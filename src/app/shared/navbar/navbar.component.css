@@ -1,0 +1,32 @@
+.navbar{
+    background-color: #05396b;
+    height:inherit;
+}
+.navbar-header {
+    float: left;
+    padding: 15px;
+    text-align: center;
+    width: 100%;
+    background-color: #05396b;
+    margin-top:5px;
+}
+.navbar-brand {
+    float:right;
+    font-size:3em;
+    cursor: pointer;
+    color:white;
+    margin-top:5px;
+}
+.navbar-nav{
+    cursor: pointer;
+    color:white;
+}
+.navbar-nav li>a{
+    color:white;
+}
+.navbar-nav li>a:hover{
+    color:grey;
+}
+.navbar-nav li:hover{
+    background-color:white;
+}
