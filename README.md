@@ -1,6 +1,11 @@
-# Hpo
+# Human Phenotype Ontology ( HPO )
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.2.6.
+
+## Installation
+
+git clone <url>
+npm -g install
 
 ## Development server
 
