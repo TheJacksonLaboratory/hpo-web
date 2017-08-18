@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { SearchHpoComponent } from './browser/search-hpo/search-hpo.component'
+import { MainSearch } from './browser/main-search/main-search.component'
 
 
 const appRoutes: Routes = [
-  { path:'browser', component: SearchHpoComponent}
+  { path:'browser', component: MainSearch}
 ]
 @NgModule({
   imports: [

@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { RoutingModule } from './app-routing.module';
 
 //Custom Modules
@@ -19,7 +18,6 @@ import { FooterComponent } from './shared/footer/footer.component';
   ],
   imports: [
     BrowserModule,
-    FormsModule,
     RoutingModule,
     BrowserHPOModule
   ],
