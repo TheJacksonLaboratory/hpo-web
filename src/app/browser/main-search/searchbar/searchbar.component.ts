@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Phenotype } from '../Phenotypes';
+import { PhenotypeService } from '../../services/phenotype-service';
 
 @Component({
   selector: 'searchbar',
@@ -7,30 +8,41 @@ import { Phenotype } from '../Phenotypes';
   styleUrls: ['./searchbar.component.css']
 })
 export class SearchbarComponent implements OnInit {
-  query:String;
-  filteredList:Array<Phenotype>;
-  pheno:Array<Phenotype>;
-  constructor() { 
-    this.pheno = [ {"id":"HP:0012108","phenotype":"Open angle glaucoma","diseases":["GLAUCOMA 1, OPEN ANGLE, M","GLAUCOMA 1, OPEN ANGLE, G","GLAUCOMA 1, OPEN ANGLE, O"]},
-                   {"id":"HP:0100019","phenotype":"Cortical cataract","diseases":["Cortical cataract","Cortical cataract"]}];
+
+  @Output() searchActive = new EventEmitter<boolean>();
+  query: String;
+  filteredList: Phenotype[];
+  pheno: Phenotype[];
+  constructor(private phenoService: PhenotypeService) {
+    this.pheno = [];
+  }
+  ngOnInit() {
+    this.getPhenotypes();
+  }
+  getPhenotypes(): void {
+    this.phenoService.searchPhenotypes('http://localhost:9999/phenotypes')
+        .then((phenotypes) => {
+          this.pheno[0] = phenotypes;
+        }, (error) => {
+            console.log(error);
+        });
   }
 
-  ngOnInit() {
-  }
-  filter(){
-    if(this.query != ""){
+  filter() {
+    if (this.query !== '') {
+      this.searchActive.emit(true);
       this.filteredList = this.pheno.filter(function(item){
         return item.phenotype.toLowerCase().indexOf(this.query.toLowerCase()) > -1;
       }.bind(this));
-    }else{
+    }else {
       this.filteredList = [];
+      this.searchActive.emit(false);
     }
   }
-
-
-select(item){
-  this.query = item;
-  this.filteredList = [];
-}
+  
+  select(item) {
+    this.query = item.phenotype;
+    this.filteredList = [];
+  }
 
 }

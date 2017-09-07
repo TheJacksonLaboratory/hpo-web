@@ -1,7 +1,8 @@
 
-<div class="col-lg-3">
+<div class="search-wrapper col-lg-12">
   <div class="search">
-    <input class="search-bar col-lg-12" type="text" placeholder="Search Ontology" [(ngModel)]=query (keyup)=filter()/> 
+    <span class="glyphicon glyphicon-search"></span>
+    <input class="search-bar col-lg-12" type="text" placeholder='Search Phenotypes' [(ngModel)]=query (keyup)="filter()"/>
   </div>
   <div class="search-results" *ngIf="filteredList && filteredList.length > 0">
     <h5 class="search-section-title">Phenotype Results</h5>

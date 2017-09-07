@@ -1,8 +1,8 @@
 .search {
     margin-top: 10px;
-    min-height: 50px;
+    min-height: 40px;
     height: auto;
-    /**background-color: #A2AAAD;**/
+    box-shadow: 1px 0px 5px rgba(129,129,129,0.6);
     background-color: #0085CA;
 }
 .search-bar {
@@ -10,16 +10,23 @@
     outline: none;
     box-shadow: none;
     padding: 0;
-    width: 100%;
+    width: 92%;
     max-width: 100%;
     background: transparent;
     border: none;
     -webkit-appearance: none;
     min-width: 0;
-    height: 50px;
+    height: 40px;
     text-indent: 15px;
-    font-size: 18px;
+    font-size: 16px;
     color: white;
+    float:none;
+
+}
+.search .glyphicon-search {
+  font-size: 15px;
+  color: white;
+  text-indent: 10px;
 }
 
 .search-results {

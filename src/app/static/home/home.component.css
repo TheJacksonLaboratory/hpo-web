@@ -1,0 +1,51 @@
+.container.container-right {
+    margin-left: 0;
+    max-width: 600px;
+    margin-right: 0;
+    float: right;
+}
+.container.container-main {
+    float: left;
+    margin-left: 25px;
+    max-width: 1000px;
+}
+.container.container-main .container-title {
+    font-size: 20px;
+    margin-top: 0px;
+    font-weight: bold;
+
+}
+.container.container-main .container-body {
+    font-size:16px;
+    text-align: justify;
+}
+.home-content {
+    margin-top: 25px;
+}
+
+.info-group {
+    margin-top: 50px;
+}
+.info-group .info-panel {
+    padding: 0 15px 0 0;
+    text-align: justify;
+}
+.info-group .info-panel:not(:first-child) {
+    margin-left: 25px;
+}
+.info-group .info-title{
+    font-size:18px;
+}
+.action-panel {
+    background-color: #ADACAD;
+    padding: 15px;
+    margin-top: 15px;
+}
+.action-panel .action-panel-btn {
+    float:right;
+}
+.action-panel .action-panel-text {
+    font-weight: bold;
+    font-size: 18px;
+    padding-left:10px;
+}

@@ -1,13 +1,29 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container-fluid">
-            <!--<a class="navbar-brand" href="/">{{title}}</a>-->
-        <ul class="nav navbar-nav">
-            <li><a>Home</a></li>
-            <li routerLink="/browser"><a>About</a></li>
-            <li><a>Docs</a></li>
-            <li><a>FAQ</a></li>
-            <li><a>Info</a></li>
-        </ul>
-        
+    <div class="container-fluid hidden-xs">
+      <div class="row">
+        <div class="col-lg-3">
+          <img src="../../../assets/hpo-logo.jpg" class="nav-brand"/>
+          <h3 class="nav-title">{{title}}</h3>
+        </div>
+        <div class="col-lg-4">
+          <ul class="nav navbar-nav">
+              <li routerLink="/">
+                <a>Home</a>
+              </li>
+              <li routerLink="hpo/browser">
+                <a>Browser</a>
+              </li>
+              <li>
+                <a>Downloads</a>
+              </li>
+              <li routerLink="hpo/resources">
+                <a>Resources</a>
+              </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="hidden-lg">
+
     </div>
 </nav>

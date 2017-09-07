@@ -10,7 +10,8 @@
   padding: 25px;
   color: black;
   /* font-size: 14px; */
-      box-shadow: 1px 1px 1px 1px #D0D3D4;
+  box-shadow: 1px 1px 15px 5px #D0D3D4;
+  margin-top: 50px;
 }
 .hexagon-group{
   width: auto;
@@ -23,7 +24,7 @@
 }
 .hexagon {
   position: relative;
-  width: 175px; 
+  width: 175px;
   height: 101.04px;
   background-color: #A2AAAD;
   margin: 50.52px 0;

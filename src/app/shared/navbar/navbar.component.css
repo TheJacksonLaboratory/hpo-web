@@ -2,6 +2,13 @@
     background-color: #05396b;
     height:inherit;
 }
+
+.navbar .nav-title {
+  margin-top: 10px;
+  float: right;
+  color: white;
+}
+
 .navbar-header {
     float: left;
     padding: 15px;
@@ -10,12 +17,10 @@
     background-color: #05396b;
     margin-top:5px;
 }
-.navbar-brand {
-    float:right;
-    font-size:3em;
-    cursor: pointer;
-    color:white;
-    margin-top:5px;
+.nav-brand {
+    height: 40px;
+    width: 40px;
+    margin: 5px 0 0 10px;
 }
 .navbar-nav{
     cursor: pointer;
@@ -25,8 +30,9 @@
     color:white;
 }
 .navbar-nav li>a:hover{
-    color:grey;
+    color: #A2AAAD;
 }
 .navbar-nav li:hover{
     background-color:white;
+    border-bottom: solid 3px #A2AAAD;
 }
