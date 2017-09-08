@@ -1,21 +1,12 @@
 .navbar{
     background-color: #05396b;
-    height:inherit;
+    border-width: 0px;
+    height:53px;
 }
-
 .navbar .nav-title {
   margin-top: 10px;
   float: right;
   color: white;
-}
-
-.navbar-header {
-    float: left;
-    padding: 15px;
-    text-align: center;
-    width: 100%;
-    background-color: #05396b;
-    margin-top:5px;
 }
 .nav-brand {
     height: 40px;
