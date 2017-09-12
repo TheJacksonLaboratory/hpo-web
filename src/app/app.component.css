@@ -1,20 +1,4 @@
-.navigation {
-    height: 50px;
-}
-navbar-hpo{
-    height: inherit;
-}
-.main-content {
-    height: 100%;
-    width: 100%;
-    overflow-x: hidden;
-}
-.footer-navigation {
-    height: 30px;
-}
-footer-hpo {
-    height: inherit;
-}
-body {
-    overflow-x: hidden;
+.main {
+    margin-top: 55px;
+    flex:1;
 }

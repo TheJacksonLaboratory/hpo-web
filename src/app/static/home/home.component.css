@@ -16,9 +16,13 @@
 
 }
 .container.container-main .container-body {
-    font-size:16px;
+    font-size:14px;
     text-align: justify;
 }
+.container.container-main .container-body a.btn {
+    border-radius: 0px;
+}
+
 .home-content {
     margin-top: 25px;
 }
@@ -36,6 +40,9 @@
 .info-group .info-title{
     font-size:18px;
 }
+.info-group .info-panel .info-body a.btn {
+    border-radius: 0px;
+}
 .action-panel {
     background-color: #ADACAD;
     padding: 15px;
@@ -43,6 +50,9 @@
 }
 .action-panel .action-panel-btn {
     float:right;
+}
+.action-panel .action-panel-btn a.btn{
+    border-radius:0px;
 }
 .action-panel .action-panel-text {
     font-weight: bold;
