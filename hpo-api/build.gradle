@@ -25,6 +25,10 @@ repositories {
 }
 
 dependencies {
+
+    compile 'com.github.phenomics:ontolib-core:0.3'
+    compile 'com.github.phenomics:ontolib-io:0.3'
+
     compile "org.springframework.boot:spring-boot-starter-logging"
     compile "org.springframework.boot:spring-boot-autoconfigure"
     compile "org.grails:grails-core"
