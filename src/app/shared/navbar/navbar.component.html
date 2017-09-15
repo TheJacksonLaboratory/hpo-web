@@ -1,4 +1,4 @@
-<nav class="navbar navbar-inverse navbar-fixed-top">
+<!--<nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid hidden-xs">
       <div class="row">
         <div class="col-lg-3">
@@ -13,7 +13,7 @@
               <li routerLink="hpo/browser">
                 <a>Browser</a>
               </li>
-              <li>
+              <li routerLink="hpo/downloads">
                 <a>Downloads</a>
               </li>
               <li routerLink="hpo/resources">
@@ -26,4 +26,33 @@
     <div class="hidden-lg">
 
     </div>
-</nav>
+</nav> -->
+
+
+<md-toolbar color="primary" class="mat-elevation-z1">
+  <div class="nav-brand" routerLink="/">
+    <img src="../../../assets/hpo-logo.jpg" class="nav-logo"/>
+    <div class="nav-title">{{title}}</div>
+  </div>
+  <!-- This fills the remaining space of the current row -->
+  <div class="nav-components" fxLayout="row" fxShow="false" fxShow.gt-sm>
+      <button md-button routerLink="/">Home</button>
+      <button md-button routerLink="hpo/browser">Browser</button>
+      <button md-button routerLink="hpo/documentation">Documentation</button>
+      <button md-button routerLink="hpo/downloads">Downloads</button>
+      <button md-button routerLink="hpo/resources">Resources</button>
+  </div>
+  <div class="fill-remaining-space">
+
+  </div>
+  <button class="mobile-menu" md-button [md-menu-trigger-for]="menu" fxHide="false" fxHide.gt-sm>
+    <md-icon>menu</md-icon>
+  </button>
+</md-toolbar>
+<md-menu x-position="before" #menu="mdMenu">
+    <button md-menu-item routerLink="/products">Products</button>
+    <button md-menu-item routerLink="/dashboard">Dashboard</button>
+    <!--<button md-menu-item>Help</button>-->
+</md-menu>
+
+    
