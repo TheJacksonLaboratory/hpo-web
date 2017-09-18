@@ -6,11 +6,15 @@ import { StaticRoutingModule } from './static-routing.module';
 import { MdTabsModule } from '@angular/material';
 import { MdExpansionModule } from '@angular/material';
 import { MdTableModule } from '@angular/material';
+import { MdCardModule } from '@angular/material';
+import { MdListModule } from '@angular/material';
+import { MdButtonModule } from '@angular/material';
 // Components
 import { HomeComponent } from './home/home.component';
 import { ResourcesComponent } from './resources/resources.component';
 import { DownloadsComponent } from './downloads/downloads.component';
 import { DocumentationComponent } from './documentation/documentation.component';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
   imports: [
@@ -18,8 +22,11 @@ import { DocumentationComponent } from './documentation/documentation.component'
     StaticRoutingModule,
     MdTabsModule,
     MdExpansionModule,
-    MdTableModule
+    MdTableModule,
+    MdCardModule,
+    MdListModule,
+    MdButtonModule
   ],
-  declarations: [ HomeComponent, ResourcesComponent, DownloadsComponent, DocumentationComponent ]
+  declarations: [ HomeComponent, ResourcesComponent, DownloadsComponent, DocumentationComponent, AboutComponent ]
 })
 export class StaticModule { }

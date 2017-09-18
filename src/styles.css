@@ -47,10 +47,10 @@ a:hover {
 }
 
 p {
-  font-size: 16px;
+  font-size: 14px;
 }
 * {
-    font-family: Vollkorn, sans-serif;
+  font-family: 'Titillium Web', sans-serif;
 }
 strong {
   font-weight:800;

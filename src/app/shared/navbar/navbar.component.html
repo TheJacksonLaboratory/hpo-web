@@ -35,7 +35,7 @@
     <div class="nav-title">{{title}}</div>
   </div>
   <!-- This fills the remaining space of the current row -->
-  <div class="nav-components" fxLayout="row" fxShow="false" fxShow.gt-sm>
+  <div class="nav-components hidden-sm">
       <button md-button routerLink="/">Home</button>
       <button md-button routerLink="hpo/browser">Browser</button>
       <button md-button routerLink="hpo/documentation">Documentation</button>
@@ -45,7 +45,7 @@
   <div class="fill-remaining-space">
 
   </div>
-  <button class="mobile-menu" md-button [md-menu-trigger-for]="menu" fxHide="false" fxHide.gt-sm>
+  <button class="mobile-menu hidden-lg" md-button [md-menu-trigger-for]="menu">
     <md-icon>menu</md-icon>
   </button>
 </md-toolbar>

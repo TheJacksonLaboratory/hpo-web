@@ -1,77 +1,83 @@
 
-<div fxLayout='column' class="container container-main">
-    <div fxFlex>
-        <div class="container-title">
-            Our Mission
-        </div>
-        <hr>
-        <div class="container-body">
-            The Human Phenotype Ontology (HPO) provides a standardized vocabulary of phenotypic abnormalities encountered in human disease. Each term in the HPO describes a phenotypic abnormality, 
-            such as atrial septal defect. The HPO is currently being developed using the medical literature, Orphanet, DECIPHER, and OMIM. HPO currently contains approximately 11,000 terms (still growing) 
-            and over 115,000 annotations to hereditary diseases. The HPO also provides a large set of HPO annotations to approximately 4000 common diseases.<br><br>
-            <a target="__blank" href="hpo/about" class="btn btn-md btn-success">Learn More About HPO</a>
-        </div>
-    </div>
-    <hr>
+<div class="container">
     <div class="row">
-        <div class="info-group">
-            <div class="col-lg-4 info-panel">
-                <div class="info-title">
-                <strong> What is the Monarch Initiative?</strong>
-                </div>
+        <div class="col-lg-7">
+            <h3>Our Mission</h3>
             <hr>
-                <div class="info-body">
-                    <p>Monarch's philosophy is based on the premise that we want to make all the data count. Monarch isn’t just another database that slurps data from the typical places and renders it in a different format. 
-                    We are driven to truly integrate biological information using semantics, and present it in a novel way, leveraging phenotypes to bridge the knowledge gap. Our niche is the use of computational reasoning to enable phenotype
-                    comparison both within and across species, with the ultimate goal of improving biomedical research.</p>
-                    <p><strong>To learn more:</strong></p>
-                    <a target="__blank" href="https://monarchinitiative.org/" class="btn btn-md btn-success">Visit Monarch Initiative</a>
-                </div>
+            <div class="container-body">
+                The Human Phenotype Ontology (HPO) provides a standardized vocabulary of phenotypic abnormalities encountered in human disease. Each term in the HPO describes a phenotypic abnormality, 
+                such as atrial septal defect. The HPO is currently being developed using the medical literature, Orphanet, DECIPHER, and OMIM. HPO currently contains approximately 11,000 terms (still growing) 
+                and over 115,000 annotations to hereditary diseases. The HPO also provides a large set of HPO annotations to approximately 4000 common diseases.<br><br>
+                <a md-raised-button href="hpo/about" class="md-btn">Learn More About HPO</a>
             </div>
         </div>
-        <div class="col-lg-offset-1 col-lg-7 action-group">
-            <div class="action-panel">
-                <span class="action-panel-text">
-                    Browse Human Phenotype Ontology
-                </span>
-                <span class="action-panel-btn">
-                    <a href="hpo/browser" class="btn btn-sm btn-primary">Explore</a>
-                </span>
-            </div>
-            <div class="action-panel">
-                <span class="action-panel-text">
-                    New Term Request
-                </span>
-                <span class="action-panel-btn">
-                    <a target="__blank" href="https://github.com/obophenotype/human-phenotype-ontology/issues" class="btn btn-sm btn-primary">Request Term</a>
-                </span>
-            </div>
-            <div class="action-panel">
-                <span class="action-panel-text">
-                    Submit an Issue
-                </span>
-                <span class="action-panel-btn">
-                    <a target="__blank" href="https://github.com/obophenotype/human-phenotype-ontology/issues" class="btn btn-sm btn-primary">Issue Tracker</a>
-                </span>
-            </div>
+        <div class="col-lg-offset-1 col-lg-4">
+            <md-card class="news-updates">
+                    <md-card-header>
+                        <md-card-title>
+                            <h3>News & Updates</h3>
+                        </md-card-title>
+                    </md-card-header>
+                    <md-card-content>
+                        <md-list>
+                            <md-list-item>
+                                <a href="javascript:void(0)">Late July 2017 Release</a>
+                                Large amount of term additions; circular graph analysis.
+                            </md-list-item>
+                            <br>
+                        </md-list>
+                    </md-card-content>
+            </md-card>
         </div>
     </div>
 </div>
-<div class="container container-right">
+<div class="empty-space"></div>
+<div class="container">
     <div class="row">
-        <div class="panel panel-default news-panel">
-            <div class="panel-heading">
-                <strong>News & Updates</strong>
-            </div>
-            <div class="panel-body">
-                <a href="javascripit:void(0)"><h5>Early July 2017 Release</h5></a>
-                <p>> Release contains term addtions like cataracts, glaucoma</p>
+        <div class="col-lg-4">
+            <h3>What is the Monarch Initiative?</h3>
+            <hr>
+            <div class="info-body">
+                <p>Monarch's philosophy is based on the premise that we want to make all the data count. Monarch isn’t just another database that slurps data from the typical places and renders it in a different format. 
+                We are driven to truly integrate biological information using semantics, and present it in a novel way, leveraging phenotypes to bridge the knowledge gap. Our niche is the use of computational reasoning to enable phenotype
+                comparison both within and across species, with the ultimate goal of improving biomedical research.</p>
+                <p><strong>To learn more:</strong></p>
+                <a md-raised-button target="__blank" href="https://monarchinitiative.org/" class="md-btn">Visit Monarch Initiative</a>
             </div>
         </div>
-        
+        <div class="col-lg-4">
+            <md-card class="quick-links-card">
+                <md-card-header>
+                    <md-card-title>
+                        <h3>Quick Links</h3>
+                     </md-card-title>
+                </md-card-header>
+                <md-card-content>
+                    <md-list>
+                       <a href="hpo/browser"><md-list-item>Browse Human Phenotype Ontology</md-list-item></a>
+                        <a target="__blank" href="https://github.com/obophenotype/human-phenotype-ontology/issues" class="btn btn-sm btn-primary"><md-list-item>New Term Request</md-list-item></a>
+                       <a target="__blank" href="https://github.com/obophenotype/human-phenotype-ontology/issues" class="btn btn-sm btn-primary"> <md-list-item>Submit an Issue</md-list-item></a>
+                    </md-list>
+                </md-card-content>
+            </md-card>
+        </div>
+        <div class="col-lg-4">
+            <md-card class="quick-links-card">
+                <md-card-header>
+                    <md-card-title>
+                        <h3>Additional Tools</h3>
+                        </md-card-title>
+                </md-card-header>
+                <md-card-content>
+                    <md-list>
+                        <a target="__blank" href="javascript:void(0)"><md-list-item>Find Diagnoses</md-list-item></a>
+                        <a target="__blank" href="javascript:void(0)" class="btn btn-sm btn-primary"><md-list-item>Perform Exome Analysis</md-list-item></a>
+                        <a target="__blank" href="javascript:void(0)" class="btn btn-sm btn-primary"><md-list-item>Extract Clinical Text</md-list-item></a>
+                        <a target="__blank" href="javascript:void(0)" class="btn btn-sm btn-primary"><md-list-item>Investigate Research Data</md-list-item></a>
+                        <a target="__blank" href="javascript:void(0)" class="btn btn-sm btn-primary"><md-list-item>Matchmake Patients</md-list-item></a>
+                    </md-list>
+                </md-card-content>
+            </md-card>
+        </div>
     </div>
 </div>
-<div class="container  container-right">
-    
-</div>
-
