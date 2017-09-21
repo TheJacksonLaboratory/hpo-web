@@ -4,16 +4,15 @@ import { RouterModule, Routes } from '@angular/router';
 
 
 const appRoutes: Routes = [
-  { path: '', redirectTo: 'hpo', pathMatch: 'full'},
-  { path: 'hpo', loadChildren: './static/static.module#StaticModule'},
-  { path: 'hpo/browser', loadChildren: './browser/browser.module#BrowserHPOModule'}
+  { path: '', pathMatch: 'prefix',loadChildren: './static/static.module#StaticModule'},
+  { path: 'browser', loadChildren: './browser/browser.module#BrowserHPOModule'}
 ]
 @NgModule({
   imports: [
     CommonModule,
     RouterModule.forRoot(
       appRoutes,
-      {enableTracing: true} // debugging purposes only
+      {enableTracing: false} // debugging purposes only
     )
   ],
   exports:[RouterModule],

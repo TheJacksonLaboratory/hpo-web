@@ -1,0 +1,192 @@
+<div class="container">
+  <div class="page-header">
+     <div routerLink="intro" class="page-title">{{pageTitle}}</div>
+     <div class="hr"></div>
+     <div class="page-intro">{{pageIntro}}</div>
+  </div>
+</div>
+<div class="container">
+  <p>We represent clinical annotations using a simple tab-delimited format that was designed to be as similar as possible to the format used by the Gene Ontology consortium. This document describes the process of assigning HPO terms to disease entities such as Mendelian disorders from OMIM or Orphanet. 
+  Each line in the annotation file represents a link between a disease entity such as <i>Noonan syndrome</i> and one of the clinical features characteristically seen in that disease. Each of the features of a disease is to be listed on a separate line. Note that this file (and format) is intended to be used 
+  for the annotation of disease entities (e.g.<i>Noonan syndrome</i>) and not individuals (such as a person that has been diagnosed with <i>Noonan syndrome</i>). You may have look at <a href="https://phenotips.org/" target="__blank">PhenoTips</a> if you are aiming at annotating clinical findings of individuals with hereditary diseases.</p>
+  <p>
+    <i>The flat file format comprises 14 tab-delimited fields</i>
+  </p>
+  <table>
+      <thead>
+        <tr>
+          <th>Column</th>
+          <th>Content</th>
+          <th>Required</th>
+          <th>Example</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>DB</td>
+          <td>required</td>
+          <td>MIM</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>DB_Object_ID</td>
+          <td>required</td>
+          <td>154700</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>DB_Name</td>
+          <td>required</td>
+          <td>Achondrogenesis, type IB</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>Qualifier</td>
+          <td>optional</td>
+          <td>NOT</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>HPO ID</td>
+          <td>required</td>
+          <td>HP:0002487</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td>DB:Reference</td>
+          <td>required</td>
+          <td>OMIM:154700 or PMID:15517394</td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td>Evidence code</td>
+          <td>required</td>
+          <td>IEA</td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td>Onset modifier</td>
+          <td>optional</td>
+          <td>HP:0003577</td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td>Frequency modifier</td>
+          <td>optional</td>
+          <td>Usually from the subontology <a href="http://www.human-phenotype-ontology.org/hpoweb?id=HP:0040279"><em>Frequency</em></a> or “70%” or “12 of 30”</td>
+        </tr>
+        <tr>
+          <td>10</td>
+          <td>With</td>
+          <td>optional</td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td>11</td>
+          <td>Aspect</td>
+          <td>required</td>
+          <td>O</td>
+        </tr>
+        <tr>
+          <td>12</td>
+          <td>Synonym</td>
+          <td>optional</td>
+          <td>ACG1B|Achondrogenesis, Fraccaro type</td>
+        </tr>
+        <tr>
+          <td>13</td>
+          <td>Date</td>
+          <td>required</td>
+          <td>YYYY.MM.DD</td>
+        </tr>
+        <tr>
+          <td>14</td>
+          <td>Assigned by</td>
+          <td>required</td>
+          <td>HPO</td>
+        </tr>
+      </tbody>
+    </table>
+  <ol class="no-indent-list">
+  <li>
+    <strong>DB:</strong>
+    <p>This field refers to the database from which the identifier in DB_Object_ID (column 2) is drawn. At present, only annotations from the OMIM database are available, but we are planning to add annotations to chromosomal disorders.</p>
+  </li>
+  <li>
+    <strong>DB_Object_ID:</strong>
+    <p>This is the identified of the annotated disease within the database indicated in column 1. Note that for OMIM identifiers, the symbol preceding the MIM number is omitted (*,#,+,%).</p>
+  </li>
+  <li>
+      <strong>DB_Name:</strong>
+      <p>This is the name of the disease associated with the DB_Object_ID in the database. Only the accepted name should be used, synonyms should not be listed here.</p>
+  </li>
+  <li>
+      <strong>Qualifer:</strong>
+      <p>This optional field can be used to qualify the annotation shown in field 5. Possible values of this field are NOT, SECONDARY, MILD,MODERATE,SEVERE. If multiple qualifiers are shown, 
+        they are separated by a comma (“,”) symbol. The meaning of individual modifiers is as follows:</p>
+        <ul>
+          <li>
+              NOT: The disorder being annotated is NOT characterized by the feature associated with HPO_ID in column 5. Note that annotations with the NOT modifier are moved to separate file!
+          </li>
+          <li>
+              SECONDARY: The feature is a secondary consequence of a primary pathophysiological event in another organ. For instance, although Jaundice is observed in the skin or sclerae, it is secondary to abnormalities in other organs. 
+              For instance, to indicate that jaundice seen in a certain disease is secondary to Cholestatic liver disease, we would annotate SECONDARY(HP:0002611), where HP:0002611 is the HPO identified of the term Cholestatic liver disease.
+          </li>
+          <li>
+              MILD, MODERATE, SEVERE, CHRONIC, PROGRESSIVE, NONPROGRESSIVE, EPISODIC, RECURRENT, PROFOUND, BILATERAL, DISTAL, GENERALIZED, PROXIMAL, REFRACTORY: In general, it is preferred to annotate with a term describing the underlying abnormality, 
+              such as Hearing loss, and to use qualifiers such as MILD, MODERATE, SEVERE if thought necessary to describe the severity of the clinical involvement. This is preferred because of the assumption that mild and moderate manifestations 
+              of specific medical abnormalities result from mild or moderate disturbances of the same cellular and physiological networks and also because distinctions that are often heard in clinical practice such as “mild-to-moderate” or grade 
+              “II-III/VI” often seem more or less arbitrary. It is an error to use more than one of the qualifiers MILD, MODERATE, SEVERE, etc. in one annotation. It is expected that software does not depend on the qualifiers being listed in a 
+              certain order. Note that Frequency information is available in Column 9.
+          </li>
+        </ul>
+  </li>
+  <li>
+      <strong>HPO ID:</strong>
+      <p>This field is for the HPO identifier for the term attributed to the DB_Object_ID. This field is mandatory, cardinality 1.</p>
+  </li>
+  <li>
+      <strong>DB:Reference:</strong>
+      <p>This required field indicates the source of the information used for the annotation. This may be the clinical experience of the annotator or may be taken from an article as indicated by a pubmed id. Each collaborating center of the Human Phenotype Ontology consortium is assigned a HPO:Ref id. 
+        In addition, if appropriate, a pubmed id for an article describing the clinical abnormality may be used.</p>
+  </li>
+  <li>
+    <strong>Evidence code:</strong>
+    <p>This required field indicates the level of evidence supporting the annotation. At the kickoff of the HPO, most annotations were extracted by parsing the Clinical Features sections of the omim.txt file. These annotations are assigned the evidence code “IEA” (inferred from electronic annotation). 
+      Other codes include “PCS” for published clinical study. This should be used for information extracted from articles in the medical literature. Generally, annotations of this type will include the pubmed id of the published study in the DB:Reference field. Finally, “ICE” can be used for annotations based on individual clinical experience. 
+      This may be appropriate for disorders with a limited amount of published data. This must be accompanied by an entry in the DB:Reference field denoting the individual or center performing the annotation together with an identifier. For instance, GH:007 might be used to refer to the seventh such annotation made by a specialist from Gotham Hospital. 
+      (assuming the prefix GH has been registered with the HPO). We have also included “ITM” to mark annotations retrieved by text-mining (inferred by text-mining). Finally we have TAS, which stands for “traceable author statement”, usually reviews or disease entries (e.g. OMIM) that only refers to the original publication.</p>
+  </li>
+  <li>
+    <strong>Onset modifier</strong>
+    <p>A term-id from the HPO-sub-ontology below the term “Age of onset” (HP:0003674).</p>
+  </li>
+  <li>
+    <strong>Frequency modifier</strong>
+    <p>A term-id from the HPO-sub-ontology below the term “Frequency” (HP:0040279). (since December 2016 ; before was a mixture of values). The terms for frequency are in alignment with Orphanet.</p>
+  </li>
+  <li>
+    <strong>With:</strong>
+    <p>This field is not currently used. However, it can be used to enter information about characteristics that go with the remaining annotation. For instance, in order to annotate a co-occurence of two features in some disease, one could add the qualified COOCCURS(17/18) and the identifier of some other characteristic in the 
+      WITH field to denote that the HPO term listed in the HPO ID field occurred in 17 of 18 cases of the disease listed in the DB_Object_ID field. In the future, the meaning of this field may be extended to include other information such as (for instance) repeat length in order to correlate, say, average age of onset 
+      of symptoms in Huntington disease with the number of CAG repeats in the huntingtin gene.</p>
+  </li>
+  <li>
+    <strong>Aspect:</strong>
+    <p>one of O (Phenotypic abnormality), I (inheritance), C (onset and clinical course) or M (Mortality/Aging). This field is mandatory; cardinality 1</p>
+  </li>
+  <li>
+    <strong>Synonym:</strong>
+    <p>This optional field can be used for a common abbreviation for the disease referred to by the <i>DB_Object_ID</i> such as “NF1” for neurofibromatosis type 1 or “MFS” for Marfan syndrome. It can also be used to store alternate names for a disorder. Individual synonyms should be separated by a pipe(“|”) symbol.</p>
+  </li>
+  <li>
+    <strong>Date:</strong>
+    <p>Date on which the annotation was made; format is YYYY.MM.DD this field is mandatory, cardinality 1</p>
+  </li>
+  <li>
+    <strong>Assigned by:</strong>
+    <p>This refers to the center or user making the annotation.</p>
+  </li>
+  </ol>
+</div>
