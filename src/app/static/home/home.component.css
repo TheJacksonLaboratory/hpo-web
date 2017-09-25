@@ -37,9 +37,26 @@ a.md-btn{
     text-decoration:none;
     background-color:#43B02A;
 }
-::ng-deep a.md-btn .mat-button-wrapper{
+::ng-deep a.md-btn .mat-button-wrapper {
     color: black;
 }
 .news-updates{
     margin-top: 5px;
+}
+::ng-deep .quick-links-card .mat-icon {
+    margin-left: auto;
+}
+
+.quick-links-card a[md-list-item] {
+    background-color: #D0D3D4;
+    opacity: 0.7;
+    margin-bottom:5px;
+}
+.quick-links-card a:hover {
+    text-decoration:none;
+}
+
+.quick-links-card a[md-list-item]:hover {
+    background-color: #D0D3D4;
+    opacity: 0.9;
 }

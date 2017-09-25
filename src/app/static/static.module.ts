@@ -10,6 +10,7 @@ import { MdTableModule } from '@angular/material';
 import { MdCardModule } from '@angular/material';
 import { MdListModule } from '@angular/material';
 import { MdButtonModule } from '@angular/material';
+import {MdIconModule} from '@angular/material';
 // Components
 import { AboutComponent } from './about/about.component';
 import { DownloadsComponent } from './downloads/downloads.component';
@@ -27,7 +28,8 @@ import { ResourcesComponent } from './resources/resources.component';
     MdTableModule,
     MdCardModule,
     MdListModule,
-    MdButtonModule
+    MdButtonModule,
+    MdIconModule
   ],
   declarations: [ HomeComponent, ResourcesComponent, DownloadsComponent,
                   AboutComponent ]
