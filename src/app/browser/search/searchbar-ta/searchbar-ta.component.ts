@@ -4,10 +4,10 @@ import { PhenotypeService } from '../../services/phenotype-service';
 
 @Component({
   selector: 'searchbar',
-  templateUrl: './searchbar.component.html',
-  styleUrls: ['./searchbar.component.css']
+  templateUrl: './searchbar-ta.component.html',
+  styleUrls: ['./searchbar-ta.component.css']
 })
-export class SearchbarComponent implements OnInit {
+export class SearchbarTAComponent implements OnInit {
 
   @Output() searchActive = new EventEmitter<boolean>();
   query: String;

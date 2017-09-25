@@ -2,14 +2,16 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-main-search',
-  templateUrl: './main-search.component.html',
-  styleUrls: ['./main-search.component.css']
+  templateUrl: './search.component.html',
+  styleUrls: ['./search.component.css']
 })
 export class MainSearch implements OnInit {
-  title: String;
+  pageTitle: String;
+  pageIntro: String;
   activeSearch: boolean;
   constructor() {
-    this.title = 'Human Phenotype Browser';
+    this.pageTitle = 'Human Phenotype Browser';
+    this.pageIntro = '';
     this.activeSearch = false;
   }
   searchActive(state: boolean) {

@@ -1,29 +1,33 @@
-<nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container-fluid hidden-xs">
-      <div class="row">
-        <div class="col-lg-3">
-          <img src="../../../assets/hpo-logo.jpg" class="nav-brand"/>
-          <h3 class="nav-title">{{title}}</h3>
-        </div>
-        <div class="col-lg-4">
-          <ul class="nav navbar-nav">
-              <li routerLink="/">
-                <a>Home</a>
-              </li>
-              <li routerLink="hpo/browser">
-                <a>Browser</a>
-              </li>
-              <li>
-                <a>Downloads</a>
-              </li>
-              <li routerLink="hpo/resources">
-                <a>Resources</a>
-              </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="hidden-lg">
+<md-toolbar color="primary" class="mat-elevation-z1">
+  <div class="nav-brand" routerLink="/">
+    <img src="assets/hpo-logo.jpg" class="nav-logo"/>
+    <div class="nav-title">{{title}}</div>
+  </div>
+  <!-- This fills the remaining space of the current row -->
+  <div class="nav-components hidden-sm">
+      <button md-button routerLink="/">Home</button>
+      <button md-button routerLink="browser">Browser</button>
+      <button md-button [md-menu-trigger-for]="docsMenu">Documentation <md-icon>arrow_drop_down</md-icon></button>
+      <button md-button routerLink="downloads">Downloads</button>
+      <button md-button routerLink="resources">Resources</button>
+  </div>
+  <div class="fill-remaining-space">
 
-    </div>
-</nav>
+  </div>
+  <button class="mobile-menu hidden-lg" md-button [md-menu-trigger-for]="menu">
+    <md-icon>menu</md-icon>
+  </button>
+
+<md-menu x-position="before" #menu="mdMenu">
+    <button md-menu-item routerLink="/products">Products</button>
+    <button md-menu-item routerLink="/dashboard">Dashboard</button>
+</md-menu>
+<md-menu y-positon="after" [overlapTrigger]="false" #docsMenu="mdMenu">
+  <button md-menu-item routerLink="documentation"> Overview </button>
+  <button md-menu-item routerLink="documentation/intro"> Introduction </button>
+  <button md-menu-item routerLink="documentation/definitions"> Definitions </button>
+  <button md-menu-item routerLink="documentation/annotations"> Annotations </button>
+</md-menu>
+</md-toolbar>
+
+    
