@@ -9,40 +9,39 @@ import { PhenotypeService } from '../../services/phenotype-service';
 })
 export class SearchbarTAComponent implements OnInit {
 
-  @Output() searchActive = new EventEmitter<boolean>();
-  query: String;
-  filteredList: Phenotype[];
-  pheno: Phenotype[];
+  @Output() public searchActive = new EventEmitter<boolean>();
+  public query: string;
+  public terms: Phenotype[];
   constructor(private phenoService: PhenotypeService) {
-    this.pheno = [];
+    this.terms = [];
   }
   ngOnInit() {
-    this.getPhenotypes();
+    //this.getPhenotypes();
   }
-  getPhenotypes(): void {
-    this.phenoService.searchPhenotypes('http://localhost:9999/phenotypes')
-        .then((phenotypes) => {
-          this.pheno[0] = phenotypes;
-        }, (error) => {
-            console.log(error);
-        });
+  queryHPO(query: string): void {
+    this.phenoService.searchPhenotypes('http://localhost:8080/hpoSearch?q=' + this.query)
+      .then((data) => {
+        this.terms = data.results;
+      }, (error) => {
+        console.log(error);
+    });
   }
 
   filter() {
-    if (this.query !== '') {
+    if (this.query !== '' && this.query.length >= 3) {
       this.searchActive.emit(true);
-      this.filteredList = this.pheno.filter(function(item){
-        return item.phenotype.toLowerCase().indexOf(this.query.toLowerCase()) > -1;
-      }.bind(this));
+      this.queryHPO(this.query);
+      /*this.filteredList = this.terms.filter(function(item){
+        return item.name.toLowerCase().indexOf(this.query.toLowerCase()) > -1;
+      }.bind(this));*/
     }else {
-      this.filteredList = [];
+      this.terms = [];
       this.searchActive.emit(false);
     }
   }
-  
   select(item) {
-    this.query = item.phenotype;
-    this.filteredList = [];
+    this.query = item.name;
+    this.terms = [];
   }
 
 }

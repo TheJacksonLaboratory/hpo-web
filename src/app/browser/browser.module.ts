@@ -8,10 +8,10 @@ import { MdInputModule } from '@angular/material';
 import { MdCardModule } from '@angular/material';
 import { MdIconModule } from '@angular/material';
 // Services
-import { PhenotypeService } from "./services/phenotype-service";
+import { PhenotypeService } from './services/phenotype-service';
 // Components
 import { MainSearch } from './search/search.component';
-import { SearchbarTAComponent } from './search/searchbar-ta/searchbar-ta.component'
+import { SearchbarTAComponent } from './search/searchbar-ta/searchbar-ta.component';
 
 @NgModule({
   imports: [

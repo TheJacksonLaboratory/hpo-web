@@ -25,3 +25,9 @@
   font-size: 1em !important;
   font-weight: bold;
 }
+.result-card {
+  margin-top:25px;
+}
+.result-list {
+  cursor: pointer;
+}
