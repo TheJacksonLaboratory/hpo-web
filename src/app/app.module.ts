@@ -1,10 +1,8 @@
+// Modules
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { RoutingModule } from './app-routing.module';
-
-//Custom Modules
-import { BrowserHPOModule } from './browser/browser.module'
 
 //Custom Shared Components
 import { AppComponent } from './app.component';
@@ -19,9 +17,8 @@ import { FooterComponent } from './shared/footer/footer.component';
   ],
   imports: [
     BrowserModule,
-    FormsModule,
-    RoutingModule,
-    BrowserHPOModule
+    BrowserAnimationsModule,
+    RoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

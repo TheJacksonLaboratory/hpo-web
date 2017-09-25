@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { SearchHpoComponent } from './browser/search-hpo/search-hpo.component'
 
 
 const appRoutes: Routes = [
-  { path:'browser', component: SearchHpoComponent}
+  { path: '', redirectTo: 'hpo', pathMatch: 'full'},
+  { path: 'hpo', loadChildren: './static/static.module#StaticModule'},
+  { path: 'hpo/browser', loadChildren: './browser/browser.module#BrowserHPOModule'}
 ]
 @NgModule({
   imports: [

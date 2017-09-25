@@ -1,0 +1,8 @@
+import com.github.phenomics.ontolib.ontology.data.Term
+
+model {
+    List<Term> termList
+}
+json{
+    results tmpl.term( termList )
+}

@@ -1,16 +1,14 @@
 .footer{
-    position:fixed;
     bottom:0;
-    background:#05396b;
+    background-color: #f5f5f5;;
     width:100%;
     color:white;
-    
 }
 .footer .information{
     float:right;
-    margin-right:10px;
+    margin-right:25px;
 }
-.footer .title{
-    float:left;
-    font-size:1.5em;
+.footer .footer-brand{
+    height: 75px;
+    width: 175px;
 }

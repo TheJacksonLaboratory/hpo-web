@@ -1,15 +1,4 @@
-.navigation{
-    height:50px;
-}
-navbar-hpo{
-    height:inherit;
-}
-.main-content{
-    height:100%;
-}
-.footer-navigation{
-    height:30px;
-}
-footer-hpo{
-    height:inherit;
+.main {
+    margin-top: 55px;
+    flex:1;
 }
