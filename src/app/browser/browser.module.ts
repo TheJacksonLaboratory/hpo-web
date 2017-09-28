@@ -8,10 +8,10 @@ import { MdInputModule } from '@angular/material';
 import { MdCardModule } from '@angular/material';
 import { MdIconModule } from '@angular/material';
 // Services
-import { PhenotypeService } from './services/phenotype-service';
+import { TermService } from './services/term-service';
 // Components
-import { MainSearch } from './search/search.component';
-import { SearchbarTAComponent } from './search/searchbar-ta/searchbar-ta.component';
+import { MainSearchComponent } from './search/search.component';
+import { SearchbarComponent } from './search/searchbar/searchbar.component';
 
 @NgModule({
   imports: [
@@ -23,7 +23,7 @@ import { SearchbarTAComponent } from './search/searchbar-ta/searchbar-ta.compone
     MdCardModule,
     MdIconModule
   ],
-  providers: [ PhenotypeService ],
-  declarations: [ MainSearch, SearchbarTAComponent ]
+  providers: [ TermService ],
+  declarations: [ MainSearchComponent, SearchbarComponent ]
 })
 export class BrowserHPOModule { }

@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.css']
 })
-export class MainSearch implements OnInit {
+export class MainSearchComponent implements OnInit {
   pageTitle: String;
   pageIntro: String;
   activeSearch: boolean;

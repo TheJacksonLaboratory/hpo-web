@@ -2,10 +2,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 // Components
-import { MainSearch } from './search/search.component'
+import { MainSearchComponent } from './search/search.component'
 
 const browserRoutes: Routes = [
-  { path:'', component: MainSearch}
+  { path:'', component: MainSearchComponent}
 ]
 export const browserRouting = RouterModule.forChild(browserRoutes)
 @NgModule({

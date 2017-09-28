@@ -17,17 +17,15 @@
   <button class="mobile-menu hidden-lg" md-button [md-menu-trigger-for]="menu">
     <md-icon>menu</md-icon>
   </button>
-
-<md-menu x-position="before" #menu="mdMenu">
-    <button md-menu-item routerLink="/products">Products</button>
-    <button md-menu-item routerLink="/dashboard">Dashboard</button>
-</md-menu>
-<md-menu y-positon="after" [overlapTrigger]="false" #docsMenu="mdMenu">
-  <button md-menu-item routerLink="documentation"> Overview </button>
-  <button md-menu-item routerLink="documentation/intro"> Introduction </button>
-  <button md-menu-item routerLink="documentation/definitions"> Definitions </button>
-  <button md-menu-item routerLink="documentation/annotations"> Annotations </button>
+  <md-menu x-position="before" #menu="mdMenu">
+      <button md-menu-item routerLink="/products">Products</button>
+      <button md-menu-item routerLink="/dashboard">Dashboard</button>
+  </md-menu>
+  <md-menu y-positon="after" [overlapTrigger]="false" #docsMenu="mdMenu">
+    <button md-menu-item routerLink="documentation"> Overview </button>
+    <button md-menu-item routerLink="documentation/intro"> Introduction </button>
+    <button md-menu-item routerLink="documentation/definitions"> Definitions </button>
+    <button md-menu-item routerLink="documentation/annotations"> Annotations </button>
 </md-menu>
 </md-toolbar>
 
-    

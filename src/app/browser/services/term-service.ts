@@ -3,7 +3,7 @@ import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angul
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
-export class PhenotypeService {
+export class TermService {
     headers: Headers;
     options: RequestOptions;
 
@@ -12,7 +12,7 @@ export class PhenotypeService {
                                     'Accept': 'q=0.8;application/json;q=0.9'});
         this.options = new RequestOptions({headers: this.headers});
     }
-    searchPhenotypes(url: string): Promise<any>{
+    searchTerms(url: string): Promise<any>{
         return this.http
             .get(url, this.options)
             .toPromise()

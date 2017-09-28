@@ -1,25 +1,25 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Phenotype } from '../Phenotypes';
-import { PhenotypeService } from '../../services/phenotype-service';
+import { TermService } from '../../services/term-service';
 
 @Component({
   selector: 'searchbar',
-  templateUrl: './searchbar-ta.component.html',
-  styleUrls: ['./searchbar-ta.component.css']
+  templateUrl: './searchbar.component.html',
+  styleUrls: ['./searchbar.component.css']
 })
-export class SearchbarTAComponent implements OnInit {
+export class SearchbarComponent implements OnInit {
 
   @Output() public searchActive = new EventEmitter<boolean>();
   public query: string;
   public terms: Phenotype[];
-  constructor(private phenoService: PhenotypeService) {
+  constructor(private termService: TermService) {
     this.terms = [];
   }
   ngOnInit() {
     //this.getPhenotypes();
   }
   queryHPO(query: string): void {
-    this.phenoService.searchPhenotypes('http://localhost:8080/hpoSearch?q=' + this.query)
+    this.termService.searchTerms('http://localhost:8080/hpoSearch?q=' + this.query)
       .then((data) => {
         this.terms = data.results;
       }, (error) => {
