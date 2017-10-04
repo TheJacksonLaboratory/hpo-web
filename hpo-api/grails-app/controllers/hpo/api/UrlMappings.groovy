@@ -11,7 +11,8 @@ class UrlMappings {
         patch "/$controller/$id(.$format)?"(action:"patch")
 
         "/"(controller: 'application', action:'index')
-        "/hpo/search"(controller: 'hpoSearch', action:'search')
+        "/hpo/search"(controller: 'hpoSearch', action:'searchAll')
+        "/hpo/search/term"(controller: 'hpoSearch', action:'searchTerm')
         "500"(view: '/error')
         "404"(view: '/notFound')
     }

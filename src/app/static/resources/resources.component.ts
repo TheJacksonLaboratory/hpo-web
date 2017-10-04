@@ -6,10 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./resources.component.css']
 })
 export class ResourcesComponent implements OnInit {
-  pageTitle: String;
-  pageIntro: String;
-  consortiaData: Array<String>;
-  toolsData: Array<String>;
+  pageTitle: string;
+  pageIntro: string;
+  consortiaData: Array<string>;
+  toolsData: Array<string>;
   constructor() { 
     this.pageTitle = "Resources";
     this.pageIntro = " ";

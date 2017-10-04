@@ -1,4 +1,4 @@
-export class Phenotype{
+export class Gene{
     id: String;
     name: String;
     altTermIds: Array<String>;

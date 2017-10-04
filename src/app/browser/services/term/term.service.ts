@@ -12,9 +12,9 @@ export class TermService {
                                     'Accept': 'q=0.8;application/json;q=0.9'});
         this.options = new RequestOptions({headers: this.headers});
     }
-    searchTerms(url: string): Promise<any>{
+    searchTerm(query: string): Promise<any>{
         return this.http
-            .get(url, this.options)
+            .get('http://localhost:8080/hpo/search/term?q=' + query, this.options)
             .toPromise()
             .then(response => response.json())
             .catch(this.handleError);

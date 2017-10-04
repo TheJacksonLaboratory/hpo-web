@@ -3,7 +3,7 @@ import {async, fakeAsync, tick} from '@angular/core/testing';
 import {BaseRequestOptions, ConnectionBackend, Http, RequestOptions} from '@angular/http';
 import {Response, ResponseOptions} from '@angular/http';
 import {MockBackend, MockConnection} from '@angular/http/testing';
-import { TermService } from './term-service';
+import { TermService } from './term.service';
 
 
 describe('Mock-TermService', () => {

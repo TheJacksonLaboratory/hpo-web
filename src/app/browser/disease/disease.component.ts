@@ -6,8 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./disease.component.css']
 })
 export class DiseaseComponent implements OnInit {
-  pageTitle: String;
-  pageIntro: String;
+  pageTitle: string;
+  pageIntro: string;
   constructor() { 
     this.pageTitle = "Disease Anotation";
   }

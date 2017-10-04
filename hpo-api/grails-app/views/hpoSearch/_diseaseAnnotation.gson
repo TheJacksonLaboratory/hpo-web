@@ -7,4 +7,5 @@ json{
     db hpoDiseaseAnnotation.db
     dbObjectId hpoDiseaseAnnotation.dbObjectId
     dbName hpoDiseaseAnnotation.dbName
+    dbReference hpoDiseaseAnnotation.dbReference
 }

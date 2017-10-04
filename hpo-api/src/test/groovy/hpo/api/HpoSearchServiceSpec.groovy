@@ -30,7 +30,7 @@ class HpoSearchServiceSpec extends Specification implements ServiceUnitTest<HpoS
         service.hpoDiseaseAnnotations = hpoDiseaseAnnotations
     }
 
-    void "test search terms #desc"() {
+    void "test searchAll terms #desc"() {
 
         final Map resultMap = service.search(query)
 
@@ -48,7 +48,7 @@ class HpoSearchServiceSpec extends Specification implements ServiceUnitTest<HpoS
         'abnormality of body' | ['Abnormality of body height', 'Abnormality of body weight', 'Abnormality of body mass index',] | 'with lower case'
         'HP:0000003'          | ['Multicystic kidney dysplasia']                                                                | 'hp id'
     }
-    void "test search diseases #desc"() {
+    void "test searchAll diseases #desc"() {
 
         final Map resultMap = service.search(query)
 
