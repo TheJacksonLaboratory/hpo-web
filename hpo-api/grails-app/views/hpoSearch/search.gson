@@ -1,8 +1,10 @@
 import com.github.phenomics.ontolib.ontology.data.Term
 
 model {
-    List<Term> termList
+    Map resultMap
+
 }
 json{
-    results tmpl.term( termList )
+      terms tmpl.term( resultMap.terms )
+      diseases tmpl.diseaseAnnotation( resultMap.diseases )
 }
