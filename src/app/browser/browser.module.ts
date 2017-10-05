@@ -11,11 +11,13 @@ import { MdIconModule } from '@angular/material';
 import { SearchService } from './services/search/search.service';
 import { TermService } from './services/term/term.service';
 // Components
-import { SearchComponent } from './search/search.component';
-import { TermComponent } from './term/term.component';
-import { DiseaseComponent } from './disease/disease.component';
-import { GeneComponent } from './gene/gene.component';
+import { SearchComponent } from './components/search/search.component';
+import { TermComponent } from './components/term/term.component';
+import { DiseaseComponent } from './components/disease/disease.component';
+import { GeneComponent } from './components/gene/gene.component';
 import { BrowserComponent } from './browser.component';
+// Custom Pipes
+import { SortPipe } from './pipes/sort-pipe';
 
 @NgModule({
   imports: [
@@ -28,6 +30,7 @@ import { BrowserComponent } from './browser.component';
     MdIconModule
   ],
   providers: [ SearchService, TermService ],
-  declarations: [ SearchComponent,TermComponent, DiseaseComponent, GeneComponent, BrowserComponent ]
+  declarations: [ SearchComponent, TermComponent, DiseaseComponent, 
+    GeneComponent, BrowserComponent, SortPipe ]
 })
 export class BrowserHPOModule { }

@@ -38,7 +38,7 @@ a.md-btn{
     background-color:#43B02A;
 }
 ::ng-deep a.md-btn .mat-button-wrapper {
-    color: black;
+    color: white;
 }
 .news-updates{
     margin-top: 5px;

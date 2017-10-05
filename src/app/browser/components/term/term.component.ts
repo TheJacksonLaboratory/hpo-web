@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute } from '@angular/router';
 import { Term } from './term';
-import { TermService } from '../services/term/term.service';
+import { TermService } from '../../services/term/term.service';
 @Component({
   selector: 'app-term',
   templateUrl: './term.component.html',

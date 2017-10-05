@@ -13,13 +13,15 @@ import { MatToolbarModule} from '@angular/material';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { FooterComponent } from './shared/footer/footer.component';
+import { NoPageFoundComponent } from './error/no-page-found.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    NoPageFoundComponent
   ],
   imports: [
     BrowserModule,

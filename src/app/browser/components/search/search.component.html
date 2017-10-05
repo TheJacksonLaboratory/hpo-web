@@ -14,32 +14,31 @@
   <div class="row">
     <div class="col-lg-12">
       <div class="search-results" >
-            <div *ngIf="terms && terms.length > 0" class="result-card col-lg-{{bootCols}} col-sm-12">
+            <div *ngIf="terms && terms.length > 0" class="result-card term-result col-lg-{{bootCols}} col-sm-12">
               <md-card>
                 <md-card-header>
                   <md-card-title>Terms<hr></md-card-title>
-
                 </md-card-header>
                 <md-card-content>
-                  <a routerLink="term/{{item.id}}" class="result-list" *ngFor="let item of terms; let isOdd=odd; let isEven=even" (click)="select(item)">
+                  <span routerLink="term/{{item.id}}" class="result-list " *ngFor="let item of terms | sort: 'name';" (click)="select(item)">
                       (HPO) {{item.id}} {{item.name}}
-                  </a>
+                  </span>
                 </md-card-content>
               </md-card>
             </div>
-            <div *ngIf="diseases && diseases.length > 0" class="result-card col-lg-{{bootCols}} col-sm-12">
+            <div *ngIf="diseases && diseases.length > 0" class="result-card disease-result col-lg-{{bootCols}} col-sm-12">
                 <md-card>
                   <md-card-header>
-                    <md-card-title>Diseases</md-card-title>
+                    <md-card-title>Diseases<hr></md-card-title>
                   </md-card-header>
                   <md-card-content>
-                    <a href="term/{{item.dbReference}}" class="result-list" *ngFor="let item of diseases; let isOdd=odd; let isEven=even" (click)="select(item)">
+                    <span routerLink="term/{{item.dbReference}}" class="result-list" *ngFor="let item of diseases | sort: 'dbName';" (click)="select(item)">
                       (Disease) {{item.dbReference}} {{item.dbName}}
-                  </a>
+                    </span>
                   </md-card-content>
                 </md-card>
               </div>
-              <div *ngIf="genes && genes.length > 0" class="result-card col-lg-{{bootCols}} col-sm-12">
+              <div *ngIf="genes && genes.length > 0" class="result-card gene-result col-lg-{{bootCols}} col-sm-12">
                   <md-card>
                     <md-card-header>
                       <md-card-title>Genes</md-card-title>

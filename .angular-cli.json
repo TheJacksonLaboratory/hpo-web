@@ -20,7 +20,7 @@
       "prefix": "app",
       "styles": [
         "styles.css",
-        "./assets/themes/jax-theme.scss"
+        "./assets/themes/jax-palette.scss"
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",

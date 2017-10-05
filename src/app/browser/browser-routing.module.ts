@@ -2,9 +2,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 // Components
-import { TermComponent } from './term/term.component';
-import { DiseaseComponent } from './disease/disease.component';
-import { GeneComponent } from './gene/gene.component';
+import { TermComponent } from './components/term/term.component';
+import { DiseaseComponent } from './components/disease/disease.component';
+import { GeneComponent } from './components/gene/gene.component';
 import { BrowserComponent } from './browser.component';
 
 const browserRoutes: Routes = [

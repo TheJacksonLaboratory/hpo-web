@@ -1,0 +1,63 @@
+
+::ng-deep .searchbar .mat-form-field {
+  width: 75%;
+  display: block;
+  float: left;
+}
+::ng-deep .searchbar .mat-input-placeholder {
+  padding: 1px;
+}
+::ng-deep .searchbar .mat-input-element {
+  height: 0%;
+  font-size: 16px;
+}
+.search-icon {
+  margin: 20px 10px 0 0;
+  float:left;
+}
+.search-results{
+  margin-top: 10px;
+}
+.result-card {
+  margin-top: 25px;
+}
+.result-list {
+  cursor: pointer;
+  display: block;
+}
+::ng-deep .result-card .mat-card-header .mat-card-header-text{
+  margin: 0px;
+}
+.result-card .mat-card-header .mat-card-title {
+  font-size: 1em !important;
+  font-weight: bold;
+}
+.result-card.term-result .mat-card-header .mat-card-title hr {
+  margin: 0;
+  border-top:solid 1px #0085CA;
+}
+.result-card.disease-result .mat-card-header .mat-card-title hr {
+  margin: 0;
+  border-top:1px solid #AB2328;
+}
+.result-card.gene-result .mat-card-header .mat-card-title hr {
+  margin: 0;
+  border-top:1px solid #43B02A;
+}
+span.result-list  {
+  text-decoration:none;
+  color: black !important;
+  margin-top: 2.5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.term-result span.result-list:hover  {
+  border-bottom:dotted 1px #0085CA;
+}
+.disease-result span.result-list:hover  {
+  border-bottom:dotted 1px #AB2328;
+}
+.gene-result span.result-list:hover  {
+  border-bottom:dotted 1px #43B02A;
+}
