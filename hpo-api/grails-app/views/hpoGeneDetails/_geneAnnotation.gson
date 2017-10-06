@@ -1,0 +1,13 @@
+package hpoGeneDetails
+
+import com.github.phenomics.ontolib.formats.hpo.HpoGeneAnnotation
+
+model {
+    HpoGeneAnnotation hpoGeneAnnotation
+}
+json{
+    entrezGeneId hpoGeneAnnotation.entrezGeneId
+    entrezGeneSymbol hpoGeneAnnotation.entrezGeneSymbol
+    hpoTermName hpoGeneAnnotation.termName
+    hpoTermId hpoGeneAnnotation.termId
+}

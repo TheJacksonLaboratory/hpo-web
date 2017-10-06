@@ -3,6 +3,7 @@ model {
 
 }
 json{
-      terms tmpl.term( resultMap.terms )
-      diseases tmpl.diseaseAnnotation( resultMap.diseases )
+      terms tmpl.termLite( resultMap.terms )
+      diseases tmpl.diseaseLite( resultMap.diseases )
+      genes tmpl.geneLite( resultMap.genes )
 }

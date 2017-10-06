@@ -1,11 +1,11 @@
 package hpo.api
 
 import com.github.phenomics.ontolib.formats.hpo.HpoDiseaseAnnotation
+import com.github.phenomics.ontolib.formats.hpo.HpoGeneAnnotation
 import com.github.phenomics.ontolib.formats.hpo.HpoOntology
-import com.github.phenomics.ontolib.ontology.data.Term
 import grails.testing.services.ServiceUnitTest
-import grails.testing.spring.AutowiredTest
-import hpo.api.util.HpoAnnotationFactory
+import hpo.api.util.HpoDiseaseFactory
+import hpo.api.util.HpoGeneFactory
 import hpo.api.util.HpoOntologyFactory
 import spock.lang.Shared
 import spock.lang.Specification
@@ -16,18 +16,21 @@ class HpoSearchServiceSpec extends Specification implements ServiceUnitTest<HpoS
 
     @Shared
     HpoOntology hpoOntology
-    @Shared List<HpoDiseaseAnnotation> hpoDiseaseAnnotations
+    @Shared List<HpoDiseaseAnnotation> hpoDiseases
+    @Shared List<HpoGeneAnnotation> hpoGenes
 
     HpoSearchServiceSpec() {}
 
     def setupSpec() {
         hpoOntology = HpoOntologyFactory.getInstance()
-        hpoDiseaseAnnotations = HpoAnnotationFactory.getAnnotationInstance()
+        hpoDiseases = HpoDiseaseFactory.getAnnotationInstance()
+        hpoGenes = HpoGeneFactory.getGeneAnnotationInstance()
     }
 
     def setup() {
         service.hpoOntology = hpoOntology
-        service.hpoDiseaseAnnotations = hpoDiseaseAnnotations
+        service.hpoDiseases = hpoDiseases
+        service.hpoGenes = hpoGenes
     }
 
     void "test searchAll terms #desc"() {
@@ -63,5 +66,20 @@ class HpoSearchServiceSpec extends Specification implements ServiceUnitTest<HpoS
         '   \n'               | []                                                                                              | 'blank'
         'Grant'               | ['GRANT SYNDROME', 'Grant syndrome']                                                            | 'with uppercase'
         'grant'               | ['GRANT SYNDROME', 'Grant syndrome']                                                            | 'with lowercase'
+    }
+    void "test searchAll genes #desc"() {
+
+        final Map resultMap = service.search(query)
+
+        expect: "fix me"
+        resultMap.genes*.entrezGeneSymbol == expected
+
+        where:
+        query                 | expected                                                                                        | desc
+        null                  | []                                                                                              | 'null'
+        ' '                   | []                                                                                              | 'blank'
+        '   '                 | []                                                                                              | 'blank'
+        '   \n'               | []                                                                                              | 'blank'
+        'TP53'                | ['TP53']                                                                                        | 'with uppercase'
     }
 }

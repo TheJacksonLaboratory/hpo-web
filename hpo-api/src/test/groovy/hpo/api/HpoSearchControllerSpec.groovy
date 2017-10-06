@@ -1,13 +1,8 @@
 package hpo.api
 
-import com.github.phenomics.ontolib.formats.hpo.HpoOntology
-import com.github.phenomics.ontolib.io.obo.hpo.HpoOboParser
 import grails.testing.spring.AutowiredTest
 import grails.testing.web.controllers.ControllerUnitTest
 import hpo.api.util.HpoOntologyFactory
-import org.grails.io.support.ClassPathResource
-import org.grails.web.json.JSONElement
-import spock.lang.Shared
 import spock.lang.Specification
 import spock.lang.Unroll
 

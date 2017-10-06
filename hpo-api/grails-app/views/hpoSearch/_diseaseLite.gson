@@ -1,0 +1,9 @@
+import com.github.phenomics.ontolib.formats.hpo.HpoDiseaseAnnotation
+
+model {
+    HpoDiseaseAnnotation diseaseLite
+}
+json{
+    db diseaseLite.db
+    dbName diseaseLite.dbName
+}
