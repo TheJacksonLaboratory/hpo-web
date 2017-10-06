@@ -12,7 +12,7 @@ class UrlMappings {
 
         "/"(controller: 'application', action:'index')
         "/hpo/search"(controller: 'hpoSearch', action:'searchAll')
-        "/hpo/search/term"(controller: 'hpoSearch', action:'searchTerm')
+        "/hpo/search/term"(controller: 'hpoTermDetails', action:'searchTerm')
         "500"(view: '/error')
         "404"(view: '/notFound')
     }

@@ -1,5 +1,3 @@
-package hpoTermDetails
-
 import com.github.phenomics.ontolib.ontology.data.Term
 
 model {
@@ -12,7 +10,6 @@ json{
     definition term.definition
     comment term.comment
     synonyms term.synonyms*.value
-    //term.synonyms*.scope == [EXACT, EXACT, EXACT]
     isObsolete term.isObsolete()
     xrefs term.xrefs*.name
 }

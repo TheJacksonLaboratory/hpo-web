@@ -9,7 +9,7 @@
       <button md-button routerLink="browser">Browser</button>
       <button md-button [md-menu-trigger-for]="docsMenu">Documentation <md-icon>arrow_drop_down</md-icon></button>
       <button md-button routerLink="downloads">Downloads</button>
-      <button md-button routerLink="resources">Resources</button>
+      <button md-button [md-menu-trigger-for]="resourceMenu">Resources <md-icon>arrow_drop_down</md-icon></button>
   </div>
   <div class="fill-remaining-space">
 
@@ -26,6 +26,12 @@
     <button md-menu-item routerLink="documentation/intro"> Introduction </button>
     <button md-menu-item routerLink="documentation/definitions"> Definitions </button>
     <button md-menu-item routerLink="documentation/annotations"> Annotations </button>
-</md-menu>
+  </md-menu>
+  <md-menu y-positon="after" [overlapTrigger]="false" #resourceMenu="mdMenu">
+      <button md-menu-item routerLink="citation"> Citation </button>
+      <button md-menu-item routerLink="contact"> Contact  </button>
+      <button md-menu-item routerLink="faq"> FAQ </button>
+      <button md-menu-item routerLink="license"> License </button>
+    </md-menu>
 </md-toolbar>
 

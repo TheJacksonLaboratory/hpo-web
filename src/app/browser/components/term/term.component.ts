@@ -13,16 +13,25 @@ export class TermComponent implements OnInit {
   term: Term;
   constructor(private route: ActivatedRoute, private termService: TermService) { 
     this.route.params.subscribe( params => this.query = params.id);
+    this.term = {"id":"", "name": "", "definition":"", "altTermIds": [], "comment":"", "synonyms": [], "isObsolete": true, "xrefs": [], "purl": ""};
   }
 
   ngOnInit() {
     this.termService.searchTerm(this.query)
       .then((data) => {
-        this.term = data.term[0];
+        this.setDefaults(data.term);
         this.termTitle = "(" + this.term.id + ")" + " " + this.term.name;
       }, (error) => {
         console.log(error);
     });
+  }
+
+  setDefaults(term: Term){
+    this.term = term;
+    console.log(this.term);
+    this.term.altTermIds = (term.altTermIds.length != 0) ? term.altTermIds: ["-"];
+    this.term.definition = (term.definition != null) ? term.definition: "Sorry this term has no definition.";
+    this.term.purl = "http://purl.obolibrary.org/obo/" + term.id.replace(":","_");
   }
 
 }

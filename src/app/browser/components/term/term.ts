@@ -1,11 +1,13 @@
 export class Term{
-    id: String;
-    name: String;
-    altTermIds: Array<String>;
-    comment: String;
-    synonyms: Array<String>;
+    id: string;
+    name: string;
+    definition: string;
+    altTermIds: Array<string>;
+    comment: string;
+    synonyms: Array<string>;
     isObsolete: boolean;
-    xrefs: Array<String>;
+    xrefs: Array<string>;
+    purl: string;
     constructor(){
     }
 }

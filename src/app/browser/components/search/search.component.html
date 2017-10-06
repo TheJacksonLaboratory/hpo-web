@@ -1,27 +1,27 @@
 <div class="container">
   <div class="row">
-    <div class="col-lg-offset-3 col-lg-6">
-      <div class="searchbar">
+    <div class="col-lg-6 searchbar">
           <md-icon class="search-icon">search</md-icon>
           <md-form-field class="example-full-width">
               <input mdInput placeholder="Search Human Phenotype Ontology" [(ngModel)]=query (keyup)="filter()">
               <md-hint align="end"><strong>( i.e. ) HP:00142 | Abornmality of Weight | Bladder Cancer</strong> </md-hint>
           </md-form-field>
           <!--<input class="search-bar col-lg-12" type="text" placeholder='Search Phenotypes' [(ngModel)]=query (keyup)="filter()"/>-->
-      </div>
     </div>
   </div>
   <div class="row">
     <div class="col-lg-12">
       <div class="search-results" >
+          <md-progress-bar *ngIf="loading" class="loading-result" color="accent" mode="indeterminate">
+            </md-progress-bar>
             <div *ngIf="terms && terms.length > 0" class="result-card term-result col-lg-{{bootCols}} col-sm-12">
               <md-card>
                 <md-card-header>
                   <md-card-title>Terms<hr></md-card-title>
                 </md-card-header>
                 <md-card-content>
-                  <span routerLink="term/{{item.id}}" class="result-list " *ngFor="let item of terms | sort: 'name';" (click)="select(item)">
-                      (HPO) {{item.id}} {{item.name}}
+                  <span routerLink="term/{{item.id}}" class="result-list" *ngFor="let item of terms | sort: 'name';" (click)="select(item)">
+                      <span class="result">{{item.id}} {{item.name}}</span>
                   </span>
                 </md-card-content>
               </md-card>
@@ -33,7 +33,7 @@
                   </md-card-header>
                   <md-card-content>
                     <span routerLink="term/{{item.dbReference}}" class="result-list" *ngFor="let item of diseases | sort: 'dbName';" (click)="select(item)">
-                      (Disease) {{item.dbReference}} {{item.dbName}}
+                      <span class="result">{{item.dbReference}} {{item.dbName}}</span>
                     </span>
                   </md-card-content>
                 </md-card>
@@ -41,13 +41,13 @@
               <div *ngIf="genes && genes.length > 0" class="result-card gene-result col-lg-{{bootCols}} col-sm-12">
                   <md-card>
                     <md-card-header>
-                      <md-card-title>Genes</md-card-title>
+                      <md-card-title>Genes<hr></md-card-title>
                     </md-card-header>
                     <md-card-content>
-                        <!--<div  *ngFor="let item of filteredList; let isOdd=odd; let isEven=even"
-                        class="result-row" [class.odd]="odd-result" [class.even]="even-result" (click)="select(item)">
-                            (HPO) {{item.id_term}} {{item.name}}
-                        </div>-->
+                      <span  routerLink="gene/{{item.entrezGeneId}}" *ngFor="let item of genes | sort: 'entrezGeneSymbol'; "
+                        class="result-list" (click)="select(item)">
+                            <span class="result"> {{item.entrezGeneId}} {{item.entrezGeneSymbol}}</span>
+                    </span>
                     </md-card-content>
                   </md-card>
               </div>

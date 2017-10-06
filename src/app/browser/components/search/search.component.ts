@@ -17,23 +17,32 @@ export class SearchComponent implements OnInit {
   diseases: Disease[];
   genes: Gene[];
   bootCols: number;
+  loading: boolean;
   constructor(private searchService: SearchService) {
     this.terms = [];
     this.diseases = [];
     this.genes = [];
     this.bootCols = 4;
+    this.loading = false;
   }
   ngOnInit() {
     //this.getPhenotypes();
   }
   queryHPO(query: string): void {
+    this.loading = true;
     this.searchService.searchAll(this.query)
       .then((data) => {
+        let numResults: number;
         this.terms = data.terms;
         this.diseases = data.diseases;
-        if(this.terms && this.diseases){
+        this.genes = data.genes;
+        numResults = this.checkEmpty(this.terms) + this.checkEmpty(this.diseases) + this.checkEmpty(this.genes)
+        if(numResults == 2 ){
           this.bootCols = 6;
+        }else if(numResults == 1){
+          this.bootCols = 12;
         }
+        this.loading = false;
       }, (error) => {
         console.log(error);
     });
@@ -49,6 +58,14 @@ export class SearchComponent implements OnInit {
       this.genes = [];
       this.bootCols = 4;
       this.searchActive.emit(false);
+    }
+  }
+  checkEmpty(array: Array<any>): number {
+    if(array.length != 0){
+      return 1;
+    }
+    else{
+      return 0;
     }
   }
   /* Keep this when having search always around becomes necessary

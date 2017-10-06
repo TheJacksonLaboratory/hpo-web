@@ -16,8 +16,10 @@ import { MdIconModule } from '@angular/material';
 import { AboutComponent } from './about/about.component';
 import { DownloadsComponent } from './downloads/downloads.component';
 import { HomeComponent } from './home/home.component';
-import { ResourcesComponent } from './resources/resources.component';
-
+import { ContactComponent } from './resources/contact/contact.component';
+import { CitationComponent } from './resources/citation/citation.component';
+import { LicenseComponent } from './resources/license/license.component';
+import { FaqComponent } from './resources/faq/faq.component';
 
 @NgModule({
   imports: [
@@ -32,7 +34,8 @@ import { ResourcesComponent } from './resources/resources.component';
     MdButtonModule,
     MdIconModule,
   ],
-  declarations: [ HomeComponent, ResourcesComponent, DownloadsComponent,
-                  AboutComponent ]
+  declarations: [ HomeComponent, DownloadsComponent, AboutComponent,
+                  ContactComponent, CitationComponent, LicenseComponent,
+                  FaqComponent]
 })
 export class StaticModule { }

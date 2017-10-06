@@ -3,11 +3,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { RoutingModule } from './app-routing.module';
-import  {MatMenuModule } from '@angular/material';
+import { MatMenuModule } from '@angular/material';
 import { MdButtonModule } from '@angular/material';
 import { MdIconModule } from '@angular/material';
 import { MatToolbarModule} from '@angular/material';
-
 
 //Custom Shared Components
 import { AppComponent } from './app.component';

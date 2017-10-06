@@ -1,9 +1,7 @@
-package hpoTermDetails
-
 import com.github.phenomics.ontolib.ontology.data.Term
 model {
     Term termResult
 }
 json{
-    tmpl.term( termResult )
+    term tmpl.term( termResult )
 }

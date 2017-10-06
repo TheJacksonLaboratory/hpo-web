@@ -61,3 +61,12 @@ span.result-list  {
 .gene-result span.result-list:hover  {
   border-bottom:dotted 1px #43B02A;
 }
+.search-results .loading-result {
+  width: 500px;
+  margin: 15px 0 0 30%;
+  float:none;
+}
+.searchbar {
+  margin:0 auto;
+  float:none;
+}

@@ -1,4 +1,14 @@
 .term-title {
     font-size: 18px;
     text-align: center;
+    text-shadow: 1px 1px #D0D3D4;
+}
+.term-summary {
+    float:left;
+}
+.term-summary .mat-card-content h4{
+    float:left;
+}
+.term-tabs{
+    float: right;
 }

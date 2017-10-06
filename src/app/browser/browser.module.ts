@@ -7,6 +7,9 @@ import { BrowserRoutingModule } from './browser-routing.module'
 import { MdInputModule } from '@angular/material';
 import { MdCardModule } from '@angular/material';
 import { MdIconModule } from '@angular/material';
+import { MdProgressBarModule }  from '@angular/material';
+import { MdTabsModule } from '@angular/material';
+
 // Services
 import { SearchService } from './services/search/search.service';
 import { TermService } from './services/term/term.service';
@@ -27,7 +30,9 @@ import { SortPipe } from './pipes/sort-pipe';
     BrowserRoutingModule,
     MdInputModule,
     MdCardModule,
-    MdIconModule
+    MdIconModule,
+    MdProgressBarModule,
+    MdTabsModule
   ],
   providers: [ SearchService, TermService ],
   declarations: [ SearchComponent, TermComponent, DiseaseComponent, 

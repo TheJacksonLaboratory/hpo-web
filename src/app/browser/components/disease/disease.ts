@@ -1,8 +1,8 @@
 export class Disease{
-    db: String;
+    db: string;
     dbObjectId: Number;
-    dbName: String;
-    dbReference: String;
+    dbName: string;
+    dbReference: string;
     constructor(){
     }
 }
