@@ -12,7 +12,7 @@ import org.grails.io.support.ClassPathResource
  */
 @CompileStatic
 class HpoOntologyFactory {
-    static HpoOntology getInstance() {
+    HpoOntology getInstance() {
         final File file = new ClassPathResource('hpo.obo').file
         new HpoOboParser(file).parse()
     }

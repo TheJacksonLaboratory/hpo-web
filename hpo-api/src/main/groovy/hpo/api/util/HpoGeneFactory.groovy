@@ -5,7 +5,7 @@ import groovy.transform.CompileStatic
 import org.grails.io.support.ClassPathResource
 @CompileStatic
 class HpoGeneFactory {
-    static List<HpoGeneAnnotation> getGeneAnnotationInstance() {
+    List<HpoGeneAnnotation> getInstance() {
         final File file = new ClassPathResource('ALL_SOURCES_ALL_FREQUENCIES_genes_to_phenotype.txt').file
         List<HpoGeneAnnotation> geneAnnotations = []
         HpoGeneAnnotationParser geneParser = new HpoGeneAnnotationParser(file)

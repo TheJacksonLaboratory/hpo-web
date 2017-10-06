@@ -8,7 +8,7 @@ import org.grails.io.support.ClassPathResource
 
 @CompileStatic
 class HpoDiseaseFactory {
-    static List<HpoDiseaseAnnotation> getAnnotationInstance(){
+    List<HpoDiseaseAnnotation> getInstance(){
         final File file = new ClassPathResource('phenotype_annotation.tab').file
         List<HpoDiseaseAnnotation> diseaseAnnotations= []
         HpoDiseaseAnnotationParser diseaseAnnotationParser = new HpoDiseaseAnnotationParser(file)
