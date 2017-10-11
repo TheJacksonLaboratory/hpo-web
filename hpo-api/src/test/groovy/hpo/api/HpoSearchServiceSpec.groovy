@@ -12,19 +12,21 @@ import spock.lang.Specification
 import spock.lang.Unroll
 
 @Unroll
-class HpoSearchServiceSpec extends Specification implements ServiceUnitTest<HpoSearchService>{
+class HpoSearchServiceSpec extends Specification implements ServiceUnitTest<HpoSearchService> {
 
     @Shared
     HpoOntology hpoOntology
-    @Shared List<HpoDiseaseAnnotation> hpoDiseases
-    @Shared List<HpoGeneAnnotation> hpoGenes
+    @Shared
+    List<HpoDiseaseAnnotation> hpoDiseases
+    @Shared
+    List<HpoGeneAnnotation> hpoGenes
 
     HpoSearchServiceSpec() {}
 
     def setupSpec() {
-        hpoOntology = HpoOntologyFactory.getInstance()
-        hpoDiseases = HpoDiseaseFactory.getAnnotationInstance()
-        hpoGenes = HpoGeneFactory.getGeneAnnotationInstance()
+        hpoOntology = new HpoOntologyFactory().getInstance()
+        hpoDiseases = new HpoDiseaseFactory().getInstance()
+        hpoGenes = new HpoGeneFactory().getInstance()
     }
 
     def setup() {
@@ -51,6 +53,7 @@ class HpoSearchServiceSpec extends Specification implements ServiceUnitTest<HpoS
         'abnormality of body' | ['Abnormality of body height', 'Abnormality of body weight', 'Abnormality of body mass index',] | 'with lower case'
         'HP:0000003'          | ['Multicystic kidney dysplasia']                                                                | 'hp id'
     }
+
     void "test searchAll diseases #desc"() {
 
         final Map resultMap = service.search(query)
@@ -59,14 +62,15 @@ class HpoSearchServiceSpec extends Specification implements ServiceUnitTest<HpoS
         resultMap.diseases*.dbName == expected
 
         where:
-        query                 | expected                                                                                        | desc
-        null                  | []                                                                                              | 'null'
-        ' '                   | []                                                                                              | 'blank'
-        '   '                 | []                                                                                              | 'blank'
-        '   \n'               | []                                                                                              | 'blank'
-        'Grant'               | ['GRANT SYNDROME', 'Grant syndrome']                                                            | 'with uppercase'
-        'grant'               | ['GRANT SYNDROME', 'Grant syndrome']                                                            | 'with lowercase'
+        query   | expected                             | desc
+        null    | []                                   | 'null'
+        ' '     | []                                   | 'blank'
+        '   '   | []                                   | 'blank'
+        '   \n' | []                                   | 'blank'
+        'Grant' | ['GRANT SYNDROME', 'Grant syndrome'] | 'with uppercase'
+        'grant' | ['GRANT SYNDROME', 'Grant syndrome'] | 'with lowercase'
     }
+
     void "test searchAll genes #desc"() {
 
         final Map resultMap = service.search(query)
@@ -75,11 +79,11 @@ class HpoSearchServiceSpec extends Specification implements ServiceUnitTest<HpoS
         resultMap.genes*.entrezGeneSymbol == expected
 
         where:
-        query                 | expected                                                                                        | desc
-        null                  | []                                                                                              | 'null'
-        ' '                   | []                                                                                              | 'blank'
-        '   '                 | []                                                                                              | 'blank'
-        '   \n'               | []                                                                                              | 'blank'
-        'TP53'                | ['TP53']                                                                                        | 'with uppercase'
+        query   | expected | desc
+        null    | []       | 'null'
+        ' '     | []       | 'blank'
+        '   '   | []       | 'blank'
+        '   \n' | []       | 'blank'
+        'TP53'  | ['TP53'] | 'with uppercase'
     }
 }
