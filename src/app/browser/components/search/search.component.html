@@ -20,7 +20,7 @@
                   <md-card-title>Terms<hr></md-card-title>
                 </md-card-header>
                 <md-card-content>
-                  <span routerLink="term/{{item.id}}" class="result-list" *ngFor="let item of terms | sort: 'name';" (click)="select(item)">
+                  <span routerLink="term/{{item.id}}" class="result-list" *ngFor="let item of terms | sort: 'name';">
                       <span class="result">{{item.id}} {{item.name}}</span>
                   </span>
                 </md-card-content>
@@ -32,8 +32,8 @@
                     <md-card-title>Diseases<hr></md-card-title>
                   </md-card-header>
                   <md-card-content>
-                    <span routerLink="term/{{item.dbReference}}" class="result-list" *ngFor="let item of diseases | sort: 'dbName';" (click)="select(item)">
-                      <span class="result">{{item.dbReference}} {{item.dbName}}</span>
+                    <span routerLink="disease/{{item.dbRef}}" class="result-list" *ngFor="let item of diseases | sort: 'dbName';">
+                      <span class="result">{{item.dbRef}} {{item.dbName}}</span>
                     </span>
                   </md-card-content>
                 </md-card>
@@ -45,7 +45,7 @@
                     </md-card-header>
                     <md-card-content>
                       <span  routerLink="gene/{{item.entrezGeneId}}" *ngFor="let item of genes | sort: 'entrezGeneSymbol'; "
-                        class="result-list" (click)="select(item)">
+                        class="result-list">
                             <span class="result"> {{item.entrezGeneId}} {{item.entrezGeneSymbol}}</span>
                     </span>
                     </md-card-content>

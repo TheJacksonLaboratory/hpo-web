@@ -28,7 +28,6 @@ class HpoSearchServiceSpec extends Specification implements ServiceUnitTest<HpoS
         hpoDiseases = new HpoDiseaseFactory().getInstance()
         hpoGenes = new HpoGeneFactory().getInstance()
     }
-
     def setup() {
         service.hpoOntology = hpoOntology
         service.hpoDiseases = hpoDiseases

@@ -19,7 +19,7 @@ class HpoTermDetailsService {
     Term searchTerms(String trimmedQ){
         final Term termResult = null
         if (trimmedQ.startsWith('HP:')) {
-            termResult =  this.hpoOntology.termMap.get(ImmutableTermId.constructWithPrefix(trimmedQ))
+            termResult = this.hpoOntology.termMap.get(ImmutableTermId.constructWithPrefix(trimmedQ))
         }
         return termResult
     }

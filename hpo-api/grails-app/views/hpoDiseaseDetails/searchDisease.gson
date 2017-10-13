@@ -1,0 +1,7 @@
+import com.github.phenomics.ontolib.formats.hpo.HpoDiseaseAnnotation
+model {
+    List<HpoDiseaseAnnotation> diseaseResult
+}
+json{
+    disease tmpl.disease( diseaseResult )
+}

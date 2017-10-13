@@ -1,13 +1,23 @@
 <div class="container">
-  <div class="term-header">
-      <div class="term-title">{{termTitle}}</div>
+  <div class="thing-header">
+      <div class="thing-title">{{termTitle}}</div>
   </div>
 </div>
 <div class="row">
   <div class="container">
     <div class="col-lg-12">
+        <md-card class="thing-summary col-lg-3" style="float:left">
+            <md-card-content>
+              <p>Primary ID:&nbsp; <strong>{{term.id}}</strong></p>
+              <p>Alternate ID's:&nbsp;<strong>{{term.altTermIds}}</strong></p>  
+              <p>PURL: <a href="{{term.purl}}" target="__blank"><strong>{{term.purl}}</strong></a></p>
+              <p><u>Definition</u><br><i>{{term.definition}}</i></p>
+              <p><u>Synonyms</u><br><i *ngFor="let item of term.synonyms; let isLast=last">{{item}}{{isLast ? '' : ', '}}</i></p>
+              <p><u>Xrefs</u><br><i *ngFor="let item of term.xrefs; let isLast=last">{{item}}{{isLast ? '' : ', '}}</i></p>
+            </md-card-content>
+        </md-card>
         <md-tab-group class="term-tabs">
-            <md-tab label="Term Statistics">
+            <md-tab label="Associations">
               <div class="tab-content">
               </div>
             </md-tab>
@@ -20,16 +30,6 @@
             </div>
           </md-tab>
           </md-tab-group>
-        <md-card class="term-summary col-lg-3">
-            <md-card-content>
-              <p>Primary ID:&nbsp; <strong>{{term.id}}</strong></p>
-              <p>Alternate ID's:&nbsp;<strong>{{term.altTermIds}}</strong></p>  
-              <p>PURL: <a href="{{term.purl}}" target="__blank"><strong>{{term.purl}}</strong></a></p>
-              <p><u>Definition</u><br><i>{{term.definition}}</i></p>
-              <p><u>Synonyms</u><br><i *ngFor="let item of term.synonyms; let isLast=last">{{item}}{{isLast ? '' : ', '}}</i></p>
-              <p><u>Xrefs</u><br><i *ngFor="let item of term.xrefs; let isLast=last">{{item}}{{isLast ? '' : ', '}}</i></p>
-            </md-card-content>
-        </md-card>
     </div>
   </div>
 </div>

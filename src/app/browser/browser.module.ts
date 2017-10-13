@@ -13,6 +13,8 @@ import { MdTabsModule } from '@angular/material';
 // Services
 import { SearchService } from './services/search/search.service';
 import { TermService } from './services/term/term.service';
+import { GeneEntrezService } from './services/gene/gene-entrez.service';
+import { DiseaseService } from './services/disease/disease.service';
 // Components
 import { SearchComponent } from './components/search/search.component';
 import { TermComponent } from './components/term/term.component';
@@ -34,7 +36,7 @@ import { SortPipe } from './pipes/sort-pipe';
     MdProgressBarModule,
     MdTabsModule
   ],
-  providers: [ SearchService, TermService ],
+  providers: [ SearchService, TermService, GeneEntrezService, DiseaseService ],
   declarations: [ SearchComponent, TermComponent, DiseaseComponent, 
     GeneComponent, BrowserComponent, SortPipe ]
 })

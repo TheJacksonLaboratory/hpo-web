@@ -6,4 +6,5 @@ model {
 json{
     db diseaseLite.db
     dbName diseaseLite.dbName
+    dbRef diseaseLite.dbReference
 }

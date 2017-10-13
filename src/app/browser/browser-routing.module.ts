@@ -11,8 +11,8 @@ const browserRoutes: Routes = [
   { path:'', component: BrowserComponent, 
     children:[
       { path:'term/:id', component: TermComponent },
-      { path:'disease', component: DiseaseComponent},
-      { path:'gene', component: GeneComponent }
+      { path:'disease/:id', component: DiseaseComponent},
+      { path:'gene/:id', component: GeneComponent }
     ]
   }
 ]

@@ -28,8 +28,8 @@ export class TermComponent implements OnInit {
 
   setDefaults(term: Term){
     this.term = term;
-    console.log(this.term);
     this.term.altTermIds = (term.altTermIds.length != 0) ? term.altTermIds: ["-"];
+    this.term.synonyms = (term.synonyms.length != 0) ? term.synonyms: ["-"];
     this.term.definition = (term.definition != null) ? term.definition: "Sorry this term has no definition.";
     this.term.purl = "http://purl.obolibrary.org/obo/" + term.id.replace(":","_");
   }

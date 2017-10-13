@@ -8,3 +8,27 @@
   box-shadow: 1px 1px 15px 5px #D0D3D4;
   margin-top: 50px;
 }
+.pageTitle{
+  cursor: pointer;
+}
+::ng-deep .mat-tab-label {
+  border-right: 1px solid rgba(0, 0, 0, 0.12);
+}
+::ng-deep .mat-tab-header {
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+}
+::ng-deep .thing-title {
+  font-size: 18px;
+  text-align: center;
+  text-shadow: 1px 1px #D0D3D4;
+}
+::ng-deep .thing-summary {
+  float:left;
+}
+::ng-deep .thing-header{
+  margin-top: -10px;
+  margin-bottom: 10px;
+}
+::ng-deep .thing-summary .mat-card-content h4{
+  float:left;
+}
