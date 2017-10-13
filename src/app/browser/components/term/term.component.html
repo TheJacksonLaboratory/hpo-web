@@ -6,30 +6,30 @@
 <div class="row">
   <div class="container">
     <div class="col-lg-12">
-        <md-card class="thing-summary col-lg-3" style="float:left">
-            <md-card-content>
+        <mat-card class="thing-summary col-lg-3" style="float:left">
+            <mat-card-content>
               <p>Primary ID:&nbsp; <strong>{{term.id}}</strong></p>
-              <p>Alternate ID's:&nbsp;<strong>{{term.altTermIds}}</strong></p>  
+              <p>Alternate ID's:&nbsp;<strong>{{term.altTermIds}}</strong></p>
               <p>PURL: <a href="{{term.purl}}" target="__blank"><strong>{{term.purl}}</strong></a></p>
               <p><u>Definition</u><br><i>{{term.definition}}</i></p>
               <p><u>Synonyms</u><br><i *ngFor="let item of term.synonyms; let isLast=last">{{item}}{{isLast ? '' : ', '}}</i></p>
               <p><u>Xrefs</u><br><i *ngFor="let item of term.xrefs; let isLast=last">{{item}}{{isLast ? '' : ', '}}</i></p>
-            </md-card-content>
-        </md-card>
-        <md-tab-group class="term-tabs">
-            <md-tab label="Associations">
+            </mat-card-content>
+        </mat-card>
+        <mat-tab-group class="term-tabs">
+            <mat-tab label="Associations">
               <div class="tab-content">
               </div>
-            </md-tab>
-             <md-tab label="Some Other Data">
+            </mat-tab>
+             <mat-tab label="Some Other Data">
                 <div class="tab-content">
                   </div>
-            </md-tab>
-          <md-tab label="Term In Text">
+            </mat-tab>
+          <mat-tab label="Term In Text">
             <div class="tab-content">
             </div>
-          </md-tab>
-          </md-tab-group>
+          </mat-tab>
+          </mat-tab-group>
     </div>
   </div>
 </div>

@@ -4,11 +4,11 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http'
 import { BrowserRoutingModule } from './browser-routing.module'
-import { MdInputModule } from '@angular/material';
-import { MdCardModule } from '@angular/material';
-import { MdIconModule } from '@angular/material';
-import { MdProgressBarModule }  from '@angular/material';
-import { MdTabsModule } from '@angular/material';
+import { MatInputModule } from '@angular/material';
+import { MatCardModule } from '@angular/material';
+import { MatIconModule } from '@angular/material';
+import { MatProgressBarModule }  from '@angular/material';
+import { MatTabsModule } from '@angular/material';
 
 // Services
 import { SearchService } from './services/search/search.service';
@@ -30,14 +30,14 @@ import { SortPipe } from './pipes/sort-pipe';
     FormsModule,
     HttpModule,
     BrowserRoutingModule,
-    MdInputModule,
-    MdCardModule,
-    MdIconModule,
-    MdProgressBarModule,
-    MdTabsModule
+    MatInputModule,
+    MatCardModule,
+    MatIconModule,
+    MatProgressBarModule,
+    MatTabsModule
   ],
   providers: [ SearchService, TermService, GeneEntrezService, DiseaseService ],
-  declarations: [ SearchComponent, TermComponent, DiseaseComponent, 
+  declarations: [ SearchComponent, TermComponent, DiseaseComponent,
     GeneComponent, BrowserComponent, SortPipe ]
 })
 export class BrowserHPOModule { }

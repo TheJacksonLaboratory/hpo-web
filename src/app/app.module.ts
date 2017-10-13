@@ -4,8 +4,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { RoutingModule } from './app-routing.module';
 import { MatMenuModule } from '@angular/material';
-import { MdButtonModule } from '@angular/material';
-import { MdIconModule } from '@angular/material';
+import { MatButtonModule } from '@angular/material';
+import { MatIconModule } from '@angular/material';
 import { MatToolbarModule} from '@angular/material';
 
 //Custom Shared Components
@@ -27,8 +27,8 @@ import { NoPageFoundComponent } from './error/no-page-found.component';
     BrowserAnimationsModule,
     RoutingModule,
     MatMenuModule,
-    MdButtonModule,
-    MdIconModule,
+    MatButtonModule,
+    MatIconModule,
     MatToolbarModule
   ],
   providers: [],

@@ -4,13 +4,13 @@ import { CommonModule } from '@angular/common';
 import { StaticRoutingModule } from './static-routing.module';
 import { DocumentationModule } from './documentation/documentation.module';
 // Angular Bootstrap Modules
-import { MdTabsModule } from '@angular/material';
-import { MdExpansionModule } from '@angular/material';
-import { MdTableModule } from '@angular/material';
-import { MdCardModule } from '@angular/material';
-import { MdListModule } from '@angular/material';
-import { MdButtonModule } from '@angular/material';
-import { MdIconModule } from '@angular/material';
+import { MatTabsModule } from '@angular/material';
+import { MatExpansionModule } from '@angular/material';
+import { MatTableModule } from '@angular/material';
+import { MatCardModule } from '@angular/material';
+import { MatListModule } from '@angular/material';
+import { MatButtonModule } from '@angular/material';
+import { MatIconModule } from '@angular/material';
 
 // Components
 import { AboutComponent } from './about/about.component';
@@ -26,13 +26,13 @@ import { FaqComponent } from './resources/faq/faq.component';
     CommonModule,
     StaticRoutingModule,
     DocumentationModule,
-    MdTabsModule,
-    MdExpansionModule,
-    MdTableModule,
-    MdCardModule,
-    MdListModule,
-    MdButtonModule,
-    MdIconModule,
+    MatTabsModule,
+    MatExpansionModule,
+    MatTableModule,
+    MatCardModule,
+    MatListModule,
+    MatButtonModule,
+    MatIconModule,
   ],
   declarations: [ HomeComponent, DownloadsComponent, AboutComponent,
                   ContactComponent, CitationComponent, LicenseComponent,

@@ -1,55 +1,55 @@
 <div class="container">
   <div class="row">
     <div class="col-lg-6 searchbar">
-          <md-icon class="search-icon">search</md-icon>
-          <md-form-field class="example-full-width">
-              <input mdInput placeholder="Search Human Phenotype Ontology" [(ngModel)]=query (keyup)="filter()">
-              <md-hint align="end"><strong>( i.e. ) HP:00142 | Abornmality of Weight | Bladder Cancer</strong> </md-hint>
-          </md-form-field>
+          <mat-icon class="search-icon">search</mat-icon>
+          <mat-form-field class="example-full-width">
+              <input matInput placeholder="Search Human Phenotype Ontology" [(ngModel)]=query (keyup)="filter()">
+              <mat-hint align="end"><strong>( i.e. ) HP:00142 | Abornmality of Weight | Bladder Cancer</strong> </mat-hint>
+          </mat-form-field>
           <!--<input class="search-bar col-lg-12" type="text" placeholder='Search Phenotypes' [(ngModel)]=query (keyup)="filter()"/>-->
     </div>
   </div>
   <div class="row">
     <div class="col-lg-12">
       <div class="search-results" >
-          <md-progress-bar *ngIf="loading" class="loading-result" color="accent" mode="indeterminate">
-            </md-progress-bar>
+          <mat-progress-bar *ngIf="loading" class="loading-result" color="accent" mode="indeterminate">
+            </mat-progress-bar>
             <div *ngIf="terms && terms.length > 0" class="result-card term-result col-lg-{{bootCols}} col-sm-12">
-              <md-card>
-                <md-card-header>
-                  <md-card-title>Terms<hr></md-card-title>
-                </md-card-header>
-                <md-card-content>
+              <mat-card>
+                <mat-card-header>
+                  <mat-card-title>Terms<hr></mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
                   <span routerLink="term/{{item.id}}" class="result-list" *ngFor="let item of terms | sort: 'name';">
                       <span class="result">{{item.id}} {{item.name}}</span>
                   </span>
-                </md-card-content>
-              </md-card>
+                </mat-card-content>
+              </mat-card>
             </div>
             <div *ngIf="diseases && diseases.length > 0" class="result-card disease-result col-lg-{{bootCols}} col-sm-12">
-                <md-card>
-                  <md-card-header>
-                    <md-card-title>Diseases<hr></md-card-title>
-                  </md-card-header>
-                  <md-card-content>
+                <mat-card>
+                  <mat-card-header>
+                    <mat-card-title>Diseases<hr></mat-card-title>
+                  </mat-card-header>
+                  <mat-card-content>
                     <span routerLink="disease/{{item.dbRef}}" class="result-list" *ngFor="let item of diseases | sort: 'dbName';">
                       <span class="result">{{item.dbRef}} {{item.dbName}}</span>
                     </span>
-                  </md-card-content>
-                </md-card>
+                  </mat-card-content>
+                </mat-card>
               </div>
               <div *ngIf="genes && genes.length > 0" class="result-card gene-result col-lg-{{bootCols}} col-sm-12">
-                  <md-card>
-                    <md-card-header>
-                      <md-card-title>Genes<hr></md-card-title>
-                    </md-card-header>
-                    <md-card-content>
+                  <mat-card>
+                    <mat-card-header>
+                      <mat-card-title>Genes<hr></mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
                       <span  routerLink="gene/{{item.entrezGeneId}}" *ngFor="let item of genes | sort: 'entrezGeneSymbol'; "
                         class="result-list">
                             <span class="result"> {{item.entrezGeneId}} {{item.entrezGeneSymbol}}</span>
                     </span>
-                    </md-card-content>
-                  </md-card>
+                    </mat-card-content>
+                  </mat-card>
               </div>
       </div>
     </div>

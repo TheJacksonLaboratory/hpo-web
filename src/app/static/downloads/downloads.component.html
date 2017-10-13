@@ -4,47 +4,47 @@
       <div class="hr"></div>
       <div class="page-intro">{{pageIntro}}</div>
   </div>
-  <md-tab-group>
-    <md-tab label="Ontology">
+  <mat-tab-group>
+    <mat-tab label="Ontology">
       <div class="tab-content">
-        <h4>Ontology Data</h4>     
+        <h4>Ontology Data</h4>
         <p>In general, users should always use the PURL (persistent URL) to access the HPO-data, i.e.</p>
         <ul>
           <li><a href="http://purl.obolibrary.org/obo/hp.obo" target="__blank">http://purl.obolibrary.org/obo/hp.obo</a></li>
           <li><a href="http://purl.obolibrary.org/obo/hp.owl" target="__blank">http://purl.obolibrary.org/obo/hp.owl</a></li>
-        </ul> 
+        </ul>
         <p>This currently re-directs you to our Hudson/Jenkins page. Hudson/Jenkins are continuous integration systems, that will provide stable releases.</p>
       </div>
-    </md-tab>
-     <md-tab label="Annotations">
+    </mat-tab>
+     <mat-tab label="Annotations">
         <div class="tab-content">
-            <h4>Annotations/Genes/DB</h4>     
+            <h4>Annotations/Genes/DB</h4>
             <p>The annotation files (e.g. phenotype_annotation.tab) from our <a href="http://compbio.charite.de/jenkins/job/hpo.annotations/lastStableBuild/">Hudson/Jenkins page</a>. The format of the annotation file is explained under Documentation.</p>
             <ul>
               <li><i>phenotype_annotation.tab</i>: contains manual and semi-automated annotations created by the HPO-team. These are annotations of OMIM-, Orphanet-, and DECIPHER-entries</li>
               <li><i>phenotype_annotation_hpoteam.tab</i>: contains annotations made explicitly and manually by the HPO-team (mostly referring to OMIM entries)</li>
               <li><i>negative_phenotype_annotation.tab</i>: contains negative annotations (i.e. a disease is NOT associated with this HPO-term)</li>
             </ul>
-            <p>Furthermore, we <a href="http://compbio.charite.de/jenkins/job/hpo.annotations.monthly/lastStableBuild/">provide two files</a> (genes_to_phenotype.txt and phenotype_to_genes.txt) to link between genes and HPO-terms. 
-              These files will be updated at regular intervals (once every month). he links are generated using the information about the phenotypes of a particular syndrome and the corresponding genes that are known to cause this syndrome 
+            <p>Furthermore, we <a href="http://compbio.charite.de/jenkins/job/hpo.annotations.monthly/lastStableBuild/">provide two files</a> (genes_to_phenotype.txt and phenotype_to_genes.txt) to link between genes and HPO-terms.
+              These files will be updated at regular intervals (once every month). he links are generated using the information about the phenotypes of a particular syndrome and the corresponding genes that are known to cause this syndrome
               when mutated.</p>
             <p>
-              The HPO can also be obtained in the form of a database. The most recent dump of this DB can be <a href="http://compbio.charite.de/jenkins/job/hpo.annotations.monthly/lastStableBuild/" target="__blank">obtained from here</a>. 
+              The HPO can also be obtained in the form of a database. The most recent dump of this DB can be <a href="http://compbio.charite.de/jenkins/job/hpo.annotations.monthly/lastStableBuild/" target="__blank">obtained from here</a>.
               Schema and UML diagrams can be found <a href="https://github.com/Human-Phenotype-Ontology/Human-Phenotype-Ontology.github.io/tree/master/data/db" target="__blank">here</a>.
-            </p>  
+            </p>
             <p>Questions and further requests can be sent to Sebastian.</p>
           </div>
-    </md-tab>
-  <md-tab label="Lanugage Support">
+    </mat-tab>
+  <mat-tab label="Lanugage Support">
     <div class="tab-content">
     <p>We do have translations of the HPO labels into spanish (¡Muchas gracias! to Pablo Lapunzina M.D., Ph.D. and colleagues) and italian. We are working with several people to translate more content of HPO into a multitude of languages.
        Several translations are being actively developed at the moment (e.g. german). Chinese and Japanese translations are also already finished (e.g. CHPO project)</p>
-    <p>The translations are considered a project coordinated by the HPO team and is hosted on <a href="https://github.com/Phenomics/HPO-translations" target="__blank">GitHub</a>. We kindly ask you to not start translating HPO content without 
+    <p>The translations are considered a project coordinated by the HPO team and is hosted on <a href="https://github.com/Phenomics/HPO-translations" target="__blank">GitHub</a>. We kindly ask you to not start translating HPO content without
       contacting us beforehand. This might cause duplicated translations and other problems.</p>
     <p>
         A Chinese version of the HPO can be downloaded from the <a href="http://wiki.chinahpo.org/index.php/%E9%A6%96%E9%A1%B5" target="__blank">CHPO Website</a>.
     </p>
     </div>
-  </md-tab>
-  </md-tab-group>
+  </mat-tab>
+  </mat-tab-group>
 </div>
