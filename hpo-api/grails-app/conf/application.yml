@@ -1,6 +1,6 @@
 ---
 grails:
-    profile: rest-api
+    profile: web
     codegen:
         defaultPackage: hpo.api
     spring:
