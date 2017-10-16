@@ -12,7 +12,7 @@ buildscript {
 }
 
 version "0.1"
-group "hpo.api"
+group "hpo.angular.app"
 
 apply plugin:"eclipse"
 apply plugin:"idea"
@@ -37,14 +37,18 @@ dependencies {
   compile "org.grails:grails-core"
   compile "org.springframework.boot:spring-boot-starter-actuator"
   compile "org.springframework.boot:spring-boot-starter-tomcat"
-  compile "org.grails:grails-web-boot"
+
   compile "org.grails:grails-logging"
-  compile "org.grails:grails-plugin-rest"
+
   compile "org.grails:grails-plugin-databinding"
+  compile "org.grails:grails-plugin-datasource"
+  compile "org.grails:grails-plugin-interceptors"
   compile "org.grails:grails-plugin-i18n"
+  compile "org.grails:grails-plugin-rest"
   compile "org.grails:grails-plugin-services"
   compile "org.grails:grails-plugin-url-mappings"
-  compile "org.grails:grails-plugin-interceptors"
+  compile "org.grails:grails-web-boot"
+
   compile "org.grails.plugins:cache"
   compile "org.grails.plugins:async"
   compile "org.grails.plugins:scaffolding"
@@ -67,7 +71,7 @@ dependencies {
 
   testCompile "org.grails:grails-gorm-testing-support"
   testCompile "org.grails.plugins:geb"
-    testCompile "org.grails:grails-datastore-rest-client"
+  testCompile "org.grails:grails-datastore-rest-client"
   testCompile "org.grails:grails-web-testing-support"
   testRuntime "org.seleniumhq.selenium:selenium-htmlunit-driver:2.47.1"
   testRuntime "net.sourceforge.htmlunit:htmlunit:2.18"
