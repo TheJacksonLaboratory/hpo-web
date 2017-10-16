@@ -9,6 +9,9 @@
 .settings/
 *.sublime-workspace
 
+# gradle local cache
+.gradle/
+
 # IDE - VSCode
 .vscode/*
 !.vscode/settings.json
