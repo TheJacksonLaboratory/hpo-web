@@ -10,7 +10,7 @@ class UrlMappings {
         put "/$controller/$id(.$format)?"(action:"update")
         patch "/$controller/$id(.$format)?"(action:"patch")
 
-        "/"(controller: 'application', action:'index')
+        "/"(redirect: '/app/index.html')
         "/hpo/search"(controller: 'hpoSearch', action:'searchAll')
         "/hpo/search/term"(controller: 'hpoTermDetails', action:'searchTerm')
         "/hpo/search/disease"(controller: 'hpoDiseaseDetails', action:'searchDisease')

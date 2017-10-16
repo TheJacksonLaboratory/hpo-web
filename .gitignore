@@ -2,6 +2,7 @@
 
 # IDEs and editors
 /.idea
+*.iml
 .project
 .classpath
 .c9/
@@ -11,6 +12,7 @@
 
 # gradle local cache
 .gradle/
+build/
 
 # IDE - VSCode
 .vscode/*

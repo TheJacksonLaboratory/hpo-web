@@ -7,7 +7,8 @@ buildscript {
         classpath "org.grails:grails-gradle-plugin:$grailsVersion"
         classpath "org.grails.plugins:hibernate5:${gormVersion-".RELEASE"}"
         classpath "org.grails.plugins:views-gradle:1.1.6"
-//        classpath "com.bertramlabs.plugins:asset-pipeline-gradle:2.14.2"
+ //       classpath "com.bertramlabs.plugins:asset-pipeline-gradle:2.14.2"
+        classpath "com.moowork.gradle:gradle-node-plugin:1.2.0"
     }
 }
 
@@ -21,6 +22,7 @@ apply plugin:"org.grails.grails-web"
 apply plugin:"org.grails.plugins.views-json"
 //apply plugin:"asset-pipeline"
 apply plugin:"org.grails.grails-gsp"
+apply plugin:"com.moowork.node"
 
 repositories {
     mavenLocal()
@@ -76,6 +78,57 @@ dependencies {
   testRuntime "org.seleniumhq.selenium:selenium-htmlunit-driver:2.47.1"
   testRuntime "net.sourceforge.htmlunit:htmlunit:2.18"
 }
+
+
+node {
+    version = '8.4.0'
+    npmVersion = '5.3.0'
+    download = true
+    nodeModulesDir = file("src/main/client")
+}
+
+task buildClientDev(type: NpmTask, dependsOn: 'npmInstall') {
+    group = 'build'
+    description = 'Compile client side assets for development'
+    args = ['run', 'build']
+}
+
+task buildClientProd(type: NpmTask, dependsOn: 'npmInstall') {
+    group = 'build'
+    description = 'Compile client side assets for production'
+    args = ['run', 'buildProd']
+}
+
+task buildClientWatch(type: NpmTask, dependsOn: 'npmInstall') {
+    group = 'application'
+    description = 'Builds and watches the client side assets for rebuilding'
+    args = ['run', 'buildWatch']
+}
+
+task clientTest(type: NpmTask, dependsOn: 'npmInstall') {
+    group = 'verification'
+    description = 'Executes client side unit tests'
+    args = ['run', 'test']
+}
+
+task clientIntegrationTest(type: NpmTask, dependsOn: 'npmInstall') {
+    group = 'verification'
+    description = 'Executes client side integration tests'
+    args = ['run', 'e2e']
+}
+
+
+war.dependsOn(buildClientProd)
+
+test.dependsOn(clientTest)
+
+integrationTest.dependsOn(clientIntegrationTest)
+
+clean {
+    delete fileTree(dir: "src/main/webapp/app")
+}
+
+bootRun.dependsOn(buildClientDev)
 
 bootRun {
     jvmArgs('-Dspring.output.ansi.enabled=always')

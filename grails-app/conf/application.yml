@@ -66,6 +66,8 @@ grails:
         encoding: UTF-8
     cors:
         enabled: true
+    resources:
+        pattern: /**
 
 ---
 hibernate:
