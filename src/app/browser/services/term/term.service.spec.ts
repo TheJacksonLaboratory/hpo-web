@@ -21,7 +21,7 @@ describe('Mock-TermService', () => {
 
     it('searchTerms() should return some terms', fakeAsync(() => {
         let result: String[];
-        this.termService.searchTerms().then((terms: String[]) => result = terms);
+        this.termService.searchTerm().then((terms: String[]) => result = terms);
         this.lastConnection.mockRespond(new Response(new ResponseOptions({
             body: JSON.stringify({})
         })))

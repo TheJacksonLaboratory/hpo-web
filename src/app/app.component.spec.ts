@@ -3,17 +3,20 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { AppComponent } from './app.component';
 import { RouterTestingModule } from '@angular/router/testing';
-import { MaterialModule } from '@angular/material';
+import { MatMenuModule } from '@angular/material';
+import { MatButtonModule } from '@angular/material';
+import { MatIconModule } from '@angular/material';
+
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [ RouterTestingModule, MatButtonModule, MatMenuModule, MatIconModule],
       declarations: [
         AppComponent,
         NavbarComponent,
         FooterComponent
-      ],
-      imports: [ RouterTestingModule, MaterialModule ]
+      ]
     }).compileComponents();
   }));
 

@@ -1,28 +1,33 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { MaterialModule } from '@angular/material';
-import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
-import { TermService } from '../services/term-service';
+import { TermService } from '../../services/term/term.service';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { MainSearchComponent } from './search.component';
-import { SearchbarComponent } from './searchbar/searchbar.component'
+import { SearchComponent } from './search.component';
+import { MatCardModule} from '@angular/material';
+import { RouterTestingModule } from '@angular/router/testing';
+import { SortPipe } from '../../pipes/sort-pipe';
+import { SearchService} from '../../services/search/search.service';
+
 
 describe('SearchHpoComponent', () => {
-  let component: MainSearchComponent;
-  let fixture: ComponentFixture<MainSearchComponent>;
+  let component: SearchComponent;
+  let fixture: ComponentFixture<SearchComponent>;
   let mockTermService;
+  let searchServiceStub = {
+    searchAll: jasmine.createSpy('searchAll').and.returnValue(Promise.resolve("something")),
+  };
   beforeEach(async(() => {
     mockTermService = {}
     TestBed.configureTestingModule({
-      declarations: [ MainSearchComponent, SearchbarComponent  ],
-      imports: [MaterialModule, FormsModule, HttpModule, NoopAnimationsModule ],
-      providers: [{provide: TermService, useValue: mockTermService }]
+      imports: [RouterTestingModule, FormsModule, NoopAnimationsModule, MatCardModule],
+      declarations: [ SearchComponent, SortPipe ],
+      providers: [{provide:SearchService, useValue:searchServiceStub}, {provide: TermService, useValue: mockTermService }]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MainSearchComponent);
+    fixture = TestBed.createComponent(SearchComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
