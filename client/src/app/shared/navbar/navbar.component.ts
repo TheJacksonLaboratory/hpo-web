@@ -7,11 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
   title:string;
-  
+
   constructor() {
     this.title = "Human Phenotype Ontology"
    }
-  
+
   ngOnInit() {
   }
 

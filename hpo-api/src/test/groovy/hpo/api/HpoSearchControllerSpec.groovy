@@ -2,46 +2,35 @@ package hpo.api
 
 import grails.testing.spring.AutowiredTest
 import grails.testing.web.controllers.ControllerUnitTest
-import hpo.api.util.HpoDiseaseFactory
-import hpo.api.util.HpoGeneFactory
-import hpo.api.util.HpoOntologyFactory
 import spock.lang.Specification
 import spock.lang.Unroll
 
 @Unroll
-class HpoSearchControllerSpec extends Specification implements ControllerUnitTest<HpoSearchController>,AutowiredTest {
+class HpoSearchControllerSpec extends Specification implements ControllerUnitTest<HpoSearchController>, AutowiredTest {
 
-    Closure doWithSpring() {
-        { ->
-            hpoOntologyFactory(HpoOntologyFactory)
-            hpoDiseaseFactory(HpoDiseaseFactory)
-            hpoGeneFactory(HpoGeneFactory)
+    /**
+     * this test, verifies the wiring,
+     * so the query gets passed to the service
+     * the map returned from the service gets passed to the controller in the ModelView object named as resultMap
+     * it also tests the view that's going to be used
+     */
+    void "test searchAll wiring"() {
+        HpoSearchService hpoSearchService = Mock()
+        controller.hpoSearchService = hpoSearchService
 
-            hpoOntology(hpoOntologyFactory: "getInstance")
-            hpoDiseases(hpoDiseaseFactory: "getInstance")
-            hpoGenes(hpoGeneFactory: "getInstance")
-        }
-    }
-
-    HpoSearchService hpoSearchService
-
-    void "test search #desc"() {
         when:
         controller.searchAll(query)
 
-        println(response.text)
-        println(response.text)
+        then: 'verify the view name'
+        1 * hpoSearchService.search(query) >> mockReturn
+        controller.getModelAndView().getViewName() == '/hpoSearch/searchAll'
 
-        then:
-        controller.getModelAndView().getViewName() == '/hpoSearch/search'
-        controller.modelAndView.model.termList*.name == expected
-
-        and:
-        controller.response.toString() == ''
+        and: 'the map returned by the service is passed in the model as resultMap'
+        controller.modelAndView.model.resultMap == expected
 
         where:
-        query                 | expected                                                                                       | desc
-        'HP:0000002'          | ['Abnormality of body height']                                                                 | 'by ID'
-        'Abnormality of body' | ['Abnormality of body height', 'Abnormality of body weight', 'Abnormality of body mass index'] | 'by term name'
+        query       | mockReturn                           | expected
+        'some term' | [:]                                  | [:]
+        'some term' | [terms: [], genes: [], diseases: []] | [terms: [], genes: [], diseases: []]
     }
 }
