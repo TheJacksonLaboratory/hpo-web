@@ -122,7 +122,7 @@ war.dependsOn(buildClientProd)
 
 test.dependsOn(clientTest)
 
-integrationTest.dependsOn(clientIntegrationTest)
+//integrationTest.dependsOn(clientIntegrationTest)
 
 clean {
     delete fileTree(dir: "src/main/webapp/app")
@@ -131,6 +131,7 @@ clean {
 bootRun.dependsOn(buildClientDev)
 
 bootRun {
-    jvmArgs('-Dspring.output.ansi.enabled=always')
+
+    jvmArgs('-Dspring.output.ansi.enabled=always', '-Dgrails.reload.enabled=true')
     addResources = true
 }
