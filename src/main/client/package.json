@@ -8,7 +8,7 @@
     "build": "ng build --base-href /app/",
     "buildProd": "ng build --prod --base-href /app/index.html",
     "buildWatch": "ng build --watch=true --base-href /app/",
-    "test": "ng test",
+    "test": "ng test --watch false",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
