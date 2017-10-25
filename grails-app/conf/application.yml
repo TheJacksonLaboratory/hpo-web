@@ -65,7 +65,7 @@ grails:
     converters:
         encoding: UTF-8
     cors:
-        enabled: false
+        enabled: true
     resources:
         pattern: /**
 
