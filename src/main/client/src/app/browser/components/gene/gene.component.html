@@ -14,7 +14,7 @@
                 <p><u>Definition</u><br>
                   <i>{{entrezGene.summary}}</i>
                 </p>
-                <p><u>Synonyms</u><br><i *ngFor="let item of entrezGene.otheraliases; let isLast=last">{{item}}{{isLast ? '' : ', '}}</i></p>
+                <p><u>Synonyms</u><br><i *ngFor="let item of entrezGene.aliases; let isLast=last">{{item}}{{isLast ? '' : ', '}}</i></p>
               </mat-card-content>
           </mat-card>
           <mat-tab-group class="gene-tabs">

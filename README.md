@@ -1,28 +1,68 @@
-# Hpo
+# Human Phenotype Ontology (HPO) Web App
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.2.6.
+## Prerequisites
 
-## Development server
++ Grails 3.3 +
++ JDK 1.8 +
++ Git 2.14
++ Gradle 4.2
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Setup
 
-## Code scaffolding
++ Clone the repo
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|module`.
+        git clone https://bitbucket.jax.org/scm/hpo/hpo-web.git
+        
 
-## Build
++ Change directory to hpo-web
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+        cd hpo-web
 
-## Running unit tests
++ Validate the client and backend components build by executing:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+        ./gradlew build
 
-## Running end-to-end tests
+## Usage
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
++ Run the application
 
-## Further help
+        ./gradlew bootRun
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
++ To open the application site launch the browser and go to
+ 
+        http://<host>:8080 gr
+
++ If client (Angular App) hot reload is desired open a new shell and execute
+
+        ./gradlew buildClientWatch
+
++ Optionally to open the client (Angular app) via Cli
+
+  * Change directory to hpo-web/src/main/client
+  
+        cd hpo-web/src/main/client  
+  * Execute
+  
+        ng serve --open (will open application in the browser using port 4200)
+  * Note: Review README file in hpo-web/src/main/client  
+
+## Unit Testing
+
++ To execute the client (Angular app) unit tests run
+  
+      ./gradlew clientTest
+
++ To execute backend and client unit tests run
+  
+      ./gradlew test
+    
+## Other
++ To see possible gradle tasks execute
+  
+      ./gradlew tasks
+      
++ To delete the previous build execute
+
+      ./gradlew clean
+      
+

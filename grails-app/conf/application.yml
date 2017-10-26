@@ -1,6 +1,6 @@
 ---
 grails:
-    profile: rest-api
+    profile: web
     codegen:
         defaultPackage: hpo.api
     spring:
@@ -66,6 +66,8 @@ grails:
         encoding: UTF-8
     cors:
         enabled: true
+    resources:
+        pattern: /**
 
 ---
 hibernate:
