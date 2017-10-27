@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { environment } from '../../../../environments/environment';
 import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
@@ -15,7 +16,7 @@ export class SearchService {
     }
     searchAll(query: string): Promise<any>{
         return this.http
-            .get('http://localhost:8080/hpo/search?q=' + query, this.options)
+            .get(environment.HPO_API_SEARCH_URL + '?q=' + query, this.options)
             .toPromise()
             .then(response => response.json())
             .catch(this.handleError);
