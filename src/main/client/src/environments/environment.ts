@@ -3,7 +3,7 @@
 // `ng build --env=prod` then `environment.prod.ts` will be used instead.
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
-const  HPO_API_BASE_URL = 'app/hpo/';
+const  HPO_API_BASE_URL = '../api/hpo/';
 export const environment = {
   production: false,
 

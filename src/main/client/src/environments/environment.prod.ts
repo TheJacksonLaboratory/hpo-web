@@ -1,5 +1,5 @@
 
-const  HPO_API_BASE_URL = 'app/hpo/';
+const  HPO_API_BASE_URL = '../api/hpo/';
 export const environment = {
   production: true,
 
