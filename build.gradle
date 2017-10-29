@@ -51,15 +51,18 @@ dependencies {
   compile "org.grails:grails-plugin-url-mappings"
   compile "org.grails:grails-web-boot"
 
-  compile "org.grails.plugins:cache"
   compile "org.grails.plugins:async"
-  compile "org.grails.plugins:scaffolding"
+  compile "org.grails.plugins:cache"
   compile "org.grails.plugins:events"
+  compile 'org.grails.plugins:external-config:1.1.2'
+  compile "org.grails.plugins:gsp"
+
   compile "org.grails.plugins:hibernate5"
   compile "org.hibernate:hibernate-core:5.1.5.Final"
+
+  compile "org.grails.plugins:scaffolding"
   compile "org.grails.plugins:views-json"
   compile "org.grails.plugins:views-json-templates"
-  compile "org.grails.plugins:gsp"
 
   console "org.grails:grails-console"
 
@@ -68,6 +71,7 @@ dependencies {
   runtime 'org.grails.plugins:grails-console:2.1.1'
   runtime "org.glassfish.web:el-impl:2.1.2-b03"
   runtime "com.h2database:h2"
+  runtime "mysql:mysql-connector-java:5.1.40"
   runtime "org.apache.tomcat:tomcat-jdbc"
   runtime "com.bertramlabs.plugins:asset-pipeline-grails:2.14.2"
 
@@ -128,7 +132,7 @@ clean {
     delete fileTree(dir: "src/main/webapp/app")
 }
 
-bootRun.dependsOn(buildClientDev)
+//bootRun.dependsOn(buildClientDev)
 
 bootRun {
 
