@@ -6,34 +6,38 @@ import grails.testing.services.ServiceUnitTest
 import hpo.api.util.HpoDiseaseFactory
 import spock.lang.Shared
 import spock.lang.Specification
+import spock.lang.Unroll
 
-class HpoDiseaseDetailsServiceSpec extends Specification implements ServiceUnitTest<HpoDiseaseDetailsService>{
+@Unroll
+class HpoDiseaseDetailsServiceSpec extends Specification implements ServiceUnitTest<HpoDiseaseDetailsService> {
 
-    @Shared
-    List<HpoDiseaseAnnotation> hpoDiseases
-    def setupSpec(){
-        hpoDiseases = new HpoDiseaseFactory().getInstance()
-    }
-    def setup() {
-        service.hpoDiseases = hpoDiseases
-    }
+  @Shared
+  List<HpoDiseaseAnnotation> hpoDiseases
 
-    def cleanup() {
-    }
+  def setupSpec() {
+    hpoDiseases = new HpoDiseaseFactory().getInstance()
+  }
 
-    void "test search term details #desc"() {
+  def setup() {
+    service.hpoDiseases = hpoDiseases
+  }
 
-        final List<HpoDiseaseAnnotation> diseaseResult = service.searchDisease(query)
-        HpoDisease
-        expect: "fix me"
-        diseaseResult[0].dbReference == expected
+  def cleanup() {
+  }
 
-        where:
-        query                 | expected                                                                                        | desc
-        /*null                  | []                                                                                              | 'null'
-        ' '                   | []                                                                                              | 'blank'
-        '   '                 | []                                                                                              | 'blank'
-        '   \n'               | []                                                                                              | 'blank'*/
-        'OMIM:158350'         | 'OMIM:158350'                                                                                   | 'exact id'
-    }
+  void "test search term details #desc"() {
+
+    final List<HpoDiseaseAnnotation> diseaseResult = service.searchDisease(query)
+    HpoDisease
+    expect: "fix me"
+    diseaseResult*.dbReference == expected
+
+    where:
+    query         | expected        | desc
+    null          | []              | 'null'
+    ' '           | []              | 'blank'
+    '   '         | []              | 'blank'
+    '   \n'       | []              | 'blank'
+    'OMIM:158350' | ['OMIM:158350'] | 'exact id'
+  }
 }

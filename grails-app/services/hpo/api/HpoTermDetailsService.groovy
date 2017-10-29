@@ -1,11 +1,11 @@
 package hpo.api
 
+import com.github.phenomics.ontolib.formats.hpo.HpoOntology
 import com.github.phenomics.ontolib.ontology.data.ImmutableTermId
 import com.github.phenomics.ontolib.ontology.data.Term
-import com.github.phenomics.ontolib.formats.hpo.HpoOntology
-import groovy.transform.CompileStatic
+import grails.compiler.GrailsCompileStatic
 
-@CompileStatic
+@GrailsCompileStatic
 class HpoTermDetailsService {
 
     HpoOntology hpoOntology
