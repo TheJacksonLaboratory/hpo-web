@@ -8,21 +8,21 @@ import hpo.api.term.DbTerm
 class DbTermPath {
 
 
-    DbTerm dbTerm
+  DbTerm dbTerm
 
-    String pathNames
-    String pathIds
-    Integer pathLength
+  String pathNames
+  String pathIds
+  Integer pathLength
 
-    static constraints = {
-        pathNames()
-        pathIds()
-        pathLength()
-    }
-    static mapping = {
-        pathNames(type: 'text', index: 'pathNames_index')
-        pathIds(type: 'text', index: 'pathIds_index')
-    }
+  static constraints = {
+    pathNames()
+    pathIds()
+    pathLength()
+  }
+  static mapping = {
+    pathNames(type: 'text', index: 'pathNames_index')
+    pathIds(type: 'text', index: 'pathIds_index')
+  }
 
 
 }

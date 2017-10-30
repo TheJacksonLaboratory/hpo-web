@@ -8,38 +8,44 @@ import com.github.phenomics.ontolib.ontology.data.Term
  */
 class DbTerm {
 
-    String ontologyId
-    String name
-    boolean isObsolete
-    String definition
-    String comment
+  String ontologyId
+  String name
+  boolean isObsolete
+  String definition
+  String comment
+  /**
+   * the number of child terms including self
+   */
+  Integer numberOfChildren
 
 
-    static constraints = {
-        ontologyId()
-        name()
-        isObsolete()
-        definition(nullable: true)
-        comment(nullable: true)
-    }
-    static mapping = {
-        ontologyId()
-        name(index: 'name_index')
-        isObsolete()
-        definition(type: 'text')
-        comment(type: 'text')
-    }
+  static constraints = {
+    ontologyId()
+    name()
+    isObsolete()
+    definition(nullable: true)
+    comment(nullable: true)
+    numberOfChildren(nullable: true)
+  }
+  static mapping = {
+    ontologyId()
+    name(index: 'name_index')
+    isObsolete()
+    definition(type: 'text')
+    comment(type: 'text')
+    numberOfChildren()
+  }
 
-    static hasMany = [dbTermPaths: DbTermPath]
+  static hasMany = [dbTermPaths: DbTermPath]
 
-    DbTerm(){}
+  DbTerm() {}
 
-    DbTerm(Term term){
-        name= term.name
-        definition= term.definition
-        comment= term.comment
-        ontologyId= term.id.idWithPrefix
-        isObsolete= term.isObsolete()
-    }
+  DbTerm(Term term) {
+    name = term.name
+    definition = term.definition
+    comment = term.comment
+    ontologyId = term.id.idWithPrefix
+    isObsolete = term.isObsolete()
+  }
 
 }

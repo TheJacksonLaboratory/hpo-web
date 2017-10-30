@@ -1,6 +1,7 @@
 package hpo.api.db
 
 import com.github.phenomics.ontolib.formats.hpo.HpoOntology
+import com.github.phenomics.ontolib.ontology.algo.OntologyTerms
 import com.github.phenomics.ontolib.ontology.data.Term
 import com.github.phenomics.ontolib.ontology.data.TermId
 import grails.gorm.transactions.Transactional
@@ -40,7 +41,9 @@ class DbTermAdminService {
           // do nothinbg
         } else {
           ontologyIdSet.add(term.id.idWithPrefix)
-          DbTerm dbTerm = new DbTerm(term as Term).save()
+          DbTerm dbTerm = new DbTerm(term as Term)
+          dbTerm.numberOfChildren = OntologyTerms.childrenOf(term.id,hpoOntology).size()
+          dbTerm.save()
           saveAncestorPaths(term, dbTerm, ancestorPathsBuilder)
         }
       }
