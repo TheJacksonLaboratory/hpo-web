@@ -10,6 +10,7 @@
 .settings/
 *.sublime-workspace
 out/
+*.iml
 
 # gradle local cache
 .gradle/
