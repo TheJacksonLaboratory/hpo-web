@@ -1,7 +1,6 @@
-
-const  HPO_API_BASE_URL = '../api/hpo/';
+const  HPO_API_BASE_URL = 'http://localhost:8080/api/hpo/';
 export const environment = {
-  production: true,
+  production: false,
 
   // HPO API environment variables
   HPO_API_SEARCH_URL:  HPO_API_BASE_URL + 'search',

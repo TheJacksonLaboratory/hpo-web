@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http';
+import { environment } from '../../../../environments/environment';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
@@ -14,7 +15,7 @@ export class DiseaseService {
     }
     searchDisease(query: string): Promise<any>{
         return this.http
-            .get('http://localhost:8080/hpo/search/disease?q=' + query, this.options)
+            .get(environment.HPO_API_DISEASE_SEARCH_URL + '?q=' + query, this.options)
             .toPromise()
             .then(response => response.json())
             .catch(this.handleError);

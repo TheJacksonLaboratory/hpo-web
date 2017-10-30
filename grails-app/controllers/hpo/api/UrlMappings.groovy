@@ -11,9 +11,9 @@ class UrlMappings {
         patch "/$controller/$id(.$format)?"(action:"patch")
 
         "/"(redirect: '/app/index.html')
-        "/hpo/search"(controller: 'hpoSearch', action:'searchAll')
-        "/hpo/search/term"(controller: 'hpoTermDetails', action:'searchTerm')
-        "/hpo/search/disease"(controller: 'hpoDiseaseDetails', action:'searchDisease')
+        "/api/hpo/search"(controller: 'hpoSearch', action:'searchAll')
+        "/api/hpo/search/term"(controller: 'hpoTermDetails', action:'searchTerm')
+        "/api/hpo/search/disease"(controller: 'hpoDiseaseDetails', action:'searchDisease')
         "500"(view: '/error')
         "404"(view: '/notFound')
     }

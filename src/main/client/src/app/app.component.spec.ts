@@ -6,6 +6,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { MatMenuModule } from '@angular/material';
 import { MatButtonModule } from '@angular/material';
 import { MatIconModule } from '@angular/material';
+import { environment} from '../environments/environment';
 
 
 describe('AppComponent', () => {
@@ -25,4 +26,11 @@ describe('AppComponent', () => {
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
   }));
+
+  it('it should check that search url environment variable is set', () =>{
+
+    //Check an example of one of the evironment variables
+     let searchUrl  =  environment.HPO_API_SEARCH_URL;
+     expect(searchUrl).toContain('hpo/search');
+  });
 });

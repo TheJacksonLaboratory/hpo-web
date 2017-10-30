@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http';
+import { environment} from '../../../../environments/environment';
 import 'rxjs/add/operator/toPromise';
 
 
@@ -13,7 +14,7 @@ export class GeneEntrezService {
   }
   searchGeneInfo(query: string): Promise<any>{
       return this.http
-          .get('https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=gene&id=' + query + "&retmode=json")
+          .get( environment.HPO_ENTREZ_SEARCH_URL + '?db=gene&id=' + query + '&retmode=json')
           .toPromise()
           .then(response => response.json())
           .catch(this.handleError);
