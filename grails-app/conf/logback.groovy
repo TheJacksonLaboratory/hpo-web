@@ -31,6 +31,17 @@ if (Environment.isDevelopmentMode() && targetDir != null) {
             pattern = "%level %logger - %msg%n"
         }
     }
+    appender("HIBERNATE.SQL",FileAppender){
+      file = "${targetDir}/hibernate-sql.log"
+      append = true
+      encoder(PatternLayoutEncoder) {
+        pattern = "%level %logger - %msg%n"
+      }
+    }
+    // Logging for SQL
+    logger("org.hibernate.SQL",TRACE,['HIBERNATE.SQL'],false)
+    logger("org.hibernate.type.descriptor.sql.BasicBinder",TRACE,['HIBERNATE.SQL'],false)
+    //
     logger("StackTrace", ERROR, ['FULL_STACKTRACE'], false)
 }
 root(ERROR, ['STDOUT'])

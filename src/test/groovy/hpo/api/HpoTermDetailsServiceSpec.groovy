@@ -15,19 +15,12 @@ class HpoTermDetailsServiceSpec extends Specification implements ServiceUnitTest
 
     @Shared
     HpoOntology hpoOntology
-    /*@Shared
-    List<HpoDiseaseAnnotation> hpoDiseases
-    @Shared
-    List<HpoGeneAnnotation> hpoGenes*/
+
     def setupSpec(){
         hpoOntology = new HpoOntologyFactory().getInstance()
-        /*hpoDiseases = new HpoDiseaseFactory().getInstance()
-        hpoGenes = new HpoGeneFactory().getInstance()*/
     }
     def setup() {
-        service.hpoOntology = hpoOntology
-       /* service.hpoDiseases = hpoDiseases
-        service.hpoGenes = hpoGenes*/
+      service.hpoOntology = hpoOntology
     }
 
     def cleanup() {

@@ -1,0 +1,7 @@
+#Format: HPO-ID<tab>HPO-Name<tab>Gene-ID<tab>Gene-Name
+HP:0002044	Zollinger-Ellison syndrome	1026	CDKN1A
+HP:0002044	Zollinger-Ellison syndrome	1027	CDKN1B
+HP:0002044	Zollinger-Ellison syndrome	1030	CDKN2B
+HP:0002044	Zollinger-Ellison syndrome	1031	CDKN2C
+HP:0002044	Zollinger-Ellison syndrome	63895	PIEZO2
+HP:0002044	Zollinger-Ellison syndrome	4221	MEN1

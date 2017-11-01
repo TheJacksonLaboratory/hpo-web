@@ -14,6 +14,6 @@ beans = {
     hpoGeneFactory(HpoGeneFactory)
 
     hpoOntology(hpoOntologyFactory: "getInstance")
-    hpoDiseases(hpoDiseaseFactory: "getInstance")
-    hpoGenes(hpoGeneFactory: "getInstance")
+    /*hpoDiseases(hpoDiseaseFactory: "getInstance")
+    hpoGenes(hpoGeneFactory: "getInstance")*/
 }
