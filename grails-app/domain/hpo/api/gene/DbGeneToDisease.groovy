@@ -3,9 +3,11 @@ package hpo.api.gene
 import hpo.api.models.HpoGeneDiseaseAnnotation
 
 class DbGeneToDisease {
-  String diseaseId;
-  String geneSymbol;
   Integer geneId;
+  String geneSymbol;
+  String diseaseId;
+
+
   static constraints = {
     diseaseId()
     geneSymbol()
@@ -14,9 +16,9 @@ class DbGeneToDisease {
 
   DbGeneToDisease(){}
 
-  DbGeneToDisease(HpoGeneDiseaseAnnotation geneMapping){
-    diseaseId = geneMapping.diseaseId
-    geneSymbol = geneMapping.geneSymbol
+  DbGeneToDisease(HpoGeneDiseaseAnnotation geneMapping) {
     geneId = geneMapping.geneId
+    geneSymbol = geneMapping.geneSymbol
+    diseaseId = geneMapping.diseaseId
   }
 }

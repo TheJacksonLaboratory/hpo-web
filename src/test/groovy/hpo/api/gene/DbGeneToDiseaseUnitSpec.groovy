@@ -9,7 +9,7 @@ class DbGeneToDiseaseUnitSpec extends Specification implements DomainUnitTest<Db
   void "test gene to disease constructor"() {
     given:
     HpoGeneDiseaseAnnotation geneMapping = new HpoGeneDiseaseAnnotation(
-      7175,
+      7157,
       "TP53",
       "OMIM:260350"
     )
