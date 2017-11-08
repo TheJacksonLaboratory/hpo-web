@@ -12,7 +12,7 @@ class DbDisease {
 
   static constraints = {
     db()
-    dbId(nullable:true)
+    dbId(nullable: true)
     dbName()
     diseaseId()
   }
@@ -21,9 +21,10 @@ class DbDisease {
   }
   static hasMany = [dbTerm: DbTerm]
   static belongsTo = DbTerm
+
   DbDisease() {}
 
-  DbDisease(HpoDiseaseAnnotation hpoDiseaseAnnotation){
+  DbDisease(HpoDiseaseAnnotation hpoDiseaseAnnotation) {
     db = hpoDiseaseAnnotation.db
     dbId = hpoDiseaseAnnotation.dbObjectId
     dbName = hpoDiseaseAnnotation.dbName

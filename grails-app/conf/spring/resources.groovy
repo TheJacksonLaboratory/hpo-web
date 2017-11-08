@@ -1,11 +1,6 @@
-import com.github.phenomics.ontolib.formats.hpo.HpoDiseaseAnnotation
-import com.github.phenomics.ontolib.formats.hpo.HpoGeneAnnotation
-import com.github.phenomics.ontolib.formats.hpo.HpoOntology
-import hpo.api.HpoSearchService
-import hpo.api.HpoTermDetailsService
-import hpo.api.util.HpoOntologyFactory
 import hpo.api.util.HpoDiseaseFactory
 import hpo.api.util.HpoGeneFactory
+import hpo.api.util.HpoOntologyFactory
 
 // Place your Spring DSL code here
 beans = {
@@ -14,6 +9,8 @@ beans = {
     hpoGeneFactory(HpoGeneFactory)
 
     hpoOntology(hpoOntologyFactory: "getInstance")
-    /*hpoDiseases(hpoDiseaseFactory: "getInstance")
-    hpoGenes(hpoGeneFactory: "getInstance")*/
+    hpoDiseases(hpoDiseaseFactory: "getInstance")
+    hpoGenes(hpoGeneFactory: "getInstance")
+
+    groovySql(groovy.sql.Sql, ref('dataSource'))
 }

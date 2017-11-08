@@ -1,27 +1,34 @@
 package hpo.api.gene
+
+import com.github.phenomics.ontolib.formats.hpo.HpoGeneAnnotation
 import hpo.api.term.DbTerm
 
 class DbGene {
 
+  Integer entrezId
+  String  geneSymbol
 
-  Integer entrezGeneId
-  String  entrezGeneSymbol
+    static constraints = {
 
-  static constraints = {
-    entrezGeneId(unique: true)
-    entrezGeneSymbol(unique: true)
-  }
+      entrezId(unique: true)
+      geneSymbol(unique:true)
+    }
 
-  static mapping = {
-    entrezGeneId()
-    entrezGeneSymbol()
-  }
+    static mapping = {
+      entrezId()
+      geneSymbol()
+    }
 
-  static belongsTo = DbTerm
-  static hasMany = [dbTerm: DbTerm]
+  Set<DbTerm> dbTerms = [] as Set<DbTerm>
+
+  static belongsTo = [dbTerms:  DbTerm]
+  static  hasMany = [dbTerms: DbTerm]
+
   DbGene() {}
-  DbGene(Integer entrezGeneId, String entrezGeneSymbol) {
-    this.entrezGeneId = entrezGeneId
-    this.entrezGeneSymbol = entrezGeneSymbol
+
+  DbGene(HpoGeneAnnotation hpoGeneAnnotation) {
+
+    entrezId = hpoGeneAnnotation.entrezGeneId
+    geneSymbol = hpoGeneAnnotation.entrezGeneSymbol
   }
 }

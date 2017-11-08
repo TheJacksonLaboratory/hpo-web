@@ -1,84 +1,132 @@
 package hpo.api.db
 
-import com.github.phenomics.ontolib.formats.hpo.HpoGeneAnnotation
-import com.github.phenomics.ontolib.formats.hpo.HpoOntology
+import grails.compiler.GrailsCompileStatic
 import grails.gorm.transactions.Transactional
-import hpo.api.io.HpoGeneTransitiveAnnotationParser
+import groovy.sql.BatchingPreparedStatementWrapper
+import groovy.sql.Sql
+import hpo.api.gene.DbGene
 import hpo.api.term.DbTerm
 import org.apache.commons.lang.time.StopWatch
-import hpo.api.gene.DbGene
 import org.grails.io.support.ClassPathResource
 
 @Transactional
+@GrailsCompileStatic
 class DbGeneAdminService {
-  HpoOntology hpoOntology
-  def sessionFactory
+
+  Sql groovySql
+
   void deleteDbGenes() {
-    StopWatch stopWatch = new StopWatch()
-    stopWatch.start()
-    DbGene.executeUpdate("delete from DbGene")
     DbGene.executeUpdate("delete from DbGene")
     println("duration: ${stopWatch} time: ${new Date()}")
   }
 
-  void refreshGenes() {
-    deleteDbGenes()
-    Map relationship = [:]
-    List<HpoGeneAnnotation> geneAnnotations = getAnnotations()
-    Map<Integer, String> uniqueGenes = getUniqueGenes(geneAnnotations)
-    uniqueGenes.each { key, value ->
-      DbGene dbGene = new DbGene(key, value)
-      dbGene.save()
-    }
-  }
-  void loadDB(){
-    List<HpoGeneAnnotation> geneAnnotations =[]
-    File file = new ClassPathResource("ALL_SOURCES_ALL_FREQUENCIES_phenotype_to_genes.txt").file
-    HpoGeneTransitiveAnnotationParser geneTransitiveParser = new HpoGeneTransitiveAnnotationParser(file)
-    Map<String, DbTerm> termMemoryMap = [:]
-    Map<Integer, DbGene> geneMemoryMap = [:]
-    Integer counter = 0
-    DbGene dbGene = null
-    DbTerm term = null
-    while (geneTransitiveParser.hasNext()) {
-      HpoGeneAnnotation geneAnnotation = geneTransitiveParser.next()
-      dbGene = geneMemoryMap.get(geneAnnotation.entrezGeneId)
-      if(!dbGene) {
-        dbGene = new DbGene(geneAnnotation.entrezGeneId, geneAnnotation.entrezGeneSymbol)
-        geneMemoryMap.put(geneAnnotation.entrezGeneId,dbGene)
-        dbGene.save()
-      }
-      term = termMemoryMap.get(geneAnnotation.getTermId().getIdWithPrefix())
-      if(!term){
-        term = DbTerm.findByOntologyId(geneAnnotation.getTermId().getIdWithPrefix())
-        termMemoryMap.put(geneAnnotation.getTermId().getIdWithPrefix(),term)
-      }
-      if(term){
-        term.addToDbGene(dbGene)
-      }else{
-        // THESE ARE TERMS NOT FOUND IN DB_TERM BUT IN PHENOTYPE FILE
-        counter++
-      }
-    }
-    System.out.println(counter.toString())
+  void deleteDbGeneDbTermJoinTable(){
+    int rowCount = groovySql.executeUpdate("delete from db_term_db_genes")
+    print("${rowCount} deleted from db_term_db_genes")
   }
 
-  static List<HpoGeneAnnotation> getAnnotations(){
-    List<HpoGeneAnnotation> geneAnnotations =[]
-    File file = new ClassPathResource("test-p_g.txt").file
-    HpoGeneTransitiveAnnotationParser geneTransitiveParser = new HpoGeneTransitiveAnnotationParser(file)
-    while (geneTransitiveParser.hasNext()) {
-      HpoGeneAnnotation geneAnnotation = geneTransitiveParser.next()
-      geneAnnotations.add(geneAnnotation)
+  Map<Integer, String> getEntrezIdToSymbolMap() {
+    StopWatch stopWatch = new StopWatch()
+    stopWatch.start()
+    Map<Integer, String> entrezIdToSymbolMap = [:]
+    final File file = new ClassPathResource("ALL_SOURCES_ALL_FREQUENCIES_genes_to_phenotype.txt").file
+    file.eachLine{String line ->
+      String[] tokens = line.split('\t')
+      if (tokens.size() == 4) {
+        int entrezGeneId = Integer.valueOf(tokens[0])
+        String geneSymbol = tokens[1]
+        entrezIdToSymbolMap.put(entrezGeneId, geneSymbol)
+      }
+      else{
+        log.info("skipping line : ${line}")
+      }
     }
-    return geneAnnotations
+    println("read file ${file.name} duration: ${stopWatch} time: ${new Date()}")
+    entrezIdToSymbolMap
   }
-  static Map<Integer, String> getUniqueGenes(List<HpoGeneAnnotation> geneAnnotations){
-    Map<Integer, String> geneIdToSymbol = [:]
-    geneAnnotations.each{
-      geneIdToSymbol.put(it.getEntrezGeneId(),it.getEntrezGeneSymbol())
+
+  Map<Integer, DbGene> saveGenes(Map<Integer, String> entrezIdToSymbolMap) {
+    Map<Integer, DbGene> mapToReturn = [:]
+    StopWatch stopWatch = new StopWatch()
+    stopWatch.start()
+    entrezIdToSymbolMap.each { Integer entrezId, String geneSymbol ->
+      DbGene dbGene = new DbGene(entrezId: entrezId, geneSymbol: geneSymbol)
+      dbGene.save()
+      mapToReturn.put(entrezId, dbGene)
     }
-    return geneIdToSymbol
+    println("saveGenes duration: ${stopWatch} time: ${new Date()}")
+    mapToReturn
+  }
+
+  Map<Integer, DbGene> loadGeneMap() {
+    Map<Integer, DbGene> mapToReturn = [:]
+    StopWatch stopWatch = new StopWatch()
+    stopWatch.start()
+    DbGene.list().each { DbGene dbGene ->
+      mapToReturn.put(dbGene.entrezId, dbGene)
+    }
+    println("loadGeneMap duration: ${stopWatch} time: ${new Date()}")
+    mapToReturn
+  }
+
+  /**
+   * @return a map with the keys the hpoIds (HP:0000001) and the value being the corresponding DbTerm that represents that hpoId
+   */
+  Map<String, DbTerm> loadHpoIdToDbTermMap() {
+    final Map<String, DbTerm> mapToReturn = [:]
+    DbTerm.list().each { DbTerm dbTerm ->
+      mapToReturn.put(dbTerm.ontologyId, dbTerm)
+    }
+    mapToReturn
+  }
+
+  /**
+   * loop over each line of the ALL_SOURCES_ALL_FREQUENCIES_genes_to_phenotype.txt file
+   * and fill in the join table with local primary keys and not any genes or hpo terms that don't match
+   *
+   * <pre>
+   *     #Format: entrez-gene-id<tab>entrez-gene-symbol<tab>HPO-Term-Name<tab>HPO-Term-ID
+   *     8192    CLPP    Primary amenorrhea      HP:0000786
+   * </pre>
+   */
+  void joinGenesAndTermsWithSql() {
+    StopWatch stopWatch = new StopWatch()
+    stopWatch.start()
+    Set<String> hpoIdWithPrefixNotFoundSet = [] as Set
+    Set<Integer> entrezIdNotFoundSet = [] as Set
+    final Map<Integer, DbGene> entrezIdToDbGeneMap = loadGeneMap()
+    final Map<String, DbTerm> hpoIdToDbTermMap = loadHpoIdToDbTermMap()
+    final File file = new ClassPathResource("ALL_SOURCES_ALL_FREQUENCIES_genes_to_phenotype.txt").file
+    groovySql.withTransaction {
+      groovySql.withBatch(500, "INSERT db_term_db_genes VALUES(?,?)") { BatchingPreparedStatementWrapper ps ->
+        int index = 0;
+        file.eachLine { String line ->
+          index++
+          String[] tokens = line.split('\t')
+          if (tokens.size() == 4) {
+            final DbTerm dbTerm = hpoIdToDbTermMap.get(tokens[3])
+            final DbGene dbGene = entrezIdToDbGeneMap.get(Integer.valueOf(tokens[0]))
+            if (dbTerm == null) {
+              hpoIdWithPrefixNotFoundSet.add(tokens[3])
+            } else if (dbGene == null) {
+              entrezIdNotFoundSet.add(Integer.valueOf(tokens[0]))
+            } else {
+              ps.addBatch([
+                dbGene.id as Object,
+                dbTerm.id as Object,
+              ])
+            }
+          } else {
+            log.info("skipping line : ${line}")
+          }
+        }
+      }
+    }
+    log.info("hpoIdWithPrefixNotFoundSet.size() : ${hpoIdWithPrefixNotFoundSet.size()} ${new Date()}")
+    log.info("${hpoIdWithPrefixNotFoundSet}")
+    log.info("entrezIdNotFoundSet.size() : ${entrezIdNotFoundSet.size()} ${new Date()}")
+    log.info("${entrezIdNotFoundSet}")
+    println("joinGenesAndTermsWithSql file ${file.name} duration: ${stopWatch} time: ${new Date()}")
   }
 }
 
