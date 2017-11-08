@@ -16,6 +16,8 @@ class DbGeneAdminService {
   Sql groovySql
 
   void deleteDbGenes() {
+    StopWatch stopWatch = new StopWatch()
+    stopWatch.start()
     DbGene.executeUpdate("delete from DbGene")
     println("duration: ${stopWatch} time: ${new Date()}")
   }
