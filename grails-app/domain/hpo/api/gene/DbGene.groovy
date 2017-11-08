@@ -23,7 +23,7 @@ class DbGene {
 
 
 
-  Collection<DbTerm> dbTerms = [] as Set<DbTerm>
+  Set<DbTerm> dbTerms = [] as Set<DbTerm>
 
   static belongsTo = [dbTerms:  DbTerm]
   static  hasMany = [dbTerms: DbTerm]

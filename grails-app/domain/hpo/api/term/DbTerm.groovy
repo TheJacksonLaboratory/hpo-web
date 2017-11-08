@@ -41,8 +41,8 @@ class DbTerm {
     dbTermPaths: DbTermPath,
     dbGenes: DbGene,
   ]
-  Collection<DbTermPath> dbTermPaths = [] as Set<DbTermPath>
-  Collection<DbGene> dbGenes = []
+  Set<DbTermPath> dbTermPaths = [] as Set<DbTermPath>
+  Set<DbGene> dbGenes = [] as Set<DbGene>
 
 
   DbTerm() {}
