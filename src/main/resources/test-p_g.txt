@@ -1,0 +1,73 @@
+#Format: HPO-ID<tab>HPO-Name<tab>Gene-ID<tab>Gene-Name
+HP:0001459	1-3 toe syndactyly	2737	GLI3
+HP:0006088	1-5 finger complete cutaneous syndactyly	64327	LMBR1
+HP:0010708	1-5 finger syndactyly	6469	SHH
+HP:0010708	1-5 finger syndactyly	64327	LMBR1
+HP:0010713	1-5 toe syndactyly	2737	GLI3
+HP:0000878	11 pairs of ribs	545	ATR
+HP:0000878	11 pairs of ribs	6497	SKI
+HP:0000878	11 pairs of ribs	6657	SOX2
+HP:0000878	11 pairs of ribs	8514	KCNAB2
+HP:0000878	11 pairs of ribs	2563	GABRD
+HP:0000878	11 pairs of ribs	6628	SNRPB
+HP:0000878	11 pairs of ribs	6662	SOX9
+HP:0000878	11 pairs of ribs	63976	PRDM16
+HP:0000878	11 pairs of ribs	126792	B3GALT6
+HP:0000878	11 pairs of ribs	2317	FLNB
+HP:0000878	11 pairs of ribs	6223	RPS19
+HP:0000878	11 pairs of ribs	22995	CEP152
+HP:0000878	11 pairs of ribs	26229	B3GAT3
+HP:0000878	11 pairs of ribs	473	RERE
+HP:0000878	11 pairs of ribs	3930	LBR
+HP:0000878	11 pairs of ribs	100151683	RNU4ATAC
+HP:0000878	11 pairs of ribs	55835	CENPJ
+HP:0000878	11 pairs of ribs	9469	CHST3
+HP:0000878	11 pairs of ribs	10013	HDAC6
+HP:0000878	11 pairs of ribs	2879	GPX4
+HP:0001233	2-3 finger syndactyly	51057	WDPCP
+HP:0001233	2-3 finger syndactyly	50964	SOST
+HP:0001233	2-3 finger syndactyly	2261	FGFR3
+HP:0001233	2-3 finger syndactyly	4038	LRP4
+HP:0001233	2-3 finger syndactyly	2263	FGFR2
+HP:0001233	2-3 finger syndactyly	5307	PITX1
+HP:0001233	2-3 finger syndactyly	2239	GPC4
+HP:0001233	2-3 finger syndactyly	2255	FGF10
+HP:0001233	2-3 finger syndactyly	2719	GPC3
+HP:0005709	2-3 toe cutaneous syndactyly	81607	NECTIN4
+HP:0005709	2-3 toe cutaneous syndactyly	55784	MCTP2
+HP:0004691	2-3 toe syndactyly	84992	PIGY
+HP:0004691	2-3 toe syndactyly	6913	TBX15
+HP:0004691	2-3 toe syndactyly	6660	SOX5
+HP:0004691	2-3 toe syndactyly	4613	MYCN
+HP:0004691	2-3 toe syndactyly	9990	SLC12A6
+HP:0004691	2-3 toe syndactyly	3590	IL11RA
+HP:0004691	2-3 toe syndactyly	64327	LMBR1
+HP:0004691	2-3 toe syndactyly	8200	GDF5
+HP:0004691	2-3 toe syndactyly	650	BMP2
+HP:0004691	2-3 toe syndactyly	658	BMPR1B
+HP:0004691	2-3 toe syndactyly	2260	FGFR1
+HP:0004691	2-3 toe syndactyly	2263	FGFR2
+HP:0004691	2-3 toe syndactyly	284252	KCTD1
+HP:0004691	2-3 toe syndactyly	9241	NOG
+HP:0004691	2-3 toe syndactyly	10907	TXNL4A
+HP:0004691	2-3 toe syndactyly	6299	SALL1
+HP:0004691	2-3 toe syndactyly	23327	NEDD4L
+HP:0004691	2-3 toe syndactyly	54880	BCOR
+HP:0004691	2-3 toe syndactyly	10020	GNE
+HP:0004691	2-3 toe syndactyly	7204	TRIO
+HP:0004691	2-3 toe syndactyly	10087	COL4A3BP
+HP:0004691	2-3 toe syndactyly	3239	HOXD13
+HP:0004691	2-3 toe syndactyly	23529	CLCF1
+HP:0004691	2-3 toe syndactyly	25836	NIPBL
+HP:0004691	2-3 toe syndactyly	85358	SHANK3
+HP:0004691	2-3 toe syndactyly	8626	TP63
+HP:0004691	2-3 toe syndactyly	372	ARCN1
+HP:0004691	2-3 toe syndactyly	4212	MEIS2
+HP:0004691	2-3 toe syndactyly	1717	DHCR7
+HP:0004691	2-3 toe syndactyly	4089	SMAD4
+HP:0004691	2-3 toe syndactyly	10682	EBP
+HP:0004691	2-3 toe syndactyly	727857	BHLHA9
+HP:0004691	2-3 toe syndactyly	3516	RBPJ
+HP:0004691	2-3 toe syndactyly	55165	CEP55
+HP:0004691	2-3 toe syndactyly	8318	CDC45
+HP:0004691	2-3 toe syndactyly	1663	DDX11

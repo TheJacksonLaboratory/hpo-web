@@ -7,6 +7,8 @@ import com.github.phenomics.ontolib.formats.hpo.HpoOntology
 import groovy.transform.CompileStatic
 import com.github.phenomics.ontolib.formats.hpo.HpoDiseaseAnnotation
 import com.github.phenomics.ontolib.formats.hpo.HpoGeneAnnotation
+import hpo.api.gene.DbGene
+
 import java.lang.reflect.Array
 import grails.compiler.GrailsCompileStatic
 
@@ -14,8 +16,8 @@ import grails.compiler.GrailsCompileStatic
 class HpoTermDetailsService {
 
     HpoOntology hpoOntology
-    List<HpoDiseaseAnnotation> hpoDiseases
-    List<HpoGeneAnnotation> hpoGenes
+    //List<HpoDiseaseAnnotation> hpoDiseases
+    //List<HpoGeneAnnotation> hpoGenes
     /**
      *
      * Query the ontology by HPO ID
@@ -27,10 +29,18 @@ class HpoTermDetailsService {
         final Map resultMap = [:]
         if (trimmedQ.startsWith('HP:')) {
             resultMap.put("term",this.hpoOntology.termMap.get(ImmutableTermId.constructWithPrefix(trimmedQ)))
-            resultMap.put("geneAssoc", this.hpoGenes.findAll {it.getTermId().getIdWithPrefix().equals(trimmedQ)})
-            resultMap.put("diseaseAssoc",this.hpoDiseases.findAll {it.getHpoId().getIdWithPrefix().equals(trimmedQ)})
+            resultMap.put("geneAssoc", getGenes(trimmedQ))
+            //resultMap.put("diseaseAssoc",this.hpoDiseases.findAll {it.getHpoId().getIdWithPrefix().equals(trimmedQ)})
         }
         return resultMap
+    }
+
+    Object getGenes(query){
+      def c = DbGene.createCriteria()
+      def geneList = c.list(){
+        like('ontologyId', "%$query%")
+      }
+      return geneList
     }
 
     /*List<Map> mapGenesToDiseases(trimmedQ){

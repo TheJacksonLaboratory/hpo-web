@@ -1,6 +1,7 @@
 package hpo.api.disease
 
 import com.github.phenomics.ontolib.formats.hpo.HpoDiseaseAnnotation
+import hpo.api.term.DbTerm
 
 class DbDisease {
 
@@ -8,7 +9,6 @@ class DbDisease {
   String dbId
   String dbName
   String qualifier
-  String hpoId
   String diseaseId
   String evidenceDescription
   String onsetModifier
@@ -24,7 +24,6 @@ class DbDisease {
     dbId(nullable:true)
     dbName()
     qualifier(nullable: true)
-    hpoId()
     diseaseId()
     evidenceDescription()
     onsetModifier(nullable: true)
@@ -38,14 +37,15 @@ class DbDisease {
   static mapping = {
 
   }
+  static hasMany = [dbTerm: DbTerm]
+  static belongsTo = DbTerm
   DbDisease() {}
 
-    DbDisease(HpoDiseaseAnnotation hpoDiseaseAnnotation){
+  DbDisease(HpoDiseaseAnnotation hpoDiseaseAnnotation){
     db = hpoDiseaseAnnotation.db
     dbId = hpoDiseaseAnnotation.dbObjectId
     dbName = hpoDiseaseAnnotation.dbName
     qualifier = hpoDiseaseAnnotation.qualifier
-    hpoId = hpoDiseaseAnnotation.hpoId.idWithPrefix
     diseaseId = hpoDiseaseAnnotation.dbReference
     evidenceDescription = hpoDiseaseAnnotation.evidenceDescription
     onsetModifier = hpoDiseaseAnnotation.onsetModifier

@@ -1,0 +1,12 @@
+import com.github.phenomics.ontolib.formats.hpo.HpoGeneAnnotation
+import hpo.api.gene.DbGene
+
+model {
+    DbGene gene
+}
+json{
+    entrezGeneId gene.geneId
+    entrezGeneSymbol gene.geneSymbol
+    hpoTermName gene.name
+    hpoTermId gene.ontologyId
+}

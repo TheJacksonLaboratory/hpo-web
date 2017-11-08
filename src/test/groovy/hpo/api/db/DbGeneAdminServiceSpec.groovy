@@ -11,8 +11,9 @@ class DbGeneAdminServiceSpec extends Specification implements ServiceUnitTest<Db
     def cleanup() {
     }
 
-    void "test something"() {
+    void "test that function returns map of unique genes"() {
+      Map<Integer,String> unqiueGenes = DbGeneAdminService.getUniqueGenes()
         expect:"fix me"
-            true == false
+            unqiueGenes.get(7157) == "TP53"
     }
 }

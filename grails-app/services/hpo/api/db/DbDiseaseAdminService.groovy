@@ -5,12 +5,10 @@ import com.github.phenomics.ontolib.io.obo.hpo.HpoDiseaseAnnotationParser
 import hpo.api.io.HpoDiseaseParser
 import grails.gorm.transactions.Transactional
 import hpo.api.disease.DbDisease
+import hpo.api.term.DbTerm
 import org.apache.commons.lang.time.StopWatch
 import org.grails.io.support.ClassPathResource
 import org.hibernate.Session
-import org.hibernate.SessionFactory
-
-import java.lang.reflect.InvocationTargetException
 
 @Transactional
 class DbDiseaseAdminService {
@@ -22,7 +20,37 @@ class DbDiseaseAdminService {
     DbDisease.executeUpdate("delete from DbGene")
     println("duration: ${stopWatch} time: ${new Date()}")
   }
-
+  void loadDB(){
+    List<HpoDiseaseAnnotation> diseaseAnnotations =[]
+    File file = new ClassPathResource("phenotype_annotation.tab").file
+    HpoDiseaseParser diseaseParser = new HpoDiseaseParser(file)
+    Map<String, DbTerm> termMemoryMap = [:]
+    Map<String, DbDisease> dMemoryMap = [:]
+    Integer counter = 0
+    DbDisease dbDisease = null
+    DbTerm term = null
+    while (diseaseParser.hasNext()) {
+      HpoDiseaseAnnotation diseaseAnnotation = diseaseParser.next()
+      dbDisease = dMemoryMap.get(diseaseAnnotation.getDbReference())
+      if(!dbDisease) {
+        dbDisease = new DbDisease(diseaseAnnotation)
+        dMemoryMap.put(diseaseAnnotation.getDbReference(),dbDisease)
+        dbDisease.save()
+      }
+      term = termMemoryMap.get(diseaseAnnotation.getTermId().getIdWithPrefix())
+      if(!term){
+        term = DbTerm.findByOntologyId(diseaseAnnotation.getTermId().getIdWithPrefix())
+        termMemoryMap.put(diseaseAnnotation.getTermId().getIdWithPrefix(),term)
+      }
+      if(term){
+        term.addToDbDisease(dbDisease)
+      }else{
+        // THESE ARE TERMS NOT FOUND IN DB_TERM BUT IN PHENOTYPE FILE
+        counter++
+      }
+    }
+    System.out.println(counter.toString())
+  }
   void refreshDbDiseases() {
     deleteDbDiseases()
     StopWatch stopWatch = new StopWatch()

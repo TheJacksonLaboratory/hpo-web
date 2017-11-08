@@ -21,7 +21,8 @@ appender('STDOUT', ConsoleAppender) {
                         '%m%n%wex' // Message
     }
 }
-
+//logger("org.hibernate.SQL",TRACE,['STDOUT'],false)
+//logger("org.hibernate.type.descriptor.sql.BasicBinder",TRACE,['STDOUT'],false)
 def targetDir = BuildSettings.TARGET_DIR
 if (Environment.isDevelopmentMode() && targetDir != null) {
     appender("FULL_STACKTRACE", FileAppender) {
@@ -39,8 +40,8 @@ if (Environment.isDevelopmentMode() && targetDir != null) {
       }
     }
     // Logging for SQL
-    logger("org.hibernate.SQL",TRACE,['HIBERNATE.SQL'],false)
-    logger("org.hibernate.type.descriptor.sql.BasicBinder",TRACE,['HIBERNATE.SQL'],false)
+    //logger("org.hibernate.SQL",TRACE,['HIBERNATE.SQL'],false)
+    //logger("org.hibernate.type.descriptor.sql.BasicBinder",TRACE,['HIBERNATE.SQL'],false)
     //
     logger("StackTrace", ERROR, ['FULL_STACKTRACE'], false)
 }

@@ -23,6 +23,5 @@ class DbTermPath {
     pathNames(type: 'text', index: 'pathNames_index')
     pathIds(type: 'text', index: 'pathIds_index')
   }
-
-
+  static belongsTo = [dbTerm: DbTerm]
 }

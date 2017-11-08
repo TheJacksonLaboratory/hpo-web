@@ -1,6 +1,8 @@
 package hpo.api.term
 
 import com.github.phenomics.ontolib.ontology.data.Term
+import hpo.api.disease.DbDisease
+import hpo.api.gene.DbGene
 
 /**
  * Minimal term representation in a table, doesn't have all info on a term currenlty but info useful
@@ -36,8 +38,7 @@ class DbTerm {
     numberOfChildren()
   }
 
-  static hasMany = [dbTermPaths: DbTermPath]
-
+  static hasMany = [dbTermPaths: DbTermPath, dbGene: DbGene, dbDisease: DbDisease]
   DbTerm() {}
 
   DbTerm(Term term) {

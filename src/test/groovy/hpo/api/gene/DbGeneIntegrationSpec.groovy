@@ -8,17 +8,31 @@ class DbGeneIntegrationSpec extends Specification {
   void setup(){
 
   }
-  void "test find transitive genes by hpo id"(){
+  void "test find genes given id"(){
     def c = DbGene.createCriteria()
     List<DbGene> geneList = c.list(){
-      like('ontologyId', "%$query%")
+      like('entrezGeneId', "%$query%")
     }
     expect: "fix me"
-    geneList*.geneId == expected
+    geneList*.entrezGeneSymbol == expected
 
     where:
     query         | expected
-    'HP:0025201'  | [529, 23545, 523]
-    'HP:0100027'  | [11330,6690, 64788, 1080, 5644, 1357, 338328, 5645, 846]
+    '7175'        | ["TP53"]
+    '2879'        | ["GPX4"]
+  }
+  void "test find genes given symbol"(){
+    def c = DbGene.createCriteria()
+    List<DbGene> geneList = c.list(){
+      createAlias('diseases','d')
+      like('entrezGeneSymbol', "%$query%")
+    }
+    expect: "fix me"
+    geneList*.entrezGeneId == expected
+
+    where:
+    query         | expected
+    "LBR"         | [3930]
+    "RPS19"       | [6223]
   }
 }
