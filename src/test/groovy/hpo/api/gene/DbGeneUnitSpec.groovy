@@ -16,8 +16,8 @@ class DbGeneUnitSpec extends Specification implements DomainUnitTest<DbGene> {
 
     then:
     verifyAll {
-      dbGene.entrezGeneId  == geneAnnotation.entrezGeneId
-      dbGene.entrezGeneSymbol == geneAnnotation.entrezGeneSymbol
+      dbGene.entrezId  == geneAnnotation.entrezGeneId
+      dbGene.geneSymbol == geneAnnotation.entrezGeneSymbol
     }
   }
 }

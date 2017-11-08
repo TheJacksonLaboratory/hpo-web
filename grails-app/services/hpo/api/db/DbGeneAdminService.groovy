@@ -10,7 +10,6 @@ import org.apache.commons.lang.time.StopWatch
 import org.grails.io.support.ClassPathResource
 
 @Transactional
-@GrailsCompileStatic
 class DbGeneAdminService {
 
   Sql groovySql
