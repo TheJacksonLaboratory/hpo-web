@@ -37,7 +37,6 @@ class DbDiseaseUnitSpec extends Specification implements DomainUnitTest<DbDiseas
       dbDisease.dbId == disease.getDbObjectId()
       dbDisease.dbName == disease.getDbName()
       dbDisease.qualifier == disease.getQualifier()
-      dbDisease.hpoId == disease.getHpoId().getIdWithPrefix()
       dbDisease.diseaseId == disease.getDbReference()
       dbDisease.evidenceDescription == disease.getEvidenceDescription()
       dbDisease.onsetModifier == disease.getOnsetModifier()

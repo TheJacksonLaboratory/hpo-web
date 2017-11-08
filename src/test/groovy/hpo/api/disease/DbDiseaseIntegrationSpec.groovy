@@ -8,13 +8,13 @@ class DbDiseaseIntegrationSpec extends Specification {
   void "test find associated diseases by hpo id"(){
     def c = DbDisease.createCriteria()
     List<DbDisease> diseaseList = c.list(){
-      like('hpoId', "%$query%")
+      like('diseaseId', "%$query%")
     }
     expect: "fix me"
-    diseaseList*.diseaseId == expected
+    diseaseList*.dbName == expected
 
     where:
     query         | expected
-    'HP:0100027'  | ['OMIM:118830', 'OMIM:145001', 'ORPHA:444490', 'ORPHA:676']
+    'OMIM:105650' | ["DIAMOND-BLACKFAN ANEMIA"]
   }
 }

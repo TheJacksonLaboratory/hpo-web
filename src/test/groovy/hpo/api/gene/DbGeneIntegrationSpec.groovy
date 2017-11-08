@@ -10,21 +10,20 @@ class DbGeneIntegrationSpec extends Specification {
   }
   void "test find genes given id"(){
     def c = DbGene.createCriteria()
-    List<DbGene> geneList = c.list(){
-      like('entrezGeneId', "%$query%")
+    List<DbGene> gene = c.list(){
+      like('entrezGeneId', query)
     }
     expect: "fix me"
-    geneList*.entrezGeneSymbol == expected
+    gene*.entrezGeneSymbol == expected
 
     where:
     query         | expected
-    '7175'        | ["TP53"]
-    '2879'        | ["GPX4"]
+    7157          | ["TP53"]
+    2879          | ["GPX4"]
   }
   void "test find genes given symbol"(){
     def c = DbGene.createCriteria()
     List<DbGene> geneList = c.list(){
-      createAlias('diseases','d')
       like('entrezGeneSymbol', "%$query%")
     }
     expect: "fix me"
