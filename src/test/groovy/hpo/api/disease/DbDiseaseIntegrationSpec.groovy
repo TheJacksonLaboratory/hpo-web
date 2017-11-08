@@ -1,4 +1,4 @@
-package hpo.api.disease
+/*package hpo.api.disease
 
 import grails.testing.mixin.integration.Integration
 import spock.lang.*
@@ -17,4 +17,4 @@ class DbDiseaseIntegrationSpec extends Specification {
     query         | expected
     'OMIM:105650' | ["DIAMOND-BLACKFAN ANEMIA"]
   }
-}
+}*/

@@ -1,4 +1,4 @@
-package hpo.api.db
+/*package hpo.api.db
 
 import grails.testing.services.ServiceUnitTest
 import spock.lang.Specification
@@ -16,4 +16,4 @@ class DbGeneAdminServiceSpec extends Specification implements ServiceUnitTest<Db
         expect:"fix me"
             unqiueGenes.get(7157) == "TP53"
     }
-}
+}*/

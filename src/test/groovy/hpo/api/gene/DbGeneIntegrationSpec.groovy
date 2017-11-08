@@ -1,4 +1,4 @@
-package hpo.api.gene
+/*package hpo.api.gene
 
 import grails.testing.mixin.integration.Integration
 import spock.lang.*
@@ -34,4 +34,4 @@ class DbGeneIntegrationSpec extends Specification {
     "LBR"         | [3930]
     "RPS19"       | [6223]
   }
-}
+}*/

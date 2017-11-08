@@ -36,16 +36,7 @@ class DbDiseaseUnitSpec extends Specification implements DomainUnitTest<DbDiseas
       dbDisease.db  == disease.getDb()
       dbDisease.dbId == disease.getDbObjectId()
       dbDisease.dbName == disease.getDbName()
-      dbDisease.qualifier == disease.getQualifier()
       dbDisease.diseaseId == disease.getDbReference()
-      dbDisease.evidenceDescription == disease.getEvidenceDescription()
-      dbDisease.onsetModifier == disease.getOnsetModifier()
-      dbDisease.frequencyModifier == disease.getFrequencyModifier()
-      dbDisease.withA == disease.getWith()
-      dbDisease.aspect == disease.getAspect()
-      dbDisease.synonym == disease.getSynonym()
-      dbDisease.date == disease.getDate()
-      dbDisease.assignedBy == disease.getAssignedBy()
     }
   }
 }

@@ -9,16 +9,15 @@ class DbGeneUnitSpec extends Specification implements DomainUnitTest<DbGene> {
 
   void "test gene constructor"() {
     given:
-    Integer entrezGeneId = 7175
-    String  entrezGeneSymbol = "TP53"
+  HpoGeneAnnotation geneAnnotation = new HpoGeneAnnotation(7175,"TP53",null,null)
 
     when:
-    DbGene dbGene = new DbGene(entrezGeneId,entrezGeneSymbol)
+    DbGene dbGene = new DbGene(geneAnnotation)
 
     then:
     verifyAll {
-      dbGene.entrezGeneId  == entrezGeneId
-      dbGene.entrezGeneSymbol == entrezGeneSymbol
+      dbGene.entrezGeneId  == geneAnnotation.entrezGeneId
+      dbGene.entrezGeneSymbol == geneAnnotation.entrezGeneSymbol
     }
   }
 }
