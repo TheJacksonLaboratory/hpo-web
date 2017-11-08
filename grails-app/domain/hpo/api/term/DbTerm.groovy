@@ -1,6 +1,7 @@
 package hpo.api.term
 
 import com.github.phenomics.ontolib.ontology.data.Term
+import hpo.api.disease.DbDisease
 import hpo.api.gene.DbGene
 
 /**
@@ -37,13 +38,10 @@ class DbTerm {
     numberOfChildren()
   }
 
-  static hasMany = [
-    dbTermPaths: DbTermPath,
-    dbGenes: DbGene,
-  ]
+  static hasMany = [dbTermPaths: DbTermPath, dbGenes: DbGene, dbDisease: DbDisease]
+
   Set<DbTermPath> dbTermPaths = [] as Set<DbTermPath>
   Set<DbGene> dbGenes = [] as Set<DbGene>
-
 
   DbTerm() {}
 

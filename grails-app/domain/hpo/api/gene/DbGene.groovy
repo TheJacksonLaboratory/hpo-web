@@ -5,7 +5,6 @@ import hpo.api.term.DbTerm
 
 class DbGene {
 
-
   Integer entrezId
   String  geneSymbol
 
@@ -19,9 +18,6 @@ class DbGene {
       entrezId()
       geneSymbol()
     }
-
-
-
 
   Set<DbTerm> dbTerms = [] as Set<DbTerm>
 

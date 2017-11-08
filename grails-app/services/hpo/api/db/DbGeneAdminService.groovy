@@ -10,7 +10,6 @@ import org.apache.commons.lang.time.StopWatch
 import org.grails.io.support.ClassPathResource
 
 @Transactional
-@GrailsCompileStatic
 class DbGeneAdminService {
 
   Sql groovySql
@@ -19,7 +18,7 @@ class DbGeneAdminService {
     StopWatch stopWatch = new StopWatch()
     stopWatch.start()
     DbGene.executeUpdate("delete from DbGene")
-    println("deleteDbGenes duration: ${stopWatch} time: ${new Date()}")
+    println("duration: ${stopWatch} time: ${new Date()}")
   }
 
   void deleteDbGeneDbTermJoinTable(){

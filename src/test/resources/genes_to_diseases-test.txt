@@ -1,0 +1,3 @@
+#Format: entrez-gene-id<tab>entrez-gene-symbol<tab>DiseaseId
+2	A2M	OMIM:614036
+16	AARS	OMIM:616339

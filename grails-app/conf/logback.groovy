@@ -21,7 +21,8 @@ appender('STDOUT', ConsoleAppender) {
         '%m%n%wex' // Message
   }
 }
-
+//logger("org.hibernate.SQL",TRACE,['STDOUT'],false)
+//logger("org.hibernate.type.descriptor.sql.BasicBinder",TRACE,['STDOUT'],false)
 def targetDir = BuildSettings.TARGET_DIR
 if (Environment.isDevelopmentMode() && targetDir != null) {
   appender("FULL_STACKTRACE", FileAppender) {

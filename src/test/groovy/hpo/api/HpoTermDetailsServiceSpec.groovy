@@ -1,4 +1,4 @@
-package hpo.api
+/*package hpo.api
 
 import com.github.phenomics.ontolib.formats.hpo.HpoDiseaseAnnotation
 import com.github.phenomics.ontolib.formats.hpo.HpoGeneAnnotation
@@ -15,19 +15,17 @@ class HpoTermDetailsServiceSpec extends Specification implements ServiceUnitTest
 
     @Shared
     HpoOntology hpoOntology
-    /*@Shared
-    List<HpoDiseaseAnnotation> hpoDiseases
     @Shared
-    List<HpoGeneAnnotation> hpoGenes*/
+    List<HpoGeneAnnotation> hpoGenes
     def setupSpec(){
         hpoOntology = new HpoOntologyFactory().getInstance()
-        /*hpoDiseases = new HpoDiseaseFactory().getInstance()
-        hpoGenes = new HpoGeneFactory().getInstance()*/
-    }
+        hpoDiseases = new HpoDiseaseFactory().getInstance()
+        hpoGenes = new HpoGeneFactory().getInstance()
+   }
     def setup() {
         service.hpoOntology = hpoOntology
-       /* service.hpoDiseases = hpoDiseases
-        service.hpoGenes = hpoGenes*/
+       service.hpoDiseases = hpoDiseases
+        service.hpoGenes = hpoGenes
     }
 
     def cleanup() {
@@ -42,10 +40,10 @@ class HpoTermDetailsServiceSpec extends Specification implements ServiceUnitTest
 
         where:
         query                 | expected                                                                                        | desc
-        /*null                  | []                                                                                              | 'null'
+        null                  | []                                                                                              | 'null'
         ' '                   | []                                                                                              | 'blank'
         '   '                 | []                                                                                              | 'blank'
-        '   \n'               | []                                                                                              | 'blank'*/
+        '   \n'               | []                                                                                              | 'blank'
         'HP:0002862'          | 'Bladder carcinoma'                                                                             | 'exact id'
     }
-}
+}*/

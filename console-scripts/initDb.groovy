@@ -1,0 +1,12 @@
+ctx.dbTermAdminService.refreshDbTerms()
+println("DbTerm.count() : ${DbTerm.count}")
+println("DbTermPath.count() : ${DbTermPath.count}")
+ctx.dbGeneAdminService.refreshTransitiveGenes()
+println("Number of Transitive Genes inserted: : ${DbGene.count}")
+println("#################################")
+println("Finished Loading of Data...")
+ctx.dbDiseaseAdminService.refreshDbDiseases()
+println("Number of Diseases inserted : ${DbDisease.count}")
+ctx.dbGeneToDiseaseAdminService.refreshGeneMapping()
+println("Number of GeneToDisease inserted: ${DbGeneToDisease.count}")
+null
