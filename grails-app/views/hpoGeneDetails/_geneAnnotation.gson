@@ -1,5 +1,3 @@
-package hpoGeneDetails
-
 import com.github.phenomics.ontolib.formats.hpo.HpoGeneAnnotation
 
 model {
