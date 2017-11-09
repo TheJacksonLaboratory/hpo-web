@@ -7,17 +7,17 @@ class DbDisease {
 
   String db
   String dbId
-  String dbName
+  String diseaseName
   String diseaseId
 
   static constraints = {
     db()
     dbId(nullable: true)
-    dbName()
-    diseaseId()
+    diseaseName()
+    diseaseId(unique:true)
   }
   static mapping = {
-
+    diseaseName(type:'text')
   }
   static hasMany = [dbTerm: DbTerm]
   static belongsTo = DbTerm
@@ -27,7 +27,7 @@ class DbDisease {
   DbDisease(HpoDiseaseAnnotation hpoDiseaseAnnotation) {
     db = hpoDiseaseAnnotation.db
     dbId = hpoDiseaseAnnotation.dbObjectId
-    dbName = hpoDiseaseAnnotation.dbName
+    diseaseName = hpoDiseaseAnnotation.dbName
     diseaseId = hpoDiseaseAnnotation.dbReference
   }
 }
