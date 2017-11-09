@@ -45,7 +45,8 @@ class DbDiseaseAdminService {
         }
       }
       else{
-        log.info("skipping line : ${line}")
+        println("${line}")
+        //log.info("skipping line : ${line}")
       }
     }
     println("read file ${file.name} duration: ${stopWatch} time: ${new Date()}")
@@ -90,6 +91,8 @@ class DbDiseaseAdminService {
     final Map<String, DbDisease> diseaseIdGeneMap = loadDbDiseases()
     final Map<String, DbTerm> hpoIdToDbTermMap = loadHpoIdToDbTermMap()
     final File file = new ClassPathResource("phenotype_annotation.tab").file
+    Integer lastTermId = null
+    Integer lastDiseaseId = null
     groovySql.withTransaction {
       groovySql.withBatch(500, "INSERT db_term_db_disease VALUES(?,?)") { BatchingPreparedStatementWrapper ps ->
         int index = 0;
@@ -98,16 +101,25 @@ class DbDiseaseAdminService {
           String[] tokens = line.split('\t')
           if (tokens.size() == 14) {
             final DbTerm dbTerm = hpoIdToDbTermMap.get(tokens[4]) //term token
-            final DbDisease dbDisease = diseaseIdGeneMap.get(tokens[5]) //diseaseid
+            String diseaseId = tokens[0] + ":" +  tokens[1]
+            diseaseId = diseaseId.trim()
+            final DbDisease dbDisease = diseaseIdGeneMap.get(diseaseId) //diseaseid
             if (dbTerm == null) {
               hpoIdWithPrefixNotFoundSet.add(tokens[4])
             } else if (dbDisease == null) {
-              diseaseIdNotFoundSet.add(tokens[5]) // add diseaseid
+              diseaseIdNotFoundSet.add(diseaseId) // add diseaseid
             } else {
-              ps.addBatch([
-                dbDisease.id as Object,
-                dbTerm.id as Object,
-              ])
+              if(dbTerm.id == lastTermId && dbDisease.id == lastDiseaseId){
+                log.info("DUPLICATE LINE: ${line}")
+              }else{
+                ps.addBatch([
+                  dbDisease.id as Object,
+                  dbTerm.id as Object,
+                ])
+                lastDiseaseId = dbDisease.id
+                lastTermId = dbTerm.id
+              }
+
             }
           } else {
             log.info("skipping line : ${line}")

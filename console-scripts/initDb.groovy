@@ -1,12 +1,9 @@
-ctx.dbTermAdminService.refreshDbTerms()
-println("DbTerm.count() : ${DbTerm.count}")
-println("DbTermPath.count() : ${DbTermPath.count}")
-ctx.dbGeneAdminService.refreshTransitiveGenes()
-println("Number of Transitive Genes inserted: : ${DbGene.count}")
-println("#################################")
-println("Finished Loading of Data...")
-ctx.dbDiseaseAdminService.refreshDbDiseases()
-println("Number of Diseases inserted : ${DbDisease.count}")
-ctx.dbGeneToDiseaseAdminService.refreshGeneMapping()
-println("Number of GeneToDisease inserted: ${DbGeneToDisease.count}")
+// LOAD THE ENTIRE DATABASE
+ctx.dbTermAdminService.refreshDbTerms() 		// Load Terms
+dbGeneAdminService.loadEntrezGenes() 			// Load Genes
+dbGeneAdminService.truncateGeneTermJoinTable()	// Truncate Genes to Terms
+dbGeneAdminService.joinGenesAndTermsWithSql() 	// Create Genes to Terms
+ctx.dbDiseaseAdminService.truncateDbDiseases() 	// Truncate Disease
+ctx.dbDiseaseAdminService.loadDiseases() 	 	// Load Diseases
+ctx.dbDiseaseAdminService.joinDiseaseAndTermsWithSql()// Load Diseases To Term
 null
