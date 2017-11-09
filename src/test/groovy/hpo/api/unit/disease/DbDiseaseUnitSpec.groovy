@@ -1,8 +1,9 @@
-package hpo.api.disease
+package hpo.api.unit.disease
 
 import com.github.phenomics.ontolib.formats.hpo.HpoDiseaseAnnotation
 import com.github.phenomics.ontolib.ontology.data.ImmutableTermId
 import grails.testing.gorm.DomainUnitTest
+import hpo.api.disease.DbDisease
 import spock.lang.Specification
 
 class DbDiseaseUnitSpec extends Specification implements DomainUnitTest<DbDisease> {

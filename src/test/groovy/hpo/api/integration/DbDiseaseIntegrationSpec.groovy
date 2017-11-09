@@ -1,9 +1,10 @@
-/*package hpo.api.disease
+package hpo.api.integration
+/*package hpo.api.unit.disease
 
 import grails.testing.mixin.integration.Integration
 import spock.lang.*
 @Integration
-class DbDiseaseIntegrationSpec extends Specification {
+class hpo.api.integration.DbDiseaseIntegrationSpec extends Specification {
 
   void "test find associated diseases by hpo id"(){
     def c = DbDisease.createCriteria()

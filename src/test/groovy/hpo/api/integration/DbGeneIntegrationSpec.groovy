@@ -1,6 +1,7 @@
-/*package hpo.api.gene
+package hpo.api.integration
 
 import grails.testing.mixin.integration.Integration
+import hpo.api.gene.DbGene
 import spock.lang.*
 @Integration
 class DbGeneIntegrationSpec extends Specification {
@@ -10,11 +11,11 @@ class DbGeneIntegrationSpec extends Specification {
   }
   void "test find genes given id"(){
     def c = DbGene.createCriteria()
-    List<DbGene> gene = c.list(){
+    List<DbGene> geneList = c.list(){
       like('entrezGeneId', query)
     }
     expect: "fix me"
-    gene*.entrezGeneSymbol == expected
+    geneList*.entrezGeneSymbol == expected
 
     where:
     query         | expected
@@ -34,4 +35,20 @@ class DbGeneIntegrationSpec extends Specification {
     "LBR"         | [3930]
     "RPS19"       | [6223]
   }
-}*/
+
+  void "test find directly related genes to term"(){
+    def c = DbGene.createCriteria()
+    List<DbGene> geneList = c.list(){
+        dbTerms{
+          'in'('ontologyId',query)
+        }
+    }
+    expect: "fix me"
+    geneList*.entrezGeneSymbol == expected
+
+    where:
+    query         | expected
+    'HP:0002862'  | ['ATP7A', 'HRAS']
+    'HP:0004408'  | ['PTCH2', 'ATP7A', 'SUFU', 'PTCH1', 'REV3L', 'KIF7', 'SOX9', 'PLXND1', 'HYLS1']
+  }
+}

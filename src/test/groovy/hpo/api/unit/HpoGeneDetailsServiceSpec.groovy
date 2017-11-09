@@ -1,6 +1,7 @@
-package hpo.api
+package hpo.api.unit
 
 import grails.testing.services.ServiceUnitTest
+import hpo.api.HpoGeneDetailsService
 import spock.lang.Ignore
 import spock.lang.Specification
 

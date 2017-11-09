@@ -5,18 +5,18 @@ import hpo.api.term.DbTerm
 
 class DbGene {
 
-  Integer entrezId
-  String  geneSymbol
+  Integer entrezGeneId
+  String  entrezGeneSymbol
 
     static constraints = {
 
-      entrezId(unique: true)
-      geneSymbol(unique:true)
+      entrezGeneId(unique: true)
+      entrezGeneSymbol(unique:true)
     }
 
     static mapping = {
-      entrezId()
-      geneSymbol()
+      entrezGeneId()
+      entrezGeneSymbol()
     }
 
   Set<DbTerm> dbTerms = [] as Set<DbTerm>
@@ -27,8 +27,7 @@ class DbGene {
   DbGene() {}
 
   DbGene(HpoGeneAnnotation hpoGeneAnnotation) {
-
-    entrezId = hpoGeneAnnotation.entrezGeneId
-    geneSymbol = hpoGeneAnnotation.entrezGeneSymbol
+    entrezGeneId = hpoGeneAnnotation.entrezGeneId
+    entrezGeneSymbol = hpoGeneAnnotation.entrezGeneSymbol
   }
 }

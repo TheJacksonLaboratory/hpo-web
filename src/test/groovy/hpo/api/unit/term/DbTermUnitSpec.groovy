@@ -1,9 +1,10 @@
-package hpo.api.term
+package hpo.api.unit.term
 
 import com.github.phenomics.ontolib.formats.hpo.HpoTerm
 import com.github.phenomics.ontolib.ontology.data.ImmutableTermId
 import com.github.phenomics.ontolib.ontology.data.Term
 import grails.testing.gorm.DomainUnitTest
+import hpo.api.term.DbTerm
 import spock.lang.Specification
 
 /**

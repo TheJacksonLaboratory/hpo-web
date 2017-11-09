@@ -1,6 +1,7 @@
-package hpo.api
+package hpo.api.unit
 
 import grails.testing.web.controllers.ControllerUnitTest
+import hpo.api.HpoDiseaseDetailsController
 import spock.lang.Ignore
 import spock.lang.Specification
 

@@ -1,8 +1,9 @@
-package hpo.api.gene
+package hpo.api.unit.gene
 
 import com.github.phenomics.ontolib.formats.hpo.HpoGeneAnnotation
 import com.github.phenomics.ontolib.ontology.data.ImmutableTermId
 import grails.testing.gorm.DomainUnitTest
+import hpo.api.gene.DbGene
 import spock.lang.Specification
 
 class DbGeneUnitSpec extends Specification implements DomainUnitTest<DbGene> {
@@ -16,8 +17,8 @@ class DbGeneUnitSpec extends Specification implements DomainUnitTest<DbGene> {
 
     then:
     verifyAll {
-      dbGene.entrezId  == geneAnnotation.entrezGeneId
-      dbGene.geneSymbol == geneAnnotation.entrezGeneSymbol
+      dbGene.entrezGeneId  == geneAnnotation.entrezGeneId
+      dbGene.entrezGeneSymbol == geneAnnotation.entrezGeneSymbol
     }
   }
 }
