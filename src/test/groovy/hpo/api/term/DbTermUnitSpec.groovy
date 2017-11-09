@@ -1,4 +1,4 @@
-package hpo.api.unit.term
+package hpo.api.term
 
 import com.github.phenomics.ontolib.formats.hpo.HpoTerm
 import com.github.phenomics.ontolib.ontology.data.ImmutableTermId

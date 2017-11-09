@@ -1,4 +1,4 @@
-package hpo.api.unit
+package hpo.api
 
 import grails.testing.web.controllers.ControllerUnitTest
 import hpo.api.HpoDiseaseDetailsController

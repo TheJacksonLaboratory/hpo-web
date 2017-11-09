@@ -1,4 +1,4 @@
-package hpo.api.unit
+package hpo.api
 
 import com.github.phenomics.ontolib.formats.hpo.HpoDisease
 import com.github.phenomics.ontolib.formats.hpo.HpoDiseaseAnnotation

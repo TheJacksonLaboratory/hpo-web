@@ -1,4 +1,4 @@
-package hpo.api.unit
+package hpo.api
 
 import grails.testing.services.ServiceUnitTest
 import hpo.api.HpoGeneDetailsService

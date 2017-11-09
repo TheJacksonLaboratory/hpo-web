@@ -1,12 +1,12 @@
-package hpo.api.unit.term
+package hpo.api
 
 import grails.testing.web.controllers.ControllerUnitTest
-import hpo.api.HpoTermDetailsController
+import hpo.api.HpoGeneDetailsController
 import spock.lang.Ignore
 import spock.lang.Specification
 
 @Ignore(value = 'need to implement')
-class HpoTermDetailsControllerSpec extends Specification implements ControllerUnitTest<HpoTermDetailsController> {
+class HpoGeneDetailsControllerSpec extends Specification implements ControllerUnitTest<HpoGeneDetailsController> {
 
     def setup() {
     }

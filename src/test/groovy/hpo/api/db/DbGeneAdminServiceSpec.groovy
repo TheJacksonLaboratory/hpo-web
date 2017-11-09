@@ -1,4 +1,4 @@
-package hpo.api.unit.db
+package hpo.api.db
 /*package hpo.api.unit.db
 
 import grails.testing.services.ServiceUnitTest

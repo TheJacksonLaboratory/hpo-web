@@ -1,4 +1,4 @@
-package hpo.api.integration
+/*package hpo.api
 
 import com.github.phenomics.ontolib.formats.hpo.HpoOntology
 import grails.testing.mixin.integration.Integration
@@ -28,10 +28,6 @@ class HpoTermDetailsServiceIntegrationSpec extends Specification implements Serv
         resultTerm.term.name == expected
         where:
         query                 | expected                   | desc
-        /*null                  | []                       | 'null'
-        ' '                   | []                         | 'blank'
-        '   '                 | []                         | 'blank'
-        '   \n'               | []                         | 'blank'*/
         'HP:0002862'          | 'Bladder carcinoma'        | 'exact id'
     }
     void "test search term assoc genes"(){
@@ -43,3 +39,4 @@ class HpoTermDetailsServiceIntegrationSpec extends Specification implements Serv
       'HP:0002862'          | [538,3265,8313,207,324,701,1499,1630,2033,10395,2261,3845,201163,4893,5290,5728,5925,79719,55612,6714,7157,7373] | 'exact id'
     }
 }
+*/
