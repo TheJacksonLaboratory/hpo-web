@@ -26,7 +26,7 @@ class DbGeneAdminService {
     print("${rowCount} deleted from db_term_db_genes")
   }
 
-  Map<Integer, String> loadEntrezGenes() {
+  Map<Integer, String> getEntrezIdToSymbolMap() {
     StopWatch stopWatch = new StopWatch()
     stopWatch.start()
     Map<Integer, String> entrezIdToSymbolMap = [:]
@@ -35,12 +35,8 @@ class DbGeneAdminService {
       String[] tokens = line.split('\t')
       if (tokens.size() == 4) {
         int entrezGeneId = Integer.valueOf(tokens[0])
-        String entrezGeneSymbol = tokens[1]
-        if(entrezIdToSymbolMap.get(entrezGeneId) == null){
-          entrezIdToSymbolMap.put(entrezGeneId, entrezGeneSymbol)
-          DbGene dbGene = new DbGene(entrezGeneId: entrezGeneId, entrezGeneSymbol: entrezGeneSymbol)
-          dbGene.save(flush:true)
-        }
+        String geneSymbol = tokens[1]
+        entrezIdToSymbolMap.put(entrezGeneId, geneSymbol)
       }
       else{
         log.info("skipping line : ${line}")
