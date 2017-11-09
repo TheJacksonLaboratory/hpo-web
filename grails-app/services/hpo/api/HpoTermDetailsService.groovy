@@ -1,20 +1,15 @@
 package hpo.api
 
-import com.github.phenomics.ontolib.formats.hpo.HpoOntology
 import com.github.phenomics.ontolib.ontology.data.ImmutableTermId
 import com.github.phenomics.ontolib.ontology.data.Term
 import com.github.phenomics.ontolib.formats.hpo.HpoOntology
 import com.github.phenomics.ontolib.ontology.data.TermId
-import com.github.phenomics.ontolib.ontology.data.TermIds
-import groovy.transform.CompileStatic
-import com.github.phenomics.ontolib.formats.hpo.HpoDiseaseAnnotation
-import com.github.phenomics.ontolib.formats.hpo.HpoGeneAnnotation
 import hpo.api.gene.DbGene
 import com.github.phenomics.ontolib.ontology.algo.OntologyTerms
-import java.lang.reflect.Array
 import grails.compiler.GrailsCompileStatic
+import groovy.transform.TypeCheckingMode
 
-
+@GrailsCompileStatic
 class HpoTermDetailsService {
 
     HpoOntology hpoOntology
@@ -37,14 +32,20 @@ class HpoTermDetailsService {
         }
         return resultMap
     }
-    List<DbGene> getGenes(query){
+    List<DbGene> getGenes(Term query){
       Set<TermId> terms = OntologyTerms.childrenOf(query.id,this.hpoOntology)
+      queryDbGene(terms)
+    }
+    @GrailsCompileStatic(TypeCheckingMode.SKIP)
+    List<DbGene> queryDbGene(Set<TermId> terms){
       def c = DbGene.createCriteria()
       List<DbGene> geneList = c.list(){
-            dbTerms {
-              'in'('ontologyId',terms.collect{ it.getIdWithPrefix()})
-            }
+        dbTerms {
+          'in'('ontologyId',terms.collect{ it.getIdWithPrefix()})
+        }
       }
       return geneList
     }
+
+
 }
