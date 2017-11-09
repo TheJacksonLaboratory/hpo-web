@@ -4,6 +4,7 @@ import com.github.phenomics.ontolib.formats.hpo.HpoDiseaseAnnotation
 import com.github.phenomics.ontolib.formats.hpo.HpoGeneAnnotation
 import com.github.phenomics.ontolib.formats.hpo.HpoOntology
 import grails.testing.services.ServiceUnitTest
+import hpo.api.HpoSearchService
 import hpo.api.util.HpoDiseaseFactory
 import hpo.api.util.HpoGeneFactory
 import hpo.api.util.HpoOntologyFactory

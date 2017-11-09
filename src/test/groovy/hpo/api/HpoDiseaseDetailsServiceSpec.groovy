@@ -3,6 +3,7 @@ package hpo.api
 import com.github.phenomics.ontolib.formats.hpo.HpoDisease
 import com.github.phenomics.ontolib.formats.hpo.HpoDiseaseAnnotation
 import grails.testing.services.ServiceUnitTest
+import hpo.api.HpoDiseaseDetailsService
 import hpo.api.util.HpoDiseaseFactory
 import spock.lang.Shared
 import spock.lang.Specification

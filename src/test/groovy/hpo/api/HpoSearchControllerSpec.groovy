@@ -2,6 +2,8 @@ package hpo.api
 
 import grails.testing.spring.AutowiredTest
 import grails.testing.web.controllers.ControllerUnitTest
+import hpo.api.HpoSearchController
+import hpo.api.HpoSearchService
 import spock.lang.Specification
 import spock.lang.Unroll
 

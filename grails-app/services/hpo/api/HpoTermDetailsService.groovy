@@ -1,16 +1,13 @@
 package hpo.api
 
-import com.github.phenomics.ontolib.formats.hpo.HpoOntology
 import com.github.phenomics.ontolib.ontology.data.ImmutableTermId
 import com.github.phenomics.ontolib.ontology.data.Term
 import com.github.phenomics.ontolib.formats.hpo.HpoOntology
-import groovy.transform.CompileStatic
-import com.github.phenomics.ontolib.formats.hpo.HpoDiseaseAnnotation
-import com.github.phenomics.ontolib.formats.hpo.HpoGeneAnnotation
+import com.github.phenomics.ontolib.ontology.data.TermId
 import hpo.api.gene.DbGene
-
-import java.lang.reflect.Array
+import com.github.phenomics.ontolib.ontology.algo.OntologyTerms
 import grails.compiler.GrailsCompileStatic
+import groovy.transform.TypeCheckingMode
 
 @GrailsCompileStatic
 class HpoTermDetailsService {
@@ -25,31 +22,30 @@ class HpoTermDetailsService {
      * @param q the term to query with
      * @return Term Object with result term.
      */
-    Map searchTerms(String trimmedQ){
+    Map searchTerm(String trimmedQ){
         final Map resultMap = [:]
         if (trimmedQ.startsWith('HP:')) {
-            resultMap.put("term",this.hpoOntology.termMap.get(ImmutableTermId.constructWithPrefix(trimmedQ)))
-            resultMap.put("geneAssoc", getGenes(trimmedQ))
+            Term term = this.hpoOntology.termMap.get(ImmutableTermId.constructWithPrefix(trimmedQ))
+            resultMap.put("term",term)
+            resultMap.put("geneAssoc", getGenes(term))
             //resultMap.put("diseaseAssoc",this.hpoDiseases.findAll {it.getHpoId().getIdWithPrefix().equals(trimmedQ)})
         }
         return resultMap
     }
-
-    Object getGenes(query){
+    List<DbGene> getGenes(Term query){
+      Set<TermId> terms = OntologyTerms.childrenOf(query.id,this.hpoOntology)
+      queryDbGene(terms)
+    }
+    @GrailsCompileStatic(TypeCheckingMode.SKIP)
+    List<DbGene> queryDbGene(Set<TermId> terms){
       def c = DbGene.createCriteria()
-      def geneList = c.list(){
-        like('ontologyId', "%$query%")
+      List<DbGene> geneList = c.list(){
+        dbTerms {
+          'in'('ontologyId',terms.collect{ it.getIdWithPrefix()})
+        }
       }
       return geneList
     }
 
-    /*List<Map> mapGenesToDiseases(trimmedQ){
-        List<HpoGeneAnnotation> genes = this.hpoGenes.findAll {it.getTermId().getIdWithPrefix().equals(trimmedQ)}
-        List<Map> mappedResult = [];
-        for(gene in genes){
-            List<HpoDiseaseAnnotation> diseases = []
-            diseases.addAll(this.hpoDiseases.findAll {it.getHpoId().getIdWithPrefix().toLowerCase().equals(gene.)})
-            gene.putAt("diseaseAssoc",diseases)
-        }
-        }*/
+
 }
