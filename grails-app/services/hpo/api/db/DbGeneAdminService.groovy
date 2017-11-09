@@ -1,6 +1,5 @@
 package hpo.api.db
 
-import grails.compiler.GrailsCompileStatic
 import grails.gorm.transactions.Transactional
 import groovy.sql.BatchingPreparedStatementWrapper
 import groovy.sql.Sql
@@ -14,14 +13,14 @@ class DbGeneAdminService {
 
   Sql groovySql
 
-  void deleteDbGenes() {
+  void truncateDbGenes() {
     StopWatch stopWatch = new StopWatch()
     stopWatch.start()
     DbGene.executeUpdate("delete from DbGene")
     println("duration: ${stopWatch} time: ${new Date()}")
   }
 
-  void deleteDbGeneDbTermJoinTable(){
+  void truncateGeneTermJoinTable(){
     int rowCount = groovySql.executeUpdate("delete from db_term_db_genes")
     print("${rowCount} deleted from db_term_db_genes")
   }
@@ -51,8 +50,8 @@ class DbGeneAdminService {
     StopWatch stopWatch = new StopWatch()
     stopWatch.start()
     entrezIdToSymbolMap.each { Integer entrezId, String geneSymbol ->
-      DbGene dbGene = new DbGene(entrezId: entrezId, geneSymbol: geneSymbol)
-      dbGene.save()
+      DbGene dbGene = new DbGene(entrezGeneId: entrezId, entrezGeneSymbol: geneSymbol)
+      dbGene.save(flush:true)
       mapToReturn.put(entrezId, dbGene)
     }
     println("saveGenes duration: ${stopWatch} time: ${new Date()}")
@@ -64,7 +63,7 @@ class DbGeneAdminService {
     StopWatch stopWatch = new StopWatch()
     stopWatch.start()
     DbGene.list().each { DbGene dbGene ->
-      mapToReturn.put(dbGene.entrezId, dbGene)
+      mapToReturn.put(dbGene.entrezGeneId, dbGene)
     }
     println("loadGeneMap duration: ${stopWatch} time: ${new Date()}")
     mapToReturn

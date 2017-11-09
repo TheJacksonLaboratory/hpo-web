@@ -12,12 +12,12 @@ class DbDisease {
 
   static constraints = {
     db()
-    dbId(nullable: true)
+    dbId()
     diseaseName()
-    diseaseId(unique:true)
+    diseaseId(unique: true)
   }
   static mapping = {
-    diseaseName(type:'text')
+    diseaseName(type: 'text')
   }
   static hasMany = [dbTerm: DbTerm]
   static belongsTo = DbTerm
