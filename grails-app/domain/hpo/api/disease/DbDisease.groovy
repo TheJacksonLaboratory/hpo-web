@@ -19,7 +19,7 @@ class DbDisease {
   static mapping = {
     diseaseName(type: 'text')
   }
-  static hasMany = [dbTerm: DbTerm]
+  static hasMany = [dbTerms: DbTerm]
   static belongsTo = DbTerm
 
   DbDisease() {}

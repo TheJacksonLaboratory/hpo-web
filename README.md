@@ -17,6 +17,14 @@
 + Change directory to hpo-web
 
         cd hpo-web
++ Execute local_db_init.sql in sql-scripts/
+
++ Execute initDb.groovy in console-scripts/
+
+         Make sure to execute each load function seperately for now.
+         
+         * Always start from fresh Database if you want to reload data.
+        
 
 + Validate the client and backend components build by executing:
 
