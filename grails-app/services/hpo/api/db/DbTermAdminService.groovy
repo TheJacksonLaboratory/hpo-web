@@ -5,6 +5,7 @@ import com.github.phenomics.ontolib.ontology.algo.OntologyTerms
 import com.github.phenomics.ontolib.ontology.data.Term
 import com.github.phenomics.ontolib.ontology.data.TermId
 import grails.gorm.transactions.Transactional
+import hpo.api.db.utils.SqlUtilsService
 import hpo.api.term.DbTerm
 import hpo.api.term.DbTermPath
 import hpo.api.util.AncestorPathsBuilder
@@ -23,32 +24,31 @@ class DbTermAdminService {
   void deleteDbTerms() {
     StopWatch stopWatch = new StopWatch()
     stopWatch.start()
-    DbTermPath.executeUpdate("delete from DbTermPath")
-    DbTerm.executeUpdate("delete from DbTerm")
-    println("duration: ${stopWatch} time: ${new Date()}")
+    int dbTermPathsDeleted = DbTermPath.executeUpdate("delete from DbTermPath")
+    log.info("${dbTermPathsDeleted} rows deleted from ${DbTermPath.name} duration: ${stopWatch} time: ${new Date()}")
+    int dbTermsleted = DbTerm.executeUpdate("delete from DbTerm")
+    log.info("${dbTermsleted} rows deleted from ${DbTerm.name} duration: ${stopWatch} time: ${new Date()}")
   }
 
   void refreshDbTerms(List<Term> terms = hpoOntology.termMap.values()) {
     deleteDbTerms()
     StopWatch stopWatch = new StopWatch()
     stopWatch.start()
-    DbTerm.withTransaction {
-      AncestorPathsBuilder ancestorPathsBuilder = new AncestorPathsBuilder(hpoOntology)
-      Set<String> ontologyIdSet = [] as Set<String>
-      for (Term term in terms) {
+    AncestorPathsBuilder ancestorPathsBuilder = new AncestorPathsBuilder(hpoOntology)
+    Set<String> ontologyIdSet = [] as Set<String>
+    for (Term term in terms) {
 
-        if (ontologyIdSet.contains(term.id.idWithPrefix)) {
-          // do nothinbg
-        } else {
-          ontologyIdSet.add(term.id.idWithPrefix)
-          DbTerm dbTerm = new DbTerm(term as Term)
-          dbTerm.numberOfChildren = OntologyTerms.childrenOf(term.id,hpoOntology).size()
-          dbTerm.save()
-          saveAncestorPaths(term, dbTerm, ancestorPathsBuilder)
-        }
+      if (ontologyIdSet.contains(term.id.idWithPrefix)) {
+        // do nothinbg
+      } else {
+        ontologyIdSet.add(term.id.idWithPrefix)
+        DbTerm dbTerm = new DbTerm(term as Term)
+        dbTerm.numberOfChildren = OntologyTerms.childrenOf(term.id, hpoOntology).size()
+        dbTerm.save()
+        saveAncestorPaths(term, dbTerm, ancestorPathsBuilder)
       }
     }
-    println("duration: ${stopWatch} time: ${new Date()}")
+    log.info("refreshDbTerms duration: ${stopWatch} time: ${new Date()}")
   }
 
   private void saveAncestorPaths(Term term, DbTerm dbTerm, ancestorPathsBuilder) {
