@@ -8,6 +8,7 @@ import hpo.api.disease.DbDisease
 import hpo.api.term.DbTerm
 import org.apache.commons.lang.time.StopWatch
 import org.grails.io.support.ClassPathResource
+import org.hibernate.Session
 
 @Transactional
 class DbDiseaseAdminService {
@@ -21,7 +22,7 @@ class DbDiseaseAdminService {
     println("duration: ${stopWatch} time: ${new Date()}")
   }
 
-  void truncateGeneTermJoinTable(){
+  void truncateDiseaseTermJoinTable(){
     int rowCount = groovySql.executeUpdate("delete from db_term_db_disease")
     print("${rowCount} deleted from db_term_db_genes")
   }
@@ -31,25 +32,28 @@ class DbDiseaseAdminService {
     stopWatch.start()
     Map<String, String> diseaseIdToNameMap = [:]
     final File file = new ClassPathResource("phenotype_annotation.tab").file
-    file.eachLine{String line ->
-      String[] tokens = line.split('\t')
-      if (tokens.size() == 14) {
-        String db = tokens[0]
-        String dbObjectId = tokens[1]
-        String diseaseName = tokens[2]
-        String diseaseId = db + ":" +  dbObjectId
-        if(!diseaseIdToNameMap.get(diseaseId)){
-          diseaseIdToNameMap.put(diseaseId, dbObjectId)
-          DbDisease dbDisease = new DbDisease(db: db, dbId: dbObjectId, diseaseName: diseaseName, diseaseId:diseaseId )
-          dbDisease.save(flush:true)
+    DbDisease.withSession {Session session ->
+      file.eachLine{String line ->
+        String[] tokens = line.split('\t')
+        if (tokens.size() == 14) {
+          String db = tokens[0]
+          String dbObjectId = tokens[1]
+          String diseaseName = tokens[2]
+          String diseaseId = db + ":" +  dbObjectId
+          if(!diseaseIdToNameMap.get(diseaseId)){
+            diseaseIdToNameMap.put(diseaseId, dbObjectId)
+            DbDisease dbDisease = new DbDisease(db: db, dbId: dbObjectId, diseaseName: diseaseName, diseaseId:diseaseId )
+            dbDisease.save(flush:true)
+          }
+        }
+        else{
+          log.info("skipping line : ${line}")
         }
       }
-      else{
-        println("${line}")
-        //log.info("skipping line : ${line}")
-      }
+      session.flush()
+      session.clear()
     }
-    println("read file ${file.name} duration: ${stopWatch} time: ${new Date()}")
+    println("[ \n Loading Diseases -  file ${file.name} \n duration: ${stopWatch} \n time: ${new Date()} \n ]")
   }
 
   Map<String, DbDisease> loadDbDiseases() {
@@ -59,7 +63,6 @@ class DbDiseaseAdminService {
     DbDisease.list().each { DbDisease dbDisease ->
       mapToReturn.put(dbDisease.diseaseId, dbDisease)
     }
-    println("loadGeneMap duration: ${stopWatch} time: ${new Date()}")
     mapToReturn
   }
 
@@ -131,7 +134,7 @@ class DbDiseaseAdminService {
     log.info("${hpoIdWithPrefixNotFoundSet}")
     log.info("entrezIdNotFoundSet.size() : ${diseaseIdNotFoundSet.size()} ${new Date()}")
     log.info("${diseaseIdNotFoundSet}")
-    println("joinGenesAndTermsWithSql file ${file.name} duration: ${stopWatch} time: ${new Date()}")
+    println("[ \n Joined Disease And Terms - file ${file.name} \n duration: ${stopWatch} \n time: ${new Date()}\n ]")
   }
 }
 

@@ -7,6 +7,7 @@ import hpo.api.gene.DbGene
 import hpo.api.term.DbTerm
 import org.apache.commons.lang.time.StopWatch
 import org.grails.io.support.ClassPathResource
+import org.hibernate.Session
 
 @Transactional
 class DbGeneAdminService {
@@ -25,54 +26,48 @@ class DbGeneAdminService {
     print("${rowCount} deleted from db_term_db_genes")
   }
 
-  Map<Integer, String> getEntrezIdToSymbolMap() {
+  void loadEntrezGenes() {
     StopWatch stopWatch = new StopWatch()
     stopWatch.start()
     Map<Integer, String> entrezIdToSymbolMap = [:]
     final File file = new ClassPathResource("ALL_SOURCES_ALL_FREQUENCIES_genes_to_phenotype.txt").file
-    file.eachLine{String line ->
-      String[] tokens = line.split('\t')
-      if (tokens.size() == 4) {
-        int entrezGeneId = Integer.valueOf(tokens[0])
-        String geneSymbol = tokens[1]
-        entrezIdToSymbolMap.put(entrezGeneId, geneSymbol)
+    DbGene.withSession { Session session ->
+      file.eachLine{String line ->
+        String[] tokens = line.split('\t')
+        if (tokens.size() == 4) {
+          int entrezGeneId = Integer.valueOf(tokens[0])
+          String entrezGeneSymbol = tokens[1]
+          if(!entrezIdToSymbolMap.get(entrezGeneId)){
+            entrezIdToSymbolMap.put(entrezGeneId, entrezGeneSymbol)
+            DbGene dbGene = new DbGene(entrezGeneId: entrezGeneId, entrezGeneSymbol: entrezGeneSymbol)
+            dbGene.save(flush:true)
+          }
+        }
+        else{
+          log.info("skipping line : ${line}")
+        }
       }
-      else{
-        log.info("skipping line : ${line}")
-      }
+      session.flush()
+      session.clear()
     }
-    println("read file ${file.name} duration: ${stopWatch} time: ${new Date()}")
-    entrezIdToSymbolMap
+
+    println("[ \n Loading Genes - file ${file.name} \n duration: ${stopWatch} time: ${new Date()}")
   }
 
-  Map<Integer, DbGene> saveGenes(Map<Integer, String> entrezIdToSymbolMap) {
-    Map<Integer, DbGene> mapToReturn = [:]
-    StopWatch stopWatch = new StopWatch()
-    stopWatch.start()
-    entrezIdToSymbolMap.each { Integer entrezId, String geneSymbol ->
-      DbGene dbGene = new DbGene(entrezGeneId: entrezId, entrezGeneSymbol: geneSymbol)
-      dbGene.save(flush:true)
-      mapToReturn.put(entrezId, dbGene)
-    }
-    println("saveGenes duration: ${stopWatch} time: ${new Date()}")
-    mapToReturn
-  }
-
-  Map<Integer, DbGene> loadGeneMap() {
+  private static Map<Integer, DbGene> loadGeneMap() {
     Map<Integer, DbGene> mapToReturn = [:]
     StopWatch stopWatch = new StopWatch()
     stopWatch.start()
     DbGene.list().each { DbGene dbGene ->
       mapToReturn.put(dbGene.entrezGeneId, dbGene)
     }
-    println("loadGeneMap duration: ${stopWatch} time: ${new Date()}")
     mapToReturn
   }
 
   /**
    * @return a map with the keys the hpoIds (HP:0000001) and the value being the corresponding DbTerm that represents that hpoId
    */
-  Map<String, DbTerm> loadHpoIdToDbTermMap() {
+  private static Map<String, DbTerm> loadHpoIdToDbTermMap() {
     final Map<String, DbTerm> mapToReturn = [:]
     DbTerm.list().each { DbTerm dbTerm ->
       mapToReturn.put(dbTerm.ontologyId, dbTerm)
@@ -126,7 +121,7 @@ class DbGeneAdminService {
     log.info("${hpoIdWithPrefixNotFoundSet}")
     log.info("entrezIdNotFoundSet.size() : ${entrezIdNotFoundSet.size()} ${new Date()}")
     log.info("${entrezIdNotFoundSet}")
-    println("joinGenesAndTermsWithSql file ${file.name} duration: ${stopWatch} time: ${new Date()}")
+    println("[ \n Joined Genes And Terms - file ${file.name} \n  duration: ${stopWatch} \n time: ${new Date()} \n ]")
   }
 }
 

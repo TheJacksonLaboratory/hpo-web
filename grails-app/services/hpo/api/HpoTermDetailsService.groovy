@@ -4,6 +4,7 @@ import com.github.phenomics.ontolib.ontology.data.ImmutableTermId
 import com.github.phenomics.ontolib.ontology.data.Term
 import com.github.phenomics.ontolib.formats.hpo.HpoOntology
 import com.github.phenomics.ontolib.ontology.data.TermId
+import hpo.api.disease.DbDisease
 import hpo.api.gene.DbGene
 import com.github.phenomics.ontolib.ontology.algo.OntologyTerms
 import grails.compiler.GrailsCompileStatic
@@ -28,13 +29,32 @@ class HpoTermDetailsService {
             Term term = this.hpoOntology.termMap.get(ImmutableTermId.constructWithPrefix(trimmedQ))
             resultMap.put("term",term)
             resultMap.put("geneAssoc", getGenes(term))
-            //resultMap.put("diseaseAssoc",this.hpoDiseases.findAll {it.getHpoId().getIdWithPrefix().equals(trimmedQ)})
+            resultMap.put("diseaseAssoc",getDiseases(term))
         }
         return resultMap
     }
-    List<DbGene> getGenes(Term query){
+    Set<TermId> getChildren(Term query){
       Set<TermId> terms = OntologyTerms.childrenOf(query.id,this.hpoOntology)
+      return terms
+    }
+    List<DbGene> getGenes(Term query){
+      Set<TermId> terms = getChildren(query)
       queryDbGene(terms)
+    }
+    List<DbDisease> getDiseases(Term query){
+      Set<TermId> terms = getChildren(query)
+      queryDbDisease(terms)
+    }
+
+    @GrailsCompileStatic(TypeCheckingMode.SKIP)
+    List<DbDisease> queryDbDisease(Set<TermId> terms){
+        def c = DbDisease.createCriteria()
+        List<DbDisease> diseaseList = c.list(){
+          dbTerms {
+            'in'('ontologyId',terms.collect{ it.getIdWithPrefix()})
+          }
+        }
+        return diseaseList
     }
     @GrailsCompileStatic(TypeCheckingMode.SKIP)
     List<DbGene> queryDbGene(Set<TermId> terms){
