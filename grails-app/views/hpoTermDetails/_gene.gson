@@ -3,4 +3,4 @@ import hpo.api.gene.DbGene
 model {
   DbGene gene
 }
-json g.render(gene,[excludes: ['dbTerms']])
+json g.render(gene,[excludes: ['dbTerms', 'id']])

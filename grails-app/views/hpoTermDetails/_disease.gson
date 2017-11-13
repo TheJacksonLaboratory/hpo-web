@@ -3,4 +3,4 @@ import hpo.api.disease.DbDisease
 model {
   DbDisease disease
 }
-json g.render(disease,[excludes: ['dbTerms']])
+json g.render(disease,[excludes: ['dbTerms','id']])
