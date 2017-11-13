@@ -2,6 +2,7 @@ package hpo.api.db
 
 import groovy.sql.BatchingPreparedStatementWrapper
 import groovy.sql.Sql
+import hpo.api.db.utils.SqlUtilsService
 import hpo.api.io.HpoDiseaseParser
 import grails.gorm.transactions.Transactional
 import hpo.api.disease.DbDisease
@@ -13,18 +14,14 @@ import org.hibernate.Session
 @Transactional
 class DbDiseaseAdminService {
 
-  Sql groovySql
+  SqlUtilsService sqlUtilsService
 
   void truncateDbDiseases() {
-    StopWatch stopWatch = new StopWatch()
-    stopWatch.start()
-    DbDisease.executeUpdate("delete from DbDisease")
-    println("duration: ${stopWatch} time: ${new Date()}")
+    sqlUtilsService.executeDetete("delete from db_disease")
   }
 
-  void truncateDiseaseTermJoinTable(){
-    int rowCount = groovySql.executeUpdate("delete from db_term_db_disease")
-    print("${rowCount} deleted from db_term_db_genes")
+  void truncateDiseaseTermJoinTable() {
+    sqlUtilsService.executeDetete("delete from db_term_db_disease")
   }
 
   Map<Integer, String> loadDiseases() {
@@ -32,28 +29,23 @@ class DbDiseaseAdminService {
     stopWatch.start()
     Map<String, String> diseaseIdToNameMap = [:]
     final File file = new ClassPathResource("phenotype_annotation.tab").file
-    DbDisease.withSession {Session session ->
-      file.eachLine{String line ->
-        String[] tokens = line.split('\t')
-        if (tokens.size() == 14) {
-          String db = tokens[0]
-          String dbObjectId = tokens[1]
-          String diseaseName = tokens[2]
-          String diseaseId = db + ":" +  dbObjectId
-          if(!diseaseIdToNameMap.get(diseaseId)){
-            diseaseIdToNameMap.put(diseaseId, dbObjectId)
-            DbDisease dbDisease = new DbDisease(db: db, dbId: dbObjectId, diseaseName: diseaseName, diseaseId:diseaseId )
-            dbDisease.save(flush:true)
-          }
+    file.eachLine { String line ->
+      String[] tokens = line.split('\t')
+      if (tokens.size() == 14) {
+        String db = tokens[0]
+        String dbObjectId = tokens[1]
+        String diseaseName = tokens[2]
+        String diseaseId = db + ":" + dbObjectId
+        if (!diseaseIdToNameMap.get(diseaseId)) {
+          diseaseIdToNameMap.put(diseaseId, dbObjectId)
+          DbDisease dbDisease = new DbDisease(db: db, dbId: dbObjectId, diseaseName: diseaseName, diseaseId: diseaseId)
+          dbDisease.save()
         }
-        else{
-          log.info("skipping line : ${line}")
-        }
+      } else {
+        log.info("skipping line : ${line}")
       }
-      session.flush()
-      session.clear()
     }
-    println("[ \n Loading Diseases -  file ${file.name} \n duration: ${stopWatch} \n time: ${new Date()} \n ]")
+    log.info("Loading Diseases -  file ${file.name} duration: ${stopWatch} time: ${new Date()} ]")
   }
 
   Map<String, DbDisease> loadDbDiseases() {
@@ -96,15 +88,14 @@ class DbDiseaseAdminService {
     final File file = new ClassPathResource("phenotype_annotation.tab").file
     Integer lastTermId = null
     Integer lastDiseaseId = null
-    groovySql.withTransaction {
-      groovySql.withBatch(500, "INSERT db_term_db_disease VALUES(?,?)") { BatchingPreparedStatementWrapper ps ->
+      sqlUtilsService.sql.withBatch(500, "INSERT INTO db_term_db_disease( db_disease_id, db_term_id) VALUES(?,?)") { BatchingPreparedStatementWrapper ps ->
         int index = 0;
         file.eachLine { String line ->
           index++
           String[] tokens = line.split('\t')
           if (tokens.size() == 14) {
             final DbTerm dbTerm = hpoIdToDbTermMap.get(tokens[4]) //term token
-            String diseaseId = tokens[0] + ":" +  tokens[1]
+            String diseaseId = tokens[0] + ":" + tokens[1]
             diseaseId = diseaseId.trim()
             final DbDisease dbDisease = diseaseIdGeneMap.get(diseaseId) //diseaseid
             if (dbTerm == null) {
@@ -112,9 +103,9 @@ class DbDiseaseAdminService {
             } else if (dbDisease == null) {
               diseaseIdNotFoundSet.add(diseaseId) // add diseaseid
             } else {
-              if(dbTerm.id == lastTermId && dbDisease.id == lastDiseaseId){
+              if (dbTerm.id == lastTermId && dbDisease.id == lastDiseaseId) {
                 log.info("DUPLICATE LINE: ${line}")
-              }else{
+              } else {
                 ps.addBatch([
                   dbDisease.id as Object,
                   dbTerm.id as Object,
@@ -127,14 +118,13 @@ class DbDiseaseAdminService {
           } else {
             log.info("skipping line : ${line}")
           }
-        }
       }
     }
     log.info("hpoIdWithPrefixNotFoundSet.size() : ${hpoIdWithPrefixNotFoundSet.size()} ${new Date()}")
     log.info("${hpoIdWithPrefixNotFoundSet}")
     log.info("entrezIdNotFoundSet.size() : ${diseaseIdNotFoundSet.size()} ${new Date()}")
     log.info("${diseaseIdNotFoundSet}")
-    println("[ \n Joined Disease And Terms - file ${file.name} \n duration: ${stopWatch} \n time: ${new Date()}\n ]")
+    log.info("Joined Disease And Terms - file ${file.name} duration: ${stopWatch} time: ${new Date()}")
   }
 }
 
