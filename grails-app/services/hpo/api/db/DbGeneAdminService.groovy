@@ -96,7 +96,7 @@ class DbGeneAdminService {
     final File file = new ClassPathResource("ALL_SOURCES_ALL_FREQUENCIES_genes_to_phenotype.txt").file
     DbGene.withSession { Session session ->
       final Sql sql = sqlUtilsService.getSql()
-      sql.withBatch(1, INSERT_INTO_DB_TERM_DB_GENES) { BatchingPreparedStatementWrapper ps ->
+      sql.withBatch(500, INSERT_INTO_DB_TERM_DB_GENES) { BatchingPreparedStatementWrapper ps ->
         file.eachLine { String line ->
           String[] tokens = line.split('\t')
           if (tokens.size() == 4) {
