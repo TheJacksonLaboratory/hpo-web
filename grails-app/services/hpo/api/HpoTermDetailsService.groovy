@@ -23,8 +23,8 @@ class HpoTermDetailsService {
      * @param q the term to query with
      * @return Term Object with result term.
      */
-    Map searchTerm(String trimmedQ){
-        final Map resultMap = [:]
+     Map searchTerm(String trimmedQ){
+        final Map resultMap = ["term":'', "geneAssoc":[],"diseaseAssoc":[]]
         if (trimmedQ.startsWith('HP:')) {
             Term term = this.hpoOntology.termMap.get(ImmutableTermId.constructWithPrefix(trimmedQ))
             resultMap.put("term",term)
@@ -41,6 +41,17 @@ class HpoTermDetailsService {
       Set<TermId> terms = getChildren(query)
       queryDbGene(terms)
     }
+  @GrailsCompileStatic(TypeCheckingMode.SKIP)
+  List<DbGene> queryDbGene(Set<TermId> terms){
+    List<DbGene> gene = DbGene.list()
+    def c = DbGene.createCriteria()
+    List<DbGene> geneList = c.list(){
+      dbTerms {
+        'in'('ontologyId',terms.collect{ it.getIdWithPrefix()})
+      }
+    }
+    return geneList
+  }
     List<DbDisease> getDiseases(Term query){
       Set<TermId> terms = getChildren(query)
       queryDbDisease(terms)
@@ -56,16 +67,4 @@ class HpoTermDetailsService {
         }
         return diseaseList
     }
-    @GrailsCompileStatic(TypeCheckingMode.SKIP)
-    List<DbGene> queryDbGene(Set<TermId> terms){
-      def c = DbGene.createCriteria()
-      List<DbGene> geneList = c.list(){
-        dbTerms {
-          'in'('ontologyId',terms.collect{ it.getIdWithPrefix()})
-        }
-      }
-      return geneList
-    }
-
-
 }
