@@ -23,14 +23,13 @@ class HpoTermDetailsServiceUnitSpec extends Specification implements ServiceUnit
     def setupSpec(){
         hpoOntology = new HpoOntologyFactory().getInstance()
         mockDomains DbTerm, DbGene, DbDisease
-   }
+    }
     def setup() {
         service.hpoOntology = hpoOntology
     }
-    void 'test find associated genes given term using #desc'(){
-      setup:
+    private static Term getFakeTerm(String id){
       Term term = new HpoTerm(
-        ImmutableTermId.constructWithPrefix("HP:0002862"),
+        ImmutableTermId.constructWithPrefix(id),
         [],
         'Bladder carcinoma' ,
         'Descriptive definition',
@@ -42,6 +41,10 @@ class HpoTermDetailsServiceUnitSpec extends Specification implements ServiceUnit
         new Date(),
         []
       )
+    }
+    void 'test find associated genes given term using #desc'(){
+      setup:
+      Term term = getFakeTerm("HP:0002862")
       DbTerm dbTerm = new DbTerm(term).save()
       List<Map> genes = [["entrezGeneId": 7157, "entrezGeneSymbol":"TP53"], ["entrezGeneId": 3265, "entrezGeneSymbol":"HRAS"]]
       genes.each{
@@ -61,19 +64,7 @@ class HpoTermDetailsServiceUnitSpec extends Specification implements ServiceUnit
     }
   void 'test find associated diseases given term using #desc'(){
     setup:
-    Term term = new HpoTerm(
-      ImmutableTermId.constructWithPrefix("HP:0002862"),
-      [],
-      'Bladder Swelling' ,
-      'Descriptive definition',
-      'Informative commment',
-      [],
-      [],
-      false,
-      'someUser',
-      new Date(),
-      []
-    )
+    Term term = getFakeTerm("HP:0002862")
     DbTerm dbTerm = new DbTerm(term).save()
     List<Map> diseases = [
       ["db": "OMIM", "dbId": "7","diseaseName":"Bladder Carcinoma", "diseaseId": "OMIM:7"],
