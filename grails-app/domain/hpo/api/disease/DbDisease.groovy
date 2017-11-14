@@ -1,6 +1,7 @@
 package hpo.api.disease
 
 import com.github.phenomics.ontolib.formats.hpo.HpoDiseaseAnnotation
+import hpo.api.gene.DbGene
 import hpo.api.term.DbTerm
 
 class DbDisease {
@@ -19,8 +20,10 @@ class DbDisease {
   static mapping = {
     diseaseName(type: 'text')
   }
-  static hasMany = [dbTerms: DbTerm]
-  static belongsTo = DbTerm
+  Set<DbTerm> dbTerms = [] as Set<DbTerm>
+  Set<DbGene> dbGenes = [] as Set<DbGene>
+  static hasMany = [dbTerms: DbTerm, dbGenes: DbGene]
+  static belongsTo = [DbTerm, DbGene]
 
   DbDisease() {}
 

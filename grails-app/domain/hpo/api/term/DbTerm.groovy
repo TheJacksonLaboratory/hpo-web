@@ -38,10 +38,11 @@ class DbTerm {
     numberOfChildren()
   }
 
-  static hasMany = [dbTermPaths: DbTermPath, dbGenes: DbGene, dbDisease: DbDisease]
+  static hasMany = [dbTermPaths: DbTermPath, dbGenes: DbGene, dbDiseases: DbDisease]
 
   Set<DbTermPath> dbTermPaths = [] as Set<DbTermPath>
   Set<DbGene> dbGenes = [] as Set<DbGene>
+  Set<DbGene> dbDiseases = [] as Set<DbGene>
 
   DbTerm() {}
 
