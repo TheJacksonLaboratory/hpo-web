@@ -16,8 +16,7 @@ import hpo.api.db.utils.DomainUtilService
 @GrailsCompileStatic
 class DbGeneAdminService {
 
-  public static
-  final String INSERT_INTO_DB_TERM_DB_GENES = "INSERT INTO db_term_db_genes (db_gene_id, db_term_id) VALUES(?,?)"
+  final static String INSERT_INTO_DB_TERM_DB_GENES = "INSERT INTO db_term_db_genes (db_gene_id, db_term_id) VALUES(?,?)"
 
   SqlUtilsService sqlUtilsService
   DomainUtilService domainUtilService
