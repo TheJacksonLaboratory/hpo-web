@@ -6,18 +6,18 @@ import { DataSource } from '@angular/cdk/collections';
 import 'rxjs/add/observable/merge';
 import 'rxjs/add/operator/map';
 export class GeneAssocDatasource extends DataSource<any> {
-    constructor(private _example: GeneAssocDB, private _sort: MatSort) {
+    constructor(private db: GeneAssocDB, private _sort: MatSort) {
       super();
     }
 
     /** Connect function called by the table to retrieve one stream containing the data to render. */
     connect(): Observable<GeneAssoc[]> {
       const displayDataChanges = [
-        this._example.dataChange,
+        this.db.dataChange,
         this._sort.sortChange,
       ];
       return Observable.merge(...displayDataChanges).map(() => {
-        return this._example.data;
+        return this.db.data;
       });
     }
 

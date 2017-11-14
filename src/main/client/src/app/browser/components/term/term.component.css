@@ -11,7 +11,7 @@
     max-height: 500px;
   }
  .associations {
-    margin: 5px;
+    margin: 5px 5px 15px 5px;
     max-width:fit-content;
  }
  .associations .title {
@@ -21,4 +21,18 @@
  .associations .mat-table{
      max-height:346px;
      max-width:fit-content;
+ }
+ .gene-association .mat-column-entrezGeneId{ 
+     max-width: 250px;
+ }
+ .disease-association .mat-column-diseaseId {
+     max-width: 250px;
+ }
+ .disease-association .mat-column-diseaseName {
+    margin-right: 100px;
+ }
+ .mat-column-dbDiseases{
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
  }

@@ -4,5 +4,5 @@ export interface DiseaseAssoc {
     dbId: string;
     diseaseId: string;
     diseaseName: string;
-    genes: GeneAssoc[]
+    dbGenes: GeneAssoc[]
 }
