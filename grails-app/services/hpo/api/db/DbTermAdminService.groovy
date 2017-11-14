@@ -21,7 +21,7 @@ class DbTermAdminService {
 
   HpoOntology hpoOntology
   SqlUtilsService sqlUtilsService
-  final String INSERT_DB_TERM_PATH = "INSERT INTO db_term_path (db_term_id, path_names, path_ids ,path_length, version) VALUES(?,?,?,?,0)"
+  final static String INSERT_DB_TERM_PATH = "INSERT INTO db_term_path (db_term_id, path_names, path_ids ,path_length, version) VALUES(?,?,?,?,0)"
 
   void deleteDbTerms() {
     StopWatch stopWatch = new StopWatch()

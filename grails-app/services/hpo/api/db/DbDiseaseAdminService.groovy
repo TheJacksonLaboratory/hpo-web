@@ -15,8 +15,8 @@ class DbDiseaseAdminService {
 
   SqlUtilsService sqlUtilsService
   DomainUtilService domainUtilService
-  final String INSERT_INTO_DB_TERM_DB_DISEASES = "INSERT INTO db_term_db_diseases( db_disease_id, db_term_id) VALUES(?,?)"
-  final String INSERT_INTO_DB_GENE_DB_DISEASES = "INSERT INTO db_gene_db_diseases( db_gene_id, db_disease_id) VALUES(?,?)"
+  final static String INSERT_INTO_DB_TERM_DB_DISEASES = "INSERT INTO db_term_db_diseases( db_disease_id, db_term_id) VALUES(?,?)"
+  final static String INSERT_INTO_DB_GENE_DB_DISEASES = "INSERT INTO db_gene_db_diseases( db_gene_id, db_disease_id) VALUES(?,?)"
 
   void truncateDbDiseases() {
     sqlUtilsService.executeDetete("delete from db_disease")
