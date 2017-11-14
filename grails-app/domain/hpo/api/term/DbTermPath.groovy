@@ -7,7 +7,6 @@ import hpo.api.term.DbTerm
  */
 class DbTermPath {
 
-
   DbTerm dbTerm
 
   String pathNames

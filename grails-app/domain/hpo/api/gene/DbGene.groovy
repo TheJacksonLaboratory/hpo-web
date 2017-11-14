@@ -9,16 +9,15 @@ class DbGene {
   Integer entrezGeneId
   String  entrezGeneSymbol
 
-    static constraints = {
+  static constraints = {
+    entrezGeneId(unique: true)
+    entrezGeneSymbol(unique:true)
+  }
 
-      entrezGeneId(unique: true)
-      entrezGeneSymbol(unique:true)
-    }
-
-    static mapping = {
-      entrezGeneId()
-      entrezGeneSymbol()
-    }
+  static mapping = {
+    entrezGeneId()
+    entrezGeneSymbol()
+  }
 
   Set<DbTerm> dbTerms = [] as Set<DbTerm>
   Set<DbDisease> dbDiseases = [] as Set<DbDisease>

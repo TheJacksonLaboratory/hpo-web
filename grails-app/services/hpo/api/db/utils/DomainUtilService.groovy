@@ -1,6 +1,7 @@
 package hpo.api.db.utils
 
 import grails.gorm.transactions.Transactional
+import groovy.transform.CompileStatic
 import hpo.api.disease.DbDisease
 import hpo.api.gene.DbGene
 import hpo.api.term.DbTerm
@@ -9,6 +10,7 @@ import org.apache.commons.lang.time.StopWatch
 /**
  * Created by gargam on 11/13/17.
  */
+@CompileStatic
 @Transactional
 class DomainUtilService {
 
@@ -40,5 +42,4 @@ class DomainUtilService {
     }
     mapToReturn
   }
-
 }
