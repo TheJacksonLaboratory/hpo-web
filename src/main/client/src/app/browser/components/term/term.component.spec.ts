@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material';
 import { MatToolbarModule} from '@angular/material';
 import { RouterTestingModule } from '@angular/router/testing';
 import { TermService} from "../../services/term/term.service";
+import { MatTableModule } from '@angular/material';
 
 describe('TermComponent', () => {
   let component: TermComponent;
@@ -18,7 +19,7 @@ describe('TermComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule, MatButtonModule, MatMenuModule, MatIconModule, MatToolbarModule],
+      imports: [RouterTestingModule, MatButtonModule, MatMenuModule, MatIconModule, MatToolbarModule,MatTableModule],
       declarations: [ TermComponent ],
       providers: [{provide:TermService, useValue:termServiceStub}]
     })
