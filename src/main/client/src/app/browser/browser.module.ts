@@ -9,6 +9,9 @@ import { MatCardModule } from '@angular/material';
 import { MatIconModule } from '@angular/material';
 import { MatProgressBarModule }  from '@angular/material';
 import { MatTabsModule } from '@angular/material';
+import { MatTableModule } from '@angular/material';
+import { MatPaginatorModule } from '@angular/material';
+import { MatSortModule } from '@angular/material';
 
 // Services
 import { SearchService } from './services/search/search.service';
@@ -34,7 +37,10 @@ import { SortPipe } from './pipes/sort-pipe';
     MatCardModule,
     MatIconModule,
     MatProgressBarModule,
-    MatTabsModule
+    MatTabsModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule
   ],
   providers: [ SearchService, TermService, GeneEntrezService, DiseaseService ],
   declarations: [ SearchComponent, TermComponent, DiseaseComponent,

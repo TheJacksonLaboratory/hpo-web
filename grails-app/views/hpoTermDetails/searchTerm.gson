@@ -1,7 +1,8 @@
-import com.github.phenomics.ontolib.ontology.data.Term
 model {
-    Term termResult
+    Map resultMap
 }
 json{
-    term tmpl.term( termResult )
+    term tmpl.term( resultMap.term )
+    geneAssoc tmpl.gene(resultMap.geneAssoc)
+    diseaseAssoc tmpl.disease(resultMap.diseaseAssoc)
 }

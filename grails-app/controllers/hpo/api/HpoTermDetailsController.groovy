@@ -9,6 +9,6 @@ class HpoTermDetailsController {
 	static responseFormats = ['json']
 
     def searchTerm(String q){
-        render(view: 'searchTerm', model: [termResult: hpoTermDetailsService.searchTerms(q)])
+        render(view: 'searchTerm', model: [resultMap: hpoTermDetailsService.searchTerm(q)])
     }
 }
