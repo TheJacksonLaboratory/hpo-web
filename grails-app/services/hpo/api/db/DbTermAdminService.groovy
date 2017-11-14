@@ -19,9 +19,9 @@ import org.hibernate.Session
 @Transactional
 class DbTermAdminService {
 
-
   HpoOntology hpoOntology
   SqlUtilsService sqlUtilsService
+  final static String INSERT_DB_TERM_PATH = "INSERT INTO db_term_path (db_term_id, path_names, path_ids ,path_length, version) VALUES(?,?,?,?,0)"
 
   void deleteDbTerms() {
     StopWatch stopWatch = new StopWatch()
@@ -31,7 +31,6 @@ class DbTermAdminService {
     int dbTermsleted = DbTerm.executeUpdate("delete from DbTerm")
     log.info("${dbTermsleted} rows deleted from ${DbTerm.name} duration: ${stopWatch} time: ${new Date()}")
   }
-
 
   void refreshDbTerms(List<Term> terms = hpoOntology.termMap.values()) {
     deleteDbTerms()
@@ -59,7 +58,7 @@ class DbTermAdminService {
     StopWatch stopWatch = new StopWatch()
     stopWatch.start()
     AncestorPathsBuilder ancestorPathsBuilder = new AncestorPathsBuilder(hpoOntology)
-    sqlUtilsService.sql.withBatch(500, "INSERT INTO db_term_path (db_term_id, path_names, path_ids ,path_length, version) VALUES(?,?,?,?,0)") { BatchingPreparedStatementWrapper ps ->
+    sqlUtilsService.sql.withBatch(500, INSERT_DB_TERM_PATH ) { BatchingPreparedStatementWrapper ps ->
       termToDbTermMap.each { Term term, DbTerm dbTerm ->
         List<List<Term>> ancestorPaths = ancestorPathsBuilder.getAncestorPaths(term)
         for (List<Term> ancestorPath in ancestorPaths) {

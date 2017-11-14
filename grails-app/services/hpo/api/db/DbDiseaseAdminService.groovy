@@ -1,27 +1,32 @@
 package hpo.api.db
 
 import groovy.sql.BatchingPreparedStatementWrapper
-import groovy.sql.Sql
 import hpo.api.db.utils.SqlUtilsService
-import hpo.api.io.HpoDiseaseParser
 import grails.gorm.transactions.Transactional
 import hpo.api.disease.DbDisease
+import hpo.api.gene.DbGene
 import hpo.api.term.DbTerm
 import org.apache.commons.lang.time.StopWatch
 import org.grails.io.support.ClassPathResource
-import org.hibernate.Session
+import hpo.api.db.utils.DomainUtilService
 
 @Transactional
 class DbDiseaseAdminService {
 
   SqlUtilsService sqlUtilsService
+  DomainUtilService domainUtilService
+  final static String INSERT_INTO_DB_TERM_DB_DISEASES = "INSERT INTO db_term_db_diseases( db_disease_id, db_term_id) VALUES(?,?)"
+  final static String INSERT_INTO_DB_GENE_DB_DISEASES = "INSERT INTO db_gene_db_diseases( db_gene_id, db_disease_id) VALUES(?,?)"
 
   void truncateDbDiseases() {
     sqlUtilsService.executeDetete("delete from db_disease")
   }
 
   void truncateDiseaseTermJoinTable() {
-    sqlUtilsService.executeDetete("delete from db_term_db_disease")
+    sqlUtilsService.executeDetete("delete from db_term_db_diseases")
+  }
+  void truncateDiseaseGeneJoinTable(){
+    sqlUtilsService.executeDetete("delete from db_gene_db_diseases")
   }
 
   Map<Integer, String> loadDiseases() {
@@ -47,35 +52,13 @@ class DbDiseaseAdminService {
     }
     log.info("Loading Diseases -  file ${file.name} duration: ${stopWatch} time: ${new Date()} ]")
   }
-
-  Map<String, DbDisease> loadDbDiseases() {
-    Map<String, DbDisease> mapToReturn = [:]
-    StopWatch stopWatch = new StopWatch()
-    stopWatch.start()
-    DbDisease.list().each { DbDisease dbDisease ->
-      mapToReturn.put(dbDisease.diseaseId, dbDisease)
-    }
-    mapToReturn
-  }
-
   /**
-   * @return a map with the keys the hpoIds (HP:0000001) and the value being the corresponding DbTerm that represents that hpoId
-   */
-  Map<String, DbTerm> loadHpoIdToDbTermMap() {
-    final Map<String, DbTerm> mapToReturn = [:]
-    DbTerm.list().each { DbTerm dbTerm ->
-      mapToReturn.put(dbTerm.ontologyId, dbTerm)
-    }
-    mapToReturn
-  }
-
-  /**
-   * loop over each line of the ALL_SOURCES_ALL_FREQUENCIES_genes_to_phenotype.txt file
+   * loop over each line of the phenotype.tab file
    * and fill in the join table with local primary keys and not any genes or hpo terms that don't match
    *
    * <pre>
-   *     #Format: entrez-gene-id<tab>entrez-gene-symbol<tab>HPO-Term-Name<tab>HPO-Term-ID
-   *     8192    CLPP    Primary amenorrhea      HP:0000786
+   *     #Format: dbId<tab>dbName<tab>diseaseName<tab>diseaseId
+   *        *     2020      OMIM      Congenial Cataract    OMIM:2020
    * </pre>
    */
   void joinDiseaseAndTermsWithSql() {
@@ -83,12 +66,12 @@ class DbDiseaseAdminService {
     stopWatch.start()
     Set<String> hpoIdWithPrefixNotFoundSet = [] as Set
     Set<String> diseaseIdNotFoundSet = [] as Set
-    final Map<String, DbDisease> diseaseIdGeneMap = loadDbDiseases()
-    final Map<String, DbTerm> hpoIdToDbTermMap = loadHpoIdToDbTermMap()
+    final Map<String, DbDisease> diseaseIdMap = domainUtilService.loadDbDiseases()
+    final Map<String, DbTerm> hpoIdToDbTermMap = domainUtilService.loadHpoIdToDbTermMap()
     final File file = new ClassPathResource("phenotype_annotation.tab").file
     Integer lastTermId = null
     Integer lastDiseaseId = null
-      sqlUtilsService.sql.withBatch(500, "INSERT INTO db_term_db_disease( db_disease_id, db_term_id) VALUES(?,?)") { BatchingPreparedStatementWrapper ps ->
+      sqlUtilsService.sql.withBatch(500,INSERT_INTO_DB_TERM_DB_DISEASES ) { BatchingPreparedStatementWrapper ps ->
         int index = 0;
         file.eachLine { String line ->
           index++
@@ -97,7 +80,7 @@ class DbDiseaseAdminService {
             final DbTerm dbTerm = hpoIdToDbTermMap.get(tokens[4]) //term token
             String diseaseId = tokens[0] + ":" + tokens[1]
             diseaseId = diseaseId.trim()
-            final DbDisease dbDisease = diseaseIdGeneMap.get(diseaseId) //diseaseid
+            final DbDisease dbDisease = diseaseIdMap.get(diseaseId) //diseaseid
             if (dbTerm == null) {
               hpoIdWithPrefixNotFoundSet.add(tokens[4])
             } else if (dbDisease == null) {
@@ -125,6 +108,44 @@ class DbDiseaseAdminService {
     log.info("entrezIdNotFoundSet.size() : ${diseaseIdNotFoundSet.size()} ${new Date()}")
     log.info("${diseaseIdNotFoundSet}")
     log.info("Joined Disease And Terms - file ${file.name} duration: ${stopWatch} time: ${new Date()}")
+  }
+
+  /** Joining Disease and Gene with genes_to_diseases.txt
+   *
+   * #Format: entrez-gene-id<tab>entrez-gene-symbol<tab>DiseaseId
+   *          7157                TP53                  HP:0002862
+   */
+  void joinDiseasesToGenesWithSql(){
+    StopWatch stopWatch = new StopWatch()
+    stopWatch.start()
+    Set<String> geneIdNotFoundSet = [] as Set
+    Set<String> diseaseIdNotFoundSet = [] as Set
+    final Map<String, DbDisease> diseaseIdMap = domainUtilService.loadDbDiseases()
+    final Map<Integer, DbGene> geneIdMap = domainUtilService.loadDbGenes()
+    final File file = new ClassPathResource("genes_to_diseases.txt").file
+    sqlUtilsService.sql.withBatch(500, INSERT_INTO_DB_GENE_DB_DISEASES) { BatchingPreparedStatementWrapper ps ->
+      int index = 0;
+      file.eachLine { String line ->
+        index++
+        String[] tokens = line.split('\t')
+        if (tokens.size() == 3) {
+          final DbGene dbGene = geneIdMap.get(tokens[0] as Integer) //term token
+          final DbDisease dbDisease = diseaseIdMap.get(tokens[2]) //diseaseid
+          if (dbGene == null) {
+            geneIdNotFoundSet.add(tokens[0])
+          } else if (dbDisease == null) {
+            diseaseIdNotFoundSet.add(tokens[2]) // add diseaseid
+          } else {
+              ps.addBatch([
+                dbGene.id as Object,
+                dbDisease.id as Object,
+              ])
+            }
+          } else {
+            log.info("skipping line : ${line}")
+        }
+      }
+    }
   }
 }
 

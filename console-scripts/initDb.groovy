@@ -12,8 +12,9 @@ ctx.dbGeneAdminService.joinGenesAndTermsWithSql() 	// Create Genes to Terms
 
 ctx.dbDiseaseAdminService.truncateDiseaseTermJoinTable() // Truncate Disease Join Table
 ctx.dbDiseaseAdminService.truncateDbDiseases() 		     // Truncate Disease
+ctx.dbDiseaseAdminService.truncateDiseaseGeneJoinTable() // Truncate Disease To Gene
 ctx.dbDiseaseAdminService.loadDiseases() 	 		     // Load Diseases
 ctx.dbDiseaseAdminService.joinDiseaseAndTermsWithSql()	 // Load Diseases To Term
+ctx.dbDiseaseAdminService.joinDiseasesToGenesWithSql()   // Load Disease To Gene
 
 println("finished refreshing database duration: ${stopWatch} time: ${new Date()}")
-

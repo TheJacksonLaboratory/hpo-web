@@ -1,6 +1,8 @@
 import hpo.api.db.DbGeneAdminService
 import hpo.api.gene.DbGene
 import hpo.api.term.DbTerm
+
+DbTerm.findAllByOntologyId
 //ctx.dbDiseaseAdminService.truncateDbDiseases()
 //ctx.dbDiseaseAdminService.loadDiseases()
 ctx.dbDiseaseAdminService.joinDiseaseAndTermsWithSql()

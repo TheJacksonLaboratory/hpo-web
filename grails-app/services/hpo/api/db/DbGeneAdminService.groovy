@@ -10,16 +10,16 @@ import hpo.api.term.DbTerm
 import org.apache.commons.lang.time.StopWatch
 import org.grails.io.support.ClassPathResource
 import org.hibernate.Session
-
+import hpo.api.db.utils.DomainUtilService
 
 @Transactional
 @GrailsCompileStatic
 class DbGeneAdminService {
 
-  public static
-  String INSERT_INTO_DB_TERM_DB_GENES = "INSERT INTO db_term_db_genes (db_gene_id, db_term_id) VALUES(?,?)"
+  final static String INSERT_INTO_DB_TERM_DB_GENES = "INSERT INTO db_term_db_genes (db_gene_id, db_term_id) VALUES(?,?)"
 
   SqlUtilsService sqlUtilsService
+  DomainUtilService domainUtilService
 
   void truncateDbGenes() {
     sqlUtilsService.executeDetete("delete from db_gene")
@@ -55,28 +55,6 @@ class DbGeneAdminService {
     log.info("Loading Genes - file ${file.name} duration: ${stopWatch} time: ${new Date()}")
 
   }
-
-  private static Map<Integer, DbGene> loadGeneMap() {
-    Map<Integer, DbGene> mapToReturn = [:]
-    StopWatch stopWatch = new StopWatch()
-    stopWatch.start()
-    DbGene.list().each { DbGene dbGene ->
-      mapToReturn.put(dbGene.entrezGeneId, dbGene)
-    }
-    mapToReturn
-  }
-
-  /**
-   * @return a map with the keys the hpoIds (HP:0000001) and the value being the corresponding DbTerm that represents that hpoId
-   */
-  private static Map<String, DbTerm> loadHpoIdToDbTermMap() {
-    final Map<String, DbTerm> mapToReturn = [:]
-    DbTerm.list().each { DbTerm dbTerm ->
-      mapToReturn.put(dbTerm.ontologyId, dbTerm)
-    }
-    mapToReturn
-  }
-
   /**
    * loop over each line of the ALL_SOURCES_ALL_FREQUENCIES_genes_to_phenotype.txt file
    * and fill in the join table with local primary keys and not any genes or hpo terms that don't match
@@ -91,8 +69,8 @@ class DbGeneAdminService {
     stopWatch.start()
     Set<String> hpoIdWithPrefixNotFoundSet = [] as Set
     Set<Integer> entrezIdNotFoundSet = [] as Set
-    final Map<Integer, DbGene> entrezIdToDbGeneMap = loadGeneMap()
-    final Map<String, DbTerm> hpoIdToDbTermMap = loadHpoIdToDbTermMap()
+    final Map<Integer, DbGene> entrezIdToDbGeneMap = domainUtilService.loadDbGenes()
+    final Map<String, DbTerm> hpoIdToDbTermMap = domainUtilService.loadHpoIdToDbTermMap()
     final File file = new ClassPathResource("ALL_SOURCES_ALL_FREQUENCIES_genes_to_phenotype.txt").file
     DbGene.withSession { Session session ->
       final Sql sql = sqlUtilsService.getSql()
