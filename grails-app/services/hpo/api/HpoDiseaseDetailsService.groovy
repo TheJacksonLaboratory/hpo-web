@@ -2,26 +2,30 @@ package hpo.api
 
 import com.github.phenomics.ontolib.formats.hpo.HpoDiseaseAnnotation
 import grails.compiler.GrailsCompileStatic
+import groovy.transform.TypeCheckingMode
+import hpo.api.disease.DbDisease
 import org.apache.commons.lang.StringUtils
 
 @GrailsCompileStatic
 class HpoDiseaseDetailsService {
 
-    List<HpoDiseaseAnnotation> hpoDiseases
-    /**
-     *
-     * Query the ontology by HPO ID
-     *
-     * @param q the term to query with
-     * @return Term Object with result term.
-     */
-    List<HpoDiseaseAnnotation> searchDisease(String q){
-        final String trimmedQ = StringUtils.trimToNull(q)
-        final List<HpoDiseaseAnnotation> diseaseResult = []
-        if (trimmedQ) {
-            diseaseResult = this.hpoDiseases.findAll {it.dbReference.equals(trimmedQ)}
-            diseaseResult.unique {it.dbReference}
-        }
-        return diseaseResult
+  Map searchDisease(String query) {
+    Map resultMap = ["disease": '', "termAssoc": [], "geneAssoc": []]
+    if (query) {
+      DbDisease disease = getDisease(query)
+      resultMap.put("disease", disease)
+      resultMap.put("termAssoc", disease.dbTerms)
+      resultMap.put("geneAssoc", disease.dbGenes)
     }
+    return resultMap
+  }
+
+  @GrailsCompileStatic(TypeCheckingMode.SKIP)
+  DbDisease getDisease(String query) {
+    def c = DbDisease.createCriteria()
+    List<DbDisease> disease = c.list() {
+      eq('diseaseId', query)
+    }
+    disease[0]
+  }
 }

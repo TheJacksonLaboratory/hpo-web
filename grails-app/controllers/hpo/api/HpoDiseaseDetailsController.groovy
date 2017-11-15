@@ -9,6 +9,6 @@ class HpoDiseaseDetailsController {
     HpoDiseaseDetailsService hpoDiseaseDetailsService
 
     def searchDisease(String q){
-        render(view: 'searchDisease', model: [diseaseResult: hpoDiseaseDetailsService.searchDisease(q)])
+        render(view: 'searchDisease', model: [resultMap: hpoDiseaseDetailsService.searchDisease(q)])
     }
 }
