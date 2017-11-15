@@ -4,7 +4,7 @@ import { DiseaseComponent } from './disease.component';
 import { MatCardModule} from '@angular/material';
 import { RouterTestingModule } from '@angular/router/testing';
 import { DiseaseService} from '../../services/disease/disease.service';
-
+import { MatTableModule } from '@angular/material';
 
 describe('DiseaseComponent', () => {
   let component: DiseaseComponent;
@@ -15,7 +15,7 @@ describe('DiseaseComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule, MatCardModule],
+      imports: [RouterTestingModule, MatCardModule, MatTableModule],
       declarations: [ DiseaseComponent ],
       providers: [{provide: DiseaseService,  useValue: diseaseServiceStub }]
     })
