@@ -13,7 +13,7 @@ import spock.lang.Specification
 import spock.lang.Unroll
 
 @Unroll
-class HpoGeneDetailsServiceSpec extends Specification implements ServiceUnitTest<HpoGeneDetailsService>, DataTest{
+class HpoGeneDetailsServiceUnitSpec extends Specification implements ServiceUnitTest<HpoGeneDetailsService>, DataTest{
 
     def setup() {
       mockDomains DbGene, DbTerm, DbDisease
