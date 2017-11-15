@@ -17,7 +17,7 @@ import spock.lang.Specification
 import spock.lang.Unroll
 
 @Unroll
-class HpoDiseaseDetailsServiceSpec extends Specification implements ServiceUnitTest<HpoDiseaseDetailsService>, DataTest {
+class HpoDiseaseDetailsServiceUnitSpec extends Specification implements ServiceUnitTest<HpoDiseaseDetailsService>, DataTest {
 
   def setup() {
     mockDomains DbGene, DbTerm, DbDisease
