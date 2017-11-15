@@ -16,8 +16,8 @@ export class TermComponent implements OnInit {
   termTitle: string;
   query: string;
   term: Term;
-  geneColumns = ['entrezGeneId'];
-  diseaseColumns = ['dbRef', 'dbName']
+  geneColumns = ['entrezGeneId','dbDiseases'];
+  diseaseColumns = ['diseaseId', 'diseaseName', 'dbGenes']
   geneAssoc: GeneAssocDB;
   diseaseAssoc: DiseaseAssocDB;
   geneSource: GeneAssocDatasource | null;
@@ -33,6 +33,7 @@ export class TermComponent implements OnInit {
   ngOnInit() {
     this.termService.searchTerm(this.query)
       .then((data) => {
+        //debugger;
         this.setDefaults(data.term);
         this.geneAssoc = new GeneAssocDB(data.geneAssoc)
         this.geneSource = new GeneAssocDatasource(this.geneAssoc, this.sort);
