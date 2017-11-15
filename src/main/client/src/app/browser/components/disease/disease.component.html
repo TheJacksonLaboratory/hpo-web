@@ -33,7 +33,7 @@
                       </mat-table>
                     </div>
                     <div class="associations gene-association mat-elevation-z6">
-                        <h4 class="title">Disease Associations</h4>
+                        <h4 class="title">Gene Associations</h4>
                         <mat-table #table [dataSource]="geneSource" matSort>
                           <mat-header-row *matHeaderRowDef="geneColumns"></mat-header-row>
                           <mat-row *matRowDef="let row; columns: geneColumns;"></mat-row>
