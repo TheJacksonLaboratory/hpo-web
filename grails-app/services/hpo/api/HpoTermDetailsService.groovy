@@ -11,7 +11,7 @@ import com.github.phenomics.ontolib.ontology.algo.OntologyTerms
 import grails.compiler.GrailsCompileStatic
 import groovy.transform.TypeCheckingMode
 
-@Transactional(readOnly = true)
+
 @GrailsCompileStatic
 class HpoTermDetailsService {
 
