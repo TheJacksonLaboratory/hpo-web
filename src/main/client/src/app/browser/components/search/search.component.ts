@@ -1,7 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Term } from '../term/term';
-import { Disease } from '../disease/disease';
-import { Gene } from '../gene/gene'
+import { Term, Gene, Disease } from '../../models/models';
 import { SearchService } from '../../services/search/search.service';
 
 @Component({

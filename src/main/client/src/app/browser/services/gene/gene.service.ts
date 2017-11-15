@@ -15,7 +15,7 @@ export class GeneService {
   }
   searchGene(query: string): Promise<any>{
       return this.http
-          .get(environment.HPO_API_TERM_SEARCH_URL + '?q=' + query, this.options)
+          .get(environment.HPO_API_GENE_SEARCH_URL + '?q=' + query, this.options)
           .toPromise()
           .then(response => response.json())
           .catch(this.handleError);
