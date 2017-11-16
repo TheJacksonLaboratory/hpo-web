@@ -1,11 +1,6 @@
-import com.github.phenomics.ontolib.formats.hpo.HpoDiseaseAnnotation
+import hpo.api.disease.DbDisease
 
 model {
-    HpoDiseaseAnnotation hpoDiseaseAnnotation
+  DbDisease disease
 }
-json{
-    db hpoDiseaseAnnotation.db
-    dbObjectId hpoDiseaseAnnotation.dbObjectId
-    dbName hpoDiseaseAnnotation.dbName
-    dbReference hpoDiseaseAnnotation.dbReference
-}
+json g.render(disease,[excludes: ['dbTerms','id', 'dbGenes']])

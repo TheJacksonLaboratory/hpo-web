@@ -47,41 +47,41 @@ class HpoTermDetailsServiceUnitSpec extends Specification implements ServiceUnit
       'HP:0002862'  |  [7157, 3265]  | 'exact id'
 
     }
-  void 'test find associated diseases given term using #desc'(){
-    setup:
-    Term term = buildMockTerm("HP:0002862")
-    DbTerm dbTerm = new DbTerm(term).save()
-    List<Map> diseases = [
-      ["db": "OMIM", "dbId": "7","diseaseName":"Bladder Carcinoma", "diseaseId": "OMIM:7"],
-      ["db": "ORPHA", "dbId": "227","diseaseName":"Bladder Failure", "diseaseId": "ORPHA:227"]]
-    diseases.each{
-      dbTerm.addToDbDiseases(new DbDisease(db: it.db, dbId:it.dbId, diseaseName: it.diseaseName, diseaseId: it.diseaseId))
-    }
-    dbTerm.save()
-    when: "we query for a term"
-    Map resultMap = service.searchTerm(query)
+    void 'test find associated diseases given term using #desc'(){
+      setup:
+      Term term = buildMockTerm("HP:0002862")
+      DbTerm dbTerm = new DbTerm(term).save()
+      List<Map> diseases = [
+        ["db": "OMIM", "dbId": "7","diseaseName":"Bladder Carcinoma", "diseaseId": "OMIM:7"],
+        ["db": "ORPHA", "dbId": "227","diseaseName":"Bladder Failure", "diseaseId": "ORPHA:227"]]
+      diseases.each{
+        dbTerm.addToDbDiseases(new DbDisease(db: it.db, dbId:it.dbId, diseaseName: it.diseaseName, diseaseId: it.diseaseId))
+      }
+      dbTerm.save()
+      when: "we query for a term"
+      Map resultMap = service.searchTerm(query)
 
-    then:
-    resultMap.diseaseAssoc*.diseaseId == expected
-    where:
-    query         |  expected                 | desc
-    ''            |  []                       | 'nothing'
-    'HP:0002862'  |  ["OMIM:7", "ORPHA:227"]  | 'exact id'
-  }
-  private static Term buildMockTerm(String id){
-    Term term = new HpoTerm(
-      ImmutableTermId.constructWithPrefix(id),
-      [],
-      'Bladder carcinoma' ,
-      'Descriptive definition',
-      'Informative commment',
-      [],
-      [],
-      false,
-      'someUser',
-      new Date(),
-      []
-    )
-  }
+      then:
+      resultMap.diseaseAssoc*.diseaseId == expected
+      where:
+      query         |  expected                 | desc
+      ''            |  []                       | 'nothing'
+      'HP:0002862'  |  ["OMIM:7", "ORPHA:227"]  | 'exact id'
+    }
+    private static Term buildMockTerm(String id){
+      Term term = new HpoTerm(
+        ImmutableTermId.constructWithPrefix(id),
+        [],
+        'Bladder carcinoma' ,
+        'Descriptive definition',
+        'Informative commment',
+        [],
+        [],
+        false,
+        'someUser',
+        new Date(),
+        []
+      )
+    }
 }
 
