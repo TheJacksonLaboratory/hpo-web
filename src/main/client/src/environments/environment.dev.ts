@@ -5,7 +5,7 @@ export const environment = {
   // HPO API environment variables
   HPO_API_SEARCH_URL:  HPO_API_BASE_URL + 'search',
   HPO_API_TERM_SEARCH_URL: HPO_API_BASE_URL + 'search/term',
-  HPO_API_GENE_SEARCH_URL: HPO_API_BASE_URL + 'search/term',
+  HPO_API_GENE_SEARCH_URL: HPO_API_BASE_URL + 'search/gene',
   HPO_API_DISEASE_SEARCH_URL: HPO_API_BASE_URL + 'search/disease',
 
   //ENTREZ external URL
