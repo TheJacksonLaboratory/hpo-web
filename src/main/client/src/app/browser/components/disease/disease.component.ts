@@ -31,7 +31,6 @@ export class DiseaseComponent implements OnInit {
   ngOnInit() {
     this.diseaseService.searchDisease(this.query)
     .then((data)=>{
-      debugger;
       this.disease  = data.disease;
       this.termAssoc = new TermAssocDB(data.termAssoc)
       this.termSource = new TermAssocDatasource(this.termAssoc, this.sort);

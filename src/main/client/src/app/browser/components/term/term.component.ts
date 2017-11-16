@@ -30,7 +30,6 @@ export class TermComponent implements OnInit {
   }
 
   ngOnInit() {
-    debugger;
     this.termService.searchTerm(this.query)
       .then((data) => {
         //debugger;
