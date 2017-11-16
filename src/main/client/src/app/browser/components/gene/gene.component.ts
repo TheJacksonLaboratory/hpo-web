@@ -45,6 +45,8 @@ export class GeneComponent implements OnInit {
       this.termSource = new TermAssocDatasource(this.termAssoc, this.sort);
       this.diseaseAssoc = new DiseaseAssocDB(data.diseaseAssoc)
       this.diseaseSource = new DiseaseAssocDatasource(this.diseaseAssoc, this.sort)
+    },(error)=>{
+        console.log(error);
     });
   }
 }
