@@ -4,11 +4,13 @@ import com.github.phenomics.ontolib.ontology.data.ImmutableTermId
 import com.github.phenomics.ontolib.ontology.data.Term
 import com.github.phenomics.ontolib.formats.hpo.HpoOntology
 import com.github.phenomics.ontolib.ontology.data.TermId
+import grails.gorm.transactions.Transactional
 import hpo.api.disease.DbDisease
 import hpo.api.gene.DbGene
 import com.github.phenomics.ontolib.ontology.algo.OntologyTerms
 import grails.compiler.GrailsCompileStatic
 import groovy.transform.TypeCheckingMode
+
 
 @GrailsCompileStatic
 class HpoTermDetailsService {
@@ -24,7 +26,7 @@ class HpoTermDetailsService {
    * @return Term Object with result term.
    */
    Map searchTerm(String trimmedQ){
-      final Map resultMap = ["term":'', "geneAssoc":[],"diseaseAssoc":[]]
+      Map resultMap = ["term":'', "geneAssoc":[],"diseaseAssoc":[]]
       if (trimmedQ.startsWith('HP:')) {
           Term term = this.hpoOntology.termMap.get(ImmutableTermId.constructWithPrefix(trimmedQ))
           resultMap.put("term",term)
