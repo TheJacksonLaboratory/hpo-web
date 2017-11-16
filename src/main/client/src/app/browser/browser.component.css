@@ -32,3 +32,22 @@
 ::ng-deep .thing-summary .mat-card-content h4{
   float:left;
 }
+::ng-deep .tab-content{
+  margin-top: 10px;
+}
+::ng-deep .mat-table {
+  overflow: auto;
+  max-height: 500px;
+}
+::ng-deep .associations {
+  margin: 5px 5px 15px 5px;
+  max-width:fit-content;
+}
+::ng-deep .associations .title {
+  padding: 10px;
+  margin: 0;
+}
+::ng-deep .associations .mat-table{
+   max-height:346px;
+   max-width:fit-content;
+}

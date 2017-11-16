@@ -3,25 +3,6 @@
     flex-grow: 1;
     margin-left: 32px;
   }
-.tab-content{
-    margin-top: 10px;
-}
-.mat-table {
-    overflow: auto;
-    max-height: 500px;
-  }
- .associations {
-    margin: 5px 5px 15px 5px;
-    max-width:fit-content;
- }
- .associations .title {
-    padding: 10px;
-    margin: 0;
- }
- .associations .mat-table{
-     max-height:346px;
-     max-width:fit-content;
- }
  .gene-association .mat-column-entrezGeneId{ 
      max-width: 250px;
  }

@@ -1,11 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Term } from './term';
+import { Term } from '../../models/models';
 import { TermService } from '../../services/term/term.service';
-import { GeneAssocDB } from './datasources/gene-assoc-db';
-import { DiseaseAssocDB } from './datasources/disease-assoc-db';
-import { GeneAssocDatasource } from './datasources/gene-assoc-datasource';
-import { DiseaseAssocDatasource } from './datasources/disease-assoc-datasource';
+import { DiseaseAssocDB,GeneAssocDB } from '../associations/datasources/associations-db';
+import { GeneAssocDatasource } from '../associations/datasources/gene-assoc-datasource';
+import { DiseaseAssocDatasource } from '../associations/datasources/disease-assoc-datasource';
 import { MatSort } from '@angular/material';
 @Component({
   selector: 'app-term',
@@ -31,6 +30,7 @@ export class TermComponent implements OnInit {
   }
 
   ngOnInit() {
+    debugger;
     this.termService.searchTerm(this.query)
       .then((data) => {
         //debugger;
