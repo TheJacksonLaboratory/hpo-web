@@ -47,7 +47,7 @@ class HpoDiseaseDetailsServiceUnitSpec extends Specification implements ServiceU
   void "test find associated terms given disease using #desc"() {
     setup:
     DbDisease dbDisease = buildMockDisease()
-    List<Term> terms = buildMockTerms()
+    List<Term> terms = buildMockTerms(["HPO:10406","HPO:1337"])
     terms.each{
       dbDisease.addToDbTerms(new DbTerm(it))
     }
@@ -68,34 +68,27 @@ class HpoDiseaseDetailsServiceUnitSpec extends Specification implements ServiceU
   private static DbDisease buildMockDisease(){
     new DbDisease(db:"ORPHA", dbId: "79501", diseaseName: "keratoderma type 1", diseaseId: "ORPHA:79501")
   }
-  private static List<Term> buildMockTerms(){
-    [
-      new HpoTerm(
-        ImmutableTermId.constructWithPrefix("HPO:10406"),
-        [],
-        'Term 1' ,
-        'Descriptive definition',
-        'Informative commment',
-        [],
-        [],
-        false,
-        'someUser',
-        new Date(),
-        []
-      ),
-      new HpoTerm(
-        ImmutableTermId.constructWithPrefix("HPO:1337"),
-        [],
-        'Term 2' ,
-        'Descriptive definition',
-        'Informative commment',
-        [],
-        [],
-        false,
-        'someUser',
-        new Date(),
-        []
-      )
-    ]
+
+  private static Term buildMockTerm(String id){
+    return  new HpoTerm(
+      ImmutableTermId.constructWithPrefix(id),
+      [],
+      'Test Term' ,
+      'Descriptive definition',
+      'Informative commment',
+      [],
+      [],
+      false,
+      'someUser',
+      new Date(),
+      []
+    )
+  }
+  private static List<Term> buildMockTerms(List<String> ids){
+    List<Term> terms = []
+    ids.each{
+      terms.add(buildMockTerm(it))
+    }
+   return terms
   }
 }

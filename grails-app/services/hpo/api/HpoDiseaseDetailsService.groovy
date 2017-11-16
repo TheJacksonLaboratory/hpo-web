@@ -20,12 +20,7 @@ class HpoDiseaseDetailsService {
     return resultMap
   }
 
-  @GrailsCompileStatic(TypeCheckingMode.SKIP)
   DbDisease getDisease(String query) {
-    def c = DbDisease.createCriteria()
-    List<DbDisease> disease = c.list() {
-      eq('diseaseId', query)
-    }
-    disease[0]
+    DbDisease.findByDiseaseId(query)
   }
 }
