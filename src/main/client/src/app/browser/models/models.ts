@@ -26,12 +26,12 @@ export interface Disease {
     assignedBy?: string
 }
 export class EntrezGene {
-    uid: string;
-    name: string;
-    maplocation : string;
-    summary : string;
-    otheraliases:string;
-    aliases : string[];
+    uid?: string;
+    name?: string;
+    maplocation?: string;
+    summary?: string;
+    otheraliases?:string;
+    aliases?: string[];
 }
 export interface Term {
     name?: string;

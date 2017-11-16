@@ -1,6 +1,6 @@
 <div class="container">
     <div class="thing-header">
-        <div class="thing-title">{{disease.dbName}}</div>
+        <div class="thing-title">({{disease.diseaseId}}){{disease.diseaseName}}</div>
     </div>
 </div>
   <div class="row">
@@ -23,7 +23,7 @@
                         <ng-container matColumnDef="ontologyId">
                           <mat-header-cell *matHeaderCellDef> Term Identifier </mat-header-cell>
                           <mat-cell *matCellDef="let row">
-                            <a routerLink="/browser/disease/{{row.ontologyId}}">{{row.ontologyId}}</a>
+                            <a routerLink="/browser/term/{{row.ontologyId}}">{{row.ontologyId}}</a>
                           </mat-cell>
                         </ng-container>
                         <ng-container matColumnDef="name">
@@ -40,7 +40,7 @@
                           <ng-container matColumnDef="entrezGeneId">
                             <mat-header-cell *matHeaderCellDef>Gene Identifier </mat-header-cell>
                             <mat-cell *matCellDef="let row">
-                              <a routerLink="/browser/disease/{{row.entrezGeneId}}">{{row.entrezGeneId}}</a>
+                              <a routerLink="/browser/gene/{{row.entrezGeneId}}">{{row.entrezGeneId}}</a>
                             </mat-cell>
                           </ng-container>
                           <ng-container matColumnDef="entrezGeneSymbol">
