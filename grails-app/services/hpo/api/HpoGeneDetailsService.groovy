@@ -21,13 +21,7 @@ class HpoGeneDetailsService {
     }
     return resultMap
   }
-
-  @GrailsCompileStatic(TypeCheckingMode.SKIP)
   DbGene getGene(Integer query) {
-    def c = DbGene.createCriteria()
-    List<DbGene> gene = c.list() {
-      eq('entrezGeneId', query)
-    }
-    gene[0]
+    DbGene.findByEntrezGeneId(query)
   }
 }
