@@ -15,9 +15,6 @@
   margin: 20px 10px 0 0;
   float:left;
 }
-.search-results{
-  margin-top: 10px;
-}
 .result-card {
   margin-top: 25px;
 }
@@ -52,16 +49,16 @@ span.result-list  {
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.term-result span.result-list:hover  {
-  border-bottom:dotted 1px #0085CA;
+.term-result span.result-list .result:hover  {
+  text-decoration:underline #0085CA;
 }
-.disease-result span.result-list:hover  {
-  border-bottom:dotted 1px #AB2328;
+.disease-result span.result-list .result:hover  {
+  text-decoration:underline #AB2328;
 }
-.gene-result span.result-list:hover  {
-  border-bottom:dotted 1px #43B02A;
+.gene-result span.result-list .result:hover  {
+  text-decoration:underline #43B02A;
 }
-.search-results .loading-result {
+.loading-result {
   width: 500px;
   margin: 15px 0 0 30%;
   float:none;
@@ -69,4 +66,9 @@ span.result-list  {
 .searchbar {
   margin:0 auto;
   float:none;
+}
+
+.result-card .mat-card {
+  overflow-y: scroll;
+  max-height: 500px;
 }
