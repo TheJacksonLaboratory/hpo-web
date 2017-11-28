@@ -32,6 +32,9 @@ module.exports = function (config) {
     logLevel: config.LOG_DEBUG,
     autoWatch: false,
     browsers: ['PhantomJS'],
-    singleRun: true
+    singleRun: true,
+    files:[
+      { pattern: './node_modules/@angular/material/prebuilt-themes/indigo-pink.css' }
+    ]
   });
 };
