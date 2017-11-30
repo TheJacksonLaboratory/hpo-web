@@ -17,7 +17,7 @@ class UrlMappings {
 
         "/"(uri: '/app/index.html')
         "/app/"(uri: '/app/index.html')
-        "/app/*"(uri: '/app/index.html')
+        "/app/**"(uri: '/app/index.html')
         "/api/hpo/search"(controller: 'hpoSearch', action:'searchAll')
         "/api/hpo/search/term"(controller: 'hpoTermDetails', action:'searchTerm')
         "/api/hpo/search/gene"(controller: 'hpoGeneDetails', action:'searchGene')
