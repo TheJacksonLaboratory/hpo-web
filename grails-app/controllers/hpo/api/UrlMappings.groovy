@@ -2,6 +2,11 @@ package hpo.api
 
 class UrlMappings {
 
+    //exclude the paths to:
+    // 1) Tell grails to avoid routing for these static resources, but instead have direct access to these via http://<host>/app/<filename>
+    // 2) Allow routing of /app/* to angular app (index.html), but ignore these paths
+    static excludes = ['/app/index.html', '/app/*.css', '/app/*.js','/app/*.jpg', '/app/*.map','/app/assets/**']
+
     static mappings = {
         delete "/$controller/$id(.$format)?"(action:"delete")
         get "/$controller(.$format)?"(action:"index")
@@ -10,7 +15,9 @@ class UrlMappings {
         put "/$controller/$id(.$format)?"(action:"update")
         patch "/$controller/$id(.$format)?"(action:"patch")
 
-        "/"(redirect: '/app/index.html')
+        "/"(uri: '/app/index.html')
+        "/app/"(uri: '/app/index.html')
+        "/app/**"(uri: '/app/index.html')
         "/api/hpo/search"(controller: 'hpoSearch', action:'searchAll')
         "/api/hpo/search/term"(controller: 'hpoTermDetails', action:'searchTerm')
         "/api/hpo/search/gene"(controller: 'hpoGeneDetails', action:'searchGene')
@@ -19,3 +26,4 @@ class UrlMappings {
         "404"(view: '/notFound')
     }
 }
+
