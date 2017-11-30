@@ -5,7 +5,7 @@ class UrlMappings {
     //exclude the paths to:
     // 1) Tell grails to avoid routing for these static resources, but instead have direct access to these via http://<host>/app/<filename>
     // 2) Allow routing of /app/* to angular app (index.html), but ignore these paths
-    static excludes = ['/app/index.html', '/app/*.css', '/app/*.js','/app/*.jpg']
+    static excludes = ['/app/index.html', '/app/*.css', '/app/*.js','/app/*.jpg', '/app/*.map','/app/assets/**']
 
     static mappings = {
         delete "/$controller/$id(.$format)?"(action:"delete")
