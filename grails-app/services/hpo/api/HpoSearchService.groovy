@@ -1,62 +1,161 @@
 package hpo.api
 
-import com.github.phenomics.ontolib.formats.hpo.HpoDiseaseAnnotation
-import com.github.phenomics.ontolib.formats.hpo.HpoGeneAnnotation
-import com.github.phenomics.ontolib.formats.hpo.HpoOntology
-import com.github.phenomics.ontolib.ontology.data.ImmutableTermId
-import com.github.phenomics.ontolib.ontology.data.Term
 import grails.compiler.GrailsCompileStatic
+import groovy.transform.TypeCheckingMode
+import hpo.api.disease.DbDisease
+import hpo.api.gene.DbGene
+import hpo.api.term.DbTerm
 import org.apache.commons.lang.StringUtils
+import org.grails.datastore.mapping.query.api.BuildableCriteria
 
 @GrailsCompileStatic
 class HpoSearchService {
 
-  HpoOntology hpoOntology
-  List<HpoDiseaseAnnotation> hpoDiseases
-  List<HpoGeneAnnotation> hpoGenes
-  /**
-   *
-   * Currently supporting Ids and partial names case insensitive
-   *
-   * @param q the term to query with
-   * @return {@link List} <code>Term</code>s for query term
-   */
-  Map search(String q) {
-    final Map resultMap = ['terms': [], 'diseases': [], 'genes': []]
-    final String trimmedQ = StringUtils.trimToNull(q)
-    if (trimmedQ) {
-      resultMap.put('terms', searchTerms(trimmedQ))
-      resultMap.put('diseases', searchDiseases(trimmedQ))
-      resultMap.put('genes', searchGenes(trimmedQ))
-    }
-    return resultMap
-  }
 
-  private List<HpoDiseaseAnnotation> searchDiseases(String trimmedQ) {
-    final List<HpoDiseaseAnnotation> diseaseResult = []
-    diseaseResult.addAll(this.hpoDiseases.findAll { it.dbName.toLowerCase().contains(trimmedQ.toLowerCase()) })
-    diseaseResult.unique { it.dbName }
+    /**
+     * Given a search query string, it executes domain object searches for terms, diseases and genes.
+     * The given string is split by white spaces to form a list of terms. These are used to dynamically build a matching criteria.
+     * @param searchTerm
+     * @return Map
+     */
+      Map<String, Map> searchAll(String searchTerm) {
 
-    return diseaseResult
-  }
+        final Map<String, Map> resultMap = ['terms': [data:[]] as Map, 'diseases': [data:[]] as Map, 'genes': [data:[]] as Map]
+        final String trimmedQ = StringUtils.trimToNull(searchTerm)
 
-  private List<Term> searchTerms(String trimmedQ) {
-    final List<Term> termResult = []
-    if (trimmedQ.startsWith('HP:')) {
-      termResult.add(this.hpoOntology.termMap.get(ImmutableTermId.constructWithPrefix(trimmedQ)))
-    }
-    termResult.addAll(this.hpoOntology.terms.findAll { it.name.toLowerCase().contains(trimmedQ.toLowerCase()) })
-    termResult.unique()
+        if (trimmedQ) {
+          List<String> inputTerms = trimmedQ.split('\\s').toList()
+          resultMap.put('terms', searchTermsAll(inputTerms))
+          resultMap.put('diseases', searchDiseasesAll(inputTerms))
+          resultMap.put('genes', searchGenesAll(inputTerms))
+        }
+        return resultMap
 
-    return termResult
-  }
+      }
 
-  private List<HpoGeneAnnotation> searchGenes(String trimmedQ) {
-    final List<HpoGeneAnnotation> geneResult = []
-    geneResult.addAll(this.hpoGenes.findAll { it.entrezGeneSymbol.toLowerCase().contains(trimmedQ.toLowerCase()) })
-    geneResult.unique { it.entrezGeneSymbol }
+    /**
+     * Builds and executes a query against DbDisease domain object to return Disease by the disease name.
+     * All terms in the given list must be part of the name.
+     * Supports paging with offset and max result set params
+     * @param terms
+     * @param offsetIn
+     * @param maxIn
+     * @return Map (total count, data<result set list>, offset)
+     */
+      @GrailsCompileStatic(TypeCheckingMode.SKIP)
+      private Map searchDiseasesAll(List<String> terms , int offsetIn = 0, int maxIn = 10) {
 
-    return geneResult
-  }
+        final List<DbDisease> diseaseResults = []
+        final Map resultsMap = [:]
+        Map params = [:]
+        params.max = maxIn // if -1, all results are returned
+        params.offset = offsetIn
+        params.sort = 'diseaseName'
+        params.order = 'asc'
+
+        BuildableCriteria c = DbDisease.createCriteria()
+        def results = c.list(max: params.max, offset: params.offset) {
+          for (term in terms) {
+            ilike('diseaseName', '%' + term + '%')
+          }
+          order(params.sort, params.order)
+        }
+        int totalCount = results.totalCount
+        diseaseResults.addAll(results as List<DbDisease>)
+        diseaseResults.unique()
+
+        resultsMap.put('data', diseaseResults)
+        resultsMap.put('totalCount', totalCount)
+        resultsMap.put('offset', offsetIn)
+
+        return resultsMap
+
+      }
+
+    /**
+     * Builds and executes a query against DbTerm domain object to return Terms by ontology Id or the term name.
+     * Searching by ontology ID, the string must match the 'HP:' suffix, only the first item in the list is considered
+     * Searching by name, all terms in the given list must be part of the name.
+     * Supports paging with offset and max result set params
+     * @param terms
+     * @param offsetIn
+     * @param maxIn
+     * @return Map (total count, data<result set list>, offset)
+     */
+    @GrailsCompileStatic(TypeCheckingMode.SKIP)
+      private Map searchTermsAll(List<String> terms, int offsetIn = 0, int maxIn = 10) {
+
+        final List<DbTerm> termResults = []
+        final Map resultsMap = [:]
+        Map params = [:]
+        params.max = maxIn // if -1, all results are returned
+        params.offset = offsetIn
+        params.sort = 'numberOfChildren'
+        params.order = 'desc'
+
+        BuildableCriteria c = DbTerm.createCriteria()
+        def results = c.list(max: params.max, offset: params.offset) {
+          if (terms[0].startsWith('HP:')) {
+            ilike('ontologyId', terms[0] + '%')
+          } else {
+            and {
+              for (term in terms) {
+                ilike('name', '%' + term + '%')
+              }
+            }
+          }
+          order(params.sort, params.order)
+        }
+        int totalCount = results.totalCount
+        termResults.addAll(results as List<DbTerm>)
+        termResults.unique()
+
+
+        resultsMap.put('data', termResults)
+        resultsMap.put('totalCount', totalCount)
+        resultsMap.put('offset', offsetIn)
+
+        return resultsMap
+      }
+
+    /**
+     * Builds and executes a query against DbGenes domain object to return genes by the entrezGeneSymbol.
+     * All terms in the given list must be part of the entrezGeneSymbol.
+     * Supports paging with offset and max result set params
+     * @param terms
+     * @param offsetIn
+     * @param maxIn
+     * @return Map (total count, data<result set list>, offset)
+     */
+      @GrailsCompileStatic(TypeCheckingMode.SKIP)
+      private Map searchGenesAll(List<String> terms, int offsetIn = 0, int maxIn = 10) {
+
+        final List<DbTerm> geneResults = []
+        final Map resultsMap = [:]
+        Map params = [:]
+        params.max = maxIn // if -1, all results are returned
+        params.offset = offsetIn
+        params.sort = 'entrezGeneSymbol'
+        params.order = 'asc'
+
+        BuildableCriteria c = DbGene.createCriteria()
+        def results = c.list(max: params.max, offset: params.offset) {
+
+          for (term in terms) {
+            ilike('entrezGeneSymbol', '%' + term + '%')
+          }
+          order(params.sort, params.order)
+        }
+        int totalCount = results.totalCount
+
+        geneResults.addAll(results as List<DbGene>)
+        geneResults.unique()
+
+        resultsMap.put('data', geneResults)
+        resultsMap.put('totalCount', totalCount)
+        resultsMap.put('offset', offsetIn)
+
+        return resultsMap
+      }
 
 }
