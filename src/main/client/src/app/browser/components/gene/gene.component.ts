@@ -39,6 +39,7 @@ export class GeneComponent implements OnInit {
       }, (error) => {
         console.log(error);
     });
+    
     this.geneService.searchGene(this.query)
     .then((data)=> {
       this.termAssoc = new TermAssocDB(data.termAssoc)

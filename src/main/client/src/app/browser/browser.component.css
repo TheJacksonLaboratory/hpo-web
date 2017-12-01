@@ -51,3 +51,7 @@
    max-height:346px;
    max-width:fit-content;
 }
+::ng-deep .container-custom{
+  margin-left:15px;
+  padding: 0px 5px 0px 5px;
+}
