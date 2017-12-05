@@ -1,9 +1,13 @@
 <div class="container">
   <div class="thing-header">
+      <span [hidden]="!isLoading">
+          <mat-progress-bar  class="loading-result-details" color="primary" mode="buffer">
+          </mat-progress-bar>
+      </span>
       <div class="thing-title">{{termTitle}}</div>
   </div>
 </div>
-<div class="row">
+<div [hidden]="isLoading" class="row">
   <div class="container container-custom">
     <div class="col-lg-12">
         <mat-card class="thing-summary col-lg-3" style="float:left">
@@ -19,7 +23,7 @@
         <mat-tab-group class="term-tabs">
             <mat-tab label="Associations">
               <div class="tab-content">
-              <div class="associations disease-association mat-elevation-z6">
+                <div class="associations disease-association mat-elevation-z6">
                   <h4 class="title">Disease Associations</h4>
                   <mat-table #table [dataSource]="diseaseSource" matSort>
                     <mat-header-row *matHeaderRowDef="diseaseColumns"></mat-header-row>
@@ -33,16 +37,16 @@
                     <ng-container matColumnDef="diseaseName">
                         <mat-header-cell *matHeaderCellDef>Disease Name </mat-header-cell>
                         <mat-cell *matCellDef="let row">{{row.diseaseName}}</mat-cell>
-                    </ng-container>         
+                    </ng-container>
                     <ng-container matColumnDef="dbGenes">
                         <mat-header-cell *matHeaderCellDef>Associated Genes</mat-header-cell>
                         <mat-cell *matCellDef="let row">
                           <span *ngFor="let gene of row.dbGenes">
                               <a routerLink="/browser/gene/{{gene.entrezGeneId}}">({{gene.entrezGeneId}})</a> -
                               {{gene.entrezGeneSymbol}}<br>
-                          </span> 
+                          </span>
                         </mat-cell>
-                    </ng-container>                
+                    </ng-container>
                   </mat-table>
                 </div>
                 <div class="associations gene-association mat-elevation-z6">
@@ -63,9 +67,9 @@
                         <span *ngFor="let disease of row.dbDiseases">
                             <a routerLink="/browser/disease/{{disease.diseaseId}}">({{disease.diseaseId}})</a> -
                             {{disease.diseaseName}}<br>
-                        </span> 
+                        </span>
                       </mat-cell>
-                    </ng-container>                      
+                    </ng-container>
                   </mat-table>
                 </div>
               </div>

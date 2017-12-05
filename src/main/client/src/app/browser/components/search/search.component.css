@@ -58,11 +58,6 @@ span.result-list  {
 .gene-result span.result-list .result:hover  {
   text-decoration:underline #43B02A;
 }
-.loading-result {
-  width: 500px;
-  margin: 15px 0 0 30%;
-  float:none;
-}
 .searchbar {
   margin:0 auto;
   float:none;

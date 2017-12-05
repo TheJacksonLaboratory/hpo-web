@@ -1,15 +1,19 @@
 <div class="container">
     <div class="thing-header">
-        <div class="thing-title">({{disease.diseaseId}}){{disease.diseaseName}}</div>
+      <span [hidden]="!isLoading">
+          <mat-progress-bar  class="loading-result-details" color="primary" mode="buffer">
+          </mat-progress-bar>
+      </span>
+      <div class="thing-title">({{disease.diseaseId}}){{disease.diseaseName}}</div>
     </div>
 </div>
-  <div class="row">
+  <div [hidden]="isLoading" class="row">
     <div class="container container-custom">
       <div class="col-lg-12">
           <mat-card class="thing-summary col-lg-3">
               <mat-card-content>
                 <p>Disease ID:&nbsp;{{disease.diseaseId}}</p>
-                <p>Disease Name:&nbsp;{{disease.diseaseName}}</p>            
+                <p>Disease Name:&nbsp;{{disease.diseaseName}}</p>
               </mat-card-content>
           </mat-card>
           <mat-tab-group class="gene-tabs">
@@ -29,7 +33,7 @@
                         <ng-container matColumnDef="name">
                             <mat-header-cell *matHeaderCellDef>Term Name </mat-header-cell>
                             <mat-cell *matCellDef="let row">{{row.name}}</mat-cell>
-                        </ng-container>                  
+                        </ng-container>
                       </mat-table>
                     </div>
                     <div class="associations gene-association mat-elevation-z6">
@@ -46,7 +50,7 @@
                           <ng-container matColumnDef="entrezGeneSymbol">
                               <mat-header-cell *matHeaderCellDef>Gene Symbol</mat-header-cell>
                               <mat-cell *matCellDef="let row">{{row.entrezGeneSymbol}}</mat-cell>
-                          </ng-container>                  
+                          </ng-container>
                         </mat-table>
                     </div>
                   </div>
