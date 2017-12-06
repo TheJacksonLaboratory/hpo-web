@@ -19,8 +19,8 @@
             <mat-card-title>Terms<hr></mat-card-title>
           </mat-card-header>
           <mat-card-content>
-            <span routerLink="term/{{item.id}}" class="result-list" *ngFor="let item of terms | sort: 'name';">
-                <span class="result">{{item.id}} {{item.name}}</span>
+            <span routerLink="term/{{item.id}}" class="result-list" *ngFor="let item of terms;">
+              <span class="result">{{item.ontologyId}} {{item.name}} ({{item.childrenCount}})</span>
             </span>
           </mat-card-content>
         </mat-card>
@@ -31,7 +31,7 @@
               <mat-card-title>Diseases<hr></mat-card-title>
             </mat-card-header>
             <mat-card-content>
-              <span routerLink="disease/{{item.dbRef}}" class="result-list" *ngFor="let item of diseases | sort: 'dbName';">
+              <span routerLink="disease/{{item.dbRef}}" class="result-list" *ngFor="let item of diseases;">
                 <span class="result">{{item.dbRef}} {{item.dbName}}</span>
               </span>
             </mat-card-content>
@@ -43,7 +43,7 @@
                 <mat-card-title>Genes<hr></mat-card-title>
               </mat-card-header>
               <mat-card-content>
-                <span  routerLink="gene/{{item.entrezGeneId}}" *ngFor="let item of genes | sort: 'entrezGeneSymbol'; "
+                <span  routerLink="gene/{{item.entrezGeneId}}" *ngFor="let item of genes; "
                   class="result-list">
                       <span class="result"> {{item.entrezGeneId}} {{item.entrezGeneSymbol}}</span>
               </span>

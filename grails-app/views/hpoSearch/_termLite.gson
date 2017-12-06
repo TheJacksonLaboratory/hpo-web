@@ -1,10 +1,11 @@
-import com.github.phenomics.ontolib.ontology.data.Term
+import hpo.api.term.DbTerm
 
 model {
-    Term termLite
+  DbTerm termLite
 }
-json{
-    name termLite.name
-    id termLite.id.idWithPrefix
-    altTermIds termLite.altTermIds*.idWithPrefix
+json {
+  name termLite.name
+  id termLite.id
+  childrenCount termLite.numberOfChildren
+  ontologyId termLite.ontologyId
 }
