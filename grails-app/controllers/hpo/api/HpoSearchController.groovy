@@ -6,7 +6,7 @@ class HpoSearchController {
     HpoSearchService hpoSearchService
 
     def searchAll(String q) {
-        render(view: 'searchAll', model: [resultMap: hpoSearchService.search(q)])
+        render(view: 'searchAll', model: [resultMap: hpoSearchService.searchAll(q)])
     }
 
 }

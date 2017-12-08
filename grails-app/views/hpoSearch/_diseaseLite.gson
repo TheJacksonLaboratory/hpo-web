@@ -1,10 +1,10 @@
-import com.github.phenomics.ontolib.formats.hpo.HpoDiseaseAnnotation
+import hpo.api.disease.DbDisease
 
 model {
-    HpoDiseaseAnnotation diseaseLite
+  DbDisease diseaseLite
 }
-json{
-    db diseaseLite.db
-    dbName diseaseLite.dbName
-    dbRef diseaseLite.dbReference
+json {
+  db diseaseLite.db
+  dbName diseaseLite.diseaseName.split(';').first()
+  dbRef diseaseLite.dbId
 }

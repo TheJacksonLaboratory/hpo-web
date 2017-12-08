@@ -24,7 +24,7 @@ class HpoSearchControllerSpec extends Specification implements ControllerUnitTes
         controller.searchAll(query)
 
         then: 'verify the view name'
-        1 * hpoSearchService.search(query) >> mockReturn
+        1 * hpoSearchService.searchAll(query) >> mockReturn
         controller.getModelAndView().getViewName() == '/hpoSearch/searchAll'
 
         and: 'the map returned by the service is passed in the model as resultMap'

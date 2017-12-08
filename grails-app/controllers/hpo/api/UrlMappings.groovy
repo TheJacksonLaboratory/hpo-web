@@ -9,6 +9,8 @@ class UrlMappings {
     '/app/*.html',
     '/app/*.ico',
     '/app/*.js',
+    '/app/*.css',
+    '/app/*.map',
     '/app/assets/**'
   ]
 
