@@ -24,40 +24,40 @@
           <mat-tab-group class="gene-tabs">
               <mat-tab label="Associations">
                   <div class="tab-content">
-                      <div class="associations term-association mat-elevation-z6">
-                        <h4 class="title">Term Associations</h4>
-                        <mat-table #table [dataSource]="termSource" matSort>
-                          <mat-header-row *matHeaderRowDef="termColumns"></mat-header-row>
-                          <mat-row *matRowDef="let row; columns: termColumns;"></mat-row>
-                          <ng-container matColumnDef="ontologyId">
-                            <mat-header-cell *matHeaderCellDef> Term Identifier </mat-header-cell>
-                            <mat-cell *matCellDef="let row">
-                              <a routerLink="/browser/term/{{row.ontologyId}}">{{row.ontologyId}}</a>
-                            </mat-cell>
-                          </ng-container>
-                          <ng-container matColumnDef="name">
-                              <mat-header-cell *matHeaderCellDef>Term Name </mat-header-cell>
-                              <mat-cell *matCellDef="let row">{{row.name}}</mat-cell>
-                          </ng-container>
-                        </mat-table>
-                      </div>
-                      <div class="associations disease-association mat-elevation-z6">
-                          <h4 class="title">Disease Associations</h4>
-                          <mat-table #table [dataSource]="diseaseSource" matSort>
-                            <mat-header-row *matHeaderRowDef="diseaseColumns"></mat-header-row>
-                            <mat-row *matRowDef="let row; columns: diseaseColumns;"></mat-row>
-                            <ng-container matColumnDef="diseaseId">
-                              <mat-header-cell *matHeaderCellDef>Disease Identifier </mat-header-cell>
-                              <mat-cell *matCellDef="let row">
-                                <a routerLink="/browser/disease/{{row.diseaseId}}">{{row.diseaseId}}</a>
-                              </mat-cell>
-                            </ng-container>
-                            <ng-container matColumnDef="diseaseName">
-                                <mat-header-cell *matHeaderCellDef>Disease Name </mat-header-cell>
-                                <mat-cell *matCellDef="let row">{{row.diseaseName}}</mat-cell>
-                            </ng-container>
-                          </mat-table>
-                      </div>
+                  <div class="associations term-association mat-elevation-z6">
+                    <h4 class="title">Term Associations</h4>
+                    <mat-table #table [dataSource]="termSource" matSort>
+                      <mat-header-row *matHeaderRowDef="termColumns"></mat-header-row>
+                      <mat-row *matRowDef="let row; columns: termColumns;"></mat-row>
+                      <ng-container matColumnDef="ontologyId">
+                        <mat-header-cell *matHeaderCellDef> Term Identifier </mat-header-cell>
+                        <mat-cell *matCellDef="let row">
+                          <a routerLink="/browser/term/{{row.ontologyId}}">{{row.ontologyId}}</a>
+                        </mat-cell>
+                      </ng-container>
+                      <ng-container matColumnDef="name">
+                          <mat-header-cell *matHeaderCellDef>Term Name </mat-header-cell>
+                          <mat-cell *matCellDef="let row">{{row.name}}</mat-cell>
+                      </ng-container>
+                    </mat-table>
+                  </div>
+                  <div class="associations disease-association mat-elevation-z6">
+                      <h4 class="title">Disease Associations</h4>
+                      <mat-table #table [dataSource]="diseaseSource" matSort>
+                        <mat-header-row *matHeaderRowDef="diseaseColumns"></mat-header-row>
+                        <mat-row *matRowDef="let row; columns: diseaseColumns;"></mat-row>
+                        <ng-container matColumnDef="diseaseId">
+                          <mat-header-cell *matHeaderCellDef>Disease Identifier </mat-header-cell>
+                          <mat-cell *matCellDef="let row">
+                            <a routerLink="/browser/disease/{{row.diseaseId}}">{{row.diseaseId}}</a>
+                          </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="diseaseName">
+                            <mat-header-cell *matHeaderCellDef>Disease Name </mat-header-cell>
+                            <mat-cell *matCellDef="let row">{{row.diseaseName}}</mat-cell>
+                        </ng-container>
+                      </mat-table>
+                  </div>
                 </div>
               </mat-tab>
               <mat-tab label="Gene Map">
