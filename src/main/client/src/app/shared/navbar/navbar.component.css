@@ -31,3 +31,8 @@
 .fill-remaining-space{
     flex:1;
 }
+.beta-flag{
+  background-color: red;
+  padding: 14px;
+  border-bottom: solid 5px ghostwhite;
+}

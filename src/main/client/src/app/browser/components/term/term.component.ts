@@ -21,10 +21,12 @@ export class TermComponent implements OnInit {
   diseaseAssoc: DiseaseAssocDB;
   geneSource: GeneAssocDatasource | null;
   diseaseSource: DiseaseAssocDatasource | null;
-  
+  isLoading: boolean;
+
 
   @ViewChild(MatSort) sort: MatSort;
-  constructor(private route: ActivatedRoute, private termService: TermService) { 
+  constructor(private route: ActivatedRoute, private termService: TermService) {
+    this.isLoading = true;
     this.route.params.subscribe( params => this.query = params.id);
     this.term = {"id":"", "name": "", "definition":"", "altTermIds": [], "comment":"", "synonyms": [], "isObsolete": true, "xrefs": [], "purl": ""};
   }
@@ -39,6 +41,7 @@ export class TermComponent implements OnInit {
         this.diseaseAssoc = new DiseaseAssocDB(data.diseaseAssoc)
         this.diseaseSource = new DiseaseAssocDatasource(this.diseaseAssoc, this.sort)
         this.termTitle = "(" + this.term.id + ")" + " " + this.term.name;
+        this.isLoading = false;
       }, (error) => {
         console.log(error);
     });

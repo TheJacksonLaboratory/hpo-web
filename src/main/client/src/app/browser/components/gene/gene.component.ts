@@ -18,19 +18,20 @@ export class GeneComponent implements OnInit {
   entrezGene: EntrezGene = new EntrezGene();
   gene: Gene;
   query: string;
-  termSource: TermAssocDatasource |  null
-  diseaseSource: DiseaseAssocDatasource | null
-  termAssoc: TermAssocDB
-  diseaseAssoc: DiseaseAssocDB
+  termSource: TermAssocDatasource |  null;
+  diseaseSource: DiseaseAssocDatasource | null;
+  termAssoc: TermAssocDB;
+  diseaseAssoc: DiseaseAssocDB;
   termColumns = ['ontologyId','name'];
-  diseaseColumns = ['diseaseId', 'diseaseName']
-  
+  diseaseColumns = ['diseaseId', 'diseaseName'];
+  isLoading: boolean;
+
   @ViewChild(MatSort) sort: MatSort;
   constructor(private route: ActivatedRoute, private geneEntrezService: GeneEntrezService, private geneService: GeneService) {
+    this.isLoading = true;
     this.route.params.subscribe( params => this.query = params.id);
     this.entrezGene.otheraliases = '';
   }
-
   ngOnInit() {
     this.geneEntrezService.searchGeneInfo(this.query)
       .then((data) => {
@@ -39,13 +40,13 @@ export class GeneComponent implements OnInit {
       }, (error) => {
         console.log(error);
     });
-    
     this.geneService.searchGene(this.query)
     .then((data)=> {
-      this.termAssoc = new TermAssocDB(data.termAssoc)
+      this.termAssoc = new TermAssocDB(data.termAssoc);
       this.termSource = new TermAssocDatasource(this.termAssoc, this.sort);
-      this.diseaseAssoc = new DiseaseAssocDB(data.diseaseAssoc)
-      this.diseaseSource = new DiseaseAssocDatasource(this.diseaseAssoc, this.sort)
+      this.diseaseAssoc = new DiseaseAssocDB(data.diseaseAssoc);
+      this.diseaseSource = new DiseaseAssocDatasource(this.diseaseAssoc, this.sort);
+      this.isLoading = false;
     },(error)=>{
         console.log(error);
     });
