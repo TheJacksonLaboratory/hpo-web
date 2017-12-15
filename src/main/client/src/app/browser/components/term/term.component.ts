@@ -14,7 +14,8 @@ import { MatSort } from '@angular/material';
 export class TermComponent implements OnInit {
   termTitle: string;
   query: string;
-  term: Term;
+  term: Term = {"id":"", "name": "", "definition":"", "altTermIds": [], "comment":"", "synonyms": [],
+                "isObsolete": true, "xrefs": [], "purl": ""};
   geneColumns = ['entrezGeneId','dbDiseases'];
   diseaseColumns = ['diseaseId', 'diseaseName', 'dbGenes']
   geneAssoc: GeneAssocDB;
@@ -22,16 +23,14 @@ export class TermComponent implements OnInit {
   geneSource: GeneAssocDatasource | null;
   diseaseSource: DiseaseAssocDatasource | null;
   treeData: TermTree;
-  isLoading: boolean;
+  isLoading: boolean = true;
   testData = {"parents":[{"id":"HPO:00004","name":"Abnormality of Hip"},{"id":"HPO:000444","name":"Abnormality of Bladder"}],"children":[
     {"id":"HPO:0000009","name":"Hip Displasia"},{"id":"HPO:00007","name":"Fractured Hip"}]};
 
 
   @ViewChild(MatSort) sort: MatSort;
   constructor(private route: ActivatedRoute, private termService: TermService) {
-    this.isLoading = true;
     this.route.params.subscribe( params => this.query = params.id);
-    this.term = {"id":"", "name": "", "definition":"", "altTermIds": [], "comment":"", "synonyms": [], "isObsolete": true, "xrefs": [], "purl": ""};
   }
 
   ngOnInit() {

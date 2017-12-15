@@ -24,13 +24,11 @@ export class GeneComponent implements OnInit {
   diseaseAssoc: DiseaseAssocDB;
   termColumns = ['ontologyId','name'];
   diseaseColumns = ['diseaseId', 'diseaseName'];
-  isLoading: boolean;
+  isLoading: boolean = true;
 
   @ViewChild(MatSort) sort: MatSort;
   constructor(private route: ActivatedRoute, private geneEntrezService: GeneEntrezService, private geneService: GeneService) {
-    this.isLoading = true;
     this.route.params.subscribe( params => this.query = params.id);
-    this.entrezGene.otheraliases = '';
   }
   ngOnInit() {
     this.geneEntrezService.searchGeneInfo(this.query)
