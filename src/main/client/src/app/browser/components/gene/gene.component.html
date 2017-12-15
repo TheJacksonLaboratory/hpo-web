@@ -1,9 +1,13 @@
 <div class="container">
     <div class="thing-header">
+        <span [hidden]="!isLoading">
+            <mat-progress-bar  class="loading-result-details" color="primary" mode="buffer">
+            </mat-progress-bar>
+        </span>
         <div class="thing-title">{{entrezGene.name}}</div>
     </div>
 </div>
-  <div class="row">
+  <div [hidden]="isLoading" class="row">
     <div class="container container-custom">
       <div class="col-lg-12">
           <mat-card class="thing-summary col-lg-3">
