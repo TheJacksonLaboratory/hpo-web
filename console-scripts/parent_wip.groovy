@@ -1,13 +1,9 @@
-def searchTerm = 'syndrome'
-def list = ctx.hpoSearchService.searchAll(searchTerm)
-//println list.diseases
-
-def map = ctx.hpoSearchService.searchAll('abnormality of limbs')
-def term = map.terms.data[0]
+def map = ctx.hpoSearchService.search('abnormality of limbs')
+def term = map.terms[0]
 println(term.name)
 
 def hpoOntology = ctx.hpoOntology
-def parentIds = hpoOntology.getParentTermIds()
+def parentIds = hpoOntology.getParentTermIds(term.id)
 println("parent terms")
 for(parentId in parentIds){
     println( "  ${hpoOntology.termMap.get(parentId).name}")
