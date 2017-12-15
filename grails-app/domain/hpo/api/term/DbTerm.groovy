@@ -38,7 +38,12 @@ class DbTerm {
     numberOfChildren()
   }
 
-  static hasMany = [dbTermPaths: DbTermPath, dbGenes: DbGene, dbDiseases: DbDisease]
+  static hasMany = [dbTermPaths: DbTermPath,
+                    dbGenes: DbGene,
+                    dbDiseases: DbDisease,
+                    dbTermRelation: DbTermRelationship]
+
+  static mappedBy = [dbTermParents: 'termParent', dbTermChildren: 'termChild']
 
   Set<DbTermPath> dbTermPaths = [] as Set<DbTermPath>
   Set<DbGene> dbGenes = [] as Set<DbGene>
@@ -52,6 +57,18 @@ class DbTerm {
     comment = term.comment
     ontologyId = term.id.idWithPrefix
     isObsolete = term.isObsolete()
+  }
+
+  static transients = ['children', 'parents']
+
+  Set<DbTerm> getChildren()
+  {
+    DbTermRelationship.findAllByTermParent(this).termChild
+  }
+
+  Set<DbTerm> getParents()
+  {
+    DbTermRelationship.findAllByTermChild(this).termParent
   }
 
 }

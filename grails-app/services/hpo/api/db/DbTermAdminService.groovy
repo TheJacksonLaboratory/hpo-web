@@ -9,9 +9,12 @@ import groovy.sql.BatchingPreparedStatementWrapper
 import hpo.api.db.utils.SqlUtilsService
 import hpo.api.term.DbTerm
 import hpo.api.term.DbTermPath
+import hpo.api.term.DbTermRelationship
 import hpo.api.util.AncestorPathsBuilder
 import org.apache.commons.lang.time.StopWatch
 import org.hibernate.Session
+import org.hibernate.SessionFactory
+import org.hibernate.Transaction
 
 /**
  * Created by djd on 10/22/17.
@@ -19,10 +22,12 @@ import org.hibernate.Session
 @Transactional
 class DbTermAdminService {
 
+  SessionFactory sessionFactory
+
   HpoOntology hpoOntology
   SqlUtilsService sqlUtilsService
   final static String INSERT_DB_TERM_PATH = "INSERT INTO db_term_path (db_term_id, path_names, path_ids ,path_length, version) VALUES(?,?,?,?,0)"
-
+  Map<DbTerm, List<DbTerm>> termParentsMap = [:]
   void deleteDbTerms() {
     StopWatch stopWatch = new StopWatch()
     stopWatch.start()
@@ -47,11 +52,13 @@ class DbTermAdminService {
         dbTerm.numberOfChildren = OntologyTerms.childrenOf(term.id, hpoOntology).size()
         dbTerm.save()
         termToDbTermMap.put(term, dbTerm)
+        getParents(term, dbTerm)
       }
     }
     DbTerm.withSession { Session session -> session.flush()}
     log.info("flushed DbTerms duration: ${stopWatch} time: ${new Date()}")
     saveAncestorPaths(termToDbTermMap)
+    saveTermParents()
   }
 
   private void saveAncestorPaths(Map<Term, DbTerm> termToDbTermMap) {
@@ -95,4 +102,55 @@ class DbTermAdminService {
     }
     paths
   }
+
+/**
+ * Populates term-parents map for the given term
+ * @param term
+ * @param dbTerm
+ * @return
+ */
+  private List<List<Term>> getParents(Term term, DbTerm dbTerm){
+
+    Set<TermId> parentTermIds = hpoOntology.getParentTermIds(term.id)
+    List<Term> parents = []
+    if (! parentTermIds.isEmpty()) {
+      for (TermId parentId in parentTermIds) {
+        Term parent = hpoOntology.getTermMap().get(parentId)
+        parents.add(parent)
+      }
+      termParentsMap.put(dbTerm, parents)
+    }
+  }
+
+  /**
+   * Persists all child-parent relations into DB from term-parent map
+   * @return
+   */
+  private saveTermParents(){
+    StopWatch stopWatch = new StopWatch()
+    stopWatch.start()
+    termParentsMap.each { term, parents ->
+
+      //construct a list of DbTerms for all Term parents from the ontology
+      List<DbTerm> parentTerms = parents.collect(){it = DbTerm.findByOntologyId("HP:" + it.getId()?.id)}
+
+      //persist child-parent relations via DB session
+      Session session = sessionFactory.openSession()
+      Transaction tx = session.beginTransaction()
+      parentTerms.eachWithIndex{ parent, counter ->
+        DbTermRelationship tr = new DbTermRelationship(termParent: parent, termChild: term)
+        session.save(tr)
+        if(counter.mod(100)==0) {
+          //clear session and save records after every 100 records
+          session.flush()
+          session.clear()
+        }
+      }
+      tx.commit()
+      session.close()
+    }
+
+    log.info("Save Parents size: ${termParentsMap.size()} duration: ${stopWatch} time: ${new Date()}")
+  }
+
 }
