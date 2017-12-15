@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Term } from '../../models/models';
+import { Term, TermTree} from '../../models/models';
 import { TermService } from '../../services/term/term.service';
 import { DiseaseAssocDB,GeneAssocDB } from '../associations/datasources/associations-db';
 import { GeneAssocDatasource } from '../associations/datasources/gene-assoc-datasource';
@@ -21,7 +21,10 @@ export class TermComponent implements OnInit {
   diseaseAssoc: DiseaseAssocDB;
   geneSource: GeneAssocDatasource | null;
   diseaseSource: DiseaseAssocDatasource | null;
+  treeData: TermTree;
   isLoading: boolean;
+  testData = {"parents":[{"id":"HPO:00004","name":"Abnormality of Hip"},{"id":"HPO:000444","name":"Abnormality of Bladder"}],"children":[
+    {"id":"HPO:0000009","name":"Hip Displasia"},{"id":"HPO:00007","name":"Fractured Hip"}]};
 
 
   @ViewChild(MatSort) sort: MatSort;
@@ -32,6 +35,12 @@ export class TermComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.termService.getTreeData(this.query).then((resp) => {
+      this.treeData = resp;
+    },(error)=>{
+      console.log(error);
+    });
+
     this.termService.searchTerm(this.query)
       .then((data) => {
         //debugger;

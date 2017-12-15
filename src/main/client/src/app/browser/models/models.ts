@@ -45,3 +45,9 @@ export interface Term {
     xrefs?: Array<string>;
     purl?: string;
 }
+
+export interface TermTree{
+  parents: Term[];
+  term: Term;
+  children: Term[];
+}

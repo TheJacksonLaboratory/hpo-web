@@ -3,7 +3,7 @@
     flex-grow: 1;
     margin-left: 32px;
   }
- .gene-association .mat-column-entrezGeneId{ 
+ .gene-association .mat-column-entrezGeneId{
      max-width: 250px;
  }
  .disease-association .mat-column-diseaseId {
@@ -17,3 +17,71 @@
     text-overflow: ellipsis;
     overflow: hidden;
  }
+ .thing-summary.tree-navigation{
+   padding: 15px !important;
+   font-size:16px;
+ }
+
+ .card-title {
+   margin: 0 0 5px 0;
+ }
+.tree,
+.tree ul {
+  padding:0;
+  list-style:none;
+  position:relative;
+}
+.tree .badge.tree-badge{
+  border-radius:2px;
+  background-color: #5fbc4a;
+  padding-bottom: 4px;
+  margin: 0 0 5px 10px;
+}
+
+.tree li:last-child span.term {
+  border-left: 1px solid;
+  padding: 5px 0 0 10px;
+}
+
+.tree li ul {margin-left:5em}
+.tree li:last-child, .tree li:last-child li {
+  margin:0;
+  padding:0 1.5em;
+  line-height:2em;
+  font-weight:bold;
+  position:relative;
+}
+.tree li:last-child{
+  margin-top: 5px;
+}
+.tree li:first-child:before {
+  border:none;
+}
+.tree li ul:before {
+  content:"";
+  display:block;
+  width:0;
+  position:absolute;
+  top:0;
+  bottom:0;
+  left:0;
+  border-left:1px solid;
+}
+
+.tree li ul li:before {
+  content:"";
+  display:block;
+  width:10px;
+  height:2px;
+  border-top:1px solid;
+  margin-top:-1px;
+  position:absolute;
+  top:1em;
+  left:0;
+}
+.tree li ul li:last-child:before {
+  background:white;
+  height:auto;
+  top:1em;
+  bottom:0;
+}

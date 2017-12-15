@@ -8,10 +8,13 @@
   </div>
 </div>
 <div [hidden]="isLoading" class="row">
-  <div class="container container-custom">
-    <div class="col-lg-12">
-        <mat-card class="thing-summary col-lg-3" style="float:left">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3">
+        <mat-card class="thing-summary">
             <mat-card-content>
+              <h3 class="card-title">Term Details</h3>
+              <hr class="underline-hr">
               <p>Primary ID:&nbsp; <strong>{{term.id}}</strong></p>
               <p>Alternate ID's:&nbsp;<strong>{{term.altTermIds}}</strong></p>
               <p>PURL: <a href="{{term.purl}}" target="__blank"><strong>{{term.purl}}</strong></a></p>
@@ -20,6 +23,28 @@
               <p><u>Xrefs</u><br><i *ngFor="let item of term.xrefs; let isLast=last">{{item}}{{isLast ? '' : ', '}}</i></p>
             </mat-card-content>
         </mat-card>
+        <mat-card class="thing-summary tree-navigation">
+          <mat-card-content>
+            <h3 class="card-title">Nearest Neighbors</h3>
+            <hr class="underline-hr">
+                  <ul class="tree">
+                    <li *ngFor="let parent of testData.parents">
+                      {{parent.name}}<span [hidden]="parent.count != 0" class="badge tree-badge">2345</span>
+                    </li>
+                    <li>
+                      <span class="term">Bladder Neoplasm</span>
+                        <span class="badge tree-badge">2345</span>
+                      <ul>
+                        <li *ngFor="let child of testData.children"> {{child.name}}
+                          <span [hidden]="child.count != 0" class="badge tree-badge">2345</span>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+          </mat-card-content>
+        </mat-card>
+      </div>
+      <div class="col-lg-9">
         <mat-tab-group class="term-tabs">
             <mat-tab label="Associations">
               <div class="tab-content">
@@ -82,7 +107,8 @@
             <div class="tab-content">
             </div>
           </mat-tab>
-          </mat-tab-group>
+        </mat-tab-group>
+      </div>
     </div>
   </div>
 </div>

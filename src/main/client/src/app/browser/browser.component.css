@@ -24,12 +24,14 @@
 }
 ::ng-deep .thing-summary {
   float:left;
+  width:100%;
+  margin:10px;
 }
 ::ng-deep .thing-header{
   margin-top: -10px;
   margin-bottom: 10px;
 }
-::ng-deep .thing-summary .mat-card-content h4{
+::ng-deep .thing-summary .mat-card-content  .associations h4{
   float:left;
 }
 ::ng-deep .tab-content{
@@ -65,4 +67,8 @@
   width: 25% !important;
   margin: 15px 0 0 0;
   float:none;
+}
+::ng-deep hr.underline-hr {
+  margin:0;
+  height:1px;
 }

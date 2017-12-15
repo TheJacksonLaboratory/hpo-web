@@ -9,13 +9,16 @@
 </div>
   <div [hidden]="isLoading" class="row">
     <div class="container container-custom">
-      <div class="col-lg-12">
-          <mat-card class="thing-summary col-lg-3">
+      <div class="row">
+        <div class="col-lg-3">
+          <mat-card class="thing-summary">
               <mat-card-content>
                 <p>Disease ID:&nbsp;{{disease.diseaseId}}</p>
                 <p>Disease Name:&nbsp;{{disease.diseaseName}}</p>
               </mat-card-content>
           </mat-card>
+        </div>
+        <div class="col-lg-9">
           <mat-tab-group class="gene-tabs">
               <mat-tab label="Associations">
                 <div class="tab-content">
@@ -64,6 +67,7 @@
               </div>
             </mat-tab>
             </mat-tab-group>
+        </div>
       </div>
     </div>
   </div>
