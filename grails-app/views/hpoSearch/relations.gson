@@ -1,5 +1,3 @@
-package hpoSearch
-
 model {
   Map<String, Map> resultMap
 }

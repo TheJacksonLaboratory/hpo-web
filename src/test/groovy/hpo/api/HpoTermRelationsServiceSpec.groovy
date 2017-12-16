@@ -16,17 +16,16 @@ class HpoTermRelationsServiceSpec extends Specification implements ServiceUnitTe
   void "test term relation service #desc"() {
 
     setup:
-      DbTerm termParent1 = buildDbTerm('HP:0000001')
-      DbTerm termParent2 = buildDbTerm('HP:0000002')
-      DbTerm termCurrent = buildDbTerm('HP:0000003')
-      DbTerm termChild1 = buildDbTerm('HP:0000004')
-      DbTerm termChild2 = buildDbTerm('HP:0000005')
+      DbTerm termParent1 = buildDbTerm('HP:0000001').save()
+      DbTerm termParent2 = buildDbTerm('HP:0000002').save()
+      DbTerm termCurrent = buildDbTerm('HP:0000003').save()
+      DbTerm termChild1 = buildDbTerm('HP:0000004').save()
+      DbTerm termChild2 = buildDbTerm('HP:0000005').save()
 
-      termCurrent.addToDbTermRelation(new DbTermRelationship(termParent: termParent1, termChild: termCurrent))
-      termCurrent.addToDbTermRelation(new DbTermRelationship(termParent: termParent2, termChild: termCurrent))
-      termCurrent.addToDbTermRelation(new DbTermRelationship(termParent: termCurrent, termChild: termChild1))
-      termCurrent.addToDbTermRelation(new DbTermRelationship(termParent: termCurrent, termChild: termChild2))
-      termCurrent.save()
+      new DbTermRelationship(termParent: termParent1, termChild: termCurrent).save()
+      new DbTermRelationship(termParent: termParent2, termChild: termCurrent).save()
+      new DbTermRelationship(termParent: termCurrent, termChild: termChild1).save()
+      new DbTermRelationship(termParent: termCurrent, termChild: termChild2).save()
 
     when:
       final Map resultMap = service.findTermRelations(ontologyId)

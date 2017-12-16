@@ -33,6 +33,8 @@ class DbTermAdminService {
     stopWatch.start()
     int dbTermPathsDeleted = DbTermPath.executeUpdate("delete from DbTermPath")
     log.info("${dbTermPathsDeleted} rows deleted from ${DbTermPath.name} duration: ${stopWatch} time: ${new Date()}")
+    int dbTermRelationsDeleted = DbTermRelationship.executeUpdate("delete from DbTermRelationship")
+    log.info("${dbTermRelationsDeleted} rows deleted from ${DbTermRelationship.name} duration: ${stopWatch} time: ${new Date()}")
     int dbTermsleted = DbTerm.executeUpdate("delete from DbTerm")
     log.info("${dbTermsleted} rows deleted from ${DbTerm.name} duration: ${stopWatch} time: ${new Date()}")
   }

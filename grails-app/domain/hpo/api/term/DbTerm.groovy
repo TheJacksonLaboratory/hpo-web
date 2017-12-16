@@ -41,13 +41,16 @@ class DbTerm {
   static hasMany = [dbTermPaths: DbTermPath,
                     dbGenes: DbGene,
                     dbDiseases: DbDisease,
-                    dbTermRelation: DbTermRelationship]
+                    dbTermParents: DbTermRelationship,
+                    dbTermChildren: DbTermRelationship ]
 
   static mappedBy = [dbTermParents: 'termParent', dbTermChildren: 'termChild']
 
   Set<DbTermPath> dbTermPaths = [] as Set<DbTermPath>
   Set<DbGene> dbGenes = [] as Set<DbGene>
   Set<DbGene> dbDiseases = [] as Set<DbGene>
+  Set<DbTermRelationship> dbTermParents = [] as Set<DbTermRelationship>
+  Set<DbTermRelationship> dbTermChildren = [] as Set<DbTermRelationship>
 
   DbTerm() {}
 
@@ -61,14 +64,22 @@ class DbTerm {
 
   static transients = ['children', 'parents']
 
+  /**
+   * gets the term (DbTerm) children objects of this term object
+   * @return
+   */
   Set<DbTerm> getChildren()
   {
-    DbTermRelationship.findAllByTermParent(this).termChild
+    dbTermParents*.termChild
   }
 
+  /**
+   * gets the term (DbTerm) parents objects of this term object
+   * @return
+   */
   Set<DbTerm> getParents()
   {
-    DbTermRelationship.findAllByTermChild(this).termParent
+    dbTermChildren*.termParent
   }
 
 }

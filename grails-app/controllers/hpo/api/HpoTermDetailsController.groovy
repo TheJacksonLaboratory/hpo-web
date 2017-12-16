@@ -11,10 +11,10 @@ class HpoTermDetailsController {
 
   /**
    * Given an ontology id for a term, find related parents and children terms
-   * @param hpoId
+   * @param hpoId (q)
    * @return
    */
-    def findTermRelations(String hpoId){
-      render(view: '../hpoSearch/relations', model: [resultMap: hpoTermRelationsService.findTermRelations(hpoId)])
+    def findTermRelations(String q){
+      render(view: '../hpoSearch/relations', model: [resultMap: hpoTermRelationsService.findTermRelations(q)])
     }
 }
