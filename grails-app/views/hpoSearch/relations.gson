@@ -1,0 +1,10 @@
+model {
+  Map<String, Map> resultMap
+}
+json {
+
+  term tmpl.termLite(resultMap.term)
+  parents tmpl.termLite(resultMap.parents.data)
+  children tmpl.termLite(resultMap.children.data)
+
+}

@@ -30,6 +30,7 @@ class UrlMappings {
     "/api/hpo/search/term"(controller: 'hpoTermDetails', action: 'searchTerm')
     "/api/hpo/search/gene"(controller: 'hpoGeneDetails', action: 'searchGene')
     "/api/hpo/search/disease"(controller: 'hpoDiseaseDetails', action: 'searchDisease')
+    "/api/hpo/term/relations"(controller: 'hpoTermDetails', action: 'findTermRelations')
 
     "500"(view: '/error')
     "404"(view: '/notFound')
