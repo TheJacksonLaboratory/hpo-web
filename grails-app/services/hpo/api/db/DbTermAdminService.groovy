@@ -51,7 +51,7 @@ class DbTermAdminService {
       } else {
         ontologyIdSet.add(term.id.idWithPrefix)
         DbTerm dbTerm = new DbTerm(term as Term)
-        dbTerm.numberOfChildren = OntologyTerms.childrenOf(term.id, hpoOntology).size()
+        dbTerm.numberOfChildren = OntologyTerms.childrenOf(term.id, hpoOntology).size() - 1 //-1 exclude the current term
         dbTerm.save()
         termToDbTermMap.put(term, dbTerm)
         getParents(term, dbTerm)
