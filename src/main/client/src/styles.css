@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 .container {
-    padding-right: 15px;
-    padding-left: 15px;
+    padding-right: 5px;
+    padding-left:  5px;
   }
   @media (min-width: 768px) {
     .container {
@@ -29,6 +29,7 @@ a:hover {
 }
 .main {
   margin-top:15px;
+  margin-bottom: 15px;
 }
 .page-header {
   width: 750px;

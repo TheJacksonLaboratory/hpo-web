@@ -38,6 +38,7 @@
   background-color: #5fbc4a;
   padding-bottom: 4px;
   margin: 0 0 5px 10px;
+  cursor: default;
 }
 
 .tree li:last-child span.term {
@@ -46,12 +47,11 @@
   font-weight: 900;
 }
 
-.tree li ul {margin-left:5em}
+.tree li ul {margin-left:1em}
 .tree li:last-child, .tree li:last-child li {
   margin:0;
-  padding:0 1.5em;
+  padding:0 1em;
   line-height:2em;
-  font-weight:bold;
   position:relative;
 }
 .tree li:last-child{

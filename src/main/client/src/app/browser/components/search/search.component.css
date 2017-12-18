@@ -73,4 +73,5 @@ span.result-list  {
   padding-bottom: 4px;
   margin: 0 0 5px 10px;
   float: right;
+  cursor: default;
 }
