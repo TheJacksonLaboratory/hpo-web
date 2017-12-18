@@ -23,10 +23,7 @@ export class TermComponent implements OnInit {
   diseaseSource: DiseaseAssocDatasource | null;
   treeData: TermTree;
   isLoading: boolean = true;
-  testData = {"parents":[{"id":"HPO:00004","name":"Abnormality of Hip"},{"id":"HPO:000444","name":"Abnormality of Bladder"}],"children":[
-    {"id":"HPO:0000009","name":"Hip Displasia"},{"id":"HPO:00007","name":"Fractured Hip"}]};
-
-
+  
   @ViewChild(MatSort) sort: MatSort;
   constructor(private route: ActivatedRoute, private termService: TermService) {
     this.route.params.subscribe( params => {
