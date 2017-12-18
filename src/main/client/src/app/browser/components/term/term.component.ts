@@ -14,10 +14,9 @@ import { MatSort } from '@angular/material';
 export class TermComponent implements OnInit {
   termTitle: string;
   query: string;
-  term: Term = {"id":"", "name": "", "definition":"", "altTermIds": [], "comment":"", "synonyms": [],
-                "isObsolete": true, "xrefs": [], "purl": ""};
+  term: Term = {"id":"", "name": "", "definition":"", "altTermIds": [], "comment":"", "synonyms": [], "isObsolete": true, "xrefs": [], "purl": ""};
   geneColumns = ['entrezGeneId','dbDiseases'];
-  diseaseColumns = ['diseaseId', 'diseaseName', 'dbGenes']
+  diseaseColumns = ['diseaseId', 'diseaseName', 'dbGenes'];
   geneAssoc: GeneAssocDB;
   diseaseAssoc: DiseaseAssocDB;
   geneSource: GeneAssocDatasource | null;
@@ -30,17 +29,22 @@ export class TermComponent implements OnInit {
 
   @ViewChild(MatSort) sort: MatSort;
   constructor(private route: ActivatedRoute, private termService: TermService) {
-    this.route.params.subscribe( params => this.query = params.id);
+    this.route.params.subscribe( params => {
+      this.refreshData(params.id)
+    });
   }
 
   ngOnInit() {
-    this.termService.getTreeData(this.query).then((resp) => {
+  }
+  refreshData(query: string){
+    this.termService.getTreeData(query).then((resp) => {
       this.treeData = resp;
+      console.log(this.treeData);
     },(error)=>{
       console.log(error);
     });
 
-    this.termService.searchTerm(this.query)
+    this.termService.searchTerm(query)
       .then((data) => {
         //debugger;
         this.setDefaults(data.term);
@@ -52,9 +56,8 @@ export class TermComponent implements OnInit {
         this.isLoading = false;
       }, (error) => {
         console.log(error);
-    });
+      });
   }
-
   setDefaults(term: Term){
     this.term = term;
     this.term.altTermIds = (term.altTermIds.length != 0) ? term.altTermIds: ["-"];

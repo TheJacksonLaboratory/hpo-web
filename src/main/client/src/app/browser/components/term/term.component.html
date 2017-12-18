@@ -25,18 +25,19 @@
         </mat-card>
         <mat-card class="thing-summary tree-navigation">
           <mat-card-content>
-            <h3 class="card-title">Nearest Neighbors</h3>
+            <h3 class="card-title">Tree Hierarchy</h3>
             <hr class="underline-hr">
-                  <ul class="tree">
-                    <li *ngFor="let parent of testData.parents">
-                      {{parent.name}}<span [hidden]="parent.count != 0" class="badge tree-badge">{{parent.count}}</span>
+                  <ul class="tree" *ngIf="treeData">
+                    <li *ngFor="let parent of treeData.parents">
+                      <a class="link" routerLink="../{{parent.ontologyId}}" >{{parent.name}}</a> <span [hidden]="parent.count != 0" class="badge tree-badge">{{parent.childrenCount}}</span>
                     </li>
                     <li>
-                      <span class="term">Bladder Neoplasm</span>
-                        <span class="badge tree-badge">{{treeData.term.count}}</span>
+                      <span class="term"><strong>{{treeData.term.name}}</strong></span>
+                        <span class="badge tree-badge">{{treeData.term.childrenCount}}</span>
                       <ul>
-                        <li *ngFor="let child of testData.children"> {{child.name}}
-                          <span [hidden]="child.count != 0" class="badge tree-badge">{{child.count}}</span>
+                        <li *ngFor="let child of treeData.children">
+                          <a class="link" routerLink="../{{child.ontologyId}}">{{child.name}}</a>
+                          <span [hidden]="child.count != 0" class="badge tree-badge">{{child.childrenCount}}</span>
                         </li>
                       </ul>
                     </li>

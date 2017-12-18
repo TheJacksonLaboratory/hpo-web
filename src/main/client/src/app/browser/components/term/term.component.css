@@ -21,7 +21,9 @@
    padding: 15px !important;
    font-size:16px;
  }
-
+.tree-navigation .link{
+  text-decoration: none;
+}
  .card-title {
    margin: 0 0 5px 0;
  }
@@ -41,6 +43,7 @@
 .tree li:last-child span.term {
   border-left: 1px solid;
   padding: 5px 0 0 10px;
+  font-weight: 900;
 }
 
 .tree li ul {margin-left:5em}
