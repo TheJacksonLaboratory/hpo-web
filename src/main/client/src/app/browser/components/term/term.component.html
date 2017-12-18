@@ -1,17 +1,17 @@
 <div class="container">
-  <div class="thing-header">
+  <div class="item-header">
       <span [hidden]="!isLoading">
           <mat-progress-bar  class="loading-result-details" color="primary" mode="buffer">
           </mat-progress-bar>
       </span>
-      <div class="thing-title">{{termTitle}}</div>
+      <div class="item-title">{{termTitle}}</div>
   </div>
 </div>
 <div [hidden]="isLoading" class="row">
   <div class="container">
     <div class="row">
       <div class="col-lg-3">
-        <mat-card class="thing-summary">
+        <mat-card class="item-summary">
             <mat-card-content>
               <h3 class="card-title">Term Details</h3>
               <hr class="underline-hr">
@@ -23,7 +23,7 @@
               <p><u>Xrefs</u><br><i *ngFor="let item of term.xrefs; let isLast=last">{{item}}{{isLast ? '' : ', '}}</i></p>
             </mat-card-content>
         </mat-card>
-        <mat-card class="thing-summary tree-navigation">
+        <mat-card class="item-summary tree-navigation">
           <mat-card-content>
             <h3 class="card-title">Tree Hierarchy</h3>
             <hr class="underline-hr">

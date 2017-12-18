@@ -1,17 +1,17 @@
 <div class="container">
-    <div class="thing-header">
+    <div class="item-header">
       <span [hidden]="!isLoading">
           <mat-progress-bar  class="loading-result-details" color="primary" mode="buffer">
           </mat-progress-bar>
       </span>
-      <div class="thing-title">({{disease.diseaseId}}){{disease.diseaseName}}</div>
+      <div class="item-title">({{disease.diseaseId}}){{disease.diseaseName}}</div>
     </div>
 </div>
   <div [hidden]="isLoading" class="row">
     <div class="container container-custom">
       <div class="row">
         <div class="col-lg-3">
-          <mat-card class="thing-summary">
+          <mat-card class="item-summary">
               <mat-card-content>
                 <p>Disease ID:&nbsp;{{disease.diseaseId}}</p>
                 <p>Disease Name:&nbsp;{{disease.diseaseName}}</p>

@@ -1,17 +1,17 @@
 <div class="container">
-    <div class="thing-header">
+    <div class="item-header">
         <span [hidden]="!isLoading">
             <mat-progress-bar  class="loading-result-details" color="primary" mode="buffer">
             </mat-progress-bar>
         </span>
-        <div class="thing-title">{{entrezGene.name}}</div>
+        <div class="item-title">{{entrezGene.name}}</div>
     </div>
 </div>
   <div [hidden]="isLoading" class="row">
     <div class="container container-custom">
       <div class="row">
         <div class="col-lg-3">
-            <mat-card class="thing-summary">
+            <mat-card class="item-summary">
                 <mat-card-content>
                   <p>Entrez ID:&nbsp;{{entrezGene.uid}}</p>
                   <p>Gene Name:&nbsp;{{entrezGene.name}}</p>
