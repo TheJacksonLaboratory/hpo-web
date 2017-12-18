@@ -29,15 +29,16 @@
             <hr class="underline-hr">
                   <ul class="tree" *ngIf="treeData">
                     <li *ngFor="let parent of treeData.parents">
-                      <a class="link" routerLink="../{{parent.ontologyId}}" >{{parent.name}}</a> <span [hidden]="parent.count != 0" class="badge tree-badge">{{parent.childrenCount}}</span>
+                      <a class="link"  routerLink="../{{parent.ontologyId}}" >{{parent.name}}</a>
+                      <span matTooltip="# of Descendants" matTooltipPosition="above" [hidden]="parent.count != 0" class="badge tree-badge">{{parent.childrenCount}}</span>
                     </li>
                     <li>
                       <span class="term"><strong>{{treeData.term.name}}</strong></span>
-                        <span class="badge tree-badge">{{treeData.term.childrenCount}}</span>
+                        <span class="badge tree-badge" matTooltip="# of Descendants" matTooltipPosition="above">{{treeData.term.childrenCount}}</span>
                       <ul>
                         <li *ngFor="let child of treeData.children">
                           <a class="link" routerLink="../{{child.ontologyId}}">{{child.name}}</a>
-                          <span [hidden]="child.count != 0" class="badge tree-badge">{{child.childrenCount}}</span>
+                          <span matTooltip="# of Descendants" matTooltipPosition="above" [hidden]="child.count != 0" class="badge tree-badge">{{child.childrenCount}}</span>
                         </li>
                       </ul>
                     </li>

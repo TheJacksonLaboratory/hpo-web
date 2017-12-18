@@ -23,7 +23,7 @@ export class TermComponent implements OnInit {
   diseaseSource: DiseaseAssocDatasource | null;
   treeData: TermTree;
   isLoading: boolean = true;
-  
+  toolTipPosition: "above";
   @ViewChild(MatSort) sort: MatSort;
   constructor(private route: ActivatedRoute, private termService: TermService) {
     this.route.params.subscribe( params => {
