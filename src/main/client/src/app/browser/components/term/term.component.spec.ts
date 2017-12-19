@@ -13,7 +13,8 @@ describe('TermComponent', () => {
   let fixture: ComponentFixture<TermComponent>;
   let testTerm = {"id": "HPO00test", "name": "testingname"};
   let termServiceStub = {
-    searchTerm: jasmine.createSpy('searchTerm').and.returnValue(Promise.resolve(testTerm))
+    searchTerm: jasmine.createSpy('searchTerm').and.returnValue(Promise.resolve(testTerm)),
+    getTreeData: jasmine.createSpy('getTreeData').and.returnValue(Promise.resolve(null))
   };
 
 
