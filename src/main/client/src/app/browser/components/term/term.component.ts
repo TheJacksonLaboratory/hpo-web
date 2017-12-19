@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Term } from '../../models/models';
+import { Term, TermTree} from '../../models/models';
 import { TermService } from '../../services/term/term.service';
 import { DiseaseAssocDB,GeneAssocDB } from '../associations/datasources/associations-db';
 import { GeneAssocDatasource } from '../associations/datasources/gene-assoc-datasource';
@@ -14,25 +14,34 @@ import { MatSort } from '@angular/material';
 export class TermComponent implements OnInit {
   termTitle: string;
   query: string;
-  term: Term;
+  term: Term = {"id":"", "name": "", "definition":"", "altTermIds": [], "comment":"", "synonyms": [], "isObsolete": true, "xrefs": [], "purl": ""};
   geneColumns = ['entrezGeneId','dbDiseases'];
-  diseaseColumns = ['diseaseId', 'diseaseName', 'dbGenes']
+  diseaseColumns = ['diseaseId', 'diseaseName', 'dbGenes'];
   geneAssoc: GeneAssocDB;
   diseaseAssoc: DiseaseAssocDB;
   geneSource: GeneAssocDatasource | null;
   diseaseSource: DiseaseAssocDatasource | null;
-  isLoading: boolean;
-
-
+  treeData: TermTree;
+  isLoading: boolean = true;
+  toolTipPosition: "above";
   @ViewChild(MatSort) sort: MatSort;
   constructor(private route: ActivatedRoute, private termService: TermService) {
-    this.isLoading = true;
-    this.route.params.subscribe( params => this.query = params.id);
-    this.term = {"id":"", "name": "", "definition":"", "altTermIds": [], "comment":"", "synonyms": [], "isObsolete": true, "xrefs": [], "purl": ""};
+    this.route.params.subscribe( params => {
+      this.refreshData(params.id)
+    });
   }
 
   ngOnInit() {
-    this.termService.searchTerm(this.query)
+  }
+  refreshData(query: string){
+    this.termService.getTreeData(query).then((resp) => {
+      this.treeData = resp;
+      console.log(this.treeData);
+    },(error)=>{
+      console.log(error);
+    });
+
+    this.termService.searchTerm(query)
       .then((data) => {
         //debugger;
         this.setDefaults(data.term);
@@ -44,9 +53,8 @@ export class TermComponent implements OnInit {
         this.isLoading = false;
       }, (error) => {
         console.log(error);
-    });
+      });
   }
-
   setDefaults(term: Term){
     this.term = term;
     this.term.altTermIds = (term.altTermIds.length != 0) ? term.altTermIds: ["-"];

@@ -17,19 +17,21 @@
 ::ng-deep .mat-tab-header {
   border-top: 1px solid rgba(0, 0, 0, 0.12);
 }
-::ng-deep .thing-title {
+::ng-deep .item-title {
   font-size: 18px;
   text-align: center;
   text-shadow: 1px 1px #D0D3D4;
 }
-::ng-deep .thing-summary {
+::ng-deep .item-summary {
   float:left;
+  width:100%;
+  margin:10px;
 }
-::ng-deep .thing-header{
+::ng-deep .item-header{
   margin-top: -10px;
   margin-bottom: 10px;
 }
-::ng-deep .thing-summary .mat-card-content h4{
+::ng-deep .item-summary .mat-card-content  .associations h4{
   float:left;
 }
 ::ng-deep .tab-content{
@@ -65,4 +67,8 @@
   width: 25% !important;
   margin: 15px 0 0 0;
   float:none;
+}
+::ng-deep hr.underline-hr {
+  margin:0;
+  height:1px;
 }

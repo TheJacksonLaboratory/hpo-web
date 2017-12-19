@@ -4,7 +4,7 @@
     <div class="nav-title">{{title}}</div>
   </div>
   <!-- This fills the remaining space of the current row -->
-  <div class="nav-components hidden-sm">
+  <div class="nav-components  hidden-xs hidden-sm hidden-md">
       <button mat-button routerLink="/">Home</button>
       <button mat-button routerLink="browser">Browser</button>
       <button mat-button [matMenuTriggerFor]="docsMenu">Documentation <mat-icon>arrow_drop_down</mat-icon></button>
@@ -21,8 +21,11 @@
     <mat-icon>menu</mat-icon>
   </button>
   <mat-menu x-position="before" #menu="matMenu">
-      <button mat-menu-item routerLink="/products">Products</button>
-      <button mat-menu-item routerLink="/dashboard">Dashboard</button>
+    <button mat-menu-item routerLink="/">Home</button>
+    <button mat-menu-item routerLink="browser">Browser</button>
+    <button mat-menu-item [matMenuTriggerFor]="docsMenu">Documentation</button>
+    <button mat-menu-item routerLink="downloads">Downloads</button>
+    <button mat-menu-item [matMenuTriggerFor]="resourceMenu">Resources</button>
   </mat-menu>
   <mat-menu y-positon="after" [overlapTrigger]="false" #docsMenu="matMenu">
     <button mat-menu-item routerLink="documentation"> Overview </button>

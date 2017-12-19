@@ -32,6 +32,9 @@ export class EntrezGene {
     summary?: string;
     otheraliases?:string;
     aliases?: string[];
+    constructor(){
+      this.otheraliases = '';
+    }
 }
 export interface Term {
     name?: string;
@@ -44,4 +47,10 @@ export interface Term {
     isObsolete?: boolean;
     xrefs?: Array<string>;
     purl?: string;
+}
+
+export interface TermTree{
+  parents: Term[];
+  term: Term;
+  children: Term[];
 }

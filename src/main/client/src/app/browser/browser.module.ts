@@ -12,7 +12,7 @@ import { MatTabsModule } from '@angular/material';
 import { MatTableModule } from '@angular/material';
 import { MatPaginatorModule } from '@angular/material';
 import { MatSortModule } from '@angular/material';
-
+import { MatTooltipModule } from '@angular/material/tooltip';
 // Services
 import { SearchService } from './services/search/search.service';
 import { TermService } from './services/term/term.service';
@@ -41,7 +41,8 @@ import { SortPipe } from './pipes/sort-pipe';
     MatTabsModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    MatTooltipModule
   ],
   providers: [ SearchService, TermService, GeneService, GeneEntrezService, DiseaseService ],
   declarations: [ SearchComponent, TermComponent, DiseaseComponent,

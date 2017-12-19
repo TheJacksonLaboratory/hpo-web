@@ -15,19 +15,17 @@ import { DiseaseService } from '../../services/disease/disease.service';
 })
 export class DiseaseComponent implements OnInit {
   query: string;
-  disease: Disease;
+  disease: Disease = {"db":"", "dbObjectId": "0", "dbName":"", "dbReference": ""};
   termColumns = ['ontologyId','name'];
   geneColumns = ['entrezGeneId', 'entrezGeneSymbol'];
   termSource: TermAssocDatasource |  null;
   geneSource: GeneAssocDatasource | null;
   termAssoc: TermAssocDB;
   geneAssoc: GeneAssocDB;
-  isLoading: boolean;
+  isLoading: boolean = true;
   @ViewChild(MatSort) sort: MatSort;
   constructor(private route: ActivatedRoute, private diseaseService: DiseaseService) {
-    this.isLoading = true;
     this.route.params.subscribe( params => this.query = params.id);
-    this.disease = {"db":"", "dbObjectId": "0", "dbName":"", "dbReference": ""};
   }
 
   ngOnInit() {

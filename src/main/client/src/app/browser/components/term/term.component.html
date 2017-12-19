@@ -1,17 +1,20 @@
 <div class="container">
-  <div class="thing-header">
+  <div class="item-header">
       <span [hidden]="!isLoading">
           <mat-progress-bar  class="loading-result-details" color="primary" mode="buffer">
           </mat-progress-bar>
       </span>
-      <div class="thing-title">{{termTitle}}</div>
+      <div class="item-title">{{termTitle}}</div>
   </div>
 </div>
 <div [hidden]="isLoading" class="row">
-  <div class="container container-custom">
-    <div class="col-lg-12">
-        <mat-card class="thing-summary col-lg-3" style="float:left">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3">
+        <mat-card class="item-summary">
             <mat-card-content>
+              <h3 class="card-title">Term Details</h3>
+              <hr class="underline-hr">
               <p>Primary ID:&nbsp; <strong>{{term.id}}</strong></p>
               <p>Alternate ID's:&nbsp;<strong>{{term.altTermIds}}</strong></p>
               <p>PURL: <a href="{{term.purl}}" target="__blank"><strong>{{term.purl}}</strong></a></p>
@@ -20,6 +23,30 @@
               <p><u>Xrefs</u><br><i *ngFor="let item of term.xrefs; let isLast=last">{{item}}{{isLast ? '' : ', '}}</i></p>
             </mat-card-content>
         </mat-card>
+        <mat-card class="item-summary tree-navigation">
+          <mat-card-content>
+            <h3 class="card-title">Tree Hierarchy</h3>
+            <hr class="underline-hr">
+                  <ul class="tree" *ngIf="treeData">
+                    <li *ngFor="let parent of treeData.parents">
+                      <a class="link"  routerLink="../{{parent.ontologyId}}" >{{parent.name}}</a>
+                      <span matTooltip="# of Descendants" matTooltipPosition="above" [hidden]="parent.count != 0" class="badge tree-badge">{{parent.childrenCount}}</span>
+                    </li>
+                    <li>
+                      <span class="term"><strong>{{treeData.term.name}}</strong></span>
+                        <span class="badge tree-badge" matTooltip="# of Descendants" matTooltipPosition="above">{{treeData.term.childrenCount}}</span>
+                      <ul>
+                        <li *ngFor="let child of treeData.children">
+                          <a class="link" routerLink="../{{child.ontologyId}}">{{child.name}}</a>
+                          <span matTooltip="# of Descendants" matTooltipPosition="above" [hidden]="child.count != 0" class="badge tree-badge">{{child.childrenCount}}</span>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+          </mat-card-content>
+        </mat-card>
+      </div>
+      <div class="col-lg-9">
         <mat-tab-group class="term-tabs">
             <mat-tab label="Associations">
               <div class="tab-content">
@@ -82,7 +109,8 @@
             <div class="tab-content">
             </div>
           </mat-tab>
-          </mat-tab-group>
+        </mat-tab-group>
+      </div>
     </div>
   </div>
 </div>
