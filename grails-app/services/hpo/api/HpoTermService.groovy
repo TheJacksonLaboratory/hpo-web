@@ -4,29 +4,24 @@ import com.github.phenomics.ontolib.ontology.data.ImmutableTermId
 import com.github.phenomics.ontolib.ontology.data.Term
 import com.github.phenomics.ontolib.formats.hpo.HpoOntology
 import com.github.phenomics.ontolib.ontology.data.TermId
-import grails.gorm.transactions.Transactional
 import hpo.api.disease.DbDisease
 import hpo.api.gene.DbGene
 import com.github.phenomics.ontolib.ontology.algo.OntologyTerms
 import grails.compiler.GrailsCompileStatic
 import groovy.transform.TypeCheckingMode
 import hpo.api.term.DbTerm
-import static hpo.api.models.TermEnum.*;
-import  hpo.api.models.TermEnum;
 
 
 @GrailsCompileStatic
 class HpoTermService {
 
   HpoOntology hpoOntology
-  //List<HpoDiseaseAnnotation> hpoDiseases
-  //List<HpoGeneAnnotation> hpoGenes
+
   /**
+   * Search For a Term By HPO ID
    *
-   * Query the ontology by HPO ID
-   *
-   * @param q the term to query with
-   * @return Term Object with result term.
+   * @param TrimmedQ the HPO ID
+   * @return DBTerm (for Relations) and Term (for Details)
    */
   Map searchTerm(String trimmedQ){
     Map result = [:]
@@ -39,6 +34,12 @@ class HpoTermService {
       }
     return result
   }
+  /**
+   * Search For Associated Genes By Term
+   *
+   * @param TrimmedQ the HPO ID
+   * @return genes: List of Genes Associated to Term
+   */
   List<DbGene> searchGenesByTerm(String trimmedQ){
     List<DbGene> genes = []
     if (trimmedQ.startsWith('HP:')) {
@@ -47,6 +48,12 @@ class HpoTermService {
     }
     return genes
   }
+  /**
+   * Search For Associated Diseases By Term
+   *
+   * @param TrimmedQ the HPO ID
+   * @return genes: List of Diseases Associated to Term
+   */
   List<DbDisease> searchDiseasesByTerm(String trimmedQ){
     List<DbDisease> diseases = []
     if (trimmedQ.startsWith('HP:')) {

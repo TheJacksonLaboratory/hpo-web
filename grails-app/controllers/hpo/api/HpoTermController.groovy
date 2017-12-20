@@ -7,11 +7,10 @@ class HpoTermController {
 
   /**
    *
-   * @param hpoid(q)
+   * @param Trimmed Rest id From Url
    * @return
    */
     def searchTerm(){
-
         render(view: '/hpoTermDetails/searchTerm', model: [result: hpoTermService.searchTerm(params.id.trim())])
     }
 
@@ -22,8 +21,4 @@ class HpoTermController {
     def searchDiseasesByTerm(String q){
         render(view: '/hpoDiseaseDetails/searchDiseasesByTerm', model: [diseaseList: hpoTermService.searchDiseasesByTerm(params.id.trim())])
     }
-    /* Shouldn't need
-    def findTermRelations(String q){
-      render(view: '../hpoSearch/relations', model: [resultMap: hpoTermRelationsService.findTermRelations(q)])
-    }*/
 }

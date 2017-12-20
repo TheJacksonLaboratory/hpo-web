@@ -32,8 +32,6 @@ class UrlMappings {
     "/api/hpo/term/$id"(controller: 'hpoTerm', action: 'searchTerm')
     "/api/hpo/term/$id/genes"(controller: 'hpoTerm', action: 'searchGenesByTerm')
     "/api/hpo/term/$id/diseases"(controller: 'hpoTerm', action: 'searchDiseasesByTerm')
-    "/api/hpo/term/relations"(controller: 'hpoTerm', action: 'findTermRelations')
-    "/api/hpo/term/associations"(controller: 'hpoTerm', action: 'findTermAssociations')
 
     "500"(view: '/error')
     "404"(view: '/notFound')
