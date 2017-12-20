@@ -1,0 +1,11 @@
+import hpo.api.term.DbTerm
+
+model {
+  DbTerm termLite
+}
+json {
+  name termLite.name
+  id termLite.id
+  childrenCount termLite.numberOfChildren
+  ontologyId termLite.ontologyId
+}

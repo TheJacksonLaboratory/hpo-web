@@ -10,10 +10,13 @@ import hpo.api.gene.DbGene
 import com.github.phenomics.ontolib.ontology.algo.OntologyTerms
 import grails.compiler.GrailsCompileStatic
 import groovy.transform.TypeCheckingMode
+import hpo.api.term.DbTerm
+import static hpo.api.models.TermEnum.*;
+import  hpo.api.models.TermEnum;
 
 
 @GrailsCompileStatic
-class HpoTermDetailsService {
+class HpoTermService {
 
   HpoOntology hpoOntology
   //List<HpoDiseaseAnnotation> hpoDiseases
@@ -25,16 +28,34 @@ class HpoTermDetailsService {
    * @param q the term to query with
    * @return Term Object with result term.
    */
-   Map searchTerm(String trimmedQ){
-      Map resultMap = ["term":'', "geneAssoc":[],"diseaseAssoc":[]]
+  Map searchTerm(String trimmedQ){
+    Map result = [:]
       if (trimmedQ.startsWith('HP:')) {
-          Term term = this.hpoOntology.termMap.get(ImmutableTermId.constructWithPrefix(trimmedQ))
-          resultMap.put("term",term)
-          resultMap.put("geneAssoc", getGenes(term))
-          resultMap.put("diseaseAssoc",getDiseases(term))
+        DbTerm dbterm = DbTerm.findByOntologyId(trimmedQ)
+        Term term = this.hpoOntology.termMap.get(ImmutableTermId.constructWithPrefix(trimmedQ))
+        result.put("TERM",term)
+        result.put("DBTERM",dbterm)
+        return result
       }
-      return resultMap
+    return result
   }
+  List<DbGene> searchGenesByTerm(String trimmedQ){
+    List<DbGene> genes = []
+    if (trimmedQ.startsWith('HP:')) {
+      Term term = this.hpoOntology.termMap.get(ImmutableTermId.constructWithPrefix(trimmedQ))
+      genes = getGenes(term)
+    }
+    return genes
+  }
+  List<DbDisease> searchDiseasesByTerm(String trimmedQ){
+    List<DbDisease> diseases = []
+    if (trimmedQ.startsWith('HP:')) {
+      Term term = this.hpoOntology.termMap.get(ImmutableTermId.constructWithPrefix(trimmedQ))
+      diseases = getDiseases(term)
+    }
+    return diseases
+  }
+
   Set<TermId> getChildren(Term query){
     Set<TermId> terms = OntologyTerms.childrenOf(query.id,this.hpoOntology)
     return terms
