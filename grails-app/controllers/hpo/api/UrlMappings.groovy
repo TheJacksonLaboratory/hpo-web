@@ -30,6 +30,8 @@ class UrlMappings {
     "/api/hpo/search/gene"(controller: 'hpoGeneDetails', action: 'searchGene')
     "/api/hpo/search/disease"(controller: 'hpoDiseaseDetails', action: 'searchDisease')
     "/api/hpo/term/$id"(controller: 'hpoTerm', action: 'searchTerm')
+    "/api/hpo/term/$id/genes"(controller: 'hpoTerm', action: 'searchGenesByTerm')
+    "/api/hpo/term/$id/diseases"(controller: 'hpoTerm', action: 'searchDiseasesByTerm')
     "/api/hpo/term/relations"(controller: 'hpoTerm', action: 'findTermRelations')
     "/api/hpo/term/associations"(controller: 'hpoTerm', action: 'findTermAssociations')
 
