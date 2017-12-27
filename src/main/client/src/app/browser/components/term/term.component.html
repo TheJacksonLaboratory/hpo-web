@@ -1,13 +1,9 @@
 <div class="container">
   <div class="item-header">
-      <span [hidden]="!isLoading">
-          <mat-progress-bar  class="loading-result-details" color="primary" mode="buffer">
-          </mat-progress-bar>
-      </span>
       <div class="item-title">{{termTitle}}</div>
   </div>
 </div>
-<div [hidden]="isLoading" class="row">
+<div class="row">
   <div class="container">
     <div class="row">
       <div class="col-lg-3">
@@ -33,8 +29,8 @@
                       <span matTooltip="# of Descendants" matTooltipPosition="above" [hidden]="parent.count != 0" class="badge tree-badge">{{parent.childrenCount}}</span>
                     </li>
                     <li>
-                      <span class="term"><strong>{{treeData.term.name}}</strong></span>
-                        <span class="badge tree-badge" matTooltip="# of Descendants" matTooltipPosition="above">{{treeData.term.childrenCount}}</span>
+                      <span class="term"><strong>{{term.name}}</strong></span>
+                        <span class="badge tree-badge" matTooltip="# of Descendants" matTooltipPosition="above">XXX</span>
                       <ul>
                         <li *ngFor="let child of treeData.children">
                           <a class="link" routerLink="../{{child.ontologyId}}">{{child.name}}</a>
@@ -50,7 +46,9 @@
         <mat-tab-group class="term-tabs">
             <mat-tab label="Associations">
               <div class="tab-content">
-                <div class="associations disease-association mat-elevation-z6">
+                <mat-progress-bar  *ngIf="assocLoadingD && assocLoadingG" class="loading-result-details" color="primary" mode="buffer">
+                </mat-progress-bar>
+                <div [hidden]="assocLoadingD"class="associations disease-association mat-elevation-z6">
                   <h4 class="title">Disease Associations</h4>
                   <mat-table #table [dataSource]="diseaseSource" matSort>
                     <mat-header-row *matHeaderRowDef="diseaseColumns"></mat-header-row>
@@ -76,7 +74,7 @@
                     </ng-container>
                   </mat-table>
                 </div>
-                <div class="associations gene-association mat-elevation-z6">
+                <div [hidden]="assocLoadingG" class="associations gene-association mat-elevation-z6">
                   <h4 class="title">Gene Associations</h4>
                   <mat-table #table [dataSource]="geneSource" matSort>
                     <mat-header-row *matHeaderRowDef="geneColumns"></mat-header-row>

@@ -16,19 +16,33 @@ export class TermService {
     }
     searchTerm(query: string): Promise<any>{
         return this.http
-            .get(environment.HPO_API_TERM_SEARCH_URL + '?q=' + query, this.options)
+            .get(environment.HPO_API_TERM_SEARCH_URL + '/' + query, this.options)
             .toPromise()
             .then(response => response.json())
-            .catch(this.handleError);
+            .catch(TermService.handleError);
     }
     getTreeData(query: string): Promise<any> {
       return this.http
         .get(environment.HPO_API_TERM_TREE_URL + '?q=' + query, this.options)
         .toPromise()
         .then(response => response.json())
-        .catch(this.handleError);
+        .catch(TermService.handleError);
     }
-    private handleError(error: any): Promise<any> {
+    searchGenesByTerm(query:string): Promise<any>{
+      return this.http
+        .get(environment.HPO_API_TERM_SEARCH_URL + query + '/genes', this.options)
+        .toPromise()
+        .then(response => response.json())
+        .catch(TermService.handleError);
+    }
+    searchDiseasesByTerm(query:string): Promise<any>{
+      return this.http
+        .get(environment.HPO_API_TERM_SEARCH_URL + query + '/diseases', this.options)
+        .toPromise()
+        .then(response => response.json())
+        .catch(TermService.handleError);
+    }
+    private static handleError(error: any): Promise<any> {
         console.error('Error:', error);
         return Promise.reject(error.message || error);
     }

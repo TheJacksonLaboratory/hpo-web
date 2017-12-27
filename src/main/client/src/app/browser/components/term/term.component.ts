@@ -22,7 +22,8 @@ export class TermComponent implements OnInit {
   geneSource: GeneAssocDatasource | null;
   diseaseSource: DiseaseAssocDatasource | null;
   treeData: TermTree;
-  isLoading: boolean = true;
+  assocLoadingD: boolean = true;
+  assocLoadingG: boolean = true;
   toolTipPosition: "above";
   @ViewChild(MatSort) sort: MatSort;
   constructor(private route: ActivatedRoute, private termService: TermService) {
@@ -34,27 +35,31 @@ export class TermComponent implements OnInit {
   ngOnInit() {
   }
   refreshData(query: string){
-    this.termService.getTreeData(query).then((resp) => {
-      this.treeData = resp;
-      console.log(this.treeData);
-    },(error)=>{
-      console.log(error);
-    });
-
+    this.assocLoadingD = true;
+    this.assocLoadingG = true;
     this.termService.searchTerm(query)
       .then((data) => {
         //debugger;
-        this.setDefaults(data.term);
-        this.geneAssoc = new GeneAssocDB(data.geneAssoc)
-        this.geneSource = new GeneAssocDatasource(this.geneAssoc, this.sort);
-        this.diseaseAssoc = new DiseaseAssocDB(data.diseaseAssoc)
-        this.diseaseSource = new DiseaseAssocDatasource(this.diseaseAssoc, this.sort)
+        this.setDefaults(data.details);
+        this.treeData = data.relations;
         this.termTitle = "(" + this.term.id + ")" + " " + this.term.name;
-        this.isLoading = false;
       }, (error) => {
         console.log(error);
+    });
+    this.termService.searchDiseasesByTerm(query)
+      .then((data) =>{
+        this.diseaseAssoc = new DiseaseAssocDB(data.diseases);
+        this.diseaseSource = new DiseaseAssocDatasource(this.diseaseAssoc, this.sort);
+        this.assocLoadingD = false;
+      });
+    this.termService.searchGenesByTerm(query)
+      .then((data) =>{
+        this.geneAssoc = new GeneAssocDB(data.genes);
+        this.geneSource = new GeneAssocDatasource(this.geneAssoc, this.sort);
+        this.assocLoadingG = false;
       });
   }
+
   setDefaults(term: Term){
     this.term = term;
     this.term.altTermIds = (term.altTermIds.length != 0) ? term.altTermIds: ["-"];
