@@ -3,6 +3,7 @@ model {
   DbTerm dbTerm
 }
 json{
+   termCount dbTerm.getNumberOfChildren()
    parents tmpl.termLite(dbTerm.getParents().asList())
    children tmpl.termLite(dbTerm.getChildren().asList())
 }
