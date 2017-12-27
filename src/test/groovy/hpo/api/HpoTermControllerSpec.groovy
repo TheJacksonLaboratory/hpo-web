@@ -14,18 +14,6 @@ class HpoTermControllerSpec extends Specification implements ControllerUnitTest<
     }
 
     void "test something"() {
-      setup:
-      String term = "HP:0002862"
-      when: "we query for a term"
-      controller.searchTerm(term)
-
-      then:
-      if(termResponse.Term){
-        termResponse.Term.getId().getIdWithPrefix() == expected
-      }
-      else{
-        termResponse == expected
-      }
         expect:"fix me"
         true == false
     }
