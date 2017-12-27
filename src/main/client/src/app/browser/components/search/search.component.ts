@@ -15,19 +15,18 @@ export class SearchComponent implements OnInit {
   diseases: Disease[];
   genes: Gene[];
   bootCols: number;
-  loading: boolean;
+  isLoading: boolean = false;
   constructor(private searchService: SearchService) {
     this.terms = [];
     this.diseases = [];
     this.genes = [];
     this.bootCols = 4;
-    this.loading = false;
   }
   ngOnInit() {
     //this.getPhenotypes();
   }
   queryHPO(query: string): void {
-    this.loading = true;
+    this.isLoading = true;
     this.searchService.searchAll(this.query)
       .then((data) => {
         let numResults: number;
@@ -40,7 +39,7 @@ export class SearchComponent implements OnInit {
         }else if(numResults == 1){
           this.bootCols = 12;
         }
-        this.loading = false;
+        this.isLoading = false;
       }, (error) => {
         console.log(error);
     });
