@@ -8,7 +8,6 @@ import grails.testing.gorm.DataTest
 import grails.testing.services.ServiceUnitTest
 import hpo.api.disease.DbDisease
 import hpo.api.gene.DbGene
-import hpo.api.models.TermEnum
 import hpo.api.term.DbTerm
 import hpo.api.util.HpoOntologyFactory
 import spock.lang.Shared
