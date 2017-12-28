@@ -8,13 +8,11 @@ import grails.testing.gorm.DataTest
 import grails.testing.services.ServiceUnitTest
 import hpo.api.disease.DbDisease
 import hpo.api.gene.DbGene
-import hpo.api.models.TermEnum
 import hpo.api.term.DbTerm
 import hpo.api.util.HpoOntologyFactory
 import spock.lang.Shared
 import spock.lang.Specification
 import spock.lang.Unroll
-import hpo.api.models.TermEnum.*;
 @Unroll
 class HpoTermServiceUnitSpec extends Specification implements ServiceUnitTest<HpoTermService>, DataTest{
 
