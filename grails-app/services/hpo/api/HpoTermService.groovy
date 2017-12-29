@@ -82,7 +82,7 @@ class HpoTermService {
         'in'('ontologyId',terms.collect{ it.getIdWithPrefix()})
       }
     }
-    return geneList
+    return geneList.unique()
   }
 
   List<DbDisease> getDiseases(Term query){
@@ -98,6 +98,6 @@ class HpoTermService {
           'in'('ontologyId',terms.collect{ it.getIdWithPrefix()})
         }
       }
-      return diseaseList
+      return diseaseList.unique()
   }
 }

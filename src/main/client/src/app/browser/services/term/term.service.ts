@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http';
+import {Observable} from "rxjs/Observable";
+import { Http, Headers, RequestOptions, URLSearchParams } from '@angular/http';
 import { environment } from '../../../../environments/environment';
 import 'rxjs/add/operator/toPromise';
-import {toPromise} from "rxjs/operator/toPromise";
+
 
 @Injectable()
 export class TermService {
@@ -21,19 +22,13 @@ export class TermService {
             .then(response => response.json())
             .catch(TermService.handleError);
     }
-    searchGenesByTerm(query:string): Promise<any>{
+    searchGenesByTerm(query:string): Observable<any>{
       return this.http
-        .get(environment.HPO_API_TERM_SEARCH_URL + query + '/genes', this.options)
-        .toPromise()
-        .then(response => response.json())
-        .catch(TermService.handleError);
+        .get(environment.HPO_API_TERM_SEARCH_URL + query + '/genes', this.options).map(res => res.json());
     }
-    searchDiseasesByTerm(query:string): Promise<any>{
+    searchDiseasesByTerm(query:string): Observable<any>{
       return this.http
-        .get(environment.HPO_API_TERM_SEARCH_URL + query + '/diseases', this.options)
-        .toPromise()
-        .then(response => response.json())
-        .catch(TermService.handleError);
+        .get(environment.HPO_API_TERM_SEARCH_URL + query + '/diseases', this.options).map(res => res.json());
     }
     private static handleError(error: any): Promise<any> {
         console.error('Error:', error);

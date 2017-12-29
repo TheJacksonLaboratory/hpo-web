@@ -1,11 +1,18 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params} from '@angular/router';
+import { MatSort } from '@angular/material';
+import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/observable/forkJoin';
+import { Observable } from "rxjs/Observable";
+// Models
 import { Term, TermTree} from '../../models/models';
-import { TermService } from '../../services/term/term.service';
 import { DiseaseAssocDB,GeneAssocDB } from '../associations/datasources/associations-db';
 import { GeneAssocDatasource } from '../associations/datasources/gene-assoc-datasource';
 import { DiseaseAssocDatasource } from '../associations/datasources/disease-assoc-datasource';
-import { MatSort } from '@angular/material';
+// Services
+import { TermService } from '../../services/term/term.service';
+
+
 @Component({
   selector: 'app-term',
   templateUrl: './term.component.html',
@@ -22,21 +29,30 @@ export class TermComponent implements OnInit {
   geneSource: GeneAssocDatasource | null;
   diseaseSource: DiseaseAssocDatasource | null;
   treeData: TermTree;
-  assocLoadingD: boolean = true;
-  assocLoadingG: boolean = true;
+  assocLoading: boolean = true;
   toolTipPosition: "above";
   @ViewChild(MatSort) sort: MatSort;
   constructor(private route: ActivatedRoute, private termService: TermService) {
-    this.route.params.subscribe( params => {
-      this.refreshData(params.id)
-    });
+
   }
 
   ngOnInit() {
+    this.route.params.switchMap((params: Params) => {
+      this.assocLoading = true;
+      this.refreshData(params.id);
+      let geneService = this.termService.searchGenesByTerm(params.id);
+      let diseaseService = this.termService.searchDiseasesByTerm(params.id);
+      return Observable.forkJoin(geneService, diseaseService)
+    }).subscribe(([res1,res2]) => {
+      this.geneAssoc = new GeneAssocDB(res1.genes);
+      this.geneSource = new GeneAssocDatasource(this.geneAssoc, this.sort);
+      this.diseaseAssoc = new DiseaseAssocDB(res2.diseases);
+      this.diseaseSource = new DiseaseAssocDatasource(this.diseaseAssoc, this.sort);
+      this.assocLoading = false;
+    });
   }
+
   refreshData(query: string){
-    this.assocLoadingD = true;
-    this.assocLoadingG = true;
     this.termService.searchTerm(query)
       .then((data) => {
         //debugger;
@@ -46,18 +62,6 @@ export class TermComponent implements OnInit {
       }, (error) => {
         console.log(error);
     });
-    this.termService.searchDiseasesByTerm(query)
-      .then((data) =>{
-        this.diseaseAssoc = new DiseaseAssocDB(data.diseases);
-        this.diseaseSource = new DiseaseAssocDatasource(this.diseaseAssoc, this.sort);
-        this.assocLoadingD = false;
-      });
-    this.termService.searchGenesByTerm(query)
-      .then((data) =>{
-        this.geneAssoc = new GeneAssocDB(data.genes);
-        this.geneSource = new GeneAssocDatasource(this.geneAssoc, this.sort);
-        this.assocLoadingG = false;
-      });
   }
 
   setDefaults(term: Term){
