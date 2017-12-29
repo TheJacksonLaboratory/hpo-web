@@ -43,71 +43,59 @@
         </mat-card>
       </div>
       <div class="col-lg-9">
-        <mat-tab-group class="term-tabs">
-            <mat-tab label="Associations">
-              <div class="tab-content">
-                <mat-progress-bar  *ngIf="assocLoading" class="loading-result-details" color="primary" mode="buffer">
-                </mat-progress-bar>
-                <div [hidden]="assocLoading"class="associations disease-association mat-elevation-z6">
-                  <h4 class="title">Disease Associations</h4>
-                  <mat-table #table [dataSource]="diseaseSource" matSort>
-                    <mat-header-row *matHeaderRowDef="diseaseColumns"></mat-header-row>
-                    <mat-row *matRowDef="let row; columns: diseaseColumns;"></mat-row>
-                    <ng-container matColumnDef="diseaseId">
-                      <mat-header-cell *matHeaderCellDef> Disease Id </mat-header-cell>
-                      <mat-cell *matCellDef="let row">
-                        <a routerLink="/browser/disease/{{row.diseaseId}}">{{row.diseaseId}}</a>
-                      </mat-cell>
-                    </ng-container>
-                    <ng-container matColumnDef="diseaseName">
-                        <mat-header-cell *matHeaderCellDef>Disease Name </mat-header-cell>
-                        <mat-cell *matCellDef="let row">{{row.diseaseName}}</mat-cell>
-                    </ng-container>
-                    <ng-container matColumnDef="dbGenes">
-                        <mat-header-cell *matHeaderCellDef>Associated Genes</mat-header-cell>
-                        <mat-cell *matCellDef="let row">
-                          <span *ngFor="let gene of row.dbGenes">
-                              <a routerLink="/browser/gene/{{gene.entrezGeneId}}">({{gene.entrezGeneId}})</a> -
-                              {{gene.entrezGeneSymbol}}<br>
-                          </span>
-                        </mat-cell>
-                    </ng-container>
-                  </mat-table>
-                </div>
-                <div [hidden]="assocLoading" class="associations gene-association mat-elevation-z6">
-                  <h4 class="title">Gene Associations</h4>
-                  <mat-table #table [dataSource]="geneSource" matSort>
-                    <mat-header-row *matHeaderRowDef="geneColumns"></mat-header-row>
-                    <mat-row *matRowDef="let row; columns: geneColumns;"></mat-row>
-                    <ng-container matColumnDef="entrezGeneId">
-                      <mat-header-cell *matHeaderCellDef> Gene Symbol </mat-header-cell>
-                      <mat-cell *matCellDef="let row">
-                        {{row.entrezGeneSymbol}}
-                        <a routerLink="/browser/gene/{{row.entrezGeneId}}"> ({{row.entrezGeneId}})</a>
-                      </mat-cell>
-                    </ng-container>
-                    <ng-container matColumnDef="dbDiseases">
-                      <mat-header-cell *matHeaderCellDef> Associated Diseases </mat-header-cell>
-                      <mat-cell *matCellDef="let row">
-                        <span *ngFor="let disease of row.dbDiseases">
-                            <a routerLink="/browser/disease/{{disease.diseaseId}}">({{disease.diseaseId}})</a> -
-                            {{disease.diseaseName}}<br>
-                        </span>
-                      </mat-cell>
-                    </ng-container>
-                  </mat-table>
-                </div>
-              </div>
-            </mat-tab>
-             <mat-tab label="Some Other Data">
-                <div class="tab-content">
-                  </div>
-            </mat-tab>
-          <mat-tab label="Term In Text">
-            <div class="tab-content">
-            </div>
-          </mat-tab>
-        </mat-tab-group>
+        <div class="tab-content">
+          <mat-progress-bar  *ngIf="assocLoading" class="loading-result-details" color="primary" mode="buffer">
+          </mat-progress-bar>
+          <div [hidden]="assocLoading"class="associations disease-association mat-elevation-z6">
+            <h4 class="title">Disease Associations</h4>
+            <mat-table #table [dataSource]="diseaseSource" matSort>
+              <mat-header-row *matHeaderRowDef="diseaseColumns"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: diseaseColumns;"></mat-row>
+              <ng-container matColumnDef="diseaseId">
+                <mat-header-cell *matHeaderCellDef> Disease Id </mat-header-cell>
+                <mat-cell *matCellDef="let row">
+                  <a routerLink="/browser/disease/{{row.diseaseId}}">{{row.diseaseId}}</a>
+                </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="diseaseName">
+                  <mat-header-cell *matHeaderCellDef>Disease Name </mat-header-cell>
+                  <mat-cell *matCellDef="let row">{{row.diseaseName}}</mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="dbGenes">
+                  <mat-header-cell *matHeaderCellDef>Associated Genes</mat-header-cell>
+                  <mat-cell *matCellDef="let row">
+                    <span *ngFor="let gene of row.dbGenes">
+                        <a routerLink="/browser/gene/{{gene.entrezGeneId}}">({{gene.entrezGeneId}})</a> -
+                        {{gene.entrezGeneSymbol}}<br>
+                    </span>
+                  </mat-cell>
+              </ng-container>
+            </mat-table>
+          </div>
+          <div [hidden]="assocLoading" class="associations gene-association mat-elevation-z6">
+            <h4 class="title">Gene Associations</h4>
+            <mat-table #table [dataSource]="geneSource" matSort>
+              <mat-header-row *matHeaderRowDef="geneColumns"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: geneColumns;"></mat-row>
+              <ng-container matColumnDef="entrezGeneId">
+                <mat-header-cell *matHeaderCellDef> Gene Symbol </mat-header-cell>
+                <mat-cell *matCellDef="let row">
+                  {{row.entrezGeneSymbol}}
+                  <a routerLink="/browser/gene/{{row.entrezGeneId}}"> ({{row.entrezGeneId}})</a>
+                </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="dbDiseases">
+                <mat-header-cell *matHeaderCellDef> Associated Diseases </mat-header-cell>
+                <mat-cell *matCellDef="let row">
+                  <span *ngFor="let disease of row.dbDiseases">
+                      <a routerLink="/browser/disease/{{disease.diseaseId}}">({{disease.diseaseId}})</a> -
+                      {{disease.diseaseName}}<br>
+                  </span>
+                </mat-cell>
+              </ng-container>
+            </mat-table>
+          </div>
+        </div>
       </div>
     </div>
   </div>
