@@ -1,11 +1,18 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params} from '@angular/router';
+import { MatSort } from '@angular/material';
+import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/observable/forkJoin';
+import { Observable } from "rxjs/Observable";
+// Models
 import { Term, TermTree} from '../../models/models';
-import { TermService } from '../../services/term/term.service';
 import { DiseaseAssocDB,GeneAssocDB } from '../associations/datasources/associations-db';
 import { GeneAssocDatasource } from '../associations/datasources/gene-assoc-datasource';
 import { DiseaseAssocDatasource } from '../associations/datasources/disease-assoc-datasource';
-import { MatSort } from '@angular/material';
+// Services
+import { TermService } from '../../services/term/term.service';
+
+
 @Component({
   selector: 'app-term',
   templateUrl: './term.component.html',
@@ -22,39 +29,41 @@ export class TermComponent implements OnInit {
   geneSource: GeneAssocDatasource | null;
   diseaseSource: DiseaseAssocDatasource | null;
   treeData: TermTree;
-  isLoading: boolean = true;
+  assocLoading: boolean = true;
   toolTipPosition: "above";
   @ViewChild(MatSort) sort: MatSort;
   constructor(private route: ActivatedRoute, private termService: TermService) {
-    this.route.params.subscribe( params => {
-      this.refreshData(params.id)
-    });
+
   }
 
   ngOnInit() {
-  }
-  refreshData(query: string){
-    this.termService.getTreeData(query).then((resp) => {
-      this.treeData = resp;
-      console.log(this.treeData);
-    },(error)=>{
-      console.log(error);
+    this.route.params.switchMap((params: Params) => {
+      this.assocLoading = true;
+      this.refreshData(params.id);
+      let geneService = this.termService.searchGenesByTerm(params.id);
+      let diseaseService = this.termService.searchDiseasesByTerm(params.id);
+      return Observable.forkJoin(geneService, diseaseService)
+    }).subscribe(([res1,res2]) => {
+      this.geneAssoc = new GeneAssocDB(res1.genes);
+      this.geneSource = new GeneAssocDatasource(this.geneAssoc, this.sort);
+      this.diseaseAssoc = new DiseaseAssocDB(res2.diseases);
+      this.diseaseSource = new DiseaseAssocDatasource(this.diseaseAssoc, this.sort);
+      this.assocLoading = false;
     });
+  }
 
+  refreshData(query: string){
     this.termService.searchTerm(query)
       .then((data) => {
         //debugger;
-        this.setDefaults(data.term);
-        this.geneAssoc = new GeneAssocDB(data.geneAssoc)
-        this.geneSource = new GeneAssocDatasource(this.geneAssoc, this.sort);
-        this.diseaseAssoc = new DiseaseAssocDB(data.diseaseAssoc)
-        this.diseaseSource = new DiseaseAssocDatasource(this.diseaseAssoc, this.sort)
+        this.setDefaults(data.details);
+        this.treeData = data.relations;
         this.termTitle = "(" + this.term.id + ")" + " " + this.term.name;
-        this.isLoading = false;
       }, (error) => {
         console.log(error);
-      });
+    });
   }
+
   setDefaults(term: Term){
     this.term = term;
     this.term.altTermIds = (term.altTermIds.length != 0) ? term.altTermIds: ["-"];

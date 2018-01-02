@@ -6,7 +6,6 @@ import com.github.phenomics.ontolib.ontology.data.ImmutableTermId
 import com.github.phenomics.ontolib.ontology.data.Term
 import grails.testing.gorm.DataTest
 import grails.testing.services.ServiceUnitTest
-import hpo.api.HpoTermDetailsService
 import hpo.api.disease.DbDisease
 import hpo.api.gene.DbGene
 import hpo.api.term.DbTerm
@@ -14,9 +13,8 @@ import hpo.api.util.HpoOntologyFactory
 import spock.lang.Shared
 import spock.lang.Specification
 import spock.lang.Unroll
-
 @Unroll
-class HpoTermDetailsServiceUnitSpec extends Specification implements ServiceUnitTest<HpoTermDetailsService>, DataTest{
+class HpoTermServiceUnitSpec extends Specification implements ServiceUnitTest<HpoTermService>, DataTest{
 
     @Shared
     HpoOntology hpoOntology
@@ -37,10 +35,10 @@ class HpoTermDetailsServiceUnitSpec extends Specification implements ServiceUnit
       }
       dbTerm.save()
       when: "we query for a term"
-      Map resultMap = service.searchTerm(query)
+      List<DbGene> genesResult = service.searchGenesByTerm(query)
 
       then:
-      resultMap.geneAssoc*.entrezGeneId == expected
+      genesResult*.entrezGeneId == expected
       where:
       query         |  expected      | desc
       ''            |  []            | 'nothing'
@@ -59,14 +57,30 @@ class HpoTermDetailsServiceUnitSpec extends Specification implements ServiceUnit
       }
       dbTerm.save()
       when: "we query for a term"
-      Map resultMap = service.searchTerm(query)
+      List<DbDisease> diseaseResult = service.searchDiseasesByTerm(query)
 
       then:
-      resultMap.diseaseAssoc*.diseaseId == expected
+      diseaseResult*.diseaseId == expected
       where:
       query         |  expected                 | desc
       ''            |  []                       | 'nothing'
       'HP:0002862'  |  ["OMIM:7", "ORPHA:227"]  | 'exact id'
+    }
+
+    void 'test find term details given term using #desc'(){
+      setup:
+      Term term = buildMockTerm("HP:0002862")
+      DbTerm dbTerm = new DbTerm(term).save()
+      dbTerm.save()
+      when: "we query for a term"
+      Map termResponse = service.searchTerm(query)
+
+      then:
+      termResponse?.TERM?.getId()?.getIdWithPrefix() == expected
+      where:
+      query         |  expected                 | desc
+      ''            |  null                    | 'nothing'
+      'HP:0002862'  |  'HP:0002862'             | 'exact id'
     }
     private static Term buildMockTerm(String id){
       Term term = new HpoTerm(

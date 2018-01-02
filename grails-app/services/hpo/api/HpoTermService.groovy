@@ -4,37 +4,65 @@ import com.github.phenomics.ontolib.ontology.data.ImmutableTermId
 import com.github.phenomics.ontolib.ontology.data.Term
 import com.github.phenomics.ontolib.formats.hpo.HpoOntology
 import com.github.phenomics.ontolib.ontology.data.TermId
-import grails.gorm.transactions.Transactional
 import hpo.api.disease.DbDisease
 import hpo.api.gene.DbGene
 import com.github.phenomics.ontolib.ontology.algo.OntologyTerms
 import grails.compiler.GrailsCompileStatic
 import groovy.transform.TypeCheckingMode
+import hpo.api.term.DbTerm
 
 
 @GrailsCompileStatic
-class HpoTermDetailsService {
+class HpoTermService {
 
   HpoOntology hpoOntology
-  //List<HpoDiseaseAnnotation> hpoDiseases
-  //List<HpoGeneAnnotation> hpoGenes
+
   /**
+   * Search For a Term By HPO ID
    *
-   * Query the ontology by HPO ID
-   *
-   * @param q the term to query with
-   * @return Term Object with result term.
+   * @param TrimmedQ the HPO ID
+   * @return DBTerm (for Relations) and Term (for Details)
    */
-   Map searchTerm(String trimmedQ){
-      Map resultMap = ["term":'', "geneAssoc":[],"diseaseAssoc":[]]
+  Map searchTerm(String trimmedQ){
+    Map result = [:]
       if (trimmedQ.startsWith('HP:')) {
-          Term term = this.hpoOntology.termMap.get(ImmutableTermId.constructWithPrefix(trimmedQ))
-          resultMap.put("term",term)
-          resultMap.put("geneAssoc", getGenes(term))
-          resultMap.put("diseaseAssoc",getDiseases(term))
+        DbTerm dbterm = DbTerm.findByOntologyId(trimmedQ)
+        Term term = this.hpoOntology.termMap.get(ImmutableTermId.constructWithPrefix(trimmedQ))
+        result.put("TERM",term)
+        result.put("DBTERM",dbterm)
+        return result
       }
-      return resultMap
+    return result
   }
+  /**
+   * Search For Associated Genes By Term
+   *
+   * @param TrimmedQ the HPO ID
+   * @return genes: List of Genes Associated to Term
+   */
+  List<DbGene> searchGenesByTerm(String trimmedQ){
+    List<DbGene> genes = []
+    if (trimmedQ.startsWith('HP:')) {
+      Term term = this.hpoOntology.termMap.get(ImmutableTermId.constructWithPrefix(trimmedQ))
+      genes = getGenes(term)
+    }
+    return genes
+  }
+  /**
+   * Search For Associated Diseases By Term
+   *
+   * @param TrimmedQ the HPO ID
+   * @return genes: List of Diseases Associated to Term
+   */
+  List<DbDisease> searchDiseasesByTerm(String trimmedQ){
+    List<DbDisease> diseases = []
+    if (trimmedQ.startsWith('HP:')) {
+      Term term = this.hpoOntology.termMap.get(ImmutableTermId.constructWithPrefix(trimmedQ))
+      diseases = getDiseases(term)
+    }
+    return diseases
+  }
+
   Set<TermId> getChildren(Term query){
     Set<TermId> terms = OntologyTerms.childrenOf(query.id,this.hpoOntology)
     return terms
@@ -54,7 +82,7 @@ class HpoTermDetailsService {
         'in'('ontologyId',terms.collect{ it.getIdWithPrefix()})
       }
     }
-    return geneList
+    return geneList.unique()
   }
 
   List<DbDisease> getDiseases(Term query){
@@ -70,6 +98,6 @@ class HpoTermDetailsService {
           'in'('ontologyId',terms.collect{ it.getIdWithPrefix()})
         }
       }
-      return diseaseList
+      return diseaseList.unique()
   }
 }

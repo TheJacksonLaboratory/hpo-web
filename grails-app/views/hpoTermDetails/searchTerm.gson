@@ -1,8 +1,7 @@
 model {
-    Map resultMap
+    Map<String,Object> result
 }
 json{
-    term tmpl.term( resultMap.term )
-    geneAssoc tmpl.gene(resultMap.geneAssoc)
-    diseaseAssoc tmpl.disease(resultMap.diseaseAssoc)
+    details tmpl.term( result.TERM )
+    relations tmpl.termRelations(result.DBTERM)
 }

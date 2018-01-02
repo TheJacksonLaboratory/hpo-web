@@ -1,6 +1,6 @@
 import com.github.phenomics.ontolib.formats.hpo.HpoDiseaseAnnotation
 model {
-    Map resultMap
+  Map resultMap
 }
 json{
   disease tmpl.disease( resultMap.disease)
