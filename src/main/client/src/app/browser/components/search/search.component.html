@@ -21,7 +21,7 @@
           <mat-card-content>
             <span routerLink="term/{{item.ontologyId}}" class="result-list" *ngFor="let item of terms;">
               <span class="result">{{item.ontologyId}} {{item.name}}
-                <span matTooltip="# of Descendants" matTooltipPosition="left"  *ngIf= item.childrenCount != 0" class="badge search-badge">{{item.childrenCount}}</span></span>
+                <span matTooltip="# of Descendants" matTooltipPosition="left"  *ngIf="item.childrenCount != 0" class="badge search-badge">{{item.childrenCount}}</span></span>
             </span>
           </mat-card-content>
         </mat-card>

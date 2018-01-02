@@ -13,6 +13,7 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { NoPageFoundComponent } from './error/no-page-found.component';
+import { ActionbarComponent } from './shared/actionbar/actionbar.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { NoPageFoundComponent } from './error/no-page-found.component';
     AppComponent,
     NavbarComponent,
     FooterComponent,
-    NoPageFoundComponent
+    NoPageFoundComponent,
+    ActionbarComponent
   ],
   imports: [
     BrowserModule,

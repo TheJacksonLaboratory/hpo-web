@@ -31,6 +31,7 @@ export class TermComponent implements OnInit {
   treeData: TermTree;
   assocLoading: boolean = true;
   toolTipPosition: "above";
+  actionBarItems: ["<button (click)=\"overlay = true\" mat-menu-item>New Search</button>","<button mat-menu-item>Test Button</button>"];
   @ViewChild(MatSort) sort: MatSort;
   constructor(private route: ActivatedRoute, private termService: TermService) {
 

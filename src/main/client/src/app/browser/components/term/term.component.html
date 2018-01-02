@@ -1,10 +1,10 @@
 <div class="container">
   <div class="item-header">
       <div class="item-title">{{termTitle}}</div>
-      <!-- Have button for Search Overlay -->
-      <button style="float:right" (click)="overlay = true"mat-button><mat-icon class="search-icon">search</mat-icon></button>
+      <!--<app-actionbar [actions]="actionBarItems"></app-actionbar> -->
+      <button style="float:right" (click)="overlay = true" mat-button><mat-icon class="search-icon">search</mat-icon></button>
       <div *ngIf="overlay" class="search-overlay">
-        <button style="float:right" (click)="overlay = false"mat-button><mat-icon class="search-icon">close</mat-icon></button>
+        <button style="float:right" (click)="overlay = false" mat-button><mat-icon class="search-icon">close</mat-icon></button>
         <searchbar></searchbar>
       </div>
   </div>
