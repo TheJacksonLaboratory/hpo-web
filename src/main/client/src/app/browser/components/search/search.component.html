@@ -19,9 +19,10 @@
             <mat-card-title>Terms<hr></mat-card-title>
           </mat-card-header>
           <mat-card-content>
-            <span routerLink="term/{{item.ontologyId}}" class="result-list" *ngFor="let item of terms;">
+            <span routerLink="/browser/term/{{item.ontologyId}}" class="result-list" *ngFor="let item of terms;">
               <span class="result">{{item.ontologyId}} {{item.name}}
-                <span matTooltip="# of Descendants" matTooltipPosition="left"  *ngIf= item.childrenCount != 0" class="badge search-badge">{{item.childrenCount}}</span></span>
+                <span matTooltip="# of Descendants" matTooltipPosition="left"  *ngIf="item.childrenCount != 0" class="badge search-badge">{{item.childrenCount}}</span>
+              </span>
             </span>
           </mat-card-content>
         </mat-card>
@@ -32,7 +33,7 @@
               <mat-card-title>Diseases<hr></mat-card-title>
             </mat-card-header>
             <mat-card-content>
-              <span routerLink="disease/{{item.diseaseId}}" class="result-list" *ngFor="let item of diseases;">
+              <span routerLink="/browser/disease/{{item.diseaseId}}" class="result-list" *ngFor="let item of diseases;">
                 <span class="result">{{item.dbRef}} {{item.dbName}}</span>
               </span>
             </mat-card-content>
@@ -44,7 +45,7 @@
                 <mat-card-title>Genes<hr></mat-card-title>
               </mat-card-header>
               <mat-card-content>
-                <span  routerLink="gene/{{item.entrezGeneId}}" *ngFor="let item of genes; "
+                <span  routerLink="/browser/gene/{{item.entrezGeneId}}" *ngFor="let item of genes; "
                   class="result-list">
                       <span class="result"> {{item.entrezGeneId}} {{item.entrezGeneSymbol}}</span>
               </span>
