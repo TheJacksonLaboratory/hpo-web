@@ -1,7 +1,8 @@
 import grails.util.Environment
 
+String externalConfigDir = "~/.grails/hpo_web"
 grails.config.locations = [
-    "~/.grails/hpo_web/${Environment.current.name}-config.groovy"
+    "${externalConfigDir}/${Environment.current.name}-config.groovy"
 ]
 
 grails {
@@ -122,20 +123,24 @@ dataSource {
 environments {
     development {
         dataSource {
-            dbCreate = 'create-drop'
-            url = 'jdbc:h2:mem:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE'
+          dbCreate = 'update'
+          url = "jdbc:h2:./build/devDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE"
+          grails.dbconsole.enabled = true
+          grails.dbconsole.urlRoot = '/admin/dbconsole'
         }
       }
     test {
         dataSource {
-            dbCreate = 'update'
-            url = 'jdbc:h2:mem:testDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE'
+          dbCreate = 'update'
+          url = "jdbc:h2:./build/devDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE"
+          grails.dbconsole.enabled = true
+          grails.dbconsole.urlRoot = '/admin/dbconsole'
         }
     }
     production {
         dataSource {
             dbCreate = 'none'
-            url = 'jdbc:h2:./prodDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE'
+            url = 'jdbc:h2:${externalConfigDir}/prodDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE'
             properties {
                 jmxEnabled = true
                 initialSize = 5
