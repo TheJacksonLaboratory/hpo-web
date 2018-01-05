@@ -43,7 +43,6 @@
 }
 ::ng-deep .associations {
   margin: 5px 5px 15px 5px;
-  max-width:fit-content;
 }
 ::ng-deep .associations .title {
   padding: 10px;
@@ -51,7 +50,6 @@
 }
 ::ng-deep .associations .mat-table{
    max-height:346px;
-   max-width:fit-content;
 }
 ::ng-deep .container-custom{
   margin-left:15px;
