@@ -1,13 +1,17 @@
-<div class="container">
-  <div class="item-header">
-      <div class="item-title">{{termTitle}}</div>
-      <!--<app-actionbar [actions]="actionBarItems"></app-actionbar> -->
-      <button style="float:right" (click)="overlay = true" mat-button><mat-icon class="search-icon">search</mat-icon></button>
-      <div *ngIf="overlay" class="search-overlay">
-        <button style="float:right" (click)="overlay = false" mat-button><mat-icon class="search-icon">close</mat-icon></button>
-        <searchbar></searchbar>
-      </div>
+<div class="term-toolbar container">
+  <div class="row">
+      <mat-toolbar color="accent" class="mat-elevation-z1">
+        <button class="mat-button" (click)="overlay = true" mat-menu-item>
+          <mat-icon class="search-icon">search</mat-icon>
+        </button>
+      </mat-toolbar>
   </div>
+</div>
+<div class="item-header row">
+    <div class="item-title">{{termTitle}}</div>
+    <div *ngIf="overlay" class="search-overlay" (click)="removeOverlay($event)">
+      <searchbar></searchbar>
+    </div>
 </div>
 <div class="row">
   <div class="container">

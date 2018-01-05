@@ -7,6 +7,8 @@ import { MatToolbarModule} from '@angular/material';
 import { RouterTestingModule } from '@angular/router/testing';
 import { TermService} from "../../services/term/term.service";
 import { MatTableModule } from '@angular/material';
+import { SearchComponent} from "../search/search.component";
+import {FormsModule} from "@angular/forms";
 
 describe('TermComponent', () => {
   let component: TermComponent;
@@ -20,8 +22,9 @@ describe('TermComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule, MatButtonModule, MatMenuModule, MatIconModule, MatToolbarModule,MatTableModule],
-      declarations: [ TermComponent ],
+      imports: [RouterTestingModule, MatButtonModule, MatMenuModule, MatIconModule, MatToolbarModule, MatTableModule,
+                 FormsModule],
+      declarations: [ TermComponent, SearchComponent ],
       providers: [{provide:TermService, useValue:termServiceStub}]
     })
     .compileComponents();

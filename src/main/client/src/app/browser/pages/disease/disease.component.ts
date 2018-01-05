@@ -3,9 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { MatSort } from '@angular/material';
 
 import { Disease,Gene,Term } from '../../models/models';
-import { TermAssocDB, GeneAssocDB} from '../associations/datasources/associations-db'
-import { TermAssocDatasource } from '../associations/datasources/term-assoc-datasource'
-import { GeneAssocDatasource} from '../associations/datasources/gene-assoc-datasource'
+import { TermAssocDB, GeneAssocDB} from '../../models/associations/datasources/associations-db'
+import { TermAssocDatasource } from '../../models/associations/datasources/term-assoc-datasource'
+import { GeneAssocDatasource} from '../../models/associations/datasources/gene-assoc-datasource'
 import { DiseaseService } from '../../services/disease/disease.service';
 
 @Component({

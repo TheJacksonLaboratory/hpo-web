@@ -1,23 +1,23 @@
 import { Observable } from 'rxjs/Observable';
-import { Term } from '../../../models/models';
-import { TermAssocDB } from './associations-db';
+import { DiseaseAssocDB } from './associations-db';
 import { MatSort } from '@angular/material';
+import { Disease } from '../../models';
 import { DataSource } from '@angular/cdk/collections';
 import 'rxjs/add/observable/merge';
 import 'rxjs/add/operator/map';
-export class TermAssocDatasource extends DataSource<any> {
-    constructor(private db: TermAssocDB, private _sort: MatSort) {
+export class DiseaseAssocDatasource extends DataSource<any> {
+    constructor(private _example: DiseaseAssocDB, private _sort: MatSort) {
       super();
     }
 
     /** Connect function called by the table to retrieve one stream containing the data to render. */
-    connect(): Observable<Term[]> {
+    connect(): Observable<Disease[]> {
       const displayDataChanges = [
-        this.db.dataChange,
+        this._example.dataChange,
         this._sort.sortChange,
       ];
       return Observable.merge(...displayDataChanges).map(() => {
-        return this.db.data;
+        return this._example.data;
       });
     }
 

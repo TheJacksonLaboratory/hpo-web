@@ -2,13 +2,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 // Components
-import { TermComponent } from './components/term/term.component';
-import { DiseaseComponent } from './components/disease/disease.component';
-import { GeneComponent } from './components/gene/gene.component';
+import { TermComponent } from './pages/term/term.component';
+import { DiseaseComponent } from './pages/disease/disease.component';
+import { GeneComponent } from './pages/gene/gene.component';
 import { BrowserComponent } from './browser.component';
 
 const browserRoutes: Routes = [
-  { path:'', component: BrowserComponent, 
+  { path:'', component: BrowserComponent,
     children:[
       { path:'term/:id', component: TermComponent },
       { path:'disease/:id', component: DiseaseComponent},

@@ -3,9 +3,9 @@ import { GeneEntrezService } from '../../services/gene/gene-entrez.service';
 import { GeneService } from '../../services/gene/gene.service';
 import { Gene, EntrezGene } from '../../models/models';
 import { ActivatedRoute } from '@angular/router';
-import { TermAssocDB, DiseaseAssocDB} from '../associations/datasources/associations-db'
-import { TermAssocDatasource } from '../associations/datasources/term-assoc-datasource'
-import { DiseaseAssocDatasource} from '../associations/datasources/disease-assoc-datasource'
+import { TermAssocDB, DiseaseAssocDB} from '../../models/associations/datasources/associations-db'
+import { TermAssocDatasource } from '../../models/associations/datasources/term-assoc-datasource'
+import { DiseaseAssocDatasource} from '../../models/associations/datasources/disease-assoc-datasource'
 import { MatSort } from '@angular/material';
 @Component({
   selector: 'app-gene',
