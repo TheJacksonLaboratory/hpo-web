@@ -73,8 +73,16 @@ export class TermComponent implements OnInit {
     this.term.definition = (term.definition != null) ? term.definition: "Sorry this term has no definition.";
     this.term.purl = "http://purl.obolibrary.org/obo/" + term.id.replace(":","_");
   }
+  showOverlay(){
+    this.overlay = true;
+  }
   removeOverlay(event){
     if(event.target.classList.contains("search-overlay")){
+      this.overlay = false;
+    }
+  }
+  onEscKey(event){
+    if(event.key == "Escape"){
       this.overlay = false;
     }
   }
