@@ -1,7 +1,17 @@
-<div class="container">
-  <div class="item-header">
-      <div class="item-title">{{termTitle}}</div>
+<div class="term-toolbar container">
+  <div class="row">
+      <mat-toolbar color="accent" class="mat-elevation-z1">
+        <button class="mat-button" (click)="showOverlay()" mat-menu-item>
+          <mat-icon class="search-icon">search</mat-icon>
+        </button>
+      </mat-toolbar>
   </div>
+</div>
+<div class="item-header row">
+    <div class="item-title">{{termTitle}}</div>
+    <div *ngIf="overlay" class="search-overlay" (click)="removeOverlay($event)" (window:keyup)="onEscKey($event)">
+      <searchbar></searchbar>
+    </div>
 </div>
 <div class="row">
   <div class="container">

@@ -88,3 +88,62 @@
   top:1em;
   bottom:0;
 }
+
+.search-overlay {
+  color:white;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.8); /* Black background with opacity */
+  z-index: 2;
+  cursor: pointer;
+}
+.term-toolbar {
+  margin-top:-50px;
+  float:right;
+  width: 75px;
+}
+.term-toolbar .mat-toolbar {
+  min-height:40px;
+  max-height:50px;
+}
+
+.term-toolbar .mat-toolbar .mat-button {
+  max-width:30px;
+  min-width:25px;
+  margin-right:10px;
+}
+::ng-deep .search-overlay .mat-input-placeholder {
+    color: white;
+}
+
+::ng-deep .search-overlay .mat-hint{
+  color:white;
+}
+
+::ng-deep .search-overlay .mat-form-field-underline {
+  background-color: rgba(255, 255, 255, 0.7);
+}
+::ng-deep .search-overlay .mat-form-field-ripple {
+  background-color: #fffff;
+}
+
+::ng-deep .search-overlay .searchbar {
+  margin:25px auto !important;
+}
+::ng-deep .search-overlay .mat-placeholder {
+  color: white;
+}
+
+.search-overlay .mat-hint{
+  color:white;
+}
+
+.search-overlay .mat-input-field-underline {
+  background-color: rgba(255, 255, 255, 0.7);
+}
+

@@ -13,6 +13,7 @@ import { MatTableModule } from '@angular/material';
 import { MatPaginatorModule } from '@angular/material';
 import { MatSortModule } from '@angular/material';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatToolbarModule } from '@angular/material';
 // Services
 import { SearchService } from './services/search/search.service';
 import { TermService } from './services/term/term.service';
@@ -20,10 +21,10 @@ import { GeneService } from './services/gene/gene.service';
 import { GeneEntrezService } from './services/gene/gene-entrez.service';
 import { DiseaseService } from './services/disease/disease.service';
 // Components
-import { SearchComponent } from './components/search/search.component';
-import { TermComponent } from './components/term/term.component';
-import { DiseaseComponent } from './components/disease/disease.component';
-import { GeneComponent } from './components/gene/gene.component';
+import { SearchComponent } from './pages/search/search.component';
+import { TermComponent } from './pages/term/term.component';
+import { DiseaseComponent } from './pages/disease/disease.component';
+import { GeneComponent } from './pages/gene/gene.component';
 import { BrowserComponent } from './browser.component';
 // Custom Pipes
 import { SortPipe } from './pipes/sort-pipe';
@@ -42,7 +43,8 @@ import { SortPipe } from './pipes/sort-pipe';
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatToolbarModule
   ],
   providers: [ SearchService, TermService, GeneService, GeneEntrezService, DiseaseService ],
   declarations: [ SearchComponent, TermComponent, DiseaseComponent,

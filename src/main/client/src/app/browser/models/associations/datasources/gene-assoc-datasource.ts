@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs/Observable';
 import { GeneAssocDB } from './associations-db';
 import { MatSort } from '@angular/material';
-import { Gene } from '../../../models/models';
+import { Gene } from '../../models';
 import { DataSource } from '@angular/cdk/collections';
 import 'rxjs/add/observable/merge';
 import 'rxjs/add/operator/map';

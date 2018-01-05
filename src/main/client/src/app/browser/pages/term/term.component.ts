@@ -6,9 +6,9 @@ import 'rxjs/add/observable/forkJoin';
 import { Observable } from "rxjs/Observable";
 // Models
 import { Term, TermTree} from '../../models/models';
-import { DiseaseAssocDB,GeneAssocDB } from '../associations/datasources/associations-db';
-import { GeneAssocDatasource } from '../associations/datasources/gene-assoc-datasource';
-import { DiseaseAssocDatasource } from '../associations/datasources/disease-assoc-datasource';
+import { DiseaseAssocDB,GeneAssocDB } from '../../models/associations/datasources/associations-db';
+import { GeneAssocDatasource } from '../../models/associations/datasources/gene-assoc-datasource';
+import { DiseaseAssocDatasource } from '../../models/associations/datasources/disease-assoc-datasource';
 // Services
 import { TermService } from '../../services/term/term.service';
 
@@ -30,15 +30,17 @@ export class TermComponent implements OnInit {
   diseaseSource: DiseaseAssocDatasource | null;
   treeData: TermTree;
   assocLoading: boolean = true;
+  overlay: boolean = false;
   toolTipPosition: "above";
+
   @ViewChild(MatSort) sort: MatSort;
   constructor(private route: ActivatedRoute, private termService: TermService) {
-
   }
 
   ngOnInit() {
     this.route.params.switchMap((params: Params) => {
       this.assocLoading = true;
+      this.overlay = false;
       this.refreshData(params.id);
       let geneService = this.termService.searchGenesByTerm(params.id);
       let diseaseService = this.termService.searchDiseasesByTerm(params.id);
@@ -71,7 +73,19 @@ export class TermComponent implements OnInit {
     this.term.definition = (term.definition != null) ? term.definition: "Sorry this term has no definition.";
     this.term.purl = "http://purl.obolibrary.org/obo/" + term.id.replace(":","_");
   }
-
+  showOverlay(){
+    this.overlay = true;
+  }
+  removeOverlay(event){
+    if(event.target.classList.contains("search-overlay")){
+      this.overlay = false;
+    }
+  }
+  onEscKey(event){
+    if(event.key == "Escape"){
+      this.overlay = false;
+    }
+  }
 }
 
 
