@@ -1,6 +1,7 @@
 package hpo.api.db.utils
 
 import grails.gorm.transactions.Transactional
+import groovy.sql.GroovyRowResult
 import groovy.sql.Sql
 import org.apache.commons.lang.time.StopWatch
 import org.hibernate.SessionFactory
@@ -38,5 +39,16 @@ class SqlUtilsService {
   Connection getConnection() {
     SessionImpl sessionImpl = sessionFactory.currentSession as SessionImpl
     sessionImpl.connection()
+  }
+
+  /**
+   * It executes the given a query and parameters with a sql connection
+   * @param sql
+   * @param params
+   * @return List of returned rows (GroovyRowResult)
+   */
+  List<GroovyRowResult> executeQuery (String sql, List<Object> params){
+    final List<GroovyRowResult> rows = getSql().rows(sql, params)
+    rows
   }
 }
