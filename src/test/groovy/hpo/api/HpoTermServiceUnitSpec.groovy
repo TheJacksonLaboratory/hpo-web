@@ -56,7 +56,7 @@ class HpoTermServiceUnitSpec extends Specification implements ServiceUnitTest<Hp
       where:
       query         |  expected      | mockQueryResponse                   | desc
       ''            |  []            | []                                  |'nothing'
-      'HP:0002862'  |  [7157, 3265]  | [[db_gene_id : 1],[db_gene_id : 2]] |'exact id'
+      'HP:0002862'  |  [3265, 7157]  | [[db_gene_id : 1],[db_gene_id : 2]] |'exact id'
       'HP:0002863'  |  []            | []                                  |'No gene associations'
 
 
