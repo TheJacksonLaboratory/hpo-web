@@ -107,9 +107,12 @@ class HpoTermService {
 
     final StopWatch stopWatch = new StopWatch()
     stopWatch.start()
-
+    final List<DbDisease> diseaseList = []
     final List<Long> diseaseIdList = getDiseaseListForAssociatedTerms(terms)
-    final List<DbDisease> diseaseList = DbDisease.findAllByIdInList(diseaseIdList, [sort:'diseaseName', order:'asc'])
+
+    if (diseaseIdList) {
+      diseaseList = DbDisease.findAllByIdInList(diseaseIdList, [sort: 'diseaseName', order: 'asc'])
+    }
 
     log.info("Find associated diseases duration = " + stopWatch)
     return diseaseList
@@ -141,13 +144,14 @@ class HpoTermService {
    * @param terms
    * @return list of DbGenes sorted by entrezGeneSymbol asc
    */
-  private List<DbGene> findDbGenes(List<DbTerm> terms){
+  private List<DbGene> findDbGenes(List<DbTerm> terms) {
     final StopWatch stopWatch = new StopWatch()
     stopWatch.start()
-
+    final List<DbGene> geneList = []
     final List<Long> geneIdList = getGeneListForAssociatedTerms(terms)
-    final List<DbGene> geneList = DbGene.findAllByIdInList(geneIdList, [sort:'entrezGeneSymbol', order:'asc'])
-
+    if (geneIdList) {
+      geneList = DbGene.findAllByIdInList(geneIdList, [sort: 'entrezGeneSymbol', order: 'asc'])
+    }
     log.info("Find associated genes duration = " + stopWatch)
     geneList
   }
