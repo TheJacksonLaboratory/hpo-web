@@ -17,18 +17,22 @@
 + Change directory to hpo-web
 
         cd hpo-web
-+ Execute local_db_init.sql in sql-scripts/
 
-+ Execute initDb.groovy in console-scripts/
 
-         Make sure to execute each load function seperately for now.
++ Build the application by executing:
+
+        ./gradlew clean build
+
++ Execute local_db_init.sql in sql-scripts/ to initialize the schema hpo user
+
++ Initialize DB and Load the HPO ontology data. Run the following command in the command window inside the hpo-web directory. This step will take approximate 2+ minutes to complete
+
+         
+         ./gradlew runCommand -Pargs="load-hpo-db"
          
          * Always start from fresh Database if you want to reload data.
         
 
-+ Validate the client and backend components build by executing:
-
-        ./gradlew build
 
 ## Usage
 
@@ -38,7 +42,7 @@
 
 + To open the application site launch the browser and go to
  
-        http://<host>:8080 gr
+        http://<host>:8080/app/index.html
 
 + If client (Angular App) hot reload is desired open a new shell and execute
 
