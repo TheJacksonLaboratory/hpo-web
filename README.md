@@ -31,7 +31,6 @@ This guide uses the H2 database which is a grails out-of-the-box in-memory or fi
 
         ./gradlew clean build
         
-        
         E.g.
         ...
         :processTestResources
@@ -49,8 +48,6 @@ This guide uses the H2 database which is a grails out-of-the-box in-memory or fi
         ./gradlew runCommand -Pargs="load-hpo-db"
         
         E.g. when complete the output in the command window should look like this:
-         
-         
         ...
         finished refreshing database duration: 0:02:49.391 time: Thu Jan 11 11:28:56 EST 2018
          
