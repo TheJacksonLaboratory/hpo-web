@@ -1,0 +1,38 @@
+.navbar{
+    background-color: #05396b;
+}
+.nav-components {
+    margin-left:25px;
+}
+.nav-brand .nav-title {
+  margin-top: 5px;
+  float: right;
+}
+.nav-brand .nav-logo {
+    height: 40px;
+    width: 40px;
+    margin: 0px 15px 0 10px;
+    float:left;
+}
+
+@media (max-width: 768px){
+    .mobile-menu.mat-button {
+        padding-left:25px;
+        padding-right:0px
+    }
+    .nav-brand .nav-logo {
+        margin-right:5px !important;
+    }
+    .nav-brand .nav-title {
+        font-size: 16px;
+    }
+
+}
+.fill-remaining-space{
+    flex:1;
+}
+.beta-flag{
+  background-color: red;
+  padding: 14px;
+  border-bottom: solid 5px ghostwhite;
+}

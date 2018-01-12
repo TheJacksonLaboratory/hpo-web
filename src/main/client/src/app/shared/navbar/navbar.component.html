@@ -1,0 +1,43 @@
+<mat-toolbar color="primary" class="mat-elevation-z1">
+  <div class="nav-brand" routerLink="/">
+    <img src="assets/hpo-logo.jpg" class="nav-logo"/>
+    <div class="nav-title">{{title}}</div>
+  </div>
+  <!-- This fills the remaining space of the current row -->
+  <div class="nav-components  hidden-xs hidden-sm hidden-md">
+      <button mat-button routerLink="/">Home</button>
+      <button mat-button routerLink="browser">Browser</button>
+      <button mat-button [matMenuTriggerFor]="docsMenu">Documentation <mat-icon>arrow_drop_down</mat-icon></button>
+      <button mat-button routerLink="downloads">Downloads</button>
+      <button mat-button [matMenuTriggerFor]="resourceMenu">Resources <mat-icon>arrow_drop_down</mat-icon></button>
+  </div>
+  <div class="fill-remaining-space">
+
+  </div>
+  <div class="beta-flag">
+    <strong>Beta</strong>
+  </div>
+  <button class="mobile-menu hidden-lg" mat-button [matMenuTriggerFor]="menu">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <mat-menu x-position="before" #menu="matMenu">
+    <button mat-menu-item routerLink="/">Home</button>
+    <button mat-menu-item routerLink="browser">Browser</button>
+    <button mat-menu-item [matMenuTriggerFor]="docsMenu">Documentation</button>
+    <button mat-menu-item routerLink="downloads">Downloads</button>
+    <button mat-menu-item [matMenuTriggerFor]="resourceMenu">Resources</button>
+  </mat-menu>
+  <mat-menu y-positon="after" [overlapTrigger]="false" #docsMenu="matMenu">
+    <button mat-menu-item routerLink="documentation"> Overview </button>
+    <button mat-menu-item routerLink="documentation/intro"> Introduction </button>
+    <button mat-menu-item routerLink="documentation/definitions"> Definitions </button>
+    <button mat-menu-item routerLink="documentation/annotations"> Annotations </button>
+  </mat-menu>
+  <mat-menu y-positon="after" [overlapTrigger]="false" #resourceMenu="matMenu">
+      <button mat-menu-item routerLink="citation"> Citation </button>
+      <button mat-menu-item routerLink="contact"> Contact  </button>
+      <button mat-menu-item routerLink="faq"> FAQ </button>
+      <button mat-menu-item routerLink="license"> License </button>
+    </mat-menu>
+</mat-toolbar>
+

@@ -1,0 +1,8 @@
+import hpo.api.gene.DbGene
+
+model {
+  List<DbGene> geneList
+}
+json{
+  genes tmpl.genesByTerm( geneList )
+}

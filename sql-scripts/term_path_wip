@@ -1,0 +1,14 @@
+select path_length
+, count(*)
+from db_term_path
+group by path_length
+
+
+select path_length
+,path_names
+from db_term_path
+	join db_term on db_term.id = db_term_path.db_term_id
+where 1=1 
+--and path_length = 12
+and db_term_path.path_names like '%lower limb%'
+order by   db_term_path.path_names

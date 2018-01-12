@@ -1,33 +1,85 @@
-# Human Phenotype Ontology ( HPO )
+# Human Phenotype Ontology (HPO) Web App
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.2.6.
+## Prerequisites
 
 ## Installation
 
 git clone <url>  
 npm -g install
 
-## Development server
++ Grails 3.3 +
++ JDK 1.8 +
++ Git 2.14
++ Gradle 4.2
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Setup
 
-## Code scaffolding
++ Clone the repo
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|module`.
+        git clone https://bitbucket.jax.org/scm/hpo/hpo-web.git
+        
 
-## Build
++ Change directory to hpo-web
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+        cd hpo-web
 
-## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
++ Build the application by executing:
 
-## Running end-to-end tests
+        ./gradlew clean build
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
++ Execute local_db_init.sql in sql-scripts/ to initialize the schema hpo user
 
-## Further help
++ Initialize DB and Load the HPO ontology data. Run the following command in the command window inside the hpo-web directory. This step will take approximate 2+ minutes to complete
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+         
+         ./gradlew runCommand -Pargs="load-hpo-db"
+         
+         * Always start from fresh Database if you want to reload data.
+        
+
+
+## Usage
+
++ Run the application
+
+        ./gradlew bootRun
+
++ To open the application site launch the browser and go to
+ 
+        http://<host>:8080/app/index.html
+
++ If client (Angular App) hot reload is desired open a new shell and execute
+
+        ./gradlew buildClientWatch
+
++ Optionally to open the client (Angular app) via Cli
+
+  * Change directory to hpo-web/src/main/client
+  
+        cd hpo-web/src/main/client  
+  * Execute
+  
+        ng serve --open (will open application in the browser using port 4200)
+  * Note: Review README file in hpo-web/src/main/client  
+
+## Unit Testing
+
++ To execute the client (Angular app) unit tests run
+  
+      ./gradlew clientTest
+
++ To execute backend and client unit tests run
+  
+      ./gradlew test
+    
+## Other
++ To see possible gradle tasks execute
+  
+      ./gradlew tasks
+      
++ To delete the previous build execute
+
+      ./gradlew clean
+      
+

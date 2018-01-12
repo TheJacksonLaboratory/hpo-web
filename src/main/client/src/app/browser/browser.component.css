@@ -1,0 +1,72 @@
+.search-intro {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  background-color: #f5f5f5;
+  border-radius: 5px;
+  padding: 25px;
+  color: black;
+  /* font-size: 14px; */
+  box-shadow: 1px 1px 15px 5px #D0D3D4;
+  margin-top: 50px;
+}
+.pageTitle{
+  cursor: pointer;
+}
+::ng-deep .mat-tab-label {
+  border-right: 1px solid rgba(0, 0, 0, 0.12);
+}
+::ng-deep .mat-tab-header {
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+}
+::ng-deep .item-title {
+  font-size: 18px;
+  text-align: center;
+  text-shadow: 1px 1px #D0D3D4;
+}
+::ng-deep .item-summary {
+  float:left;
+  width:100%;
+  margin:10px;
+}
+::ng-deep .item-header{
+  margin-top: -10px;
+  margin-bottom: 10px;
+}
+::ng-deep .item-summary .mat-card-content  .associations h4{
+  float:left;
+}
+::ng-deep .tab-content{
+  margin-top: 10px;
+}
+::ng-deep .mat-table {
+  overflow: auto;
+  max-height: 500px;
+}
+::ng-deep .associations {
+  margin: 5px 5px 15px 5px;
+}
+::ng-deep .associations .title {
+  padding: 10px;
+  margin: 0;
+}
+::ng-deep .associations .mat-table{
+   max-height:346px;
+}
+::ng-deep .container-custom{
+  margin-left:15px;
+  padding: 0px 5px 0px 5px;
+}
+
+::ng-deep .loading-result {
+  width: 25% !important;
+  margin: 15px 0 0 30%;
+  float:none;
+}
+::ng-deep .loading-result-details{
+  width: 25% !important;
+  margin: 15px 0 0 0;
+  float:none;
+}
+::ng-deep hr.underline-hr {
+  margin:0;
+  height:1px;
+}

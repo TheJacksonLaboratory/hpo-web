@@ -1,0 +1,15 @@
+import com.github.phenomics.ontolib.ontology.data.Term
+
+model {
+    Term term
+}
+json{
+  name term.name
+  id term.id.idWithPrefix
+  altTermIds term.altTermIds*.idWithPrefix
+  definition term.definition
+  comment term.comment
+  synonyms term.synonyms*.value
+  isObsolete term.isObsolete()
+  xrefs term.xrefs*.name
+}

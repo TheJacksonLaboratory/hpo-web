@@ -1,0 +1,8 @@
+model {
+  Map resultMap
+}
+json{
+  gene tmpl.gene( resultMap.gene )
+  termAssoc tmpl.term(resultMap.termAssoc)
+  diseaseAssoc tmpl.disease(resultMap.diseaseAssoc)
+}

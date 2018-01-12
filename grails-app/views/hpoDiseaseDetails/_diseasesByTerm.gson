@@ -1,0 +1,6 @@
+import hpo.api.disease.DbDisease
+
+model {
+  DbDisease diseasesByTerm
+}
+json g.render(diseasesByTerm,[excludes: ['dbTerms','id', 'dbGenes.dbTerms','dbGenes.dbDiseases'], expand:['dbGenes']])

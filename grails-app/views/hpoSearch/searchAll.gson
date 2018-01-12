@@ -1,0 +1,16 @@
+model {
+  Map<String, Map> resultMap
+}
+json {
+  terms tmpl.termLite(resultMap.terms.data)
+  termsTotalCount resultMap.terms.totalCount
+  termsOffset resultMap.terms.offset
+
+  diseases tmpl.diseaseLite(resultMap.diseases.data)
+  diseasesotalCount resultMap.diseases.totalCount
+  diseasesOffset resultMap.diseases.offset
+
+  genes tmpl.geneLite(resultMap.genes.data)
+  genesTotalCount resultMap.genes.totalCount
+  genesOffset resultMap.genes.offset
+}

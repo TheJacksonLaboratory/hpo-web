@@ -1,0 +1,88 @@
+<div class="container">
+    <div class="page-header">
+        <div class="page-title">{{pageTitle}}</div>
+        <div class="hr"></div>
+        <div class="page-intro">{{pageIntro}}</div>
+    </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+        <mat-accordion>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <strong>How to collaborate with the HPO ?</strong>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <p>We welcome the participation of interested colleagues. We anticipate that the structure of the HPO will continue to be refined and completed for some time to come.
+                Groups or persons with expert knowledge in a particular domain of human phenotyping in a medical genetics setting are invited to contribute their knowledge on a collaborative basis.
+                Please contact us to discuss details.</p>
+              <p>We are currently transitioning from annotations derived in a semiautomated fashion from the OMIM database to manually curated annotations. Given the number of human hereditary diseases,
+                this is no small task. We greet participation of colleagues with an interest in specific hereditary diseases to improve the annotations for ‘their’ disease. Please get in contact with us to discuss this form of collaboration.
+                We are also preparing an online system for manual annotations.</p>
+              <p>The issue tracker is <a href="https://github.com/obophenotype/human-phenotype-ontology/issues" target="__blank">available on Github.</a></p>
+              <h5>Collaborations for translations</h5>
+              <p>We are working with several people to translate more content of HPO into a multitude of languages. Several translations are being actively developed at the moment (e.g. german).</p>
+              <p>The translations are considered a project coordinated by the HPO team and is hosted on <a href="https://github.com/Phenomics/HPO-translations" target="__blank">GitHub</a>. Please do not start translating HPO content without contacting us beforehand.
+                This might cause duplicated translations and other problems. Please contact us here.</p>
+            </mat-expansion-panel>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                  <mat-panel-title>
+                  <strong>What is the difference between genes_to_phenotypes.txt and phenotype_to_genes.txt ?</strong>
+                  </mat-panel-title>
+              </mat-expansion-panel-header>
+              <p>A question that is asked very often, deals with the asymmetry of the files:</p>
+              <ul>
+                <li><i>genes_to_phenotypes.txt</i></li>
+                <li><i>phenotype_to_genes.txt</i></li>
+              </ul>
+              <p>The difference is that one files uses the transitivity of the annotations and the other does not. I.e. in <i>genes_to_phenotypes.txt</i> we list for each gene the most specific HPO-classes (and not all the ancestors).
+                In <i>phenotype_to_genes.txt</i> we show each phenotype that has at least one gene associated with it. Additionally, we have mapped the genes to all its the ancestor classes. For example given that:</p>
+              <ul>
+                <li>HP_1 subclass_of HP_3</li>
+                <li>HP_1 subclass_of HP_3</li>
+              </ul>
+              <p>then <i>genes_to_phenotypes.txt</i> </p>
+              <ul>
+                <li><strong>geneA</strong> annotated to HP_1</li>
+                <li><strong>geneB</strong> annotated to HP_2</li>
+              </ul>
+              <p>then <i>phenotype_to_genes.txt</i> contains:</p>
+              <ul>
+                <li>HP_3 annotates <strong>geneA</strong> and <strong>geneB</strong></li>
+              </ul>
+            </mat-expansion-panel>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                    <strong>What is the difference between “ALL_FREQUENCIES” and “FREQUENT_FEATURES”?</strong>
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+              <p>Each annotation has a frequency associated, i.e. how many patients with that disease have this clinical feature. “ALL_FREQUENCIES” denotes that we do not use any filter.
+                “FREQUENT_FEATURES” means that we exclude all features seen in less than 50% of the patients.</p>
+            </mat-expansion-panel>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    <strong>What is your procedure for associating genes with HPO phenotypes?</strong>
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <p>The following file is used to associate genes with phenotypes.</p>
+                <ul>
+                  <li>
+                    <i>genes_to_phenotypes.txt</i>
+                  </li>
+                </ul>
+                <p>
+                    In many cases, there are multiple diseases that are associated with mutations in the same gene (for instance, mutations in the LMNA gene are associated with multiple diseases including Cardiomyopathy,
+                    dilated, 1A [MIM:115200], Charcot-Marie-Tooth disease, type 2B1 [605588], Emery-Dreifuss muscular dystrophy 2, AD [181350], and Hutchinson-Gilford progeria [176670]. Each of these diseases is associated with a
+                    different spectrum of phenotypic features. The gene-to-phenotype association in our databases takes the set of all phenotypic features (HPO terms) associated with one or more diseases causes by mutation in the gene under
+                    consideration. Thus, LMNA is associated with Alopecia (which is a feature of Hutchinson-Gilford progeria) as well as Ventricular arrhythmia (which is a feature of Cardiomyopathy, dilated, 1A).
+                </p>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+  </div>
+</div>

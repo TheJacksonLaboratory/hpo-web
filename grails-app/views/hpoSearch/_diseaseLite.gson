@@ -1,0 +1,11 @@
+import hpo.api.disease.DbDisease
+
+model {
+  DbDisease diseaseLite
+}
+json {
+  db diseaseLite.db
+  dbName diseaseLite.diseaseName.split(';').first()
+  dbRef diseaseLite.dbId
+  diseaseId diseaseLite.diseaseId
+}
