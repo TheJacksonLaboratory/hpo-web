@@ -18,7 +18,6 @@ import { MatToolbarModule } from '@angular/material';
 import { SearchService } from './services/search/search.service';
 import { TermService } from './services/term/term.service';
 import { GeneService } from './services/gene/gene.service';
-import { GeneEntrezService } from './services/gene/gene-entrez.service';
 import { DiseaseService } from './services/disease/disease.service';
 // Components
 import { SearchComponent } from './pages/search/search.component';
@@ -46,7 +45,7 @@ import { SortPipe } from './pipes/sort-pipe';
     MatTooltipModule,
     MatToolbarModule
   ],
-  providers: [ SearchService, TermService, GeneService, GeneEntrezService, DiseaseService ],
+  providers: [ SearchService, TermService, GeneService, DiseaseService ],
   declarations: [ SearchComponent, TermComponent, DiseaseComponent,
     GeneComponent, BrowserComponent, SortPipe ]
 })

@@ -1,5 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { GeneEntrezService } from '../../services/gene/gene-entrez.service';
+import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import { GeneService } from '../../services/gene/gene.service';
 import { Gene, EntrezGene } from '../../models/models';
 import { ActivatedRoute } from '@angular/router';
@@ -7,10 +6,13 @@ import { TermAssocDB, DiseaseAssocDB} from '../../models/associations/datasource
 import { TermAssocDatasource } from '../../models/associations/datasources/term-assoc-datasource'
 import { DiseaseAssocDatasource} from '../../models/associations/datasources/disease-assoc-datasource'
 import { MatSort } from '@angular/material';
+
+import * as ProtVista from 'ProtVista';
 @Component({
   selector: 'app-gene',
   templateUrl: './gene.component.html',
-  styleUrls: ['./gene.component.css']
+  styleUrls: ['./gene.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class GeneComponent implements OnInit {
   geneTitle: string;
@@ -18,6 +20,7 @@ export class GeneComponent implements OnInit {
   entrezGene: EntrezGene = new EntrezGene();
   gene: Gene;
   query: string;
+  uniprotId:string;
   termSource: TermAssocDatasource |  null;
   diseaseSource: DiseaseAssocDatasource | null;
   termAssoc: TermAssocDB;
@@ -27,11 +30,12 @@ export class GeneComponent implements OnInit {
   isLoading: boolean = true;
 
   @ViewChild(MatSort) sort: MatSort;
-  constructor(private route: ActivatedRoute, private geneEntrezService: GeneEntrezService, private geneService: GeneService) {
+  constructor(private route: ActivatedRoute, private geneService: GeneService) {
     this.route.params.subscribe( params => this.query = params.id);
   }
   ngOnInit() {
-    this.geneEntrezService.searchGeneInfo(this.query)
+    this.uniprotWidgetInit();
+    this.geneService.searchGeneInfo(this.query)
       .then((data) => {
         this.entrezGene = data.result[this.query];
         this.entrezGene.aliases = this.entrezGene.otheraliases.split(",");
@@ -47,6 +51,23 @@ export class GeneComponent implements OnInit {
       this.isLoading = false;
     },(error)=>{
         console.log(error);
+    });
+
+  }
+  uniprotWidgetInit(){
+    // Make service call for Mapping  EntrezId to UniProtKB Accession
+    this.geneService.searchUniprot(this.query).then((uniprotId) => {
+      if(uniprotId){
+        // Init ProtVista Viewer if identifier found.
+        let protVistaDiv = document.getElementsByClassName('ProtVistaReference');
+        new ProtVista(
+          { el: protVistaDiv[0],
+            uniprotacc : uniprotId
+          });
+        this.uniprotId = uniprotId;
+      }
+    }, (error)=>{
+      console.log(error);
     });
   }
 }

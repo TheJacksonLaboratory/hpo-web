@@ -9,7 +9,7 @@ const appRoutes: Routes = [
   { path: 'browser', loadChildren: './browser/browser.module#BrowserHPOModule'},
   { path: '**', component: NoPageFoundComponent}
 
-]
+];
 @NgModule({
   imports: [
     CommonModule,
