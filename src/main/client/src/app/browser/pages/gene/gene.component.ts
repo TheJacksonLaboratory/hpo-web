@@ -6,12 +6,12 @@ import { TermAssocDB, DiseaseAssocDB} from '../../models/associations/datasource
 import { TermAssocDatasource } from '../../models/associations/datasources/term-assoc-datasource'
 import { DiseaseAssocDatasource} from '../../models/associations/datasources/disease-assoc-datasource'
 import { MatSort } from '@angular/material';
-
 import * as ProtVista from 'ProtVista';
+
 @Component({
   selector: 'app-gene',
   templateUrl: './gene.component.html',
-  styleUrls: ['./gene.component.css'],
+  styleUrls: ['./gene.component.css','../../../../../node_modules/ProtVista/style/main.css'],
   encapsulation: ViewEncapsulation.None
 })
 export class GeneComponent implements OnInit {
