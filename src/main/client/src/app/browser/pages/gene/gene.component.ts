@@ -20,7 +20,7 @@ export class GeneComponent implements OnInit {
   entrezGene: EntrezGene = new EntrezGene();
   gene: Gene;
   query: string;
-  uniprotId:string;
+  uniprotId:string = "";
   termSource: TermAssocDatasource |  null;
   diseaseSource: DiseaseAssocDatasource | null;
   termAssoc: TermAssocDB;
@@ -67,6 +67,8 @@ export class GeneComponent implements OnInit {
             exclusions: ['ANTIGEN','MOLECULE_PROCESSING']
           });
         this.uniprotId = uniprotId;
+      }else{
+        this.uniprotId = "error";
       }
     }, (error)=>{
       console.log(error);
