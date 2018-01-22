@@ -36,27 +36,29 @@ export class GeneComponent implements OnInit {
   ngOnInit() {
     this.uniprotWidgetInit();
     this.geneService.searchGeneInfo(this.query)
-      .then((data) => {
+      .subscribe((data) => {
         this.entrezGene = data.result[this.query];
         this.entrezGene.aliases = this.entrezGene.otheraliases.split(",");
       }, (error) => {
+        // TODO: Implement Better Error Handling
         console.log(error);
     });
     this.geneService.searchGene(this.query)
-    .then((data)=> {
+    .subscribe((data)=> {
       this.termAssoc = new TermAssocDB(data.termAssoc);
       this.termSource = new TermAssocDatasource(this.termAssoc, this.sort);
       this.diseaseAssoc = new DiseaseAssocDB(data.diseaseAssoc);
       this.diseaseSource = new DiseaseAssocDatasource(this.diseaseAssoc, this.sort);
       this.isLoading = false;
     },(error)=>{
+      // TODO: Implement Better Error Handling
         console.log(error);
     });
 
   }
   uniprotWidgetInit(){
     // Make service call for Mapping  EntrezId to UniProtKB Accession
-    this.geneService.searchUniprot(this.query).then((uniprotId) => {
+    this.geneService.searchUniprot(this.query).subscribe((uniprotId) => {
       if(uniprotId){
         // Init ProtVista Viewer if identifier found.
         let protVistaDiv = document.getElementsByClassName('ProtVistaReference');
@@ -69,6 +71,7 @@ export class GeneComponent implements OnInit {
         this.uniprotId = uniprotId;
       }
     }, (error)=>{
+      // TODO: Implement Better Error Handling
       console.log(error);
     });
   }

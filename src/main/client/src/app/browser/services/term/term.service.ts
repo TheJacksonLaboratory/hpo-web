@@ -15,23 +15,19 @@ export class TermService {
                                     'Accept': 'q=0.8;application/json;q=0.9'});
         this.options = new RequestOptions({headers: this.headers});
     }
-    searchTerm(query: string): Promise<any>{
+    searchTerm(query: string): Observable<any>{
         return this.http
             .get(environment.HPO_API_TERM_SEARCH_URL + '/' + query, this.options)
-            .toPromise()
-            .then(response => response.json())
-            .catch(TermService.handleError);
+            .map(res => res.json())
     }
     searchGenesByTerm(query:string): Observable<any>{
       return this.http
-        .get(environment.HPO_API_TERM_SEARCH_URL + query + '/genes', this.options).map(res => res.json());
+        .get(environment.HPO_API_TERM_SEARCH_URL + query + '/genes', this.options)
+        .map(res => res.json());
     }
     searchDiseasesByTerm(query:string): Observable<any>{
       return this.http
-        .get(environment.HPO_API_TERM_SEARCH_URL + query + '/diseases', this.options).map(res => res.json());
-    }
-    private static handleError(error: any): Promise<any> {
-        console.error('Error:', error);
-        return Promise.reject(error.message || error);
+        .get(environment.HPO_API_TERM_SEARCH_URL + query + '/diseases', this.options)
+        .map(res => res.json());
     }
 }
