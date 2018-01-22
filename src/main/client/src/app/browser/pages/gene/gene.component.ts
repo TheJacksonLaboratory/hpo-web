@@ -62,7 +62,9 @@ export class GeneComponent implements OnInit {
         let protVistaDiv = document.getElementsByClassName('ProtVistaReference');
         new ProtVista(
           { el: protVistaDiv[0],
-            uniprotacc : uniprotId
+            uniprotacc : uniprotId,
+            categoryOrder: ['DOMAINS_AND_SITES', 'VARIATION', 'PTM','PROTEOMICS'],
+            exclusions: ['ANTIGEN','MOLECULE_PROCESSING']
           });
         this.uniprotId = uniprotId;
       }
