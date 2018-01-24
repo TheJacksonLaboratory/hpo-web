@@ -57,7 +57,7 @@ export class GeneComponent implements OnInit {
   uniprotWidgetInit(){
     // Make service call for Mapping  EntrezId to UniProtKB Accession
     this.geneService.searchUniprot(this.query).then((uniprotId) => {
-      if(uniprotId){
+      if(uniprotId != null){
         // Init ProtVista Viewer if identifier found.
         let protVistaDiv = document.getElementsByClassName('ProtVistaReference');
         new ProtVista(

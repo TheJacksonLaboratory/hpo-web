@@ -55,5 +55,6 @@ export class GeneService {
       }
       lineCount++;
     }
+    return null;
   }
 }
