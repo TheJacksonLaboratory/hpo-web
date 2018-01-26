@@ -20,9 +20,41 @@ export class GeneService {
           .then(response => response.json())
           .catch(this.handleError);
   }
+  searchGeneInfo(query: string): Promise<any>{
+    return this.http
+      .get( environment.HPO_ENTREZ_SEARCH_URL + '?db=gene&id=' + query + '&retmode=json')
+      .toPromise()
+      .then(response => response.json())
+      .catch(this.handleError);
+  }
+  searchUniprot(query:string): Promise<any>{
+    let payload = new URLSearchParams();
+    payload.set('from', "P_ENTREZGENEID");
+    payload.set('to', "ACC");
+    payload.set('query',query);
+    payload.set('format', "tab");
+    payload.set('columns',"id,reviewed");
+    return this.http
+      .post(environment.HPO_UNIPROT_MAPPING_URL,payload).toPromise().then(res =>{
+        return this.parseUniprotMapping(res.text().split("\n"));
+      }).catch(this.handleError);
+}
   private handleError(error: any): Promise<any> {
       console.error('Error:', error);
       return Promise.reject(error.message || error);
   }
 
+  private parseUniprotMapping(lines: string[]){
+    let lineCount = 0;
+    for(let line of lines){
+      if(lineCount != 0) {
+        let mapping = line.split("\t");
+        if(mapping[1] == "reviewed"){
+          return mapping[0];
+        }
+      }
+      lineCount++;
+    }
+    return null;
+  }
 }

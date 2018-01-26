@@ -25,7 +25,7 @@
 ::ng-deep .item-summary {
   float:left;
   width:100%;
-  margin:10px;
+  margin-bottom: 10px;
 }
 ::ng-deep .item-header{
   margin-top: -10px;
@@ -34,17 +34,14 @@
 ::ng-deep .item-summary .mat-card-content  .associations h4{
   float:left;
 }
-::ng-deep .tab-content{
-  margin-top: 10px;
-}
 ::ng-deep .mat-table {
   overflow: auto;
   max-height: 500px;
 }
 ::ng-deep .associations {
-  margin: 5px 5px 15px 5px;
+  margin: 0 5px 15px 5px;
 }
-::ng-deep .associations .title {
+::ng-deep .title {
   padding: 10px;
   margin: 0;
 }
@@ -52,8 +49,11 @@
    max-height:346px;
 }
 ::ng-deep .container-custom{
-  margin-left:15px;
-  padding: 0px 5px 0px 5px;
+  margin:0;
+  padding: 0 5px 0 5px;
+}
+::ng-deep .container-custom .row{
+  margin:0;
 }
 
 ::ng-deep .loading-result {

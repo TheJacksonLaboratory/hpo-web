@@ -1,24 +1,44 @@
-.term-association .mat-column-ontologyId {
+.gene-component .term-association .mat-column-ontologyId {
     max-width: 250px;
 }
-.term-association .mat-column-name {
-   margin-right: 100px;
+.gene-component  .term-association .mat-column-name {
+   margin: 0 100px 0 0;
 }
-.mat-column-dbDiseases{
+.gene-component .mat-column-dbDiseases{
    white-space: nowrap;
    text-overflow: ellipsis;
    overflow: hidden;
 }
-.disease-association .mat-column-diseaseName{
+.gene-component .disease-association .mat-column-diseaseName{
     width:425px;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
 }
-.associations.disease-association{
+.gene-component .associations.disease-association{
+    float:left;
+    margin:0 0 15px 8px;
+}
+.gene-component .associations.term-association{
     float:left;
 }
-.associations.term-association{
-    margin-left:15px;
-    float:left;
+
+.up_pftv_buttons {
+  display:none !important;
 }
+.ProtVistaContainer {
+  margin: 10px 0 0 5px;
+  display: inline-block;
+}
+.up_pftv_container {
+  display:inline-block;
+  margin: 0 0 0 75px;
+}
+.up_pftv_aaviewer {
+  margin:0 0 0 195px;
+}
+.gene-component .associations.col-lg-6{
+  width:49%;
+}
+
+
