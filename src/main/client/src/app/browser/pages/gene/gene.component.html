@@ -64,7 +64,7 @@
         <div class="ProtVistaContainer col-lg-12 mat-elevation-z6">
         <h4 class="title">UniProt Viewer <a target="_blank" href="https://www.uniprot.org/uniprot/{{this.uniprotId}}">{{this.uniprotId}}</a></h4>
           <div class="ProtVistaReference">
-            <div *ngIf="!uniprotId">
+            <div *ngIf="uniprotId == 'error'">
               <p><strong>No UniProt Reference Could be found for Gene {{entrezGene.name}}</strong></p>
             </div>
           </div>
