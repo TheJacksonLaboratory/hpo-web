@@ -1,37 +1,30 @@
 import { Injectable } from '@angular/core';
-import {Observable} from "rxjs/Observable";
-import { Http, Headers, RequestOptions, URLSearchParams } from '@angular/http';
+import { Observable } from "rxjs/Observable";
+import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
-import 'rxjs/add/operator/toPromise';
 
 
 @Injectable()
 export class TermService {
-    headers: Headers;
-    options: RequestOptions;
+    options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Accept': 'q=0.8;application/json;q=0.9'
+       })
+    };
 
-    constructor(private http: Http){
-        this.headers = new Headers({'Content-Type': 'application/json',
-                                    'Accept': 'q=0.8;application/json;q=0.9'});
-        this.options = new RequestOptions({headers: this.headers});
+    constructor(private http: HttpClient){
     }
-    searchTerm(query: string): Promise<any>{
+    searchTerm(query: string): Observable<any>{
         return this.http
-            .get(environment.HPO_API_TERM_SEARCH_URL + '/' + query, this.options)
-            .toPromise()
-            .then(response => response.json())
-            .catch(TermService.handleError);
+            .get(environment.HPO_API_TERM_SEARCH_URL + '/' + query, this.options);
     }
     searchGenesByTerm(query:string): Observable<any>{
       return this.http
-        .get(environment.HPO_API_TERM_SEARCH_URL + query + '/genes', this.options).map(res => res.json());
+        .get(environment.HPO_API_TERM_SEARCH_URL + query + '/genes', this.options);
     }
     searchDiseasesByTerm(query:string): Observable<any>{
       return this.http
-        .get(environment.HPO_API_TERM_SEARCH_URL + query + '/diseases', this.options).map(res => res.json());
-    }
-    private static handleError(error: any): Promise<any> {
-        console.error('Error:', error);
-        return Promise.reject(error.message || error);
+        .get(environment.HPO_API_TERM_SEARCH_URL + query + '/diseases', this.options);
     }
 }

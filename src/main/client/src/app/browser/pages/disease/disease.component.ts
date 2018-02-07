@@ -30,12 +30,12 @@ export class DiseaseComponent implements OnInit {
 
   ngOnInit() {
     this.diseaseService.searchDisease(this.query)
-    .then((data)=>{
+    .subscribe((data)=>{
       this.disease  = data.disease;
       this.termAssoc = new TermAssocDB(data.termAssoc);
       this.termSource = new TermAssocDatasource(this.termAssoc, this.sort);
       this.geneAssoc = new GeneAssocDB(data.geneAssoc);
-      this.geneSource = new GeneAssocDatasource(this.geneAssoc, this.sort)
+      this.geneSource = new GeneAssocDatasource(this.geneAssoc, this.sort);
       this.isLoading = false;
     }, (error) => {
       console.log(error);
