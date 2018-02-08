@@ -21,11 +21,11 @@
     overflow: hidden;
 }
 .associations.gene-association{
-    margin-top: 20px;
+    margin: 20px 0 0 0;
     float:left;
 }
 .associations.term-association{
-    margin-top: 20px;
+    margin: 20px 0 0 0;
     float:left;
 }
 

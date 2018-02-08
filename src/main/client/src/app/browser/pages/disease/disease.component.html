@@ -23,7 +23,6 @@
               <mat-tab label="Term Associations">
                 <div class="tab-content">
                   <div class="associations term-association">
-                    <!--<h3 class="title">Term Associations</h3>-->
                     <div *ngFor="let catTermSource of catTermSources; index as i">
                       <h3 class="title">{{catTermSource.catLabel}} {{catTermSource.annotationCountTxt}}</h3>
                       <mat-table #table [dataSource]="catTermSource.termSource" matSort>
@@ -53,7 +52,6 @@
               <mat-tab label="Gene Associations">
                 <div class="tab-content">
                   <div class="associations gene-association">
-                      <!--<h3 class="title">Gene Associations</h3>-->
                       <mat-table #table [dataSource]="geneSource" matSort>
                         <mat-header-row *matHeaderRowDef="geneColumns"></mat-header-row>
                         <mat-row *matRowDef="let row; columns: geneColumns;"></mat-row>

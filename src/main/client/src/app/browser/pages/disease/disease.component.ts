@@ -23,7 +23,6 @@ export class DiseaseComponent implements OnInit {
   termAssoc: TermAssocDB;
   geneAssoc: GeneAssocDB;
   isLoading: boolean = true;
-  catTermsMap: {"catLabel":string, "terms":Term[]};
   catTermSources= [];
   @ViewChild(MatSort) sort: MatSort;
   constructor(private route: ActivatedRoute, private diseaseService: DiseaseService) {
@@ -34,8 +33,7 @@ export class DiseaseComponent implements OnInit {
     this.diseaseService.searchDisease(this.query)
     .subscribe((data)=>{
       this.disease  = data.disease;
-      this.catTermsMap = data.catTermsMap;
-      this.setCatTermsDBSource ();
+      this.setCatTermsDBSource (data.catTermsMap);
       this.termAssoc = new TermAssocDB(data.termAssoc);
       this.termSource = new TermAssocDatasource(this.termAssoc, this.sort);
       this.geneAssoc = new GeneAssocDB(data.geneAssoc);
@@ -49,13 +47,13 @@ export class DiseaseComponent implements OnInit {
   /**
    * Sets DB sources for Category-Term map data
    */
-  setCatTermsDBSource(){
+  setCatTermsDBSource(catTermsMap){
 
-    for (let i in this.catTermsMap) {
+    for (let i in catTermsMap) {
 
-      var catLabel = this.catTermsMap[i].catLabel
-      var annotationCount = this.catTermsMap[i].terms.length
-      var termAssoc = new TermAssocDB(this.catTermsMap[i].terms);
+      var catLabel = catTermsMap[i].catLabel
+      var annotationCount = catTermsMap[i].terms.length
+      var termAssoc = new TermAssocDB(catTermsMap[i].terms);
       var termSource = new TermAssocDatasource(termAssoc, this.sort);
       var annotationCountTxt = "(1 annotation)"
       annotationCountTxt = annotationCount > 1? "(" + annotationCount + " annotations)" : annotationCountTxt;
