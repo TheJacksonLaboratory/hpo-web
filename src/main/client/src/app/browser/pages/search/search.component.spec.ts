@@ -7,14 +7,15 @@ import { MatCardModule} from '@angular/material';
 import { RouterTestingModule } from '@angular/router/testing';
 import { SortPipe } from '../../pipes/sort-pipe';
 import { SearchService} from '../../services/search/search.service';
-
+import {Observable} from "rxjs/Observable";
+import 'rxjs/add/observable/of';
 
 describe('SearchHpoComponent', () => {
   let component: SearchComponent;
   let fixture: ComponentFixture<SearchComponent>;
   let mockTermService;
   let searchServiceStub = {
-    searchAll: jasmine.createSpy('searchAll').and.returnValue(Promise.resolve("something")),
+    searchAll: jasmine.createSpy('queryHPO').and.returnValue(Observable.of("something")),
   };
   beforeEach(async(() => {
     mockTermService = {}
