@@ -7,12 +7,12 @@ import { MatMenuModule } from '@angular/material';
 import { MatButtonModule } from '@angular/material';
 import { MatIconModule } from '@angular/material';
 import { environment} from '../environments/environment';
-
+import {HttpClientModule} from "@angular/common/http";
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ RouterTestingModule, MatButtonModule, MatMenuModule, MatIconModule],
+      imports: [ RouterTestingModule, MatButtonModule, MatMenuModule, MatIconModule,HttpClientModule],
       declarations: [
         AppComponent,
         NavbarComponent,

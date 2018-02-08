@@ -7,7 +7,7 @@ import { MatMenuModule } from '@angular/material';
 import { MatButtonModule } from '@angular/material';
 import { MatIconModule } from '@angular/material';
 import { MatToolbarModule} from '@angular/material';
-
+import { HttpClientModule} from '@angular/common/http';
 //Custom Shared Components
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
@@ -29,7 +29,8 @@ import { NoPageFoundComponent } from './error/no-page-found.component';
     MatMenuModule,
     MatButtonModule,
     MatIconModule,
-    MatToolbarModule
+    MatToolbarModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
