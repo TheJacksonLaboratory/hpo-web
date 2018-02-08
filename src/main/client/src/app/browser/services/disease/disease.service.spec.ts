@@ -1,69 +1,52 @@
-import { TestBed, inject } from '@angular/core/testing';
+import {DiseaseService} from './disease.service';
+import {TestBed, inject} from '@angular/core/testing';
+import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
+import {environment} from "../../../../environments/environment";
 
-import { DiseaseService } from './disease.service';
-import {MockBackend, MockConnection} from "@angular/http/testing";
-import {BaseRequestOptions, Http, ResponseOptions, Response, RequestMethod} from "@angular/http";
-
-describe('DiseaseService', () => {
-
-  let subject: DiseaseService = null;
-  let backend: MockBackend = null;
+describe('DiseaseServiceSpec', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [
-        MockBackend,
-        BaseRequestOptions,
-        {
-          provide: Http,
-          useFactory: (backendInstance: MockBackend,  defaultOptions: BaseRequestOptions) => {
-            return new Http(backendInstance, defaultOptions);
-          },
-          deps: [MockBackend, BaseRequestOptions]
+      imports: [HttpClientTestingModule],
+      providers: [DiseaseService]
+    })
+  });
+  let query = "7157";
+
+  it('should handle a searchGene service method ', inject([
+    HttpTestingController, DiseaseService
+  ], (httpMock, diseaseService: DiseaseService) => {
+    // call our service, and once the results come in
+    // expect them to have the proper data (filled in
+    // using the mock below)
+    diseaseService.searchDisease(query).subscribe(diseaseResponse => {
+      expect(diseaseResponse).toBeDefined();
+      expect(diseaseResponse.disease.diseaseId).toBe("OMIM:202300");
+      expect(diseaseResponse.termAssoc.length).toEqual(2);
+      expect(diseaseResponse.geneAssoc.length).toEqual(1);
+    });
+
+    // look up our request and access it
+    const request = httpMock.expectOne(environment.HPO_API_DISEASE_SEARCH_URL + '?q=' + query);
+    // verify it is a GET
+    expect(request.request.method).toEqual('GET');
+
+    request.flush(
+  {
+        "disease": {
+          "diseaseId":"OMIM:202300",
+          "diseaseName":"ADRENOCORTICAL CARCINOMA, HEREDITARY",
+          "dbId":"202300",
+          "db":"OMIM"
         },
-        DiseaseService
-      ]
-    });
-  });
-
-  beforeEach(inject( [DiseaseService, MockBackend], (diseaseService: DiseaseService, mockBackend: MockBackend) => {
-    subject = diseaseService;
-    backend = mockBackend;
-
+        "termAssoc":[
+          {"ontologyId":"HP:0006744","name":"Adrenocortical carcinoma"},
+          {"ontologyId":"HP:0000007","name":"Autosomal recessive inheritance"}
+          ],
+        "geneAssoc":[
+          {"entrezGeneId":7157,"entrezGeneSymbol":"TP53"}
+          ]
+        });
+    httpMock.verify();
   }));
-
-
-
-  it('should be created', inject([DiseaseService], (service: DiseaseService) => {
-    expect(service).toBeTruthy();
-  }));
-
-  it('searchDisease should call endpoint and return it\'s result', () =>{
-
-    const mockResponse = {
-      data : [
-        {dbReference: 1, dbName: 'disease 1'},
-        {dbReference: 2, dbName: 'disease 2'},
-        {dbReference: 3, dbName: 'disease 3'}
-      ]
-    };
-
-    backend.connections.subscribe((connection: MockConnection) =>{
-      let options = new ResponseOptions({
-        body: JSON.stringify(mockResponse)
-      });
-      connection.mockRespond(new Response(options));
-    });
-
-    subject
-      .searchDisease('anything')
-      .then ((response) => {
-          let data = response.json();
-          expect(data.length(3));
-          expect(data[0].name).toEqual('disease 1');
-          expect(data[1].name).toEqual('disease 2');
-    });
-
-  });
-
 });
