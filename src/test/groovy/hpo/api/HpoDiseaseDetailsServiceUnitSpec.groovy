@@ -1,18 +1,15 @@
 package hpo.api
 
-import com.github.phenomics.ontolib.formats.hpo.HpoDisease
-import com.github.phenomics.ontolib.formats.hpo.HpoDiseaseAnnotation
+import com.github.phenomics.ontolib.formats.hpo.HpoOntology
 import com.github.phenomics.ontolib.formats.hpo.HpoTerm
 import com.github.phenomics.ontolib.ontology.data.ImmutableTermId
 import com.github.phenomics.ontolib.ontology.data.Term
 import grails.testing.gorm.DataTest
 import grails.testing.services.ServiceUnitTest
-import hpo.api.HpoDiseaseDetailsService
 import hpo.api.disease.DbDisease
 import hpo.api.gene.DbGene
 import hpo.api.term.DbTerm
-import hpo.api.util.HpoDiseaseFactory
-import spock.lang.Shared
+import hpo.api.util.HpoOntologyFactory
 import spock.lang.Specification
 import spock.lang.Unroll
 
@@ -46,8 +43,10 @@ class HpoDiseaseDetailsServiceUnitSpec extends Specification implements ServiceU
   }
   void "test find associated terms given disease using #desc"() {
     setup:
+    HpoOntology hpoOntology = new HpoOntologyFactory().getInstance()
+    service.hpoOntology = hpoOntology
     DbDisease dbDisease = buildMockDisease()
-    List<Term> terms = buildMockTerms(["HPO:10406","HPO:1337"])
+    List<Term> terms = buildMockTerms(["HP:0001597","HP:0000982"])
     terms.each{
       dbDisease.addToDbTerms(new DbTerm(it))
     }
@@ -60,11 +59,40 @@ class HpoDiseaseDetailsServiceUnitSpec extends Specification implements ServiceU
     resultMap.termAssoc*.ontologyId.containsAll(expected)
 
     where:
-    query           | expected                   | desc
-    null            | []                         | 'nothing'
-    "ORPHA:79501"   | ["HPO:10406","HPO:1337"]   | 'disease by id'
+    query           | expected                      | desc
+    null            | []                            | 'nothing'
+    "ORPHA:79501"   | ["HP:0001597","HP:0000982"]   | 'disease by id'
+    "XXXXXXXXXXX"   | []                            | 'invalid by id'
 
   }
+
+  void "test find category-terms map given disease using #desc"() {
+    setup:
+
+    HpoOntology hpoOntology = new HpoOntologyFactory().getInstance()
+    service.hpoOntology = hpoOntology
+    DbDisease dbDisease1 = buildMockDisease()
+
+    List<Term> terms = buildMockTerms(["HP:0001597","HP:0000982"])
+    terms.each{
+      dbDisease1.addToDbTerms(new DbTerm(it))
+    }
+    dbDisease1.save()
+
+    when: "we query for a disease"
+    Map resultMap = service.searchDisease(query)
+
+    then:
+    resultMap.catTerms == expected
+
+    where:
+    query           | expected                                                  | desc
+    null            | [[:]]                                                     | 'nothing'
+    "ORPHA:79501"   | [[catLabel:'Skin, Hair, and Nails', terms:[null, null]]]  | 'disease by id'
+    "XXXXXXXXXXX"   | [[:]]                                                     | 'invalid by id'
+
+  }
+
   private static DbDisease buildMockDisease(){
     new DbDisease(db:"ORPHA", dbId: "79501", diseaseName: "keratoderma type 1", diseaseId: "ORPHA:79501")
   }
