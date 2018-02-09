@@ -27,12 +27,18 @@ apply plugin:"com.moowork.node"
 repositories {
     mavenLocal()
     maven { url "https://repo.grails.org/grails/core" }
+   flatDir {
+     dir("libs")
+   }
 }
 
 dependencies {
+  //Custom OLGP and its dependencies
+  compile name:'ontolib-core-0.1.2'
+  compile name:'ontolib-io-0.1.2'
+  compile 'com.google.guava:guava:24.0-jre'
+  compile "org.antlr:antlr4:4.7"
 
-    compile 'com.github.phenomics:ontolib-core:0.4'
-    compile 'com.github.phenomics:ontolib-io:0.4'
 
   compile "org.springframework.boot:spring-boot-starter-logging"
   compile "org.springframework.boot:spring-boot-autoconfigure"
@@ -142,7 +148,7 @@ bootRun {
         '-Xmx768M',
         '-XX:MaxPermSize=256m',
         '-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005',
-        '-Dspring.output.ansi.enabled=always', 
+        '-Dspring.output.ansi.enabled=always',
         '-Dgrails.reload.enabled=true'
     )
     addResources = true
