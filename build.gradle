@@ -83,8 +83,6 @@ dependencies {
   testCompile "org.grails.plugins:geb"
   testCompile "org.grails:grails-datastore-rest-client"
   testCompile "org.grails:grails-web-testing-support"
-  //testRuntime "org.seleniumhq.selenium:selenium-htmlunit-driver:2.47.1"
-  //testRuntime "net.sourceforge.htmlunit:htmlunit:2.18"
 
   testCompile "org.grails.plugins:geb"
   testRuntime "net.sourceforge.htmlunit:htmlunit:2.18"
@@ -138,17 +136,12 @@ war.dependsOn(buildClientProd)
 
 test.dependsOn(clientTest)
 
-//integrationTest.dependsOn(clientIntegrationTest)
-
 clean {
     delete fileTree(dir: "src/main/webapp/app")
 }
 
-//bootRun.dependsOn(buildClientDev)
-
 bootRun {
 
-        //'-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005',
     jvmArgs(
         '-server',
         '-Xmx768M',

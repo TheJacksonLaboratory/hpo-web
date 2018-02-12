@@ -11,7 +11,7 @@ import geb.spock.*
 
 @Integration
 @Rollback
-class HpoBrowserSearchSpec extends  GebSpec {
+class HpoBrowserSearchSpec extends  GebReportingSpec {
 
     def setup() {
     }
@@ -25,16 +25,6 @@ class HpoBrowserSearchSpec extends  GebSpec {
 
         then:"The title is correct"
         	title == "HPO"
-    }
-
-    void "test browser page visit" (){
-
-      when:"The browser page is visited"
-      go '/app/browser'
-
-      then:"The page title is correct"
-        title == "HPO"
-
     }
 
     void "test browser page landing" (){

@@ -13,7 +13,6 @@ class BrowserPage extends Page {
     title == TITLE
 
     waitFor {
-      //pageTitle.text() == PAGE_TITLE
       pageTitle.text() == PAGE_TITLE
     }
   }

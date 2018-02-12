@@ -18,7 +18,6 @@ environments {
   }
 
   chrome {driver = defaultChromeConfig
-    //driver = { new ChromeDriver()}
   }
 
   firefox {
@@ -30,14 +29,13 @@ environments {
   }
 }
 
-//waiting{
-//  timeout = 20
-//}
-//atCheckWaiting = true
-//cacheDriverPerThread = true
+waiting {
+  timeout = 5
+}
+atCheckWaiting = true
+cacheDriverPerThread = true
 
-//baseUrl = System.getProperty('baseUrl','http://localhost:8080')
-//reportsDir = System.getProperty('reportsDir','build/reports/geb')
+reportsDir = System.getProperty('reportsDir','build/reports/geb')
 
 if(System.getProperty('geb.env')==null){
   driver = defaultChromeConfig
