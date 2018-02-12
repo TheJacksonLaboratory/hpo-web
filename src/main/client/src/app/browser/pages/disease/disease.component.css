@@ -1,8 +1,13 @@
 .term-association .mat-column-ontologyId {
-    max-width: 250px;
+    max-width: 150px;
 }
 .term-association .mat-column-name {
-   margin-right: 100px;
+
+   max-width: 250px;
+}
+.term-association .mat-column-definitionn {
+  margin-right: 20px;
+  max-width: 350px;
 }
 .mat-column-dbDiseases{
    white-space: nowrap;
@@ -16,8 +21,15 @@
     overflow: hidden;
 }
 .associations.gene-association{
+    margin: 20px 0 0 0;
     float:left;
 }
 .associations.term-association{
+    margin: 20px 0 0 0;
     float:left;
 }
+
+.disease-details-tab-group {
+  border: 1px solid #e8e8e8;
+}
+

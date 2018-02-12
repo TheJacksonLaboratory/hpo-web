@@ -16,13 +16,14 @@ import { DiseaseService } from '../../services/disease/disease.service';
 export class DiseaseComponent implements OnInit {
   query: string;
   disease: Disease = {"db":"", "dbObjectId": "0", "dbName":"", "dbReference": ""};
-  termColumns = ['ontologyId','name'];
+  termColumns = ['ontologyId','name', 'definition'];
   geneColumns = ['entrezGeneId', 'entrezGeneSymbol'];
   termSource: TermAssocDatasource |  null;
   geneSource: GeneAssocDatasource | null;
   termAssoc: TermAssocDB;
   geneAssoc: GeneAssocDB;
   isLoading: boolean = true;
+  catTermSources= [];
   @ViewChild(MatSort) sort: MatSort;
   constructor(private route: ActivatedRoute, private diseaseService: DiseaseService) {
     this.route.params.subscribe( params => this.query = params.id);
@@ -30,15 +31,33 @@ export class DiseaseComponent implements OnInit {
 
   ngOnInit() {
     this.diseaseService.searchDisease(this.query)
-    .then((data)=>{
+    .subscribe((data)=>{
       this.disease  = data.disease;
+      this.setCatTermsDBSource (data.catTermsMap);
       this.termAssoc = new TermAssocDB(data.termAssoc);
       this.termSource = new TermAssocDatasource(this.termAssoc, this.sort);
       this.geneAssoc = new GeneAssocDB(data.geneAssoc);
-      this.geneSource = new GeneAssocDatasource(this.geneAssoc, this.sort)
+      this.geneSource = new GeneAssocDatasource(this.geneAssoc, this.sort);
       this.isLoading = false;
     }, (error) => {
       console.log(error);
     });
+  }
+
+  /**
+   * Sets DB sources for Category-Term map data
+   */
+  setCatTermsDBSource(catTermsMap){
+
+    for (let i in catTermsMap) {
+
+      var catLabel = catTermsMap[i].catLabel
+      var annotationCount = catTermsMap[i].terms.length
+      var termAssoc = new TermAssocDB(catTermsMap[i].terms);
+      var termSource = new TermAssocDatasource(termAssoc, this.sort);
+      var annotationCountTxt = "(1 annotation)"
+      annotationCountTxt = annotationCount > 1? "(" + annotationCount + " annotations)" : annotationCountTxt;
+      this.catTermSources.push({catLabel, annotationCountTxt,  termSource});
+    }
   }
 }

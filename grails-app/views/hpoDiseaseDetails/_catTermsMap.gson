@@ -1,0 +1,9 @@
+import hpo.api.term.DbTerm
+
+model {
+  Map catTermsMap
+}
+json {
+  catLabel catTermsMap.catLabel
+  terms tmpl.term(catTermsMap.terms)
+}

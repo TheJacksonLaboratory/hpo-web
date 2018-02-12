@@ -28,7 +28,7 @@ export class SearchComponent implements OnInit {
   queryHPO(query: string): void {
     this.isLoading = true;
     this.searchService.searchAll(this.query)
-      .then((data) => {
+      .subscribe((data) => {
         let numResults: number;
         this.terms = data.terms;
         this.diseases = data.diseases;
@@ -41,6 +41,7 @@ export class SearchComponent implements OnInit {
         }
         this.isLoading = false;
       }, (error) => {
+        // TODO: Implement Better Error Handling
         console.log(error);
     });
   }

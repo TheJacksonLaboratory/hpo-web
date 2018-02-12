@@ -51,17 +51,20 @@ export class TermComponent implements OnInit {
       this.diseaseAssoc = new DiseaseAssocDB(res2.diseases);
       this.diseaseSource = new DiseaseAssocDatasource(this.diseaseAssoc, this.sort);
       this.assocLoading = false;
+    }, err=>{
+      // TODO: Implement Better Handling Here
+      console.log(err);
     });
   }
 
   refreshData(query: string){
     this.termService.searchTerm(query)
-      .then((data) => {
-        //debugger;
+      .subscribe((data) => {
         this.setDefaults(data.details);
         this.treeData = data.relations;
         this.termTitle = "(" + this.term.id + ")" + " " + this.term.name;
       }, (error) => {
+        // TODO:Implement Better Handling Here
         console.log(error);
     });
   }
