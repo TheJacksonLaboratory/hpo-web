@@ -18,7 +18,7 @@
   border-top: 1px solid rgba(0, 0, 0, 0.12);
 }
 ::ng-deep .item-title {
-  font-size: 18px;
+  font-size: 24px;
   text-align: center;
   text-shadow: 1px 1px #D0D3D4;
 }

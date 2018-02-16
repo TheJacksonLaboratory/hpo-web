@@ -62,7 +62,7 @@ export class TermComponent implements OnInit {
       .subscribe((data) => {
         this.setDefaults(data.details);
         this.treeData = data.relations;
-        this.termTitle = "(" + this.term.id + ")" + " " + this.term.name;
+        this.termTitle = this.term.name;
       }, (error) => {
         // TODO:Implement Better Handling Here
         console.log(error);
