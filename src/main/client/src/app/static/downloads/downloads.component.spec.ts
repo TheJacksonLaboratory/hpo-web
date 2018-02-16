@@ -4,7 +4,8 @@ import { DownloadsComponent } from './downloads.component';
 import { MatMenuModule } from '@angular/material';
 import { MatButtonModule } from '@angular/material';
 import { MatIconModule } from '@angular/material';
-import { MatToolbarModule} from '@angular/material';
+import { MatToolbarModule } from '@angular/material';
+import { MatTabsModule } from "@angular/material/tabs";
 import { RouterTestingModule } from '@angular/router/testing';
 
 describe('DownloadsComponent', () => {
@@ -14,7 +15,14 @@ describe('DownloadsComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ DownloadsComponent ],
-      imports: [RouterTestingModule, NoopAnimationsModule, MatIconModule, MatMenuModule, MatButtonModule, MatToolbarModule ],
+      imports: [RouterTestingModule,
+        NoopAnimationsModule,
+        MatIconModule,
+        MatMenuModule,
+        MatButtonModule,
+        MatToolbarModule,
+        MatTabsModule
+      ],
     })
     .compileComponents();
   }));
