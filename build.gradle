@@ -85,6 +85,7 @@ dependencies {
   testCompile "org.grails:grails-web-testing-support"
 
   testCompile "org.grails.plugins:geb"
+  testCompile "io.github.bonigarcia:webdrivermanager:2.1.0"
   testRuntime "net.sourceforge.htmlunit:htmlunit:2.18"
   testRuntime "org.seleniumhq.selenium:selenium-support:2.53.1"
   testCompile "org.seleniumhq.selenium:selenium-htmlunit-driver:2.47.1"
