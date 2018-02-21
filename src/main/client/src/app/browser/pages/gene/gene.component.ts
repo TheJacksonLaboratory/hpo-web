@@ -7,6 +7,7 @@ import { TermAssocDatasource } from '../../models/associations/datasources/term-
 import { DiseaseAssocDatasource} from '../../models/associations/datasources/disease-assoc-datasource'
 import { MatSort } from '@angular/material';
 import * as ProtVista from 'ProtVista';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-gene',
@@ -20,21 +21,26 @@ export class GeneComponent implements OnInit {
   entrezGene: EntrezGene = new EntrezGene();
   gene: Gene;
   query: string;
-  uniprotId:string = "";
-  termSource: TermAssocDatasource |  null;
+  uniprotId: string = "";
+  termSource: TermAssocDatasource | null;
   diseaseSource: DiseaseAssocDatasource | null;
   termAssoc: TermAssocDB;
   diseaseAssoc: DiseaseAssocDB;
-  termColumns = ['ontologyId','name'];
+  termColumns = ['ontologyId', 'name', 'definition'];
   diseaseColumns = ['diseaseId', 'diseaseName'];
   isLoading: boolean = true;
+  uniProtWidgetInitilized =false;
+  uniProtLoading = false;
+  uniProtWidgetURL = environment.HPO_UNIPROT_WIDGET_URL;
 
   @ViewChild(MatSort) sort: MatSort;
+
   constructor(private route: ActivatedRoute, private geneService: GeneService) {
-    this.route.params.subscribe( params => this.query = params.id);
+    this.route.params.subscribe(params => this.query = params.id);
   }
+
   ngOnInit() {
-    this.uniprotWidgetInit();
+    //this.uniprotWidgetInit();
     this.geneService.searchGeneInfo(this.query)
       .subscribe((data) => {
         this.entrezGene = data.result[this.query];
@@ -42,39 +48,54 @@ export class GeneComponent implements OnInit {
       }, (error) => {
         // TODO: Implement Better Error Handling
         console.log(error);
-    });
+      });
     this.geneService.searchGene(this.query)
-    .subscribe((data)=> {
-      this.termAssoc = new TermAssocDB(data.termAssoc);
-      this.termSource = new TermAssocDatasource(this.termAssoc, this.sort);
-      this.diseaseAssoc = new DiseaseAssocDB(data.diseaseAssoc);
-      this.diseaseSource = new DiseaseAssocDatasource(this.diseaseAssoc, this.sort);
-      this.isLoading = false;
-    },(error)=>{
-      // TODO: Implement Better Error Handling
+      .subscribe((data) => {
+        this.termAssoc = new TermAssocDB(data.termAssoc);
+        this.termSource = new TermAssocDatasource(this.termAssoc, this.sort);
+        this.diseaseAssoc = new DiseaseAssocDB(data.diseaseAssoc);
+        this.diseaseSource = new DiseaseAssocDatasource(this.diseaseAssoc, this.sort);
+        this.isLoading = false;
+      }, (error) => {
+        // TODO: Implement Better Error Handling
         console.log(error);
-    });
+      });
 
   }
-  uniprotWidgetInit(){
+
+  uniprotWidgetInit() {
+
+    this.uniProtLoading = true;
     // Make service call for Mapping  EntrezId to UniProtKB Accession
     this.geneService.searchUniprot(this.query).subscribe((uniprotId) => {
-      if(uniprotId != null){
-        // Init ProtVista Viewer if identifier found.
+      if (uniprotId != null) {
+        // UniprotVista Viewer if identifier found.
         let protVistaDiv = document.getElementsByClassName('ProtVistaReference');
         new ProtVista(
-          { el: protVistaDiv[0],
-            uniprotacc : uniprotId,
-            categoryOrder: ['DOMAINS_AND_SITES', 'VARIATION', 'PTM','PROTEOMICS'],
-            exclusions: ['ANTIGEN','MOLECULE_PROCESSING']
+          {
+            el: protVistaDiv[0],
+            uniprotacc: uniprotId,
+            categoryOrder: ['DOMAINS_AND_SITES', 'VARIATION', 'PTM', 'PROTEOMICS'],
+            exclusions: ['ANTIGEN', 'MOLECULE_PROCESSING']
           });
         this.uniprotId = uniprotId;
-      }else{
+      } else {
         this.uniprotId = "error";
       }
-    }, (error)=>{
+      this.uniProtLoading = false;
+    }, (error) => {
       // TODO: Implement Better Error Handling
       console.log(error);
     });
+    this.uniProtWidgetInitilized =true;
   }
+
+
+  initTabs(event) {
+      console.log(event)
+      if (event.index == 2 && ! this.uniProtWidgetInitilized ){
+        this.uniprotWidgetInit();
+      }
+  }
+
 }
