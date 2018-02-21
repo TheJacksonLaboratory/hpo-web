@@ -110,12 +110,15 @@ This guide uses the H2 database which is a grails out-of-the-box in-memory or fi
       ./gradlew integrationTest -DchromeHeadless
     
 ## Other
-+ To see possible gradle tasks execute
++ To see possible gradle tasks, execute:
   
       ./gradlew tasks
       
-+ To delete the previous build execute
++ To delete the previous build, execute:
 
       ./gradlew clean
       
 
++ To build with chrome headless for functional tests, execute:
+
+      ./gradlew clean build -DchromeHeadless=true
