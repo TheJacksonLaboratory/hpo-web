@@ -91,21 +91,34 @@ This guide uses the H2 database which is a grails out-of-the-box in-memory or fi
   
 ## Unit Testing
 
-+ To execute the client (Angular app) unit tests run
++ To execute the client (Angular app) unit tests, run
   
       ./gradlew clientTest
 
-+ To execute backend and client unit tests run
++ To execute backend and client unit tests, run
   
       ./gradlew test
+      
+## Functional Testing
+
++ To execute functional testing with chrome browser, run
+  
+      ./gradlew integrationTest
+
++ To execute functional testing with chrome headless browser, run
+  
+      ./gradlew integrationTest -DchromeHeadless
     
 ## Other
-+ To see possible gradle tasks execute
++ To see possible gradle tasks, execute:
   
       ./gradlew tasks
       
-+ To delete the previous build execute
++ To delete the previous build, execute:
 
       ./gradlew clean
       
 
++ To build with chrome headless for functional tests, execute:
+
+      ./gradlew clean build -DchromeHeadless=true
