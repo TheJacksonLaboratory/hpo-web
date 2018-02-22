@@ -19,8 +19,8 @@ const staticRoutes: Routes = [
   { path: 'downloads', component: DownloadsComponent },
   { path: 'license', component: LicenseComponent },
   { path: 'faq', component: FaqComponent}
-]
-export const staticRouting = RouterModule.forChild(staticRoutes)
+];
+export const staticRouting = RouterModule.forChild(staticRoutes);
 @NgModule({
   imports: [
     RouterModule,

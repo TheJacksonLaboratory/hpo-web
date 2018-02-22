@@ -3,11 +3,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { RoutingModule } from './app-routing.module';
-import { MatMenuModule } from '@angular/material';
-import { MatButtonModule } from '@angular/material';
-import { MatIconModule } from '@angular/material';
-import { MatToolbarModule} from '@angular/material';
 import { HttpClientModule} from '@angular/common/http';
+
+// Global Material Modules
+import {GlobalMaterialModules} from "./shared/global.module";
+
 //Custom Shared Components
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
@@ -26,11 +26,8 @@ import { NoPageFoundComponent } from './error/no-page-found.component';
     BrowserModule,
     BrowserAnimationsModule,
     RoutingModule,
-    MatMenuModule,
-    MatButtonModule,
-    MatIconModule,
-    MatToolbarModule,
-    HttpClientModule
+    HttpClientModule,
+    GlobalMaterialModules
   ],
   providers: [],
   bootstrap: [AppComponent]

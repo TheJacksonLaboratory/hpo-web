@@ -4,16 +4,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http'
 import { BrowserRoutingModule } from './browser-routing.module'
-import { MatInputModule } from '@angular/material';
-import { MatCardModule } from '@angular/material';
-import { MatIconModule } from '@angular/material';
-import { MatProgressBarModule }  from '@angular/material';
-import { MatTabsModule } from '@angular/material';
-import { MatTableModule } from '@angular/material';
-import { MatPaginatorModule } from '@angular/material';
-import { MatSortModule } from '@angular/material';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { MatToolbarModule } from '@angular/material';
+//Material Modules
+import {GlobalMaterialModules} from "../shared/global.module";
 // Services
 import { SearchService } from './services/search/search.service';
 import { TermService } from './services/term/term.service';
@@ -34,16 +26,7 @@ import { SortPipe } from './pipes/sort-pipe';
     FormsModule,
     HttpModule,
     BrowserRoutingModule,
-    MatInputModule,
-    MatCardModule,
-    MatIconModule,
-    MatProgressBarModule,
-    MatTabsModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatSortModule,
-    MatTooltipModule,
-    MatToolbarModule
+    GlobalMaterialModules,
   ],
   providers: [ SearchService, TermService, GeneService, DiseaseService ],
   declarations: [ SearchComponent, TermComponent, DiseaseComponent,
