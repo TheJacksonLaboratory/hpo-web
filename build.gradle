@@ -32,13 +32,16 @@ repositories {
    }
 }
 
+integrationTest {
+  systemProperties System.properties
+}
+
 dependencies {
   //Custom OLGP and its dependencies
   compile name:'ontolib-core-0.1.2'
   compile name:'ontolib-io-0.1.2'
-  compile 'com.google.guava:guava:24.0-jre'
+  compile 'com.google.guava:guava:22.0'
   compile "org.antlr:antlr4:4.7"
-
 
   compile "org.springframework.boot:spring-boot-starter-logging"
   compile "org.springframework.boot:spring-boot-autoconfigure"
@@ -85,8 +88,15 @@ dependencies {
   testCompile "org.grails.plugins:geb"
   testCompile "org.grails:grails-datastore-rest-client"
   testCompile "org.grails:grails-web-testing-support"
-  testRuntime "org.seleniumhq.selenium:selenium-htmlunit-driver:2.47.1"
+
+  testCompile "org.grails.plugins:geb"
+  testCompile "io.github.bonigarcia:webdrivermanager:2.1.0"
   testRuntime "net.sourceforge.htmlunit:htmlunit:2.18"
+  testRuntime "org.seleniumhq.selenium:selenium-support:2.53.1"
+  testCompile "org.seleniumhq.selenium:selenium-htmlunit-driver:2.47.1"
+  testCompile "org.seleniumhq.selenium:selenium-firefox-driver:2.53.1"
+  testCompile "org.seleniumhq.selenium:selenium-chrome-driver:2.53.1"
+  testCompile "com.codeborne:phantomjsdriver:1.3.0"
 }
 
 
@@ -132,17 +142,12 @@ war.dependsOn(buildClientProd)
 
 test.dependsOn(clientTest)
 
-//integrationTest.dependsOn(clientIntegrationTest)
-
 clean {
     delete fileTree(dir: "src/main/webapp/app")
 }
 
-//bootRun.dependsOn(buildClientDev)
-
 bootRun {
 
-        //'-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005',
     jvmArgs(
         '-server',
         '-Xmx768M',

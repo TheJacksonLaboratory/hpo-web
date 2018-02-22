@@ -147,3 +147,10 @@
   background-color: rgba(255, 255, 255, 0.7);
 }
 
+.term-details-tab-group {
+  border: 1px solid #e8e8e8;
+}
+
+.mat-progress-bar{
+  margin: 30px 0 30px 10px
+}
