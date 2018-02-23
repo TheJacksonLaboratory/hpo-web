@@ -19,10 +19,10 @@
             <mat-card-title>Terms<hr></mat-card-title>
           </mat-card-header>
           <mat-card-content>
-            <span routerLink="/browser/term/{{item.ontologyId}}" class="result-list" *ngFor="let item of terms;">
-              <span class="result">{{item.ontologyId}} {{item.name}}
-                <span matTooltip="# of Descendants" matTooltipPosition="left"  *ngIf="item.childrenCount != 0" class="badge search-badge">{{item.childrenCount}}</span>
-              </span>
+            <span routerLink="/browser/term/{{item.ontologyId}}" class="result-list"
+                  *ngFor="let item of terms;"
+                  [innerHtml]="{id:item.ontologyId, name: item.name, count: item.childrenCount} | highlight: query">
+                <!--<span matTooltip="# of Descendants" matTooltipPosition="left"  *ngIf="item.childrenCount != 0" class="badge search-badge">{{item.childrenCount}}</span>-->
             </span>
           </mat-card-content>
         </mat-card>
@@ -33,8 +33,9 @@
               <mat-card-title>Diseases<hr></mat-card-title>
             </mat-card-header>
             <mat-card-content>
-              <span routerLink="/browser/disease/{{item.diseaseId}}" class="result-list" *ngFor="let item of diseases;">
-                <span class="result">{{item.dbRef}} {{item.dbName}}</span>
+              <span routerLink="/browser/disease/{{item.diseaseId}}" class="result-list"
+                    *ngFor="let item of diseases;"
+                    [innerHtml]="{id:item.dbRef, name: item.dbName} | highlight: query">
               </span>
             </mat-card-content>
           </mat-card>
@@ -46,8 +47,7 @@
               </mat-card-header>
               <mat-card-content>
                 <span  routerLink="/browser/gene/{{item.entrezGeneId}}" *ngFor="let item of genes; "
-                  class="result-list">
-                      <span class="result"> {{item.entrezGeneId}} {{item.entrezGeneSymbol}}</span>
+                  class="result-list" [innerHtml]="{id:item.entrezGeneId, name: item.entrezGeneSymbol} | highlight: query">
               </span>
               </mat-card-content>
             </mat-card>

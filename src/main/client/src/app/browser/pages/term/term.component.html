@@ -14,6 +14,7 @@
         <mat-card class="item-summary tree-navigation">
           <mat-card-content>
             <h3 class="card-title">Tree Hierarchy</h3>
+            <span matTooltip="Local View of HPO" matTooltipPosition="left" class="badge info-badge">i</span>
             <hr class="underline-hr">
                   <ul class="tree" *ngIf="treeData">
                     <li *ngFor="let parent of treeData.parents">
