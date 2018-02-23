@@ -3,15 +3,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StaticRoutingModule } from './static-routing.module';
 import { DocumentationModule } from './documentation/documentation.module';
-// Angular Bootstrap Modules
-import { MatTabsModule } from '@angular/material';
-import { MatExpansionModule } from '@angular/material';
-import { MatTableModule } from '@angular/material';
-import { MatCardModule } from '@angular/material';
-import { MatListModule } from '@angular/material';
-import { MatButtonModule } from '@angular/material';
-import { MatIconModule } from '@angular/material';
-
+// GlobalMaterialModules
+import { GlobalMaterialModules} from "../shared/global.module";
 // Components
 import { AboutComponent } from './about/about.component';
 import { DownloadsComponent } from './downloads/downloads.component';
@@ -26,13 +19,7 @@ import { FaqComponent } from './resources/faq/faq.component';
     CommonModule,
     StaticRoutingModule,
     DocumentationModule,
-    MatTabsModule,
-    MatExpansionModule,
-    MatTableModule,
-    MatCardModule,
-    MatListModule,
-    MatButtonModule,
-    MatIconModule,
+    GlobalMaterialModules
   ],
   declarations: [ HomeComponent, DownloadsComponent, AboutComponent,
                   ContactComponent, CitationComponent, LicenseComponent,

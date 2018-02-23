@@ -1,15 +1,23 @@
+import io.github.bonigarcia.wdm.ChromeDriverManager
 import org.openqa.selenium.chrome.ChromeDriver
 import org.openqa.selenium.chrome.ChromeOptions
 import org.openqa.selenium.firefox.FirefoxDriver
 import org.openqa.selenium.htmlunit.HtmlUnitDriver
 import org.openqa.selenium.phantomjs.PhantomJSDriver
 
+
+def defaultBrowserSize = { driver ->
+  driver.manage().window().size = [1920, 1080]
+  driver
+}
+
 def defaultChromeConfig = {
+  ChromeDriverManager.getInstance().setup()
   ChromeOptions chromeOptions = new ChromeOptions()
   if(System.getProperty('chromeHeadless')){
     chromeOptions.addArguments('--headless')
   }
-  new ChromeDriver(chromeOptions)
+  defaultBrowserSize(new ChromeDriver(chromeOptions))
 }
 environments {
 

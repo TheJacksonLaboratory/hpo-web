@@ -26,3 +26,6 @@ build/
 # System Files
 .DS_Store
 Thumbs.db
+
+# Node_Modules
+node_modules/*

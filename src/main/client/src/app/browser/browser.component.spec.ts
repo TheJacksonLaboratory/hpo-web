@@ -2,10 +2,17 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { SearchComponent} from './pages/search/search.component';
 import { BrowserComponent } from './browser.component';
 import { RouterTestingModule } from '@angular/router/testing';
-import { MatIconModule } from '@angular/material';
+
+import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
+import { MatProgressBarModule} from '@angular/material/progress-bar';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+
 import { SortPipe } from './pipes/sort-pipe';
 import { FormsModule } from '@angular/forms';
 import { SearchService} from './services/search/search.service';
+import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 
 
 describe('BrowserComponent', () => {
@@ -15,7 +22,15 @@ describe('BrowserComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule, FormsModule, MatIconModule],
+      imports: [RouterTestingModule,
+        FormsModule,
+        MatIconModule,
+        MatCardModule,
+        MatProgressBarModule,
+        MatFormFieldModule,
+        MatInputModule,
+        NoopAnimationsModule
+      ],
       declarations: [ BrowserComponent, SearchComponent, SortPipe ],
       providers: [{provide: SearchService, useValue: mockSearchService}]
     })
