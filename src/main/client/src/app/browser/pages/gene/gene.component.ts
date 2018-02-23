@@ -40,7 +40,6 @@ export class GeneComponent implements OnInit {
   }
 
   ngOnInit() {
-    //this.uniprotWidgetInit();
     this.geneService.searchGeneInfo(this.query)
       .subscribe((data) => {
         this.entrezGene = data.result[this.query];
@@ -90,9 +89,11 @@ export class GeneComponent implements OnInit {
     this.uniProtWidgetInitilized =true;
   }
 
-
+  /**
+   * Initialize tab components where needed
+   */
   initTabs(event) {
-      console.log(event)
+      //initialize uniProt widget
       if (event.index == 2 && ! this.uniProtWidgetInitilized ){
         this.uniprotWidgetInit();
       }
