@@ -1,120 +1,120 @@
-<div class="term-toolbar">
-  <mat-toolbar color="accent" class="mat-elevation-z1">
-      <mat-icon (click)="showOverlay()" class="search-icon">search</mat-icon>
-  </mat-toolbar>
-</div>
-<div class="container">
-<div class="item-header row">
-    <div *ngIf="overlay" class="search-overlay" (click)="removeOverlay($event)" (window:keyup)="onEscKey($event)">
-      <searchbar></searchbar>
-    </div>
-</div>
-<div class="row">
-      <div class="col-lg-3">
-        <mat-card class="item-summary tree-navigation">
-          <mat-card-content>
-            <h3 class="card-title">Tree Hierarchy</h3>
-            <span matTooltip="Local View of HPO" matTooltipPosition="left" class="badge info-badge">i</span>
-            <hr class="underline-hr">
-                  <ul class="tree" *ngIf="treeData">
-                    <li *ngFor="let parent of treeData.parents">
-                      <a class="link"  routerLink="../{{parent.ontologyId}}" >{{parent.name}}</a>
-                      <span matTooltip="# of Descendants" matTooltipPosition="above"  *ngIf="parent.childrenCount != 0" class="badge tree-badge">{{parent.childrenCount}}</span>
-                    </li>
-                    <li>
-                      <span class="term"><strong>{{term.name}}</strong></span>
-                        <span class="badge tree-badge" matTooltip="# of Descendants" matTooltipPosition="above">{{treeData.termCount}}</span>
-                      <ul>
-                        <li *ngFor="let child of treeData.children">
-                          <a class="link" routerLink="../{{child.ontologyId}}">{{child.name}}</a>
-                          <span matTooltip="# of Descendants" matTooltipPosition="above" *ngIf="child.childrenCount != 0" class="badge tree-badge">{{child.childrenCount}}</span>
-                        </li>
-                      </ul>
-                    </li>
-                  </ul>
-          </mat-card-content>
-        </mat-card>
-      </div>
-      <div class="col-lg-9 inline">
-          <mat-card class="item-summary">
-          <mat-card-content>
-
-              <div>
-                <span class="item-title">{{termTitle}}</span>
-                <a routerLink="/browser/term/{{term.id}}"><strong>({{term.id}})</strong></a>
-              </div>
-
+<div class="term-component">
+  <div class="container-custom">
+    <div class="row">
+        <!-- Term navigtaion tree - left pane-->
+        <div class="col-lg-3">
+          <mat-card class="item-summary tree-navigation">
+            <mat-card-content>
+              <h3 class="card-title">Tree Hierarchy</h3>
+              <span matTooltip="Local View of HPO" matTooltipPosition="left" class="badge info-badge">i</span>
               <hr class="underline-hr">
-
-              <p><br><i>{{term.definition}}</i></p>
-                <p> <u>PURL:</u>&nbsp;<a href="{{term.purl}}" target="__blank"><strong>{{term.purl}}</strong></a></p>
-              <p><u>Synonyms</u><br><i *ngFor="let item of term.synonyms; let isLast=last">{{item}}{{isLast ? '' : ', '}}</i></p>
-              <p><u>Xrefs</u><br><i *ngFor="let item of term.xrefs; let isLast=last">{{item}}{{isLast ? '' : ', '}}</i></p>
-          </mat-card-content>
+                    <ul class="tree" *ngIf="treeData">
+                      <li *ngFor="let parent of treeData.parents">
+                        <a class="link"  routerLink="../{{parent.ontologyId}}" >{{parent.name}}</a>
+                        <span matTooltip="# of Descendants" matTooltipPosition="above"  *ngIf="parent.childrenCount != 0" class="badge tree-badge">{{parent.childrenCount}}</span>
+                      </li>
+                      <li>
+                        <span class="term"><strong>{{term.name}}</strong></span>
+                          <span class="badge tree-badge" matTooltip="# of Descendants" matTooltipPosition="above">{{treeData.termCount}}</span>
+                        <ul>
+                          <li *ngFor="let child of treeData.children">
+                            <a class="link" routerLink="../{{child.ontologyId}}">{{child.name}}</a>
+                            <span matTooltip="# of Descendants" matTooltipPosition="above" *ngIf="child.childrenCount != 0" class="badge tree-badge">{{child.childrenCount}}</span>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+            </mat-card-content>
           </mat-card>
+        </div>
 
-          <mat-tab-group class="term-details-tab-group mat-elevation-z6">
-            <mat-tab label="Disease Associations">
+       <!-- right pane -->
+        <div class="col-lg-9 inline">
+            <!-- Term summary -->
+            <mat-card class="item-summary">
+              <mat-card-content>
+
+                  <div>
+                    <span class="item-title">{{termTitle}}</span>
+                    <a routerLink="/browser/term/{{term.id}}"><strong>({{term.id}})</strong></a>
+                  </div>
+
+                  <hr class="underline-hr">
+
+                  <p><br><i>{{term.definition}}</i></p>
+                  <p><u>PURL:</u>&nbsp;&nbsp;<a href="{{term.purl}}" target="__blank"><strong>{{term.purl}}</strong></a></p>
+                  <p><u>Synonyms:</u>&nbsp;&nbsp; <i *ngFor="let item of term.synonyms; let isLast=last">{{item}}{{isLast ? '' : ', '}}</i></p>
+                  <p><u>Xrefs:</u>&nbsp;&nbsp;<i *ngFor="let item of term.xrefs; let isLast=last">{{item}}{{isLast ? '' : ', '}}</i></p>
+              </mat-card-content>
+            </mat-card>
+
+            <!-- TABS -->
+            <mat-tab-group class="term-details-tab-group mat-elevation-z6">
+
+              <!-- Disease association -->
+              <mat-tab label="Disease Associations">
+
+                      <mat-progress-bar  *ngIf="assocLoading" class="loading-result-details" color="primary" mode="buffer">
+                      </mat-progress-bar>
+
+                      <div [hidden]="assocLoading"class="associations disease-association">
+                        <mat-table #table [dataSource]="diseaseSource" matSort>
+                          <mat-header-row *matHeaderRowDef="diseaseColumns"></mat-header-row>
+                          <mat-row *matRowDef="let row; columns: diseaseColumns;"></mat-row>
+                          <ng-container matColumnDef="diseaseId">
+                            <mat-header-cell *matHeaderCellDef> Disease Id </mat-header-cell>
+                            <mat-cell *matCellDef="let row">
+                              <a routerLink="/browser/disease/{{row.diseaseId}}">{{row.diseaseId}}</a>
+                            </mat-cell>
+                          </ng-container>
+                          <ng-container matColumnDef="diseaseName">
+                              <mat-header-cell *matHeaderCellDef>Disease Name </mat-header-cell>
+                              <mat-cell *matCellDef="let row">{{row.diseaseName}}</mat-cell>
+                          </ng-container>
+                          <ng-container matColumnDef="dbGenes">
+                              <mat-header-cell *matHeaderCellDef>Associated Genes</mat-header-cell>
+                              <mat-cell *matCellDef="let row">
+                                <span *ngFor="let gene of row.dbGenes">
+                                    <a routerLink="/browser/gene/{{gene.entrezGeneId}}">({{gene.entrezGeneId}})</a> -
+                                    {{gene.entrezGeneSymbol}}<br>
+                                </span>
+                              </mat-cell>
+                          </ng-container>
+                        </mat-table>
+                      </div>
+              </mat-tab>
+
+              <!-- Gene Association -->
+              <mat-tab label="Gene Associations">
 
                     <mat-progress-bar  *ngIf="assocLoading" class="loading-result-details" color="primary" mode="buffer">
                     </mat-progress-bar>
 
-                    <div [hidden]="assocLoading"class="associations disease-association">
-                      <mat-table #table [dataSource]="diseaseSource" matSort>
-                        <mat-header-row *matHeaderRowDef="diseaseColumns"></mat-header-row>
-                        <mat-row *matRowDef="let row; columns: diseaseColumns;"></mat-row>
-                        <ng-container matColumnDef="diseaseId">
-                          <mat-header-cell *matHeaderCellDef> Disease Id </mat-header-cell>
+                    <div [hidden]="assocLoading" class="associations gene-association">
+                      <mat-table #table [dataSource]="geneSource" matSort>
+                        <mat-header-row *matHeaderRowDef="geneColumns"></mat-header-row>
+                        <mat-row *matRowDef="let row; columns: geneColumns;"></mat-row>
+                        <ng-container matColumnDef="entrezGeneId">
+                          <mat-header-cell *matHeaderCellDef> Gene Symbol </mat-header-cell>
                           <mat-cell *matCellDef="let row">
-                            <a routerLink="/browser/disease/{{row.diseaseId}}">{{row.diseaseId}}</a>
+                            {{row.entrezGeneSymbol}}
+                            <a routerLink="/browser/gene/{{row.entrezGeneId}}"> ({{row.entrezGeneId}})</a>
                           </mat-cell>
                         </ng-container>
-                        <ng-container matColumnDef="diseaseName">
-                            <mat-header-cell *matHeaderCellDef>Disease Name </mat-header-cell>
-                            <mat-cell *matCellDef="let row">{{row.diseaseName}}</mat-cell>
-                        </ng-container>
-                        <ng-container matColumnDef="dbGenes">
-                            <mat-header-cell *matHeaderCellDef>Associated Genes</mat-header-cell>
-                            <mat-cell *matCellDef="let row">
-                              <span *ngFor="let gene of row.dbGenes">
-                                  <a routerLink="/browser/gene/{{gene.entrezGeneId}}">({{gene.entrezGeneId}})</a> -
-                                  {{gene.entrezGeneSymbol}}<br>
-                              </span>
-                            </mat-cell>
+                        <ng-container matColumnDef="dbDiseases">
+                          <mat-header-cell *matHeaderCellDef> Associated Diseases </mat-header-cell>
+                          <mat-cell *matCellDef="let row">
+                            <span *ngFor="let disease of row.dbDiseases">
+                                <a routerLink="/browser/disease/{{disease.diseaseId}}">({{disease.diseaseId}})</a> -
+                                {{disease.diseaseName}}<br>
+                            </span>
+                          </mat-cell>
                         </ng-container>
                       </mat-table>
                     </div>
-            </mat-tab>
-
-            <mat-tab label="Gene Associations">
-
-                  <mat-progress-bar  *ngIf="assocLoading" class="loading-result-details" color="primary" mode="buffer">
-                  </mat-progress-bar>
-
-                  <div [hidden]="assocLoading" class="associations gene-association">
-                    <mat-table #table [dataSource]="geneSource" matSort>
-                      <mat-header-row *matHeaderRowDef="geneColumns"></mat-header-row>
-                      <mat-row *matRowDef="let row; columns: geneColumns;"></mat-row>
-                      <ng-container matColumnDef="entrezGeneId">
-                        <mat-header-cell *matHeaderCellDef> Gene Symbol </mat-header-cell>
-                        <mat-cell *matCellDef="let row">
-                          {{row.entrezGeneSymbol}}
-                          <a routerLink="/browser/gene/{{row.entrezGeneId}}"> ({{row.entrezGeneId}})</a>
-                        </mat-cell>
-                      </ng-container>
-                      <ng-container matColumnDef="dbDiseases">
-                        <mat-header-cell *matHeaderCellDef> Associated Diseases </mat-header-cell>
-                        <mat-cell *matCellDef="let row">
-                          <span *ngFor="let disease of row.dbDiseases">
-                              <a routerLink="/browser/disease/{{disease.diseaseId}}">({{disease.diseaseId}})</a> -
-                              {{disease.diseaseName}}<br>
-                          </span>
-                        </mat-cell>
-                      </ng-container>
-                    </mat-table>
-                  </div>
-            </mat-tab>
-          </mat-tab-group>
+              </mat-tab>
+            </mat-tab-group>
+        </div>
     </div>
   </div>
 </div>
