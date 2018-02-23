@@ -5,11 +5,7 @@ export class HighlightPipe implements PipeTransform {
   transform(result: any, query: string): string {
     let outHtml: string = "";
     if (result && query) {
-      let pattern = query.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&');
-      pattern = pattern.split(' ').filter((t) => {
-        return t.length > 0;
-      }).join('|');
-      const regex = new RegExp(pattern, 'gi');
+      const regex = new RegExp(query, 'gi');
       result.name = result.name.replace(regex, (match) => `<span class="search-highlight">${match}</span>`);
       outHtml = `<span class="result">
                  ${result.id} ${result.name}
