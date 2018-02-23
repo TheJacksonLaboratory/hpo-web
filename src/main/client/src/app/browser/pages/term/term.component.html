@@ -1,16 +1,8 @@
-<!--<div class="term-toolbar">-->
-  <!--<mat-toolbar color="accent" class="mat-elevation-z1">-->
-      <!--<mat-icon (click)="showOverlay()" class="search-icon">search</mat-icon>-->
-  <!--</mat-toolbar>-->
-<!--</div>-->
 <div class="term-component">
-<!--<div class="item-header row">-->
-    <!--<div *ngIf="overlay" class="search-overlay" (click)="removeOverlay($event)" (window:keyup)="onEscKey($event)">-->
-      <!--<searchbar></searchbar>-->
-    <!--</div>-->
-<!--</div>-->
-  <div class="container-custom" [hidden]="isLoading">
+  <div class="container-custom">
+
     <div class="row">
+        <!-- Term navigtaion tree - left pane-->
         <div class="col-lg-3">
           <mat-card class="item-summary tree-navigation">
             <mat-card-content>
@@ -35,9 +27,12 @@
             </mat-card-content>
           </mat-card>
         </div>
+
+       <!-- right pane -->
         <div class="col-lg-9">
           <div class="tab-content">
 
+            <!-- Term summary -->
             <mat-card class="item-summary">
             <mat-card-content>
 
@@ -55,7 +50,10 @@
             </mat-card-content>
             </mat-card>
 
+            <!-- TABS -->
             <mat-tab-group class="term-details-tab-group mat-elevation-z6">
+
+              <!-- Disease association -->
               <mat-tab label="Disease Associations">
 
                       <mat-progress-bar  *ngIf="assocLoading" class="loading-result-details" color="primary" mode="buffer">
@@ -88,6 +86,7 @@
                       </div>
               </mat-tab>
 
+              <!-- Gene Association -->
               <mat-tab label="Gene Associations">
 
                     <mat-progress-bar  *ngIf="assocLoading" class="loading-result-details" color="primary" mode="buffer">
