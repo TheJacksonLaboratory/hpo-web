@@ -6,7 +6,6 @@
               <input matInput placeholder="Search Human Phenotype Ontology" [(ngModel)]=query (keyup)="filter()">
               <mat-hint align="end"><strong>( i.e. ) HP:00142 | Abornmality of Weight | Bladder Cancer</strong> </mat-hint>
           </mat-form-field>
-          <!--<input class="search-bar col-lg-12" type="text" placeholder='Search Phenotypes' [(ngModel)]=query (keyup)="filter()"/>-->
     </div>
   </div>
   <div class="row">
@@ -20,9 +19,12 @@
           </mat-card-header>
           <mat-card-content>
             <span routerLink="/browser/term/{{item.ontologyId}}" class="result-list"
-                  *ngFor="let item of terms;"
-                  [innerHtml]="{id:item.ontologyId, name: item.name, count: item.childrenCount} | highlight: query">
-                <!--<span matTooltip="# of Descendants" matTooltipPosition="left"  *ngIf="item.childrenCount != 0" class="badge search-badge">{{item.childrenCount}}</span>-->
+                  *ngFor="let item of terms;">
+              <span class="result">
+                <span class="id">{{item.ontologyId}}</span>
+                <span class="name" [innerHtml]="{name: item.name } | highlight: query"></span>
+                <span matTooltip="# of Descendants" matTooltipPosition="left"  *ngIf="item.childrenCount != 0" class="badge search-badge">{{item.childrenCount}}</span>
+              </span>
             </span>
           </mat-card-content>
         </mat-card>
@@ -34,8 +36,11 @@
             </mat-card-header>
             <mat-card-content>
               <span routerLink="/browser/disease/{{item.diseaseId}}" class="result-list"
-                    *ngFor="let item of diseases;"
-                    [innerHtml]="{id:item.dbRef, name: item.dbName} | highlight: query">
+                    *ngFor="let item of diseases;">
+                <span class="result">
+                  <span class="id">{{item.dbRef}}</span>
+                  <span class="name" [innerHtml]="{name: item.dbName } | highlight: query"></span>
+                </span>
               </span>
             </mat-card-content>
           </mat-card>
@@ -48,6 +53,10 @@
               <mat-card-content>
                 <span  routerLink="/browser/gene/{{item.entrezGeneId}}" *ngFor="let item of genes; "
                   class="result-list" [innerHtml]="{id:item.entrezGeneId, name: item.entrezGeneSymbol} | highlight: query">
+                  <span class="result">
+                  <span class="id">{{item.entrezGeneId}}</span>
+                  <span class="name" [innerHtml]="{name: item.entrezGeneSymbol } | highlight: query"></span>
+                </span>
               </span>
               </mat-card-content>
             </mat-card>
