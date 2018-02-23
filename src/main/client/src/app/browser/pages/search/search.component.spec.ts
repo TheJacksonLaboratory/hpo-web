@@ -5,6 +5,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { SearchComponent } from './search.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { SortPipe } from '../../pipes/sort-pipe';
+import { HighlightPipe} from "../../pipes/highlight-pipe";
 import { SearchService} from '../../services/search/search.service';
 import {Observable} from "rxjs/Observable";
 import 'rxjs/add/observable/of';
@@ -33,7 +34,7 @@ describe('SearchComponent', () => {
         MatInputModule,
         MatProgressBarModule
       ],
-      declarations: [ SearchComponent, SortPipe ],
+      declarations: [ SearchComponent, SortPipe, HighlightPipe ],
       providers: [{provide:SearchService, useValue:searchServiceStub}, {provide: TermService, useValue: mockTermService }]
     })
     .compileComponents();
