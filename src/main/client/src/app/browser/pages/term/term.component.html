@@ -1,6 +1,5 @@
 <div class="term-component">
   <div class="container-custom">
-
     <div class="row">
         <!-- Term navigtaion tree - left pane-->
         <div class="col-lg-3">
@@ -29,25 +28,23 @@
         </div>
 
        <!-- right pane -->
-        <div class="col-lg-9">
-          <div class="tab-content">
-
+        <div class="col-lg-9 inline">
             <!-- Term summary -->
             <mat-card class="item-summary">
-            <mat-card-content>
+              <mat-card-content>
 
-                <div>
-                  <span class="item-title">{{termTitle}}</span>
-                  <a routerLink="/browser/term/{{term.id}}"><strong>({{term.id}})</strong></a>
-                </div>
+                  <div>
+                    <span class="item-title">{{termTitle}}</span>
+                    <a routerLink="/browser/term/{{term.id}}"><strong>({{term.id}})</strong></a>
+                  </div>
 
-                <hr class="underline-hr">
+                  <hr class="underline-hr">
 
-                <p><br><i>{{term.definition}}</i></p>
-                <p><u>PURL:</u>&nbsp;&nbsp;<a href="{{term.purl}}" target="__blank"><strong>{{term.purl}}</strong></a></p>
-                <p><u>Synonyms:</u>&nbsp;&nbsp; <i *ngFor="let item of term.synonyms; let isLast=last">{{item}}{{isLast ? '' : ', '}}</i></p>
-                <p><u>Xrefs:</u>&nbsp;&nbsp;<i *ngFor="let item of term.xrefs; let isLast=last">{{item}}{{isLast ? '' : ', '}}</i></p>
-            </mat-card-content>
+                  <p><br><i>{{term.definition}}</i></p>
+                  <p><u>PURL:</u>&nbsp;&nbsp;<a href="{{term.purl}}" target="__blank"><strong>{{term.purl}}</strong></a></p>
+                  <p><u>Synonyms:</u>&nbsp;&nbsp; <i *ngFor="let item of term.synonyms; let isLast=last">{{item}}{{isLast ? '' : ', '}}</i></p>
+                  <p><u>Xrefs:</u>&nbsp;&nbsp;<i *ngFor="let item of term.xrefs; let isLast=last">{{item}}{{isLast ? '' : ', '}}</i></p>
+              </mat-card-content>
             </mat-card>
 
             <!-- TABS -->
@@ -116,8 +113,7 @@
                     </div>
               </mat-tab>
             </mat-tab-group>
-          </div>
-      </div>
+        </div>
     </div>
   </div>
 </div>

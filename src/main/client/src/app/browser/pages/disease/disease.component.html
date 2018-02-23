@@ -1,15 +1,14 @@
 <div class="gene-component">
   <div class="container-custom" [hidden]="isLoading">
+    <div class="item-header">
+      <span [hidden]="!isLoading">
+          <mat-progress-bar  class="loading-result-details" color="primary" mode="buffer">
+          </mat-progress-bar>
+      </span>
+    </div>
+</div>
+  <div [hidden]="isLoading" class="container container-custom">
       <div class="row">
-        <div class="item-header">
-          <span [hidden]="!isLoading">
-              <mat-progress-bar  class="loading-result-details" color="primary" mode="buffer">
-              </mat-progress-bar>
-          </span>
-        </div>
-      </div>
-
-      <div [hidden]="isLoading" class="row">
             <!--Summary - left pane-->
             <div class="col-lg-3">
               <mat-card class="item-summary">

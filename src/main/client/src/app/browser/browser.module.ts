@@ -19,6 +19,7 @@ import { GeneComponent } from './pages/gene/gene.component';
 import { BrowserComponent } from './browser.component';
 // Custom Pipes
 import { SortPipe } from './pipes/sort-pipe';
+import { HighlightPipe} from "./pipes/highlight-pipe";
 
 @NgModule({
   imports: [
@@ -30,6 +31,6 @@ import { SortPipe } from './pipes/sort-pipe';
   ],
   providers: [ SearchService, TermService, GeneService, DiseaseService ],
   declarations: [ SearchComponent, TermComponent, DiseaseComponent,
-    GeneComponent, BrowserComponent, SortPipe ]
+    GeneComponent, BrowserComponent, SortPipe, HighlightPipe ]
 })
 export class BrowserHPOModule { }

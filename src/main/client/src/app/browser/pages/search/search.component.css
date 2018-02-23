@@ -67,11 +67,41 @@ span.result-list  {
   overflow-y: scroll;
   max-height: 500px;
 }
-.badge.search-badge{
+::ng-deep .badge.search-badge{
   border-radius:2px;
   background-color: #0085CA;
   padding-bottom: 4px;
   margin: 0 0 5px 10px;
   float: right;
   cursor: default;
+}
+
+::ng-deep .search-highlight{
+  font-weight: 900;
+  background-color:yellow;
+}
+::ng-deep .disease-result .result .id{
+  color: grey;
+  font-size: 10px;
+  display: block;
+  float: left;
+  width: 50px;
+  margin: 5px 0 0 0;
+}
+::ng-deep .term-result .result .id{
+  color: grey;
+  font-size: 10px;
+  display: block;
+  float: left;
+  width: 60px;
+  margin: 5px 0 0 0;
+}
+
+::ng-deep .gene-result .result .id{
+  color: grey;
+  font-size: 10px;
+  display: block;
+  float: left;
+  width: 35px;
+  margin: 5px 0 0 0;
 }
