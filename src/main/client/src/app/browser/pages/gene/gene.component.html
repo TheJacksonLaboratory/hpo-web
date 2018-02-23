@@ -42,6 +42,24 @@
               <mat-tab-group class="term-details-tab-group mat-elevation-z6"
                       (selectedTabChange)="initTabs($event)">
 
+                  <!-- Widget tab -->
+                  <mat-tab label="UniProt Viewer">
+
+                    <mat-progress-bar  *ngIf="uniProtLoading" class="loading-result-details" color="primary" mode="buffer">
+                    </mat-progress-bar>
+
+                    <div class="ProtVistaContainer col-lg-12">
+
+
+                      <p *ngIf="!uniProtLoading"> <u>UniProt Reference:</u> <a href="{{uniProtWidgetURL}}{{this.uniprotId}}">{{this.uniprotId}}</a></p>
+                      <div class="ProtVistaReference">
+                        <div *ngIf="uniprotId == 'error'">
+                          <p><strong>No UniProt Reference Could be found for Gene {{entrezGene.name}}</strong></p>
+                        </div>
+                      </div>
+                    </div>
+                  </mat-tab>
+
                   <!-- Term association tab -->
                   <mat-tab label="Term Associations">
 
@@ -89,23 +107,7 @@
                     </div>
                   </mat-tab>
 
-                  <!-- Widget tab -->
-                  <mat-tab label="UniProt Viewer">
 
-                    <mat-progress-bar  *ngIf="uniProtLoading" class="loading-result-details" color="primary" mode="buffer">
-                    </mat-progress-bar>
-
-                    <div class="ProtVistaContainer col-lg-12">
-
-
-                      <p *ngIf="!uniProtLoading"> <u>UniProt Reference:</u> <a href="{{uniProtWidgetURL}}{{this.uniprotId}}">{{this.uniprotId}}</a></p>
-                      <div class="ProtVistaReference">
-                        <div *ngIf="uniprotId == 'error'">
-                          <p><strong>No UniProt Reference Could be found for Gene {{entrezGene.name}}</strong></p>
-                        </div>
-                      </div>
-                    </div>
-                  </mat-tab>
 
               </mat-tab-group>
         </div>

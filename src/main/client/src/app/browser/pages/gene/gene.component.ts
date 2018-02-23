@@ -59,7 +59,7 @@ export class GeneComponent implements OnInit {
         // TODO: Implement Better Error Handling
         console.log(error);
       });
-
+    this.uniprotWidgetInit();
   }
 
   uniprotWidgetInit() {
@@ -94,7 +94,7 @@ export class GeneComponent implements OnInit {
    */
   initTabs(event) {
       //initialize uniProt widget
-      if (event.index == 2 && ! this.uniProtWidgetInitilized ){
+      if (event.index == 0 && ! this.uniProtWidgetInitilized ){
         this.uniprotWidgetInit();
       }
   }
