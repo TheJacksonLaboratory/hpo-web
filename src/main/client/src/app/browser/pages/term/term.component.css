@@ -40,6 +40,14 @@
   margin: 0 0 5px 10px;
   cursor: default;
 }
+.tree-navigation .badge.info-badge{
+  border-radius:2px;
+  background-color: dodgerblue;
+  padding-bottom: 4px;
+  margin: -25px 0 0 0;
+  float: right;
+  cursor: default;
+}
 
 .tree li:last-child span.term {
   border-left: 1px solid;
