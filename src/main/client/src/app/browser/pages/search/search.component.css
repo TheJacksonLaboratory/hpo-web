@@ -80,3 +80,28 @@ span.result-list  {
   font-weight: 900;
   background-color:yellow;
 }
+::ng-deep .disease-result .result .id{
+  color: grey;
+  font-size: 10px;
+  display: block;
+  float: left;
+  width: 50px;
+  margin: 5px 0 0 0;
+}
+::ng-deep .term-result .result .id{
+  color: grey;
+  font-size: 10px;
+  display: block;
+  float: left;
+  width: 60px;
+  margin: 5px 0 0 0;
+}
+
+::ng-deep .gene-result .result .id{
+  color: grey;
+  font-size: 10px;
+  display: block;
+  float: left;
+  width: 35px;
+  margin: 5px 0 0 0;
+}
