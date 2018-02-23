@@ -157,3 +157,6 @@
 .search-icon{
   cursor: pointer;
 }
+.inline{
+  display:inline-block;
+}
