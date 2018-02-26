@@ -19,7 +19,7 @@ import { GeneComponent } from './pages/gene/gene.component';
 import { BrowserComponent } from './browser.component';
 // Custom Pipes
 import { SortPipe } from './pipes/sort-pipe';
-import { HighlightPipe} from "./pipes/highlight-pipe";
+import { HighlightPipe} from "./pipes/highlight.pipe";
 
 @NgModule({
   imports: [

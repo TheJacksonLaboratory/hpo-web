@@ -8,5 +8,8 @@ export class HighlightPipe implements PipeTransform {
       const regex = new RegExp(query, 'gi');
       return  result.name.replace(regex, (match) => `<span class="search-highlight">${match}</span>`);
     }
+    else{
+      return result.name;
+    }
   }
 }
