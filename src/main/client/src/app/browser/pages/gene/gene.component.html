@@ -1,76 +1,117 @@
 <div class="gene-component">
-<div class="container-custom" [hidden]="isLoading">
-  <div class="row">
-    <div class="item-header">
-        <span [hidden]="!isLoading">
-            <mat-progress-bar  class="loading-result-details" color="primary" mode="buffer">
-            </mat-progress-bar>
-        </span>
-      <div class="item-title">{{entrezGene.name}}</div>
+  <div class="container-custom" [hidden]="isLoading">
+    <div class="row">
+      <div class="item-header">
+          <span [hidden]="!isLoading">
+              <mat-progress-bar  class="loading-result-details" color="primary" mode="buffer">
+              </mat-progress-bar>
+          </span>
+
+      </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-3">
+            <!-- Gene Summary -->
+            <mat-card class="item-summary">
+                <mat-card-content>
+                  <h3 class="card-title">Summary</h3>
+                  <hr class="underline-hr">
+                  <p>Entrez ID:&nbsp;{{entrezGene.uid}}</p>
+                  <p>Gene Name:&nbsp;{{entrezGene.name}}</p>
+                  <p>Gene Location:&nbsp;{{entrezGene.maplocation}}</p>
+                  <p><u>Definition</u><br>
+                    <i>{{entrezGene.summary}}</i>
+                  </p>
+                </mat-card-content>
+            </mat-card>
+        </div>
+
+        <div class="col-lg-9">
+              <!-- Gene Banner -->
+              <mat-card class="title-banner mat-elevation-z6">
+                  <mat-card-content>
+                    <span class="item-title">{{entrezGene.name}}</span>
+                    <a routerLink="/browser/gene/{{entrezGene.uid}}"><strong>({{entrezGene.uid}})</strong></a>
+                    <hr class="underline-hr">
+                    <p><u>Synonyms:</u> <i *ngFor="let item of entrezGene.aliases; let isLast=last">{{item}}{{isLast ? '' : ', '}}</i></p>
+                  </mat-card-content>
+              </mat-card>
+
+              <!--TABS -->
+              <mat-tab-group class="term-details-tab-group mat-elevation-z6"
+                      (selectedTabChange)="initTabs($event)">
+
+                  <!-- Widget tab -->
+                  <mat-tab label="UniProt Viewer">
+
+                    <mat-progress-bar  *ngIf="uniProtLoading" class="loading-result-details" color="primary" mode="buffer">
+                    </mat-progress-bar>
+
+                    <div class="ProtVistaContainer col-lg-12">
+
+
+                      <p *ngIf="!uniProtLoading"> <u>UniProt Reference:</u> <a href="{{uniProtWidgetURL}}{{this.uniprotId}}">{{this.uniprotId}}</a></p>
+                      <div class="ProtVistaReference">
+                        <div *ngIf="uniprotId == 'error'">
+                          <p><strong>No UniProt Reference Could be found for Gene {{entrezGene.name}}</strong></p>
+                        </div>
+                      </div>
+                    </div>
+                  </mat-tab>
+
+                  <!-- Term association tab -->
+                  <mat-tab label="Term Associations">
+
+                    <div class="associations term-association">
+                      <mat-table #table [dataSource]="termSource" matSort>
+                        <mat-header-row *matHeaderRowDef="termColumns"></mat-header-row>
+                        <mat-row *matRowDef="let row; columns: termColumns;"></mat-row>
+                        <ng-container matColumnDef="ontologyId">
+                          <mat-header-cell *matHeaderCellDef> Term Identifier </mat-header-cell>
+                          <mat-cell *matCellDef="let row">
+                            <a routerLink="/browser/term/{{row.ontologyId}}">{{row.ontologyId}}</a>
+                          </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="name">
+                            <mat-header-cell *matHeaderCellDef>Term Name </mat-header-cell>
+                            <mat-cell *matCellDef="let row">{{row.name}}</mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="definition">
+                          <mat-header-cell *matHeaderCellDef>Definition</mat-header-cell>
+                          <mat-cell *matCellDef="let row">{{row.definition}}</mat-cell>
+                        </ng-container>
+                      </mat-table>
+                    </div>
+                  </mat-tab>
+
+                  <!-- Disease association tab -->
+                  <mat-tab label="Disease Associations">
+
+                    <div class="associations disease-association">
+                        <!--<h4 class="title">Disease Associations</h4>-->
+                        <mat-table #table [dataSource]="diseaseSource" matSort>
+                          <mat-header-row *matHeaderRowDef="diseaseColumns"></mat-header-row>
+                          <mat-row *matRowDef="let row; columns: diseaseColumns;"></mat-row>
+                          <ng-container matColumnDef="diseaseId">
+                            <mat-header-cell *matHeaderCellDef>Disease Identifier </mat-header-cell>
+                            <mat-cell *matCellDef="let row">
+                              <a routerLink="/browser/disease/{{row.diseaseId}}">{{row.diseaseId}}</a>
+                            </mat-cell>
+                          </ng-container>
+                          <ng-container matColumnDef="diseaseName">
+                              <mat-header-cell *matHeaderCellDef>Disease Name </mat-header-cell>
+                              <mat-cell *matCellDef="let row">{{row.diseaseName}}</mat-cell>
+                          </ng-container>
+                        </mat-table>
+                    </div>
+                  </mat-tab>
+
+
+
+              </mat-tab-group>
+        </div>
+
     </div>
   </div>
-  <div class="row">
-    <div class="col-lg-3">
-        <mat-card class="item-summary">
-            <mat-card-content>
-              <p>Entrez ID:&nbsp;{{entrezGene.uid}}</p>
-              <p>Gene Name:&nbsp;{{entrezGene.name}}</p>
-              <p>Gene Location:&nbsp;{{entrezGene.maplocation}}</p>
-              <p><u>Definition</u><br>
-                <i>{{entrezGene.summary}}</i>
-              </p>
-              <p><u>Synonyms</u><br><i *ngFor="let item of entrezGene.aliases; let isLast=last">{{item}}{{isLast ? '' : ', '}}</i></p>
-            </mat-card-content>
-        </mat-card>
-    </div>
-    <div class="col-lg-9">
-      <div class="tab-content row">
-        <div class="assoc-class">
-      <div class="associations term-association mat-elevation-z6 col-lg-6">
-        <h4 class="title">Term Associations</h4>
-        <mat-table #table [dataSource]="termSource" matSort>
-          <mat-header-row *matHeaderRowDef="termColumns"></mat-header-row>
-          <mat-row *matRowDef="let row; columns: termColumns;"></mat-row>
-          <ng-container matColumnDef="ontologyId">
-            <mat-header-cell *matHeaderCellDef> Term Identifier </mat-header-cell>
-            <mat-cell *matCellDef="let row">
-              <a routerLink="/browser/term/{{row.ontologyId}}">{{row.ontologyId}}</a>
-            </mat-cell>
-          </ng-container>
-          <ng-container matColumnDef="name">
-              <mat-header-cell *matHeaderCellDef>Term Name </mat-header-cell>
-              <mat-cell *matCellDef="let row">{{row.name}}</mat-cell>
-          </ng-container>
-        </mat-table>
-      </div>
-      <div class="associations disease-association  mat-elevation-z6 col-lg-6">
-          <h4 class="title">Disease Associations</h4>
-          <mat-table #table [dataSource]="diseaseSource" matSort>
-            <mat-header-row *matHeaderRowDef="diseaseColumns"></mat-header-row>
-            <mat-row *matRowDef="let row; columns: diseaseColumns;"></mat-row>
-            <ng-container matColumnDef="diseaseId">
-              <mat-header-cell *matHeaderCellDef>Disease Identifier </mat-header-cell>
-              <mat-cell *matCellDef="let row">
-                <a routerLink="/browser/disease/{{row.diseaseId}}">{{row.diseaseId}}</a>
-              </mat-cell>
-            </ng-container>
-            <ng-container matColumnDef="diseaseName">
-                <mat-header-cell *matHeaderCellDef>Disease Name </mat-header-cell>
-                <mat-cell *matCellDef="let row">{{row.diseaseName}}</mat-cell>
-            </ng-container>
-          </mat-table>
-      </div>
-        </div>
-        <div class="ProtVistaContainer col-lg-12 mat-elevation-z6">
-        <h4 class="title">UniProt Viewer <a target="_blank" href="https://www.uniprot.org/uniprot/{{this.uniprotId}}">{{this.uniprotId}}</a></h4>
-          <div class="ProtVistaReference">
-            <div *ngIf="uniprotId == 'error'">
-              <p><strong>No UniProt Reference Could be found for Gene {{entrezGene.name}}</strong></p>
-            </div>
-          </div>
-        </div>
-    </div>
-    </div>
-  </div>
-</div>
 </div>
