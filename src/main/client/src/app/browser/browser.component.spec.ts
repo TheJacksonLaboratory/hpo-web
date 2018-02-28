@@ -10,7 +10,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
 import { SortPipe } from './pipes/sort-pipe';
-import { HighlightPipe} from "./pipes/highlight-pipe";
+import { HighlightPipe} from "./pipes/highlight.pipe";
 import { FormsModule } from '@angular/forms';
 import { SearchService} from './services/search/search.service';
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
