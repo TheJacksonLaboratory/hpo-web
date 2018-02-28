@@ -13,7 +13,7 @@
     cursor: pointer;
 }
 
-.nav-brand .nav-logo {
+.nav-brand .nav-logo:hover {
   opacity: .8;
 }
 
