@@ -4,15 +4,17 @@
 .nav-components {
     margin-left:25px;
 }
-/*.nav-brand .nav-title {
-  margin-top: 5px;
-  float: right;
-}*/
+
 .nav-brand .nav-logo {
     height: 45px;
     width: 125px;
     margin: 0 0 0 15px;
     float:left;
+    cursor: pointer;
+}
+
+.nav-brand .nav-logo {
+  opacity: .8;
 }
 
 .nav-brand {
