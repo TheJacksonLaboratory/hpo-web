@@ -1,15 +1,21 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Term, Gene, Disease } from '../../models/models';
-import { SearchService } from '../../services/search/search.service';
+import { Term, Gene, Disease } from '../../../browse/models/models';
+import { SearchService } from '../service/search.service';
 
 @Component({
-  selector: 'searchbar',
+  selector: 'searchoutput',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.css']
 })
-export class SearchComponent implements OnInit {
+export class SearchOutputComponent implements OnInit {
 
   @Output() public searchActive = new EventEmitter<boolean>();
+  @Input() set searchString(query: string){
+    if(query) {
+      this.query = query;
+      this.engageSearch()
+    }
+  };
   query: string;
   terms: Term[];
   diseases: Disease[];
@@ -23,8 +29,9 @@ export class SearchComponent implements OnInit {
     this.bootCols = 4;
   }
   ngOnInit() {
-    //this.getPhenotypes();
+
   }
+
   queryHPO(query: string): void {
     this.isLoading = true;
     this.searchService.searchAll(this.query)
@@ -46,7 +53,7 @@ export class SearchComponent implements OnInit {
     });
   }
 
-  filter() {
+  engageSearch() {
     if (this.query !== '' && this.query.length >= 3) {
       this.searchActive.emit(true);
       this.queryHPO(this.query);
@@ -58,6 +65,7 @@ export class SearchComponent implements OnInit {
       this.searchActive.emit(false);
     }
   }
+
   checkEmpty(array: Array<any>): number {
     if(array.length != 0){
       return 1;
@@ -66,11 +74,5 @@ export class SearchComponent implements OnInit {
       return 0;
     }
   }
-  /* Keep this when having search always around becomes necessary
-    select(item) {
-      this.query = item.name;
-      this.terms = [];
-    }
-  */
 
 }

@@ -1,12 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-import { TermService } from '../../services/term/term.service';
+import { TermService } from '../../../browse/services/term/term.service';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { SearchComponent } from './search.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { SortPipe } from '../../pipes/sort-pipe';
 import { HighlightPipe} from "../../pipes/highlight.pipe";
-import { SearchService} from '../../services/search/search.service';
+import { SearchService} from '../service/search.service';
 import {Observable} from "rxjs/Observable";
 import 'rxjs/add/observable/of';
 import { MatCardModule} from '@angular/material/card';
