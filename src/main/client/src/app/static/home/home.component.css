@@ -35,7 +35,7 @@
 }
 a.mat-btn{
     text-decoration:none;
-    background-color:#43B02A;
+    background-color:#ec9736;
 }
 ::ng-deep a.mat-btn .mat-button-wrapper {
     color: white;
@@ -73,13 +73,14 @@ a.mat-btn{
 }
 
 .home-search{
-  background-color:lightgrey;
+  background-color:#ebebeb;
 }
 .home-search .bar{
-  padding: 25px 25px 85px 25px;
-  margin: 25px 0 50px 0;
+  padding: 25px 0 85px 125px;
+  margin: 25px 0 50px 50px;
   max-height: 100%;
   background-color:white;
+  border: solid 2px #325364;
 }
 
 .home-search .title{
