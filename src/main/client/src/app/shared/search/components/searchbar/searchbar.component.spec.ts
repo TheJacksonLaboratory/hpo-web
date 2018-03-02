@@ -1,6 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SearchbarComponent } from './searchbar.component';
+import { GlobalMaterialModules} from "../../../global.module";
+import { FormsModule} from "@angular/forms";
+import { SearchOutputComponent } from "../search.component";
+import { RouterModule } from "@angular/router";
+import { HighlightPipe } from "../../../pipes/highlight.pipe";
+import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 
 describe('SearchbarComponent', () => {
   let component: SearchbarComponent;
@@ -8,7 +14,8 @@ describe('SearchbarComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SearchbarComponent ]
+      declarations: [ SearchbarComponent, SearchOutputComponent, HighlightPipe ],
+      imports: [GlobalMaterialModules , FormsModule, RouterModule, NoopAnimationsModule]
     })
     .compileComponents();
   }));
