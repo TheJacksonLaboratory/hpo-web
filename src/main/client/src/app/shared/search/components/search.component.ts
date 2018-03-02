@@ -22,6 +22,7 @@ export class SearchOutputComponent implements OnInit {
   genes: Gene[];
   bootCols: number;
   isLoading: boolean = false;
+  notFound: boolean = false;
   constructor(private searchService: SearchService) {
     this.terms = [];
     this.diseases = [];
@@ -34,6 +35,7 @@ export class SearchOutputComponent implements OnInit {
 
   queryHPO(query: string): void {
     this.isLoading = true;
+    this.notFound = false;
     this.searchService.searchAll(this.query)
       .subscribe((data) => {
         let numResults: number;
@@ -45,6 +47,8 @@ export class SearchOutputComponent implements OnInit {
           this.bootCols = 6;
         }else if(numResults == 1){
           this.bootCols = 12;
+        }else{
+          this.notFound = true;
         }
         this.isLoading = false;
       }, (error) => {

@@ -86,3 +86,12 @@ a.mat-btn{
 .home-search .title{
   text-align:center;
 }
+
+::ng-deep .home-search .mat-focused .mat-form-field-label{
+  color:#ec9736;
+}
+
+
+::ng-deep .home-search .mat-form-field-ripple{
+  background-color:#ec9736;
+}
