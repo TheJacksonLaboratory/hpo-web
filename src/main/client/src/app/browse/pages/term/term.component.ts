@@ -75,6 +75,7 @@ export class TermComponent implements OnInit {
     this.term.synonyms = (term.synonyms.length != 0) ? term.synonyms: ["-"];
     this.term.definition = (term.definition != null) ? term.definition: "Sorry this term has no definition.";
     this.term.purl = "http://purl.obolibrary.org/obo/" + term.id.replace(":","_");
+    this.term.comment = (term.comment != null) ? term.comment: "No comments found for this term";
   }
   showOverlay(){
     this.overlay = true;

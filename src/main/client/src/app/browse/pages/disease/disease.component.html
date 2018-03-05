@@ -1,4 +1,4 @@
-<div class="gene-component">
+<div class="disease-component">
   <div class="container-custom" [hidden]="isLoading">
     <div class="item-header">
       <span [hidden]="!isLoading">
@@ -9,24 +9,12 @@
 </div>
   <div [hidden]="isLoading" class="container container-custom">
       <div class="row">
-            <!--Summary - left pane-->
-            <div class="col-lg-3">
-              <mat-card class="item-summary">
-                  <mat-card-content>
-                    <h3 class="card-title">Summary</h3>
-                    <hr class="underline-hr">
-                    <p>Disease ID:&nbsp;{{disease.diseaseId}}</p>
-                    <p>Disease Name:&nbsp;{{disease.diseaseName}}</p>
-                  </mat-card-content>
-              </mat-card>
-            </div>
-
-            <div class="col-lg-9">
+            <div class="col-lg-offset-2 col-lg-8">
               <!-- Disease Banner -->
               <mat-card class="title-banner mat-elevation-z6">
                 <mat-card-content>
                   <span class="item-title">{{disease.diseaseName}}</span>
-                  <a routerLink="/browser/disease/{{disease.diseaseId}}"><strong>({{disease.diseaseId}})</strong></a>
+                  <a routerLink="/browse/disease/{{disease.diseaseId}}"><strong>({{disease.diseaseId}})</strong></a>
                   <hr class="underline-hr">
                   <p><u>Definition:</u> TBD</p>
                 </mat-card-content>
@@ -47,7 +35,7 @@
                             <ng-container matColumnDef="ontologyId">
                               <mat-header-cell *matHeaderCellDef> Term Identifier </mat-header-cell>
                                 <mat-cell *matCellDef="let row">
-                                  <a routerLink="/browser/term/{{row.ontologyId}}">{{row.ontologyId}}</a>
+                                  <a routerLink="/browse/term/{{row.ontologyId}}">{{row.ontologyId}}</a>
                                 </mat-cell>
                             </ng-container>
                             <ng-container matColumnDef="name">
@@ -74,7 +62,7 @@
                             <ng-container matColumnDef="entrezGeneId">
                               <mat-header-cell *matHeaderCellDef>Gene Identifier </mat-header-cell>
                               <mat-cell *matCellDef="let row">
-                                <a routerLink="/browser/gene/{{row.entrezGeneId}}">{{row.entrezGeneId}}</a>
+                                <a routerLink="/browse/gene/{{row.entrezGeneId}}">{{row.entrezGeneId}}</a>
                               </mat-cell>
                             </ng-container>
                             <ng-container matColumnDef="entrezGeneSymbol">

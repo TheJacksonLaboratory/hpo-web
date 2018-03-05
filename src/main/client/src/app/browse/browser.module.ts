@@ -15,7 +15,6 @@ import { DiseaseService } from './services/disease/disease.service';
 import { TermComponent } from './pages/term/term.component';
 import { DiseaseComponent } from './pages/disease/disease.component';
 import { GeneComponent } from './pages/gene/gene.component';
-import { BrowserComponent } from './browser.component';
 // Custom Pipes
 import { SortPipe } from '../shared/pipes/sort-pipe';
 
@@ -29,6 +28,6 @@ import { SortPipe } from '../shared/pipes/sort-pipe';
   ],
   providers: [ SearchService, TermService, GeneService, DiseaseService ],
   declarations: [ TermComponent, DiseaseComponent,
-    GeneComponent, BrowserComponent, SortPipe]
+    GeneComponent, SortPipe]
 })
 export class BrowserHPOModule { }
