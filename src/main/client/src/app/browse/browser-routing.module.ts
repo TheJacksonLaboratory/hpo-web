@@ -8,15 +8,11 @@ import { GeneComponent } from './pages/gene/gene.component';
 import { BrowserComponent } from './browser.component';
 
 const browserRoutes: Routes = [
-  { path:'', component: BrowserComponent,
-    children:[
-      { path:'term/:id', component: TermComponent },
-      { path:'disease/:id', component: DiseaseComponent},
-      { path:'gene/:id', component: GeneComponent }
-    ]
-  }
-]
-export const browserRouting = RouterModule.forChild(browserRoutes)
+    { path:'term/:id', component: TermComponent },
+    { path:'disease/:id', component: DiseaseComponent},
+    { path:'gene/:id', component: GeneComponent }
+];
+export const browserRouting = RouterModule.forChild(browserRoutes);
 @NgModule({
   imports: [
     RouterModule,

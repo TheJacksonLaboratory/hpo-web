@@ -2,8 +2,8 @@ package hpo.api.specs
 
 import grails.testing.mixin.integration.Integration
 import grails.transaction.Rollback
-import hpo.api.pages.BrowserPage
 import geb.spock.*
+import hpo.api.pages.HomePage
 
 /**
  * See http://www.gebish.org/manual/current/ for more instructions
@@ -11,7 +11,7 @@ import geb.spock.*
 
 @Integration
 @Rollback
-class HpoBrowserSearchSpec extends  GebReportingSpec {
+class HpoHomeSearchSpec extends  GebReportingSpec {
 
     def setup() {
     }
@@ -27,26 +27,16 @@ class HpoBrowserSearchSpec extends  GebReportingSpec {
         	title == "HPO"
     }
 
-    void "test browser page landing" (){
-
-      when:
-      BrowserPage browserPage  = browser.to(BrowserPage)
-
-      then:"The JSON response has data"
-      browser.at(BrowserPage)
-
-    }
-
     void "test term search input" (){
 
       given:
-         BrowserPage browserPage = browser.to(BrowserPage)
+         HomePage homePage = browser.to(HomePage)
 
       when:
-        browserPage.findTermInput.value('limbs')
+        homePage.findTermInput.value('limbs')
 
       then:
-        browserPage.termResultsPanel.text().startsWith("Terms")
+        homePage.termResultsPanel.text().startsWith("Terms")
     }
 
 }

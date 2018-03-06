@@ -1,97 +1,52 @@
 <div class="container">
     <div class="row">
-        <div class="col-lg-7">
-            <h3>Our Mission</h3>
-            <hr>
-            <div class="container-body">
-                The Human Phenotype Ontology (HPO) provides a standardized vocabulary of phenotypic abnormalities encountered in human disease. Each term in the HPO describes a phenotypic abnormality,
-                such as atrial septal defect. The HPO is currently being developed using the medical literature, Orphanet, DECIPHER, and OMIM. HPO currently contains approximately 11,000 terms (still growing)
-                and over 115,000 annotations to hereditary diseases. The HPO also provides a large set of HPO annotations to approximately 4000 common diseases.<br><br>
-                <a mat-raised-button routerLink="documentation" class="mat-btn">Learn More About HPO</a>
-            </div>
+        <div class="home-search col-lg-offset-2 col-lg-8">
+          <h2 class="title">Explore the ontology!</h2>
+          <div class="bar">
+              <searchbar (queryEmit)="searchString = $event"></searchbar>
+          </div>
         </div>
-        <div class="col-lg-offset-1 col-lg-4">
-            <mat-card class="news-updates">
-                    <mat-card-header>
-                        <mat-card-title>
-                            <h3>News & Updates</h3>
-                        </mat-card-title>
-                    </mat-card-header>
-                    <mat-card-content>
-                        <mat-list>
-                            <mat-list-item>
-                                <a href="javascript:void(0)">Late July 2017 Release</a>
-                                Large amount of term additions; circular graph analysis.
-                            </mat-list-item>
-                            <br>
-                        </mat-list>
-                    </mat-card-content>
-            </mat-card>
-        </div>
+
     </div>
+</div>
+<div class="search-overlay" *ngIf="searchString?.length >= 3">
+  <searchoutput [searchString]="searchString"></searchoutput>
 </div>
 <div class="empty-space"></div>
 <div class="container">
-    <div class="row">
-        <div class="col-lg-4">
-            <h3>What is the Monarch Initiative?</h3>
-            <hr>
-            <div class="info-body">
-                <p>Monarch's philosophy is based on the premise that we want to make all the data count. Monarch isn’t just another database that slurps data from the typical places and renders it in a different format.
-                We are driven to truly integrate biological information using semantics, and present it in a novel way, leveraging phenotypes to bridge the knowledge gap. Our niche is the use of computational reasoning to enable phenotype
-                comparison both within and across species, with the ultimate goal of improving biomedical research.</p>
-                <p><strong>To learn more:</strong></p>
-                <a mat-raised-button target="__blank" href="https://monarchinitiative.org/" class="mat-btn">Visit Monarch Initiative</a>
-            </div>
-        </div>
-        <div class="col-lg-4">
-            <mat-card class="quick-links-card">
-                <mat-card-header>
-                    <mat-card-title>
-                        <h3>Quick Links</h3>
-                     </mat-card-title>
-                </mat-card-header>
-                <mat-card-content>
-                    <mat-list>
-                       <a routerLink="browser">
-                        <mat-list-item>Browse Human Phenotype Ontology <mat-icon class="arrow-float-right">keyboard_arrow_right</mat-icon></mat-list-item>
-                       </a>
-                        <a target="__blank" href="https://github.com/obophenotype/human-phenotype-ontology/issues" class="btn btn-sm btn-primary">
-                            <mat-list-item>New Term Request <mat-icon class="arrow-float-right">keyboard_arrow_right</mat-icon></mat-list-item>
-                        </a>
-                        <a target="__blank" href="https://github.com/obophenotype/human-phenotype-ontology/issues" class="btn btn-sm btn-primary">
-                         <mat-list-item>Submit an Issue <mat-icon class="arrow-float-right">keyboard_arrow_right</mat-icon></mat-list-item>
-                        </a>
-                    </mat-list>
-                </mat-card-content>
-            </mat-card>
-        </div>
-        <div class="col-lg-4">
-            <mat-card class="quick-links-card">
-                <mat-card-header>
-                    <mat-card-title>
-                        <h3>Additonal Tools with HPO</h3>
-                        </mat-card-title>
-                </mat-card-header>
-                <mat-card-content>
-                    <mat-list>
-                        <a target="__blank" href="javascript:void(0)">
-                            <mat-list-item>Find Diagnoses <mat-icon class="arrow-float-right">keyboard_arrow_right</mat-icon></mat-list-item>
-                        </a>
-                        <a target="__blank" href="javascript:void(0)" class="btn btn-sm btn-primary">
-                            <mat-list-item>Perform Exome Analysis <mat-icon class="arrow-float-right">keyboard_arrow_right</mat-icon> </mat-list-item>
-                        </a>
-                        <a target="__blank" href="javascript:void(0)" class="btn btn-sm btn-primary">
-                            <mat-list-item>Extract Clinical Text <mat-icon class="arrow-float-right">keyboard_arrow_right</mat-icon></mat-list-item></a>
-                        <a target="__blank" href="javascript:void(0)" class="btn btn-sm btn-primary">
-                            <mat-list-item>Investigate Research Data <mat-icon class="arrow-float-right">keyboard_arrow_right</mat-icon></mat-list-item>
-                        </a>
-                        <a target="__blank" href="javascript:void(0)" class="btn btn-sm btn-primary">
-                            <mat-list-item>Matchmake Patients <mat-icon class="arrow-float-right">keyboard_arrow_right</mat-icon></mat-list-item>
-                        </a>
-                    </mat-list>
-                </mat-card-content>
-            </mat-card>
+  <div class="row">
+    <div class="col-lg-4">
+      <h3>Our Mission</h3>
+      <hr>
+      <div class="container-body">
+        The Human Phenotype Ontology (HPO) provides a standardized vocabulary of phenotypic abnormalities encountered in human disease. Each term in the HPO describes a phenotypic abnormality,
+        such as atrial septal defect. The HPO is currently being developed using the medical literature, Orphanet, DECIPHER, and OMIM. HPO currently contains approximately 11,000 terms (still growing)
+        and over 115,000 annotations to hereditary diseases. The HPO also provides a large set of HPO annotations to approximately 4000 common diseases.<br><br>
+        <a mat-raised-button routerLink="documentation" class="mat-btn">Learn More About HPO</a>
+      </div>
+    </div>
+    <div class="col-lg-4">
+        <h3>What is the Monarch Initiative?</h3>
+        <hr>
+        <div class="info-body">
+            <p>Monarch's philosophy is based on the premise that we want to make all the data count. Monarch isn’t just another database that slurps data from the typical places and renders it in a different format.
+            We are driven to truly integrate biological information using semantics, and present it in a novel way, leveraging phenotypes to bridge the knowledge gap. Our niche is the use of computational reasoning to enable phenotype
+            comparison both within and across species, with the ultimate goal of improving biomedical research.</p>
+            <a mat-raised-button target="__blank" href="https://monarchinitiative.org/" class="mat-btn">Visit Monarch Initiative</a>
         </div>
     </div>
+    <div class="col-lg-4">
+      <h3>News & Updates</h3>
+      <hr>
+      <div class="info-body">
+        <mat-list>
+          <mat-list-item>
+            <a href="javascript:void(0)">Late July 2017 Release</a>
+            Large amount of term additions; circular graph analysis.
+          </mat-list-item>
+          <br>
+        </mat-list>
+      </div>
+    </div>
+  </div>
 </div>

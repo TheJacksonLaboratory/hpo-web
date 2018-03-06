@@ -12,3 +12,7 @@
     height: 75px;
     width: 175px;
 }
+
+.footer .footer-brand:hover{
+  opacity:.6;
+}
