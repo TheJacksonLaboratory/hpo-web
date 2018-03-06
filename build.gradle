@@ -137,7 +137,9 @@ task clientIntegrationTest(type: NpmTask, dependsOn: 'npmInstall') {
     args = ['run', 'e2e']
 }
 
-
+war {
+  archiveName = System.getProperty("warName")
+}
 war.dependsOn(buildClientProd)
 
 test.dependsOn(clientTest)
