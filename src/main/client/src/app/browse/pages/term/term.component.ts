@@ -71,8 +71,7 @@ export class TermComponent implements OnInit {
 
   setDefaults(term: Term){
     this.term = term;
-    this.term.altTermIds = (term.altTermIds.length != 0) ? term.altTermIds: ["-"];
-    this.term.synonyms = (term.synonyms.length != 0) ? term.synonyms: ["-"];
+    this.term.synonyms = (term.synonyms.length != 0) ? term.synonyms: ["No synonyms found for this term."];
     this.term.definition = (term.definition != null) ? term.definition: "Sorry this term has no definition.";
     this.term.purl = "http://purl.obolibrary.org/obo/" + term.id.replace(":","_");
     this.term.comment = (term.comment != null) ? term.comment: "No comments found for this term";

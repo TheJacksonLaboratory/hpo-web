@@ -36,17 +36,27 @@
 
                   <div>
                     <span class="item-title">{{termTitle}}</span>
-                    <a routerLink="/browser/term/{{term.id}}"><strong>({{term.id}})</strong></a>
+                    <a href="{{term.purl}}" target="__blank"> <strong>({{term.id}})</strong></a>
                   </div>
 
                   <hr class="underline-hr">
-
                   <p><br><i>{{term.definition}}</i></p>
-                  <p><u>PURL:</u>&nbsp;&nbsp;<a href="{{term.purl}}" target="__blank"><strong>{{term.purl}}</strong></a></p>
-                  <p><u>Comment:</u>&nbsp;&nbsp;<strong>{{term.comment}}</strong></p>
-                  <p><u>Synonyms:</u>&nbsp;&nbsp; <i *ngFor="let item of term.synonyms; let isLast=last">{{item}}{{isLast ? '' : ', '}}</i></p>
-                  <p><u>Xrefs:</u>&nbsp;&nbsp;<i *ngFor="let item of term.xrefs; let isLast=last">{{item}}{{isLast ? '' : ', '}}</i></p>
-
+                  <mat-list>
+                    <mat-divider></mat-divider>
+                    <mat-list-item>
+                      <strong>Synonyms:</strong> &nbsp;&nbsp; <i *ngFor="let item of term.synonyms; let isLast=last">{{item}}{{isLast ? '' : ', '}}</i>
+                    </mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item>
+                      <strong>Comment:</strong> &nbsp;&nbsp; {{term.comment}}
+                      </mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item>
+                      <strong>Xrefs:</strong> &nbsp;&nbsp;
+                      <i *ngFor="let item of term.xrefs; let isLast=last">{{item}}{{isLast ? '' : ', '}}</i>
+                    </mat-list-item>
+                    <mat-divider></mat-divider>
+                  </mat-list>
               </mat-card-content>
             </mat-card>
 
