@@ -6,9 +6,26 @@
   </div>
 </div>
 <div class="container">
-  <p>We represent clinical annotations using a simple tab-delimited format that was designed to be as similar as possible to the format used by the Gene Ontology consortium. This document describes the process of assigning HPO terms to disease entities such as Mendelian disorders from OMIM or Orphanet. 
-  Each line in the annotation file represents a link between a disease entity such as <i>Noonan syndrome</i> and one of the clinical features characteristically seen in that disease. Each of the features of a disease is to be listed on a separate line. Note that this file (and format) is intended to be used 
-  for the annotation of disease entities (e.g.<i>Noonan syndrome</i>) and not individuals (such as a person that has been diagnosed with <i>Noonan syndrome</i>). You may have look at <a href="https://phenotips.org/" target="__blank">PhenoTips</a> if you are aiming at annotating clinical findings of individuals with hereditary diseases.</p>
+<p>
+In addition to an ontology of phenotypic abnormalities, the HPO project provides
+ a large set of phenotype annotations, i.e. statements that link a particular term 
+from the HPO to specific diseases or genes. These annotations are made for the most appropriate (specific) term of the HPO, as all of the ancestor terms are implicitly annotated as well.
+This means that if a patient has <em>Aculeiform cataract</em> (HP:0010926), the patient can also be said to have the parent term of Aculeiform cataract, viz., 
+<em>Nuclear cataract</em> (HP:0100018) as well as the "grandmother" and "great-grandmother" terms <em>Zonular cataract</em> (HP:0010920) and 
+<em>Cataract</em> (HP:0000518). This is a necessary consequence of the way the HPO-based algorithms were developed, but it also reflects the "fuzziness" that
+is frequently encountered in clinical medicine. For instance, a general practitioner might make the diagnosis of Cataract and refer a patient to an ophthalmologist who would
+make the more precise diagnosis of Aculeiform cataract.
+</p>
+<p>Users of HPO-based software such as Phenomizer and Exomiser will see the disease annotations displayed in various contexts. This page describes the format of the file
+provided by the HPO project for download and will mainly be of interest to bioinformaticians or computer scientists who want to use the file for their own analysis.
+</p>
+  <p>We represent clinical annotations using a simple tab-delimited format. This document describes the process of assigning HPO terms to disease entities. 
+  Each line in the annotation file represents a link between a disease entity such as <i>Noonan syndrome</i> and one 
+  of the clinical features characteristically seen in that disease. Each of the features of a disease is to be listed on a separate line. 
+  Note that this file (and format) is intended to be used 
+  for the annotation of disease entities (e.g.<i>Noonan syndrome</i>) and not individuals (such as a person that has been diagnosed with <i>Noonan syndrome</i>). 
+  We recommend looking at <a href="https://phenotips.org/" target="__blank">PhenoTips</a>  or <a href="http://www.patientarchive.org/#/home" target="__blank">Patient Archive</a>
+  if you are aiming at annotating clinical findings of individuals with hereditary diseases.</p>
   <p>
     <i>The flat file format comprises 14 tab-delimited fields</i>
   </p>
