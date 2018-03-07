@@ -8,10 +8,10 @@ class UrlMappings {
   static excludes = [
     '/app/*.html',
     '/app/*.ico',
-    '/app/*.js',
-    '/app/*.css',
-    '/app/*.map',
-    '/app/assets/**'
+//    '/app/*.js',
+//    '/app/*.css',
+//    '/app/*.map',
+    '/app/assets/*.png'
   ]
 
   static mappings = {
@@ -25,6 +25,23 @@ class UrlMappings {
     "/"(uri: '/app/index.html')
     "/app/"(uri: '/app/index.html')
     "/app/**"(uri: '/app/index.html')
+
+    "/app/$name**.js"(controller: 'contentTypeAsset', action:'setCharEncoding') {
+      contentType = 'text/javascript; charset=UTF-8'
+      extention = 'js'
+    }
+    "/app/$name**.map"(controller: 'contentTypeAsset', action:'setCharEncoding') {
+      contentType = 'application/json; charset=UTF-8'
+      extention = 'map'
+    }
+    "/app/assets/$name**.js"(controller: 'contentTypeAsset', action:'setCharEncoding') {
+      contentType = 'text/javascript; charset=UTF-8'
+      extention = 'js'
+    }
+    "/app/$name**.css"(controller: 'contentTypeAsset', action:'setCharEncoding') {
+      contentType = 'text/css; charset=UTF-8'
+      extention = 'css'
+    }
 
     "/api/hpo/search"(controller: 'hpoSearch', action: 'searchAll')
     "/api/hpo/search/gene"(controller: 'hpoGeneDetails', action: 'searchGene')
