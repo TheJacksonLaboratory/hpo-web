@@ -67,3 +67,10 @@
   margin:0;
   height:1px;
 }
+
+::ng-deep .mat-tab-label-active{
+  background-color: rgba(179, 218, 239, 0.3);
+  font-weight: 900;
+  opacity: 1 !important;
+}
+
