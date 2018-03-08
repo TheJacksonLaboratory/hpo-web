@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit} from '@angular/core';
+import {OutputEmitter} from "@angular/compiler/src/output/abstract_emitter";
+import {Output} from "@angular/core";
 
 @Component({
   selector: 'app-home',
@@ -6,11 +8,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  searchString: string;
 
+  clearSearch: boolean = false;
+  searchString: string;
   constructor() { }
 
   ngOnInit() {
   }
-
+  setOverlay(event: Event){
+    if(this.searchString){
+      this.clearSearch = true;
+    }else{
+      this.clearSearch = false;
+    }
+  }
 }
