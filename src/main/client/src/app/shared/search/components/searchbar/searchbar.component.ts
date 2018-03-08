@@ -12,10 +12,10 @@ export class SearchbarComponent implements OnInit {
 
   ngOnInit() {
   }
-  emitQuery(): void {
+  emitQuery(event): void {
+    let query = event.target.value;
     this.queryEmit.emit(
-      this.query
-    );
+        query
+      );
   }
-
 }
