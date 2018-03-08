@@ -46,7 +46,9 @@ export class SearchOutputComponent implements OnInit {
           this.bootCols = 6;
         }else if(numResults == 1){
           this.bootCols = 12;
-        }else if(numResults != 1 && numResults !=2 && numResults != 3){
+        }else if(numResults == 3){
+          this.bootCols = 4;
+        }else{
           this.notFound = true;
         }
         this.isLoading = false;
