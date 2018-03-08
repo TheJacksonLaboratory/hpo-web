@@ -57,7 +57,6 @@ export class SearchOutputComponent implements OnInit {
   }
 
   engageSearch() {
-    debugger;
     if (this.query !== '' && this.query.length >= 3) {
       this.queryHPO(this.query);
     }else {

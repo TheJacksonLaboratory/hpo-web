@@ -1,7 +1,7 @@
 <div class="searchbar">
   <mat-icon class="search-icon">search</mat-icon>
   <mat-form-field class="example-full-width">
-    <input matInput placeholder="Human Phenotype Ontology" (keyup)="emitQuery($event)">
+    <input matInput placeholder="Human Phenotype Ontology" [(ngModel)]=query (keyup)="emitQuery()">
     <mat-hint align="end"><strong>( i.e. ) HP:00142 | Abornmality of Weight | Bladder Cancer</strong> </mat-hint>
   </mat-form-field>
 </div>
