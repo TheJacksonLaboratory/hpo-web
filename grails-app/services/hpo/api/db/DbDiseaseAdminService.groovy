@@ -39,7 +39,7 @@ class DbDiseaseAdminService {
       if (tokens.size() == 14) {
         String db = tokens[0]
         String dbObjectId = tokens[1]
-        String diseaseName = tokens[2].split(';').first()
+        String diseaseName = correctDiseaseName(tokens[2].split(';').first())
         String diseaseId = db + ":" + dbObjectId
         if (!diseaseIdToNameMap.get(diseaseId)) {
           diseaseIdToNameMap.put(diseaseId, dbObjectId)
@@ -146,6 +146,17 @@ class DbDiseaseAdminService {
         }
       }
     }
+  }
+
+  static String correctDiseaseName(String diseaseName){
+    if(diseaseName.startsWith("%")){
+     diseaseName = diseaseName.replaceAll('\\%\\d{6}\\s+','')
+    }else if(diseaseName.startsWith("#")){
+      diseaseName = diseaseName.replaceAll('\\#\\d{6}\\s+','')
+    }else if(Character.isDigit(diseaseName.charAt(0))){
+      diseaseName = diseaseName.replaceAll('\\d{6}\\s+','')
+    }
+    return diseaseName
   }
 }
 
