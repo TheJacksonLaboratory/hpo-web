@@ -16,10 +16,18 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
   }
   setOverlay(event: Event){
-    if(this.searchString){
+    if(this.searchString && this.checkSourceClass(event.srcElement.className)){
       this.clearSearch = true;
     }else{
       this.clearSearch = false;
+    }
+  }
+
+  checkSourceClass(cls: string): boolean {
+    if(cls.includes("container") || cls.includes("row") || cls.includes("home-search")){
+      return true;
+    }else{
+      return false;
     }
   }
 }

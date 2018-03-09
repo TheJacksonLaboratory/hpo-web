@@ -1,3 +1,7 @@
 .main {
     flex:1;
 }
+
+::ng-deep mat-hint{
+  cursor: pointer;
+}
