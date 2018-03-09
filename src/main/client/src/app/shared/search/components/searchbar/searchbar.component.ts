@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'searchbar',
@@ -7,15 +7,25 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 })
 export class SearchbarComponent implements OnInit {
   @Output() queryEmit: EventEmitter<string> = new EventEmitter<string>();
+  @Input() set resetQuery(reset:boolean){
+    if(reset){
+      this.query = "";
+      this.emitQuery(new Event("reset"))
+    }
+  };
   query: string;
   constructor() { }
 
   ngOnInit() {
   }
-  emitQuery(): void {
+  emitQuery(event): void {
     this.queryEmit.emit(
-      this.query
-    );
+        this.query
+      );
   }
 
+  setQuery(term: string): void {
+    this.query = term;
+    this.emitQuery(new Event("activate"))
+  }
 }

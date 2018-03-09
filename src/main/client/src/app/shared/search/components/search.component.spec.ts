@@ -20,7 +20,15 @@ describe('SearchComponent', () => {
   let fixture: ComponentFixture<SearchOutputComponent>;
   let mockTermService;
   let searchServiceStub = {
-    searchAll: jasmine.createSpy('queryHPO').and.returnValue(Observable.of("something")),
+    searchAll: jasmine.createSpy('queryHPO').and
+      .returnValue(
+        Observable.of(
+          {
+            terms: [{name: "Abnormality of the Bladder", ontologyId: "HPO:00723843", id: "00723843"}],
+            diseases:[{dbRef: "ORPHA: 9222001", dbName: "Bladder Carcinoma"}],
+            genes: [{entrezGeneSymbol: "TP53", entrezGeneId: 7157}]
+          }
+      )),
   };
   beforeEach(async(() => {
     mockTermService = {};
@@ -35,7 +43,7 @@ describe('SearchComponent', () => {
         MatProgressBarModule
       ],
       declarations: [ SearchOutputComponent, SortPipe, HighlightPipe ],
-      providers: [{provide:SearchService, useValue:searchServiceStub}, {provide: TermService, useValue: mockTermService }]
+      providers: [{provide:SearchService, useValue:searchServiceStub}]
     })
     .compileComponents();
   }));
@@ -49,4 +57,27 @@ describe('SearchComponent', () => {
   it('should be created', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should test checkEmpty Function', () =>{
+     let testData_empty = [];
+     let testData_items = ["item 1"];
+     expect(component.checkEmpty(testData_empty)).toBeFalsy();
+     expect(component.checkEmpty(testData_items)).toBeTruthy();
+  });
+
+  it( 'should engage and set query when searchString input',() => {
+    spyOn(component,"engageSearch");
+    component.searchString = "bladder";
+    fixture.detectChanges();
+    expect(component.query).toEqual("bladder");
+    expect(component.engageSearch).toHaveBeenCalled();
+  });
+
+  it('should call queryHPO and set response items', () => {
+    component.queryHPO("bladder");
+    fixture.detectChanges();
+    expect(component.terms.length).toEqual(1);
+
+
+  })
 });

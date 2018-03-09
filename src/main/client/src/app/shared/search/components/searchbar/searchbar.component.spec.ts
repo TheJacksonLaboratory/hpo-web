@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import { SearchbarComponent } from './searchbar.component';
 import { GlobalMaterialModules} from "../../../global.module";
@@ -28,5 +28,14 @@ describe('SearchbarComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it( 'should emit an event when input with query', ()=>{
+    let element = fixture.nativeElement.querySelector("input");
+    spyOn(component.queryEmit, 'emit');
+    element.value = 'bladder';
+    element.dispatchEvent(new Event("input"));
+    element.dispatchEvent(new Event("keyup"));
+    expect(component.queryEmit.emit).toHaveBeenCalledWith("bladder");
   });
 });

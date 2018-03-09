@@ -41,11 +41,11 @@
           </mat-card-header>
           <mat-card-content>
             <span  routerLink="/browse/gene/{{item.entrezGeneId}}" *ngFor="let item of genes; "
-              class="result-list" [innerHtml]="{id:item.entrezGeneId, name: item.entrezGeneSymbol} | highlight: query">
+              class="result-list" [innerHtml]="{name: item.entrezGeneSymbol} | highlight: query">
               <span class="result">
-              <span class="id">{{item.entrezGeneId}}</span>
-              <span class="name" [innerHtml]="{name: item.entrezGeneSymbol } | highlight: query"></span>
-            </span>
+                <span class="id">{{item.entrezGeneId}}</span>
+                <span class="name" [innerHtml]="{name: item.entrezGeneSymbol } | highlight: query"></span>
+              </span>
           </span>
           </mat-card-content>
         </mat-card>

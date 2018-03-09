@@ -9,7 +9,6 @@ import { SearchService } from '../service/search.service';
 })
 export class SearchOutputComponent implements OnInit {
 
-  @Output() public searchActive = new EventEmitter<boolean>();
   @Input() set searchString(query: string){
     if(query) {
       this.query = query;
@@ -42,11 +41,13 @@ export class SearchOutputComponent implements OnInit {
         this.terms = data.terms;
         this.diseases = data.diseases;
         this.genes = data.genes;
-        numResults = this.checkEmpty(this.terms) + this.checkEmpty(this.diseases) + this.checkEmpty(this.genes)
+        numResults = this.checkEmpty(this.terms) + this.checkEmpty(this.diseases) + this.checkEmpty(this.genes);
         if(numResults == 2 ){
           this.bootCols = 6;
         }else if(numResults == 1){
           this.bootCols = 12;
+        }else if(numResults == 3){
+          this.bootCols = 4;
         }else{
           this.notFound = true;
         }
@@ -59,14 +60,12 @@ export class SearchOutputComponent implements OnInit {
 
   engageSearch() {
     if (this.query !== '' && this.query.length >= 3) {
-      this.searchActive.emit(true);
       this.queryHPO(this.query);
     }else {
       this.terms = [];
       this.diseases = [];
       this.genes = [];
       this.bootCols = 4;
-      this.searchActive.emit(false);
     }
   }
 
