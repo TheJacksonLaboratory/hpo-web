@@ -69,3 +69,6 @@
   opacity: 1 !important;
 }
 
+::ng-deep mat-hint{
+  cursor: pointer;
+}

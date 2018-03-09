@@ -2,6 +2,10 @@
   <mat-icon class="search-icon">search</mat-icon>
   <mat-form-field class="example-full-width">
     <input matInput placeholder="Human Phenotype Ontology" [(ngModel)]=query (keyup)="emitQuery()">
-    <mat-hint align="end"><strong>( i.e. ) HP:00142 | Abornmality of Weight | Bladder Cancer</strong> </mat-hint>
+    <mat-hint align="end">
+      <strong>( i.e. ) <a (click)="setQuery('Abnormality of the bladder')">Abnormality of the bladder</a> |
+        <a (click)="setQuery('Bladder Cancer')">Bladder Cancer</a> |
+        <a (click)="setQuery('TP53')">TP53</a></strong>
+    </mat-hint>
   </mat-form-field>
 </div>

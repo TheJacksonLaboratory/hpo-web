@@ -23,4 +23,9 @@ export class SearchbarComponent implements OnInit {
         this.query
       );
   }
+
+  setQuery(term: string): void {
+    this.query = term;
+    this.emitQuery(new Event("activate"))
+  }
 }
