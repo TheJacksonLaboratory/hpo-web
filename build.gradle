@@ -137,7 +137,6 @@ task clientIntegrationTest(type: NpmTask, dependsOn: 'npmInstall') {
     args = ['run', 'e2e']
 }
 
-
 war.dependsOn(buildClientProd)
 
 test.dependsOn(clientTest)

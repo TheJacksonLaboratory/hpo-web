@@ -1,0 +1,17 @@
+.search-icon {
+  margin: 20px 10px 0 0;
+  float:left;
+}
+
+::ng-deep .searchbar .mat-form-field {
+  width: 75%;
+  display: block;
+  float: left;
+}
+::ng-deep .searchbar .mat-input-placeholder {
+  padding: 1px;
+}
+::ng-deep .searchbar .mat-input-element {
+  height: 0%;
+  font-size: 16px;
+}

@@ -3,6 +3,8 @@ import { MatCardModule} from '@angular/material';
 import { HomeComponent } from './home.component';
 import { MatIconModule} from "@angular/material/icon";
 import { MatListModule} from "@angular/material/list";
+import { SearchModule} from "../../shared/search/search.module";
+import {NoopAnimationsModule} from "@angular/platform-browser/animations";
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -13,7 +15,9 @@ describe('HomeComponent', () => {
       declarations: [ HomeComponent ],
       imports: [MatCardModule,
         MatIconModule,
-        MatListModule
+        MatListModule,
+        NoopAnimationsModule,
+        SearchModule
       ]
     })
     .compileComponents();
