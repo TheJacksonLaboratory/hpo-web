@@ -1,6 +1,5 @@
 package hpo.api
 
-import org.springframework.core.io.Resource
 import org.springframework.core.io.ResourceLoader
 
 class ContentTypeAssetController implements org.springframework.context.ResourceLoaderAware {
@@ -10,12 +9,12 @@ class ContentTypeAssetController implements org.springframework.context.Resource
 
       String requestURI = request.getProperty('requestURI')
       File file  = resourceLoader.getResource(requestURI).getFile()
-      render(file: file, contentType: contentType, encoding: "UTF-8")
+      render(file: file, contentType: contentType)
 
     }
 
   @Override
-  void setResourceLoader(org.springframework.core.io.ResourceLoader resourceLoader) {
+  void setResourceLoader(ResourceLoader resourceLoader) {
     this.resourceLoader = resourceLoader
   }
 }
