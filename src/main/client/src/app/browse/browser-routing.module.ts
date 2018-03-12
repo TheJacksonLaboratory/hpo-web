@@ -5,7 +5,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { TermComponent } from './pages/term/term.component';
 import { DiseaseComponent } from './pages/disease/disease.component';
 import { GeneComponent } from './pages/gene/gene.component';
-import { BrowserComponent } from './browser.component';
 
 const browserRoutes: Routes = [
     { path:'term/:id', component: TermComponent },

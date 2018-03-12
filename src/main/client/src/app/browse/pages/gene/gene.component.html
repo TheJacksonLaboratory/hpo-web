@@ -29,18 +29,23 @@
 
         <div class="col-lg-9">
               <!-- Gene Banner -->
-              <mat-card class="title-banner mat-elevation-z6">
+              <mat-card class="item-summary mat-elevation-z6">
                   <mat-card-content>
                     <span class="item-title">{{entrezGene.name}}</span>
                     <a routerLink="/browser/gene/{{entrezGene.uid}}"><strong>({{entrezGene.uid}})</strong></a>
                     <hr class="underline-hr">
-                    <p><u>Synonyms:</u> <i *ngFor="let item of entrezGene.aliases; let isLast=last">{{item}}{{isLast ? '' : ', '}}</i></p>
+                    <mat-list>
+                      <mat-list-item>
+                        <strong>Synonyms:&nbsp;</strong>
+                        <i *ngFor="let item of entrezGene.aliases; let isLast=last">{{item}}{{isLast ? '' : ', '}}</i>
+                      </mat-list-item>
+                    </mat-list>
                   </mat-card-content>
               </mat-card>
 
               <!--TABS -->
               <mat-tab-group class="term-details-tab-group mat-elevation-z6"
-                      (selectedTabChange)="initTabs($event)">
+                      selectedIndex="0">
 
                   <!-- Widget tab -->
                   <mat-tab label="UniProt Viewer">
@@ -70,7 +75,7 @@
                         <ng-container matColumnDef="ontologyId">
                           <mat-header-cell *matHeaderCellDef> Term Identifier </mat-header-cell>
                           <mat-cell *matCellDef="let row">
-                            <a routerLink="/browser/term/{{row.ontologyId}}">{{row.ontologyId}}</a>
+                            <a routerLink="/browse/term/{{row.ontologyId}}">{{row.ontologyId}}</a>
                           </mat-cell>
                         </ng-container>
                         <ng-container matColumnDef="name">
@@ -96,7 +101,7 @@
                           <ng-container matColumnDef="diseaseId">
                             <mat-header-cell *matHeaderCellDef>Disease Identifier </mat-header-cell>
                             <mat-cell *matCellDef="let row">
-                              <a routerLink="/browser/disease/{{row.diseaseId}}">{{row.diseaseId}}</a>
+                              <a routerLink="/browse/disease/{{row.diseaseId}}">{{row.diseaseId}}</a>
                             </mat-cell>
                           </ng-container>
                           <ng-container matColumnDef="diseaseName">
@@ -106,12 +111,8 @@
                         </mat-table>
                     </div>
                   </mat-tab>
-
-
-
               </mat-tab-group>
         </div>
-
     </div>
   </div>
 </div>
