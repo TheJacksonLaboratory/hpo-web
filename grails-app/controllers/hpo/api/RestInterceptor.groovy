@@ -9,7 +9,7 @@ class RestInterceptor {
       header( "X-Frame-Options", "DENY" )
       header( "X-Content-Type-Options", "nosniff" )
       header( "X-XSS-Protection", "1" )
-      header( "Content-Security-Policy", "script-src 'self' 'unsafe-eval'")
+      header( "Content-Security-Policy", "script-src 'self'")
       true
     }
 
