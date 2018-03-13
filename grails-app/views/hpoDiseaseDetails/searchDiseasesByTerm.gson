@@ -2,7 +2,11 @@ import hpo.api.disease.DbDisease
 
 model {
   List<DbDisease> diseaseList
+  Integer offset
+  Integer max
 }
 json{
   diseases tmpl.diseasesByTerm(diseaseList)
+  offset offset
+  max max
 }

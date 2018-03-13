@@ -69,6 +69,13 @@ export class TermComponent implements OnInit {
     });
   }
 
+  reloadDiseaseAssociations(offset : string, max: string){
+    this.termService.searchDiseasesByTerm(this.term.ontologyId, offset, max)
+      .subscribe((data) => {
+        this.diseaseAssoc = new DiseaseAssocDB(data.diseases);
+      })
+  }
+
   setDefaults(term: Term){
     this.term = term;
     this.term.synonyms = (term.synonyms.length != 0) ? term.synonyms: ["No synonyms found for this term."];

@@ -12,6 +12,7 @@ import hpo.api.disease.DbDisease
 import hpo.api.gene.DbGene
 import hpo.api.term.DbTerm
 import org.apache.commons.lang.time.StopWatch
+import org.grails.plugins.web.interceptors.InterceptorsGrailsPlugin
 import org.hibernate.SessionFactory
 
 @GrailsCompileStatic
@@ -43,14 +44,14 @@ class HpoTermService {
    * @param TrimmedQ the HPO ID
    * @return genes: List of Genes Associated to Term
    */
-  List<DbGene> searchGenesByTerm(String trimmedQ){
+  List<DbGene> searchGenesByTerm(String trimmedQ, Integer offset, Integer max){
     List<DbGene> genes = []
     if (trimmedQ.startsWith('HP:')) {
       final Term term = this.hpoOntology.termMap.get(ImmutableTermId.constructWithPrefix(trimmedQ))
       final List<DbTerm> descendantTerms = findTermDescendants(term)
 
       if (descendantTerms) {
-        genes = findDbGenes(descendantTerms)
+        genes = findDbGenes(descendantTerms, offset, max)
       }
     }
 
@@ -63,14 +64,14 @@ class HpoTermService {
    * @param TrimmedQ the HPO ID
    * @return genes: List of Diseases Associated to Term
    */
-  List<DbDisease> searchDiseasesByTerm(String trimmedQ){
+  List<DbDisease> searchDiseasesByTerm(String trimmedQ, Integer offset, Integer max){
     List<DbDisease> diseases = []
     if (trimmedQ.startsWith('HP:')) {
       final Term term = this.hpoOntology.termMap.get(ImmutableTermId.constructWithPrefix(trimmedQ))
       final List<DbTerm> descendantTerms = findTermDescendants(term)
 
       if (descendantTerms) {
-        diseases = findDbDiseases(descendantTerms)
+        diseases = findDbDiseases(descendantTerms, offset, max)
       }
     }
     log.info("Associated disease count = " + diseases.size()  + " for term " + trimmedQ)
@@ -103,7 +104,7 @@ class HpoTermService {
    * @param terms
    * @return list of DBDisease sorted by disease name asc
    */
-  private List<DbDisease> findDbDiseases(List<DbTerm> terms){
+  private List<DbDisease> findDbDiseases(List<DbTerm> terms, Integer offset, Integer max){
 
     final StopWatch stopWatch = new StopWatch()
     stopWatch.start()
@@ -111,7 +112,7 @@ class HpoTermService {
     final List<Long> diseaseIdList = getDiseaseListForAssociatedTerms(terms)
 
     if (diseaseIdList) {
-      diseaseList = DbDisease.findAllByIdInList(diseaseIdList, [sort: 'diseaseName', order: 'asc'])
+      diseaseList = DbDisease.findAllByIdInList(diseaseIdList, [offset:offset, max:max, sort: 'diseaseName', order: 'asc'])
     }
 
     log.info("Find associated diseases duration = " + stopWatch)
@@ -144,13 +145,13 @@ class HpoTermService {
    * @param terms
    * @return list of DbGenes sorted by entrezGeneSymbol asc
    */
-  private List<DbGene> findDbGenes(List<DbTerm> terms) {
+  private List<DbGene> findDbGenes(List<DbTerm> terms, Integer offset, Integer max) {
     final StopWatch stopWatch = new StopWatch()
     stopWatch.start()
     final List<DbGene> geneList = []
     final List<Long> geneIdList = getGeneListForAssociatedTerms(terms)
     if (geneIdList) {
-      geneList = DbGene.findAllByIdInList(geneIdList, [sort: 'entrezGeneSymbol', order: 'asc'])
+      geneList = DbGene.findAllByIdInList(geneIdList, [offset:offset, max:max, sort: 'entrezGeneSymbol', order: 'asc'])
     }
     log.info("Find associated genes duration = " + stopWatch)
     geneList

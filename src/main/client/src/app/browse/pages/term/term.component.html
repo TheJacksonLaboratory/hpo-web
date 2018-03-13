@@ -68,7 +68,9 @@
 
                       <mat-progress-bar  *ngIf="assocLoading" class="loading-result-details" color="primary" mode="buffer">
                       </mat-progress-bar>
-
+                      <div *ngIf="!assocLoading" style="text-align: right; padding-right: 10px; margin-bottom: 5px; margin-top: 5px;">
+                        <p>Displaying xxx out of yyy. <a>View all</a></p>
+                      </div>
                       <div [hidden]="assocLoading"class="associations disease-association">
                         <mat-table #table [dataSource]="diseaseSource" matSort>
                           <mat-header-row *matHeaderRowDef="diseaseColumns"></mat-header-row>
