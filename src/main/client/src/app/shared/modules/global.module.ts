@@ -16,6 +16,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatExpansionModule } from '@angular/material';
 import { MatListModule } from '@angular/material';
 import { MatSelectModule } from '@angular/material/select';
+import { MatDividerModule } from '@angular/material/divider';
 
 @NgModule({
   imports: [MatButtonModule,
@@ -32,7 +33,8 @@ import { MatSelectModule } from '@angular/material/select';
     MatTooltipModule,
     MatListModule,
     MatExpansionModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDividerModule
   ],
   exports: [MatButtonModule,
     MatMenuModule,
@@ -48,7 +50,8 @@ import { MatSelectModule } from '@angular/material/select';
     MatTooltipModule,
     MatListModule,
     MatExpansionModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDividerModule
   ],
 })
 export class GlobalMaterialModules { }

@@ -6,7 +6,7 @@
           <mat-card class="item-summary tree-navigation">
             <mat-card-content>
               <h3 class="card-title">Tree Hierarchy</h3>
-              <span matTooltip="Local View of HPO" matTooltipPosition="left" class="badge info-badge">i</span>
+              <span matTooltip="Neighborhood View of HPO Hierarchy" matTooltipPosition="left" class="badge info-badge">i</span>
               <hr class="underline-hr">
                     <ul class="tree" *ngIf="treeData">
                       <li *ngFor="let parent of treeData.parents">
@@ -36,20 +36,32 @@
 
                   <div>
                     <span class="item-title">{{termTitle}}</span>
-                    <a routerLink="/browser/term/{{term.id}}"><strong>({{term.id}})</strong></a>
+                    <a href="{{term.purl}}" target="__blank"> <strong>({{term.id}})</strong></a>
                   </div>
 
                   <hr class="underline-hr">
-
                   <p><br><i>{{term.definition}}</i></p>
-                  <p><u>PURL:</u>&nbsp;&nbsp;<a href="{{term.purl}}" target="__blank"><strong>{{term.purl}}</strong></a></p>
-                  <p><u>Synonyms:</u>&nbsp;&nbsp; <i *ngFor="let item of term.synonyms; let isLast=last">{{item}}{{isLast ? '' : ', '}}</i></p>
-                  <p><u>Xrefs:</u>&nbsp;&nbsp;<i *ngFor="let item of term.xrefs; let isLast=last">{{item}}{{isLast ? '' : ', '}}</i></p>
+                  <mat-list>
+                    <mat-divider></mat-divider>
+                    <mat-list-item>
+                      <strong>Synonyms:</strong> &nbsp;&nbsp; <i *ngFor="let item of term.synonyms; let isLast=last">{{item}}{{isLast ? '' : ', '}}</i>
+                    </mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item>
+                      <strong>Comment:</strong> &nbsp;&nbsp; {{term.comment}}
+                      </mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item>
+                      <strong>Xrefs:</strong> &nbsp;&nbsp;
+                      <i *ngFor="let item of term.xrefs; let isLast=last">{{item}}{{isLast ? '' : ', '}}</i>
+                    </mat-list-item>
+                    <mat-divider></mat-divider>
+                  </mat-list>
               </mat-card-content>
             </mat-card>
 
             <!-- TABS -->
-            <mat-tab-group class="term-details-tab-group mat-elevation-z6">
+            <mat-tab-group selectedIndex="0" class="term-details-tab-group mat-elevation-z6">
 
               <!-- Disease association -->
               <mat-tab label="Disease Associations">
@@ -64,7 +76,7 @@
                           <ng-container matColumnDef="diseaseId">
                             <mat-header-cell *matHeaderCellDef> Disease Id </mat-header-cell>
                             <mat-cell *matCellDef="let row">
-                              <a routerLink="/browser/disease/{{row.diseaseId}}">{{row.diseaseId}}</a>
+                              <a routerLink="/browse/disease/{{row.diseaseId}}">{{row.diseaseId}}</a>
                             </mat-cell>
                           </ng-container>
                           <ng-container matColumnDef="diseaseName">
@@ -75,7 +87,7 @@
                               <mat-header-cell *matHeaderCellDef>Associated Genes</mat-header-cell>
                               <mat-cell *matCellDef="let row">
                                 <span *ngFor="let gene of row.dbGenes">
-                                    <a routerLink="/browser/gene/{{gene.entrezGeneId}}">({{gene.entrezGeneId}})</a> -
+                                    <a routerLink="/browse/gene/{{gene.entrezGeneId}}">({{gene.entrezGeneId}})</a> -
                                     {{gene.entrezGeneSymbol}}<br>
                                 </span>
                               </mat-cell>
@@ -98,14 +110,14 @@
                           <mat-header-cell *matHeaderCellDef> Gene Symbol </mat-header-cell>
                           <mat-cell *matCellDef="let row">
                             {{row.entrezGeneSymbol}}
-                            <a routerLink="/browser/gene/{{row.entrezGeneId}}"> ({{row.entrezGeneId}})</a>
+                            <a routerLink="/browse/gene/{{row.entrezGeneId}}"> ({{row.entrezGeneId}})</a>
                           </mat-cell>
                         </ng-container>
                         <ng-container matColumnDef="dbDiseases">
                           <mat-header-cell *matHeaderCellDef> Associated Diseases </mat-header-cell>
                           <mat-cell *matCellDef="let row">
                             <span *ngFor="let disease of row.dbDiseases">
-                                <a routerLink="/browser/disease/{{disease.diseaseId}}">({{disease.diseaseId}})</a> -
+                                <a routerLink="/browse/disease/{{disease.diseaseId}}">({{disease.diseaseId}})</a> -
                                 {{disease.diseaseName}}<br>
                             </span>
                           </mat-cell>

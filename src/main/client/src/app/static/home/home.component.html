@@ -1,9 +1,9 @@
-<div class="container">
+<div class="container" (click)="setOverlay($event)">
     <div class="row">
         <div class="home-search col-lg-offset-2 col-lg-8">
           <h2 class="title">Explore the ontology!</h2>
           <div class="bar">
-              <searchbar (queryEmit)="searchString = $event"></searchbar>
+              <searchbar [resetQuery]="clearSearch" (queryEmit)="searchString = $event"></searchbar>
           </div>
         </div>
 
