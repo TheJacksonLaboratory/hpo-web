@@ -53,6 +53,7 @@ export class NavbarComponent implements OnInit {
           this.terms = [];
           this.diseases = [];
           this.genes = [];
+          this.query = "";
         }
       }
     });
