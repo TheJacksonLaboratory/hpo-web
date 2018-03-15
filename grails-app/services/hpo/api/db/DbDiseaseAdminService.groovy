@@ -9,6 +9,7 @@ import hpo.api.term.DbTerm
 import org.apache.commons.lang.time.StopWatch
 import org.grails.io.support.ClassPathResource
 import hpo.api.db.utils.DomainUtilService
+import org.apache.commons.lang.WordUtils;
 
 @Transactional
 class DbDiseaseAdminService {
@@ -39,7 +40,9 @@ class DbDiseaseAdminService {
       if (tokens.size() == 14) {
         String db = tokens[0]
         String dbObjectId = tokens[1]
-        String diseaseName = tokens[2].split(';').first()
+        String diseaseName = tokens[2].split(';').first().replaceAll('^\\%\\d{6}|^\\#\\d{6}|^\\d{6}',
+          '').trim();
+        diseaseName = WordUtils.capitalizeFully(diseaseName);
         String diseaseId = db + ":" + dbObjectId
         if (!diseaseIdToNameMap.get(diseaseId)) {
           diseaseIdToNameMap.put(diseaseId, dbObjectId)
