@@ -38,7 +38,3 @@
   cursor: default;
 }
 
-::ng-deep .search-highlight{
-  font-weight: 900;
-  background-color:yellow;
-}

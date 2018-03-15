@@ -116,3 +116,8 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+::ng-deep .search-highlight{
+  font-weight: 900;
+  background-color:yellow;
+}
