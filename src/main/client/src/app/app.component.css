@@ -72,3 +72,47 @@
 ::ng-deep mat-hint{
   cursor: pointer;
 }
+
+::ng-deep .term-result .result-list .result:hover  {
+  text-decoration:underline #0085CA;
+}
+::ng-deep .disease-result .result-list .result:hover  {
+  text-decoration:underline #AB2328;
+}
+::ng-deep .gene-result .result-list .result:hover  {
+  text-decoration:underline #43B02A;
+}
+::ng-deep .disease-result .result .id{
+  color: grey;
+  font-size: 10px;
+  display: block;
+  float: left;
+  width: 50px;
+  margin: 5px 0 0 0;
+}
+::ng-deep .term-result .result .id{
+  color: grey;
+  font-size: 10px;
+  display: block;
+  float: left;
+  width: 60px;
+  margin: 5px 0 0 0;
+}
+
+::ng-deep .gene-result .result .id{
+  color: grey;
+  font-size: 10px;
+  display: block;
+  float: left;
+  width: 35px;
+  margin: 5px 0 0 0;
+}
+
+::ng-deep span.result-list, ::ng-deep div.result-list  {
+  text-decoration:none;
+  color: black !important;
+  margin-top: 2.5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

@@ -7,6 +7,7 @@ import { HttpClientModule} from '@angular/common/http';
 // Service
 import { SearchService } from "./shared/search/service/search.service";
 // Global Material Modules
+import { GlobalMaterialModules } from "./shared/modules/global.module";
 import { ExtrasModule } from "./shared/modules/extras.module";
 
 //Custom Shared Components
@@ -27,6 +28,7 @@ import { NoPageFoundComponent } from './error/no-page-found.component';
     BrowserAnimationsModule,
     RoutingModule,
     HttpClientModule,
+    GlobalMaterialModules,
     ExtrasModule
   ],
   providers: [SearchService],

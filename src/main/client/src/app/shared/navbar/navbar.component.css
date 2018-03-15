@@ -70,7 +70,7 @@
 
 .navbar-container .mat-select{
   width: 25%;
-  background-color: white;
+  background-color: #eaeaea;
   padding: 2px 2px 2px 10px;
   font-size: 14px;
   margin-top: 15px;
@@ -80,25 +80,41 @@
 }
 
 .navbar-output {
-  font-size: 12px;
+  font-size: 14px;
   overflow-x: hidden;
   background-color:#e6e7e9;
+  cursor:pointer;
 }
 .navbar-output .result-list{
-  margin-left: 50px;
+  margin-left: 15px;
   line-height: 20px;
 }
-.navbar-output .result-term {
+.navbar-output .term-result {
   margin-left: 10px;
 }
-.navbar-output .result-disease {
+.navbar-output .disease-result {
   margin-left: 10px;
 
 }
-.navbar-output .result-gene {
+.navbar-output .gene-result {
   margin-left:10px;
-
 }
 
+.navbar-output .result .id {
+  font-size: 10px;
+  color: grey;
+}
+
+.term-result .result .id{
+  margin: 0 !important;
+}
+
+.gene-result .result .id{
+  margin: 0 !important;
+}
+
+.disease-result .result .id{
+  margin: 0 !important;
+}
 
 

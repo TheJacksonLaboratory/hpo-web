@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import { NavigationEnd, Router} from "@angular/router";
 import { SearchService} from "../search/service/search.service";
 import {Disease, Gene, Term} from "../../browse/models/models";
@@ -27,11 +27,12 @@ import {
         animate('500ms ease-in-out')),
       transition('active => inactive',
         animate('400ms ease-in-out'))
-      ]),
+      ])
   ]
 })
 export class NavbarComponent implements OnInit {
   title:string = "Human Phenotype Ontology";
+  query: string = "";
   showSearch: boolean =  false;
   navFilter: string = "all";
   terms: Term[] = [];
@@ -49,14 +50,26 @@ export class NavbarComponent implements OnInit {
           this.showSearch = true;
         }else{
           this.showSearch = false;
+          this.terms = [];
+          this.diseases = [];
+          this.genes = [];
         }
       }
     });
   }
 
+  @HostListener('document:click', ['$event'])
+  documentClick(event: Event): void {
+    if(this.searchstate == "active") {
+      this.searchstate = "inactive";
+      this.query = "";
+    }
+  }
+
   suggestContent(query: string): void {
     if(query){
       if(query.length >= 3 ){
+        this.query = query;
         this.searchService.searchAll(query).subscribe((data) => {
           this.searchstate = "active";
           this.terms = data.terms;
