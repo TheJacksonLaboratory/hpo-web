@@ -1,3 +1,52 @@
-<p>
-  overview works!
+
+<h1>HPO-based tools</h1>
+<p>The HPO has been used in many different tools and algorithms for clinical diagnostics,
+  phenotype-driven genomic diagnostics, translational bioinformatics, and more.
+  These pages provide an overview of tools developed within the HPO project
+  and the <a href="https://monarchinitiative.org/" target="_blank">Monarch Initiative</a>
+  as well as tools from other groups. If you have a tool that you would like us to add
+to these pages, please contact us.
 </p>
+
+<h2>Clinical diagnostics</h2>
+<p>The HPO provides a computational foundation for algorithms that implement
+fuzzy, specificity-weighted phenotype matching for computational differential
+diagnostic support. Users enter a list of HPO terms that represent the phenotypic
+abnormalities (signs, symptoms, laboratory measurements, etc.) observed in a patient.
+The tools employ a variety of approaches and algorithms to find diseases that
+best match the list of HPO terms. </p>
+<ul>
+<li>The <a routerLink="/tools/phenomizer">Phenomizer</a></li>
+<//ul>
+
+<h2>Exome/Genome diagnostics and research</h2>
+<p>We have developed a series of Java-based tools that form the foundation of algorithms
+  intended to implement phenotype-driven prioritization of variants in Mendelian disease. As input,
+  the tools take a VCF file from an exome or genome as well as a list of HPO terms representing
+  the phenotypic abnormalities observed in the person being investigated.</p>
+  <ul>
+    <li><a routerLink="/tools/exomiser">Exomiser</a></li>
+    <li><a routerLink="/tools/exomiser">Genomiser</a></li>
+    <li><a href="https://www.ncbi.nlm.nih.gov/pubmed/25186178" target="_blank">PhenIX</a> is intended for clinical
+      diagnostics using a "Mendeliome" panel or exome. The PhenIX algorithm can be run within the Exomiser tool.<//li>
+  </ul>
+
+  <h2>CNV diagnostics</h2>
+  <p>Array CGH and related assays are commonly used as a screening test for indications such
+    developmental delay and congenital malformations. These assays can detect copy number variants (deletions and duplications).
+    Numerous CNVs are found in all individuals, and thus it can be difficult to determine whether any given
+    CNV is causally related to a medical problem. HPO-based analysis allows one to assess whether the
+    genes contained within a CNV are phenotypically related to the phenotypic abnormalities observed in a patient.</p>
+    <ul>
+      <li><a routerLink="/tools/phenogramviz">PhenoGramViz</a>
+      </li>
+    </ul>
+
+    <h2>Clinical phenotyping</h2>
+    <p>Todo</p>
+<ul>
+  <li><a routerlink="/tools/clinicalannotation">Patient Archive</a>.</li>
+</ul>
+
+    <h2>Tools for contributing to the HPO</h2>
+    <p>
