@@ -12,14 +12,14 @@
   <div class="fill-remaining-space">
 
   </div>
-  <div class="navbar-container col-lg-3 col-sm-6" *ngIf="showSearch">
+  <div class="navbar-search-container col-lg-3 col-sm-6" *ngIf="showSearch">
       <mat-select placeholder="All" [(value)]="navFilter">
         <mat-option value="all">All</mat-option>
         <mat-option value="term">Term</mat-option>
         <mat-option value="disease">Disease</mat-option>
         <mat-option value="gene">Gene</mat-option>
       </mat-select>
-      <input matInput #navsearch placeholder="Search the Ontology.." [value]="query"
+      <input class="navbar-search" matInput #navsearch placeholder="Search the Ontology.." [value]="query"
              (input)="suggestContent(navsearch.value)">
     <div class="navbar-output mat-elevation-z4" [@searchState]="searchstate">
       <div class="term-result" *ngIf="(navFilter == 'term' || navFilter == 'all') && terms.length > 0 ">
