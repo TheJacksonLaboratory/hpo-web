@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./externalhpo.component.css']
 })
 export class ExternalHPOComponent implements OnInit {
-
+  pageTitle: string = "Tools / External Tools";
   constructor() { }
 
   ngOnInit() {

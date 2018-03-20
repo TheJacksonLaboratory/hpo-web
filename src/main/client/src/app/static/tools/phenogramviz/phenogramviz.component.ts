@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./phenogramviz.component.css']
 })
 export class PhenogramVizComponent implements OnInit {
-
+  pageTitle: string = "Tools / PhenoGramViz";
   constructor() { }
 
   ngOnInit() {

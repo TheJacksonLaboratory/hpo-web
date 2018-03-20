@@ -9,8 +9,8 @@ export class UsersComponent implements OnInit {
   pageTitle: String;
   pageIntro: String;
   constructor() {
-    this.pageTitle = "Documentaton / Computable HPO Term Definitions";
-    this.pageIntro = "How do we define or compute our terms?";
+    this.pageTitle = "Help / Users";
+    this.pageIntro = "Who else is using the Ontology?";
 
    }
   ngOnInit() {

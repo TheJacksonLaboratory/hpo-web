@@ -6,11 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./contact.component.css']
 })
 export class ContactComponent implements OnInit {
-  pageTitle: string;
-  pageIntro: string;
-  constructor() { 
-    this.pageTitle = "Contact";
-    this.pageIntro = " ";
+  pageTitle: String = "Contact";
+  constructor() {
+
   }
   ngOnInit() {
   }

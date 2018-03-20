@@ -6,11 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./definitions.component.css']
 })
 export class DefinitionsComponent implements OnInit {
-  pageTitle: String;
-  pageIntro: String;
+  pageTitle: String = "Help / Computable HPO Term Definitions";
   constructor() {
-    this.pageTitle = "Documentaton / Computable HPO Term Definitions";
-    this.pageIntro = "How do we define or compute our terms?";
 
    }
   ngOnInit() {

@@ -6,7 +6,6 @@ import {DownloadsRoutingModule} from "./downloads-routing.module";
 import { DownloadsComponent } from "./downloads.component";
 import { PhenotypeAnnotationComponent } from "./phenotype-annotation/phenotype-annotation.component";
 import { HpOboComponent} from "./hp-obo/hp-obo.component";
-import { HpOwlComponent} from "./hp-owl/hp-owl.component";
 
 
 @NgModule({
@@ -15,6 +14,6 @@ import { HpOwlComponent} from "./hp-owl/hp-owl.component";
     DownloadsRoutingModule,
     GlobalMaterialModules
   ],
-  declarations: [ DownloadsComponent, PhenotypeAnnotationComponent, HpOboComponent, HpOwlComponent ]
+  declarations: [ DownloadsComponent, PhenotypeAnnotationComponent, HpOboComponent ]
 })
 export class DownloadsModule { }

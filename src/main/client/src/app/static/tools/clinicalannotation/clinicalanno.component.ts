@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./clinicalanno.component.css']
 })
 export class ClinicalAnnotationComponent implements OnInit {
-
+  pageTitle: string = "Tools / Clinical-Annotation";
   constructor() { }
 
   ngOnInit() {

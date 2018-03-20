@@ -6,11 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./mapping.component.css']
 })
 export class MappingComponent implements OnInit {
-  pageTitle: String;
-  pageIntro: String;
+  pageTitle: String = "Mapping and Translation";
   constructor() {
-    this.pageTitle = "Documentaton / Computable HPO Term Definitions";
-    this.pageIntro = "How do we define or compute our terms?";
 
    }
   ngOnInit() {

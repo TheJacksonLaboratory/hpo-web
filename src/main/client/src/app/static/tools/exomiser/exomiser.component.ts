@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./exomiser.component.css']
 })
 export class ExomiserComponent implements OnInit {
-
+  pageTitle: string = "Tools / Exomiser";
   constructor() { }
 
   ngOnInit() {

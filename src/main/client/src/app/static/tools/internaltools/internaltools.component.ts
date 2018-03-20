@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./internaltools.component.css']
 })
 export class InternalToolsComponent implements OnInit {
-
+  pageTitle: string = "Tools / Internal";
   constructor() { }
 
   ngOnInit() {

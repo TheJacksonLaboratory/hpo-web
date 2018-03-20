@@ -5,12 +5,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { DownloadsComponent } from "./downloads.component";
 import { PhenotypeAnnotationComponent } from "./phenotype-annotation/phenotype-annotation.component";
 import { HpOboComponent} from "./hp-obo/hp-obo.component";
-import { HpOwlComponent} from "./hp-owl/hp-owl.component";
 
 const downloadRoutes: Routes = [
   { path: '', component: DownloadsComponent},
   { path: 'hpobo', component: HpOboComponent},
-  { path: 'hpoowl', component: HpOwlComponent},
   { path: 'phenotype-annotation', component: PhenotypeAnnotationComponent}
 
 ];

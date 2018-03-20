@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./overview.component.css']
 })
 export class OverviewComponent implements OnInit {
-
+  pageTitle: string = "Tools / Overview";
   constructor() { }
 
   ngOnInit() {
