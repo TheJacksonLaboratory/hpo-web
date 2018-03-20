@@ -6,11 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./users.component.css']
 })
 export class UsersComponent implements OnInit {
-  pageTitle: String;
-  pageIntro: String;
+  pageTitle: String = "Help / Users";
+  pageIntro: String = "Who else is using the Ontology?";
   constructor() {
-    this.pageTitle = "Help / Users";
-    this.pageIntro = "Who else is using the Ontology?";
 
    }
   ngOnInit() {

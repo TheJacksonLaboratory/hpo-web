@@ -6,11 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./collaboration.component.css']
 })
 export class CollaborationComponent implements OnInit {
-  pageTitle: String;
-  pageIntro: String;
+  pageTitle: String  = "Help / Collaboration";
+  pageIntro: String  = "How to contribute to the HPO.";
   constructor() {
-    this.pageTitle = "Documentaton / Computable HPO Term Definitions";
-    this.pageIntro = "How do we define or compute our terms?";
 
    }
   ngOnInit() {

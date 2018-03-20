@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OtherComponent implements OnInit {
   pageTitle: string = "Tools / Other Tools";
+  pageIntro: String = "";
   constructor() { }
 
   ngOnInit() {

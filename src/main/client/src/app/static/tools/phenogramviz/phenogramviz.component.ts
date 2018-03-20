@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PhenogramVizComponent implements OnInit {
   pageTitle: string = "Tools / PhenoGramViz";
+  pageIntro: String = "";
   constructor() { }
 
   ngOnInit() {

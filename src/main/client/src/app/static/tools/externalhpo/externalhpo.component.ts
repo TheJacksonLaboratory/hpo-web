@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ExternalHPOComponent implements OnInit {
   pageTitle: string = "Tools / External Tools";
+  pageIntro: String = "";
   constructor() { }
 
   ngOnInit() {

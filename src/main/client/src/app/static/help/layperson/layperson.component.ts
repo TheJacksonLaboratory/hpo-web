@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LaypersonComponent implements OnInit {
   pageTitle: String = "Help / Layperson";
+  pageIntro: String = "";
   constructor() { }
 
   ngOnInit() {

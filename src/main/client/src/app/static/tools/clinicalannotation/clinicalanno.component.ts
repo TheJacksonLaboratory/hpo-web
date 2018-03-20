@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ClinicalAnnotationComponent implements OnInit {
   pageTitle: string = "Tools / Clinical-Annotation";
+  pageIntro: String = "";
   constructor() { }
 
   ngOnInit() {

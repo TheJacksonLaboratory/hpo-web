@@ -12,7 +12,6 @@ import 'rxjs/add/operator/mergeMap';
 export class HelpComponent implements OnInit {
   pageTitle: String;
   pageIntro: String;
-  routerSub: any;
   constructor() {
 
   }

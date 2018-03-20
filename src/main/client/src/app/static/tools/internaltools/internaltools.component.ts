@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InternalToolsComponent implements OnInit {
   pageTitle: string = "Tools / Internal";
+  pageIntro: String = "";
   constructor() { }
 
   ngOnInit() {

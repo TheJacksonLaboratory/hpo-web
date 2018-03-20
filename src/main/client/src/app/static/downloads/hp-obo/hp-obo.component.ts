@@ -6,7 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./hp-obo.component.css']
 })
 export class HpOboComponent implements OnInit {
-
+  pageTitle: String = "Downloads / Obo Format";
+  pageIntro: String = "";
   constructor() { }
 
   ngOnInit() {

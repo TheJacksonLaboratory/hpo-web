@@ -6,11 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./introduction.component.css']
 })
 export class IntroductionComponent implements OnInit {
-  pageTitle: String;
-  pageIntro: String;
-  constructor() { 
-    this.pageTitle = "Documentation / Introduction";
-    this.pageIntro = "An introuction to the Human Phenotype Ontology";
+  pageTitle: String = "Documentation / Introduction";
+  pageIntro: String = "An introuction to the Human Phenotype Ontology";
+  constructor() {
   }
   ngOnInit() {
   }

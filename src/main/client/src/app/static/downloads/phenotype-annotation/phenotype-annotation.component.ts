@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PhenotypeAnnotationComponent implements OnInit {
   pageTitle: string = "Downloads / Phenotype-Annotation";
-
+  pageIntro: String = "";
   constructor() { }
 
   ngOnInit() {

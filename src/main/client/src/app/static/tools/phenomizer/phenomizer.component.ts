@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PhenomizerComponent implements OnInit {
   pageTitle: string = "Tools / Phenomiser";
+  pageIntro: String = "";
   constructor() { }
 
   ngOnInit() {

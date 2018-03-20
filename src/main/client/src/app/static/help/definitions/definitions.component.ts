@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DefinitionsComponent implements OnInit {
   pageTitle: String = "Help / Computable HPO Term Definitions";
+  pageIntro: String = "";
   constructor() {
 
    }

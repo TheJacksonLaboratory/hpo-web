@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MappingComponent implements OnInit {
   pageTitle: String = "Mapping and Translation";
+  pageIntro: String = "";
   constructor() {
 
    }

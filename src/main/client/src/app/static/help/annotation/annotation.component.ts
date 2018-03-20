@@ -6,12 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./annotation.component.css']
 })
 export class AnnotationComponent implements OnInit {
-  pageTitle: String;
-  pageIntro: String;
+  pageTitle: String = "Documentaton / Annotation - File Format";
+  pageIntro: String = "Wondering how we annotate our terms or how we structure our files?";
   constructor() {
-    this.pageTitle = "Documentaton / Annotation - File Format";
-    this.pageIntro = "Wondering how we annotate our terms or how we structure our files?";
-
    }
 
   ngOnInit() {

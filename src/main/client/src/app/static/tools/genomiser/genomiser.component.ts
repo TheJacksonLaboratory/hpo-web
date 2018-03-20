@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GenomiserComponent implements OnInit {
   pageTitle: string = "Tools / Genomiser";
+  pageIntro: String = "";
   constructor() { }
 
   ngOnInit() {
