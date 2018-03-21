@@ -3,27 +3,29 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { AppComponent } from './app.component';
 import { RouterTestingModule } from '@angular/router/testing';
-import { MatMenuModule } from '@angular/material';
-import { MatButtonModule } from '@angular/material';
-import { MatIconModule } from '@angular/material';
-import { MatToolbarModule} from "@angular/material";
-import { environment} from '../environments/environment';
-import {HttpClientModule} from "@angular/common/http";
+import { environment } from '../environments/environment';
+import { HttpClientTestingModule } from "@angular/common/http/testing";
+import { GlobalMaterialModules } from "./shared/modules/global.module";
+import { FormsModule } from "@angular/forms";
+import { ExtrasModule } from "./shared/modules/extras.module";
+import { SearchService } from "./shared/search/service/search.service";
+
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [ RouterTestingModule,
-        MatButtonModule,
-        MatMenuModule,
-        MatIconModule,
-        MatToolbarModule,
-        HttpClientModule],
+        GlobalMaterialModules,
+        HttpClientTestingModule,
+        FormsModule,
+        ExtrasModule
+      ],
       declarations: [
         AppComponent,
         NavbarComponent,
         FooterComponent
-      ]
+      ],
+      providers: [ SearchService ]
     }).compileComponents();
   }));
 

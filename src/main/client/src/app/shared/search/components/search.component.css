@@ -24,23 +24,6 @@
   margin: 0;
   border-top:1px solid #43B02A;
 }
-span.result-list  {
-  text-decoration:none;
-  color: black !important;
-  margin-top: 2.5px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.term-result span.result-list .result:hover  {
-  text-decoration:underline #0085CA;
-}
-.disease-result span.result-list .result:hover  {
-  text-decoration:underline #AB2328;
-}
-.gene-result span.result-list .result:hover  {
-  text-decoration:underline #43B02A;
-}
 
 .result-card .mat-card {
   overflow-y: scroll;
@@ -55,32 +38,3 @@ span.result-list  {
   cursor: default;
 }
 
-::ng-deep .search-highlight{
-  font-weight: 900;
-  background-color:yellow;
-}
-::ng-deep .disease-result .result .id{
-  color: grey;
-  font-size: 10px;
-  display: block;
-  float: left;
-  width: 50px;
-  margin: 5px 0 0 0;
-}
-::ng-deep .term-result .result .id{
-  color: grey;
-  font-size: 10px;
-  display: block;
-  float: left;
-  width: 60px;
-  margin: 5px 0 0 0;
-}
-
-::ng-deep .gene-result .result .id{
-  color: grey;
-  font-size: 10px;
-  display: block;
-  float: left;
-  width: 35px;
-  margin: 5px 0 0 0;
-}

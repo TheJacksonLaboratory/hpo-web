@@ -1,10 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NavbarComponent } from './navbar.component';
-import { MatMenuModule } from '@angular/material';
-import { MatButtonModule } from '@angular/material';
-import { MatIconModule } from '@angular/material';
-import { MatToolbarModule} from '@angular/material';
-
+import { GlobalMaterialModules } from "../modules/global.module";
+import { SearchService } from "../search/service/search.service";
+import { FormsModule } from "@angular/forms";
+import { RouterTestingModule} from "@angular/router/testing";
+import { ExtrasModule } from "../modules/extras.module";
+import {HttpClientTestingModule} from "@angular/common/http/testing";
 
 describe('NavbarComponent', () => {
   let component: NavbarComponent;
@@ -12,12 +13,16 @@ describe('NavbarComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [MatButtonModule,
-        MatMenuModule,
-        MatIconModule,
-        MatToolbarModule
+      imports: [
+        GlobalMaterialModules,
+        FormsModule,
+        RouterTestingModule,
+        ExtrasModule,
+        HttpClientTestingModule
+
       ],
-      declarations: [ NavbarComponent ]
+      declarations: [ NavbarComponent ],
+      providers:[ SearchService ]
     })
     .compileComponents();
   }));

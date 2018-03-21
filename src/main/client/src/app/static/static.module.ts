@@ -5,7 +5,7 @@ import { StaticRoutingModule } from './static-routing.module';
 import { DocumentationModule } from './documentation/documentation.module';
 import { SearchModule } from "../shared/search/search.module";
 // GlobalMaterialModules
-import { GlobalMaterialModules} from "../shared/global.module";
+import { GlobalMaterialModules} from "../shared/modules/global.module";
 // Components
 import { AboutComponent } from './about/about.component';
 import { DownloadsComponent } from './downloads/downloads.component';

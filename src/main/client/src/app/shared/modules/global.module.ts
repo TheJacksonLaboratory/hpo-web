@@ -15,9 +15,8 @@ import { MatSortModule } from '@angular/material';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatExpansionModule } from '@angular/material';
 import { MatListModule } from '@angular/material';
+import { MatSelectModule } from '@angular/material/select';
 import { MatDividerModule } from '@angular/material/divider';
-
-
 
 @NgModule({
   imports: [MatButtonModule,
@@ -34,6 +33,7 @@ import { MatDividerModule } from '@angular/material/divider';
     MatTooltipModule,
     MatListModule,
     MatExpansionModule,
+    MatSelectModule,
     MatDividerModule
   ],
   exports: [MatButtonModule,
@@ -50,6 +50,7 @@ import { MatDividerModule } from '@angular/material/divider';
     MatTooltipModule,
     MatListModule,
     MatExpansionModule,
+    MatSelectModule,
     MatDividerModule
   ],
 })

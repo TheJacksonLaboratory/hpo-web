@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http'
 import { BrowserRoutingModule } from './browser-routing.module'
 //Material Modules
-import {GlobalMaterialModules} from "../shared/global.module";
+import {GlobalMaterialModules} from "../shared/modules/global.module";
 // Services
 import { SearchService } from '../shared/search/service/search.service';
 import { TermService } from './services/term/term.service';
