@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ExternalhpoComponent } from './externalhpo.component';
+import { ExternalHPOComponent } from './externalhpo.component';
 
-describe('ExternalhpoComponent', () => {
-  let component: ExternalhpoComponent;
-  let fixture: ComponentFixture<ExternalhpoComponent>;
+describe('ExternalHPOComponent', () => {
+  let component: ExternalHPOComponent;
+  let fixture: ComponentFixture<ExternalHPOComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ExternalhpoComponent ]
+      declarations: [ ExternalHPOComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ExternalhpoComponent);
+    fixture = TestBed.createComponent(ExternalHPOComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
