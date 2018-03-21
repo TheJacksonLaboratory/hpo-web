@@ -25,13 +25,23 @@ export class TermComponent implements OnInit {
   geneColumns = ['entrezGeneId','dbDiseases'];
   diseaseColumns = ['diseaseId', 'diseaseName', 'dbGenes'];
   geneAssoc: GeneAssocDB;
+  geneAssocCount: number;
+  geneAssocMax: number;
+  geneAssocOffset: number;
+  geneDisplayCount : number;
   diseaseAssoc: DiseaseAssocDB;
+  diseaseAssocCount: number;
+  diseaseAssocMax: number;
+  diseaseAssocOffset: number;
+  diseaseDisplayCount : number;
   geneSource: GeneAssocDatasource | null;
   diseaseSource: DiseaseAssocDatasource | null;
   treeData: TermTree;
   assocLoading: boolean = true;
   overlay: boolean = false;
   toolTipPosition: "above";
+  displayAllDiseaseAssc = false;
+  displayAllGeneAssc = false;
 
   @ViewChild(MatSort) sort: MatSort;
   constructor(private route: ActivatedRoute, private termService: TermService) {
@@ -48,9 +58,21 @@ export class TermComponent implements OnInit {
     }).subscribe(([res1,res2]) => {
       this.geneAssoc = new GeneAssocDB(res1.genes);
       this.geneSource = new GeneAssocDatasource(this.geneAssoc, this.sort);
+      this.geneAssocCount = res1.geneCount;
+      this.geneAssocMax = res1.max;
+      this.geneAssocOffset = res1.offset;
+      this.geneDisplayCount = (res1.geneCount < res1.max)? res1.geneCount : res1.max;
+      this.displayAllGeneAssc = false;
+
       this.diseaseAssoc = new DiseaseAssocDB(res2.diseases);
+      this.diseaseAssocCount = res2.diseaseCount
+      this.diseaseAssocMax = res2.max;
+      this.diseaseAssocOffset = res2.offset;
+      this.diseaseDisplayCount = (res2.diseaseCount < res2.max)? res2.diseaseCount : res2.max;
       this.diseaseSource = new DiseaseAssocDatasource(this.diseaseAssoc, this.sort);
       this.assocLoading = false;
+      this.displayAllDiseaseAssc = false;
+
     }, err=>{
       // TODO: Implement Better Handling Here
       console.log(err);
@@ -70,9 +92,32 @@ export class TermComponent implements OnInit {
   }
 
   reloadDiseaseAssociations(offset : string, max: string){
-    this.termService.searchDiseasesByTerm(this.term.ontologyId, offset, max)
+    console.log(this.term)
+    this.termService.searchDiseasesByTerm(this.term.id, offset, max)
       .subscribe((data) => {
-        this.diseaseAssoc = new DiseaseAssocDB(data.diseases);
+        let newDiseaseAssoc = new DiseaseAssocDB(data.diseases);
+        this.diseaseSource = new DiseaseAssocDatasource(newDiseaseAssoc, this.sort);
+        this.diseaseAssocCount = data.diseaseCount;
+        this.diseaseAssocOffset = data.offset;
+        this.diseaseAssocMax = data.max;
+        this.diseaseDisplayCount = data.diseaseCount;
+        this.displayAllDiseaseAssc = true;
+        this.assocLoading = false;
+      })
+  }
+
+  reloadGeneAssociations(offset : string, max: string){
+    console.log(this.term)
+    this.termService.searchGenesByTerm(this.term.id, offset, max)
+      .subscribe((data) => {
+        let newGeneAssoc = new GeneAssocDB(data.genes);
+        this.geneSource = new GeneAssocDatasource(newGeneAssoc, this.sort);
+        this.geneAssocCount = data.geneCount;
+        this.geneAssocOffset = data.offset;
+        this.geneAssocMax = data.max;
+        this.geneDisplayCount = data.geneCount;
+        this.displayAllGeneAssc = true;
+        this.assocLoading = false;
       })
   }
 
@@ -95,6 +140,17 @@ export class TermComponent implements OnInit {
     if(event.key == "Escape"){
       this.overlay = false;
     }
+  }
+
+  showAllDiseases(event){
+    console.log(event)
+    this.assocLoading = true;
+    this.reloadDiseaseAssociations('0', '-1')
+  }
+
+  showAllGenes(event){
+    this.assocLoading = true;
+    this.reloadGeneAssociations('0', '-1')
   }
 }
 

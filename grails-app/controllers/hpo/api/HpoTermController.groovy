@@ -17,12 +17,12 @@ class HpoTermController {
     def searchGenesByTerm(Integer offset, Integer max){
         if (!offset) offset = 0
         if (!max)  max = 20
-        render(view: '/hpoGeneDetails/searchGenesByTerm', model: [geneList: hpoTermService.searchGenesByTerm(params.id.trim(), offset, max), offset: offset, max: max])
+        render(view: '/hpoGeneDetails/searchGenesByTerm', model: [resultMap: hpoTermService.searchGenesByTerm(params.id.trim(), offset, max)])
     }
 
     def searchDiseasesByTerm(Integer offset, Integer max){
         if (!offset) offset = 0
         if (!max)  max = 20
-        render(view: '/hpoDiseaseDetails/searchDiseasesByTerm', model: [diseaseList: hpoTermService.searchDiseasesByTerm(params.id.trim(), offset, max), offset: offset, max: max])
+        render(view: '/hpoDiseaseDetails/searchDiseasesByTerm', model: [resultMap: hpoTermService.searchDiseasesByTerm(params.id.trim(), offset, max)])
     }
 }

@@ -40,42 +40,52 @@ class HpoTermService {
   }
   /**
    * Search For Associated Genes By Term
-   *
+   * @param offset -- for paging
+   * @param max -- for paging
    * @param TrimmedQ the HPO ID
-   * @return genes: List of Genes Associated to Term
+   * @return Map [List of Genes Associated with given term, total gene count, given offset, given max]
    */
-  List<DbGene> searchGenesByTerm(String trimmedQ, Integer offset, Integer max){
-    List<DbGene> genes = []
+  Map<String, Object> searchGenesByTerm(String trimmedQ, Integer offset, Integer max){
+
+    Map<String, Object> resultMap = [genes:[], geneCount:0, offset:offset, max:max]
     if (trimmedQ.startsWith('HP:')) {
       final Term term = this.hpoOntology.termMap.get(ImmutableTermId.constructWithPrefix(trimmedQ))
       final List<DbTerm> descendantTerms = findTermDescendants(term)
 
       if (descendantTerms) {
-        genes = findDbGenes(descendantTerms, offset, max)
+        Map<String, Object> queryResults= findDbGenes(descendantTerms, offset, max)
+        resultMap.genes = queryResults.geneList
+        resultMap.geneCount = queryResults.geneCount
       }
     }
 
-    log.info("Associated gene count = " + genes.size()  + " for term " + trimmedQ)
-    return genes
+    log.info("Associated gene count = " + resultMap.geneCount  + " for term " + trimmedQ)
+    return resultMap
   }
   /**
    * Search For Associated Diseases By Term
    *
    * @param TrimmedQ the HPO ID
-   * @return genes: List of Diseases Associated to Term
+   * @param offset -- for paging
+   * @param max -- for paging
+   * @return result Map [list of diseases associated with given term, total disease count, given offset, given max]
    */
-  List<DbDisease> searchDiseasesByTerm(String trimmedQ, Integer offset, Integer max){
-    List<DbDisease> diseases = []
+  Map<String, Object> searchDiseasesByTerm(String trimmedQ, Integer offset, Integer max){
+
+    Map<String, Object> resultMap = [diseases:[], diseaseCount:0, offset:offset, max:max]
     if (trimmedQ.startsWith('HP:')) {
       final Term term = this.hpoOntology.termMap.get(ImmutableTermId.constructWithPrefix(trimmedQ))
       final List<DbTerm> descendantTerms = findTermDescendants(term)
 
       if (descendantTerms) {
-        diseases = findDbDiseases(descendantTerms, offset, max)
+        Map<String, Object> queryResults= findDbDiseases(descendantTerms, offset, max)
+        resultMap.diseases = queryResults.diseaseList
+        resultMap.diseaseCount = queryResults.diseaseCount
       }
     }
-    log.info("Associated disease count = " + diseases.size()  + " for term " + trimmedQ)
-    return diseases
+
+    log.info("Associated disease count = " + resultMap.diseaseCount  + " for term " + trimmedQ)
+    return resultMap
   }
 
   /**
@@ -102,21 +112,27 @@ class HpoTermService {
   /**
    * Given the list of DbTerms find associated diseases
    * @param terms
-   * @return list of DBDisease sorted by disease name asc
+   * @param offset -- for paging
+   * @param max -- for paging
+   * @return a Map with list of DBDisease sorted by disease name asc and total disease count
    */
-  private List<DbDisease> findDbDiseases(List<DbTerm> terms, Integer offset, Integer max){
+  private Map<String, Object> findDbDiseases(List<DbTerm> terms, Integer offset, Integer max){
 
     final StopWatch stopWatch = new StopWatch()
     stopWatch.start()
+
+    final Map<String, Object> resultMap = [diseaseList:[], diseaseCount:0]
     final List<DbDisease> diseaseList = []
     final List<Long> diseaseIdList = getDiseaseListForAssociatedTerms(terms)
 
     if (diseaseIdList) {
       diseaseList = DbDisease.findAllByIdInList(diseaseIdList, [offset:offset, max:max, sort: 'diseaseName', order: 'asc'])
+      resultMap.diseaseCount = diseaseIdList.size()
     }
+    resultMap.diseaseList = diseaseList
 
     log.info("Find associated diseases duration = " + stopWatch)
-    return diseaseList
+    return resultMap
   }
 
   /**
@@ -143,18 +159,24 @@ class HpoTermService {
   /**
    * Given the list of DbTerms find associated genes
    * @param terms
-   * @return list of DbGenes sorted by entrezGeneSymbol asc
+   * @param offset -- for paging
+   * @param max -- for paging
+   * @return Map with list of DbGenes sorted by entrezGeneSymbol asc and total gene count
    */
-  private List<DbGene> findDbGenes(List<DbTerm> terms, Integer offset, Integer max) {
+  private Map<String, Object> findDbGenes(List<DbTerm> terms, Integer offset, Integer max) {
     final StopWatch stopWatch = new StopWatch()
     stopWatch.start()
+    final Map<String, Object> resultMap = [geneList:[], geneCount:0]
     final List<DbGene> geneList = []
     final List<Long> geneIdList = getGeneListForAssociatedTerms(terms)
     if (geneIdList) {
       geneList = DbGene.findAllByIdInList(geneIdList, [offset:offset, max:max, sort: 'entrezGeneSymbol', order: 'asc'])
+      resultMap.geneCount = geneIdList.size()
     }
+
+    resultMap.geneList = geneList
     log.info("Find associated genes duration = " + stopWatch)
-    geneList
+    resultMap
   }
 
   /**
