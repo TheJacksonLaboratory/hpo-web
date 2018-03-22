@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {GlobalMaterialModules} from "../../shared/global.module";
+import { GlobalMaterialModules} from "../../shared/modules/global.module";
 import {DownloadsRoutingModule} from "./downloads-routing.module";
 // Components
 import { DownloadsComponent } from "./downloads.component";
