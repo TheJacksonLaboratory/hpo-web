@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ExternalHPOComponent } from './externalhpo.component';
+import { ExternalHPOComponent } from './external.component';
 
 describe('ExternalHPOComponent', () => {
   let component: ExternalHPOComponent;

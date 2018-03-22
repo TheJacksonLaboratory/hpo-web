@@ -8,7 +8,8 @@ class UrlMappings {
   static excludes = [
     '/app/*.html',
     '/app/*.ico',
-    '/app/assets/*.png'
+    '/app/assets/*.png',
+    '/app/assets/*.jpg'
   ]
 
   static mappings = {
