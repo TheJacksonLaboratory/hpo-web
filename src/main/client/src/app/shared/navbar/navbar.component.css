@@ -118,4 +118,10 @@
   margin: 0 !important;
 }
 
+button.mat-menu-item a{
+  color:inherit !important;
+  text-decoration: none;
+  font-family: inherit;
+
+}
 

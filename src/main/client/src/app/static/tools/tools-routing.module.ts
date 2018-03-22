@@ -20,7 +20,7 @@ const toolsRoutes: Routes = [
   { path: 'genomiser', component: GenomiserComponent},
   { path: 'clinical-annotation', component: ClinicalAnnotationComponent},
   { path: 'internal-tools', component: InternalToolsComponent},
-  { path: 'external', component: ExternalHPOComponent},
+  { path: 'external', component:  ExternalHPOComponent},
   { path: 'other', component: OtherComponent}
 ];
 
