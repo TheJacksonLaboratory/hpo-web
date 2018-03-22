@@ -1,24 +1,39 @@
-.navbar{
-    background-color: #05396b;
+.navbar {
+  background: rgba(41,101,124,1);
+  background: -moz-linear-gradient(left, rgba(41,101,124,1) 0%, rgba(39,86,105,1) 46%, rgba(39,84,103,1) 51%, rgba(43,63,78,1) 88%, rgba(46,56,68,1) 100%);
+  background: -webkit-gradient(linear,left top, right top, color-stop(0%, rgba(41,101,124,1)), color-stop(46%, rgba(39,86,105,1)), color-stop(51%, rgba(39,84,103,1)), color-stop(88%, rgba(43,63,78,1)), color-stop(100%, rgba(46,56,68,1)));
+  background: -webkit-linear-gradient(left, rgba(41,101,124,1) 0%, rgba(39,86,105,1) 46%, rgba(39,84,103,1) 51%, rgba(43,63,78,1) 88%, rgba(46,56,68,1) 100%);
+  background: -o-linear-gradient(left, rgba(41,101,124,1) 0%, rgba(39,86,105,1) 46%, rgba(39,84,103,1) 51%, rgba(43,63,78,1) 88%, rgba(46,56,68,1) 100%);
+  background: -ms-linear-gradient(left, rgba(41,101,124,1) 0%, rgba(39,86,105,1) 46%, rgba(39,84,103,1) 51%, rgba(43,63,78,1) 88%, rgba(46,56,68,1) 100%);
+  background: linear-gradient(to right, rgba(41,101,124,1) 0%, rgba(39,86,105,1) 46%, rgba(39,84,103,1) 51%, rgba(43,63,78,1) 88%, rgba(46,56,68,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#29657c', endColorstr='#2e3844', GradientType=1 );
 }
+
 .nav-components {
     margin-left:25px;
+    color:white;
 }
-.nav-brand .nav-title {
-  margin-top: 5px;
-  float: right;
-}
+
 .nav-brand .nav-logo {
-    height: 40px;
-    width: 40px;
-    margin: 0px 15px 0 10px;
+    height: 45px;
+    width: 125px;
+    margin: 0 0 0 15px;
     float:left;
+    cursor: pointer;
+}
+
+.nav-brand .nav-logo:hover {
+  opacity: .8;
+}
+
+.nav-brand {
+  outline:none;
 }
 
 @media (max-width: 768px){
     .mobile-menu.mat-button {
-        padding-left:25px;
-        padding-right:0px
+        padding:0 0 0 25px;
+        color:white;
     }
     .nav-brand .nav-logo {
         margin-right:5px !important;
@@ -28,11 +43,79 @@
     }
 
 }
+
 .fill-remaining-space{
     flex:1;
 }
+
 .beta-flag{
   background-color: red;
   padding: 14px;
   border-bottom: solid 5px ghostwhite;
+  color:white;
 }
+
+.navbar-search-container{
+  height:100%;
+  z-index: 20;
+}
+
+.navbar-search-container .navbar-search{
+  background-color: white;
+  font-size: 12px;
+  width: 75%;
+  padding: 2px 2px 2px 10px;
+  margin: 15px 0 0 0;
+  border-style: none;
+}
+
+.navbar-search-container .mat-select{
+  width: 25%;
+  background-color: #eaeaea;
+  padding: 2px 2px 2px 10px;
+  font-size: 14px;
+  margin-top: 15px;
+  float: left;
+  border-right: solid 1px lightgray;
+  outline:none;
+}
+
+.navbar-search-container .navbar-output {
+  font-size: 14px;
+  overflow-x: hidden;
+  background-color:#e6e7e9;
+  cursor:pointer;
+}
+.navbar-output .result-list{
+  margin-left: 15px;
+  line-height: 20px;
+}
+.navbar-output .term-result {
+  margin-left: 10px;
+}
+.navbar-output .disease-result {
+  margin-left: 10px;
+
+}
+.navbar-output .gene-result {
+  margin-left:10px;
+}
+
+.navbar-output .result .id {
+  font-size: 10px;
+  color: grey;
+}
+
+.term-result .result .id{
+  margin: 0 !important;
+}
+
+.gene-result .result .id{
+  margin: 0 !important;
+}
+
+.disease-result .result .id{
+  margin: 0 !important;
+}
+
+
