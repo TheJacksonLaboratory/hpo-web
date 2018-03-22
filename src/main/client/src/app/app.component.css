@@ -121,3 +121,7 @@
   font-weight: 900;
   background-color:yellow;
 }
+
+::ng-deep .mat-menu-item {
+  font-size: 14px;
+}
