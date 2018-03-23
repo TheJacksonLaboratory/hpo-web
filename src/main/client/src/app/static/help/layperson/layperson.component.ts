@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./layperson.component.css']
 })
 export class LaypersonComponent implements OnInit {
-  pageTitle: String = "Help / Layperson";
+  pageTitle: String = "Help / Layperson Synonyms";
   pageIntro: String = "";
   constructor() { }
 

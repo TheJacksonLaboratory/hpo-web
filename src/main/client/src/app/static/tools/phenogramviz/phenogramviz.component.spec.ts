@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PhenogramvizComponent } from './phenogramviz.component';
+import { PhenogramVizComponent } from './phenogramviz.component';
 
-describe('PhenogramvizComponent', () => {
-  let component: PhenogramvizComponent;
-  let fixture: ComponentFixture<PhenogramvizComponent>;
+describe('PhenogramVizComponent', () => {
+  let component: PhenogramVizComponent;
+  let fixture: ComponentFixture<PhenogramVizComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PhenogramvizComponent ]
+      declarations: [ PhenogramVizComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PhenogramvizComponent);
+    fixture = TestBed.createComponent(PhenogramVizComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
