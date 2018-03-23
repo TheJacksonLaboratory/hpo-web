@@ -2,11 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
-import { GlobalMaterialModules } from "../global.module";
+import { GlobalMaterialModules } from "../modules/global.module";
+import { ExtrasModule } from "../modules/extras.module";
 //Components
 import { SearchbarComponent } from "./components/searchbar/searchbar.component";
 import { SearchOutputComponent } from "./components/search.component";
-import { HighlightPipe } from "../pipes/highlight.pipe";
 //Service
 import { SearchService } from "./service/search.service";
 
@@ -16,9 +16,10 @@ import { SearchService } from "./service/search.service";
     CommonModule,
     FormsModule,
     GlobalMaterialModules,
-    RouterModule
+    RouterModule,
+    ExtrasModule
   ],
-  declarations: [SearchbarComponent, SearchOutputComponent, HighlightPipe],
+  declarations: [SearchbarComponent, SearchOutputComponent],
   providers: [SearchService],
   exports: [SearchbarComponent, SearchOutputComponent ]
 })
