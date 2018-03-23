@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ExternalHPOComponent } from './external.component';
+import { ExternalToolsComponent } from './external.component';
 
-describe('ExternalHPOComponent', () => {
-  let component: ExternalHPOComponent;
-  let fixture: ComponentFixture<ExternalHPOComponent>;
+describe('ExternalToolsComponent', () => {
+  let component: ExternalToolsComponent;
+  let fixture: ComponentFixture<ExternalToolsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ExternalHPOComponent ]
+      declarations: [ ExternalToolsComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ExternalHPOComponent);
+    fixture = TestBed.createComponent(ExternalToolsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

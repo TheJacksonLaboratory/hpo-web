@@ -12,7 +12,6 @@ import { GenomiserComponent } from './genomiser/genomiser.component';
 import { OtherComponent } from './other/other.component';
 import { ClinicalAnnotationComponent } from './clinicalannotation/clinicalanno.component';
 import { InternalToolsComponent } from './internaltools/internaltools.component';
-import {ToolsComponent} from "./tools.component";
 
 
 @NgModule({
@@ -20,7 +19,7 @@ import {ToolsComponent} from "./tools.component";
     CommonModule,
     ToolsRoutingModule
   ],
-  declarations: [ ToolsComponent, OverviewComponent, PhenomizerComponent, ExternalToolsComponent, PhenogramVizComponent,
+  declarations: [ OverviewComponent, PhenomizerComponent, ExternalToolsComponent, PhenogramVizComponent,
     ExomiserComponent, GenomiserComponent, OtherComponent, ClinicalAnnotationComponent, InternalToolsComponent ]
 })
 export class ToolsModule { }

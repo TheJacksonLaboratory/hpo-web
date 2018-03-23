@@ -11,13 +11,11 @@ import { GenomiserComponent } from './genomiser/genomiser.component';
 import { OtherComponent } from './other/other.component';
 import { ClinicalAnnotationComponent } from './clinicalannotation/clinicalanno.component';
 import { InternalToolsComponent } from './internaltools/internaltools.component';
-import {ToolsComponent} from "./tools.component";
 
 const toolsRoutes: Routes = [
   { path: 'tools',
-    component: ToolsComponent,
     children: [
-      { path: 'tools', redirectTo:'overview', pathMatch: 'prefix'},
+      { path: '', redirectTo: 'overview' },
       { path: 'overview',  component: OverviewComponent},
       { path: 'phenomizer', component: PhenomizerComponent},
       { path: 'phenogramviz', component: PhenogramVizComponent},

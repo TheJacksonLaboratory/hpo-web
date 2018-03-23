@@ -21,12 +21,12 @@ import {SearchService} from "../shared/search/service/search.service";
 @NgModule({
   imports: [
     CommonModule,
-    StaticRoutingModule,
     HelpModule,
     DownloadsModule,
     ToolsModule,
     GlobalMaterialModules,
-    SearchModule
+    SearchModule,
+    StaticRoutingModule,
   ],
   declarations: [ HomeComponent,
     ContactComponent, CitationComponent, LicenseComponent,
