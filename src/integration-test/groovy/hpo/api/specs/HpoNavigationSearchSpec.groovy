@@ -26,8 +26,9 @@ class HpoNavigationSearchSpec extends GebReportingSpec {
       downloadsPage.navSearchBar.value('limbs')
 
       then:
-      downloadsPage.navSearchResults.children(".result")
-        .children(".name")[0].text() == "Abnormality of limbs"
+      waitFor {
+        downloadsPage.navSearchResults.children(".result").children(".name")[0].text() == "Abnormality of limbs"
+      }
     }
 
 }

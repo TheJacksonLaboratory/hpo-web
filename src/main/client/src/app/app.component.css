@@ -121,7 +121,11 @@
   font-weight: 900;
   background-color:yellow;
 }
+
 ::ng-deep .static-images {
-  width:800px;
-  height:auto;
+  width: 800px;
+  height: auto;
+}
+::ng-deep .mat-menu-item {
+  font-size: 14px;
 }
