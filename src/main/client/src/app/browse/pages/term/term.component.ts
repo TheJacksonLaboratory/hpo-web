@@ -92,7 +92,6 @@ export class TermComponent implements OnInit {
   }
 
   reloadDiseaseAssociations(offset : string, max: string){
-    console.log(this.term)
     this.termService.searchDiseasesByTerm(this.term.id, offset, max)
       .subscribe((data) => {
         let newDiseaseAssoc = new DiseaseAssocDB(data.diseases);
@@ -107,7 +106,6 @@ export class TermComponent implements OnInit {
   }
 
   reloadGeneAssociations(offset : string, max: string){
-    console.log(this.term)
     this.termService.searchGenesByTerm(this.term.id, offset, max)
       .subscribe((data) => {
         let newGeneAssoc = new GeneAssocDB(data.genes);
@@ -143,7 +141,6 @@ export class TermComponent implements OnInit {
   }
 
   showAllDiseases(event){
-    console.log(event)
     this.assocLoading = true;
     this.reloadDiseaseAssociations('0', '-1')
   }

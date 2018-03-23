@@ -13,26 +13,23 @@ class TermDetailsPage extends Page{
   }
 
   static content = {
-    diseasePagingElement(wait:true, required:false)  { $("#assocDiseasePagingSubset")}
-    diseasePagingElementAll(wait:true, required:false)  { $("#assocDiseasePagingAll")}
-    diseasePagingElementViewAllLink(wait:true, required:false)  { $("#assocDiseasePagingSubset a")}
+    diseasePagingElement(wait:true, required:false)  { $("div#assocDiseasePagingSubset")}
+    diseasePagingElementAll(wait:true, required:false)  { $("div#assocDiseasePagingAll")}
+    diseaseViewAllLink(wait:true, required:false)  { $("div#assocDiseasePagingSubset a")}
     geneTabElement(wait:true) {$"#mat-tab-label-0-1"}
-    genePagingElement(wait:true, required:false)  { $("#assocGenePagingSubset")}
-    genePagingElementViewAllLink(wait:true, required:false)  { $("#mat-tab-content-0-1 .mat-tab-body-content #assocGenePagingSubset a")}
-    genePagingElementAll(wait:true, required:false)  { $("#mat-tab-content-0-1 .mat-tab-body-content #assocGenePagingAll")}
+    genePagingElement(wait:true, required:false)  { $("div#assocGenePagingSubset")}
+    geneViewAllLink(wait:true, required:false){$("a",text:"View all")}
+    genePagingElementAll(wait:true, required:false)  { $("div#assocGenePagingAll")}
 
   }
 
   def loadGeneAssociations(){
     geneTabElement.click()
-    waitFor{genePagingElement.present}
-    //waitFor{genePagingElementViewAllLink.present}
+    waitFor(10){geneViewAllLink}
   }
 
   def loadAllGenes(){
-   
-    //genePagingElement.children('p').children('a').click()
-    genePagingElementViewAllLink.click()
-    waitFor{genePagingElementAll.present}
+    geneViewAllLink.click()
+    waitFor(10, 2) {genePagingElementAll}
   }
 }

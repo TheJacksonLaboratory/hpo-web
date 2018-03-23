@@ -24,7 +24,7 @@ class HpoTermDetailsSpec extends  GebReportingSpec {
     termDetailsPage.diseasePagingElement.text().startsWith("Displaying")
 
     when:
-    termDetailsPage.diseasePagingElementViewAllLink.click()
+    termDetailsPage.diseaseViewAllLink.click()
 
     then:
     termDetailsPage.diseasePagingElementAll.text().startsWith("Count:")
@@ -39,18 +39,13 @@ class HpoTermDetailsSpec extends  GebReportingSpec {
     termDetailsPage.diseasePagingElement.text().startsWith("Displaying")
 
     when:
-    //termDetailsPage.geneTabElement.click()
     termDetailsPage.loadGeneAssociations()
 
     then:
     termDetailsPage.genePagingElement.text().startsWith("Displaying")
-    println (termDetailsPage.genePagingElement.children("p").children('a'))
 
     when:
     termDetailsPage.loadAllGenes()
-    //termDetailsPage.genePagingElement.children("p").children('a').click()
-    // termDetailsPage.genePagingElementViewAllLink.click()
-    //termDetailsPage.genePagingElement.children('p').children('a').click()
 
     then:
     termDetailsPage.genePagingElementAll.text().startsWith("Count:")
