@@ -70,7 +70,7 @@
                       </mat-progress-bar>
 
                       <!-- paging: associations subset count -->
-                      <div *ngIf="!assocLoading && !displayAllDiseaseAssc" class="associationsPaging">
+                      <div id="assocDiseasePagingSubset" *ngIf="!assocLoading && !displayAllDiseaseAssc" class="associationsPaging">
                         <p>Displaying {{diseaseDisplayCount}} out of {{diseaseAssocCount}}.
                           <a *ngIf="diseaseDisplayCount != diseaseAssocCount"
                              (click)="showAllDiseases($event)">View all
@@ -78,7 +78,7 @@
                         </p>
                       </div>
                       <!-- paging: associations display all count -->
-                      <div *ngIf="displayAllDiseaseAssc" class="associationsPaging">
+                      <div id="assocDiseasePagingAll" *ngIf="displayAllDiseaseAssc" class="associationsPaging">
                         <p>Count: {{diseaseDisplayCount}} </p>
                       </div>
 
@@ -116,7 +116,7 @@
                     </mat-progress-bar>
 
                     <!-- paging: associations subset count -->
-                    <div *ngIf="!assocLoading && !displayAllGeneAssc" class="associationsPaging">
+                    <div id="assocGenePagingSubset" *ngIf="!assocLoading && !displayAllGeneAssc" class="associationsPaging">
                       <p>Displaying {{geneDisplayCount}} out of {{geneAssocCount}}.
                         <a *ngIf="geneDisplayCount != geneAssocCount"
                            (click)="showAllGenes($event)">View all
@@ -124,7 +124,7 @@
                       </p>
                     </div>
                     <!-- paging: associations display all count -->
-                    <div *ngIf="displayAllGeneAssc" class="associationsPaging">
+                    <div id="assocGenePagingAll" *ngIf="displayAllGeneAssc" class="associationsPaging">
                       <p>Count: {{geneDisplayCount}} </p>
                     </div>
 
