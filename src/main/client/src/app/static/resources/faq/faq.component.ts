@@ -6,11 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./faq.component.css']
 })
 export class FaqComponent implements OnInit {
-  pageTitle: string;
-  pageIntro: string;
-  constructor() { 
-    this.pageTitle = "Frequently Asked Questions";
-    this.pageIntro = " ";
+  constructor() {
+
   }
   ngOnInit() {
   }

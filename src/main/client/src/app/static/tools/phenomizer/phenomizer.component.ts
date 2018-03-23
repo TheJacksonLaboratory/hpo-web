@@ -6,8 +6,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./phenomizer.component.css']
 })
 export class PhenomizerComponent implements OnInit {
-  pageTitle: string = "Tools / Phenomiser";
-  pageIntro: String = "";
   constructor() { }
 
   ngOnInit() {

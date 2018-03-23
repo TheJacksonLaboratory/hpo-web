@@ -6,11 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./license.component.css']
 })
 export class LicenseComponent implements OnInit {
-  pageTitle: string;
-  pageIntro: string;
-  constructor() { 
-    this.pageTitle = "License & Information";
-    this.pageIntro = " ";
+  constructor() {
   }
   ngOnInit() {
   }

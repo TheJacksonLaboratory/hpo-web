@@ -129,3 +129,7 @@
 ::ng-deep .mat-menu-item {
   font-size: 14px;
 }
+
+::ng-deep .center{
+  text-align: center;
+}
