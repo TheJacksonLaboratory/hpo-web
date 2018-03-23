@@ -1,9 +1,6 @@
 .main {
     flex:1;
 }
-.pageTitle{
-  cursor: pointer;
-}
 ::ng-deep .mat-tab-label {
   border-right: 1px solid rgba(0, 0, 0, 0.12);
 }
@@ -130,6 +127,7 @@
   font-size: 14px;
 }
 
-::ng-deep .center{
-  text-align: center;
+::ng-deep .pageTitle {
+  font-weight: 400;
+  margin: 0 0 5px 0;
 }
