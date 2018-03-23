@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CollaborationComponent implements OnInit {
   pageTitle: String  = "Help / Collaboration";
-  pageIntro: String  = "How to contribute to the HPO.";
+  pageIntro: String  = "";
   constructor() {
 
    }

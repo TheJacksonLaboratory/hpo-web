@@ -7,7 +7,7 @@ import { PhenotypeAnnotationComponent } from "./phenotype-annotation/phenotype-a
 import { HpOboComponent} from "./hp-obo/hp-obo.component";
 
 const downloadRoutes: Routes = [
-  { path: '', component: DownloadsComponent},
+  { path: 'downloads', component: DownloadsComponent},
   { path: 'hpobo', component: HpOboComponent},
   { path: 'phenotype-annotation', component: PhenotypeAnnotationComponent}
 

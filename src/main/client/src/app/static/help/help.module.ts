@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { HelpRoutingModule } from './help-routing.module';
 
 // Components
-import { HelpComponent } from './help.component';
 import { AnnotationComponent} from "./annotation/annotation.component";
 import { ClinicianGuideComponent} from "./clinician-guide/clinician-guide.component";
 import { CollaborationComponent } from "./collaboration/collaboration.component";
@@ -20,7 +19,7 @@ import { UsersComponent} from "./users/users.component";
     CommonModule,
     HelpRoutingModule
   ],
-  declarations: [HelpComponent, AnnotationComponent, ClinicianGuideComponent, CollaborationComponent,
+  declarations: [AnnotationComponent, ClinicianGuideComponent, CollaborationComponent,
     DefinitionsComponent, HistoryComponent, IntroductionComponent, LaypersonComponent , MappingComponent, UsersComponent
     ]
 })
