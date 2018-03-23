@@ -5,13 +5,41 @@
   <!-- Desktop Navbar -->
   <div class="nav-components  hidden-xs hidden-sm hidden-md">
       <button mat-button routerLink="/">Home</button>
-      <button mat-button [matMenuTriggerFor]="docsMenu">Documentation <mat-icon>arrow_drop_down</mat-icon></button>
+      <button mat-button [matMenuTriggerFor]="toolsMenu">Tools <mat-icon>arrow_drop_down</mat-icon></button>
       <button mat-button routerLink="downloads">Downloads</button>
-      <button mat-button [matMenuTriggerFor]="resourceMenu">Resources <mat-icon>arrow_drop_down</mat-icon></button>
+      <button mat-button [matMenuTriggerFor]="helpMenu">Help <mat-icon>arrow_drop_down</mat-icon></button>
   </div>
+  <mat-menu y-positon="after" [overlapTrigger]="false" #toolsMenu="matMenu">
+    <button mat-menu-item routerLink="tools"> Overview </button>
+    <button mat-menu-item> <a href="http://compbio.charite.de/hpoweb/showterm?id=HP:0000118#id=HP_0000118" target="__blank">
+      Former HPO Application </a> </button>
+    <button mat-menu-item routerLink="tools/clinical-annotation"> Clinical Annotation </button>
+    <button mat-menu-item routerLink="tools/phenomizer"> Phenomizer </button>
+    <button mat-menu-item routerLink="tools/phenogramviz"> Analyze CNV's using PhenoGramViz </button>
+    <button mat-menu-item routerLink="tools/exomsier"> Prioritize variants using Exomiser </button>
+    <button mat-menu-item routerLink="tools/genomiser"> Genomiser </button>
+    <button mat-menu-item routerLink="tools/external-tools"> External Tools </button>
+    <button mat-menu-item routerLink="tools/internal-tools"> Internal Tools </button>
+    <button mat-menu-item routerLink="tools/other"> Other Tools </button>
+  </mat-menu>
+  <mat-menu y-positon="after" [overlapTrigger]="false" #helpMenu="matMenu">
+    <button mat-menu-item routerLink="help/introduction"> Introduction to HPO </button>
+    <button mat-menu-item routerLink="help/annotations"> How to use Annotations </button>
+    <button mat-menu-item routerLink="help/history"> History </button>
+    <button mat-menu-item routerLink="help/clinician-guide"> Clinicians Guide to HPO </button>
+    <button mat-menu-item routerLink="help/layperson"> Layperson Synonyms </button>
+    <button mat-menu-item routerLink="help/users"> HPO Users </button>
+    <button mat-menu-item routerLink="help/collaboration"> How to contribute to HPO </button>
+    <button mat-menu-item routerLink="citation"> How to cite or license HPO </button>
+    <button mat-menu-item routerLink="help/mapping"> Translations and Mapping </button>
+    <button mat-menu-item routerLink="license"> Contributors </button>
+    <button mat-menu-item routerLink="contact"> Contact </button>
+    <button mat-menu-item routerLink="faq"> FAQ </button>
+  </mat-menu>
   <div class="fill-remaining-space">
 
   </div>
+  <!-- Navigation Search Bar -->
   <div class="navbar-search-container col-lg-3 col-sm-6" *ngIf="showSearch">
       <mat-select placeholder="All" [(value)]="navFilter">
         <mat-option value="all">All</mat-option>
@@ -63,6 +91,8 @@
       </div>
     </div>
   </div>
+  <!-- End Navigation Search -->
+  <!-- Beta Flag -->
   <div class="beta-flag">
     <strong>Beta</strong>
   </div>
@@ -72,21 +102,9 @@
   </button>
   <mat-menu x-position="before" #menu="matMenu">
     <button mat-menu-item routerLink="/">Home</button>
-    <button mat-menu-item [matMenuTriggerFor]="docsMenu">Documentation</button>
+    <button mat-menu-item [matMenuTriggerFor]="toolsMenu">Tools</button>
     <button mat-menu-item routerLink="downloads">Downloads</button>
-    <button mat-menu-item [matMenuTriggerFor]="resourceMenu">Resources</button>
+    <button mat-menu-item [matMenuTriggerFor]="helpMenu">Help</button>
   </mat-menu>
-  <mat-menu y-positon="after" [overlapTrigger]="false" #docsMenu="matMenu">
-    <button mat-menu-item routerLink="documentation"> Overview </button>
-    <button mat-menu-item routerLink="documentation/intro"> Introduction </button>
-    <button mat-menu-item routerLink="documentation/definitions"> Definitions </button>
-    <button mat-menu-item routerLink="documentation/annotations"> Annotations </button>
-  </mat-menu>
-  <mat-menu y-positon="after" [overlapTrigger]="false" #resourceMenu="matMenu">
-      <button mat-menu-item routerLink="citation"> Citation </button>
-      <button mat-menu-item routerLink="contact"> Contact  </button>
-      <button mat-menu-item routerLink="faq"> FAQ </button>
-      <button mat-menu-item routerLink="license"> License </button>
-    </mat-menu>
 </mat-toolbar>
 
