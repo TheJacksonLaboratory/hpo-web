@@ -6,8 +6,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./mapping.component.css']
 })
 export class MappingComponent implements OnInit {
-  pageTitle: String = "Help / Mapping and Translation";
-  pageIntro: String = "";
   constructor() {
 
    }

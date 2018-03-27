@@ -6,8 +6,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./clinician-guide.component.css']
 })
 export class ClinicianGuideComponent implements OnInit {
-  pageTitle: String = "Help / Clinician Guide";
-  pageIntro: String = "";
   constructor() { }
 
   ngOnInit() {

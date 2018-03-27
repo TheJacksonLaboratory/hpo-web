@@ -6,8 +6,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./genomiser.component.css']
 })
 export class GenomiserComponent implements OnInit {
-  pageTitle: string = "Tools / Genomiser";
-  pageIntro: String = "";
   constructor() { }
 
   ngOnInit() {
