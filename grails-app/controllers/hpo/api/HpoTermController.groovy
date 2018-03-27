@@ -14,11 +14,15 @@ class HpoTermController {
         render(view: '/hpoTermDetails/searchTerm', model: [result: hpoTermService.searchTerm(params.id.trim())])
     }
 
-    def searchGenesByTerm(){
-        render(view: '/hpoGeneDetails/searchGenesByTerm', model: [geneList: hpoTermService.searchGenesByTerm(params.id.trim())])
+    def searchGenesByTerm(Integer offset, Integer max){
+        if (!offset) offset = 0
+        if (!max)  max = 20
+        render(view: '/hpoGeneDetails/searchGenesByTerm', model: [resultMap: hpoTermService.searchGenesByTerm(params.id.trim(), offset, max)])
     }
 
-    def searchDiseasesByTerm(String q){
-        render(view: '/hpoDiseaseDetails/searchDiseasesByTerm', model: [diseaseList: hpoTermService.searchDiseasesByTerm(params.id.trim())])
+    def searchDiseasesByTerm(Integer offset, Integer max){
+        if (!offset) offset = 0
+        if (!max)  max = 20
+        render(view: '/hpoDiseaseDetails/searchDiseasesByTerm', model: [resultMap: hpoTermService.searchDiseasesByTerm(params.id.trim(), offset, max)])
     }
 }

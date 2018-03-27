@@ -54,7 +54,7 @@ class HpoTermServiceViewSpec extends Specification implements JsonViewTest,DataT
 
     when:"search genes by term gson is rendered"
     mappingContext.addPersistentEntity(DbGene)
-    def result = render(view: "/hpoGeneDetails/searchGenesByTerm", model:[geneList:geneList]).json
+    def result = render(view: "/hpoGeneDetails/searchGenesByTerm", model:[resultMap:[genes:geneList , geneCount:2, offset:0, max:20]]).json
 
     then:"The json is correct"
     result.genes.entrezGeneSymbol == expectedSymbols
@@ -75,7 +75,7 @@ class HpoTermServiceViewSpec extends Specification implements JsonViewTest,DataT
 
     when:"search disease by term gson is rendered"
     mappingContext.addPersistentEntity(DbDisease)
-    def result = render(view: "/hpoDiseaseDetails/searchDiseasesByTerm", model:[diseaseList:diseaseList]).json
+    def result = render(view: "/hpoDiseaseDetails/searchDiseasesByTerm", model:[resultMap:[diseases:diseaseList, diseaseCount:2, offset:0, max:20 ]]).json
 
     then:"The json is correct"
     result.diseases.diseaseId == expectedDiseaseIds

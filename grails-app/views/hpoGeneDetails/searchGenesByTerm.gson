@@ -1,8 +1,9 @@
-import hpo.api.gene.DbGene
-
 model {
-  List<DbGene> geneList
+  Map<String, Object> resultMap
 }
 json{
-  genes tmpl.genesByTerm( geneList )
+  genes tmpl.genesByTerm( resultMap.genes )
+  geneCount resultMap.geneCount
+  offset resultMap.offset
+  max resultMap.max
 }
