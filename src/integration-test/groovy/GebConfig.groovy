@@ -7,7 +7,7 @@ import org.openqa.selenium.phantomjs.PhantomJSDriver
 
 
 def defaultBrowserSize = { driver ->
-  driver.manage().window().size = [1920, 1080]
+  driver.manage().window().size = [1400, 1080]
   driver
 }
 

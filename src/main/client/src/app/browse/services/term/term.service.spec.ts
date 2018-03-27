@@ -65,7 +65,7 @@ describe('TermServiceSpec', () => {
     });
 
     // look up our request and access it
-    const request = httpMock.expectOne(environment.HPO_API_TERM_SEARCH_URL + query + '/genes');
+    const request = httpMock.expectOne(environment.HPO_API_TERM_SEARCH_URL + query + '/genes' + '?offset=0&max=20');
     // verify it is a GET
     expect(request.request.method).toEqual('GET');
     // Now, provide the answer to the caller above,
@@ -111,7 +111,7 @@ describe('TermServiceSpec', () => {
     });
 
     // look up our request and access it
-    const request = httpMock.expectOne(environment.HPO_API_TERM_SEARCH_URL + query + '/diseases');
+    const request = httpMock.expectOne(environment.HPO_API_TERM_SEARCH_URL + query + '/diseases' + '?offset=0&max=20');
     // verify it is a GET
     expect(request.request.method).toEqual('GET');
     // Now, provide the answer to the caller above,

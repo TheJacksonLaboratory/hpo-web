@@ -69,6 +69,19 @@
                       <mat-progress-bar  *ngIf="assocLoading" class="loading-result-details" color="primary" mode="buffer">
                       </mat-progress-bar>
 
+                      <!-- paging: associations subset count -->
+                      <div id="assocDiseasePagingSubset" *ngIf="!assocLoading && !displayAllDiseaseAssc" class="associationsPaging">
+                        <p>Displaying {{diseaseDisplayCount}} out of {{diseaseAssocCount}}.
+                          <a *ngIf="diseaseDisplayCount != diseaseAssocCount"
+                             (click)="showAllDiseases($event)">View all
+                          </a>
+                        </p>
+                      </div>
+                      <!-- paging: associations display all count -->
+                      <div id="assocDiseasePagingAll" *ngIf="displayAllDiseaseAssc" class="associationsPaging">
+                        <p>Count: {{diseaseDisplayCount}} </p>
+                      </div>
+
                       <div [hidden]="assocLoading"class="associations disease-association">
                         <mat-table #table [dataSource]="diseaseSource" matSort>
                           <mat-header-row *matHeaderRowDef="diseaseColumns"></mat-header-row>
@@ -101,6 +114,19 @@
 
                     <mat-progress-bar  *ngIf="assocLoading" class="loading-result-details" color="primary" mode="buffer">
                     </mat-progress-bar>
+
+                    <!-- paging: associations subset count -->
+                    <div id="assocGenePagingSubset" *ngIf="!assocLoading && !displayAllGeneAssc" class="associationsPaging">
+                      <p>Displaying {{geneDisplayCount}} out of {{geneAssocCount}}.
+                        <a *ngIf="geneDisplayCount != geneAssocCount"
+                           (click)="showAllGenes($event)">View all
+                        </a>
+                      </p>
+                    </div>
+                    <!-- paging: associations display all count -->
+                    <div id="assocGenePagingAll" *ngIf="displayAllGeneAssc" class="associationsPaging">
+                      <p>Count: {{geneDisplayCount}} </p>
+                    </div>
 
                     <div [hidden]="assocLoading" class="associations gene-association">
                       <mat-table #table [dataSource]="geneSource" matSort>
