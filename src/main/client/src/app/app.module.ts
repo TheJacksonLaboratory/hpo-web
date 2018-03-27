@@ -26,10 +26,10 @@ import { NoPageFoundComponent } from './error/no-page-found.component';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    RoutingModule,
     HttpClientModule,
     GlobalMaterialModules,
-    ExtrasModule
+    ExtrasModule,
+    RoutingModule,
   ],
   providers: [SearchService],
   bootstrap: [AppComponent]
