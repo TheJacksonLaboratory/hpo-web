@@ -31,20 +31,11 @@ a:hover {
   margin-top:15px;
   margin-bottom: 15px;
 }
-.page-header {
-  width: 750px;
-}
-.page-header .page-title{
-  font-size: 20px;
-}
-.page-header .hr{
+
+.hr{
   border-bottom: 1px solid rgba(208, 211, 212, .8);
   width: 250px;
   margin: 5px 0 10px 0;
-}
-.page-header .page-intro {
-  font-size: 14px;
-  margin-bottom:25px;
 }
 
 p {
@@ -63,4 +54,12 @@ table {
 
 table, th, td {
   border: 1px solid black;
+}
+
+.center{
+  text-align: center;
+}
+
+.small-icon {
+  font-size: 10px;
 }

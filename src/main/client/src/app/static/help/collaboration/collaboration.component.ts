@@ -6,8 +6,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./collaboration.component.css']
 })
 export class CollaborationComponent implements OnInit {
-  pageTitle: String  = "Help / Collaboration";
-  pageIntro: String  = "";
   constructor() {
 
    }

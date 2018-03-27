@@ -6,11 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./citation.component.css']
 })
 export class CitationComponent implements OnInit {
-  pageTitle: string;
-  pageIntro: string;
-  constructor() { 
-    this.pageTitle = "Citation";
-    this.pageIntro = " ";
+  constructor() {
   }
   ngOnInit() {
   }

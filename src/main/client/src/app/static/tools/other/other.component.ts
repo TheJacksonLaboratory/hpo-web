@@ -6,8 +6,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./other.component.css']
 })
 export class OtherComponent implements OnInit {
-  pageTitle: string = "Tools / Other";
-  pageIntro: String = "";
   constructor() { }
 
   ngOnInit() {
