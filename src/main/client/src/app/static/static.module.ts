@@ -17,6 +17,7 @@ import { LicenseComponent } from './resources/license/license.component';
 import { FaqComponent } from './resources/faq/faq.component';
 // Pipe
 import {SearchService} from "../shared/search/service/search.service";
+import {NewsComponent} from "./news/news.component";
 
 @NgModule({
   imports: [
@@ -30,7 +31,7 @@ import {SearchService} from "../shared/search/service/search.service";
   ],
   declarations: [ HomeComponent,
     ContactComponent, CitationComponent, LicenseComponent,
-    FaqComponent
+    FaqComponent, NewsComponent
   ],
   providers:[SearchService]
 })

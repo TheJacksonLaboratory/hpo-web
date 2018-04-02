@@ -4,7 +4,6 @@
   </div>
   <!-- Desktop Navbar -->
   <div class="nav-components  hidden-xs hidden-sm hidden-md">
-      <button mat-button routerLink="/">Home</button>
       <button mat-button [matMenuTriggerFor]="toolsMenu">Tools <mat-icon>arrow_drop_down</mat-icon></button>
       <button mat-button routerLink="downloads">Downloads</button>
       <button mat-button [matMenuTriggerFor]="helpMenu">Help <mat-icon>arrow_drop_down</mat-icon></button>
@@ -101,7 +100,6 @@
     <mat-icon>menu</mat-icon>
   </button>
   <mat-menu x-position="before" #menu="matMenu">
-    <button mat-menu-item routerLink="/">Home</button>
     <button mat-menu-item [matMenuTriggerFor]="toolsMenu">Tools</button>
     <button mat-menu-item routerLink="downloads">Downloads</button>
     <button mat-menu-item [matMenuTriggerFor]="helpMenu">Help</button>
