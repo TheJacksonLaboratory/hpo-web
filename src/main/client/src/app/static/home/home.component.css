@@ -73,15 +73,15 @@ a.mat-btn{
 }
 
 .home-search .bar{
-  padding: 25px 0 85px 125px;
-  margin: 25px 25px 0 25px;
+  padding: 50px;
+  margin: auto;
   max-height: 100%;
-  background-color:white;
+  background-color: rgba(41,101,124,1);
   border: solid 2px #325364;
 }
 
-.home-search .title{
-  text-align:center;
+.home-search {
+  margin-top: 25px;
 }
 
 ::ng-deep .home-search .mat-focused .mat-form-field-label{
