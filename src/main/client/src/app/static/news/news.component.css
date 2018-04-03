@@ -1,0 +1,11 @@
+.news-title{
+  font-size: 16px;
+}
+.news-timeline h4{
+  margin: 10px 0;
+}
+
+.news-timeline .news-dates {
+  border-right: solid 1px lightgray;
+  line-height: 30px;
+}

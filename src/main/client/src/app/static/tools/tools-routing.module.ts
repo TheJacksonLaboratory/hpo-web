@@ -8,9 +8,9 @@ import { ExternalToolsComponent } from './external/external.component';
 import { PhenogramVizComponent } from './phenogramviz/phenogramviz.component';
 import { ExomiserComponent } from './exomiser/exomiser.component';
 import { GenomiserComponent } from './genomiser/genomiser.component';
-import { OtherComponent } from './other/other.component';
+import { WorkbenchComponent } from './workbench/workbench.component';
 import { ClinicalAnnotationComponent } from './clinicalannotation/clinicalanno.component';
-import { InternalToolsComponent } from './internaltools/internaltools.component';
+import { OtherToolsComponent } from './other/other.component';
 
 const toolsRoutes: Routes = [
   { path: 'tools',
@@ -22,9 +22,9 @@ const toolsRoutes: Routes = [
       { path: 'exomiser', component: ExomiserComponent},
       { path: 'genomiser', component: GenomiserComponent},
       { path: 'clinical-annotation', component: ClinicalAnnotationComponent},
-      { path: 'internal', component: InternalToolsComponent},
+      { path: 'other', component: OtherToolsComponent},
       { path: 'external', component: ExternalToolsComponent},
-      { path: 'other', component: OtherComponent}
+      { path: 'workbench', component: WorkbenchComponent}
     ]
   }
 ];

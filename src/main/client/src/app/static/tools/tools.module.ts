@@ -9,9 +9,9 @@ import { ExternalToolsComponent } from './external/external.component';
 import { PhenogramVizComponent } from './phenogramviz/phenogramviz.component';
 import { ExomiserComponent } from './exomiser/exomiser.component';
 import { GenomiserComponent } from './genomiser/genomiser.component';
-import { OtherComponent } from './other/other.component';
+import { WorkbenchComponent } from './workbench/workbench.component';
 import { ClinicalAnnotationComponent } from './clinicalannotation/clinicalanno.component';
-import { InternalToolsComponent } from './internaltools/internaltools.component';
+import { OtherToolsComponent } from './other/other.component';
 
 
 @NgModule({
@@ -20,6 +20,6 @@ import { InternalToolsComponent } from './internaltools/internaltools.component'
     ToolsRoutingModule
   ],
   declarations: [ OverviewComponent, PhenomizerComponent, ExternalToolsComponent, PhenogramVizComponent,
-    ExomiserComponent, GenomiserComponent, OtherComponent, ClinicalAnnotationComponent, InternalToolsComponent ]
+    ExomiserComponent, GenomiserComponent, WorkbenchComponent, ClinicalAnnotationComponent, OtherToolsComponent ]
 })
 export class ToolsModule { }
