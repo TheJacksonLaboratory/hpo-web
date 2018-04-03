@@ -32,7 +32,7 @@
               <mat-card class="item-summary mat-elevation-z6">
                   <mat-card-content>
                     <span class="item-title">{{entrezGene.name}}</span>
-                    <a routerLink="/browser/gene/{{entrezGene.uid}}"><strong>({{entrezGene.uid}})</strong></a>
+                    <a routerLink="/browser/gene/{{entrezGene.uid}}"><strong>{{entrezGene.uid}}</strong></a>
                     <hr class="underline-hr">
                     <mat-list>
                       <mat-list-item>
@@ -56,7 +56,7 @@
                     <div class="ProtVistaContainer col-lg-12">
 
 
-                      <p *ngIf="!uniProtLoading"> <u>UniProt Reference:</u> <a href="{{uniProtWidgetURL}}{{this.uniprotId}}">{{this.uniprotId}}</a></p>
+                      <p *ngIf="!uniProtLoading"><a href="{{uniProtWidgetURL}}{{this.uniprotId}}">{{this.uniprotId}}</a></p>
                       <div class="ProtVistaReference">
                         <div *ngIf="uniprotId == 'error'">
                           <p><strong>No UniProt Reference Could be found for Gene {{entrezGene.name}}</strong></p>
