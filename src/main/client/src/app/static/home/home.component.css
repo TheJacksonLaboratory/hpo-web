@@ -92,3 +92,7 @@ a.mat-btn{
 ::ng-deep .home-search .mat-form-field-ripple{
   background-color:#ec9736;
 }
+
+.info-body p{
+  min-height: 150px;
+}

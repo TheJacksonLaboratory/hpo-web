@@ -12,4 +12,29 @@
     For instance, the term for <a routerLink="/browse/term/HP:0000256"><em>Macrocephaly</em></a> can be translated as
     <em>Large skull</em>.
   </p>
+  The layperson translations are included in the main HPO release files. For instance, in the hp.obo file the term for
+  Macrocephaly contains synonyms that are maked as layperson (the following is an excerpt of the entire entry for the term):
+
+  <pre>
+    [Term]
+    id: HP:0000256
+    name: Macrocephaly
+    def: "Occipitofrontal (head) circumference greater than 97th centile compared to appropriate, age matched,
+    sex-matched normal standards. Alternatively, a apparently increased size of the cranium." [pmid:19125436]
+    comment: Macrocephaly can be due to hydrocephalus (increased CFSF), megalencephaly (increased brain volume) or
+    thickening of the skull. Head circumference is measured from just above the glabella
+    (the most prominent point on the frontal bone above the root of the nose) to the most posterior prominent point of
+    the occipital bone using a tape measure. Some standard charts are organized by centiles [Hall et al. [2007]], others
+    by standard deviations [Farkas, [1981]]. It is important to add an indication of how far above the normal standard
+    the head circumference is if an accurate assessment of this can be made. Macrocephaly is an absolute term.
+    The term relative macrocephaly can be used when the head size centile exceeds the centile for height, for example,
+    head size at the 75th centile with height at the 5th centile for age and sex.
+    subset: hposlim_core
+    synonym: "Big calvaria" BROAD layperson [ORCID:0000-0001-5889-4463]
+    synonym: "Big cranium" BROAD layperson [ORCID:0000-0001-5889-4463]
+    synonym: "Big head" BROAD layperson [ORCID:0000-0001-5889-4463]
+    synonym: "Big skull" BROAD layperson [ORCID:0000-0001-5889-4463]
+  </pre>
+
+  <img class="static-images col-lg-offset-3 col-lg-offset-4" src="assets/laypersonHPO.jpg" />
 </div>

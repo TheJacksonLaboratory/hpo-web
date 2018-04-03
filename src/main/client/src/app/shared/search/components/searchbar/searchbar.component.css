@@ -1,18 +1,18 @@
 .search-icon {
   padding: 10px;
   height: 45px;
-  width: 43px;
+  width: 41px;
   font-size: 25px;
   float: left;
   background-color: #ec9736;
-  position:absolute;
-  left:13%;
+  position: absolute;
+  left: 20%;
 }
 
 .main-search{
-  width: 75%;
+  width: 60%;
   height: 45px;
-  padding: 5px;
+  padding: 10px;
   font-size: 16px;
 }
 
