@@ -8,6 +8,7 @@ import { CitationComponent } from './resources/citation/citation.component';
 import { LicenseComponent } from './resources/license/license.component';
 import { FaqComponent } from './resources/faq/faq.component';
 import {NewsComponent} from "./news/news.component";
+import {DownloadsComponent} from "./downloads/downloads.component";
 
 const staticRoutes: Routes = [
   { path: '', component: HomeComponent},
@@ -17,7 +18,7 @@ const staticRoutes: Routes = [
   { path: 'faq', component: FaqComponent},
   { path: 'news', component: NewsComponent},
   { path: 'help', loadChildren: './help/help.module#HelpModule'},
-  { path: 'downloads', loadChildren: './downloads/downloads.module#DownloadsModule' },
+  { path: 'downloads', component: DownloadsComponent },
   { path: 'tools', loadChildren: './tools/tools.module#ToolsModule'}
 
 ];
