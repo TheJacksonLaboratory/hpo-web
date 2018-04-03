@@ -11,6 +11,7 @@ import { GenomiserComponent } from './genomiser/genomiser.component';
 import { WorkbenchComponent } from './workbench/workbench.component';
 import { ClinicalAnnotationComponent } from './clinicalannotation/clinicalanno.component';
 import { OtherToolsComponent } from './other/other.component';
+import {HpobrowserComponent} from "./hpobrowser/hpobrowser.component";
 
 const toolsRoutes: Routes = [
   { path: 'tools',
@@ -24,7 +25,8 @@ const toolsRoutes: Routes = [
       { path: 'clinical-annotation', component: ClinicalAnnotationComponent},
       { path: 'other', component: OtherToolsComponent},
       { path: 'external', component: ExternalToolsComponent},
-      { path: 'workbench', component: WorkbenchComponent}
+      { path: 'workbench', component: WorkbenchComponent},
+      { path: 'hpo-browser', component: HpobrowserComponent}
     ]
   }
 ];

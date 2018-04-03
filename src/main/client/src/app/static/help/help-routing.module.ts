@@ -11,6 +11,7 @@ import { IntroductionComponent } from './introduction/introduction.component';
 import { LaypersonComponent } from './layperson/layperson.component';
 import { MappingComponent } from './mapping/mapping.component';
 import { UsersComponent} from "./users/users.component";
+import {ContributorsComponent} from "./contributors/contributors.component";
 
 const helpRoutes: Routes = [
   { path: 'help',
@@ -24,7 +25,8 @@ const helpRoutes: Routes = [
     { path: 'introduction', component: IntroductionComponent},
     { path: 'layperson', component: LaypersonComponent},
     { path: 'mapping', component: MappingComponent},
-    { path: 'users', component: UsersComponent}
+    { path: 'users', component: UsersComponent},
+    { path: 'contributors', component: ContributorsComponent}
   ]},
 
 ];

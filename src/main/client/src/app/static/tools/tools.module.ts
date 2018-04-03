@@ -12,6 +12,7 @@ import { GenomiserComponent } from './genomiser/genomiser.component';
 import { WorkbenchComponent } from './workbench/workbench.component';
 import { ClinicalAnnotationComponent } from './clinicalannotation/clinicalanno.component';
 import { OtherToolsComponent } from './other/other.component';
+import { HpobrowserComponent } from './hpobrowser/hpobrowser.component';
 
 
 @NgModule({
@@ -20,6 +21,6 @@ import { OtherToolsComponent } from './other/other.component';
     ToolsRoutingModule
   ],
   declarations: [ OverviewComponent, PhenomizerComponent, ExternalToolsComponent, PhenogramVizComponent,
-    ExomiserComponent, GenomiserComponent, WorkbenchComponent, ClinicalAnnotationComponent, OtherToolsComponent ]
+    ExomiserComponent, GenomiserComponent, WorkbenchComponent, ClinicalAnnotationComponent, OtherToolsComponent, HpobrowserComponent ]
 })
 export class ToolsModule { }

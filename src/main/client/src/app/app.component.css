@@ -128,6 +128,6 @@
 }
 
 ::ng-deep .pageTitle {
-  font-weight: 400;
-  margin: 0 0 5px 0;
+  border-bottom: lightgray solid 1px;
+  padding-bottom: 10px;
 }
