@@ -12,6 +12,7 @@ import { IntroductionComponent } from './introduction/introduction.component';
 import { LaypersonComponent } from './layperson/layperson.component';
 import { MappingComponent } from './mapping/mapping.component';
 import { UsersComponent} from "./users/users.component";
+import { ContributorsComponent } from './contributors/contributors.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { UsersComponent} from "./users/users.component";
     HelpRoutingModule
   ],
   declarations: [AnnotationComponent, ClinicianGuideComponent, CollaborationComponent,
-    DefinitionsComponent, HistoryComponent, IntroductionComponent, LaypersonComponent , MappingComponent, UsersComponent
+    DefinitionsComponent, HistoryComponent, IntroductionComponent, LaypersonComponent , MappingComponent,
+    UsersComponent, ContributorsComponent
     ]
 })
 export class HelpModule { }

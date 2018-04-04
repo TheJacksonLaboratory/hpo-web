@@ -29,11 +29,15 @@
 .nav-brand {
   outline:none;
 }
-
+.mobile-menu.mat-button {
+  color: white;
+}
+.nav-components .mat-button {
+  margin-left: 15px;
+}
 @media (max-width: 768px){
     .mobile-menu.mat-button {
         padding:0 0 0 25px;
-        color:white;
     }
     .nav-brand .nav-logo {
         margin-right:5px !important;

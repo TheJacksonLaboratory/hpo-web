@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { InternalToolsComponent } from './internaltools.component';
+import { HpobrowserComponent } from './hpobrowser.component';
 
-describe('InternalToolsComponent', () => {
-  let component: InternalToolsComponent;
-  let fixture: ComponentFixture<InternalToolsComponent>;
+describe('HpobrowserComponent', () => {
+  let component: HpobrowserComponent;
+  let fixture: ComponentFixture<HpobrowserComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ InternalToolsComponent ]
+      declarations: [ HpobrowserComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(InternalToolsComponent);
+    fixture = TestBed.createComponent(HpobrowserComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

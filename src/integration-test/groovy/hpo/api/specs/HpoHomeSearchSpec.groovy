@@ -35,7 +35,7 @@ class HpoHomeSearchSpec extends  GebReportingSpec {
          HomePage homePage = browser.to(HomePage)
 
       when:
-        homePage.findTermInput.value('limbs')
+        waitFor(15, 2){ homePage.findTermInput.value('limbs')}
 
       then:
         homePage.termResultsPanel.text().startsWith("Terms")

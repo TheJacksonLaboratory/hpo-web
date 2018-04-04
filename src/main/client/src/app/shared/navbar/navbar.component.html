@@ -4,35 +4,33 @@
   </div>
   <!-- Desktop Navbar -->
   <div class="nav-components  hidden-xs hidden-sm hidden-md">
-      <button mat-button routerLink="/">Home</button>
       <button mat-button [matMenuTriggerFor]="toolsMenu">Tools <mat-icon>arrow_drop_down</mat-icon></button>
       <button mat-button routerLink="downloads">Downloads</button>
       <button mat-button [matMenuTriggerFor]="helpMenu">Help <mat-icon>arrow_drop_down</mat-icon></button>
   </div>
   <mat-menu y-positon="after" [overlapTrigger]="false" #toolsMenu="matMenu">
     <button mat-menu-item routerLink="tools"> Overview </button>
-    <button mat-menu-item> <a href="http://compbio.charite.de/hpoweb/showterm?id=HP:0000118#id=HP_0000118" target="__blank">
-      Former HPO Application </a> <i class="material-icons small-icon">open_in_new</i> </button>
     <button mat-menu-item routerLink="tools/clinical-annotation"> Clinical Annotation </button>
     <button mat-menu-item routerLink="tools/phenomizer"> Phenomizer </button>
     <button mat-menu-item routerLink="tools/phenogramviz"> Analyze CNV's using PhenoGramViz </button>
     <button mat-menu-item routerLink="tools/exomiser"> Prioritize variants using Exomiser </button>
     <button mat-menu-item routerLink="tools/genomiser"> Genomiser </button>
+    <button mat-menu-item routerLink="tools/hpo-browser"> HPO Browser </button>
+    <button mat-menu-item routerLink="tools/workbench"> HPO Workbench </button>
     <button mat-menu-item routerLink="tools/external"> External Tools </button>
-    <button mat-menu-item routerLink="tools/internal"> Internal Tools </button>
     <button mat-menu-item routerLink="tools/other"> Other Tools </button>
   </mat-menu>
   <mat-menu y-positon="after" [overlapTrigger]="false" #helpMenu="matMenu">
     <button mat-menu-item routerLink="help/introduction"> Introduction to HPO </button>
     <button mat-menu-item routerLink="help/annotations"> How to use Annotations </button>
-    <button mat-menu-item routerLink="help/history"> History </button>
     <button mat-menu-item routerLink="help/clinician-guide"> Clinicians Guide to HPO </button>
-    <button mat-menu-item routerLink="help/layperson"> Layperson Synonyms </button>
-    <button mat-menu-item routerLink="help/users"> HPO Users </button>
     <button mat-menu-item routerLink="help/collaboration"> How to contribute to HPO </button>
     <button mat-menu-item routerLink="citation"> How to cite or license HPO </button>
+    <button mat-menu-item routerLink="help/layperson"> Layperson Synonyms </button>
     <button mat-menu-item routerLink="help/mapping"> Translations and Mapping </button>
-    <button mat-menu-item routerLink="license"> Contributors </button>
+    <button mat-menu-item routerLink="help/history"> History </button>
+    <button mat-menu-item routerLink="help/users"> HPO Users </button>
+    <button mat-menu-item routerLink="help/contributors"> Contributors </button>
     <button mat-menu-item routerLink="contact"> Contact </button>
     <button mat-menu-item routerLink="faq"> FAQ </button>
   </mat-menu>
@@ -97,11 +95,10 @@
     <strong>Beta</strong>
   </div>
   <!-- Mobile Navbar -->
-  <button class="mobile-menu hidden-lg" mat-button [matMenuTriggerFor]="menu">
+  <button class="mobile-menu hidden-lg" color="white" mat-button [matMenuTriggerFor]="menu">
     <mat-icon>menu</mat-icon>
   </button>
   <mat-menu x-position="before" #menu="matMenu">
-    <button mat-menu-item routerLink="/">Home</button>
     <button mat-menu-item [matMenuTriggerFor]="toolsMenu">Tools</button>
     <button mat-menu-item routerLink="downloads">Downloads</button>
     <button mat-menu-item [matMenuTriggerFor]="helpMenu">Help</button>

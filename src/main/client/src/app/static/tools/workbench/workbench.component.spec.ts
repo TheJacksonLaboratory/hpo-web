@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HpOboComponent } from './hp-obo.component';
+import { WorkbenchComponent } from './workbench.component';
 
-describe('HpOboComponent', () => {
-  let component: HpOboComponent;
-  let fixture: ComponentFixture<HpOboComponent>;
+describe('OtherComponent', () => {
+  let component: WorkbenchComponent;
+  let fixture: ComponentFixture<WorkbenchComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HpOboComponent ]
+      declarations: [ WorkbenchComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(HpOboComponent);
+    fixture = TestBed.createComponent(WorkbenchComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

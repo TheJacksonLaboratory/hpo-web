@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { StaticRoutingModule } from './static-routing.module';
 
 import { HelpModule } from './help/help.module';
-import { DownloadsModule } from "./downloads/downloads.module";
 import { ToolsModule } from "./tools/tools.module";
 import { SearchModule } from "../shared/search/search.module";
 // GlobalMaterialModules
@@ -17,12 +16,13 @@ import { LicenseComponent } from './resources/license/license.component';
 import { FaqComponent } from './resources/faq/faq.component';
 // Pipe
 import {SearchService} from "../shared/search/service/search.service";
+import {NewsComponent} from "./news/news.component";
+import {DownloadsComponent} from "./downloads/downloads.component";
 
 @NgModule({
   imports: [
     CommonModule,
     HelpModule,
-    DownloadsModule,
     ToolsModule,
     GlobalMaterialModules,
     SearchModule,
@@ -30,7 +30,7 @@ import {SearchService} from "../shared/search/service/search.service";
   ],
   declarations: [ HomeComponent,
     ContactComponent, CitationComponent, LicenseComponent,
-    FaqComponent
+    FaqComponent, NewsComponent, DownloadsComponent
   ],
   providers:[SearchService]
 })
