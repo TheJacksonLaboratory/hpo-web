@@ -73,7 +73,7 @@ a.mat-btn{
 }
 
 .home-search .bar{
-  padding: 50px;
+  padding: 50px 50px 50px 100px;
   margin: auto;
   max-height: 100%;
   background-color: rgba(41,101,124,1);
