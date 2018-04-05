@@ -2,25 +2,35 @@
   <div class="nav-brand" routerLink="/">
     <img src="assets/hpo-logo-white.png" class="nav-logo"/>
   </div>
-  <!-- Desktop Navbar -->
+  <!-- Main Desktop Navbar -->
   <div class="nav-components  hidden-xs hidden-sm hidden-md">
       <button mat-button [matMenuTriggerFor]="toolsMenu">Tools <mat-icon>arrow_drop_down</mat-icon></button>
       <button mat-button routerLink="downloads">Downloads</button>
       <button mat-button [matMenuTriggerFor]="helpMenu">Help <mat-icon>arrow_drop_down</mat-icon></button>
   </div>
-  <!-- Menus and Sub Menus -->
-  <mat-menu [overlapTrigger]="false" #toolsMenu="matMenu">
+  <!-- Tools Menu and SubMenus -->
+  <mat-menu [overlapTrigger]="false" class="hpo-menus" #toolsMenu="matMenu">
     <button mat-menu-item routerLink="tools"> Overview </button>
     <button mat-menu-item routerLink="tools/clinical-annotation"> Clinical Annotation </button>
-    <button mat-menu-item routerLink="tools/phenomizer"> Phenomizer </button>
-    <button mat-menu-item routerLink="tools/phenogramviz"> Analyze CNV's using PhenoGramViz </button>
-    <button mat-menu-item routerLink="tools/exomiser"> Prioritize variants using Exomiser </button>
-    <button mat-menu-item routerLink="tools/genomiser"> Genomiser </button>
-    <button mat-menu-item routerLink="tools/hpo-browser"> HPO Browser </button>
+    <button mat-menu-item [matMenuTriggerFor]="genomicMenu">Genomic Tools</button>
+    <button mat-menu-item [matMenuTriggerFor]="phenomicMenu">Phenomic Tools</button>
+    <button mat-menu-item routerLink="tools/hpo-browser"> Other HPO Browsers </button>
     <button mat-menu-item routerLink="tools/workbench"> HPO Workbench </button>
     <button mat-menu-item routerLink="tools/external"> External Tools </button>
     <button mat-menu-item routerLink="tools/other"> Other Tools </button>
   </mat-menu>
+  <mat-menu class="hpo-menus"  #genomicMenu="matMenu">
+    <button mat-menu-item routerLink="tools/genomiser"> Genomiser: Analyze non-coding variants </button>
+    <button mat-menu-item routerLink="tools/exomiser"> Exomiser: Prioritize variants from VCF </button>
+  </mat-menu>
+  <mat-menu class="hpo-menus"  #phenomicMenu="matMenu">
+    <button mat-menu-item routerLink="tools/phenomizer"> Phenomizer: Clinical diagnostics at your fingertips </button>
+    <button mat-menu-item routerLink="tools/phenogramviz"> PhenoGramViz: Non-coding analysis and visualization </button>
+  </mat-menu>
+
+
+  <!-- ---- -->
+  <!-- Help Menu and SubMenus -->
   <mat-menu [overlapTrigger]="false" #helpMenu="matMenu">
     <button mat-menu-item [matMenuTriggerFor]="infoMenu">About</button>
 
@@ -34,7 +44,8 @@
   <mat-menu  #howtoMenu="matMenu">
     <button mat-menu-item routerLink="help/annotations"> Use Annotations </button>
     <button mat-menu-item routerLink="help/collaboration"> Contribute to HPO </button>
-    <button mat-menu-item routerLink="citation"> Cite or License HPO </button>
+    <button mat-menu-item routerLink="citation"> Cite HPO </button>
+    <button mat-menu-item routerLink="license"> License HPO </button>
   </mat-menu>
   <mat-menu  #infoMenu="matMenu">
     <button mat-menu-item routerLink="help/introduction"> Introduction </button>
@@ -43,6 +54,7 @@
     <button mat-menu-item routerLink="help/contributors"> Contributors </button>
     <button mat-menu-item routerLink="help/users">  Users </button>
   </mat-menu>
+  <!-- ------ -->
   <div class="fill-remaining-space">
 
   </div>

@@ -135,3 +135,7 @@ button.mat-menu-item a{
 
 }
 
+::ng-deep .mat-menu-panel {
+  max-width: 380px !important;
+}
+
