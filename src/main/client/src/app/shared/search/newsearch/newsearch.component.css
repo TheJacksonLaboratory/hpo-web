@@ -1,0 +1,69 @@
+.search-wrapper{
+  height:100%;
+  z-index: 20;
+}
+
+.search-wrapper .searchbar{
+  background-color: white;
+  border-style: none;
+  outline: none;
+}
+
+.search-wrapper .mat-select{
+  background-color: #eaeaea;
+  float: left;
+  border-right: solid 1px lightgray;
+  outline: none;
+}
+
+.search-wrapper .search-output {
+  font-size: 14px;
+  overflow-x: hidden;
+  background-color: white;
+  cursor:pointer;
+  position: relative;
+  z-index:999;
+  top: -50px;
+}
+.search-output .result-list{
+  margin-left: 15px;
+  line-height: 20px;
+}
+.search-output .term-result {
+  margin-left: 10px;
+}
+.search-output .disease-result {
+  margin-left: 10px;
+
+}
+.search-output .gene-result {
+  margin-left:10px;
+}
+
+.search-output .result .id {
+  font-size: 10px;
+  color: grey;
+}
+
+.term-result .result .id{
+  margin: 0 !important;
+}
+
+.gene-result .result .id{
+  margin: 0 !important;
+}
+
+.disease-result .result .id{
+  margin: 0 !important;
+}
+
+
+p.hint{
+  color:white;
+  float:right;
+  margin-left: 15px;
+}
+p.hint a{
+  color: #ec9736 !important;
+  cursor: pointer;
+}
