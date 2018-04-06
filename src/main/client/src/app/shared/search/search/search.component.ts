@@ -11,8 +11,8 @@ import {
 
 @Component({
   selector: 'newsearchbar',
-  templateUrl: './newsearch.component.html',
-  styleUrls: ['./newsearch.component.css'],
+  templateUrl: './search.component.html',
+  styleUrls: ['./search.component.css'],
   animations: [
     trigger('searchState', [
       state('inactive', style({
@@ -32,7 +32,7 @@ import {
     ])
   ]
 })
-export class NewsearchComponent implements OnInit {
+export class SearchComponent implements OnInit {
   terms: Term[] = [];
   diseases: Disease[] = [];
   genes: Gene[] = [];

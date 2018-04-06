@@ -5,7 +5,7 @@
     <mat-option value="disease">Disease</mat-option>
     <mat-option value="gene">Gene</mat-option>
   </mat-select>
-  <input class="searchbar" matInput #search placeholder="Search for phenotypes, diseases, genes.." [value]="query"
+  <input class="searchbar" matInput #search placeholder="Search for phenotypes, diseases, genes..." [value]="query"
          (input)="suggestContent(search.value)">
   <p class="hint">
     <strong>( i.e. ) <a (click)="setQuery('Abnormality of the bladder')">Abnormality of the bladder</a> |

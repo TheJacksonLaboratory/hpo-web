@@ -7,7 +7,7 @@ import { ExtrasModule } from "../modules/extras.module";
 //Components
 //Service
 import { SearchService } from "./service/search.service";
-import { NewsearchComponent } from './newsearch/newsearch.component';
+import { SearchComponent } from './search/search.component';
 
 
 @NgModule({
@@ -18,8 +18,8 @@ import { NewsearchComponent } from './newsearch/newsearch.component';
     RouterModule,
     ExtrasModule
   ],
-  declarations: [ NewsearchComponent],
+  declarations: [ SearchComponent ],
   providers: [SearchService],
-  exports: [ NewsearchComponent ]
+  exports: [ SearchComponent ]
 })
 export class SearchModule { }

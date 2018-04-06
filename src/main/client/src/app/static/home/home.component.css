@@ -62,18 +62,6 @@ a.mat-btn{
   margin-top: 5px;
 }
 
-
-.search-overlay {
-  color:white;
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,0.1);
-  z-index: 2;
-  cursor: pointer;
-  display: inline-block;
-}
-
 .home-search .search-container{
   margin: 0 auto;
   max-height: 100%;
@@ -113,22 +101,13 @@ a.mat-btn{
   width: 100px;
   height: 45px;
   font-size: 14px;
-  padding: 15px;
+  padding: 15px 25px 15px 25px;
 }
 ::ng-deep .home-search .search-container .search-output {
   margin-left: 100px;
   width: 85%;
   padding: 15px;
 }
-
-/*@media (max-width: 1200px) {
-  width: 55.3%;
-}
-
-
-@media (max-width: 768px){
-
-}*/
 
 .info-body p{
   min-height: 150px;

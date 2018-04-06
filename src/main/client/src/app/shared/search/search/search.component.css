@@ -60,7 +60,7 @@
 
 p.hint{
   color:white;
-  float:right;
+  text-align: center;
   margin-left: 15px;
 }
 p.hint a{

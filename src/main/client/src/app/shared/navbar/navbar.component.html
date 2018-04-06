@@ -59,7 +59,10 @@
 
   </div>
   <!-- Navigation Search Bar -->
-  <div class="navbar-search-container col-lg-3 col-sm-6" *ngIf="showSearch">
+  <div class="navbar-search-wrapper col-lg-4">
+    <newsearchbar *ngIf="showSearch"></newsearchbar>
+  </div>
+  <!--<div class="navbar-search-container col-lg-3 col-sm-6" *ngIf="showSearch">
       <mat-select placeholder="All" [(value)]="navFilter">
         <mat-option value="all">All</mat-option>
         <mat-option value="term">Term</mat-option>
@@ -109,7 +112,7 @@
         <br>
       </div>
     </div>
-  </div>
+  </div>-->
   <!-- End Navigation Search -->
   <!-- Beta Flag -->
   <div class="beta-flag">

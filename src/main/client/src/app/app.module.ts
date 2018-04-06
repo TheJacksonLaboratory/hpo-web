@@ -15,6 +15,7 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { NoPageFoundComponent } from './error/no-page-found.component';
+import {SearchModule} from "./shared/search/search.module";
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { NoPageFoundComponent } from './error/no-page-found.component';
     GlobalMaterialModules,
     ExtrasModule,
     RoutingModule,
+    SearchModule
   ],
   providers: [SearchService],
   bootstrap: [AppComponent]
