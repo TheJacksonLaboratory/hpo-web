@@ -71,9 +71,9 @@
 }
 
 ::ng-deep .navbar-search-wrapper .search-wrapper .search-filter{
-  width: 75px;
+  width: 85px;
   font-size: 14px;
-  padding: 5px 5px 5px 15px;
+  padding: 5px 5px 5px 10px;
 }
 
 ::ng-deep .navbar-search-wrapper .search-wrapper .searchbar{
@@ -85,7 +85,7 @@
 ::ng-deep .navbar-search-wrapper .search-wrapper .search-output {
   width: 85%;
   padding: 15px;
-  margin-left: 75px;
+  margin-left: 85px;
   top: 0 !important;
 }
 ::ng-deep .navbar-search-wrapper .search-wrapper .hint{
