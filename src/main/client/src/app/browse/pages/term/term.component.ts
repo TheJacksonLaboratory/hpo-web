@@ -147,15 +147,11 @@ export class TermComponent implements OnInit {
     document.body.appendChild(txtArea);
     txtArea.select();
     try {
-      let successful = document.execCommand('copy');
-      let msg = successful ? 'successful' : 'unsuccessful';
-      if(successful){
-        return true;
-      }
+      document.execCommand('copy');
+      document.body.removeChild(txtArea);
     } catch (err) {
       console.log('Unable to copy');
     }
-    document.body.removeChild(txtArea);
     return false;
 
   }
