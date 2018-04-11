@@ -9,6 +9,7 @@ import { GlobalMaterialModules } from "./shared/modules/global.module";
 import { FormsModule } from "@angular/forms";
 import { ExtrasModule } from "./shared/modules/extras.module";
 import { SearchService } from "./shared/search/service/search.service";
+import { SearchModule } from "./shared/search/search.module";
 
 
 describe('AppComponent', () => {
@@ -18,7 +19,8 @@ describe('AppComponent', () => {
         GlobalMaterialModules,
         HttpClientTestingModule,
         FormsModule,
-        ExtrasModule
+        ExtrasModule,
+        SearchModule
       ],
       declarations: [
         AppComponent,

@@ -91,21 +91,21 @@ a.mat-btn{
   }
 }
 ::ng-deep .home-search .search-container .searchbar {
-  width: 85%;
+  width: 80%;
   font-size: 16px;
   height: 45px;
   margin: 0;
   padding: 15px;
 }
 ::ng-deep .home-search .search-container .search-filter {
-  width: 100px;
+  width: 20%;
   height: 45px;
   font-size: 14px;
-  padding: 15px 25px 15px 25px;
+  padding: 15px;
 }
 ::ng-deep .home-search .search-container .search-output {
-  margin-left: 100px;
-  width: 85%;
+  margin-left: 20%;
+  width: 80%;
   padding: 15px;
 }
 

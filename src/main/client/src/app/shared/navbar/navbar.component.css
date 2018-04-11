@@ -71,21 +71,21 @@
 }
 
 ::ng-deep .navbar-search-wrapper .search-wrapper .search-filter{
-  width: 75px;
+  width: 20%;
   font-size: 14px;
-  padding: 5px 5px 5px 15px;
+  padding: 5px 5px 5px 10px;
 }
 
 ::ng-deep .navbar-search-wrapper .search-wrapper .searchbar{
   font-size: 14px;
   padding: 5px 0 5px 10px;
-  width: 85%;
+  width: 80%;
   margin-top: 0;
 }
 ::ng-deep .navbar-search-wrapper .search-wrapper .search-output {
-  width: 85%;
+  width: 80%;
   padding: 15px;
-  margin-left: 75px;
+  margin-left: 20%;
   top: 0 !important;
 }
 ::ng-deep .navbar-search-wrapper .search-wrapper .hint{

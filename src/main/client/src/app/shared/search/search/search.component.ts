@@ -10,7 +10,7 @@ import {
 } from '@angular/animations';
 
 @Component({
-  selector: 'newsearchbar',
+  selector: 'searchbar',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.css'],
   animations: [
