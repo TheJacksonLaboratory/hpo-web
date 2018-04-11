@@ -175,3 +175,9 @@
   margin-bottom: 5px;
   margin-top: 5px;
 }
+
+.copyToClipboard{
+  font-size: 12px;
+  cursor: copy;
+  padding: 5px;
+}
