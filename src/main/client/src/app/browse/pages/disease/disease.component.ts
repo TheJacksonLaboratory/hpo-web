@@ -23,7 +23,7 @@ export class DiseaseComponent implements OnInit {
   termAssoc: TermAssocDB;
   geneAssoc: GeneAssocDB;
   isLoading: boolean = true;
-  catTermSources= [];
+  catTermSources = [];
   @ViewChild(MatSort) sort: MatSort;
   constructor(private route: ActivatedRoute, private diseaseService: DiseaseService) {
     this.route.params.subscribe( params => this.query = params.id);
@@ -48,16 +48,17 @@ export class DiseaseComponent implements OnInit {
    * Sets DB sources for Category-Term map data
    */
   setCatTermsDBSource(catTermsMap){
-
     for (let i in catTermsMap) {
-
-      var catLabel = catTermsMap[i].catLabel
-      var annotationCount = catTermsMap[i].terms.length
-      var termAssoc = new TermAssocDB(catTermsMap[i].terms);
-      var termSource = new TermAssocDatasource(termAssoc, this.sort);
-      var annotationCountTxt = "(1 annotation)"
-      annotationCountTxt = annotationCount > 1? "(" + annotationCount + " annotations)" : annotationCountTxt;
-      this.catTermSources.push({catLabel, annotationCountTxt,  termSource});
+      let catLabel = catTermsMap[i].catLabel;
+      let annotationCount = catTermsMap[i].terms.length;
+      let termAssoc = new TermAssocDB(catTermsMap[i].terms);
+      let termSource = new TermAssocDatasource(termAssoc, this.sort);;
+      this.catTermSources.push({catLabel, annotationCount,  termSource});
     }
+    this.catTermSources.sort((a, b) => {
+      if (a.annotationCount > b.annotationCount) return -1;
+      else if (a.annotationCount < b.annotationCount) return 1;
+      else return 0;
+    });
   }
 }

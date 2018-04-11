@@ -16,7 +16,6 @@ import { TermComponent } from './pages/term/term.component';
 import { DiseaseComponent } from './pages/disease/disease.component';
 import { GeneComponent } from './pages/gene/gene.component';
 // Custom Pipes
-import { SortPipe } from '../shared/pipes/sort-pipe';
 
 
 @NgModule({
@@ -28,6 +27,6 @@ import { SortPipe } from '../shared/pipes/sort-pipe';
   ],
   providers: [ SearchService, TermService, GeneService, DiseaseService ],
   declarations: [ TermComponent, DiseaseComponent,
-    GeneComponent, SortPipe]
+    GeneComponent ]
 })
 export class BrowserHPOModule { }
