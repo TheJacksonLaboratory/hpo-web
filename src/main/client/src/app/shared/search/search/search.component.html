@@ -54,5 +54,8 @@
       </div>
       <br>
     </div>
+    <div class="no-result" *ngIf="genes.length == 0 && diseases.length == 0 && terms.length == 0">
+      <h3>Sorry no results have been found!</h3>
+    </div>
   </div>
 </div>
