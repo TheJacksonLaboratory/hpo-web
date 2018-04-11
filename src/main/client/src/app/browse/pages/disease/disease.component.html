@@ -14,7 +14,7 @@
               <mat-card class="item-summary mat-elevation-z6">
                 <mat-card-content>
                   <span class="item-title">{{disease.diseaseName}}</span>
-                  <a routerLink="/browse/disease/{{disease.diseaseId}}"><strong>{{disease.diseaseId}}</strong></a>
+                  <span class="item-id">{{disease.diseaseId}}</span>
                   <hr class="underline-hr">
                   <mat-list>
                     <mat-list-item><strong>Definition:&nbsp;</strong> Waiting for MONDO API.</mat-list-item>
@@ -29,8 +29,11 @@
                   <mat-tab label="Term Associations">
                     <div class="tab-content">
                       <div class="associations term-association">
-                        <div *ngFor="let catTermSource of catTermSources; index as i">
-                          <h3 class="title">{{catTermSource.catLabel}} {{catTermSource.annotationCountTxt}}</h3>
+                        <div *ngFor="let catTermSource of catTermSources ">
+                          <h3 class="title">{{catTermSource.catLabel}}
+                            <span *ngIf="catTermSource.annotationCount > 1">[ {{catTermSource.annotationCount}} annotations ]</span>
+                            <span *ngIf="catTermSource.annotationCount == 1">[ {{catTermSource.annotationCount}} annotation ]</span>
+                          </h3>
                           <mat-table #table [dataSource]="catTermSource.termSource" matSort>
                             <mat-header-row *matHeaderRowDef="termColumns"></mat-header-row>
                             <mat-row *matRowDef="let row; columns: termColumns;"></mat-row>
