@@ -5,10 +5,9 @@ import { RouterModule } from "@angular/router";
 import { GlobalMaterialModules } from "../modules/global.module";
 import { ExtrasModule } from "../modules/extras.module";
 //Components
-import { SearchbarComponent } from "./components/searchbar/searchbar.component";
-import { SearchOutputComponent } from "./components/search.component";
 //Service
 import { SearchService } from "./service/search.service";
+import { SearchComponent } from './search/search.component';
 
 
 @NgModule({
@@ -19,8 +18,8 @@ import { SearchService } from "./service/search.service";
     RouterModule,
     ExtrasModule
   ],
-  declarations: [SearchbarComponent, SearchOutputComponent],
+  declarations: [ SearchComponent ],
   providers: [SearchService],
-  exports: [SearchbarComponent, SearchOutputComponent ]
+  exports: [ SearchComponent ]
 })
 export class SearchModule { }

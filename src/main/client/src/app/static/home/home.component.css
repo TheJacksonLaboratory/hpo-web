@@ -40,9 +40,6 @@ a.mat-btn{
 ::ng-deep a.mat-btn .mat-button-wrapper {
     color: white;
 }
-.news-updates{
-    margin-top: 5px;
-}
 ::ng-deep .quick-links-card .mat-icon {
     margin-left: auto;
 }
@@ -61,36 +58,55 @@ a.mat-btn{
     opacity: 0.9;
 }
 
-.search-overlay {
-  color:white;
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,0.1);
-  z-index: 2;
-  cursor: pointer;
-  display: inline-block;
+.news-updates{
+  margin-top: 5px;
 }
 
-.home-search .bar{
-  padding: 50px 50px 50px 100px;
-  margin: auto;
+.home-search .search-container{
+  margin: 0 auto;
   max-height: 100%;
+  height: 170px;
   background-color: rgba(41,101,124,1);
   border: solid 2px #325364;
 }
-
-.home-search {
-  margin-top: 25px;
+::ng-deep .home-search .search-container .search-wrapper {
+  margin-top: 50px;
+  position: relative;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
-::ng-deep .home-search .mat-focused .mat-form-field-label{
-  color:#ec9736;
+
+@media (min-width: 992px) {
+  ::ng-deep .home-search .search-container .search-wrapper {
+    width: 100%;
+  }
 }
 
-
-::ng-deep .home-search .mat-form-field-ripple{
-  background-color:#ec9736;
+@media (min-width: 1200px) {
+  ::ng-deep .home-search .search-container .search-wrapper {
+    margin-left: 16.6667%;
+    width: 67.66666667%;
+  }
+}
+::ng-deep .home-search .search-container .searchbar {
+  width: 80%;
+  font-size: 16px;
+  height: 45px;
+  margin: 0;
+  padding: 15px;
+}
+::ng-deep .home-search .search-container .search-filter {
+  width: 20%;
+  height: 45px;
+  font-size: 14px;
+  padding: 15px;
+}
+::ng-deep .home-search .search-container .search-output {
+  margin-left: 20%;
+  width: 80%;
+  padding: 15px;
 }
 
 .info-body p{
