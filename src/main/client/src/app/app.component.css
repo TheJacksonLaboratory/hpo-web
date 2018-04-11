@@ -115,8 +115,7 @@
 }
 
 ::ng-deep .search-highlight{
-  font-weight: 900;
-  background-color:yellow;
+  font-weight: 800;
 }
 
 ::ng-deep .static-images {
