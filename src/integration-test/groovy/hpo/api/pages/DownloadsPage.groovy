@@ -8,8 +8,8 @@ class DownloadsPage extends Page {
 
   static url = "app/downloads"
   static content = {
-    navSearchBar(wait: true) { $(".navbar-search-container .navbar-search") }
-    navSearchResults(wait: true, required: false) { $(".navbar-search-container .navbar-output .term-result .result-list") }
+    navSearchBar(wait: true) { $(".navbar-search-wrapper .searchbar") }
+    navSearchResults(wait: true, required: false) { $(".navbar-search-wrapper .search-output .term-result .result-list") }
   }
 
 }
