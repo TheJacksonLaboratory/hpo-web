@@ -110,3 +110,7 @@ button.mat-menu-item a{
   max-width: 380px !important;
 }
 
+
+::ng-deep .navbar-search-wrapper .search-output h3 {
+  font-size: 14px;
+}

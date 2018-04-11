@@ -35,7 +35,9 @@
               <mat-card-content>
                   <div>
                     <span class="item-title">{{termTitle}}</span>
-                    <a href="{{term.purl}}" target="__blank"> <strong>{{term.id}}</strong></a>
+                    <span class="item-id">{{term.id}}</span>
+                    <i matTooltip="Copy purl to clipboard!" matTooltipPosition="above"
+                       (click)="copyToClipboard(term.purl)" class="material-icons copyToClipboard">content_copy</i>
                   </div>
 
                   <hr class="underline-hr">

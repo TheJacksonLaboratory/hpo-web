@@ -126,19 +126,6 @@ export class TermComponent implements OnInit {
     this.term.purl = "http://purl.obolibrary.org/obo/" + term.id.replace(":","_");
     this.term.comment = (term.comment != null) ? term.comment: "No comments found for this term";
   }
-  showOverlay(){
-    this.overlay = true;
-  }
-  removeOverlay(event){
-    if(event.target.classList.contains("search-overlay")){
-      this.overlay = false;
-    }
-  }
-  onEscKey(event){
-    if(event.key == "Escape"){
-      this.overlay = false;
-    }
-  }
 
   showAllDiseases(event){
     this.assocLoading = true;
@@ -148,6 +135,25 @@ export class TermComponent implements OnInit {
   showAllGenes(event){
     this.assocLoading = true;
     this.reloadGeneAssociations('0', '-1')
+  }
+
+  copyToClipboard(text){
+    let txtArea = document.createElement("textarea");
+    txtArea.style.position = 'fixed';
+    txtArea.style.top = '0';
+    txtArea.style.left = '0';
+    txtArea.style.opacity = '0';
+    txtArea.value = text;
+    document.body.appendChild(txtArea);
+    txtArea.select();
+    try {
+      document.execCommand('copy');
+      document.body.removeChild(txtArea);
+    } catch (err) {
+      console.log('Unable to copy');
+    }
+    return false;
+
   }
 }
 
