@@ -54,7 +54,7 @@
                     </mat-progress-bar>
 
                     <div class="ProtVistaContainer col-lg-12" >
-                      <p *ngIf="uniprotId != 'error'"><a href="{{uniProtWidgetURL}}{{this.uniprotId}}">{{this.uniprotId}}</a></p>
+                      <p *ngIf="uniprotId != 'error'"><a href="{{uniProtWidgetURL}}{{this.uniprotId}}" target="__blank">{{this.uniprotId}}</a></p>
                       <div class="ProtVistaReference">
                         <div *ngIf="uniprotId == 'error'">
                           <p><strong>No UniProt Reference Could be found for Gene {{entrezGene.name}}</strong></p>

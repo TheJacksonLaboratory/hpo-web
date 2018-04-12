@@ -65,7 +65,7 @@ export class TermComponent implements OnInit {
       this.displayAllGeneAssc = false;
 
       this.diseaseAssoc = new DiseaseAssocDB(res2.diseases);
-      this.diseaseAssocCount = res2.diseaseCount
+      this.diseaseAssocCount = res2.diseaseCount;
       this.diseaseAssocMax = res2.max;
       this.diseaseAssocOffset = res2.offset;
       this.diseaseDisplayCount = (res2.diseaseCount < res2.max)? res2.diseaseCount : res2.max;

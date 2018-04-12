@@ -36,10 +36,16 @@ export class GeneComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private route: ActivatedRoute, private geneService: GeneService) {
-    this.route.params.subscribe(params => this.query = params.id);
+    this.route.params.subscribe((params) => {
+      this.query = params.id;
+      this.reloadGeneData();
+    });
   }
 
   ngOnInit() {
+  }
+
+  reloadGeneData(){
     this.geneService.searchGeneInfo(this.query)
       .subscribe((data) => {
         this.entrezGene = data.result[this.query];
@@ -62,7 +68,6 @@ export class GeneComponent implements OnInit {
       });
     this.uniprotWidgetInit();
   }
-
   uniprotWidgetInit() {
 
     this.uniProtLoading = true;
