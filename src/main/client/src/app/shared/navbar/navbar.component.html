@@ -24,8 +24,8 @@
     <button mat-menu-item routerLink="tools/exomiser"> Exomiser: Prioritize variants from VCF </button>
   </mat-menu>
   <mat-menu class="hpo-menus"  #phenomicMenu="matMenu">
-    <button mat-menu-item routerLink="tools/phenomizer"> Phenomizer: Clinical diagnostics at your fingertips </button>
-    <button mat-menu-item routerLink="tools/phenogramviz"> PhenoGramViz: Non-coding analysis and visualization </button>
+    <button mat-menu-item routerLink="tools/phenomizer"> Phenomizer: Clinical diagnostics </button>
+    <button mat-menu-item routerLink="tools/phenogramviz"> PhenoGramViz: Evaluation of CNV's </button>
   </mat-menu>
 
 
@@ -62,58 +62,6 @@
   <div class="navbar-search-wrapper col-lg-4">
     <searchbar *ngIf="showSearch"></searchbar>
   </div>
-  <!--<div class="navbar-search-container col-lg-3 col-sm-6" *ngIf="showSearch">
-      <mat-select placeholder="All" [(value)]="navFilter">
-        <mat-option value="all">All</mat-option>
-        <mat-option value="term">Term</mat-option>
-        <mat-option value="disease">Disease</mat-option>
-        <mat-option value="gene">Gene</mat-option>
-      </mat-select>
-      <input class="navbar-search" matInput #navsearch placeholder="Search the Ontology.." [value]="query"
-             (input)="suggestContent(navsearch.value)">
-    <div class="navbar-output mat-elevation-z4" [@searchState]="searchstate">
-      <div class="term-result" *ngIf="(navFilter == 'term' || navFilter == 'all') && terms.length > 0 ">
-        <span  class="result-title">
-          Terms
-        </span>
-        <br>
-        <div class="result-list">
-          <span class="result" routerLink="/browse/term/{{item.ontologyId}}" *ngFor="let item of terms;" >
-            <span class="id">{{item.ontologyId}}</span>
-            <span class="name" [innerHtml]="{name: item.name } | highlight: query"></span><br>
-          </span>
-        </div>
-        <br>
-      </div>
-
-      <div class="disease-result" *ngIf="(navFilter == 'disease' || navFilter == 'all') && diseases.length > 0">
-        <span  class="result-title">
-          Diseases
-        </span>
-        <div class="result-list">
-          <span class="result" routerLink="/browse/disease/{{item.diseaseId}}" *ngFor="let item of diseases;" >
-            <span class="id">{{item.dbRef}}</span>
-            <span class="name" [innerHtml]="{name: item.dbName } | highlight: query"></span><br>
-          </span>
-        </div>
-        <br>
-      </div>
-
-      <div class="gene-result" *ngIf="(navFilter == 'gene' || navFilter == 'all') && genes.length > 0">
-        <span  class="result-title">
-          Genes
-        </span>
-        <div class="result-list">
-          <span class="result" routerLink="/browse/gene/{{item.entrezGeneId}}" *ngFor="let item of genes;" >
-            <span class="id">{{item.entrezGeneId}}</span>
-            <span class="name" [innerHtml]="{name: item.entrezGeneSymbol } | highlight: query"></span><br>
-          </span>
-        </div>
-        <br>
-      </div>
-    </div>
-  </div>-->
-  <!-- End Navigation Search -->
   <!-- Beta Flag -->
   <div class="beta-flag">
     <strong>Beta</strong>

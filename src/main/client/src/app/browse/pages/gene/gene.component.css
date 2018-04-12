@@ -1,4 +1,4 @@
-.gene-component .term-association .mat-column-ontologyId {
+ .gene-component .term-association .mat-column-ontologyId {
   max-width: 150px;
 }
 .gene-component  .term-association .mat-column-name {
@@ -46,7 +46,7 @@
   width:49%;
 }
 
-.mat-progress-bar{
-  margin: 30px 0 30px 10px
+.gene-component .loading-protvista{
+  margin: 30px 10px 30px 10px;
+  width: 99%;
 }
-
