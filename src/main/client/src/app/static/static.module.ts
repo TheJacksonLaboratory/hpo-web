@@ -18,6 +18,7 @@ import { FaqComponent } from './resources/faq/faq.component';
 import {SearchService} from "../shared/search/service/search.service";
 import {NewsComponent} from "./news/news.component";
 import {DownloadsComponent} from "./downloads/downloads.component";
+import {NewsService} from "../shared/news/news.service";
 
 @NgModule({
   imports: [
@@ -32,6 +33,6 @@ import {DownloadsComponent} from "./downloads/downloads.component";
     ContactComponent, CitationComponent, LicenseComponent,
     FaqComponent, NewsComponent, DownloadsComponent
   ],
-  providers:[SearchService]
+  providers:[SearchService, NewsService]
 })
 export class StaticModule { }

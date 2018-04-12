@@ -59,3 +59,4 @@ export interface News {
   body: string;
   date: string;
 }
+

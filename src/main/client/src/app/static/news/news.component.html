@@ -1,14 +1,14 @@
 <div class="container">
   <h1 class="center">News & Updates</h1>
   <div class="news-timeline col-lg-1">
-    <h4>Recent News</h4>
+    <h3>Recent News</h3>
     <div class="news-dates">
-      <p *ngFor="let date of dates" (click)="setCurrentDate(date)">{{date}}</p>
+      <p *ngFor="let date of dates" [ngClass]="{'active': currentSelected == date}" (click)="setCurrentDate(date)">{{date}}</p>
     </div>
   </div>
-  <div class="news-section col-lg-offset-1 col-lg-10 mat-elevation-z4" *ngFor="let news of content">
-    <div class="news-title hr">
-      {{news.title}} <br> <span class="news-date">{{news.date}}</span>
+  <div class="news-section col-lg-offset-1 col-lg-9 mat-elevation-z4" *ngFor="let news of content">
+    <div class="news-title">
+     <span class="hr">{{news.title}}</span>  <br> <span class="news-date">{{news.date}}</span><br>
     </div>
     <div class="news-body" [innerHtml]="news.body">
     </div>
