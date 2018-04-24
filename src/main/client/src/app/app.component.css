@@ -12,13 +12,23 @@
   text-align: center;
   text-shadow: 1px 1px #D0D3D4;
 }
+
+::ng-deep .item-id {
+  font-size: 14px;
+  color: darkslategray;
+}
 ::ng-deep .item-summary {
   width:100%;
   margin-bottom: 10px;
 }
 ::ng-deep .item-summary .mat-list-item-content{
   font-size:14px;
-  padding: 0 !important;
+  padding: 5px !important;
+  display:block !important;
+}
+
+::ng-deep .item-summary .mat-list-item{
+  height:auto !important;
 }
 
 ::ng-deep .item-header{

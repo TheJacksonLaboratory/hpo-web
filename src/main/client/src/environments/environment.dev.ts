@@ -12,7 +12,7 @@ export const environment = {
   //ENTREZ external URL
   HPO_ENTREZ_SEARCH_URL: 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi',
   //UniProt External Url
-  HPO_UNIPROT_MAPPING_URL: 'http://www.uniprot.org/uploadlists/',
+  HPO_UNIPROT_MAPPING_URL: 'https://www.uniprot.org/uploadlists/',
   //UniProt widget URL
   HPO_UNIPROT_WIDGET_URL: 'https://www.uniprot.org/uniprot/',
   //News File

@@ -35,7 +35,9 @@
               <mat-card-content>
                   <div>
                     <span class="item-title">{{termTitle}}</span>
-                    <a href="{{term.purl}}" target="__blank"> <strong>{{term.id}}</strong></a>
+                    <span class="item-id">{{term.id}}</span>
+                    <i matTooltip="Copy purl to clipboard!" matTooltipPosition="above"
+                       (click)="copyToClipboard(term.purl)" class="material-icons copyToClipboard">content_copy</i>
                   </div>
 
                   <hr class="underline-hr">
@@ -46,11 +48,11 @@
                       <strong>Synonyms:</strong> &nbsp;&nbsp; <i *ngFor="let item of term.synonyms; let isLast=last">{{item}}{{isLast ? '' : ', '}}</i>
                     </mat-list-item>
                     <mat-divider></mat-divider>
-                    <mat-list-item>
+                    <mat-list-item *ngIf="term.comment">
                       <strong>Comment:</strong> &nbsp;&nbsp; {{term.comment}}
                       </mat-list-item>
                     <mat-divider></mat-divider>
-                    <mat-list-item>
+                    <mat-list-item *ngIf="term.xrefs.length > 0">
                       <strong>Xrefs:</strong> &nbsp;&nbsp;
                       <i *ngFor="let item of term.xrefs; let isLast=last">{{item}}{{isLast ? '' : ', '}}</i>
                     </mat-list-item>

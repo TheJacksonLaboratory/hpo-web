@@ -57,6 +57,10 @@
   margin: 0 !important;
 }
 
+.no-result{
+  text-align: center;
+}
+
 
 p.hint{
   color:white;

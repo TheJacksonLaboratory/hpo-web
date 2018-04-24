@@ -65,7 +65,7 @@ export class TermComponent implements OnInit {
       this.displayAllGeneAssc = false;
 
       this.diseaseAssoc = new DiseaseAssocDB(res2.diseases);
-      this.diseaseAssocCount = res2.diseaseCount
+      this.diseaseAssocCount = res2.diseaseCount;
       this.diseaseAssocMax = res2.max;
       this.diseaseAssocOffset = res2.offset;
       this.diseaseDisplayCount = (res2.diseaseCount < res2.max)? res2.diseaseCount : res2.max;
@@ -124,20 +124,6 @@ export class TermComponent implements OnInit {
     this.term.synonyms = (term.synonyms.length != 0) ? term.synonyms: ["No synonyms found for this term."];
     this.term.definition = (term.definition != null) ? term.definition: "Sorry this term has no definition.";
     this.term.purl = "http://purl.obolibrary.org/obo/" + term.id.replace(":","_");
-    this.term.comment = (term.comment != null) ? term.comment: "No comments found for this term";
-  }
-  showOverlay(){
-    this.overlay = true;
-  }
-  removeOverlay(event){
-    if(event.target.classList.contains("search-overlay")){
-      this.overlay = false;
-    }
-  }
-  onEscKey(event){
-    if(event.key == "Escape"){
-      this.overlay = false;
-    }
   }
 
   showAllDiseases(event){
@@ -148,6 +134,25 @@ export class TermComponent implements OnInit {
   showAllGenes(event){
     this.assocLoading = true;
     this.reloadGeneAssociations('0', '-1')
+  }
+
+  copyToClipboard(text){
+    let txtArea = document.createElement("textarea");
+    txtArea.style.position = 'fixed';
+    txtArea.style.top = '0';
+    txtArea.style.left = '0';
+    txtArea.style.opacity = '0';
+    txtArea.value = text;
+    document.body.appendChild(txtArea);
+    txtArea.select();
+    try {
+      document.execCommand('copy');
+      document.body.removeChild(txtArea);
+    } catch (err) {
+      console.log('Unable to copy');
+    }
+    return false;
+
   }
 }
 
