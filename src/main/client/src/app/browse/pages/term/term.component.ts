@@ -65,7 +65,7 @@ export class TermComponent implements OnInit {
       this.displayAllGeneAssc = false;
 
       this.diseaseAssoc = new DiseaseAssocDB(res2.diseases);
-      this.diseaseAssocCount = res2.diseaseCount
+      this.diseaseAssocCount = res2.diseaseCount;
       this.diseaseAssocMax = res2.max;
       this.diseaseAssocOffset = res2.offset;
       this.diseaseDisplayCount = (res2.diseaseCount < res2.max)? res2.diseaseCount : res2.max;
@@ -124,7 +124,6 @@ export class TermComponent implements OnInit {
     this.term.synonyms = (term.synonyms.length != 0) ? term.synonyms: ["No synonyms found for this term."];
     this.term.definition = (term.definition != null) ? term.definition: "Sorry this term has no definition.";
     this.term.purl = "http://purl.obolibrary.org/obo/" + term.id.replace(":","_");
-    this.term.comment = (term.comment != null) ? term.comment: "No comments found for this term";
   }
 
   showAllDiseases(event){

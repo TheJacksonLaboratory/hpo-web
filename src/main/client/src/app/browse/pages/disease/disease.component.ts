@@ -26,24 +26,29 @@ export class DiseaseComponent implements OnInit {
   catTermSources = [];
   @ViewChild(MatSort) sort: MatSort;
   constructor(private route: ActivatedRoute, private diseaseService: DiseaseService) {
-    this.route.params.subscribe( params => this.query = params.id);
-  }
-
-  ngOnInit() {
-    this.diseaseService.searchDisease(this.query)
-    .subscribe((data)=>{
-      this.disease  = data.disease;
-      this.setCatTermsDBSource (data.catTermsMap);
-      this.termAssoc = new TermAssocDB(data.termAssoc);
-      this.termSource = new TermAssocDatasource(this.termAssoc, this.sort);
-      this.geneAssoc = new GeneAssocDB(data.geneAssoc);
-      this.geneSource = new GeneAssocDatasource(this.geneAssoc, this.sort);
-      this.isLoading = false;
-    }, (error) => {
-      console.log(error);
+    this.route.params.subscribe( (params) => {
+      this.query = params.id;
+      this.refreshData();
     });
   }
 
+  ngOnInit() {
+  }
+
+  refreshData(){
+    this.diseaseService.searchDisease(this.query)
+      .subscribe((data)=>{
+        this.disease  = data.disease;
+        this.setCatTermsDBSource (data.catTermsMap);
+        this.termAssoc = new TermAssocDB(data.termAssoc);
+        this.termSource = new TermAssocDatasource(this.termAssoc, this.sort);
+        this.geneAssoc = new GeneAssocDB(data.geneAssoc);
+        this.geneSource = new GeneAssocDatasource(this.geneAssoc, this.sort);
+        this.isLoading = false;
+      }, (error) => {
+        console.log(error);
+      });
+  }
   /**
    * Sets DB sources for Category-Term map data
    */

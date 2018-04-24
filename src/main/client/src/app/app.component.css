@@ -23,7 +23,12 @@
 }
 ::ng-deep .item-summary .mat-list-item-content{
   font-size:14px;
-  padding: 0 !important;
+  padding: 5px !important;
+  display:block !important;
+}
+
+::ng-deep .item-summary .mat-list-item{
+  height:auto !important;
 }
 
 ::ng-deep .item-header{

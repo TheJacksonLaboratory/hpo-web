@@ -17,10 +17,10 @@
                 <mat-card-content>
                   <h3 class="card-title">Summary</h3>
                   <hr class="underline-hr">
-                  <p>Entrez ID:&nbsp;{{entrezGene.uid}}</p>
-                  <p>Gene Name:&nbsp;{{entrezGene.name}}</p>
-                  <p>Gene Location:&nbsp;{{entrezGene.maplocation}}</p>
-                  <p><u>Definition</u><br>
+                  <p><strong>Entrez ID</strong>:&nbsp;{{entrezGene.uid}}</p>
+                  <p><strong>Gene Name</strong>:&nbsp;{{entrezGene.name}}</p>
+                  <p><strong>Gene Location</strong>:&nbsp;{{entrezGene.maplocation}}</p>
+                  <p><strong>Definition</strong><br>
                     <i>{{entrezGene.summary}}</i>
                   </p>
                 </mat-card-content>
@@ -32,7 +32,7 @@
               <mat-card class="item-summary mat-elevation-z6">
                   <mat-card-content>
                     <span class="item-title">{{entrezGene.name}}</span>
-                    <a routerLink="/browser/gene/{{entrezGene.uid}}"><strong>{{entrezGene.uid}}</strong></a>
+                    <span class="item-id">{{entrezGene.uid}}</span>
                     <hr class="underline-hr">
                     <mat-list>
                       <mat-list-item>
@@ -50,13 +50,11 @@
                   <!-- Widget tab -->
                   <mat-tab label="UniProt Viewer">
 
-                    <mat-progress-bar  *ngIf="uniProtLoading" class="loading-result-details" color="primary" mode="buffer">
+                    <mat-progress-bar  *ngIf="uniProtLoading" class="loading-protvista" color="primary" mode="buffer">
                     </mat-progress-bar>
 
-                    <div class="ProtVistaContainer col-lg-12">
-
-
-                      <p *ngIf="!uniProtLoading"><a href="{{uniProtWidgetURL}}{{this.uniprotId}}">{{this.uniprotId}}</a></p>
+                    <div class="ProtVistaContainer col-lg-12" >
+                      <p *ngIf="uniprotId != 'error'"><a href="{{uniProtWidgetURL}}{{this.uniprotId}}" target="__blank">{{this.uniprotId}}</a></p>
                       <div class="ProtVistaReference">
                         <div *ngIf="uniprotId == 'error'">
                           <p><strong>No UniProt Reference Could be found for Gene {{entrezGene.name}}</strong></p>
