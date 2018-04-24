@@ -4,7 +4,6 @@ import { Observable } from "rxjs/Observable";
 import 'rxjs/add/observable/of';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from "../../../environments/environment";
-import {forEach} from "@angular/router/src/utils/collection";
 
 @Injectable()
 export class NewsService {
@@ -24,7 +23,7 @@ export class NewsService {
 
   }
 
-
+ /* Return a specific months news */
   getNewsByDate(date: string): Observable<News[]> {
     if (this.allNews && this.allNews[date]) {
       return Observable.of(this.allNews[date]);
@@ -32,7 +31,7 @@ export class NewsService {
       return Observable.of(null);
     }
   }
-
+  /* Return all unique month-years with news*/
   getUniqueDates(): Observable<Array<string>> {
     if (this.allNews) {
       return Observable.of(this._getDates());
@@ -41,7 +40,7 @@ export class NewsService {
     }
   }
 
-  /* Return all dates */
+  /* Return all month years */
   private _getDates(): Array<string> {
     if (this.allNews){
       return Object.keys(this.allNews);
@@ -74,7 +73,7 @@ export class NewsService {
       return news;
     }
   }
-
+  /* Get the news items from the api */
   setAllNews(): void {
     this.http.get(environment.HPO_NEWS_JSON_URL).subscribe((data) => {
       this.allNews = data;

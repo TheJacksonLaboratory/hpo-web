@@ -6,6 +6,7 @@ import { MatListModule} from "@angular/material/list";
 import { SearchModule} from "../../shared/search/search.module";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { HttpClientTestingModule } from "@angular/common/http/testing";
+import { NewsService } from "../../shared/news/news.service";
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -20,7 +21,8 @@ describe('HomeComponent', () => {
         NoopAnimationsModule,
         SearchModule,
         HttpClientTestingModule
-      ]
+      ],
+      providers: [ NewsService ]
     })
     .compileComponents();
   }));
