@@ -14,5 +14,7 @@ export const environment = {
   //UniProt External Url
   HPO_UNIPROT_MAPPING_URL: 'http://www.uniprot.org/uploadlists/',
   //UniProt widget URL
-  HPO_UNIPROT_WIDGET_URL: 'https://www.uniprot.org/uniprot/'
+  HPO_UNIPROT_WIDGET_URL: 'https://www.uniprot.org/uniprot/',
+  //News File
+  HPO_NEWS_JSON_URL: 'https://raw.githubusercontent.com/TheJacksonLaboratory/hpo-web/master/news.json'
 };

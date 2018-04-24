@@ -33,6 +33,6 @@ import {NewsService} from "../shared/news/news.service";
     ContactComponent, CitationComponent, LicenseComponent,
     FaqComponent, NewsComponent, DownloadsComponent
   ],
-  providers:[SearchService, NewsService]
+  providers:[SearchService]
 })
 export class StaticModule { }

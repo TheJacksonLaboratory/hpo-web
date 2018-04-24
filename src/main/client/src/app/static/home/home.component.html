@@ -38,14 +38,16 @@
     <div class="col-lg-4">
       <h3>News & Updates</h3>
       <hr>
-      <div>
-        <mat-list>
-          <mat-list-item>
-            <a routerLink="news">Late July 2017 Release</a>
-            Large amount of term additions; circular graph analysis.
+      <div class="info-body">
+        <mat-list class="list">
+          <mat-list-item *ngFor="let item of teaserNews">
+            <div class="teaser-title">{{item.teaserTitle}}</div>&nbsp; - &nbsp;
+            <div class="teaser-date">{{item.date}}</div>
           </mat-list-item>
-          <br>
         </mat-list>
+        <div class="button-wrapper">
+          <a mat-raised-button routerLink="/news" class="mat-btn">View All News</a>
+        </div>
       </div>
     </div>
   </div>

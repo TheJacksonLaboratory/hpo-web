@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { News } from "../../browse/models/models";
 import { NewsService } from "../../shared/news/news.service";
+import {Observable} from "rxjs/Observable";
 
 @Component({
   selector: 'app-news',
@@ -11,14 +12,20 @@ export class NewsComponent implements OnInit {
   dates: Array<string>;
   currentSelected: string = "April 2018";
   content: Array<News>;
+  error: boolean = false;
   constructor(private newsService: NewsService) {
-    newsService.getUniqueDates().subscribe((dates) => {
-      this.dates = dates;
-    });
-    this.updateNewsItems();
+
   }
 
   ngOnInit() {
+    this.newsService.getUniqueDates().subscribe((dates) => {
+      if(dates){
+        this.dates = dates;
+        this.updateNewsItems();
+      }else{
+        this.error = true;
+      }
+    });
   }
 
   setCurrentDate(date){
@@ -28,9 +35,13 @@ export class NewsComponent implements OnInit {
 
   updateNewsItems(){
     this.newsService.getNewsByDate(this.currentSelected).subscribe((data) =>{
-      this.content = data;
-    })
+      if(data){
+        this.content = data;
+      }else{
+        this.error = true;
+      }
 
+    })
   }
 
 }
