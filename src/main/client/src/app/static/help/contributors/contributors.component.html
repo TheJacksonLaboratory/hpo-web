@@ -1,6 +1,131 @@
-<div class="container">
-  <h1 class="center pageTitle">Contributors</h1>
+<div class="container contributors">
+  <h1 class="center pageTitle">Contributors to the Human Phenotype Ontology</h1>
 
-  <p>Contributors text needed</p>
+  <p>The HPO has been under development since 2008 and has benefited enormously since 2009 from a team-science approach
+    under the auspices of what has become <a target="__blank" href="https://monarchinitiative.org/">Monarch Initiative</a>. From the beginning, the HPO has worked with clinicians to improve,
+    refine and extend areas of the HPO to meet the needs of clinicians and translational researchers.
+    The first such workshop was conducted in 2009 at the Wellcome Trust Sanger Institute with Professors Helen Firth and Nigel Carter.
+    This page represents an incomplete list of all those who have made contributions to the HPO (please let us know about any omissions!).</p>
+  <div class="section">
+    <h2>Core HPO/Monarch Initiative Team</h2>
+    <ul class="big-list">
+      <li>Peter N. Robinson, The Jackson Laboratory for Genomic Medicine, Farmington CT, USA</li>
+      <li>Sebastian Köhler, NeuroCure Cluster of Excellence, Charité Universitätsmedizin Berlin, Berlin Germany</li>
+      <li>Melissa Haendel, Linus Pauling Institute, Oregon State University, Corvallis, OR, USA </li>
+      <li>Chris Mungall, Lawrence Berkeley National Laboratory, Berkeley, California, USA </li>
+      <li>Hannah Blau, The Jackson Laboratory for Genomic Medicine, Farmington CT, USA</li>
+      <li>Leigh Carmody, The Jackson Laboratory for Genomic Medicine, Farmington CT, USA</li>
+      <li>Valentina Cipriani, Queen Mary University of London</li>
+      <li>Tom Conlin, Oregon Health & Science University, Portland, OR, USA</li>
+      <li>Daniel Danis, The Jackson Laboratory for Genomic Medicine, Farmington CT, USA</li>
+      <li>Sandra Doelken, Institute for Medical Genetics, Charité Universitätsmedizin Berlin, Berlin Germany (alumna)</li>
+      <li>Mark Engelstad, Oregon Health & Science University, Portland, OR, USA</li>
+      <li>Erin Foster Oregon Health & Science University, Portland, OR, USA</li>
+      <li>Tudor Groza, Garvan Institute for Medical Research, Sydney, Australia</li>
+      <li>Julius O Jacobsen, Queen Mary University of London</li>
+      <li>HyeongSik Kim, Lawrence Berkeley National Laboratory, Berkeley, California, USA</li>
+      <li>Suzanna Lewis, Lawrence Berkeley National Laboratory, Berkeley, California, USA</li>
+      <li>Julie McMurry, Linus Pauling Institute, Oregon State University, Corvallis, OR, USA</li>
+      <li>Vida Ravanmehr, The Jackson Laboratory for Genomic Medicine, Farmington CT, USA</li>
+      <li>Damian Smedley,Queen Mary University of London</li>
+      <li>Nicole Vasilevsky, Department of Medical Informatics and Clinical Epidemiology, Oregon Health & Science University, Portland, OR, USA </li>
+      <li>Nicole Washingthon, Lawrence Berkeley National Laboratory, Berkeley, California, USA (alumna)           </li>
+      <li>Aaron Zhang, The Jackson Laboratory for Genomic Medicine, Farmington CT, USA    </li>
+    </ul>
+  </div>
+  <div class="section">
+    <h2>OMIM</h2>
+    <p>The initial version of the HPO was constructed in 2008 using a file from the
+      <a target="__blank" href="https://www.omim.org/">Online Mendelian Inheritance in Man (OMIM)</a>
+    resource by extracting the textual descriptions of each disease as listed in OMIM’s Clinical Synopsis section.
+    The HPO was constructed using in-house scripts and Java programs as well as the ontology editing tool
+      <a href="https://www.ncbi.nlm.nih.gov/pubmed/17545183" target="__blank">OBO Edit</a>
+    by manually curating all items that occured twice or more in the entire OMIM corpus. We merged synonyms into unique HPO terms.
+      For instance, the three OMIM descriptions <i>Carpal bone hypoplasia</i>, <i>Hypoplasia of carpal bones</i>, and <i>Hypoplastic carpal bones</i> were
+    fused into the single term HP:0001498, <i>Carpal bone hypoplasia</i>. Domain knowledge was also used to develop a subclass hierarchy
+    and to define the necessary general terms, such as <i>Aplasia/hypoplasia</i> of the outer ear, to group more specific terms, as well as
+    to define links between individual terms. Details about the initial construction of the HPO can be found in the
+      <a href="https://academic.oup.com/nar/article/45/D1/D865/2574174" target="__blank">initial publication</a>
+      We would like to acknowledge countless constructive interactions with the OMIM team since 2008.<br><br>Ada Hamosh <br>Joanna Amberger</p>
+  </div>
 
+  <div class="section orphanet">
+    <h2>Orphanet</h2>
+   <p>The HPO project is collaborating with Orphanet to create an interoperable suite of ontology resources for rare
+    disease based on the HPO and the <a href="http://www.orpha.net/consor/cgi-bin/Disease.php?lng=EN" target="__blank">Orphanet Rare Disease Ontology (ORDO)</a>
+   </p>
+    <ul>
+      <li>Ana Rath</li>
+      <li>Ségolène Aymé</li>
+      <li>Bruno Donadille</li>
+      <li>Marc Hanauer</li>
+      <li>Annie Orlie</li>
+      <li>Halima Lourghi</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>JAX Bar Harbor</h2>
+   <p>The HPO has a long-term collaboration with the
+    <a target="__blank" href="http://www.informatics.jax.org/vocab/mp_ontology">Mammalian Phenotype Ontology</a>
+    team at the Bar Harbor Campus of the <a href="https://www.jax.org/" target="__blank">Jackson Laboratory for Mammalian Genetics</a>
+    designed to create compatible logical definitions of the phenotype terms in a way that will allow cross-species phenotype matching
+    in software such as the <a href="http://monarch-exomiser-web-dev.monarchinitiative.org/exomiser/">Exomiser</a>.<br>
+    Cynthia L. Smith<br>
+    Sue Bello
+   </p>
+  </div>
+
+  <div class="section">
+    <h2>The Phenotype and Trait Ontology Project</h2>
+    <p>
+      The teams in Berlin and in the UK and US first joined forces in 2009 under the auspices of an NIH-funded project
+      that we call the “PATO grant” (2009-2014). Here we laid the foundation for the computational logic that underlies
+      the HPO as well as the Mammalian Phenotype Ontology as well as zebrafish phenotype annotations by developing a
+      scheme for creating logical definitions of individual phenotypic abnormalities. The framework is based on a
+      number of computational resources include the
+      <a href="https://github.com/pato-ontology/pato" target="__blank">Phenotype and Trait Ontology (PATO)</a> and the
+      <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3334586/" target="__blank">Uberon</a> cross-species anatomy ontology.
+      This framework allows not only computational quality control of the ontologies and annotations but also enables cross-species phenotypic comparisons.
+    </p>
+    <ul class="big-list">
+      <li>Michael Ashburner, University of Cambridge, Cambridge UK</li>
+      <li>Sandra Dölken, Institute for Medical Genetics, Charité Universitätsmedizin Berlin, Berlin Germany</li>
+      <li>Georgios V. Gkoutos,University of Cambridge, Cambridge UK</li>
+      <li>Melissa A Haendel Oregon Health and Science University, Portland, OR, USA</li>
+      <li>John Hancock MRC Mammalian Genetics Unit, Harwell, England</li>
+      <li>Sebastian Köhler,Institute for Medical Genetics, Charité Universitätsmedizin Berlin, Berlin Germany</li>
+      <li>Suzanna Lewis, Lawrence Berkeley National Laboratory, Berkeley, California, USA</li>
+      <li>Chris Mungall,Lawrence Berkeley National Laboratory, Berkeley, California, USA</li>
+      <li>Peter N. Robinson, Institute for Medical Genetics, Charité Universitätsmedizin Berlin, Berlin Germany (currently Jackson Laboratory, USA)</li>
+      <li>Barbara Ruef , University of Oregon, Eugene, OR, USA (ZFIN, the Zebrafish Model Organism Database)</li>
+      <li>Paul Schofield,University of Cambridge, Cambridge UK</li>
+      <li>Monte Westerfield, University of Oregon, Eugene, OR, USA (ZFIN, the Zebrafish Model Organism Database)</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>IRDiRC</h2>
+    <p>The International Rare DIseases Research Consortium aims to enable all people living with a rare disease to receive
+    an accurate diagnosis, care, and available therapy within one year of coming to medical attention. The HPO utilized
+    by almost all member countries and has been a key source of collaboration, validation, and community dissemination.
+    HPO has therefore been adopted as a Recommended Resource for use in rare disease diagnostics by the IRDiRC.
+    The <a target="__blank" href="http://www.irdirc.org/activities/task-forces/international-consortium-of-human-phenotype-terminologies/">International Consortium of Human Phenotype Terminologies (ICHPT)</a>
+    was conducted under the auspices of IRDiRC and led by Ségolène Aymé, Ada Hamosh, Ana Rath, Peter Robinson with
+    substantial input by the workshop members listed here The <a target="__blank" href="http://www.irdirc.org/activities/task-forces/international-consortium-of-human-phenotype-terminologies/"></a>
+    </p>
+  </div>
+  <div class="section">
+    <h2>HPO Translations</h2>
+    <p>Please see the <a routerLink="/mapping"> HPO translations page</a> for information about contributors to HPO translation projects</p>
+  </div>
+  <div class="section">
+    <h2>Workshops</h2>
+    <p>
+      This is a partial list of workshops (“hackathons”) conducted over the last decade to add content to the HPO for
+      specific areas of medicine. Please <a routerLink="/contact">contact</a> the HPO team if you would like to work with us on HPO terms for an area of medicine.
+    </p>
+
+  </div>
 </div>
+
