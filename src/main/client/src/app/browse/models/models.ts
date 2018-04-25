@@ -60,4 +60,9 @@ export interface News {
   date: string;
   teaserTitle: string;
 }
+export interface Contributors {
+  lastName: string;
+  firstName: string;
+  location: string;
+}
 
