@@ -54,3 +54,22 @@ export interface TermTree{
   term: Term;
   children: Term[];
 }
+
+export interface TermSearchResult {
+  name: string;
+  id: number;
+  childrenCount: number;
+  ontologyId: string;
+}
+
+export interface DiseaseSearchResult {
+  db: string;
+  dbName: string;
+  dbRef: string;
+  diseaseId: string;
+}
+
+export interface GeneSearchResult {
+  entrezGeneId: number;
+  entrezGeneSymbol: string;
+}

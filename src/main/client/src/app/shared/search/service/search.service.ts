@@ -18,4 +18,9 @@ export class SearchService {
         return this.http
             .get(environment.HPO_API_SEARCH_URL + '?q=' + query, this.options);
     }
+
+    searchFetchAll(query: string): Observable<any>{
+      return this.http
+        .get(environment.HPO_API_SEARCH_URL + '?q=' + query +'&fetchAll=true', this.options);
+    }
 }
