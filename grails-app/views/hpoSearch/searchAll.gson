@@ -7,7 +7,7 @@ json {
   termsOffset resultMap.terms.offset
 
   diseases tmpl.diseaseLite(resultMap.diseases.data)
-  diseasesotalCount resultMap.diseases.totalCount
+  diseasesTotalCount resultMap.diseases.totalCount
   diseasesOffset resultMap.diseases.offset
 
   genes tmpl.geneLite(resultMap.genes.data)

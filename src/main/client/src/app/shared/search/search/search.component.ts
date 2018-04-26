@@ -1,6 +1,7 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import {Disease, Gene, Term} from "../../../browse/models/models";
 import {SearchService} from "../service/search.service";
+import {NavigationExtras, Router} from "@angular/router";
 import {
   trigger,
   state,
@@ -36,10 +37,16 @@ export class SearchComponent implements OnInit {
   terms: Term[] = [];
   diseases: Disease[] = [];
   genes: Gene[] = [];
+  termsCount: number;
+  diseasesCount: number;
+  genesCount: number;
   searchstate: string = "inactive";
   query: string = "";
   navFilter: string = "all";
-  constructor(private searchService: SearchService) { }
+  constructor(private router: Router, private searchService: SearchService) {
+    this.router = router;
+
+  }
 
   ngOnInit() {
   }
@@ -59,6 +66,9 @@ export class SearchComponent implements OnInit {
           this.terms = data.terms;
           this.diseases = data.diseases;
           this.genes = data.genes;
+          this.termsCount = data.termsTotalCount;
+          this.diseasesCount = data.diseasesTotalCount;
+          this.genesCount = data.genesTotalCount;
         }, (error) => {
           // TODO: Implement Better Error Handling
           console.log(error);
@@ -75,4 +85,12 @@ export class SearchComponent implements OnInit {
   }
 
 
+  submitQuery(){
+
+    if(this.searchstate == "active") {
+      this.searchstate = "inactive";
+    }
+
+    this.router.navigate(["/browse/search_results"], {queryParams: {q: this.query, navFilter: this.navFilter}});
+  }
 }

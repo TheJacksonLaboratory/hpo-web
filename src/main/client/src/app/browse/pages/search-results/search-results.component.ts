@@ -16,6 +16,8 @@ export class SearchResultsComponent implements OnInit {
   diseases: DiseaseSearchResult[] = [];
   genes: GeneSearchResult[] = [];
   isLoading: boolean = true;
+  navFilter : string = 'term';
+  selectedTab : number = 0;
 
   termDisplayedColumns = ['ontologyId', 'name', 'childrenCount'];
   termDataSource : MatTableDataSource<TermSearchResult>;
@@ -32,20 +34,32 @@ export class SearchResultsComponent implements OnInit {
 
 
   constructor(private route: ActivatedRoute, private searchService: SearchService ) {
-      this.route.params.subscribe((params) => {
-      this.query = params.q;
+
+    this.route.queryParams.subscribe((params) => {
+      this.query = params['q'];
+      this.navFilter = params['navFilter']
 
       this.reloadResultsData();
+      this.setSelectedTab();
     });
   }
 
   ngAfterViewInit() {
-
   }
 
   ngOnInit() {
   }
 
+  setSelectedTab(){
+
+    if (this.navFilter ==  'disease'){
+      this.selectedTab = 1;
+    }else if (this.navFilter == 'gene'){
+      this.selectedTab = 2;
+    }else if (this.navFilter == 'term' || this.navFilter == 'all'){
+      this.selectedTab = 0;
+    }
+  }
   reloadResultsData(){
 
     this.searchService.searchFetchAll(this.query).subscribe((data) => {
