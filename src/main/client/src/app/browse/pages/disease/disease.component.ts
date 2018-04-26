@@ -48,6 +48,10 @@ export class DiseaseComponent implements OnInit {
       }, (error) => {
         console.log(error);
       });
+    this.diseaseService.searchMonarch(this.query)
+      .subscribe((data) => {
+      this.disease.description = data.description;
+    })
   }
   /**
    * Sets DB sources for Category-Term map data
