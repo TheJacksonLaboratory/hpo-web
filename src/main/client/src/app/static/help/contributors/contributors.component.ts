@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Contributors } from "../../../browse/models/models";
+import {ContributorsService} from "../../../shared/contributors/contributors.service";
 
 @Component({
   selector: 'app-contributors',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContributorsComponent implements OnInit {
 
-  constructor() { }
+  contributorsSource: Contributors[];
+  displayedColumns = ['firstName', 'lastName', 'location'];
+  constructor(private contribService: ContributorsService) { }
 
   ngOnInit() {
-  }
 
+    this.contribService.getContributors().subscribe((contribArray) => {
+      this.contributorsSource = contribArray;
+    });
+  }
 }
