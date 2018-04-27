@@ -11,7 +11,7 @@ const browserRoutes: Routes = [
     { path:'term/:id', component: TermComponent },
     { path:'disease/:id', component: DiseaseComponent},
     { path:'gene/:id', component: GeneComponent },
-    { path:'search_results' , component:SearchResultsComponent}
+    { path:'search', component:SearchResultsComponent}
 ];
 export const browserRouting = RouterModule.forChild(browserRoutes);
 @NgModule({

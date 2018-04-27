@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {MatTableDataSource, MatPaginator} from '@angular/material';
-import {TermSearchResult, GeneSearchResult, DiseaseSearchResult, Term} from "../../models/models";
+import {TermSearchResult, GeneSearchResult, DiseaseSearchResult} from "../../models/models";
 import {SearchService} from "../../../shared/search/service/search.service";
 import {ActivatedRoute } from '@angular/router';
 
@@ -34,8 +34,8 @@ export class SearchResultsComponent implements OnInit {
 
 
   constructor(private route: ActivatedRoute, private searchService: SearchService ) {
-
     this.route.queryParams.subscribe((params) => {
+      this.isLoading = true;
       this.query = params['q'];
       this.navFilter = params['navFilter']
 
@@ -45,6 +45,7 @@ export class SearchResultsComponent implements OnInit {
   }
 
   ngAfterViewInit() {
+
   }
 
   ngOnInit() {

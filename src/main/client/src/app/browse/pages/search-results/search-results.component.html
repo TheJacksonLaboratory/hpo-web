@@ -1,6 +1,6 @@
 <div class="results-component">
 
-  <div [hidden]="isLoading" class="container">
+  <div class="container">
 
     <div class="row">
       <div class="col-lg-offset-2 col-lg-8">
@@ -21,7 +21,7 @@
                        [(selectedIndex)]="selectedTab">
 
           <!-- Term results tab -->
-          <mat-tab label="Term Results">
+          <mat-tab label="Terms Results">
 
               <mat-progress-bar  *ngIf="isLoading" class="loading-result-details" color="primary" mode="buffer">
               </mat-progress-bar>
@@ -64,7 +64,7 @@
           </mat-tab>
 
           <!-- Disease results tab -->
-          <mat-tab label="Disease Results">
+          <mat-tab label="Diseases Results">
 
             <mat-progress-bar  *ngIf="isLoading" class="loading-result-details" color="primary" mode="buffer">
             </mat-progress-bar>

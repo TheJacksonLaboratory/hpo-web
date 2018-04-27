@@ -1,7 +1,7 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import {Disease, Gene, Term} from "../../../browse/models/models";
 import {SearchService} from "../service/search.service";
-import {NavigationExtras, Router} from "@angular/router";
+import {Router} from "@angular/router";
 import {
   trigger,
   state,
@@ -91,6 +91,6 @@ export class SearchComponent implements OnInit {
       this.searchstate = "inactive";
     }
 
-    this.router.navigate(["/browse/search_results"], {queryParams: {q: this.query, navFilter: this.navFilter}});
+    this.router.navigate(["/browse/search"], {queryParams: {q: this.query, navFilter: this.navFilter}});
   }
 }
