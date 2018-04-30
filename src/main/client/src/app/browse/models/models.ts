@@ -23,7 +23,8 @@ export interface Disease {
     aspect?: string;
     synonym?: string;
     date?: string;
-    assignedBy?: string
+    assignedBy?: string;
+    description?: string;
 }
 export class EntrezGene {
     uid?: string;
