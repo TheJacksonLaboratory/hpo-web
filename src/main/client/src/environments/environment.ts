@@ -22,6 +22,6 @@ export const environment = {
   // News File
   HPO_NEWS_JSON_URL: 'https://raw.githubusercontent.com/TheJacksonLaboratory/hpo-web/master/news.json',
   // Contributors File
-  HPO_CONTRIBUTORS_URL: 'https://raw.githubusercontent.com/TheJacksonLaboratory/hpo-web/master/contributors.csv'
+  HPO_CONTRIBUTORS_URL: 'https://raw.githubusercontent.com/monarch-initiative/hpo-web-config/master/individual-contributors.csv'
 };
 

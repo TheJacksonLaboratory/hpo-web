@@ -18,5 +18,5 @@ export const environment = {
   HPO_UNIPROT_WIDGET_URL: 'https://www.uniprot.org/uniprot/',
   //News File
   HPO_NEWS_JSON_URL: 'https://raw.githubusercontent.com/TheJacksonLaboratory/hpo-web/master/news.json',
-  HPO_CONTRIBUTORS_URL: 'https://raw.githubusercontent.com/TheJacksonLaboratory/hpo-web/master/contributors.csv'
+  HPO_CONTRIBUTORS_URL: 'https://raw.githubusercontent.com/monarch-initiative/hpo-web-config/master/individual-contributors.csv'
 };
