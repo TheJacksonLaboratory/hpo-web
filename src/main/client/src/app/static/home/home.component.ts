@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit {
   constructor(private newsService: NewsService) { }
 
   ngOnInit() {
-   this.teaserNews = this.newsService.getTeaserNews();
+   this.teaserNews = this.newsService.getTeaserNews()
   }
   setOverlay(event: Event){
     if(this.searchString && this.checkSourceClass(event.srcElement.className)){

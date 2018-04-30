@@ -13,15 +13,18 @@ export const environment = {
   HPO_API_GENE_SEARCH_URL: HPO_API_BASE_URL + 'search/gene',
   HPO_API_DISEASE_SEARCH_URL: HPO_API_BASE_URL + 'search/disease',
 
+
+  //Monarch external disease definition URL
+  HPO_MONARCH_DISEASE_URL: "https://api.monarchinitiative.org/api/bioentity/disease/",
   //ENTREZ external URL
   HPO_ENTREZ_SEARCH_URL: 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi',
   //UniProt External Url
   HPO_UNIPROT_MAPPING_URL: 'https://www.uniprot.org/uploadlists/',
   //UniProt widget URL
   HPO_UNIPROT_WIDGET_URL: 'https://www.uniprot.org/uniprot/',
-  // News File
-  HPO_NEWS_JSON_URL: 'https://raw.githubusercontent.com/TheJacksonLaboratory/hpo-web/master/news.json',
-  // Contributors File
-  HPO_CONTRIBUTORS_URL: 'https://raw.githubusercontent.com/TheJacksonLaboratory/hpo-web/master/contributors.csv'
+  //Contributors File
+  HPO_CONTRIBUTORS_URL: 'https://raw.githubusercontent.com/monarch-initiative/hpo-web-config/master/individual-contributors.csv',
+  // News
+  HPO_NEWS_JSON_URL: 'https://raw.githubusercontent.com/monarch-initiative/hpo-web-config/master/news.json'
 };
 

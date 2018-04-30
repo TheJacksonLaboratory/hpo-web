@@ -144,6 +144,27 @@
       HPO and are not necessarily up to date. We apologize in advance to anybody who has been inadvertently omitted
       from this list (<a routerLink="/contact">please contact us!</a>).
     </p>
+    <mat-table #table [dataSource]="contributorsSource" *ngIf="contributorsSource">
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+      <ng-container matColumnDef="firstName">
+        <mat-header-cell *matHeaderCellDef> First Name </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.firstName}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="lastName">
+        <mat-header-cell *matHeaderCellDef> Last Name </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.lastName}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="location">
+        <mat-header-cell *matHeaderCellDef> Location </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.location}} </mat-cell>
+      </ng-container>
+    </mat-table>
+    <h4 class="center"> Contributors list temporarily Unavailable. Please <a routerLink="/contact">contact us</a> if this persists.</h4>
   </div>
 </div>
 

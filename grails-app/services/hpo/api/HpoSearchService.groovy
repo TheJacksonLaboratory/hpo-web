@@ -18,20 +18,20 @@ class HpoSearchService {
      * @param searchTerm
      * @return Map
      */
-      Map<String, Map> searchAll(String searchTerm) {
+    Map<String, Map> searchAll(String searchTerm, Integer offsetIn = 0, Integer maxIn = 10) {
 
-        final Map<String, Map> resultMap = ['terms': [data:[]] as Map, 'diseases': [data:[]] as Map, 'genes': [data:[]] as Map]
-        final String trimmedQ = StringUtils.trimToNull(searchTerm)
+      final Map<String, Map> resultMap = ['terms': [data:[]] as Map, 'diseases': [data:[]] as Map, 'genes': [data:[]] as Map]
+      final String trimmedQ = StringUtils.trimToNull(searchTerm)
 
-        if (trimmedQ) {
-          List<String> inputTerms = trimmedQ.split('\\s').toList()
-          resultMap.put('terms', searchTermsAll(inputTerms))
-          resultMap.put('diseases', searchDiseasesAll(inputTerms))
-          resultMap.put('genes', searchGenesAll(inputTerms))
-        }
-        return resultMap
-
+      if (trimmedQ) {
+        List<String> inputTerms = trimmedQ.split('\\s').toList()
+        resultMap.put('terms', searchTermsAll(inputTerms, offsetIn, maxIn))
+        resultMap.put('diseases', searchDiseasesAll(inputTerms, offsetIn, maxIn))
+        resultMap.put('genes', searchGenesAll(inputTerms, offsetIn, maxIn))
       }
+      return resultMap
+
+    }
 
     /**
      * Builds and executes a query against DbDisease domain object to return Disease by the disease name.

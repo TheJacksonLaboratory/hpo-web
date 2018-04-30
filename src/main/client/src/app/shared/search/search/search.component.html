@@ -1,23 +1,24 @@
 <div class="search-wrapper">
-  <mat-select class="search-filter" placeholder="All" [(value)]="navFilter">
-    <mat-option value="all">All</mat-option>
-    <mat-option value="term">Term</mat-option>
-    <mat-option value="disease">Disease</mat-option>
-    <mat-option value="gene">Gene</mat-option>
-  </mat-select>
-  <input class="searchbar" matInput #search placeholder="Search for phenotypes, diseases, genes..." [value]="query"
-         (input)="suggestContent(search.value)">
-  <p class="hint">
-    <strong>e.g. <a (click)="setQuery('Abnormality of the bladder')">Abnormality of the bladder</a> |
-      <a (click)="setQuery('Bladder Cancer')">Bladder Cancer</a> |
-      <a (click)="setQuery('TP53')">TP53</a></strong>
-  </p>
+    <mat-select class="search-filter" placeholder="All" [(value)]="navFilter">
+      <mat-option value="all">All</mat-option>
+      <mat-option value="term">Term</mat-option>
+      <mat-option value="disease">Disease</mat-option>
+      <mat-option value="gene">Gene</mat-option>
+    </mat-select>
+    <input class="searchbar" matInput #search placeholder="Search for phenotypes, diseases, genes..." [value]="query"
+           (input)="suggestContent(search.value)"
+           (keyup.enter)="submitQuery()">
+    <p class="hint">
+      <strong>e.g. <a (click)="setQuery('Abnormality of the bladder')">Abnormality of the bladder</a> |
+        <a (click)="setQuery('Bladder Cancer')">Bladder Cancer</a> |
+        <a (click)="setQuery('TP53')">TP53</a></strong>
+    </p>
   <div class="search-spacer">
   </div>
   <div class="search-output mat-elevation-z4" [@searchState]="searchstate">
     <div class="term-result" *ngIf="(navFilter == 'term' || navFilter == 'all') && terms.length > 0 ">
           <span  class="result-title">
-            Terms
+             <a routerLink="/browse/search/"  [queryParams]="{'q':query, 'navFilter':'term'}">Terms ( {{termsCount}} )</a>
           </span>
       <br>
       <div class="result-list">
@@ -31,7 +32,7 @@
 
     <div class="disease-result" *ngIf="(navFilter == 'disease' || navFilter == 'all') && diseases.length > 0">
           <span  class="result-title">
-            Diseases
+            <a routerLink="/browse/search/"  [queryParams]="{'q':query, 'navFilter':'disease'}">Diseases ( {{diseasesCount}} )</a>
           </span>
       <div class="result-list">
             <span class="result" routerLink="/browse/disease/{{item.diseaseId}}" *ngFor="let item of diseases;" >
@@ -44,7 +45,7 @@
 
     <div class="gene-result" *ngIf="(navFilter == 'gene' || navFilter == 'all') && genes.length > 0">
           <span  class="result-title">
-            Genes
+            <a routerLink="/browse/search/"  [queryParams]="{'q':query, 'navFilter':'gene'}">Genes ( {{genesCount}} )</a>
           </span>
       <div class="result-list">
             <span class="result" routerLink="/browse/gene/{{item.entrezGeneId}}" *ngFor="let item of genes;" >

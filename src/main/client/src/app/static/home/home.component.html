@@ -39,14 +39,19 @@
       <h3>News & Updates</h3>
       <hr>
       <div class="info-body">
-        <mat-list class="list">
-          <mat-list-item *ngFor="let item of teaserNews">
-            <div class="teaser-title">{{item.teaserTitle}}</div>&nbsp; - &nbsp;
-            <div class="teaser-date">{{item.date}}</div>
-          </mat-list-item>
-        </mat-list>
-        <div class="button-wrapper">
-          <a mat-raised-button routerLink="/news" class="mat-btn">View All News</a>
+        <div *ngIf="teaserNews">
+          <mat-list class="list">
+            <mat-list-item *ngFor="let item of teaserNews">
+              <div class="teaser-title">{{item.teaserTitle}}</div>&nbsp; - &nbsp;
+              <div class="teaser-date">{{item.date}}</div>
+            </mat-list-item>
+          </mat-list>
+          <div class="button-wrapper">
+            <a mat-raised-button routerLink="/news" class="mat-btn">View All News</a>
+          </div>
+        </div>
+        <div *ngIf="!teaserNews">
+          Temporarily Unavailable. Please <a routerLink="/contact">contact us </a> if this does not return soon.
         </div>
       </div>
     </div>
