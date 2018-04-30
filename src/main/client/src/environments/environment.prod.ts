@@ -10,6 +10,8 @@ export const environment = {
   HPO_API_GENE_SEARCH_URL: HPO_API_BASE_URL + 'search/gene',
   HPO_API_DISEASE_SEARCH_URL: HPO_API_BASE_URL + 'search/disease',
 
+  //Monarch external disease definition URL
+  HPO_MONARCH_DISEASE_URL: "https://api.monarchinitiative.org/api/bioentity/disease/",
   //ENTREZ external URL
   HPO_ENTREZ_SEARCH_URL: 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi',
   //UniProt External Url
