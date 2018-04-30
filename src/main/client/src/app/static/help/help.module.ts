@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HelpRoutingModule } from './help-routing.module';
-
+import { GlobalMaterialModules } from "../../shared/modules/global.module";
+import { ContributorsService } from "../../shared/contributors/contributors.service";
 // Components
 import { AnnotationComponent} from "./annotation/annotation.component";
 import { ClinicianGuideComponent} from "./clinician-guide/clinician-guide.component";
@@ -18,11 +19,13 @@ import { ContributorsComponent } from './contributors/contributors.component';
 @NgModule({
   imports: [
     CommonModule,
-    HelpRoutingModule
+    HelpRoutingModule,
+    GlobalMaterialModules
   ],
   declarations: [AnnotationComponent, ClinicianGuideComponent, CollaborationComponent,
     DefinitionsComponent, HistoryComponent, IntroductionComponent, LaypersonComponent , MappingComponent,
     UsersComponent, ContributorsComponent
-    ]
+    ],
+  providers: [ContributorsService]
 })
 export class HelpModule { }
