@@ -21,7 +21,7 @@
                        [(selectedIndex)]="selectedTab">
 
           <!-- Term results tab -->
-          <mat-tab label="Terms Results">
+          <mat-tab label="Term Results">
 
               <mat-progress-bar  *ngIf="isLoading" class="loading-result-details" color="primary" mode="buffer">
               </mat-progress-bar>
@@ -55,7 +55,7 @@
 
                   <!-- Weight Column -->
                   <ng-container matColumnDef="childrenCount">
-                    <mat-header-cell *matHeaderCellDef> Children Count </mat-header-cell>
+                    <mat-header-cell *matHeaderCellDef> No. Descendants </mat-header-cell>
                     <mat-cell *matCellDef="let row"> {{row.childrenCount}} </mat-cell>
                   </ng-container>
                 </mat-table>
@@ -64,7 +64,7 @@
           </mat-tab>
 
           <!-- Disease results tab -->
-          <mat-tab label="Diseases Results">
+          <mat-tab label="Disease Results">
 
             <mat-progress-bar  *ngIf="isLoading" class="loading-result-details" color="primary" mode="buffer">
             </mat-progress-bar>
@@ -104,7 +104,7 @@
 
 
           <!-- Gene results tab -->
-          <mat-tab label="Genes Results">
+          <mat-tab label="Gene Results">
 
             <mat-progress-bar  *ngIf="isLoading" class="loading-result-details" color="primary" mode="buffer">
             </mat-progress-bar>

@@ -44,10 +44,6 @@ export class SearchResultsComponent implements OnInit {
     });
   }
 
-  ngAfterViewInit() {
-
-  }
-
   ngOnInit() {
   }
 
