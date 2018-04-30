@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {MatTableDataSource, MatPaginator} from '@angular/material';
-import {TermSearchResult, GeneSearchResult, DiseaseSearchResult} from "../../models/models";
+import {Term, Gene, Disease} from "../../models/models";
 import {SearchService} from "../../../shared/search/service/search.service";
 import {ActivatedRoute } from '@angular/router';
 
@@ -12,21 +12,21 @@ import {ActivatedRoute } from '@angular/router';
 export class SearchResultsComponent implements OnInit {
 
   query: string;
-  terms: TermSearchResult[] = [];
-  diseases: DiseaseSearchResult[] = [];
-  genes: GeneSearchResult[] = [];
+  terms: Term[] = [];
+  diseases: Disease[] = [];
+  genes: Gene[] = [];
   isLoading: boolean = true;
   navFilter : string = 'term';
   selectedTab : number = 0;
 
   termDisplayedColumns = ['ontologyId', 'name', 'childrenCount'];
-  termDataSource : MatTableDataSource<TermSearchResult>;
+  termDataSource : MatTableDataSource<Term>;
 
   diseaseDisplayedColumns = ['diseaseId', 'dbName'];
-  diseaseDataSource : MatTableDataSource<DiseaseSearchResult>;
+  diseaseDataSource : MatTableDataSource<Disease>;
 
   geneDisplayedColumns = ['entrezGeneId', 'entrezGeneSymbol'];
-  geneDataSource : MatTableDataSource<GeneSearchResult>;
+  geneDataSource : MatTableDataSource<Gene>;
 
   @ViewChild('termPaginator') termPaginator: MatPaginator;
   @ViewChild('diseasePaginator') diseasePaginator: MatPaginator;
@@ -37,7 +37,7 @@ export class SearchResultsComponent implements OnInit {
     this.route.queryParams.subscribe((params) => {
       this.isLoading = true;
       this.query = params['q'];
-      this.navFilter = params['navFilter']
+      this.navFilter = params['navFilter'];
 
       this.reloadResultsData();
       this.setSelectedTab();
