@@ -6,6 +6,7 @@ import { MatListModule} from "@angular/material/list";
 import { SearchModule} from "../../shared/search/search.module";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { HttpClientTestingModule } from "@angular/common/http/testing";
+import { RouterTestingModule} from "@angular/router/testing";
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -19,7 +20,8 @@ describe('HomeComponent', () => {
         MatListModule,
         NoopAnimationsModule,
         SearchModule,
-        HttpClientTestingModule
+        HttpClientTestingModule,
+        RouterTestingModule
       ]
     })
     .compileComponents();
