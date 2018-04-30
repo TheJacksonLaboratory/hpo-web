@@ -18,6 +18,7 @@ import { FaqComponent } from './resources/faq/faq.component';
 import {SearchService} from "../shared/search/service/search.service";
 import {NewsComponent} from "./news/news.component";
 import {DownloadsComponent} from "./downloads/downloads.component";
+import {NewsService} from "../shared/news/news.service";
 
 @NgModule({
   imports: [

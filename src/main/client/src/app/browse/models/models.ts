@@ -55,3 +55,10 @@ export interface TermTree{
   term: Term;
   children: Term[];
 }
+export interface News {
+  title: string;
+  body: string;
+  date: string;
+  teaserTitle: string;
+}
+
