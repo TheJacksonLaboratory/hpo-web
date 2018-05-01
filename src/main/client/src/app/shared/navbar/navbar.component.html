@@ -33,7 +33,6 @@
   <!-- Help Menu and SubMenus -->
   <mat-menu [overlapTrigger]="false" #helpMenu="matMenu">
     <button mat-menu-item [matMenuTriggerFor]="infoMenu">Information</button>
-
     <button mat-menu-item routerLink="help/clinician-guide"> Clinicians Guide </button>
     <button mat-menu-item [matMenuTriggerFor]="howtoMenu">How to..</button>
     <button mat-menu-item routerLink="help/layperson"> Layperson Synonyms </button>
@@ -51,8 +50,10 @@
     <button mat-menu-item routerLink="help/introduction"> Introduction </button>
     <button mat-menu-item routerLink="help/history"> History </button>
     <button mat-menu-item routerLink="contact"> Contact </button>
-    <button mat-menu-item routerLink="help/contributors"> Contributors </button>
     <button mat-menu-item routerLink="help/users">  Users </button>
+    <button mat-menu-item routerLink="help/contributors"> Contributors </button>
+    <button mat-menu-item routerLink="help/publications"> Publications </button>
+    <button mat-menu-item routerLink="help/funding"> Funding </button>
   </mat-menu>
   <!-- ------ -->
   <div class="fill-remaining-space">
