@@ -14,6 +14,8 @@ import { LaypersonComponent } from './layperson/layperson.component';
 import { MappingComponent } from './mapping/mapping.component';
 import { UsersComponent} from "./users/users.component";
 import { ContributorsComponent } from './contributors/contributors.component';
+import { PublicationsComponent } from './publications/publications.component';
+import { FundingComponent } from './funding/funding.component';
 
 
 @NgModule({
@@ -24,7 +26,7 @@ import { ContributorsComponent } from './contributors/contributors.component';
   ],
   declarations: [AnnotationComponent, ClinicianGuideComponent, CollaborationComponent,
     DefinitionsComponent, HistoryComponent, IntroductionComponent, LaypersonComponent , MappingComponent,
-    UsersComponent, ContributorsComponent
+    UsersComponent, ContributorsComponent, PublicationsComponent, FundingComponent
     ],
   providers: [ContributorsService]
 })
