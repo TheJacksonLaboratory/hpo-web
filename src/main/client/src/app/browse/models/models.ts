@@ -48,6 +48,7 @@ export interface Term {
     isObsolete?: boolean;
     xrefs?: Array<string>;
     purl?: string;
+    childrenCount?: number;
 }
 
 export interface TermTree{
