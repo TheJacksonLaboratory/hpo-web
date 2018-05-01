@@ -13,6 +13,12 @@
     width: 175px;
 }
 
-.footer .footer-brand:hover{
+.footer .footer-brand-larger{
+  height: 50px;
+  width: 150px;
+  margin: 0 0 0 25px;
+}
+
+.footer .footer-brand:hover, .footer .footer-brand-larger:hover{
   opacity:.6;
 }
