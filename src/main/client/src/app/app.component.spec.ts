@@ -9,6 +9,7 @@ import { GlobalMaterialModules } from "./shared/modules/global.module";
 import { FormsModule } from "@angular/forms";
 import { ExtrasModule } from "./shared/modules/extras.module";
 import { SearchService } from "./shared/search/service/search.service";
+import { NewsService } from "./shared/news/news.service";
 import { SearchModule } from "./shared/search/search.module";
 
 
@@ -27,7 +28,7 @@ describe('AppComponent', () => {
         NavbarComponent,
         FooterComponent
       ],
-      providers: [ SearchService ]
+      providers: [ SearchService, NewsService ]
     }).compileComponents();
   }));
 

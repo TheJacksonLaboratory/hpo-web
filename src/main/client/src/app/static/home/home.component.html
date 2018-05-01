@@ -38,21 +38,22 @@
     <div class="col-lg-4">
       <h3>News & Updates</h3>
       <hr>
-      <p>This section is under construction.<br><br> Please refer to <a href="http://human-phenotype-ontology.github.io/">http://human-phenotype-ontology.github.io/</a> for recent news.</p>
-      <!--<div>
-        <mat-list>
-          <mat-list-item>
-            Paper on novel annotation model
-          </mat-list-item>
-          <mat-list-item>
-            Nature Genetics Paper on layperson vocabulary
-          </mat-list-item>
-          <mat-list-item>
-            March 2018 Release
-          </mat-list-item>
-          <br>
-        </mat-list>
-      </div>-->
+      <div class="info-body">
+        <div *ngIf="teaserNews">
+          <mat-list class="list">
+            <mat-list-item *ngFor="let item of teaserNews">
+              <div class="teaser-title">{{item.teaserTitle}}</div>&nbsp; - &nbsp;
+              <div class="teaser-date">{{item.date}}</div>
+            </mat-list-item>
+          </mat-list>
+          <div class="button-wrapper">
+            <a mat-raised-button routerLink="/news" class="mat-btn">View All News</a>
+          </div>
+        </div>
+        <div *ngIf="!teaserNews">
+          Temporarily Unavailable. Please <a routerLink="/contact">contact us </a> if this does not return soon.
+        </div>
+      </div>
     </div>
   </div>
 </div>

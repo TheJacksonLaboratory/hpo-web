@@ -1,6 +1,6 @@
-import {Component, EventEmitter, OnInit} from '@angular/core';
-import {OutputEmitter} from "@angular/compiler/src/output/abstract_emitter";
-import {Output} from "@angular/core";
+import {Component, OnInit} from '@angular/core';
+import { NewsService} from "../../shared/news/news.service";
+import { News } from "../../browse/models/models";
 
 @Component({
   selector: 'app-home',
@@ -11,9 +11,11 @@ export class HomeComponent implements OnInit {
 
   clearSearch: boolean = false;
   searchString: string;
-  constructor() { }
+  teaserNews: News[];
+  constructor(private newsService: NewsService) { }
 
   ngOnInit() {
+   this.teaserNews = this.newsService.getTeaserNews()
   }
   setOverlay(event: Event){
     if(this.searchString && this.checkSourceClass(event.srcElement.className)){
@@ -26,8 +28,6 @@ export class HomeComponent implements OnInit {
   checkSourceClass(cls: string): boolean {
     if(cls.includes("container") || cls.includes("row") || cls.includes("home-search")){
       return true;
-    }else{
-      return false;
     }
   }
 }

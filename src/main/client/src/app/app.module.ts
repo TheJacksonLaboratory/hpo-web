@@ -16,6 +16,7 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { NoPageFoundComponent } from './error/no-page-found.component';
 import {SearchModule} from "./shared/search/search.module";
+import {NewsService} from "./shared/news/news.service";
 
 @NgModule({
   declarations: [
@@ -33,7 +34,7 @@ import {SearchModule} from "./shared/search/search.module";
     RoutingModule,
     SearchModule
   ],
-  providers: [SearchService],
+  providers: [SearchService, NewsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
