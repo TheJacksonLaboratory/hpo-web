@@ -3,9 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { MatSort } from '@angular/material';
 
 import { Disease,Gene,Term } from '../../models/models';
-import { TermAssocDB, GeneAssocDB} from '../../models/associations/datasources/associations-db'
-import { TermAssocDatasource } from '../../models/associations/datasources/term-assoc-datasource'
-import { GeneAssocDatasource} from '../../models/associations/datasources/gene-assoc-datasource'
+import { MatTableDataSource, MatPaginator} from '@angular/material';
 import { DiseaseService } from '../../services/disease/disease.service';
 
 @Component({
@@ -16,15 +14,18 @@ import { DiseaseService } from '../../services/disease/disease.service';
 export class DiseaseComponent implements OnInit {
   query: string;
   disease: Disease = {"db":"", "dbObjectId": "0", "dbName":"", "dbReference": ""};
+  termAssoc: Term[]=[];
+  geneAssoc: Gene[]=[];
   termColumns = ['ontologyId','name', 'definition'];
   geneColumns = ['entrezGeneId', 'entrezGeneSymbol'];
-  termSource: TermAssocDatasource |  null;
-  geneSource: GeneAssocDatasource | null;
-  termAssoc: TermAssocDB;
-  geneAssoc: GeneAssocDB;
+  termDataSource : MatTableDataSource<Term>;
+  geneDataSource : MatTableDataSource<Gene>;
   isLoading: boolean = true;
   catTermSources = [];
   @ViewChild(MatSort) sort: MatSort;
+
+  @ViewChild('genePaginator') genePaginator: MatPaginator;
+
   constructor(private route: ActivatedRoute, private diseaseService: DiseaseService) {
     this.route.params.subscribe( (params) => {
       this.query = params.id;
@@ -39,11 +40,14 @@ export class DiseaseComponent implements OnInit {
     this.diseaseService.searchDisease(this.query)
       .subscribe((data)=>{
         this.disease  = data.disease;
+        this.termAssoc = data.termAssoc;
+        this.geneAssoc = data.geneAssoc;
         this.setCatTermsDBSource (data.catTermsMap);
-        this.termAssoc = new TermAssocDB(data.termAssoc);
-        this.termSource = new TermAssocDatasource(this.termAssoc, this.sort);
-        this.geneAssoc = new GeneAssocDB(data.geneAssoc);
-        this.geneSource = new GeneAssocDatasource(this.geneAssoc, this.sort);
+
+        this.termDataSource = new MatTableDataSource(this.termAssoc);
+        this.geneDataSource = new MatTableDataSource(this.geneAssoc);
+
+        this.geneDataSource.paginator = this.genePaginator;
         this.isLoading = false;
       }, (error) => {
         console.log(error);
@@ -60,8 +64,7 @@ export class DiseaseComponent implements OnInit {
     for (let i in catTermsMap) {
       let catLabel = catTermsMap[i].catLabel;
       let annotationCount = catTermsMap[i].terms.length;
-      let termAssoc = new TermAssocDB(catTermsMap[i].terms);
-      let termSource = new TermAssocDatasource(termAssoc, this.sort);;
+      let termSource = new MatTableDataSource(catTermsMap[i].terms);
       this.catTermSources.push({catLabel, annotationCount,  termSource});
     }
     this.catTermSources.sort((a, b) => {
@@ -70,4 +73,11 @@ export class DiseaseComponent implements OnInit {
       else return 0;
     });
   }
+
+  applyGeneFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    this.geneDataSource.filter = filterValue;
+  }
+
 }

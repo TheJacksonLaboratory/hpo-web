@@ -123,7 +123,7 @@ class HpoTermService {
 
     final Map<String, Object> resultMap = [diseaseList:[], diseaseCount:0]
     final List<DbDisease> diseaseList = []
-    final List<Long> diseaseIdList = getDiseaseListForAssociatedTerms(terms)
+    final List<Long> diseaseIdList = getDiseaseListForAssociatedTerms(terms).unique()
 
     if (diseaseIdList) {
       diseaseList = DbDisease.findAllByIdInList(diseaseIdList, [offset:offset, max:max, sort: 'diseaseName', order: 'asc'])
@@ -168,7 +168,7 @@ class HpoTermService {
     stopWatch.start()
     final Map<String, Object> resultMap = [geneList:[], geneCount:0]
     final List<DbGene> geneList = []
-    final List<Long> geneIdList = getGeneListForAssociatedTerms(terms)
+    final List<Long> geneIdList = getGeneListForAssociatedTerms(terms).unique()
     if (geneIdList) {
       geneList = DbGene.findAllByIdInList(geneIdList, [offset:offset, max:max, sort: 'entrezGeneSymbol', order: 'asc'])
       resultMap.geneCount = geneIdList.size()

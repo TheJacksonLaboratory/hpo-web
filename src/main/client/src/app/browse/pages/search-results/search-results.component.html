@@ -72,14 +72,18 @@
 
             <mat-progress-bar  *ngIf="isLoading" class="loading-result-details" color="primary" mode="buffer">
             </mat-progress-bar>
+
             <div [hidden]="diseases.length == 0">
               <div class="filter-container mat-elevation-z8">
+
+                <!-- filter -->
                 <div class="filter-header">
                   <mat-form-field>
                     <input matInput (keyup)="applyDiseaseFilter($event.target.value)" placeholder="Filter">
                   </mat-form-field>
                 </div>
 
+                <!-- Disease table-->
                 <mat-table #table [dataSource]="diseaseDataSource">
 
                   <mat-header-row *matHeaderRowDef="diseaseDisplayedColumns"></mat-header-row>
@@ -101,6 +105,7 @@
                   </ng-container>
                 </mat-table>
 
+                <!--paging component-->
                 <mat-paginator #diseasePaginator [pageSizeOptions]="[50, 100, 500]"></mat-paginator>
               </div>
             </div>
@@ -117,12 +122,15 @@
             </mat-progress-bar>
             <div [hidden]="genes.length == 0">
               <div class="filter-container mat-elevation-z8">
+
+                <!-- filter -->
                 <div class="filter-header">
                   <mat-form-field>
                     <input matInput (keyup)="applyGeneFilter($event.target.value)" placeholder="Filter">
                   </mat-form-field>
                 </div>
 
+                <!-- Gene table -->
                 <mat-table #table [dataSource]="geneDataSource">
 
                   <mat-header-row *matHeaderRowDef="geneDisplayedColumns"></mat-header-row>

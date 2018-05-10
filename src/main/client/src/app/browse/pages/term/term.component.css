@@ -1,8 +1,8 @@
-.mat-form-field {
-    font-size: 14px;
-    flex-grow: 1;
-    margin-left: 32px;
-  }
+/*.mat-form-field {*/
+    /*font-size: 14px;*/
+    /*flex-grow: 1;*/
+    /*margin-left: 32px;*/
+  /*}*/
  .gene-association .mat-column-entrezGeneId{
      max-width: 250px;
  }
@@ -172,12 +172,35 @@
 .associationsPaging{
   text-align: right;
   padding-right: 10px;
-  margin-bottom: 5px;
-  margin-top: 5px;
+  margin-bottom: 1px;
+  margin-top: 1px;
+}
+
+.associationsPaging p{
+  margin-bottom: 1px;
+  margin-top: 1px;
 }
 
 .copyToClipboard{
   font-size: 12px;
   cursor: copy;
   padding: 5px;
+}
+
+
+.filter-container {
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+}
+
+.filter-header {
+  min-height: 24px;
+  padding: 2px 24px 0;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+  padding-bottom: 1px;
 }
