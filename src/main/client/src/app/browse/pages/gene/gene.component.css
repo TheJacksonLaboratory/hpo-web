@@ -23,6 +23,7 @@
 .gene-component .associations.disease-association{
     float:left;
     margin:0 0 15px 8px;
+    width: 99%;
 }
 .gene-component .associations.term-association{
     float:left;
