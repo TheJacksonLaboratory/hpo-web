@@ -1,0 +1,43 @@
+<div class="container">
+  <h1 class="pageTitle center">Download Ontology</h1>
+  <h2>hp.obo</h2>
+  <p>The <a href="http://owlcollab.github.io/oboformat/doc/GO.format.obo-1_2.html"
+            target="_blank">OBO flat file format</a>  is a simple way of representing an
+    ontology that models represent a subset of the concepts in the OWL description
+    logic language. The OBO format was designed to maximize human readability and has
+    been widely used in the field of bio-ontologies and was probably one of the
+    many factors responsible for the success of the
+    <a href="https://www.ncbi.nlm.nih.gov/pubmed/10802651" target="_blank">Gene Ontology</a>.
+    The HPO file in OBO format can be downloaded here:
+  </p>
+  <ul>
+    <li><a href="http://purl.obolibrary.org/obo/hp.obo" target="__blank">http://purl.obolibrary.org/obo/hp.obo</a></li>
+  </ul>
+  <h2>hp.owl</h2>
+  <p>OWL, which stands for <em><a href="https://www.w3.org/TR/owl2-overview/" target="_blank">Web
+    Ontology Language</a></em>, is an ontology language for the semantic web. The
+    OWL version of the HPO (which is the primary version) contains some features that the OBO
+    version does not, including the logical definitions of HPO classes. Consider
+    for instance the following definition of the HPO term for
+    <a routerLink="/browse/term/HP:0000483">Astigmatism</a>.
+  </p>
+  <pre>
+  'has part' some
+    ('asymmetrically curved'
+       and ('inheres in' some cornea)
+       and ('has modifier' some abnormal))
+   </pre>
+  <p>The logical makes use of terms from the <a href="https://github.com/pato-ontology/pato" target="_blank">PATO</a>
+    Phenotype And Trait Ontology as well as the <a href="http://uberon.github.io/" target="_blank">UBERON</a>
+    cross-species anatomy ontology in order to define
+    <em><a href="https://en.wikipedia.org/wiki/Astigmatism" target="_blank">Astigmatism</a></em> as an
+    abnormal asymmetric curvature of the cornea. A number of HPO-based algorithms make use of these definitions to
+    link to definitions of mouse phenotypes at the <a href="http://www.informatics.jax.org/" target="_blank">Mouse Genome Informatics</a>
+    resource, for quality control, and other purposes. For many of the HPO algorithms that are primarily
+    intended for clinical phenotype matching, these features are not relevant and either the OBO or the OWL format are suitable.
+    The HPO file in OWL format can be downloaded here:
+  </p>
+  <ul>
+    <li><a href="http://purl.obolibrary.org/obo/hp.owl" target="__blank">http://purl.obolibrary.org/obo/hp.owl</a></li>
+  </ul>
+</div>
