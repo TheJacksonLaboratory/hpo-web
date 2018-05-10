@@ -26,7 +26,7 @@ class HpoHomeSearchSpec extends  GebReportingSpec {
     go '/app/index.html'
 
     then: "The title is correct"
-    title == "HPO"
+    title == "Human Phenotype Ontology"
   }
 
     void "test term search input" (){

@@ -17,8 +17,8 @@ import { FaqComponent } from './resources/faq/faq.component';
 // Pipe
 import {SearchService} from "../shared/search/service/search.service";
 import {NewsComponent} from "./news/news.component";
-import {DownloadsComponent} from "./downloads/downloads.component";
-import {NewsService} from "../shared/news/news.service";
+import { OntologyComponent } from './downloads/ontology/ontology.component';
+import { AnnotationsDownloadComponent} from "./downloads/annotations/annotations.component";
 
 @NgModule({
   imports: [
@@ -31,7 +31,7 @@ import {NewsService} from "../shared/news/news.service";
   ],
   declarations: [ HomeComponent,
     ContactComponent, CitationComponent, LicenseComponent,
-    FaqComponent, NewsComponent, DownloadsComponent
+    FaqComponent, NewsComponent, OntologyComponent, AnnotationsDownloadComponent
   ],
   providers:[SearchService]
 })
