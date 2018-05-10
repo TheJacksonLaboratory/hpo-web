@@ -134,7 +134,7 @@ a.mat-btn{
   text-align: center;
   border: 1px solid #bdbdbd;
   border-radius: 3px;
-  min-height: 125px;
+  min-height: 165px;
   cursor: pointer;
   margin:0 25px 0 0;
 }
@@ -163,5 +163,12 @@ a .irdirc{
   height:80px;
   margin:0 0 5px 0;
 }
+
+.highlight-item-logo {
+  width: 150px;
+  height:60px;
+  margin:0 0 5px 0;
+}
+
 
 
