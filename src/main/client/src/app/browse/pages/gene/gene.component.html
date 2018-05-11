@@ -71,7 +71,7 @@
                           <!-- filter -->
                           <div class="filter-header">
                             <mat-form-field>
-                              <input matInput (keyup)="applyTermFilter($event.target.value)" placeholder="Filter">
+                              <input id="termFilterInput" matInput (keyup)="applyTermFilter($event.target.value)" placeholder="Filter">
                             </mat-form-field>
                           </div>
 
@@ -114,7 +114,7 @@
                           <!-- filter -->
                           <div class="filter-header">
                             <mat-form-field>
-                              <input matInput (keyup)="applyDiseaseFilter($event.target.value)" placeholder="Filter">
+                              <input id="diseaseFilterInput" matInput (keyup)="applyDiseaseFilter($event.target.value)" placeholder="Filter">
                             </mat-form-field>
                           </div>
 
