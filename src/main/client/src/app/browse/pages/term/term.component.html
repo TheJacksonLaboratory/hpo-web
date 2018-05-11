@@ -89,7 +89,7 @@
                             <!-- filter. Display when all results are loaded -->
                             <div id="diseaseFilter" *ngIf="displayAllDiseaseAssc" class="filter-header">
                               <mat-form-field>
-                                <input matInput (keyup)="applyDiseaseFilter($event.target.value)" placeholder="Filter by disease">
+                                <input id="diseaseFilterInput" matInput (keyup)="applyDiseaseFilter($event.target.value)" placeholder="Filter by disease">
                               </mat-form-field>
                             </div>
 
@@ -149,7 +149,7 @@
                     <!-- filter. Display when all results are loaded -->
                     <div id="geneFilter" *ngIf="displayAllGeneAssc" class="filter-header">
                       <mat-form-field>
-                        <input matInput (keyup)="applyGeneFilter($event.target.value)" placeholder="Filter by gene">
+                        <input id="geneFilterInput" matInput (keyup)="applyGeneFilter($event.target.value)" placeholder="Filter by gene">
                       </mat-form-field>
                     </div>
 

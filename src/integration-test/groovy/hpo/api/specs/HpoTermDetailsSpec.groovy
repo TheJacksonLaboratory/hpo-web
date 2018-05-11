@@ -51,4 +51,33 @@ class HpoTermDetailsSpec extends  GebReportingSpec {
     termDetailsPage.genePagingElementAll.text().startsWith("Count:")
 
   }
+
+  void "test disease filter" (){
+
+    when:
+    TermDetailsPage termDetailsPage = browser.to(TermDetailsPage)
+
+    then:
+    termDetailsPage.diseasePagingElement.text().startsWith("Displaying")
+
+    when:
+    termDetailsPage.loadDiseaseAssociations()
+
+    then:
+    termDetailsPage.diseasePagingElement.text().startsWith("Displaying")
+
+    when:
+    termDetailsPage.loadAllDiseases()
+
+    then:
+    termDetailsPage.diseasePagingElementAll.text().startsWith("Count:")
+
+    when:
+    waitFor(5){termDetailsPage.diseaseFilterElement.value('disability')}
+
+    then:
+    waitFor {
+      termDetailsPage.diseasePagingRangeLabelElement.text() == '1 - 4 of 4'
+    }
+  }
 }
