@@ -153,7 +153,7 @@ class HpoTermService {
       row.db_disease_id
     } as List<Long>
 
-    diseaseIdList
+    diseaseIdList.unique()
   }
 
   /**
@@ -197,7 +197,7 @@ class HpoTermService {
       row.db_gene_id
     } as List<Long>
 
-    geneIdList
+    geneIdList.unique()
   }
 
 }

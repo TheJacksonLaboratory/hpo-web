@@ -66,47 +66,82 @@
                   <!-- Term association tab -->
                   <mat-tab label="Term Associations">
 
-                    <div class="associations term-association">
-                      <mat-table #table [dataSource]="termSource" matSort>
-                        <mat-header-row *matHeaderRowDef="termColumns"></mat-header-row>
-                        <mat-row *matRowDef="let row; columns: termColumns;"></mat-row>
-                        <ng-container matColumnDef="ontologyId">
-                          <mat-header-cell *matHeaderCellDef> Term Identifier </mat-header-cell>
-                          <mat-cell *matCellDef="let row">
-                            <a routerLink="/browse/term/{{row.ontologyId}}">{{row.ontologyId}}</a>
-                          </mat-cell>
-                        </ng-container>
-                        <ng-container matColumnDef="name">
-                            <mat-header-cell *matHeaderCellDef>Term Name </mat-header-cell>
-                            <mat-cell *matCellDef="let row">{{row.name}}</mat-cell>
-                        </ng-container>
-                        <ng-container matColumnDef="definition">
-                          <mat-header-cell *matHeaderCellDef>Definition</mat-header-cell>
-                          <mat-cell *matCellDef="let row">{{row.definition}}</mat-cell>
-                        </ng-container>
-                      </mat-table>
+                    <div [hidden]="termAssoc.length == 0">
+                      <div class="filter-container mat-elevation-z8">
+                          <!-- filter -->
+                          <div class="filter-header">
+                            <mat-form-field>
+                              <input id="termFilterInput" matInput (keyup)="applyTermFilter($event.target.value)" placeholder="Filter">
+                            </mat-form-field>
+                          </div>
+
+                          <!-- term table -->
+                          <mat-table #table [dataSource]="termDataSource" matSort>
+                            <mat-header-row *matHeaderRowDef="termColumns"></mat-header-row>
+                            <mat-row *matRowDef="let row; columns: termColumns;"></mat-row>
+                            <ng-container matColumnDef="ontologyId">
+                              <mat-header-cell *matHeaderCellDef> Term Identifier </mat-header-cell>
+                              <mat-cell *matCellDef="let row">
+                                <a routerLink="/browse/term/{{row.ontologyId}}">{{row.ontologyId}}</a>
+                              </mat-cell>
+                            </ng-container>
+                            <ng-container matColumnDef="name">
+                                <mat-header-cell *matHeaderCellDef>Term Name </mat-header-cell>
+                                <mat-cell *matCellDef="let row">{{row.name}}</mat-cell>
+                            </ng-container>
+                            <ng-container matColumnDef="definition">
+                              <mat-header-cell *matHeaderCellDef>Definition</mat-header-cell>
+                              <mat-cell *matCellDef="let row">{{row.definition}}</mat-cell>
+                            </ng-container>
+                          </mat-table>
+
+                          <!-- paging component -->
+                          <mat-paginator #termPaginator [pageSizeOptions]="[50, 100, 500]"></mat-paginator>
+                      </div>
+                    </div>
+
+                    <!-- no results found -->
+                    <div class="container center" [hidden]="termAssoc.length != 0">
+                      <h4>No term results found for.. "{{query}}"</h4>
                     </div>
                   </mat-tab>
 
                   <!-- Disease association tab -->
                   <mat-tab label="Disease Associations">
 
-                    <div class="associations disease-association">
-                        <!--<h4 class="title">Disease Associations</h4>-->
-                        <mat-table #table [dataSource]="diseaseSource" matSort>
-                          <mat-header-row *matHeaderRowDef="diseaseColumns"></mat-header-row>
-                          <mat-row *matRowDef="let row; columns: diseaseColumns;"></mat-row>
-                          <ng-container matColumnDef="diseaseId">
-                            <mat-header-cell *matHeaderCellDef>Disease Identifier </mat-header-cell>
-                            <mat-cell *matCellDef="let row">
-                              <a routerLink="/browse/disease/{{row.diseaseId}}">{{row.diseaseId}}</a>
-                            </mat-cell>
-                          </ng-container>
-                          <ng-container matColumnDef="diseaseName">
-                              <mat-header-cell *matHeaderCellDef>Disease Name </mat-header-cell>
-                              <mat-cell *matCellDef="let row">{{row.diseaseName}}</mat-cell>
-                          </ng-container>
-                        </mat-table>
+                    <div [hidden]="diseaseAssoc.length == 0">
+                      <div class="filter-container mat-elevation-z8">
+                          <!-- filter -->
+                          <div class="filter-header">
+                            <mat-form-field>
+                              <input id="diseaseFilterInput" matInput (keyup)="applyDiseaseFilter($event.target.value)" placeholder="Filter">
+                            </mat-form-field>
+                          </div>
+
+                          <!--<h4 class="title">Disease Associations</h4>-->
+                          <mat-table #table [dataSource]="diseaseDataSource" matSort>
+                            <mat-header-row *matHeaderRowDef="diseaseColumns"></mat-header-row>
+                            <mat-row *matRowDef="let row; columns: diseaseColumns;"></mat-row>
+                            <ng-container matColumnDef="diseaseId">
+                              <mat-header-cell *matHeaderCellDef>Disease Identifier </mat-header-cell>
+                              <mat-cell *matCellDef="let row">
+                                <a routerLink="/browse/disease/{{row.diseaseId}}">{{row.diseaseId}}</a>
+                              </mat-cell>
+                            </ng-container>
+                            <ng-container matColumnDef="diseaseName">
+                                <mat-header-cell *matHeaderCellDef>Disease Name </mat-header-cell>
+                                <mat-cell *matCellDef="let row">{{row.diseaseName}}</mat-cell>
+                            </ng-container>
+                          </mat-table>
+
+                          <!-- paging component -->
+                          <mat-paginator #diseasePaginator [pageSizeOptions]="[50, 100, 500]"></mat-paginator>
+                      </div>
+                    </div>
+
+                    <!-- no results found -->
+                    <div class="container center" [hidden]="diseaseAssoc.length != 0">
+                      <h4>No disease results found for.. "{{query}}"</h4>
                     </div>
                   </mat-tab>
               </mat-tab-group>
