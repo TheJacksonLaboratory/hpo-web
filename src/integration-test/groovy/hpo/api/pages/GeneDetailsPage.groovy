@@ -4,7 +4,7 @@ import geb.Page
 
 class GeneDetailsPage extends Page{
 
-  static final String TITLE = 'HPO'
+  static final String TITLE = 'Human Phenotype Ontology'
 
   static url = "/app/browse/gene/29123"
 

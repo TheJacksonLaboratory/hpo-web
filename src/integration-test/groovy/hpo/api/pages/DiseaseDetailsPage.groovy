@@ -4,7 +4,7 @@ import geb.Page
 
 class DiseaseDetailsPage extends Page{
 
-  static final String TITLE = 'HPO'
+  static final String TITLE = 'Human Phenotype Ontology'
 
   static url = "/app/browse/disease/ORPHA:1606"
 
