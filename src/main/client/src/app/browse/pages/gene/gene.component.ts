@@ -1,11 +1,9 @@
 import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import { GeneService } from '../../services/gene/gene.service';
-import { Gene, EntrezGene } from '../../models/models';
+import { Gene, EntrezGene, Term, Disease } from '../../models/models';
 import { ActivatedRoute } from '@angular/router';
-import { TermAssocDB, DiseaseAssocDB} from '../../models/associations/datasources/associations-db'
-import { TermAssocDatasource } from '../../models/associations/datasources/term-assoc-datasource'
-import { DiseaseAssocDatasource} from '../../models/associations/datasources/disease-assoc-datasource'
 import { MatSort } from '@angular/material';
+import { MatTableDataSource, MatPaginator} from '@angular/material';
 import * as ProtVista from 'ProtVista';
 import { environment } from '../../../../environments/environment';
 
@@ -16,16 +14,14 @@ import { environment } from '../../../../environments/environment';
   encapsulation: ViewEncapsulation.None
 })
 export class GeneComponent implements OnInit {
-  geneTitle: string;
-  geneInfo: object;
   entrezGene: EntrezGene = new EntrezGene();
   gene: Gene;
   query: string;
   uniprotId: string = "";
-  termSource: TermAssocDatasource | null;
-  diseaseSource: DiseaseAssocDatasource | null;
-  termAssoc: TermAssocDB;
-  diseaseAssoc: DiseaseAssocDB;
+  termAssoc: Term[]=[];
+  diseaseAssoc: Disease[]=[];
+  termDataSource : MatTableDataSource<Term>;
+  diseaseDataSource : MatTableDataSource<Disease>;
   termColumns = ['ontologyId', 'name', 'definition'];
   diseaseColumns = ['diseaseId', 'diseaseName'];
   isLoading: boolean = true;
@@ -34,6 +30,8 @@ export class GeneComponent implements OnInit {
   uniProtWidgetURL = environment.HPO_UNIPROT_WIDGET_URL;
 
   @ViewChild(MatSort) sort: MatSort;
+  @ViewChild('termPaginator') termPaginator: MatPaginator;
+  @ViewChild('diseasePaginator') diseasePaginator: MatPaginator;
 
   constructor(private route: ActivatedRoute, private geneService: GeneService) {
     this.route.params.subscribe((params) => {
@@ -57,10 +55,15 @@ export class GeneComponent implements OnInit {
       });
     this.geneService.searchGene(this.query)
       .subscribe((data) => {
-        this.termAssoc = new TermAssocDB(data.termAssoc);
-        this.termSource = new TermAssocDatasource(this.termAssoc, this.sort);
-        this.diseaseAssoc = new DiseaseAssocDB(data.diseaseAssoc);
-        this.diseaseSource = new DiseaseAssocDatasource(this.diseaseAssoc, this.sort);
+        this.termAssoc = data.termAssoc;
+        this.diseaseAssoc = data.diseaseAssoc;
+
+        this.termDataSource = new MatTableDataSource(this.termAssoc);
+        this.diseaseDataSource = new MatTableDataSource(this.diseaseAssoc);
+
+        this.termDataSource.paginator = this.termPaginator;
+        this.diseaseDataSource.paginator = this.diseasePaginator;
+
         this.isLoading = false;
       }, (error) => {
         // TODO: Implement Better Error Handling
@@ -103,6 +106,18 @@ export class GeneComponent implements OnInit {
       if (event.index == 0 && ! this.uniProtWidgetInitilized ){
         this.uniprotWidgetInit();
       }
+  }
+
+  applyTermFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    this.termDataSource.filter = filterValue;
+  }
+
+  applyDiseaseFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    this.diseaseDataSource.filter = filterValue;
   }
 
 }

@@ -59,24 +59,42 @@
 
                   <!-- Gene associations tab -->
                   <mat-tab label="Gene Associations">
-                    <div class="tab-content">
-                      <div class="associations gene-association">
-                          <mat-table #table [dataSource]="geneSource" matSort>
-                            <mat-header-row *matHeaderRowDef="geneColumns"></mat-header-row>
-                            <mat-row *matRowDef="let row; columns: geneColumns;"></mat-row>
-                            <ng-container matColumnDef="entrezGeneId">
-                              <mat-header-cell *matHeaderCellDef>Gene Identifier </mat-header-cell>
-                              <mat-cell *matCellDef="let row">
-                                <a routerLink="/browse/gene/{{row.entrezGeneId}}">{{row.entrezGeneId}}</a>
-                              </mat-cell>
-                            </ng-container>
-                            <ng-container matColumnDef="entrezGeneSymbol">
-                                <mat-header-cell *matHeaderCellDef>Gene Symbol</mat-header-cell>
-                                <mat-cell *matCellDef="let row">{{row.entrezGeneSymbol}}</mat-cell>
-                            </ng-container>
-                          </mat-table>
+                    <!--<div class="tab-content">-->
+                    <div [hidden]="geneAssoc.length == 0">
+                      <div class="filter-container mat-elevation-z8">
+
+                          <!-- filter -->
+                          <div class="filter-header">
+                            <mat-form-field>
+                              <input id="geneFilterInput" matInput (keyup)="applyGeneFilter($event.target.value)" placeholder="Filter">
+                            </mat-form-field>
+                          </div>
+                          <div class="associations gene-association">
+                              <mat-table #table [dataSource]="geneDataSource" matSort>
+                                <mat-header-row *matHeaderRowDef="geneColumns"></mat-header-row>
+                                <mat-row *matRowDef="let row; columns: geneColumns;"></mat-row>
+                                <ng-container matColumnDef="entrezGeneId">
+                                  <mat-header-cell *matHeaderCellDef>Gene Identifier </mat-header-cell>
+                                  <mat-cell *matCellDef="let row">
+                                    <a routerLink="/browse/gene/{{row.entrezGeneId}}">{{row.entrezGeneId}}</a>
+                                  </mat-cell>
+                                </ng-container>
+                                <ng-container matColumnDef="entrezGeneSymbol">
+                                    <mat-header-cell *matHeaderCellDef>Gene Symbol</mat-header-cell>
+                                    <mat-cell *matCellDef="let row">{{row.entrezGeneSymbol}}</mat-cell>
+                                </ng-container>
+                              </mat-table>
+
+                              <mat-paginator #genePaginator [pageSizeOptions]="[50, 100, 500]"> </mat-paginator>
+                          </div>
                       </div>
                     </div>
+
+                    <!-- no results found -->
+                    <div class="container center" [hidden]="geneAssoc.length != 0">
+                      <h4>No gene results found for.. "{{query}}"</h4>
+                    </div>
+
                   </mat-tab>
                 </mat-tab-group>
             </div>
