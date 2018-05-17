@@ -1,0 +1,26 @@
+<div class="container">
+  <h1 class="pageTitle center">Download Annotations</h1>
+  <div>
+    <p>The annotation files (e.g. phenotype_annotation.tab) are available from our
+      <a target="__blank" href="http://compbio.charite.de/jenkins/job/hpo.annotations/lastStableBuild/">Hudson/Jenkins page</a>.
+      The formats of the annotation file are explained <a routerLink="/help/annotations">here</a>.</p>
+    <ul>
+      <li><strong><i>phenotype_annotation.tab</i></strong>:
+        contains manual and semi-automated annotations created by the HPO-team. These are annotations of OMIM-, Orphanet-, and DECIPHER-entries.
+      </li>
+      <li><strong><i>phenotype_annotation_hpoteam.tab</i></strong>: contains annotations made explicitly and manually by the HPO-team (mostly referring to OMIM entries)</li>
+      <li><strong><i>negative_phenotype_annotation.tab</i></strong>: contains negative annotations (i.e. a disease is NOT associated with this HPO-term)</li>
+      <li><strong><i>Genes_to_phenotype.txt and phenotype_to_genes.txt</i></strong>:
+        Genes are associated with phenotypes by listing all of the phenotypes associated with any disease that is
+        caused by mutation in the gene. See the <a routerLink="faq">FAQ</a> about these two files to read about the differences between these two files.</li>
+      <li><strong><i>phenotype.hpoa</i></strong>: The HPO project is transitioning to a new, improved file format for disease
+        annotations. The file can be obtained <a href=" http://compbio.charite.de/jenkins/job/hpo.annotations.2018/" target="_blank">here</a>.
+        Please see the
+        <a target="__blank" href="http://hpo-annotation-qc.readthedocs.io/en/latest/annotationFormat.html">online documentation</a>
+        for details about the new format, which will become the standard format after the transition period.
+      </li>
+    </ul>
+    <p>We are preparing a software solution that transforms the HPO ontology and annotation data into a relational database. Please contact us if you are interested in testing this software.</p>
+    <p>Please direct questions about the annotation files to <a href="mailto:dr.sebastian.koehler@gmail.com">Sebastian Köhler</a> or <a href="mailto:peter.robinson@jax.org">Peter Robinson</a>.</p>
+  </div>
+</div>
