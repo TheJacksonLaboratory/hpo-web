@@ -3,9 +3,8 @@ package hpo.api.specs
 import geb.spock.GebReportingSpec
 import grails.testing.mixin.integration.Integration
 import grails.transaction.Rollback
-
-import geb.spock.*
-import hpo.api.pages.DownloadsPage
+import hpo.api.pages.DownloadAnnotationsPage
+import hpo.api.pages.DownloadOntologyPage
 
 @Integration
 @Rollback
@@ -17,17 +16,30 @@ class HpoNavigationSearchSpec extends GebReportingSpec {
     def cleanup() {
     }
 
-    void "test navigation term search input" (){
+    void "test navigation term search input on download annotations page" (){
 
       given:
-      DownloadsPage downloadsPage = browser.to(DownloadsPage)
+      DownloadAnnotationsPage downloadAnnotationPage = browser.to(DownloadAnnotationsPage)
 
       when:
-      downloadsPage.navSearchBar.value('limbs')
+      downloadAnnotationPage.navSearchBar.value('limbs')
 
       then:
       waitFor {
-        downloadsPage.navSearchResults.children(".result").children(".name")[0].text() == "Abnormality of limbs"
+        downloadAnnotationPage.navSearchResults.children(".result").children(".name")[0].text() == "Abnormality of limbs"
+      }
+    }
+
+    void "test navigation to download ontology page" (){
+      given:
+      DownloadOntologyPage downloadOntologyPage = browser.to(DownloadOntologyPage)
+
+      when:
+      downloadOntologyPage.navSearchBar.value('eye')
+
+      then:
+      waitFor {
+        downloadOntologyPage.navSearchResults.children(".result").children(".name")[1].text() == "Abnormal eye morphology"
       }
     }
 
