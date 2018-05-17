@@ -118,6 +118,7 @@ a.mat-btn{
   -webkit-margin-after: 1em;
   -webkit-margin-start: 0;
   -webkit-margin-end: 0;
+  -moz-margin-start: 0;
   padding:0;
 }
 .teaser-title{
@@ -126,27 +127,20 @@ a.mat-btn{
   font-style: italic;
 }
 
-.home-highlight-menu {
-  margin: 75px 0 0 100px;
+.teaser-date{
+  justify-content: flex-end;
+  margin: 0 0 0 auto;
 }
 
-.home-highlight-menu .home-highlight-item{
-  text-align: center;
-  border: 1px solid #bdbdbd;
-  border-radius: 3px;
-  min-height: 165px;
-  cursor: pointer;
-  margin:0 25px 0 0;
+.home-highlight-menu {
+  margin: 50px 0 0 25px;
 }
+
 .home-highlight-menu .home-highlight-item h4{
-  min-height:40px;
   text-decoration: none;
   color: black;
-}
-
-.home-highlight-item:hover {
-  -webkit-box-shadow: 0 2px 4px -1px rgba(41,101,124,.2), 0 4px 5px 0 rgba(41,101,124,.2), 0 1px 10px 0px rgba(41,101,124,.12), 0 -4px 10px 0 rgba(0, 0, 0, 0.12);
-  box-shadow: -2px 2px 4px -1px rgba(41,101,124,.2), 2px 4px 5px 0 rgba(41,101,124,.14), 0 1px 10px 0 rgba(41,101,124,.12), 0 -4px 10px 0 rgba(0, 0, 0, 0.12);
+  margin: 0;
+  padding: 10px;
 }
 
 ::ng-deep .info-body.teaser .mat-list-item-content{
@@ -158,17 +152,74 @@ a .irdirc{
   float:right;
 }
 
-.highlight-item-image {
+.home-highlight-image{
+  min-height: 75px;
+}
+.home-highlight-image .image {
   width: 150px;
   height:80px;
-  margin:0 0 5px 0;
+  margin:0 0 5px 25px;
 }
 
-.highlight-item-logo {
+.home-highlight-image .logo {
   width: 150px;
   height:60px;
-  margin:0 0 5px 0;
+  margin: 10px 0 25px 25px;
 }
 
 
+.home-highlight-title{
+  text-align:center;
+  border-bottom: 1px solid;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  color: #333;
+  background-color: #f5f5f5;
+  border-color: #ddd;
+}
+
+.home-highlight-item{
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+  -moz-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+  box-shadow: 0 1px 1px rgba(0,0,0,.05);
+  margin: 0 25px;
+  min-height: 265px;
+  padding: 0;
+}
+
+.home-highlight-item.monarch p{
+  margin:0 0 18px 0;
+}
+
+.home-highlight-item a.mat-btn{
+  background-color: rgb(51, 118, 138);
+  display: block;
+}
+.home-highlight-body{
+  padding:15px;
+}
+
+.mailing-list{
+  width: 300px;
+  background-color: #ec9736;
+  padding: 15px;
+  color: white;
+  position:absolute;
+}
+.mailing-list-body{
+  margin: 0 0 0 50px;
+}
+
+.mailing-list-body h4{
+  margin:0;
+}
+
+.mailing-list .material-icons{
+  font-size: 40px;
+  margin: 10px 0;
+  float:left;
+}
 
