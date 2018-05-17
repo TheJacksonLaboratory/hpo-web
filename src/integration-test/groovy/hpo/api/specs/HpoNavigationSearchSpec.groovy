@@ -22,6 +22,7 @@ class HpoNavigationSearchSpec extends GebReportingSpec {
       DownloadAnnotationsPage downloadAnnotationPage = browser.to(DownloadAnnotationsPage)
 
       when:
+      downloadAnnotationPage.pageTitle.text() == "Download Annotations"
       downloadAnnotationPage.navSearchBar.value('limbs')
 
       then:
@@ -35,6 +36,7 @@ class HpoNavigationSearchSpec extends GebReportingSpec {
       DownloadOntologyPage downloadOntologyPage = browser.to(DownloadOntologyPage)
 
       when:
+      downloadOntologyPage.pageTitle.text() == "Download Ontology"
       downloadOntologyPage.navSearchBar.value('eye')
 
       then:
