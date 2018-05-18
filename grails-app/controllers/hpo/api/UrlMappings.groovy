@@ -9,7 +9,9 @@ class UrlMappings {
     '/app/*.html',
     '/app/*.ico',
     '/app/assets/*.png',
-    '/app/assets/*.jpg'
+    '/app/assets/*.jpg',
+    '/app/assets/*/*.png',
+    '/app/assets/*/*.jpg'
   ]
 
   static mappings = {
