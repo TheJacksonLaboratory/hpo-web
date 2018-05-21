@@ -4,10 +4,19 @@
     width:100%;
     color:black;
 }
+
 .footer .group{
     float:right;
     margin-top:25px;
 }
+
+@media (max-width:769px){
+  .footer .group{
+    float:none;
+    margin-top:25px;
+  }
+}
+
 .footer .footer-brand{
     height: 75px;
     width: 175px;
