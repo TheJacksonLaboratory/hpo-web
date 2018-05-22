@@ -56,7 +56,6 @@
   font-size: 14px;
   height: 100%;
   margin: 25px 0 0 0;
-  width:100%;
 }
 
 ::ng-deep .navbar-search-wrapper .search-wrapper .search-filter{
@@ -116,6 +115,9 @@ button.mat-menu-item a{
   ::ng-deep .mat-toolbar-single-row {
     height: 165px !important;
     flex-wrap:wrap;
+  }
+  .navbar-search-wrapper{
+    width: 100%;
   }
 }
 

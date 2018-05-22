@@ -130,8 +130,10 @@
 
 ::ng-deep .static-images {
   width: 650px;
+  max-width: 100%;
   height: auto;
 }
+
 ::ng-deep .mat-menu-item {
   font-size: 14px;
 }
