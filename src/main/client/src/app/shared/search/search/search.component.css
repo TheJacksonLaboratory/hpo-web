@@ -71,3 +71,9 @@ p.hint a{
   color: #ec9736 !important;
   cursor: pointer;
 }
+
+@media (max-width: 767px) {
+  ::ng-deep .navbar-search-wrapper .search-wrapper .searchbar{
+    font-size:12px !important;
+  }
+}

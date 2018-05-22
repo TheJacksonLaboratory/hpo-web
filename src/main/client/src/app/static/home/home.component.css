@@ -258,6 +258,8 @@ a .irdirc{
   }
   ::ng-deep .home-search .search-container .searchbar {
     width: 100%;
+    font-size:12px;
+    margin:5px 0 0 0;
   }
   ::ng-deep .home-search .search-container .search-output {
     width: 100%;
@@ -274,5 +276,8 @@ a .irdirc{
     float:left;
   }
 
+  /*::ng-deep .navbar-search-wrapper{
+    display:none;
+  }*/
 
 }

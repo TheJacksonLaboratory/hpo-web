@@ -6,14 +6,17 @@
 }
 
 .footer .group{
-    float:right;
+    float:left;
     margin-top:25px;
+}
+
+.footer .logo-group{
+  float:right;
 }
 
 @media (max-width:769px){
   .footer .group{
-    float:none;
-    margin-top:25px;
+    margin:25px 0 25px 50px;
   }
 }
 

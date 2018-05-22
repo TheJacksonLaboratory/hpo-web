@@ -64,13 +64,10 @@
 
   </div>
   <!-- Navigation Search Bar -->
-  <div class="navbar-search-wrapper col-lg-4">
-    <searchbar *ngIf="showSearch"></searchbar>
-  </div>
-  <!-- Beta Flag -->
+  <!-- Beta Flag
   <div class="beta-flag">
     <strong>Beta</strong>
-  </div>
+  </div>-->
   <!-- Mobile Navbar -->
   <button class="mobile-menu hidden-lg" color="white" mat-button [matMenuTriggerFor]="menu">
     <mat-icon>menu</mat-icon>
@@ -80,5 +77,8 @@
     <button mat-menu-item [matMenuTriggerFor]="downloadsMenu">Downloads</button>
     <button mat-menu-item [matMenuTriggerFor]="helpMenu">Help</button>
   </mat-menu>
+  <div  *ngIf="showSearch" class="navbar-search-wrapper col-lg-4">
+    <searchbar></searchbar>
+  </div>
 </mat-toolbar>
 
