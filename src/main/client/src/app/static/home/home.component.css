@@ -103,11 +103,32 @@ a.mat-btn{
   font-size: 14px;
   padding: 15px;
 }
+
 ::ng-deep .home-search .search-container .search-output {
   margin-left: 20%;
   width: 80%;
   padding: 15px;
 }
+
+/*@media (max-width: 786px) {
+
+  ::ng-deep .home-search .search-container .search-filter {
+    width: 100%;
+  }
+
+  ::ng-deep .home-search .search-container .search-wrapper {
+    margin-top: 15px;
+  }
+  ::ng-deep .home-search .search-container .searchbar {
+    width: 100%;
+  }
+  ::ng-deep .home-search .search-container .search-output {
+    width: 100%;
+    padding: 15px;
+    margin:0;
+  }
+
+}*/
 
 .info-body p, .info-body .list{
   min-height: 175px;
@@ -147,10 +168,6 @@ a.mat-btn{
   padding:0 !important;
 }
 
-a .irdirc{
-  height: 100px;
-  float:right;
-}
 
 .home-highlight-image{
   min-height: 75px;
@@ -223,3 +240,39 @@ a .irdirc{
   float:left;
 }
 
+
+a .irdirc{
+  height: 100px;
+  float:right;
+}
+
+
+@media (max-width:767px) {
+
+  ::ng-deep .home-search .search-container .search-filter {
+    width: 100%;
+  }
+
+  ::ng-deep .home-search .search-container .search-wrapper {
+    margin-top: 15px;
+  }
+  ::ng-deep .home-search .search-container .searchbar {
+    width: 100%;
+  }
+  ::ng-deep .home-search .search-container .search-output {
+    width: 100%;
+    padding: 15px;
+    margin:0;
+  }
+
+  .mailing-list{
+    position:unset;
+  }
+
+  a .irdirc{
+    height: 100px;
+    float:left;
+  }
+
+
+}
