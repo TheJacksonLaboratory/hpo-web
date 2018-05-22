@@ -76,4 +76,8 @@ p.hint a{
   ::ng-deep .navbar-search-wrapper .search-wrapper .searchbar{
     font-size:12px !important;
   }
+  ::ng-deep .navbar-search-wrapper .search-wrapper .search-output{
+    width: 100%;
+    margin:0;
+  }
 }
