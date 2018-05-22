@@ -108,7 +108,7 @@ button.mat-menu-item a{
     padding:0 0 0 25px;
   }
   .nav-brand {
-    margin: 10px 0 10px 0 !important;
+    margin: 15px 0 10px 0 !important;
   }
   .nav-brand .nav-title {
     font-size: 16px;
@@ -120,5 +120,5 @@ button.mat-menu-item a{
 }
 
 .navbar-home {
-  height:fit-content !important;
+  height: 65px !important;
 }
