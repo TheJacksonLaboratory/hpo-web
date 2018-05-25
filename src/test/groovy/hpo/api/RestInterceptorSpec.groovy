@@ -43,6 +43,6 @@ class RestInterceptorSpec extends Specification implements InterceptorUnitTest<R
       response.getHeader("X-Frame-Options") == "DENY"
       response.getHeader("X-Content-Type-Options") == "nosniff"
       response.getHeader("X-XSS-Protection") == "1"
-      response.getHeader("Content-Security-Policy") == "script-src 'self'"
+      response.getHeader("Content-Security-Policy").contains("script-src 'self'")
     }
 }
