@@ -9,7 +9,7 @@ class RestInterceptor {
       header( "X-Frame-Options", "DENY" )
       header( "X-Content-Type-Options", "nosniff" )
       header( "X-XSS-Protection", "1" )
-      header( "Content-Security-Policy", "script-src 'self'")
+      header( "Content-Security-Policy", "script-src 'self' https://www.googletagmanager.com/gtag/js https://www.google-analytics.com/analytics.js")
       true
     }
 
