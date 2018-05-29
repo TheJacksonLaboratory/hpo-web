@@ -75,6 +75,7 @@ p.hint a{
 @media (max-width: 767px) {
   ::ng-deep .navbar-search-wrapper .search-wrapper .searchbar{
     font-size:12px !important;
+    width: 74%;
   }
   ::ng-deep .navbar-search-wrapper .search-wrapper .search-output{
     width: 100%;

@@ -256,6 +256,10 @@ a .irdirc{
     float:left;
   }
 
+  ::ng-deep .info-body .mat-list-item-content{
+    display: block !important;
+  }
+
   /*::ng-deep .navbar-search-wrapper{
     display:none;
   }*/

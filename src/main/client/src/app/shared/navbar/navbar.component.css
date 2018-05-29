@@ -119,6 +119,11 @@ button.mat-menu-item a{
   .navbar-search-wrapper{
     width: 100%;
   }
+  ::ng-deep .navbar-search-wrapper .search-wrapper .search-filter {
+    width: 26%;
+    font-size: 14px;
+    padding: 5px 5px 5px 10px;
+  }
 }
 
 .navbar-home {

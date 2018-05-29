@@ -28,6 +28,7 @@ export class GeneComponent implements OnInit {
   uniProtWidgetInitilized =false;
   uniProtLoading = false;
   uniProtWidgetURL = environment.HPO_UNIPROT_WIDGET_URL;
+  mobile: boolean = false;
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild('termPaginator') termPaginator: MatPaginator;
@@ -36,8 +37,12 @@ export class GeneComponent implements OnInit {
   constructor(private route: ActivatedRoute, private geneService: GeneService) {
     this.route.params.subscribe((params) => {
       this.query = params.id;
+      if (window.screen.width < 767) { // 768px portrait
+        this.mobile = true;
+      }
       this.reloadGeneData();
     });
+
   }
 
   ngOnInit() {
@@ -69,8 +74,12 @@ export class GeneComponent implements OnInit {
         // TODO: Implement Better Error Handling
         console.log(error);
       });
-    this.uniprotWidgetInit();
+
+    if(!this.mobile) {
+      this.uniprotWidgetInit();
+    }
   }
+
   uniprotWidgetInit() {
 
     this.uniProtLoading = true;
