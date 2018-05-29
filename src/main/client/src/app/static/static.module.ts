@@ -19,6 +19,7 @@ import {SearchService} from "../shared/search/service/search.service";
 import {NewsComponent} from "./news/news.component";
 import { OntologyComponent } from './downloads/ontology/ontology.component';
 import { AnnotationsDownloadComponent} from "./downloads/annotations/annotations.component";
+import { DisclaimerComponent } from './resources/disclaimer/disclaimer.component';
 
 @NgModule({
   imports: [
@@ -31,7 +32,7 @@ import { AnnotationsDownloadComponent} from "./downloads/annotations/annotations
   ],
   declarations: [ HomeComponent,
     ContactComponent, CitationComponent, LicenseComponent,
-    FaqComponent, NewsComponent, OntologyComponent, AnnotationsDownloadComponent
+    FaqComponent, NewsComponent, OntologyComponent, AnnotationsDownloadComponent, DisclaimerComponent
   ],
   providers:[SearchService]
 })
