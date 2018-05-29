@@ -66,7 +66,7 @@
 
               <!-- Disease association -->
               <mat-tab label="Disease Associations">
-
+                <div [hidden]="diseaseAssocCount == 0">
                       <mat-progress-bar  *ngIf="assocLoading" class="loading-result-details" color="primary" mode="buffer">
                       </mat-progress-bar>
 
@@ -124,11 +124,15 @@
 
                             </div>
                       </div>
+                </div>
+                <div class="container center" [hidden]="diseaseAssocCount != 0">
+                  <h4>No disease associations found for <strong>{{term.id}}</strong></h4>
+                </div>
               </mat-tab>
 
               <!-- Gene Association -->
               <mat-tab label="Gene Associations">
-
+                <div [hidden]="geneAssocCount == 0">
                     <mat-progress-bar  *ngIf="assocLoading" class="loading-result-details" color="primary" mode="buffer">
                     </mat-progress-bar>
 
@@ -179,6 +183,10 @@
                         <mat-paginator  #genePaginator [pageSizeOptions]="[50, 100, 500]"></mat-paginator>
                       </div>
                     </div>
+                </div>
+                <div class="container center" [hidden]="geneAssocCount != 0">
+                  <h4>No gene associations found for <strong>{{term.id}}</strong></h4>
+                </div>
               </mat-tab>
             </mat-tab-group>
         </div>
