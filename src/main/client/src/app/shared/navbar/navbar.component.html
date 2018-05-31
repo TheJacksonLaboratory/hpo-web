@@ -28,8 +28,6 @@
     <button mat-menu-item routerLink="tools/phenogramviz"> PhenoGramViz: Evaluation of CNV's </button>
   </mat-menu>
 
-
-  <!-- ---- -->
   <!-- Help Menu and SubMenus -->
   <mat-menu [overlapTrigger]="false" #helpMenu="matMenu">
     <button mat-menu-item [matMenuTriggerFor]="infoMenu">Information</button>
@@ -63,21 +61,12 @@
   <div class="fill-remaining-space">
 
   </div>
-  <!-- Navigation Search Bar -->
-  <!-- Beta Flag
-  <div class="beta-flag">
-    <strong>Beta</strong>
-  </div>-->
   <!-- Mobile Navbar -->
-  <button class="mobile-menu hidden-lg" color="white" mat-button [matMenuTriggerFor]="menu">
+  <button class="mobile-menu hidden-lg" color="white" mat-button (click)="navOpen()">
     <mat-icon>menu</mat-icon>
   </button>
-  <mat-menu x-position="before" #menu="matMenu">
-    <button mat-menu-item [matMenuTriggerFor]="toolsMenu">Tools</button>
-    <button mat-menu-item [matMenuTriggerFor]="downloadsMenu">Downloads</button>
-    <button mat-menu-item [matMenuTriggerFor]="helpMenu">Help</button>
-  </mat-menu>
   <div  *ngIf="showSearch" class="navbar-search-wrapper col-lg-4">
     <searchbar></searchbar>
   </div>
 </mat-toolbar>
+
