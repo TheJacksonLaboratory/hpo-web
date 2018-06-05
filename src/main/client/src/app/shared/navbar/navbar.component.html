@@ -3,7 +3,7 @@
     <img src="assets/hpo-logo-white.png" class="nav-logo"/>
   </div>
   <!-- Main Desktop Navbar -->
-  <div class="nav-components  hidden-xs hidden-sm hidden-md">
+  <div class="nav-components  hidden-xs hidden-sm">
       <button mat-button [matMenuTriggerFor]="toolsMenu">Tools <mat-icon>arrow_drop_down</mat-icon></button>
       <button mat-button [matMenuTriggerFor]="downloadsMenu">Downloads <mat-icon>arrow_drop_down</mat-icon></button>
       <button mat-button [matMenuTriggerFor]="helpMenu">Help <mat-icon>arrow_drop_down</mat-icon></button>
@@ -61,12 +61,15 @@
   <div class="fill-remaining-space">
 
   </div>
-  <!-- Mobile Navbar -->
-  <button class="mobile-menu hidden-lg" color="white" mat-button (click)="navOpen()">
+  <button class="mobile-menu  hidden-sm hidden-md hidden-lg" color="white" mat-button (click)="navOpen()">
     <mat-icon>menu</mat-icon>
   </button>
+  <!-- Mobile Navbar -->
   <div  *ngIf="showSearch" class="navbar-search-wrapper col-lg-4">
     <searchbar></searchbar>
   </div>
+  <button class="mobile-menu hidden-xs hidden-md hidden-lg" color="white" mat-button (click)="navOpen()">
+    <mat-icon>menu</mat-icon>
+  </button>
 </mat-toolbar>
 

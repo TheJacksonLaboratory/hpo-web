@@ -2,10 +2,8 @@
   <navbar-hpo (navToggle)="sidenav.open(); mobileNavSection = 'home'"></navbar-hpo>
   <mat-sidenav #sidenav class="sidenav">
     <mat-nav-list>
-        <div class="container">
-          <h4 class="center">Menu</h4>
+          <h3 class="center menuTitle">Menu</h3>
           <hr>
-        </div>
         <div *ngIf="mobileNavSection != 'home'">
           <button class="backButton"  mat-menu-item (click)="backNavigate()"><mat-icon>arrow_left</mat-icon>Back</button>
         </div>

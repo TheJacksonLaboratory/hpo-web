@@ -11,6 +11,7 @@ import { ExtrasModule } from "./shared/modules/extras.module";
 import { SearchService } from "./shared/search/service/search.service";
 import { NewsService } from "./shared/news/news.service";
 import { SearchModule } from "./shared/search/search.module";
+import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 
 
 describe('AppComponent', () => {
@@ -21,7 +22,8 @@ describe('AppComponent', () => {
         HttpClientTestingModule,
         FormsModule,
         ExtrasModule,
-        SearchModule
+        SearchModule,
+        NoopAnimationsModule
       ],
       declarations: [
         AppComponent,

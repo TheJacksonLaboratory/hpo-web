@@ -63,3 +63,7 @@ table, th, td {
 .small-icon {
   font-size: 10px;
 }
+
+app-root{
+  flex-direction: unset;
+}
