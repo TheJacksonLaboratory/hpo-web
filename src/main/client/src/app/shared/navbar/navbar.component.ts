@@ -1,4 +1,4 @@
-import {Component, HostListener, OnInit} from '@angular/core';
+import {Component, EventEmitter, HostListener, OnInit} from '@angular/core';
 import { NavigationEnd, Router} from "@angular/router";
 import { SearchService} from "../search/service/search.service";
 import {Disease, Gene, Term} from "../../browse/models/models";
@@ -28,7 +28,8 @@ import {
       transition('active => inactive',
         animate('400ms ease-in-out'))
       ])
-  ]
+  ],
+  outputs:['navToggle']
 })
 export class NavbarComponent implements OnInit {
   title:string = "Human Phenotype Ontology";
@@ -39,6 +40,11 @@ export class NavbarComponent implements OnInit {
   diseases: Disease[] = [];
   genes: Gene[] = [];
   searchstate: string = "inactive";
+  navToggle = new EventEmitter();
+
+  navOpen(){
+    this.navToggle.emit(true);
+  }
   constructor(private router: Router, private searchService: SearchService ) {
 
   }

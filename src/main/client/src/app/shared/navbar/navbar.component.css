@@ -35,18 +35,6 @@
 .nav-components .mat-button {
   margin-left: 15px;
 }
-@media (max-width: 768px){
-    .mobile-menu.mat-button {
-        padding:0 0 0 25px;
-    }
-    .nav-brand .nav-logo {
-        margin-right:5px !important;
-    }
-    .nav-brand .nav-title {
-        font-size: 16px;
-    }
-
-}
 
 .fill-remaining-space{
     flex:1;
@@ -110,7 +98,34 @@ button.mat-menu-item a{
   max-width: 380px !important;
 }
 
-
 ::ng-deep .navbar-search-wrapper .search-output h3 {
   font-size: 14px;
+}
+
+@media (max-width: 767px){
+  .mobile-menu.mat-button {
+    padding:0 0 0 25px;
+  }
+  .nav-brand {
+    margin: 15px 0 10px 0 !important;
+  }
+  .nav-brand .nav-title {
+    font-size: 16px;
+  }
+  ::ng-deep .mat-toolbar-single-row {
+    height: 165px !important;
+    flex-wrap:wrap;
+  }
+  .navbar-search-wrapper{
+    width: 100%;
+  }
+  ::ng-deep .navbar-search-wrapper .search-wrapper .search-filter {
+    width: 26%;
+    font-size: 14px;
+    padding: 5px 5px 5px 10px;
+  }
+}
+
+.navbar-home {
+  height: 65px !important;
 }

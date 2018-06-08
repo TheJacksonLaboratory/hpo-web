@@ -45,7 +45,6 @@ export class SearchComponent implements OnInit {
   navFilter: string = "all";
   constructor(private router: Router, private searchService: SearchService) {
     this.router = router;
-
   }
 
   ngOnInit() {

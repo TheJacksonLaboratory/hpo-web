@@ -1,9 +1,9 @@
-<mat-toolbar class="mat-elevation-z1 navbar">
+<mat-toolbar [ngClass]="{'navbar-home': !showSearch }" class="mat-elevation-z1 navbar">
   <div class="nav-brand" routerLink="/">
     <img src="assets/hpo-logo-white.png" class="nav-logo"/>
   </div>
   <!-- Main Desktop Navbar -->
-  <div class="nav-components  hidden-xs hidden-sm hidden-md">
+  <div class="nav-components  hidden-xs hidden-sm">
       <button mat-button [matMenuTriggerFor]="toolsMenu">Tools <mat-icon>arrow_drop_down</mat-icon></button>
       <button mat-button [matMenuTriggerFor]="downloadsMenu">Downloads <mat-icon>arrow_drop_down</mat-icon></button>
       <button mat-button [matMenuTriggerFor]="helpMenu">Help <mat-icon>arrow_drop_down</mat-icon></button>
@@ -28,8 +28,6 @@
     <button mat-menu-item routerLink="tools/phenogramviz"> PhenoGramViz: Evaluation of CNV's </button>
   </mat-menu>
 
-
-  <!-- ---- -->
   <!-- Help Menu and SubMenus -->
   <mat-menu [overlapTrigger]="false" #helpMenu="matMenu">
     <button mat-menu-item [matMenuTriggerFor]="infoMenu">Information</button>
@@ -63,22 +61,15 @@
   <div class="fill-remaining-space">
 
   </div>
-  <!-- Navigation Search Bar -->
-  <div class="navbar-search-wrapper col-lg-4">
-    <searchbar *ngIf="showSearch"></searchbar>
-  </div>
-  <!-- Beta Flag -->
-  <div class="beta-flag">
-    <strong>Beta</strong>
-  </div>
-  <!-- Mobile Navbar -->
-  <button class="mobile-menu hidden-lg" color="white" mat-button [matMenuTriggerFor]="menu">
+  <button class="mobile-menu  hidden-sm hidden-md hidden-lg" color="white" mat-button (click)="navOpen()">
     <mat-icon>menu</mat-icon>
   </button>
-  <mat-menu x-position="before" #menu="matMenu">
-    <button mat-menu-item [matMenuTriggerFor]="toolsMenu">Tools</button>
-    <button mat-menu-item routerLink="downloads">Downloads</button>
-    <button mat-menu-item [matMenuTriggerFor]="helpMenu">Help</button>
-  </mat-menu>
+  <!-- Mobile Navbar -->
+  <div  *ngIf="showSearch" class="navbar-search-wrapper col-lg-4">
+    <searchbar></searchbar>
+  </div>
+  <button class="mobile-menu hidden-xs hidden-md hidden-lg" color="white" mat-button (click)="navOpen()">
+    <mat-icon>menu</mat-icon>
+  </button>
 </mat-toolbar>
 
