@@ -174,7 +174,9 @@
         <mat-cell *matCellDef="let element"> {{element.location}} </mat-cell>
       </ng-container>
     </mat-table>
-    <h4 class="center"> Contributors list temporarily Unavailable. Please <a routerLink="/contact">contact us</a> if this persists.</h4>
+    <div *ngIf="!contributorsSource">
+      <h4 class="center"> Contributors list temporarily unavailable. Please <a routerLink="/contact">contact us</a> if this persists.</h4>
+    </div>
   </div>
 </div>
 

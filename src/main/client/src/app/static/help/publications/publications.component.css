@@ -4,8 +4,17 @@
   text-align: justify;
 }
 
-a.mat-btn{
-  text-decoration:none;
+a.mat-btn {
+  text-decoration: none;
   color: white !important;
-  background-color:#ec9736;
+  background-color: #ec9736;
+}
+
+@media (max-width: 767px){
+  .publications ul{
+    list-style-type: square;
+    padding: 0;
+    margin: 0 15px 0 15px;
+    line-height: 25px;
+  }
 }

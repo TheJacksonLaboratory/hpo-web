@@ -110,26 +110,6 @@ a.mat-btn{
   padding: 15px;
 }
 
-/*@media (max-width: 786px) {
-
-  ::ng-deep .home-search .search-container .search-filter {
-    width: 100%;
-  }
-
-  ::ng-deep .home-search .search-container .search-wrapper {
-    margin-top: 15px;
-  }
-  ::ng-deep .home-search .search-container .searchbar {
-    width: 100%;
-  }
-  ::ng-deep .home-search .search-container .search-output {
-    width: 100%;
-    padding: 15px;
-    margin:0;
-  }
-
-}*/
-
 .info-body p, .info-body .list{
   min-height: 175px;
 }
@@ -274,6 +254,10 @@ a .irdirc{
   a .irdirc{
     height: 100px;
     float:left;
+  }
+
+  ::ng-deep .info-body .mat-list-item-content{
+    display: block !important;
   }
 
   /*::ng-deep .navbar-search-wrapper{

@@ -12,6 +12,8 @@ declare let ga: Function;
 export class AppComponent {
   ga = null;
   gaTrackId:string = '';
+  mobileNavSection = 'home';
+  parentSections = [];
   constructor(private newsService: NewsService){
 
     // Avoid google analytics for dev and testing unless explicitly indicated
@@ -39,4 +41,14 @@ export class AppComponent {
     newsService.setAllNews();
 
   }
+
+  backNavigate(){
+    this.mobileNavSection = this.parentSections.pop();
+  }
+
+  mobileNavigate(dest: string){
+      this.parentSections.push(this.mobileNavSection);
+      this.mobileNavSection = dest;
+  }
+
 }

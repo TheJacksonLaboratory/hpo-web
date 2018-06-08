@@ -48,8 +48,7 @@
                       selectedIndex="0">
 
                   <!-- Widget tab -->
-                  <mat-tab label="UniProt Viewer">
-
+                  <mat-tab label="UniProt Viewer" *ngIf="!mobile">
                     <mat-progress-bar  *ngIf="uniProtLoading" class="loading-protvista" color="primary" mode="buffer">
                     </mat-progress-bar>
 

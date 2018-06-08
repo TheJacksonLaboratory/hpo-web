@@ -17,6 +17,7 @@ import { MatExpansionModule } from '@angular/material';
 import { MatListModule } from '@angular/material';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 @NgModule({
   imports: [MatButtonModule,
@@ -34,7 +35,8 @@ import { MatDividerModule } from '@angular/material/divider';
     MatListModule,
     MatExpansionModule,
     MatSelectModule,
-    MatDividerModule
+    MatDividerModule,
+    MatSidenavModule
   ],
   exports: [MatButtonModule,
     MatMenuModule,
@@ -51,7 +53,8 @@ import { MatDividerModule } from '@angular/material/divider';
     MatListModule,
     MatExpansionModule,
     MatSelectModule,
-    MatDividerModule
+    MatDividerModule,
+    MatSidenavModule
   ],
 })
 export class GlobalMaterialModules { }
