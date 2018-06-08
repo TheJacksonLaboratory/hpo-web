@@ -111,8 +111,8 @@
                                     <mat-header-cell *matHeaderCellDef>Associated Genes</mat-header-cell>
                                     <mat-cell *matCellDef="let row">
                                       <span *ngFor="let gene of row.dbGenes">
-                                          <a routerLink="/browse/gene/{{gene.entrezGeneId}}">({{gene.entrezGeneId}})</a> -
-                                          {{gene.entrezGeneSymbol}}<br>
+                                        {{gene.entrezGeneSymbol}}
+                                        <a routerLink="/browse/gene/{{gene.entrezGeneId}}">[{{gene.entrezGeneId}}]</a><br>
                                       </span>
                                     </mat-cell>
                                 </ng-container>
