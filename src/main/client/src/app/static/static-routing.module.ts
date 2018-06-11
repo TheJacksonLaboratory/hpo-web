@@ -10,6 +10,7 @@ import { FaqComponent } from './resources/faq/faq.component';
 import { NewsComponent } from "./news/news.component";
 import { OntologyComponent } from "./downloads/ontology/ontology.component";
 import { AnnotationsDownloadComponent } from "./downloads/annotations/annotations.component";
+import { DisclaimerComponent } from "./resources/disclaimer/disclaimer.component";
 
 const staticRoutes: Routes = [
   { path: '', component: HomeComponent},
@@ -21,7 +22,8 @@ const staticRoutes: Routes = [
   { path: 'help', loadChildren: './help/help.module#HelpModule'},
   { path: 'download/ontology', component: OntologyComponent },
   { path: 'download/annotation', component: AnnotationsDownloadComponent },
-  { path: 'tools', loadChildren: './tools/tools.module#ToolsModule'}
+  { path: 'tools', loadChildren: './tools/tools.module#ToolsModule'},
+  { path: 'disclaimer', component: DisclaimerComponent}
 
 ];
 export const staticRouting = RouterModule.forChild(staticRoutes);
