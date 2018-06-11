@@ -35,17 +35,19 @@ export class GeneComponent implements OnInit {
   @ViewChild('diseasePaginator') diseasePaginator: MatPaginator;
 
   constructor(private route: ActivatedRoute, private geneService: GeneService) {
-    this.route.params.subscribe((params) => {
-      this.query = params.id;
-      if (window.screen.width < 767) { // 768px portrait
-        this.mobile = true;
-      }
-      this.reloadGeneData();
-    });
 
   }
 
   ngOnInit() {
+    if (window.screen.width < 767) { // 768px portrait
+      this.mobile = true;
+    }
+
+    this.route.params.subscribe((params) => {
+      this.query = params.id;
+
+      this.reloadGeneData();
+    });
   }
 
   reloadGeneData(){

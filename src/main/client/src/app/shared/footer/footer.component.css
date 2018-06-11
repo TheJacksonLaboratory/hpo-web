@@ -13,7 +13,7 @@
 
 .footer .logo-group{
   float:right;
-  margin: 0 25px 0 0;
+  margin: 0 18px 0 0;
 }
 
 .footer .footer-brand{
@@ -31,11 +31,7 @@
   opacity:.6;
 }
 
-
 @media (max-width:767px){
-  .footer .group{
-    margin:25px 0 25px 25px;
-  }
 
   .footer .footer-brand{
     height: 50px;
@@ -47,9 +43,31 @@
     width: 100px;
     margin: 0 0 0 5px;
   }
-  .footer .logo-group{
-    float:left;
-    margin: 0 5px 0 5px;
+  .footer .group .mat-button{
+    min-width: 75px;
   }
 
+}
+
+@media (max-width: 979px){
+  .footer .group-links-wrapper{
+    text-align: center;
+  }
+
+  .footer .group{
+    margin: 25px auto;
+    display: inline-block;
+    text-align: center;
+    float:unset;
+  }
+
+  .footer .logo-group-wrapper{
+    text-align: center;
+  }
+
+  .footer .logo-group{
+    float:unset;
+    display:inline-block;
+    text-align: center;
+  }
 }

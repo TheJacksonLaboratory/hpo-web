@@ -81,4 +81,8 @@ p.hint a{
     width: 100%;
     margin:0;
   }
+  p.hint{
+    margin: 15px 0;
+    font-size: 12px;
+  }
 }
