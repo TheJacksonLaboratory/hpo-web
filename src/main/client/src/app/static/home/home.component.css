@@ -206,6 +206,12 @@ a.mat-btn{
   color: white;
   position:absolute;
 }
+
+.mailing-list-wrapper a, .mailing-list-wrapper a:hover, .mailing-list-wrapper a:active, .mailing-list-wrapper a:visited,
+.mailing-list-wrapper a:focus {
+  text-decoration:none;
+}
+
 .mailing-list-body{
   margin: 0 0 0 50px;
 }
@@ -258,6 +264,10 @@ a .irdirc{
 
   ::ng-deep .info-body .mat-list-item-content{
     display: block !important;
+  }
+
+  .home-highlight-menu {
+    margin: 50px 0 0 0;
   }
 
   /*::ng-deep .navbar-search-wrapper{
