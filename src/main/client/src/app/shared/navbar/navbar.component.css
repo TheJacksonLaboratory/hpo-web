@@ -129,3 +129,9 @@ button.mat-menu-item a{
 .navbar-home {
   height: 65px !important;
 }
+
+.ontoversion {
+  color: white;
+  font-size: 12px;
+  font-style: italic;
+}
