@@ -9,11 +9,16 @@ import hpo.api.term.DbTerm
 import org.apache.commons.lang.time.StopWatch
 import org.grails.io.support.ClassPathResource
 import hpo.api.db.utils.DomainUtilService
-import org.apache.commons.lang.WordUtils;
+import org.apache.commons.lang.WordUtils
+import org.monarchinitiative.phenol.formats.hpo.HpoDisease
+import org.monarchinitiative.phenol.ontology.data.TermId
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Transactional
 class DbDiseaseAdminService {
 
+  @Autowired
+  Map<TermId, HpoDisease> hpoDiseases
   SqlUtilsService sqlUtilsService
   DomainUtilService domainUtilService
   final static String INSERT_INTO_DB_TERM_DB_DISEASES = "INSERT INTO db_term_db_diseases( db_disease_id, db_term_id) VALUES(?,?)"
@@ -30,28 +35,16 @@ class DbDiseaseAdminService {
     sqlUtilsService.executeDetete("delete from db_gene_db_diseases")
   }
 
-  Map<Integer, String> loadDiseases() {
+  void loadDiseases() {
     StopWatch stopWatch = new StopWatch()
     stopWatch.start()
-    Map<String, String> diseaseIdToNameMap = [:]
-    final File file = new ClassPathResource("phenotype_annotation.tab").file
-    file.eachLine { String line ->
-      String[] tokens = line.split('\t')
-      if (tokens.size() == 14) {
-        String db = tokens[0]
-        String dbObjectId = tokens[1]
-        String diseaseName = tokens[2].split(';').first().replaceAll('^\\%\\d{6}|^\\#\\d{6}|^\\d{6}',
-          '').trim();
-        diseaseName = WordUtils.capitalizeFully(diseaseName);
-        String diseaseId = db + ":" + dbObjectId
-        if (!diseaseIdToNameMap.get(diseaseId)) {
-          diseaseIdToNameMap.put(diseaseId, dbObjectId)
-          DbDisease dbDisease = new DbDisease(db: db, dbId: dbObjectId, diseaseName: diseaseName, diseaseId: diseaseId)
-          dbDisease.save()
-        }
-      } else {
-        log.info("skipping line : ${line}")
-      }
+    hpoDiseases.each{ diseaseId, disease ->
+      String db = disease.getDatabase()
+      String dbObjectId = disease.getDiseaseDatabaseId()
+      String diseaseName = disease.getName().replaceAll('^\\%\\d{6}|^\\#\\d{6}|^\\d{6}', '').trim()
+      diseaseName = WordUtils.capitalizeFully(diseaseName)
+      DbDisease dbDisease = new DbDisease(db: db, dbId: dbObjectId, diseaseName: diseaseName, diseaseId: diseaseId)
+      dbDisease.save()
     }
     log.info("Loading Diseases -  file ${file.name} duration: ${stopWatch} time: ${new Date()} ]")
   }

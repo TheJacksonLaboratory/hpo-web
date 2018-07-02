@@ -1,8 +1,10 @@
 package hpo.api.util
-import com.github.phenomics.ontolib.io.obo.hpo.HpoGeneAnnotationParser
-import com.github.phenomics.ontolib.formats.hpo.HpoGeneAnnotation
+
+import org.monarchinitiative.phenol.formats.hpo.HpoGeneAnnotation
+import org.monarchinitiative.phenol.io.obo.hpo.HpoGeneAnnotationParser
 import groovy.transform.CompileStatic
 import org.grails.io.support.ClassPathResource
+
 @CompileStatic
 class HpoGeneFactory {
     List<HpoGeneAnnotation> getInstance() {

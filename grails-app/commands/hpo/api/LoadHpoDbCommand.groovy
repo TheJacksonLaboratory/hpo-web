@@ -13,7 +13,7 @@ class LoadHpoDbCommand implements GrailsApplicationCommand {
       def appCtx = getApplicationContext()
       appCtx.dbTermAdminService.refreshDbTerms() 			// Load Terms Table
 
-      appCtx.dbGeneAdminService.truncateGeneTermJoinTable()	// Truncate Genes to Terms
+      /*appCtx.dbGeneAdminService.truncateGeneTermJoinTable()	// Truncate Genes to Terms
       appCtx.dbGeneAdminService.truncateDbGenes()			// Truncate Gene Table
       appCtx.dbGeneAdminService.loadEntrezGenes() 			// Load Genes Table
       appCtx.dbGeneAdminService.joinGenesAndTermsWithSql() 	// Create Genes to Terms
@@ -23,7 +23,7 @@ class LoadHpoDbCommand implements GrailsApplicationCommand {
       appCtx.dbDiseaseAdminService.truncateDiseaseGeneJoinTable() // Truncate Disease To Gene
       appCtx.dbDiseaseAdminService.loadDiseases() 	 		     // Load Diseases
       appCtx.dbDiseaseAdminService.joinDiseaseAndTermsWithSql()	 // Load Diseases To Term
-      appCtx.dbDiseaseAdminService.joinDiseasesToGenesWithSql()   // Load Disease To Gene
+      appCtx.dbDiseaseAdminService.joinDiseasesToGenesWithSql()   // Load Disease To Gene*/
 
       println("finished refreshing database duration: ${stopWatch} time: ${new Date()}")
         return true

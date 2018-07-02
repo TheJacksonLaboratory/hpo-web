@@ -1,11 +1,12 @@
 package hpo.api.db
 
-import com.github.phenomics.ontolib.formats.hpo.HpoOntology
-import com.github.phenomics.ontolib.ontology.algo.OntologyTerms
-import com.github.phenomics.ontolib.ontology.data.Term
-import com.github.phenomics.ontolib.ontology.data.TermId
+
 import grails.gorm.transactions.Transactional
 import groovy.sql.BatchingPreparedStatementWrapper
+import org.monarchinitiative.phenol.formats.hpo.HpoOntology
+import org.monarchinitiative.phenol.ontology.algo.OntologyTerms
+import org.monarchinitiative.phenol.ontology.data.Term
+import org.monarchinitiative.phenol.ontology.data.TermId
 import hpo.api.db.utils.SqlUtilsService
 import hpo.api.term.DbTerm
 import hpo.api.term.DbTermPath
@@ -15,6 +16,7 @@ import org.apache.commons.lang.time.StopWatch
 import org.hibernate.Session
 import org.hibernate.SessionFactory
 import org.hibernate.Transaction
+
 
 /**
  * Created by djd on 10/22/17.
@@ -47,7 +49,7 @@ class DbTermAdminService {
     Map<Term, DbTerm> termToDbTermMap = [:]
     for (Term term in terms) {
       if (ontologyIdSet.contains(term.id.idWithPrefix)) {
-        // do nothinbg
+        // do nothing
       } else {
         ontologyIdSet.add(term.id.idWithPrefix)
         DbTerm dbTerm = new DbTerm(term as Term)

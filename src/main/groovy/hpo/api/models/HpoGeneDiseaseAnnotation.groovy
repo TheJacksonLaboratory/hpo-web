@@ -1,9 +1,5 @@
 package hpo.api.models
 
-import com.github.phenomics.ontolib.base.OntoLibRuntimeException
-import com.github.phenomics.ontolib.formats.hpo.HpoDiseaseAnnotation
-import com.github.phenomics.ontolib.ontology.data.TermAnnotation
-import com.google.common.collect.ComparisonChain
 
 public final class HpoGeneDiseaseAnnotation {
 

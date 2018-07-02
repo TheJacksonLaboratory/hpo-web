@@ -1,14 +1,13 @@
 package hpo.api
 
-import com.github.phenomics.ontolib.formats.hpo.HpoOntology
-import com.github.phenomics.ontolib.formats.hpo.HpoTerm
-import com.github.phenomics.ontolib.ontology.data.ImmutableTermId
-import com.github.phenomics.ontolib.ontology.data.TermId
 import grails.compiler.GrailsCompileStatic
 import hpo.api.annotation.HpoCategory
 import hpo.api.annotation.HpoCategoryMap
 import hpo.api.disease.DbDisease
 import hpo.api.term.DbTerm
+import org.monarchinitiative.phenol.formats.hpo.HpoOntology
+import org.monarchinitiative.phenol.ontology.data.TermId
+import org.monarchinitiative.phenol.ontology.data.Term
 
 @GrailsCompileStatic
 class HpoDiseaseDetailsService {
@@ -46,7 +45,7 @@ class HpoDiseaseDetailsService {
 
     Set<DbTerm> dbTermList  = disease.dbTerms
     dbTermList.each {dbTerm ->
-      TermId termId = ImmutableTermId.constructWithPrefix(dbTerm.getOntologyId())
+      TermId termId = TermId.constructWithPrefix(dbTerm.getOntologyId())
       hpoCatMap.addAnnotatedTerm(termId, hpoOntology)
     }
 
@@ -60,7 +59,7 @@ class HpoDiseaseDetailsService {
         //get category terms
         List<TermId> termIdList = cat.getAnnotatingTermIds()
         termIdList.each { tId ->
-          HpoTerm term = hpoOntology.getTermMap().get(tId)
+          Term term = hpoOntology.getTermMap().get(tId)
           String termIdWithPrefix = term.getId().getIdWithPrefix()
 
           //add the DbTerm to the list of terms

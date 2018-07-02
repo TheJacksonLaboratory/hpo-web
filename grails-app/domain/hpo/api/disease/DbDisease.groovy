@@ -1,6 +1,5 @@
 package hpo.api.disease
 
-import com.github.phenomics.ontolib.formats.hpo.HpoDiseaseAnnotation
 import hpo.api.gene.DbGene
 import hpo.api.term.DbTerm
 
@@ -27,11 +26,11 @@ class DbDisease {
 
   DbDisease() {}
 
-  DbDisease(HpoDiseaseAnnotation hpoDiseaseAnnotation) {
-    db = hpoDiseaseAnnotation.db
-    dbId = hpoDiseaseAnnotation.dbObjectId
-    diseaseName = hpoDiseaseAnnotation.dbName
-    diseaseId = hpoDiseaseAnnotation.dbReference
+  DbDisease(Map disease) {
+    db = disease.db
+    dbId = disease.dbObjectId
+    diseaseName = disease.dbName
+    diseaseId = disease.dbReference
   }
 }
 

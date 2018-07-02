@@ -1,15 +1,16 @@
 package hpo.api.annotation;
 
-import com.github.phenomics.ontolib.formats.hpo.HpoOntology;
-import com.github.phenomics.ontolib.graph.data.Edge;
-import com.github.phenomics.ontolib.ontology.data.ImmutableTermId;
-import com.github.phenomics.ontolib.ontology.data.TermId;
+
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
+import org.monarchinitiative.phenol.formats.hpo.HpoOntology;
+import org.monarchinitiative.phenol.ontology.data.TermId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.*;
+
+import static org.monarchinitiative.phenol.ontology.algo.OntologyAlgorithm.getParentTerms;
 
 /**
  * Model of the upper-level HPO classes. This allows a canonical view of HPO Annotation per disease
@@ -32,32 +33,32 @@ public class HpoCategoryMap {
      */
     private ImmutableMap<TermId, HpoCategory> categorymap;
 
-    private static final TermId INHERITANCE_ID = ImmutableTermId.constructWithPrefix("HP:0000005");
-    private static final TermId ABNORMAL_CELLULAR_ID = ImmutableTermId.constructWithPrefix("HP:0025354");
-    private static final TermId BLOOD_ID = ImmutableTermId.constructWithPrefix("HP:0001871");
-    private static final TermId CONNECTIVE_TISSUE_ID = ImmutableTermId.constructWithPrefix("HP:0003549");
-    private static final TermId HEAD_AND_NECK_ID = ImmutableTermId.constructWithPrefix("HP:0000152");
-    private static final TermId LIMBS_ID =ImmutableTermId.constructWithPrefix("HP:0040064");
-    private static final TermId METABOLISM_ID = ImmutableTermId.constructWithPrefix("HP:0001939");
-    private static final TermId PRENATAL_ID = ImmutableTermId.constructWithPrefix("HP:0001197");
-    private static final TermId BREAST_ID = ImmutableTermId.constructWithPrefix("HP:0000769");
-    private static final TermId CARDIOVASCULAR_ID = ImmutableTermId.constructWithPrefix("HP:0001626");
-    private static final TermId DIGESTIVE_ID = ImmutableTermId.constructWithPrefix("HP:0025031");
-    private static final TermId EAR_ID = ImmutableTermId.constructWithPrefix("HP:0000598");
-    private static final TermId ENDOCRINE_ID = ImmutableTermId.constructWithPrefix("HP:0000818");
-    private static final TermId EYE_ID = ImmutableTermId.constructWithPrefix("HP:0000478");
-    private static final TermId GENITOURINARY_ID = ImmutableTermId.constructWithPrefix("HP:0000119");
-    private static final TermId IMMUNOLOGY_ID = ImmutableTermId.constructWithPrefix("HP:0002715");
-    private static final TermId INTEGUMENT_ID = ImmutableTermId.constructWithPrefix("HP:0001574");
-    private static final TermId MUSCLE_ID = ImmutableTermId.constructWithPrefix("HP:0003011");
-    private static final TermId NERVOUS_SYSTEM_ID = ImmutableTermId.constructWithPrefix("HP:0000707");
-    private static final TermId RESPIRATORY_ID = ImmutableTermId.constructWithPrefix("HP:0002086");
-    private static final TermId SKELETAL_ID = ImmutableTermId.constructWithPrefix("HP:0000924");
-    private static final TermId THORACIC_CAVITY_ID = ImmutableTermId.constructWithPrefix("HP:0045027");
-    private static final TermId VOICE_ID = ImmutableTermId.constructWithPrefix("HP:0001608");
-    private static final TermId CONSTITUTIONAL_ID = ImmutableTermId.constructWithPrefix("HP:0025142");
-    private static final TermId GROWTH_ID = ImmutableTermId.constructWithPrefix("HP:0001507");
-    private static final TermId NEOPLASM_ID = ImmutableTermId.constructWithPrefix("HP:0002664");
+    private static final TermId INHERITANCE_ID = TermId.constructWithPrefix("HP:0000005");
+    private static final TermId ABNORMAL_CELLULAR_ID = TermId.constructWithPrefix("HP:0025354");
+    private static final TermId BLOOD_ID = TermId.constructWithPrefix("HP:0001871");
+    private static final TermId CONNECTIVE_TISSUE_ID = TermId.constructWithPrefix("HP:0003549");
+    private static final TermId HEAD_AND_NECK_ID = TermId.constructWithPrefix("HP:0000152");
+    private static final TermId LIMBS_ID =TermId.constructWithPrefix("HP:0040064");
+    private static final TermId METABOLISM_ID = TermId.constructWithPrefix("HP:0001939");
+    private static final TermId PRENATAL_ID = TermId.constructWithPrefix("HP:0001197");
+    private static final TermId BREAST_ID = TermId.constructWithPrefix("HP:0000769");
+    private static final TermId CARDIOVASCULAR_ID = TermId.constructWithPrefix("HP:0001626");
+    private static final TermId DIGESTIVE_ID = TermId.constructWithPrefix("HP:0025031");
+    private static final TermId EAR_ID = TermId.constructWithPrefix("HP:0000598");
+    private static final TermId ENDOCRINE_ID = TermId.constructWithPrefix("HP:0000818");
+    private static final TermId EYE_ID = TermId.constructWithPrefix("HP:0000478");
+    private static final TermId GENITOURINARY_ID = TermId.constructWithPrefix("HP:0000119");
+    private static final TermId IMMUNOLOGY_ID = TermId.constructWithPrefix("HP:0002715");
+    private static final TermId INTEGUMENT_ID = TermId.constructWithPrefix("HP:0001574");
+    private static final TermId MUSCLE_ID = TermId.constructWithPrefix("HP:0003011");
+    private static final TermId NERVOUS_SYSTEM_ID = TermId.constructWithPrefix("HP:0000707");
+    private static final TermId RESPIRATORY_ID = TermId.constructWithPrefix("HP:0002086");
+    private static final TermId SKELETAL_ID = TermId.constructWithPrefix("HP:0000924");
+    private static final TermId THORACIC_CAVITY_ID = TermId.constructWithPrefix("HP:0045027");
+    private static final TermId VOICE_ID = TermId.constructWithPrefix("HP:0001608");
+    private static final TermId CONSTITUTIONAL_ID = TermId.constructWithPrefix("HP:0025142");
+    private static final TermId GROWTH_ID = TermId.constructWithPrefix("HP:0001507");
+    private static final TermId NEOPLASM_ID = TermId.constructWithPrefix("HP:0002664");
 
     public HpoCategoryMap() {
         initializeMap();
@@ -94,8 +95,8 @@ public class HpoCategoryMap {
         mapbuilder.put(abnConnTiss.getTid(), abnConnTiss);
         // head or neck
         HpoCategory headNeckCat = new HpoCategory.Builder(HEAD_AND_NECK_ID, "Head and neck").
-                subcategory(ImmutableTermId.constructWithPrefix("HP:0000234"), "Head").
-                subcategory(ImmutableTermId.constructWithPrefix("HP:0000464"), "Neck").build();
+                subcategory(TermId.constructWithPrefix("HP:0000234"), "Head").
+                subcategory(TermId.constructWithPrefix("HP:0000464"), "Neck").build();
         mapbuilder.put(HEAD_AND_NECK_ID, headNeckCat);
         // limbs
         HpoCategory limbCat = new HpoCategory.Builder(LIMBS_ID, "Limbs").build();
@@ -111,8 +112,8 @@ public class HpoCategoryMap {
         mapbuilder.put(BREAST_ID, breastCat);
         //cardiovascular
         HpoCategory cardiovascularCat = new HpoCategory.Builder(CARDIOVASCULAR_ID, "Cardiovascular").
-                subcategory(ImmutableTermId.constructWithPrefix("HP:0002597"), "Vascular").
-                subcategory(ImmutableTermId.constructWithPrefix("HP:0010948"), "fetal cardiovascular").
+                subcategory(TermId.constructWithPrefix("HP:0002597"), "Vascular").
+                subcategory(TermId.constructWithPrefix("HP:0010948"), "fetal cardiovascular").
                 build(); // ToDo extend!!!
         mapbuilder.put(CARDIOVASCULAR_ID, cardiovascularCat);
         //digestive
@@ -129,8 +130,8 @@ public class HpoCategoryMap {
         mapbuilder.put(EYE_ID, eyeCat);
         //genitourinary
         HpoCategory guCat = new HpoCategory.Builder(GENITOURINARY_ID, "Genitourinary system").
-                subcategory(ImmutableTermId.constructWithPrefix("HP:0000078"), "Genital system").
-                subcategory(ImmutableTermId.constructWithPrefix("HP:0000079"), "Urinary system").
+                subcategory(TermId.constructWithPrefix("HP:0000078"), "Genital system").
+                subcategory(TermId.constructWithPrefix("HP:0000079"), "Urinary system").
                 build();
         mapbuilder.put(GENITOURINARY_ID, guCat);
         // Immune
@@ -186,30 +187,13 @@ public class HpoCategoryMap {
     }
 
 
-
-    /** Find all of the direct parents of childTermId (do not include "grandchildren" and other descendents).
-     * @param ontology The ontology to which parentTermId belongs
-     * @param childTermId The term whose parents were are seeking
-     * @return A set of all parent terms of childTermId
-     */
-    private Set<TermId> getParentTerms(HpoOntology ontology, TermId childTermId) {
-        ImmutableSet.Builder<TermId> anccset = new ImmutableSet.Builder<>();
-        Iterator it =  ontology.getGraph().outEdgeIterator(childTermId);
-        while (it.hasNext()) {
-            Edge<TermId> edge = (Edge<TermId>) it.next();
-            TermId destId=edge.getDest();
-            anccset.add(destId);
-        }
-        return anccset.build();
-    }
-
     private Set<TermId> getAncestorCategories(HpoOntology ontology, TermId childTermId) {
         ImmutableSet.Builder<TermId> anccset = new ImmutableSet.Builder<>();
         Stack<TermId> stack = new Stack<>();
         stack.push(childTermId);
         while (! stack.empty()) {
             TermId tid = stack.pop();
-            Set<TermId> parents = getParentTerms(ontology,tid);
+            Set<TermId> parents = getParentTerms(ontology,tid,false);
             for (TermId p : parents) {
                 if (this.categorymap.containsKey(p)) {
                     anccset.add(p);
@@ -220,27 +204,6 @@ public class HpoCategoryMap {
         }
         return anccset.build();
     }
-
-
-
-
-//
-//    public static boolean existsPath2(Ontology ontology, final TermId sourceID, TermId destID){
-//        // special case -- a term cannot have a path to itself in an ontology (DAG)
-//        if (sourceID.equals(destID)) return false;
-//        final DirectedGraph<TermId, ImmutableEdge<TermId>> graph=ontology.getGraph();
-//        List<TermId> visited = new ArrayList<>();
-//        BreadthFirstSearch<TermId, ImmutableEdge<TermId>> bfs = new BreadthFirstSearch<>();
-//        bfs.startFromForward(graph, sourceID, (g, termId) -> {
-//            visited.add(termId);
-//            System.out.println("visited "+termId.getIdWithPrefix());
-//            return true;
-//        });
-//        return visited.contains(destID);
-//    }
-//
-
-
 
     /** Identify the category that best matches the term id (usually just fine the category that represents a parent term. */
     private HpoCategory getCategory(TermId tid, HpoOntology ontology) {

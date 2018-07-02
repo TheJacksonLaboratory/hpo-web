@@ -1,6 +1,6 @@
 package hpo.api.term
 
-import com.github.phenomics.ontolib.ontology.data.Term
+import org.monarchinitiative.phenol.ontology.data.Term
 import hpo.api.disease.DbDisease
 import hpo.api.gene.DbGene
 

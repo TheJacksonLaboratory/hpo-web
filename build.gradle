@@ -38,10 +38,12 @@ integrationTest {
 
 dependencies {
   //Custom OLGP and its dependencies
-  compile name:'ontolib-core-0.1.2'
-  compile name:'ontolib-io-0.1.2'
+  compile name:'phenol-core-1.1.0'
+  compile name:'phenol-io-1.1.0'
   compile 'com.google.guava:guava:22.0'
   compile "org.antlr:antlr4:4.7"
+  compile group: 'org.jgrapht', name: 'jgrapht-core', version: '1.2.0'
+
 
   compile "org.springframework.boot:spring-boot-starter-logging"
   compile "org.springframework.boot:spring-boot-autoconfigure"
@@ -135,6 +137,10 @@ task clientIntegrationTest(type: NpmTask, dependsOn: 'npmInstall') {
     group = 'verification'
     description = 'Executes client side integration tests'
     args = ['run', 'e2e']
+}
+
+war {
+  archiveName = System.getProperty("warName")
 }
 
 war.dependsOn(buildClientProd)

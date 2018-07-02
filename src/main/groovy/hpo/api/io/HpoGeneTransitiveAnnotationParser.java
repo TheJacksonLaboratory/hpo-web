@@ -1,10 +1,10 @@
 package hpo.api.io;
 
-import com.github.phenomics.ontolib.formats.hpo.HpoGeneAnnotation;
-import com.github.phenomics.ontolib.io.base.TermAnnotationParser;
-import com.github.phenomics.ontolib.io.base.TermAnnotationParserException;
-import com.github.phenomics.ontolib.ontology.data.ImmutableTermId;
-import com.github.phenomics.ontolib.ontology.data.TermId;
+
+import org.monarchinitiative.phenol.io.base.TermAnnotationParser;
+import org.monarchinitiative.phenol.io.base.TermAnnotationParserException;
+import org.monarchinitiative.phenol.ontology.data.TermId;
+import org.monarchinitiative.phenol.formats.hpo.HpoGeneAnnotation;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -93,7 +93,7 @@ public class HpoGeneTransitiveAnnotationParser implements TermAnnotationParser<H
   @Override
   public HpoGeneAnnotation next() throws IOException, TermAnnotationParserException {
     final String[] arr = nextLine.split("\t");
-    final TermId hpoTermId = ImmutableTermId.constructWithPrefix(arr[0]);
+    final TermId hpoTermId = TermId.constructWithPrefix(arr[0]);
     final String hpoTermName = arr[1];
     final int geneId = Integer.parseInt(arr[2]);
     final String geneSymbol = arr[3];
