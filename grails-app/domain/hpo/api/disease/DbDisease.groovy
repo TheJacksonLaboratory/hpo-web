@@ -2,6 +2,7 @@ package hpo.api.disease
 
 import hpo.api.gene.DbGene
 import hpo.api.term.DbTerm
+import org.monarchinitiative.phenol.formats.hpo.HpoDisease
 
 class DbDisease {
 
@@ -26,11 +27,11 @@ class DbDisease {
 
   DbDisease() {}
 
-  DbDisease(Map disease) {
-    db = disease.db
-    dbId = disease.dbObjectId
-    diseaseName = disease.dbName
-    diseaseId = disease.dbReference
+  DbDisease(HpoDisease disease) {
+    db = disease.getDiseaseDatabaseId().getPrefix().toString()
+    dbId = disease.getDiseaseDatabaseId().getId()
+    diseaseName = disease.getName()
+    diseaseId = disease.getDiseaseDatabaseId().toString()
   }
 }
 

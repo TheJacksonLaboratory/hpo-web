@@ -1,9 +1,7 @@
 package hpo.api.views
 
-import com.github.phenomics.ontolib.formats.hpo.HpoOntology
-import com.github.phenomics.ontolib.formats.hpo.HpoTerm
-import com.github.phenomics.ontolib.ontology.data.ImmutableTermId
-import com.github.phenomics.ontolib.ontology.data.Term
+import org.monarchinitiative.phenol.ontology.data.Term
+import org.monarchinitiative.phenol.ontology.data.TermId
 import grails.plugin.json.view.test.*
 import grails.testing.gorm.DataTest
 import hpo.api.disease.DbDisease
@@ -84,11 +82,12 @@ class HpoTermServiceViewSpec extends Specification implements JsonViewTest,DataT
     expectedDiseaseIds = ["OMIM:7","ORPHA:227"]
   }
   private static Term buildMockTerm(String id){
-    Term term = new HpoTerm(
-      ImmutableTermId.constructWithPrefix(id),
+    Term term = new Term(
+      TermId.constructWithPrefix(id),
       [],
       'Bladder neoplasm' ,
       'Descriptive definition',
+      [],
       'Informative commment',
       [],
       [],

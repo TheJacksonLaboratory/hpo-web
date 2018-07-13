@@ -1,8 +1,7 @@
 package hpo.api.term
 
-import com.github.phenomics.ontolib.formats.hpo.HpoTerm
-import com.github.phenomics.ontolib.ontology.data.ImmutableTermId
-import com.github.phenomics.ontolib.ontology.data.Term
+import org.monarchinitiative.phenol.ontology.data.Term
+import org.monarchinitiative.phenol.ontology.data.TermId
 import grails.testing.gorm.DomainUnitTest
 import hpo.api.term.DbTerm
 import spock.lang.Specification
@@ -37,11 +36,12 @@ class DbTermUnitSpec extends Specification implements DomainUnitTest<DbTerm> {
 
   void "test term constructor"() {
     given:
-    Term term = new HpoTerm(
-      ImmutableTermId.constructWithPrefix("HP:0000006"),
+    Term term = new Term(
+      TermId.constructWithPrefix("HP:0000006"),
       [],
       'A term name',
       'Descriptive definition',
+      [],
       'Informative commment',
       [],
       [],

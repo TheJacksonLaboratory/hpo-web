@@ -1,4 +1,4 @@
-import com.github.phenomics.ontolib.ontology.data.Term
+import org.monarchinitiative.phenol.ontology.data.Term
 
 model {
     Term term

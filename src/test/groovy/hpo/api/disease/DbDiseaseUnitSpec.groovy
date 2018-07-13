@@ -1,9 +1,12 @@
 package hpo.api.disease
 
-import com.github.phenomics.ontolib.formats.hpo.HpoDiseaseAnnotation
-import com.github.phenomics.ontolib.ontology.data.ImmutableTermId
+
 import grails.testing.gorm.DomainUnitTest
 import hpo.api.disease.DbDisease
+import org.monarchinitiative.phenol.formats.hpo.HpoAnnotation
+import org.monarchinitiative.phenol.formats.hpo.HpoDisease
+import org.monarchinitiative.phenol.formats.hpo.HpoOnset
+import org.monarchinitiative.phenol.ontology.data.TermId
 import spock.lang.Specification
 import spock.lang.Unroll
 
@@ -38,32 +41,25 @@ class DbDiseaseUnitSpec extends Specification implements DomainUnitTest<DbDiseas
   }
   void "test disease constructor"() {
     given:
-    HpoDiseaseAnnotation disease = new HpoDiseaseAnnotation(
-      "ORPHA",
-      "284400",
+    HpoAnnotation annotation = new HpoAnnotation(TermId.constructWithPrefix("HP:0000010"),
+    0.00, HpoOnset.ONSET, [])
+    HpoDisease disease = new HpoDisease(
       "Small cell carcinoma of the bladder",
-      null,
-      ImmutableTermId.constructWithPrefix("HP:0000010"),
-      "ORPHA:284400",
-      "TAS",
-      null,
-      "HP:0040283",
-      null,
-      "O",
-      null,
-      new Date(),
-      "orphadata"
+      TermId.constructWithPrefix("ORPHA:284400"),
+      [annotation],
+      [],
+      []
     )
 
     when:
-    DbDisease dbDisease = new DbDisease(disease)
+    DbDisease dbDisease = new DbDisease(disease).save()
 
     then:
     verifyAll {
-      dbDisease.db  == disease.getDb()
-      dbDisease.dbId == disease.getDbObjectId()
-      dbDisease.diseaseName == disease.getDbName()
-      dbDisease.diseaseId == disease.getDbReference()
+      dbDisease.db  == disease.getDiseaseDatabaseId().getPrefix().toString()
+      dbDisease.dbId == disease.getDiseaseDatabaseId().getId()
+      dbDisease.diseaseName == disease.getName()
+      dbDisease.diseaseId == disease.getDiseaseDatabaseId().toString()
     }
   }
 }

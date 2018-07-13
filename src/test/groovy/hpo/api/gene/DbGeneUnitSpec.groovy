@@ -1,7 +1,7 @@
 package hpo.api.gene
 
-import com.github.phenomics.ontolib.formats.hpo.HpoGeneAnnotation
 import grails.testing.gorm.DomainUnitTest
+import org.monarchinitiative.phenol.formats.hpo.HpoGeneAnnotation
 import spock.lang.Specification
 import spock.lang.Unroll
 

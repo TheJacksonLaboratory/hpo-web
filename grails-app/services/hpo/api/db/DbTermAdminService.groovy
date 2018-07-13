@@ -17,7 +17,6 @@ import org.hibernate.Session
 import org.hibernate.SessionFactory
 import org.hibernate.Transaction
 
-
 /**
  * Created by djd on 10/22/17.
  */
@@ -29,7 +28,7 @@ class DbTermAdminService {
   HpoOntology hpoOntology
   SqlUtilsService sqlUtilsService
   final static String INSERT_DB_TERM_PATH = "INSERT INTO db_term_path (db_term_id, path_names, path_ids ,path_length, version) VALUES(?,?,?,?,0)"
-  Map<DbTerm, List<DbTerm>> termParentsMap = [:]
+  Map<DbTerm, List<Term>> termParentsMap = [:]
   void deleteDbTerms() {
     StopWatch stopWatch = new StopWatch()
     stopWatch.start()
@@ -113,7 +112,7 @@ class DbTermAdminService {
  * @param dbTerm
  * @return
  */
-  private List<List<Term>> getParents(Term term, DbTerm dbTerm){
+  private void getParents(Term term, DbTerm dbTerm){
 
     Set<TermId> parentTermIds = hpoOntology.getParentTermIds(term.id)
     List<Term> parents = []

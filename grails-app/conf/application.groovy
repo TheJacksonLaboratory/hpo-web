@@ -23,6 +23,7 @@ grails {
 
 }
 
+
 info {
     app {
         name = '@info.app.name@'
@@ -85,6 +86,16 @@ grails {
             all = '*/*'
         }
     }
+    /*  Uncomment to use Grails debug console
+
+    plugin {
+      console{
+        csrfProtection{
+          enabled = false
+        }
+      }
+    }*/
+
     urlmapping {
         cache {
             maxsize = 1000

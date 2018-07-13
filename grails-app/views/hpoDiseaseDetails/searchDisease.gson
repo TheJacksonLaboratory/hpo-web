@@ -1,4 +1,3 @@
-import com.github.phenomics.ontolib.formats.hpo.HpoDiseaseAnnotation
 model {
   Map resultMap
 }
