@@ -62,12 +62,13 @@ class DbGeneAdminService {
     final Map<Integer, DbGene> entrezIdToDbGeneMap = domainUtilService.loadDbGenes()
     final Map<String, DbTerm> hpoIdToDbTermMap = domainUtilService.loadHpoIdToDbTermMap()
     List<HpoGeneAnnotation> phenotypeToGene =  hpoAssociation.getPhenotypeToGene()
-
-    DbGene.withSession { Session session ->
-      final Sql sql = sqlUtilsService.getSql()
-      sql.withBatch(500, INSERT_INTO_DB_TERM_DB_GENES) { BatchingPreparedStatementWrapper ps ->
-        phenotypeToGene.each { HpoGeneAnnotation gene ->
-            final DbTerm dbTerm = hpoIdToDbTermMap.get(gene.getTermId())
+    
+    try{
+      DbGene.withSession { Session session ->
+        final Sql sql = sqlUtilsService.getSql()
+        sql.withBatch(500, INSERT_INTO_DB_TERM_DB_GENES) { BatchingPreparedStatementWrapper ps ->
+          phenotypeToGene.each { HpoGeneAnnotation gene ->
+            final DbTerm dbTerm = hpoIdToDbTermMap.get(gene.getTermId().getIdWithPrefix().toString())
             final DbGene dbGene = entrezIdToDbGeneMap.get(gene.getEntrezGeneId())
             if (dbTerm == null) {
               hpoIdWithPrefixNotFoundSet.add(gene.getTermId().toString())
@@ -81,7 +82,11 @@ class DbGeneAdminService {
             }
           }
         }
+      }
+    }catch (Exception ex){
+      log.error(ex.toString())
     }
+
     log.info("hpoIdWithPrefixNotFoundSet.size() : ${hpoIdWithPrefixNotFoundSet.size()} ${new Date()}")
     log.info("${hpoIdWithPrefixNotFoundSet}")
     log.info("entrezIdNotFoundSet.size() : ${entrezIdNotFoundSet.size()} ${new Date()}")

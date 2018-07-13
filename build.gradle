@@ -37,11 +37,12 @@ integrationTest {
 }
 
 dependencies {
-  //Custom OLGP and its dependencies
-  compile name:'phenol-core-1.1.0'
-  compile name:'phenol-io-1.1.0'
+  profile "org.grails.profiles:web"
+
+  compile 'org.monarchinitiative.phenol:phenol-core:1.2.0'
+  compile 'org.monarchinitiative.phenol:phenol-io:1.2.0'
+
   compile 'com.google.guava:guava:22.0'
-  compile "org.antlr:antlr4:4.7"
   compile group: 'org.jgrapht', name: 'jgrapht-core', version: '1.2.0'
 
 
@@ -76,8 +77,6 @@ dependencies {
   compile "org.grails.plugins:views-json-templates"
 
   console "org.grails:grails-console"
-
-  profile "org.grails.profiles:web"
 
   runtime 'org.grails.plugins:grails-console:2.1.1'
   runtime "org.glassfish.web:el-impl:2.1.2-b03"
