@@ -44,7 +44,7 @@ class DbDiseaseUnitSpec extends Specification implements DomainUnitTest<DbDiseas
     HpoAnnotation annotation = new HpoAnnotation(TermId.constructWithPrefix("HP:0000010"),
     0.00, HpoOnset.ONSET, [])
     HpoDisease disease = new HpoDisease(
-      "Small cell carcinoma of the bladder",
+      "Small Cell Carcinoma Of The Bladder",
       TermId.constructWithPrefix("ORPHA:284400"),
       [annotation],
       [],
@@ -56,10 +56,10 @@ class DbDiseaseUnitSpec extends Specification implements DomainUnitTest<DbDiseas
 
     then:
     verifyAll {
-      dbDisease.db  == disease.getDiseaseDatabaseId().getPrefix().toString()
+      dbDisease.db  == disease.getDiseaseDatabaseId().getPrefix().getValue()
       dbDisease.dbId == disease.getDiseaseDatabaseId().getId()
       dbDisease.diseaseName == disease.getName()
-      dbDisease.diseaseId == disease.getDiseaseDatabaseId().toString()
+      dbDisease.diseaseId == disease.getDiseaseDatabaseId().getIdWithPrefix()
     }
   }
 }

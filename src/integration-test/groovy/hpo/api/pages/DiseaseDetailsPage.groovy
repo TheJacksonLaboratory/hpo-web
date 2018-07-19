@@ -6,7 +6,7 @@ class DiseaseDetailsPage extends Page{
 
   static final String TITLE = 'Human Phenotype Ontology'
 
-  static url = "/app/browse/disease/ORPHA:1606"
+  static url = "/app/browse/disease/OMIM:109800"
 
   static at = {
     title == TITLE
