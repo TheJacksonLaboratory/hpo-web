@@ -3,6 +3,7 @@ package hpo.api.disease
 import hpo.api.gene.DbGene
 import hpo.api.term.DbTerm
 import org.monarchinitiative.phenol.formats.hpo.HpoDisease
+import org.apache.commons.lang.WordUtils
 
 class DbDisease {
 
@@ -28,10 +29,10 @@ class DbDisease {
   DbDisease() {}
 
   DbDisease(HpoDisease disease) {
-    db = disease.getDiseaseDatabaseId().getPrefix().toString()
+    db = disease.getDiseaseDatabaseId().getPrefix().getValue().toString()
     dbId = disease.getDiseaseDatabaseId().getId()
-    diseaseName = disease.getName()
-    diseaseId = disease.getDiseaseDatabaseId().toString()
+    diseaseName = WordUtils.capitalizeFully(disease.getName().replaceAll('^\\%\\d{6}|^\\#\\d{6}|^\\d{6}', '').trim())
+    diseaseId = disease.getDiseaseDatabaseId().getIdWithPrefix();
   }
 }
 
