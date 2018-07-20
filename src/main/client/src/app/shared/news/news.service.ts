@@ -66,6 +66,7 @@ export class NewsService {
         * */
         if(this.allNews[currentMonthYear]){
           for(let item of this.allNews[currentMonthYear]){
+            item.monthYear = currentMonthYear;
             if(news.length < 3){
               news.push(item);
             }
