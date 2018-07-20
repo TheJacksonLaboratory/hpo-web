@@ -4,6 +4,7 @@ import { Observable } from "rxjs/Observable";
 import 'rxjs/add/observable/of';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from "../../../environments/environment";
+import {xdescribe} from "selenium-webdriver/testing";
 
 @Injectable()
 export class NewsService {
@@ -25,12 +26,15 @@ export class NewsService {
 
  /* Return a specific months news */
   getNewsByDate(date: string): Observable<News[]> {
-    if (this.allNews && this.allNews[date]) {
-      return Observable.of(this.allNews[date]);
-    } else {
-      return Observable.of(null);
+    if(date){
+      if (this.allNews[date]) {
+        return Observable.of(this.allNews[date]);
+      } else {
+        return Observable.of(null);
+      }
     }
   }
+
   /* Return all unique month-years with news*/
   getUniqueDates(): Observable<Array<string>> {
     if (this.allNews) {

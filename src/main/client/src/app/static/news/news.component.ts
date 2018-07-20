@@ -10,7 +10,7 @@ import {Observable} from "rxjs/Observable";
 })
 export class NewsComponent implements OnInit {
   dates: Array<string>;
-  currentSelected: string = "April 2018";
+  currentSelected: string = "";
   content: Array<News>;
   error: boolean = false;
   constructor(private newsService: NewsService) {
@@ -21,6 +21,7 @@ export class NewsComponent implements OnInit {
     this.newsService.getUniqueDates().subscribe((dates) => {
       if(dates){
         this.dates = dates;
+        this.currentSelected = dates[0];
         this.updateNewsItems();
       }else{
         this.error = true;
