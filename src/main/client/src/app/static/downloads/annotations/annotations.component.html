@@ -1,26 +1,33 @@
 <div class="container">
   <h1 class="pageTitle center">Download Annotations</h1>
   <div>
-    <p>The annotation files (e.g. phenotype_annotation.tab) are available from our
-      <a target="__blank" href="http://compbio.charite.de/jenkins/job/hpo.annotations/lastStableBuild/">Hudson/Jenkins page</a>.
-      The formats of the annotation file are explained <a routerLink="/help/annotations">here</a>.</p>
+    <p>
+      A number of annotation files (e.g. phenotype_annotation.tab) are available on our
+      <a href="http://compbio.charite.de/jenkins/job/hpo.annotations/lastStableBuild/">Hudson/Jenkins page</a>.
+      The format of the annotation file is explained <a routerLink="/help/annotations">here</a>.
+    </p>
     <ul>
-      <li><strong><i>phenotype_annotation.tab</i></strong>:
-        contains manual and semi-automated annotations created by the HPO-team. These are annotations of OMIM-, Orphanet-, and DECIPHER-entries.
+      <li><a href="http://compbio.charite.de/jenkins/job/hpo.annotations/lastStableBuild/artifact/misc/phenotype_annotation.tab" target="__blank">phenotype_annotation.tab</a>: contains manual and semi-automated annotations created by the HPO-team. These are annotations of OMIM-, Orphanet-, and DECIPHER-entries</li>
+      <li><a href="http://compbio.charite.de/jenkins/job/hpo.annotations/lastStableBuild/artifact/misc/phenotype_annotation_hpoteam.tab" target="__blank">phenotype_annotation_hpoteam.tab</a>: contains annotations made explicitly and manually by the HPO-team (mostly referring to OMIM entries)</li>
+      <li><a href="http://compbio.charite.de/jenkins/job/hpo.annotations/lastStableBuild/artifact/misc/negative_phenotype_annotation.tab" target="__blank">negative_phenotype_annotation.tab</a>: contains negative annotations (i.e. a disease is NOT associated with this HPO-term)</li>
+    </ul>
+    <p>Furthermore, we <a href="http://compbio.charite.de/jenkins/job/hpo.annotations.monthly/lastStableBuild/" target="__blank">provide files</a> that link genes and phenotypes in different ways.
+    <ul>
+      <li>
+        <a href="http://compbio.charite.de/jenkins/job/hpo.annotations.monthly/lastSuccessfulBuild/artifact/annotation/ALL_SOURCES_ALL_FREQUENCIES_genes_to_phenotype.txt"
+             target="__blank">ALL_SOURCES_ALL_FREQUENCIES_genes_to_phenotype.txt</a>  provides a link between genes and HPO terms. All phenotype terms associated with any disease that is
+        associated with variants in a gene are assigned to that gene in this file. Other files are available on our Jenkins server that filter terms according to provenance of the
+        annotation and frequency of the features in the disease.
       </li>
-      <li><strong><i>phenotype_annotation_hpoteam.tab</i></strong>: contains annotations made explicitly and manually by the HPO-team (mostly referring to OMIM entries)</li>
-      <li><strong><i>negative_phenotype_annotation.tab</i></strong>: contains negative annotations (i.e. a disease is NOT associated with this HPO-term)</li>
-      <li><strong><i>Genes_to_phenotype.txt and phenotype_to_genes.txt</i></strong>:
-        Genes are associated with phenotypes by listing all of the phenotypes associated with any disease that is
-        caused by mutation in the gene. See the <a routerLink="faq">FAQ</a> about these two files to read about the differences between these two files.</li>
-      <li><strong><i>phenotype.hpoa</i></strong>: The HPO project is transitioning to a new, improved file format for disease
-        annotations. The file can be obtained <a href=" http://compbio.charite.de/jenkins/job/hpo.annotations.2018/" target="_blank">here</a>.
-        Please see the
-        <a target="__blank" href="http://hpo-annotation-qc.readthedocs.io/en/latest/annotationFormat.html">online documentation</a>
-        for details about the new format, which will become the standard format after the transition period.
+      <li>
+        <a href="http://compbio.charite.de/jenkins/job/hpo.annotations.monthly/lastSuccessfulBuild/artifact/annotation/ALL_SOURCES_ALL_FREQUENCIES_phenotype_to_genes.txt"
+             target="__blank">ALL_SOURCES_ALL_FREQUENCIES_phenotype_to_genes.txt</a> is analogous, but instead provides links from HPO terms to genes.
       </li>
     </ul>
-    <p>We are preparing a software solution that transforms the HPO ontology and annotation data into a relational database. Please contact us if you are interested in testing this software.</p>
-    <p>Please direct questions about the annotation files to <a href="mailto:dr.sebastian.koehler@gmail.com">Sebastian Köhler</a> or <a href="mailto:peter.robinson@jax.org">Peter Robinson</a>.</p>
+
+    <p>These files are updated at once every month. </p>
+
+    <p><strong>The HPO project is transitioning to a new annotation format in 2018. A detailed description of the new format can be found <a href="http://hpo-annotation-qc.readthedocs.io/en/latest/annotationFormat.html#new-and-old-big-file-formats" target="__blank">here</a>.
+      This format will become the main release format later this year following an additional testing and feedback phase.</strong></p>
   </div>
 </div>
