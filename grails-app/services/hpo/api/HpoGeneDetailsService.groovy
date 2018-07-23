@@ -1,11 +1,7 @@
 package hpo.api
 
-import grails.gorm.transactions.Transactional
-import hpo.api.disease.DbDisease
 import hpo.api.gene.DbGene
 import grails.compiler.GrailsCompileStatic
-import groovy.transform.TypeCheckingMode
-import hpo.api.term.DbTerm
 
 
 @GrailsCompileStatic

@@ -12,7 +12,6 @@ import hpo.api.disease.DbDisease
 import hpo.api.gene.DbGene
 import hpo.api.term.DbTerm
 import org.apache.commons.lang.time.StopWatch
-import org.grails.plugins.web.interceptors.InterceptorsGrailsPlugin
 import org.hibernate.SessionFactory
 
 
