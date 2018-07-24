@@ -26,12 +26,21 @@ class SqlUtilsService {
   /**
    * @param statement a delete statement to execute
    */
-  void executeDetete(String statement) {
+  void executeDelete(String statement) {
     StopWatch stopWatch = new StopWatch()
     stopWatch.start()
     int rowCount = getSql().executeUpdate(statement)
     log.info("${rowCount} rows deleted by statement: ${statement} duration: ${stopWatch} time: ${new Date()}")
   }
+
+  void stopForeignChecks(){
+    getSql().executeUpdate("SET FOREIGN_KEY_CHECKS = 0");
+  }
+
+  void startForeignChecks(){
+    getSql().executeUpdate("SET FOREIGN_KEY_CHECKS = 1");
+  }
+
 
   /**
    * @return a Connection with the underlying connection for the active session

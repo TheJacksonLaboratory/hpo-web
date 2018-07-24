@@ -29,19 +29,24 @@ class DbTermAdminService {
   SqlUtilsService sqlUtilsService
   final static String INSERT_DB_TERM_PATH = "INSERT INTO db_term_path (db_term_id, path_names, path_ids ,path_length, version) VALUES(?,?,?,?,0)"
   Map<DbTerm, List<Term>> termParentsMap = [:]
-  void deleteDbTerms() {
-    StopWatch stopWatch = new StopWatch()
-    stopWatch.start()
-    int dbTermPathsDeleted = DbTermPath.executeUpdate("delete from DbTermPath")
-    log.info("${dbTermPathsDeleted} rows deleted from ${DbTermPath.name} duration: ${stopWatch} time: ${new Date()}")
-    int dbTermRelationsDeleted = DbTermRelationship.executeUpdate("delete from DbTermRelationship")
-    log.info("${dbTermRelationsDeleted} rows deleted from ${DbTermRelationship.name} duration: ${stopWatch} time: ${new Date()}")
-    int dbTermsleted = DbTerm.executeUpdate("delete from DbTerm")
-    log.info("${dbTermsleted} rows deleted from ${DbTerm.name} duration: ${stopWatch} time: ${new Date()}")
+
+  void truncateDbTerms() {
+    sqlUtilsService.executeDelete("TRUNCATE TABLE db_term")
+    log.info("db_term TRUNCATED..")
+
   }
 
-  void refreshDbTerms(List<Term> terms = hpoOntology.termMap.values()) {
-    deleteDbTerms()
+  void tuncateDbTermRelationship() {
+    sqlUtilsService.executeDelete("TRUNCATE TABLE db_term_relationship")
+    log.info("db_term_relationship TRUNCATED..")
+  }
+
+  void truncatedDbTermPath() {
+    sqlUtilsService.executeDelete("TRUNCATE TABLE db_term_path")
+    log.info("db_term_relationship TRUNCATED..")
+  }
+
+  void loadDbTerms(List<Term> terms = hpoOntology.termMap.values()) {
     StopWatch stopWatch = new StopWatch()
     stopWatch.start()
     Set<String> ontologyIdSet = [] as Set<String>

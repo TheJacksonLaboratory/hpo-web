@@ -28,14 +28,14 @@ class DbDiseaseAdminService {
   final static String INSERT_INTO_DB_GENE_DB_DISEASES = "INSERT INTO db_gene_db_diseases( db_gene_id, db_disease_id) VALUES(?,?)"
 
   void truncateDbDiseases() {
-    sqlUtilsService.executeDetete("delete from db_disease")
+    sqlUtilsService.executeDelete("truncate table db_disease")
   }
 
   void truncateDiseaseTermJoinTable() {
-    sqlUtilsService.executeDetete("delete from db_term_db_diseases")
+    sqlUtilsService.executeDelete("truncate table db_term_db_diseases")
   }
   void truncateDiseaseGeneJoinTable(){
-    sqlUtilsService.executeDetete("delete from db_gene_db_diseases")
+    sqlUtilsService.executeDelete("truncate table db_gene_db_diseases")
   }
 
   void loadDiseases() throws SQLException {
