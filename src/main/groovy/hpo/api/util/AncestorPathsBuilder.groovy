@@ -1,8 +1,8 @@
 package hpo.api.util
 
-import com.github.phenomics.ontolib.formats.hpo.HpoOntology
-import com.github.phenomics.ontolib.ontology.data.Term
-import com.github.phenomics.ontolib.ontology.data.TermId
+import org.monarchinitiative.phenol.formats.hpo.HpoOntology
+import org.monarchinitiative.phenol.ontology.data.Term
+import org.monarchinitiative.phenol.ontology.data.TermId
 import org.springframework.beans.factory.annotation.Autowired
 
 /**

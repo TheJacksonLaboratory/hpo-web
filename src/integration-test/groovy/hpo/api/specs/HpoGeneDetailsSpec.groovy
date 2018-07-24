@@ -27,13 +27,13 @@ class HpoGeneDetailsSpec extends  GebReportingSpec {
         }
     then:
     waitFor(25, 2) {
-      geneDetailsPage.diseasePagingRangeLabelElement.text() == '1 - 2 of 2'
+      geneDetailsPage.diseasePagingRangeLabelElement.text() == '1 - 4 of 4'
 
     }
 
     when:
       waitFor(25, 2){
-        geneDetailsPage.diseaseFilterElement.value('kbg')
+        geneDetailsPage.diseaseFilterElement.value('Bladder Cancer')
       }
 
     then:
@@ -55,18 +55,18 @@ class HpoGeneDetailsSpec extends  GebReportingSpec {
     }
     then:
     waitFor(25, 2) {
-      geneDetailsPage.termPagingRangeLabelElement.text() == '1 - 50 of 74'
+      geneDetailsPage.termPagingRangeLabelElement.text() == '1 - 18 of 18'
 
     }
 
     when:
     waitFor(25, 2){
-      geneDetailsPage.termFilterElement.value('short')
+      geneDetailsPage.termFilterElement.value('Leuk')
     }
 
     then:
     waitFor(25, 2) {
-      geneDetailsPage.termPagingRangeLabelElement.text() == '1 - 1 of 1'
+      geneDetailsPage.termPagingRangeLabelElement.text() == '1 - 2 of 2'
     }
   }
 

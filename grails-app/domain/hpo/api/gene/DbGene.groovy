@@ -1,8 +1,9 @@
 package hpo.api.gene
 
-import com.github.phenomics.ontolib.formats.hpo.HpoGeneAnnotation
+
 import hpo.api.disease.DbDisease
 import hpo.api.term.DbTerm
+import org.monarchinitiative.phenol.formats.hpo.HpoGeneAnnotation
 
 class DbGene {
 

@@ -14,7 +14,7 @@ class HpoTermRelationsService {
    */
   Map<String, Map> findTermRelations(String ontologyId) {
 
-    final Map<String, Map> resultMap = ['term': null , 'children': [data:[]] as Map, 'parents': [data:[]] as Map]
+    final Map<String, Map> resultMap = ['term': null, 'children': [data:[]] as Map, 'parents': [data:[]] as Map]
     final String hpoId = StringUtils.trimToNull(ontologyId)
 
     if (hpoId) {

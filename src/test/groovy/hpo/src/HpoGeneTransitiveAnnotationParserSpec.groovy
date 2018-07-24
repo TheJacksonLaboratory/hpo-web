@@ -1,7 +1,7 @@
 package hpo.src
 
-import com.github.phenomics.ontolib.formats.hpo.HpoGeneAnnotation
 import org.grails.io.support.ClassPathResource
+import org.monarchinitiative.phenol.formats.hpo.HpoGeneAnnotation
 import spock.lang.Specification
 import hpo.api.io.HpoGeneTransitiveAnnotationParser;
 class HpoGeneTransitiveAnnotationParserSpec extends Specification {

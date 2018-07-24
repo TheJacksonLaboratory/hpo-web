@@ -1,10 +1,10 @@
 package hpo.api
 
-import com.github.phenomics.ontolib.formats.hpo.HpoOntology
-import com.github.phenomics.ontolib.ontology.algo.OntologyTerms
-import com.github.phenomics.ontolib.ontology.data.ImmutableTermId
-import com.github.phenomics.ontolib.ontology.data.Term
-import com.github.phenomics.ontolib.ontology.data.TermId
+import org.monarchinitiative.phenol.formats.hpo.HpoOntology
+import org.monarchinitiative.phenol.ontology.algo.OntologyTerms
+import org.monarchinitiative.phenol.ontology.data.Term
+import org.monarchinitiative.phenol.ontology.data.TermId
+
 import grails.compiler.GrailsCompileStatic
 import groovy.sql.GroovyRowResult
 import hpo.api.db.utils.SqlUtilsService
@@ -14,6 +14,7 @@ import hpo.api.term.DbTerm
 import org.apache.commons.lang.time.StopWatch
 import org.grails.plugins.web.interceptors.InterceptorsGrailsPlugin
 import org.hibernate.SessionFactory
+
 
 @GrailsCompileStatic
 class HpoTermService {
@@ -31,7 +32,7 @@ class HpoTermService {
     Map result = [:]
       if (trimmedQ.startsWith('HP:')) {
         DbTerm dbterm = DbTerm.findByOntologyId(trimmedQ)
-        Term term = this.hpoOntology.termMap.get(ImmutableTermId.constructWithPrefix(trimmedQ))
+        Term term = this.hpoOntology.termMap.get(TermId.constructWithPrefix(trimmedQ))
         result.put("TERM",term)
         result.put("DBTERM",dbterm)
         return result
@@ -49,7 +50,7 @@ class HpoTermService {
 
     Map<String, Object> resultMap = [genes:[], geneCount:0, offset:offset, max:max]
     if (trimmedQ.startsWith('HP:')) {
-      final Term term = this.hpoOntology.termMap.get(ImmutableTermId.constructWithPrefix(trimmedQ))
+      final Term term = this.hpoOntology.termMap.get(TermId.constructWithPrefix(trimmedQ))
       final List<DbTerm> descendantTerms = findTermDescendants(term)
 
       if (descendantTerms) {
@@ -74,7 +75,7 @@ class HpoTermService {
 
     Map<String, Object> resultMap = [diseases:[], diseaseCount:0, offset:offset, max:max]
     if (trimmedQ.startsWith('HP:')) {
-      final Term term = this.hpoOntology.termMap.get(ImmutableTermId.constructWithPrefix(trimmedQ))
+      final Term term = this.hpoOntology.termMap.get(TermId.constructWithPrefix(trimmedQ))
       final List<DbTerm> descendantTerms = findTermDescendants(term)
 
       if (descendantTerms) {

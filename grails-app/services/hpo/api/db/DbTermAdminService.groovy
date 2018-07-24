@@ -1,11 +1,12 @@
 package hpo.api.db
 
-import com.github.phenomics.ontolib.formats.hpo.HpoOntology
-import com.github.phenomics.ontolib.ontology.algo.OntologyTerms
-import com.github.phenomics.ontolib.ontology.data.Term
-import com.github.phenomics.ontolib.ontology.data.TermId
+
 import grails.gorm.transactions.Transactional
 import groovy.sql.BatchingPreparedStatementWrapper
+import org.monarchinitiative.phenol.formats.hpo.HpoOntology
+import org.monarchinitiative.phenol.ontology.algo.OntologyTerms
+import org.monarchinitiative.phenol.ontology.data.Term
+import org.monarchinitiative.phenol.ontology.data.TermId
 import hpo.api.db.utils.SqlUtilsService
 import hpo.api.term.DbTerm
 import hpo.api.term.DbTermPath
@@ -27,27 +28,32 @@ class DbTermAdminService {
   HpoOntology hpoOntology
   SqlUtilsService sqlUtilsService
   final static String INSERT_DB_TERM_PATH = "INSERT INTO db_term_path (db_term_id, path_names, path_ids ,path_length, version) VALUES(?,?,?,?,0)"
-  Map<DbTerm, List<DbTerm>> termParentsMap = [:]
-  void deleteDbTerms() {
-    StopWatch stopWatch = new StopWatch()
-    stopWatch.start()
-    int dbTermPathsDeleted = DbTermPath.executeUpdate("delete from DbTermPath")
-    log.info("${dbTermPathsDeleted} rows deleted from ${DbTermPath.name} duration: ${stopWatch} time: ${new Date()}")
-    int dbTermRelationsDeleted = DbTermRelationship.executeUpdate("delete from DbTermRelationship")
-    log.info("${dbTermRelationsDeleted} rows deleted from ${DbTermRelationship.name} duration: ${stopWatch} time: ${new Date()}")
-    int dbTermsleted = DbTerm.executeUpdate("delete from DbTerm")
-    log.info("${dbTermsleted} rows deleted from ${DbTerm.name} duration: ${stopWatch} time: ${new Date()}")
+  Map<DbTerm, List<Term>> termParentsMap = [:]
+
+  void truncateDbTerms() {
+    sqlUtilsService.executeDelete("TRUNCATE TABLE db_term")
+    log.info("db_term TRUNCATED..")
+
   }
 
-  void refreshDbTerms(List<Term> terms = hpoOntology.termMap.values()) {
-    deleteDbTerms()
+  void tuncateDbTermRelationship() {
+    sqlUtilsService.executeDelete("TRUNCATE TABLE db_term_relationship")
+    log.info("db_term_relationship TRUNCATED..")
+  }
+
+  void truncatedDbTermPath() {
+    sqlUtilsService.executeDelete("TRUNCATE TABLE db_term_path")
+    log.info("db_term_relationship TRUNCATED..")
+  }
+
+  void loadDbTerms(List<Term> terms = hpoOntology.termMap.values()) {
     StopWatch stopWatch = new StopWatch()
     stopWatch.start()
     Set<String> ontologyIdSet = [] as Set<String>
     Map<Term, DbTerm> termToDbTermMap = [:]
     for (Term term in terms) {
       if (ontologyIdSet.contains(term.id.idWithPrefix)) {
-        // do nothinbg
+        // do nothing
       } else {
         ontologyIdSet.add(term.id.idWithPrefix)
         DbTerm dbTerm = new DbTerm(term as Term)
@@ -111,7 +117,7 @@ class DbTermAdminService {
  * @param dbTerm
  * @return
  */
-  private List<List<Term>> getParents(Term term, DbTerm dbTerm){
+  private void getParents(Term term, DbTerm dbTerm){
 
     Set<TermId> parentTermIds = hpoOntology.getParentTermIds(term.id)
     List<Term> parents = []

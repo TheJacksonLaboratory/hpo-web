@@ -1,7 +1,8 @@
 package hpo.api.io;
 
-import com.github.phenomics.ontolib.io.base.TermAnnotationParserException;
 import hpo.api.models.HpoGeneDiseaseAnnotation;
+import org.monarchinitiative.phenol.io.base.TermAnnotationParserException;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;

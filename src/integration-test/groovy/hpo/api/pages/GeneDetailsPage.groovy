@@ -6,7 +6,7 @@ class GeneDetailsPage extends Page{
 
   static final String TITLE = 'Human Phenotype Ontology'
 
-  static url = "/app/browse/gene/29123"
+  static url = "/app/browse/gene/5925"
 
   static at = {
     title == TITLE

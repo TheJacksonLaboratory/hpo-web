@@ -1,15 +1,14 @@
 package hpo.api
 
-import com.github.phenomics.ontolib.formats.hpo.HpoOntology
-import com.github.phenomics.ontolib.formats.hpo.HpoTerm
-import com.github.phenomics.ontolib.ontology.data.ImmutableTermId
-import com.github.phenomics.ontolib.ontology.data.Term
 import grails.testing.gorm.DataTest
 import grails.testing.services.ServiceUnitTest
 import hpo.api.disease.DbDisease
 import hpo.api.gene.DbGene
 import hpo.api.term.DbTerm
 import hpo.api.util.HpoOntologyFactory
+import org.monarchinitiative.phenol.formats.hpo.HpoOntology
+import org.monarchinitiative.phenol.ontology.data.Term
+import org.monarchinitiative.phenol.ontology.data.TermId
 import spock.lang.Specification
 import spock.lang.Unroll
 
@@ -98,11 +97,12 @@ class HpoDiseaseDetailsServiceUnitSpec extends Specification implements ServiceU
   }
 
   private static Term buildMockTerm(String id){
-    return  new HpoTerm(
-      ImmutableTermId.constructWithPrefix(id),
+    return new Term(
+      TermId.constructWithPrefix(id),
       [],
       'Test Term' ,
       'Descriptive definition',
+      [],
       'Informative commment',
       [],
       [],

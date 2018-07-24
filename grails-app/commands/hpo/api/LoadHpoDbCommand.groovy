@@ -11,19 +11,23 @@ class LoadHpoDbCommand implements GrailsApplicationCommand {
       stopWatch.start()
       // LOAD THE ENTIRE DATABASE
       def appCtx = getApplicationContext()
-      appCtx.dbTermAdminService.refreshDbTerms() 			// Load Terms Table
-
+      appCtx.sqlUtilsService.stopForeignChecks()
       appCtx.dbGeneAdminService.truncateGeneTermJoinTable()	// Truncate Genes to Terms
+      appCtx.dbDiseaseAdminService.truncateDiseaseGeneJoinTable() // Truncate Disease To Gene
+      appCtx.dbDiseaseAdminService.truncateDiseaseTermJoinTable() // Truncate Disease Join Table
+      appCtx.dbTermAdminService.truncatedDbTermPath()
+      appCtx.dbTermAdminService.tuncateDbTermRelationship()
+      appCtx.dbTermAdminService.truncateDbTerms()       // Truncate Term Table
       appCtx.dbGeneAdminService.truncateDbGenes()			// Truncate Gene Table
+      appCtx.dbDiseaseAdminService.truncateDbDiseases() 		     // Truncate Disease
+      appCtx.sqlUtilsService.startForeignChecks()
+
+      appCtx.dbTermAdminService.loadDbTerms() 			// Load Terms Table
       appCtx.dbGeneAdminService.loadEntrezGenes() 			// Load Genes Table
       appCtx.dbGeneAdminService.joinGenesAndTermsWithSql() 	// Create Genes to Terms
-
-      appCtx.dbDiseaseAdminService.truncateDiseaseTermJoinTable() // Truncate Disease Join Table
-      appCtx.dbDiseaseAdminService.truncateDbDiseases() 		     // Truncate Disease
-      appCtx.dbDiseaseAdminService.truncateDiseaseGeneJoinTable() // Truncate Disease To Gene
       appCtx.dbDiseaseAdminService.loadDiseases() 	 		     // Load Diseases
       appCtx.dbDiseaseAdminService.joinDiseaseAndTermsWithSql()	 // Load Diseases To Term
-      appCtx.dbDiseaseAdminService.joinDiseasesToGenesWithSql()   // Load Disease To Gene
+      appCtx.dbDiseaseAdminService.joinDiseasesToGenesWithSql()   // Load Disease To Gene*/
 
       println("finished refreshing database duration: ${stopWatch} time: ${new Date()}")
         return true
