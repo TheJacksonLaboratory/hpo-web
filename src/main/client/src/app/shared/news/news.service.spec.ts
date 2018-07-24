@@ -1,7 +1,6 @@
 import { TestBed, inject } from '@angular/core/testing';
 import { NewsService } from './news.service';
 import {HttpClientTestingModule, HttpTestingController} from "@angular/common/http/testing";
-import {environment} from "../../../environments/environment";
 
 describe('NewsService', () => {
   beforeEach(() => {

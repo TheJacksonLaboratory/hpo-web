@@ -4,7 +4,6 @@ import { Observable } from "rxjs/Observable";
 import 'rxjs/add/observable/of';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from "../../../environments/environment";
-import {xdescribe} from "selenium-webdriver/testing";
 
 @Injectable()
 export class NewsService {
