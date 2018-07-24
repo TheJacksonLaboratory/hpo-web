@@ -11,7 +11,8 @@ import org.monarchinitiative.phenol.ontology.data.TermId
 class HpoAssociationFactory {
 
   private String geneInfoPath
-  private String diseaseToGenePath
+  private String omimToGenePath;
+  private File orphaToGenePath;
   private File diseaseFilePath
   private HpoAssociationParser assocParser
   private Map<TermId, HpoDisease> diseaseMap
@@ -19,12 +20,13 @@ class HpoAssociationFactory {
 
   HpoAssociationFactory(HpoOntology hpoOntology){
     this.geneInfoPath = new ClassPathResource('Homo_sapiens.gene_info.gz').file
-    this.diseaseToGenePath = new ClassPathResource('mim2gene_medgen.txt').file
+    this.omimToGenePath = new ClassPathResource('mim2gene_medgen.txt').file
     this.diseaseFilePath =  new ClassPathResource('phenotype.hpoa').file
+    this.orphaToGenePath = new ClassPathResource('orphanet_disease2gene.xml').file
     HpoDiseaseAnnotationParser diseaseAnnotationParser = new HpoDiseaseAnnotationParser(this.diseaseFilePath, hpoOntology)
     this.diseaseMap =  diseaseAnnotationParser.parse()
     this.termToDisease = diseaseAnnotationParser.getTermToDiseaseMap()
-    this.assocParser = new HpoAssociationParser(this.geneInfoPath, this.diseaseToGenePath, hpoOntology)
+    this.assocParser = new HpoAssociationParser(this.geneInfoPath, this.omimToGenePath, this.orphaToGenePath, hpoOntology)
     this.assocParser.parse()
     this.assocParser.setTermToGene(termToDisease)
   }

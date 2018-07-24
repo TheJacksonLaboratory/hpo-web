@@ -27,11 +27,11 @@ class DbGeneAdminService {
   DomainUtilService domainUtilService
 
   void truncateDbGenes() {
-    sqlUtilsService.executeDetete("delete from db_gene")
+    sqlUtilsService.executeDelete("truncate table db_gene")
   }
 
   void truncateGeneTermJoinTable() {
-    sqlUtilsService.executeDetete("delete from db_term_db_genes")
+    sqlUtilsService.executeDelete("truncate table db_term_db_genes")
   }
 
   void loadEntrezGenes() {
@@ -62,7 +62,7 @@ class DbGeneAdminService {
     final Map<Integer, DbGene> entrezIdToDbGeneMap = domainUtilService.loadDbGenes()
     final Map<String, DbTerm> hpoIdToDbTermMap = domainUtilService.loadHpoIdToDbTermMap()
     List<HpoGeneAnnotation> phenotypeToGene =  hpoAssociation.getPhenotypeToGene()
-    
+
     try{
       DbGene.withSession { Session session ->
         final Sql sql = sqlUtilsService.getSql()

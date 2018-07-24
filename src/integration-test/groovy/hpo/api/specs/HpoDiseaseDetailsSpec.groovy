@@ -28,13 +28,13 @@ class HpoDiseaseDetailsSpec extends  GebReportingSpec {
         }
     then:
     waitFor(25, 2) {
-      diseaseDetailsPage.genePagingRangeLabelElement.text() == '1 - 5 of 5'
+      diseaseDetailsPage.genePagingRangeLabelElement.text() == '1 - 4 of 4'
 
     }
 
     when:
       waitFor(25, 2){
-        diseaseDetailsPage.geneFilterElement.value('SKI')
+        diseaseDetailsPage.geneFilterElement.value('RB1')
       }
 
     then:

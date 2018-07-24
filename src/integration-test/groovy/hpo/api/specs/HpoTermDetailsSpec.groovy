@@ -38,18 +38,6 @@ class HpoTermDetailsSpec extends  GebReportingSpec {
     then:
     termDetailsPage.diseasePagingElement.text().startsWith("Displaying")
 
-    when:
-    termDetailsPage.loadGeneAssociations()
-
-    then:
-    termDetailsPage.genePagingElement.text().startsWith("Displaying")
-
-    when:
-    termDetailsPage.loadAllGenes()
-
-    then:
-    termDetailsPage.genePagingElementAll.text().startsWith("Count:")
-
   }
 
   void "test disease filter" (){
@@ -77,7 +65,7 @@ class HpoTermDetailsSpec extends  GebReportingSpec {
 
     then:
     waitFor {
-      termDetailsPage.diseasePagingRangeLabelElement.text() == '1 - 4 of 4'
+      termDetailsPage.diseasePagingRangeLabelElement.text() == '1 - 5 of 5'
     }
   }
 }

@@ -39,8 +39,8 @@ integrationTest {
 dependencies {
   profile "org.grails.profiles:web"
 
-  compile 'org.monarchinitiative.phenol:phenol-core:1.2.0'
-  compile 'org.monarchinitiative.phenol:phenol-io:1.2.0'
+  compile 'org.monarchinitiative.phenol:phenol-core:1.2.1'
+  compile 'org.monarchinitiative.phenol:phenol-io:1.2.1'
 
   compile 'com.google.guava:guava:22.0'
   compile group: 'org.jgrapht', name: 'jgrapht-core', version: '1.2.0'
