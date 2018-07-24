@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { News } from "../../browse/models/models";
 import { NewsService } from "../../shared/news/news.service";
-import {Observable} from "rxjs/Observable";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-news',
@@ -10,22 +10,28 @@ import {Observable} from "rxjs/Observable";
 })
 export class NewsComponent implements OnInit {
   dates: Array<string>;
-  currentSelected: string = "April 2018";
+  currentSelected: string = "";
+  teaserDate: string = "";
   content: Array<News>;
   error: boolean = false;
-  constructor(private newsService: NewsService) {
+  constructor(private newsService: NewsService, private route: ActivatedRoute ) {
 
   }
 
   ngOnInit() {
+    this.route.params.subscribe((params) => {
+      this.teaserDate = params.id;
+    });
     this.newsService.getUniqueDates().subscribe((dates) => {
       if(dates){
         this.dates = dates;
+        this.currentSelected = this.teaserDate && dates.includes(this.teaserDate) ? this.teaserDate : dates[0];
         this.updateNewsItems();
       }else{
         this.error = true;
       }
     });
+
   }
 
   setCurrentDate(date){

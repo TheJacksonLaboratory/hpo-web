@@ -61,6 +61,7 @@ export interface News {
   body: string;
   date: string;
   teaserTitle: string;
+  monthYear?: string;
 }
 export interface Contributors {
   lastName: string;

@@ -6,9 +6,9 @@ class HpoTermController {
 	static responseFormats = ['json']
 
   /**
-   *
    * @param Trimmed Rest id From Url
    * @return
+   *
    */
     def searchTerm(){
         render(view: '/hpoTermDetails/searchTerm', model: [result: hpoTermService.searchTerm(params.id.trim())])

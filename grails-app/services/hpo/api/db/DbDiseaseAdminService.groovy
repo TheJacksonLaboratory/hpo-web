@@ -1,7 +1,6 @@
 package hpo.api.db
 
 import com.google.common.collect.Multimap
-import com.sun.org.apache.xpath.internal.operations.Mult
 import groovy.sql.BatchingPreparedStatementWrapper
 import hpo.api.db.utils.SqlUtilsService
 import grails.gorm.transactions.Transactional
@@ -10,9 +9,7 @@ import hpo.api.gene.DbGene
 import hpo.api.term.DbTerm
 import hpo.api.util.HpoAssociationFactory
 import org.apache.commons.lang.time.StopWatch
-import org.grails.io.support.ClassPathResource
 import hpo.api.db.utils.DomainUtilService
-import org.monarchinitiative.phenol.formats.hpo.GeneToAssociation
 import org.monarchinitiative.phenol.formats.hpo.HpoDisease
 import org.monarchinitiative.phenol.io.assoc.HpoAssociationParser
 import org.monarchinitiative.phenol.ontology.data.TermId

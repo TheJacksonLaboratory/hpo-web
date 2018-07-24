@@ -25,12 +25,15 @@ export class NewsService {
 
  /* Return a specific months news */
   getNewsByDate(date: string): Observable<News[]> {
-    if (this.allNews && this.allNews[date]) {
-      return Observable.of(this.allNews[date]);
-    } else {
-      return Observable.of(null);
+    if(date){
+      if (this.allNews[date]) {
+        return Observable.of(this.allNews[date]);
+      } else {
+        return Observable.of(null);
+      }
     }
   }
+
   /* Return all unique month-years with news*/
   getUniqueDates(): Observable<Array<string>> {
     if (this.allNews) {
@@ -62,6 +65,7 @@ export class NewsService {
         * */
         if(this.allNews[currentMonthYear]){
           for(let item of this.allNews[currentMonthYear]){
+            item.monthYear = currentMonthYear;
             if(news.length < 3){
               news.push(item);
             }
