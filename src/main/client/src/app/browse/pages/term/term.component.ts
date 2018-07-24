@@ -123,9 +123,11 @@ export class TermComponent implements OnInit {
 
   setDefaults(term: Term){
     this.term = term;
+    this.term.comment = (term.comment != null) ? term.comment: "";
     this.term.synonyms = (term.synonyms.length != 0) ? term.synonyms: ["No synonyms found for this term."];
     this.term.definition = (term.definition != null) ? term.definition: "Sorry this term has no definition.";
     this.term.purl = "http://purl.obolibrary.org/obo/" + term.id.replace(":","_");
+    this.term.xrefs = (term.xrefs != null) ? term.xrefs: [];
   }
 
   showAllDiseases(event){
