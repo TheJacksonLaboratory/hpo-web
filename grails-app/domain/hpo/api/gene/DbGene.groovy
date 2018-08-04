@@ -18,6 +18,7 @@ class DbGene {
   static mapping = {
     entrezGeneId()
     entrezGeneSymbol()
+    version false
   }
 
   Set<DbTerm> dbTerms = [] as Set<DbTerm>

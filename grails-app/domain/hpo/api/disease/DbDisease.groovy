@@ -20,6 +20,7 @@ class DbDisease {
   }
   static mapping = {
     diseaseName(type: 'text')
+    version false
   }
   Set<DbTerm> dbTerms = [] as Set<DbTerm>
   Set<DbGene> dbGenes = [] as Set<DbGene>
