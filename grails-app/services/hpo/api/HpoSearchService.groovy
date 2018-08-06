@@ -7,6 +7,7 @@ import hpo.api.gene.DbGene
 import hpo.api.term.DbTerm
 import org.apache.commons.lang.StringUtils
 import org.grails.datastore.mapping.query.api.BuildableCriteria
+import org.hibernate.sql.JoinType
 
 @GrailsCompileStatic
 class HpoSearchService {
@@ -93,6 +94,7 @@ class HpoSearchService {
         params.sort = 'numberOfChildren'
         params.order = 'desc'
 
+        // Search the term table
         BuildableCriteria c = DbTerm.createCriteria()
         def results = c.list(max: params.max, offset: params.offset) {
           if (terms[0].startsWith('HP:')) {
@@ -106,13 +108,25 @@ class HpoSearchService {
           }
           order(params.sort, params.order)
         }
-        int totalCount = results.totalCount
+        def synResults = []
+        // Search the synonyms with the entire string
+        // if we find something. Only suggest that one.
+        BuildableCriteria s = DbTerm.createCriteria()
+        synResults = s.list() {
+          dbTermSynonyms {
+            like("synonym", terms.join(' ') + '%')
+          }
+          order(params.sort, params.order)
+        }
+        synResults.unique()
+        if(synResults.size() == 1){
+          results = synResults
+        }
+
         termResults.addAll(results as List<DbTerm>)
         termResults.unique()
-
-
         resultsMap.put('data', termResults)
-        resultsMap.put('totalCount', totalCount)
+        resultsMap.put('totalCount', termResults.size())
         resultsMap.put('offset', offsetIn)
 
         return resultsMap

@@ -79,10 +79,12 @@ class DbTermAdminService {
     if(synonyms.size() > 0){
       sqlUtilsService.sql.withBatch(500, INSERT_DB_TERM_SYNONYM ) { BatchingPreparedStatementWrapper ps ->
         synonyms.each { TermSynonym synonym ->
-          ps.addBatch([
-            dbTerm.id,
-            synonym.getValue()
-          ])
+          if(synonym != ' ' || synonym != '') {
+            ps.addBatch([
+              dbTerm.id,
+              synonym.getValue()
+            ])
+          }
         }
       }
     }
