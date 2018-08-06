@@ -14,4 +14,9 @@ class DbTermSynonym {
 
   static belongsTo = [dbTerm: DbTerm]
 
+  DbTermSynonym(DbTerm term, String syn){
+    dbTerm = term
+    synonym = syn
+  }
+
 }
