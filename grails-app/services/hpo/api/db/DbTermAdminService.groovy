@@ -3,6 +3,7 @@ package hpo.api.db
 
 import grails.gorm.transactions.Transactional
 import groovy.sql.BatchingPreparedStatementWrapper
+import hpo.api.term.DbTermSynonym
 import org.monarchinitiative.phenol.formats.hpo.HpoOntology
 import org.monarchinitiative.phenol.ontology.algo.OntologyTerms
 import org.monarchinitiative.phenol.ontology.data.Term
@@ -16,6 +17,7 @@ import org.apache.commons.lang.time.StopWatch
 import org.hibernate.Session
 import org.hibernate.SessionFactory
 import org.hibernate.Transaction
+import org.monarchinitiative.phenol.ontology.data.TermSynonym
 
 /**
  * Created by djd on 10/22/17.
@@ -27,7 +29,8 @@ class DbTermAdminService {
 
   HpoOntology hpoOntology
   SqlUtilsService sqlUtilsService
-  final static String INSERT_DB_TERM_PATH = "INSERT INTO db_term_path (db_term_id, path_names, path_ids ,path_length, version) VALUES(?,?,?,?,0)"
+  final static String INSERT_DB_TERM_PATH = "INSERT INTO db_term_path (db_term_id, path_names, path_ids ,path_length) VALUES(?,?,?,?)"
+  final static String INSERT_DB_TERM_SYNONYM = "INSERT INTO db_term_synonym (db_term_id, synonym) VALUES (?,?)"
   Map<DbTerm, List<Term>> termParentsMap = [:]
 
   void truncateDbTerms() {
@@ -59,6 +62,7 @@ class DbTermAdminService {
         DbTerm dbTerm = new DbTerm(term as Term)
         dbTerm.numberOfChildren = OntologyTerms.childrenOf(term.id, hpoOntology).size() - 1 //-1 exclude the current term
         dbTerm.save()
+        loadSynonyms(dbTerm, term)
         termToDbTermMap.put(term, dbTerm)
         getParents(term, dbTerm)
       }
@@ -67,6 +71,23 @@ class DbTermAdminService {
     log.info("flushed DbTerms duration: ${stopWatch} time: ${new Date()}")
     saveAncestorPaths(termToDbTermMap)
     saveTermParents()
+  }
+
+
+  private void loadSynonyms(DbTerm dbTerm, Term term){
+    List<TermSynonym> synonyms = term.getSynonyms()
+    if(synonyms.size() > 0){
+      sqlUtilsService.sql.withBatch(500, INSERT_DB_TERM_SYNONYM ) { BatchingPreparedStatementWrapper ps ->
+        synonyms.each { TermSynonym synonym ->
+          if(synonym.getValue() != ' ' && synonym.getValue() != '') {
+            ps.addBatch([
+              dbTerm.id,
+              synonym.getValue()
+            ])
+          }
+        }
+      }
+    }
   }
 
   private void saveAncestorPaths(Map<Term, DbTerm> termToDbTermMap) {

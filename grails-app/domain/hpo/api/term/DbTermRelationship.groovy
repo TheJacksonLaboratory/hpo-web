@@ -15,4 +15,8 @@ class DbTermRelationship implements Serializable{
       termChild()
     }
 
+    static mapping = {
+      version false
+    }
+
 }

@@ -42,7 +42,8 @@ class DbTerm {
                     dbGenes: DbGene,
                     dbDiseases: DbDisease,
                     dbTermParents: DbTermRelationship,
-                    dbTermChildren: DbTermRelationship ]
+                    dbTermChildren: DbTermRelationship,
+                    dbTermSynonyms: DbTermSynonym]
 
   static mappedBy = [dbTermParents: 'termParent', dbTermChildren: 'termChild']
 
