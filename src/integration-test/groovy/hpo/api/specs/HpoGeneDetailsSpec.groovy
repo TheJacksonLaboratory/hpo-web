@@ -21,13 +21,13 @@ class HpoGeneDetailsSpec extends  GebReportingSpec {
       GeneDetailsPage geneDetailsPage = browser.to(GeneDetailsPage)
 
     when:
-        waitFor(10){
+        waitFor(25){
           geneDetailsPage.diseaseTabElement
           geneDetailsPage.diseaseTabElement.click()
         }
     then:
     waitFor(25, 2) {
-      geneDetailsPage.diseasePagingRangeLabelElement.text() == '1 - 4 of 4'
+      geneDetailsPage.diseasePagingRangeLabelElement.text() == '1 - 6 of 6'
 
     }
 
@@ -49,13 +49,13 @@ class HpoGeneDetailsSpec extends  GebReportingSpec {
     GeneDetailsPage geneDetailsPage = browser.to(GeneDetailsPage)
 
     when:
-    waitFor(10){
+    waitFor(25){
       geneDetailsPage.termTabElement
       geneDetailsPage.termTabElement.click()
     }
     then:
     waitFor(25, 2) {
-      geneDetailsPage.termPagingRangeLabelElement.text() == '1 - 18 of 18'
+      geneDetailsPage.termPagingRangeLabelElement.text() == '1 - 50 of 58'
 
     }
 

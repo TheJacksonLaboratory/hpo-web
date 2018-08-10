@@ -26,7 +26,9 @@ apply plugin:"com.moowork.node"
 
 repositories {
     mavenLocal()
+    mavenCentral()
     maven { url "https://repo.grails.org/grails/core" }
+
    flatDir {
      dir("libs")
    }
@@ -42,13 +44,15 @@ dependencies {
   //compile 'org.monarchinitiative.phenol:phenol-core:1.2.1'
   //compile 'org.monarchinitiative.phenol:phenol-io:1.2.1'
 
-  compile name:'phenol-core-1.1.0'
-  compile name:'phenol-io-1.1.0'
-
-  compile 'com.google.guava:guava:22.0'
+  // Raw jar file with its dependencies. Remove when switch to maven
+  compile name:'phenol-core-1.2.1'
+  compile name:'phenol-io-1.2.1'
+  compile "org.prefixcommons:curie-util:0.0.2"
+  compile group: 'net.sourceforge.owlapi', name: 'owlapi-distribution', version: '4.2.6'
+  compile group: 'org.geneontology', name: 'obographs', version: '0.1.1'
   compile group: 'org.jgrapht', name: 'jgrapht-core', version: '1.2.0'
 
-
+  compile 'com.google.guava:guava:22.0'
   compile "org.springframework.boot:spring-boot-starter-logging"
   compile "org.springframework.boot:spring-boot-autoconfigure"
   compile "org.grails:grails-core"
