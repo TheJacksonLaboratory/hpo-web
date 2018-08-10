@@ -154,9 +154,12 @@ class HpoSearchService {
 
         BuildableCriteria c = DbGene.createCriteria()
         def results = c.list(max: params.max, offset: params.offset) {
-
-          for (term in terms) {
-            ilike('entrezGeneSymbol', '%' + term + '%')
+          if(terms.size() == 1 && terms[0].isInteger()){
+            eq('entrezGeneId', terms[0].toInteger())
+          }else{
+            for (term in terms) {
+              ilike('entrezGeneSymbol', '%' + term + '%')
+            }
           }
           order(params.sort, params.order)
         }
