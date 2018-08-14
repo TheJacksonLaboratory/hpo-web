@@ -1,6 +1,7 @@
 package hpo.api
 
-import grails.compiler.GrailsCompileStatic
+
+
 import hpo.api.disease.DbDisease
 import hpo.api.term.DbTerm
 import org.monarchinitiative.phenol.formats.hpo.HpoOntology
@@ -9,7 +10,6 @@ import org.monarchinitiative.phenol.formats.hpo.category.HpoCategoryMap
 import org.monarchinitiative.phenol.ontology.data.TermId
 import org.monarchinitiative.phenol.ontology.data.Term
 
-@GrailsCompileStatic
 class HpoDiseaseDetailsService {
 
   HpoOntology hpoOntology

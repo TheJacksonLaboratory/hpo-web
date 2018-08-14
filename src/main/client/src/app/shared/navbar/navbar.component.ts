@@ -33,7 +33,7 @@ import {
 })
 export class NavbarComponent implements OnInit {
   title:string = "Human Phenotype Ontology";
-  ontologyVersion: string = "Ontology Version: 2018-06-13";
+  ontologyVersion: string = "Ontology Version: 2018-07-25";
 
   query: string = "";
   showSearch: boolean =  false;
