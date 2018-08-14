@@ -32,7 +32,10 @@ class DbDisease {
   DbDisease(HpoDisease disease) {
     db = disease.getDiseaseDatabaseId().getPrefix().getValue().toString()
     dbId = disease.getDiseaseDatabaseId().getId()
-    diseaseName = WordUtils.capitalizeFully(disease.getName().replaceAll('^\\%\\d{6}|^\\#\\d{6}|^\\d{6}', '').trim())
+    diseaseName = WordUtils.capitalizeFully(
+      disease.getName().replaceAll('^\\%\\d{6}|^\\#\\d{6}|^\\d{6}', '').trim()
+        .split(';')[0]
+    )
     diseaseId = disease.getDiseaseDatabaseId().getIdWithPrefix();
   }
 }

@@ -27,7 +27,23 @@ This guide uses the H2 database which is a grails out-of-the-box in-memory or fi
 
         cd hpo-web
 
-+ Build the application with a gradle task. If everything is fine, this step should finish with a success build after compiling and running unit tests. Run this command in the command window in the hpo-web directory.  
++ Initialize the H2 DB and load the HPO ontology data. Run the following command in the command window inside the hpo-web directory. This step will take approximate 3+ minutes to complete
+         
+        ./gradlew runCommand -Pargs="load-hpo-db"
+        
+        E.g. when complete the output in the command window should look like this:
+        ...
+        finished refreshing database duration: 0:03:49.391 time: Thu Jan 11 11:28:56 EST 2018
+         
+        BUILD SUCCESSFUL
+        
+        Note:
+        If you desire to re-initialize the application and the database, execute the command again.
+        
+        ./gradlew runCommand -Pargs="load-hpo-db" ..to initialize and reload the ontology data
+        
+
++ Build the application with a gradle task.
 
         ./gradlew clean build
         
@@ -43,28 +59,12 @@ This guide uses the H2 database which is a grails out-of-the-box in-memory or fi
          
         Total time: 1 mins 29.306 secs
 
-+ Initialize the H2 DB and load the HPO ontology data. Run the following command in the command window inside the hpo-web directory. This step will take approximate 2+ minutes to complete
-         
-        ./gradlew runCommand -Pargs="load-hpo-db"
-        
-        E.g. when complete the output in the command window should look like this:
-        ...
-        finished refreshing database duration: 0:02:49.391 time: Thu Jan 11 11:28:56 EST 2018
-         
-        BUILD SUCCESSFUL
-        
-        Note:
-        If you desire to re-initialize the application and the database, execute the gradle clean and build command in the command line window, after shutting down the application
-        
-        E.g. in the command line where the hpo-web app is running (hpo-web dir), run these commands
-        
-        ctrl + c to stop the current process
-        
-        ./gradlew clean build to clean and rebuild the application. It drops the current database and data
-        
-        ./gradlew runCommand -Pargs="load-hpo-db" to initialize and reload the ontology data
-        
-        ./gradlew bootRun to restart the application    
+  
++ War creation with a gradle task.
+
+      ./gradlew clean war -DwarName="hpo-web-someversion.war"
+       
+      Will output a war to ./build/libs/
 
 ## Usage
 
