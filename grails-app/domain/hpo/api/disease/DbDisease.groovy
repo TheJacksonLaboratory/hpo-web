@@ -2,6 +2,7 @@ package hpo.api.disease
 
 import hpo.api.gene.DbGene
 import hpo.api.term.DbTerm
+import org.apache.commons.lang.NullArgumentException
 import org.monarchinitiative.phenol.formats.hpo.HpoDisease
 import org.apache.commons.lang.WordUtils
 
@@ -38,5 +39,14 @@ class DbDisease {
     )
     diseaseId = disease.getDiseaseDatabaseId().getIdWithPrefix();
   }
+
+
+  static String fixDiseaseName(String dbId, String name){
+    if(name == null || name == ''){
+      throw new NullArgumentException("Disease Name for disease ${dbId}")
+    }
+    return name.replaceAll('^\\%\\d{6}|^\\#\\d{6}|^\\d{6}|^\\+\\d{6}', '').trim().split(';')[0]
+  }
+
 }
 

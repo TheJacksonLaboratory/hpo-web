@@ -3,12 +3,15 @@ package hpo.api.disease
 
 import grails.testing.gorm.DomainUnitTest
 import hpo.api.disease.DbDisease
+import org.apache.commons.lang.NullArgumentException
 import org.monarchinitiative.phenol.formats.hpo.HpoAnnotation
 import org.monarchinitiative.phenol.formats.hpo.HpoDisease
 import org.monarchinitiative.phenol.formats.hpo.HpoOnset
 import org.monarchinitiative.phenol.ontology.data.TermId
 import spock.lang.Specification
 import spock.lang.Unroll
+
+import javax.validation.constraints.Null
 
 @Unroll
 class DbDiseaseUnitSpec extends Specification implements DomainUnitTest<DbDisease> {
@@ -61,5 +64,35 @@ class DbDiseaseUnitSpec extends Specification implements DomainUnitTest<DbDiseas
       dbDisease.diseaseName == disease.getName()
       dbDisease.diseaseId == disease.getDiseaseDatabaseId().getIdWithPrefix()
     }
+  }
+
+
+  void "test fix disease name"(){
+    expect: "the given name to match the expected"
+    DbDisease.fixDiseaseName(testId, testName) == expectedName
+
+    where: "we test possible conditions"
+    testId             | testName                             |   expectedName
+    'OMIM:000test'     | 'Disease Name; Synonym Name'         |   'Disease Name'
+    'OMIM:000test'     | '%123456 Disease Name'               |   'Disease Name'
+    'OMIM:000test'     | '+123456 Disease Name'               |   'Disease Name'
+    'OMIM:000test'     | '+123456 Disease Name; Synonym Name' |   'Disease Name'
+    'OMIM:000test'     | '#123456 Disease Name; Synonym Name' |   'Disease Name'
+
+  }
+
+  void "test fix disease name bad"(){
+    when: "the given name to match the expected"
+    DbDisease.fixDiseaseName(testId, testName) == expectedName
+
+    then:
+    final NullArgumentException ex = thrown()
+    ex.message == expectedException
+
+    where: "we test possible conditions"
+    testId             | testName   |   expectedException
+    'OMIM:000test'     | ''         |   'Disease Name for disease OMIM:000test must not be null.'
+    'OMIM:000test'     | null       |   'Disease Name for disease OMIM:000test must not be null.'
+
   }
 }
