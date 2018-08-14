@@ -33,10 +33,7 @@ class DbDisease {
   DbDisease(HpoDisease disease) {
     db = disease.getDiseaseDatabaseId().getPrefix().getValue().toString()
     dbId = disease.getDiseaseDatabaseId().getId()
-    diseaseName = WordUtils.capitalizeFully(
-      disease.getName().replaceAll('^\\%\\d{6}|^\\#\\d{6}|^\\d{6}', '').trim()
-        .split(';')[0]
-    )
+    diseaseName = fixDiseaseName(disease.getDiseaseDatabaseId().getId(), disease.getName())
     diseaseId = disease.getDiseaseDatabaseId().getIdWithPrefix();
   }
 
@@ -45,7 +42,9 @@ class DbDisease {
     if(name == null || name == ''){
       throw new NullArgumentException("Disease Name for disease ${dbId}")
     }
-    return name.replaceAll('^\\%\\d{6}|^\\#\\d{6}|^\\d{6}|^\\+\\d{6}', '').trim().split(';')[0]
+
+    return WordUtils.capitalizeFully(
+      name.replaceAll('^\\%\\d{6}|^\\#\\d{6}|^\\d{6}|^\\+\\d{6}', '').trim().split(';')[0])
   }
 
 }

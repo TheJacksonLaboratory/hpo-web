@@ -74,10 +74,10 @@ class DbDiseaseUnitSpec extends Specification implements DomainUnitTest<DbDiseas
     where: "we test possible conditions"
     testId             | testName                             |   expectedName
     'OMIM:000test'     | 'Disease Name; Synonym Name'         |   'Disease Name'
-    'OMIM:000test'     | '%123456 Disease Name'               |   'Disease Name'
-    'OMIM:000test'     | '+123456 Disease Name'               |   'Disease Name'
-    'OMIM:000test'     | '+123456 Disease Name; Synonym Name' |   'Disease Name'
-    'OMIM:000test'     | '#123456 Disease Name; Synonym Name' |   'Disease Name'
+    'OMIM:000test'     | '%123456 Disease name'               |   'Disease Name'
+    'OMIM:000test'     | '+123456 Disease name'               |   'Disease Name'
+    'OMIM:000test'     | '+123456 Disease name; Synonym Name' |   'Disease Name'
+    'OMIM:000test'     | '#123456 Disease name; Synonym Name' |   'Disease Name'
 
   }
 
