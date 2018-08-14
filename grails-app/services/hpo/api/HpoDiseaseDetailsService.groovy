@@ -1,11 +1,11 @@
 package hpo.api
 
 import grails.compiler.GrailsCompileStatic
-import hpo.api.annotation.HpoCategory
-import hpo.api.annotation.HpoCategoryMap
 import hpo.api.disease.DbDisease
 import hpo.api.term.DbTerm
 import org.monarchinitiative.phenol.formats.hpo.HpoOntology
+import org.monarchinitiative.phenol.formats.hpo.category.HpoCategory
+import org.monarchinitiative.phenol.formats.hpo.category.HpoCategoryMap
 import org.monarchinitiative.phenol.ontology.data.TermId
 import org.monarchinitiative.phenol.ontology.data.Term
 
