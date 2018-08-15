@@ -38,13 +38,23 @@ class DbDisease {
   }
 
 
+  /*
+    Method to fix OMIM & ORPHA identifiers out of phenotype.hpoa
+    many come with rough prefixes.
+
+    #123456
+    %123456
+
+    as well as the disease names coming with synonyms after a semi-colon. Until we have
+    a steady source of disease names and id's we will need this method.
+   */
   static String fixDiseaseName(String dbId, String name){
     if(name == null || name == ''){
       throw new NullArgumentException("Disease Name for disease ${dbId}")
     }
 
     return WordUtils.capitalizeFully(
-      name.replaceAll('^\\%\\d{6}|^\\#\\d{6}|^\\d{6}|^\\+\\d{6}', '').trim().split(';')[0])
+      name.replaceAll(/^%\d{6}|^#\d{6}|^\d{6}|^\+\d{6}/, '').trim().split(';')[0])
   }
 
 }

@@ -8,6 +8,7 @@
           <button class="backButton"  mat-menu-item (click)="backNavigate()"><mat-icon>arrow_left</mat-icon>Back</button>
         </div>
         <div *ngIf="mobileNavSection == 'home'">
+          <button mat-menu-item  routerLink="/">Home</button>
           <button mat-menu-item (click)="mobileNavigate('toolsMenu')"> Tools <mat-icon>arrow_right</mat-icon> </button>
           <button mat-menu-item (click)="mobileNavigate('downloadsMenu')"> Downloads <mat-icon>arrow_right</mat-icon> </button>
           <button mat-menu-item (click)="mobileNavigate('helpMenu')"> Help <mat-icon>arrow_right</mat-icon> </button>

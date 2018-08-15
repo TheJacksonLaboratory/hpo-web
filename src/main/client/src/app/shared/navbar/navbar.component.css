@@ -102,6 +102,10 @@ button.mat-menu-item a{
   font-size: 14px;
 }
 
+.navbar-home {
+  height: 65px;
+}
+
 @media (max-width: 767px){
   .mobile-menu.mat-button {
     padding:0 0 0 25px;
@@ -112,22 +116,29 @@ button.mat-menu-item a{
   .nav-brand .nav-title {
     font-size: 16px;
   }
+  .navbar-home {
+    height: 95px !important;
+  }
+
   ::ng-deep .mat-toolbar-single-row {
     height: 165px !important;
     flex-wrap:wrap;
   }
+
+
   .navbar-search-wrapper{
+    margin:0;
     width: 100%;
   }
+
   ::ng-deep .navbar-search-wrapper .search-wrapper .search-filter {
     width: 26%;
     font-size: 14px;
     padding: 5px 5px 5px 10px;
   }
-}
-
-.navbar-home {
-  height: 65px !important;
+  .ontoversion{
+    margin:0;
+  }
 }
 
 .ontoversion {

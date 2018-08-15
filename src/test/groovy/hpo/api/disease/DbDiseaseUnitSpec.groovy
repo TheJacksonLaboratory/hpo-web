@@ -11,8 +11,6 @@ import org.monarchinitiative.phenol.ontology.data.TermId
 import spock.lang.Specification
 import spock.lang.Unroll
 
-import javax.validation.constraints.Null
-
 @Unroll
 class DbDiseaseUnitSpec extends Specification implements DomainUnitTest<DbDisease> {
 
@@ -67,17 +65,19 @@ class DbDiseaseUnitSpec extends Specification implements DomainUnitTest<DbDiseas
   }
 
 
-  void "test fix disease name"(){
+  void "test fix disease name #desc"(){
     expect: "the given name to match the expected"
     DbDisease.fixDiseaseName(testId, testName) == expectedName
 
     where: "we test possible conditions"
-    testId             | testName                             |   expectedName
-    'OMIM:000test'     | 'Disease Name; Synonym Name'         |   'Disease Name'
-    'OMIM:000test'     | '%123456 Disease name'               |   'Disease Name'
-    'OMIM:000test'     | '+123456 Disease name'               |   'Disease Name'
-    'OMIM:000test'     | '+123456 Disease name; Synonym Name' |   'Disease Name'
-    'OMIM:000test'     | '#123456 Disease name; Synonym Name' |   'Disease Name'
+    testId             | testName                             |   expectedName    | desc
+    'OMIM:000test'     | 'Disease Name; Synonym Name'         |   'Disease Name'  | 'typical line with synonm'
+    'OMIM:000test'     | '%123456 Disease name'               |   'Disease Name'  | 'typical line with garbage %6num'
+    'OMIM:000test'     | '+123456 Disease name'               |   'Disease Name'  | 'typical line with garbage +6num'
+    'OMIM:000test'     | '+123456 Disease name; Synonym Name' |   'Disease Name'  | 'typical line with garbage +6num with synonym'
+    'OMIM:000test'     | '#123456 Disease name; Synonym Name' |   'Disease Name'  | 'typical line with garbage #6num with synonym'
+    'OMIM:000test'     | ' Disease Name '                     |   'Disease Name'  | 'typical line with extra spaces'
+    'OMIM:000test'     | 'Disease Name'                       |   'Disease Name'  | 'typical line'
 
   }
 

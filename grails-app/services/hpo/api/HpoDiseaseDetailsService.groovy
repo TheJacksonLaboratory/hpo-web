@@ -1,7 +1,7 @@
 package hpo.api
 
-
-
+import grails.compiler.GrailsCompileStatic
+import groovy.transform.TypeCheckingMode
 import hpo.api.disease.DbDisease
 import hpo.api.term.DbTerm
 import org.monarchinitiative.phenol.formats.hpo.HpoOntology
@@ -10,6 +10,7 @@ import org.monarchinitiative.phenol.formats.hpo.category.HpoCategoryMap
 import org.monarchinitiative.phenol.ontology.data.TermId
 import org.monarchinitiative.phenol.ontology.data.Term
 
+@GrailsCompileStatic
 class HpoDiseaseDetailsService {
 
   HpoOntology hpoOntology
@@ -38,6 +39,7 @@ class HpoDiseaseDetailsService {
    * @param disease
    * @return
    */
+  @GrailsCompileStatic(TypeCheckingMode.SKIP)
   private List<Map> getDiseaseCategoriesWithTerms(DbDisease disease){
 
     HpoCategoryMap hpoCatMap = new HpoCategoryMap()
