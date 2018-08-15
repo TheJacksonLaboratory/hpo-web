@@ -11,8 +11,6 @@ import org.monarchinitiative.phenol.ontology.data.TermId
 import spock.lang.Specification
 import spock.lang.Unroll
 
-import javax.validation.constraints.Null
-
 @Unroll
 class DbDiseaseUnitSpec extends Specification implements DomainUnitTest<DbDisease> {
 
@@ -78,6 +76,8 @@ class DbDiseaseUnitSpec extends Specification implements DomainUnitTest<DbDiseas
     'OMIM:000test'     | '+123456 Disease name'               |   'Disease Name'
     'OMIM:000test'     | '+123456 Disease name; Synonym Name' |   'Disease Name'
     'OMIM:000test'     | '#123456 Disease name; Synonym Name' |   'Disease Name'
+    'OMIM:000test'     | ' Disease Name '                     |   'Disease Name'
+    'OMIM:000test'     | 'Disease Name'                       |   'Disease Name'
 
   }
 
