@@ -65,7 +65,7 @@ class HpoDiseaseDetailsService {
           String termIdWithPrefix = term.getId().getIdWithPrefix()
 
           //add the DbTerm to the list of terms
-          catDbTermList.plus(DbTerm.findByOntologyId(termIdWithPrefix))
+          catDbTermList << DbTerm.findByOntologyId(termIdWithPrefix)
         }
 
         //populate the map
