@@ -47,8 +47,6 @@ export class SearchComponent implements OnInit {
   navFilter: string = "all";
   highlightText: string;
 
-  inputBox = document.getElementById("hpoSearch");
-
   constructor(private router: Router, private searchService: SearchService) {
     this.router = router;
   }
