@@ -108,13 +108,14 @@ class HpoSearchService {
           }
           order(params.sort, params.order)
         }
+
         def synResults = []
         // Search the synonyms with the entire string
         // if we find something. Only suggest that one.
         BuildableCriteria s = DbTerm.createCriteria()
-        synResults = s.list() {
+        synResults = s.list(max: params.max, offset: params.offset) {
           dbTermSynonyms {
-            like("synonym", terms.join(' ') + '%')
+            ilike("synonym", '%'+ terms.join(' ') + '%')
           }
           order(params.sort, params.order)
         }

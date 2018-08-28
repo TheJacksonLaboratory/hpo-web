@@ -20,6 +20,9 @@
     text-overflow: ellipsis;
     overflow: hidden;
  }
+ .tree-container{
+   padding-right:0;
+ }
  .item-summary.tree-navigation{
    padding: 15px !important;
    font-size:16px;
