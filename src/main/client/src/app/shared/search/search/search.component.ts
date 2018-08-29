@@ -9,6 +9,8 @@ import {
   animate,
   transition, group
 } from '@angular/animations';
+import { Subject } from "rxjs/Subject";
+import "rxjs/add/operator/debounceTime";
 
 @Component({
   selector: 'searchbar',
@@ -27,7 +29,7 @@ import {
         'visibility': 'visible'
       })),
       transition('inactive => active',
-        animate('500ms ease-in-out')),
+        animate('350ms ease-in-out')),
       transition('active => inactive',
         animate('400ms ease-in-out'))
     ])
@@ -41,26 +43,21 @@ export class SearchComponent implements OnInit {
   diseasesCount: number;
   genesCount: number;
   searchstate: string = "inactive";
-  query: string = "";
+  query = new Subject();
   navFilter: string = "all";
+  highlightText: string;
+
   constructor(private router: Router, private searchService: SearchService) {
     this.router = router;
   }
 
+
+
   ngOnInit() {
-  }
-  @HostListener('document:click', ['$event'])
-  documentClick(event: Event): void {
-    if(this.searchstate == "active") {
-      this.searchstate = "inactive";
-      this.query = "";
-    }
-  }
-  suggestContent(query: string): void {
-    if(query){
-      if(query.length >= 3 ){
-        this.query = query;
-        this.searchService.searchAll(query).subscribe((data) => {
+    this.query.debounceTime(650).subscribe((val: string) => {
+      if(val && val.length > 3){
+        this.highlightText = val;
+        this.searchService.searchAll(val).subscribe((data) => {
           this.searchstate = "active";
           this.terms = data.terms;
           this.diseases = data.diseases;
@@ -75,21 +72,27 @@ export class SearchComponent implements OnInit {
       }else{
         this.searchstate = "inactive";
       }
-    }
+    }); //End debounce subscribe
   }
-
-  setQuery(term: string): void {
-    this.query = term;
-    this.suggestContent(term);
-  }
-
-
-  submitQuery(){
-
+  @HostListener('document:click', ['$event'])
+  documentClick(event: Event): void {
     if(this.searchstate == "active") {
       this.searchstate = "inactive";
     }
+  }
 
-    this.router.navigate(["/browse/search"], {queryParams: {q: this.query, navFilter: this.navFilter}});
+  contentChanging(input: string) {
+      this.query.next(input);
+  }
+
+  setQuery(term: string): void {
+    this.contentChanging(term);
+  }
+
+  submitQuery(input: string){ // Goes to the big search page
+    if(this.searchstate == "active") {
+      this.searchstate = "inactive";
+    }
+    this.router.navigate(["/browse/search"], {queryParams: {q: input, navFilter: this.navFilter}});
   }
 }
