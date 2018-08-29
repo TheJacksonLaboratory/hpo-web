@@ -55,7 +55,7 @@ export class SearchComponent implements OnInit {
 
   ngOnInit() {
     this.query.debounceTime(650).subscribe((val: string) => {
-      if(val && val.length > 3){
+      if(val && val.length >= 3){
         this.highlightText = val;
         this.searchService.searchAll(val).subscribe((data) => {
           this.searchstate = "active";
