@@ -2,9 +2,11 @@ package hpo.api
 
 import grails.testing.gorm.DataTest
 import grails.testing.services.ServiceUnitTest
+import hpo.api.db.utils.SqlUtilsService
 import hpo.api.disease.DbDisease
 import hpo.api.gene.DbGene
 import hpo.api.term.DbTerm
+import spock.lang.Shared
 import spock.lang.Specification
 import spock.lang.Unroll
 
@@ -18,7 +20,7 @@ class HpoSearchServiceSpec extends Specification implements ServiceUnitTest<HpoS
       mockDomain DbGene
     }
 
-    void "test searchAll terms #desc"() {
+    /*void "test searchAll terms #desc"() {
 
         setup:
         new DbTerm(name: 'Test Term 1', ontologyId: 'HP:1234XX', numberOfChildren: 10).save()
@@ -46,34 +48,78 @@ class HpoSearchServiceSpec extends Specification implements ServiceUnitTest<HpoS
         'Test Term 1' | ['Test Term 1'] | 'exact match'
         'HP:1234XX'   | ['Test Term 1'] | 'ontology id match'
 
-    }
+    }*/
 
-    void "test searchAll terms sort by number of descendants #desc"() {
-
-        setup:
-        new DbTerm(name: 'Abnormality of the upper limb bone', ontologyId: 'HP:000222333444XX', numberOfChildren: 10).save()
-        new DbTerm(name: 'Abnormality of the limb bone', ontologyId: 'HP:000222333XX', numberOfChildren: 20).save()
-        new DbTerm(name: 'Abnormality of limbs', ontologyId: 'HP:000222XX', numberOfChildren: 30).save()
-        new DbTerm(name: 'Abnormality of the eye', ontologyId: 'HP:000111XX', numberOfChildren: 40).save()
-        new DbTerm(name: 'Abnormality', ontologyId: 'HP:000XX', numberOfChildren: 50).save()
-
+    void "test searchTerm prepared statement builder #desc"(){
         when:
+        def termMap = [:]
+        final String statement = service.buildSearchTermsAndSynonymsPS(terms, termMap, params)
+
+        then:
+        statement == expectedStatement
+        termMap == expectedNamedParametersMap
+
+        where:
+        terms  << [[" "] ,["abnorm"], ["little", "test"]]
+        params << [
+                    [max: 10, offset: 0, sortPS : 'number_of_children', order: 'desc'],
+                    [max: -1, offset: 0, sortPS : 'number_of_children', order: 'desc'],
+                    [max: 10, offset: 1, sortPS: 'number_of_children', order: 'desc']
+                  ]
+        expectedStatement << [
+
+                              "SELECT * FROM ( SELECT t.ontology_id, t.name, t.id, t.number_of_children FROM " +
+                                "hpo_web.db_term t LEFT JOIN hpo_web.db_term_synonym s ON t.id = s.db_term_id WHERE " +
+                                  "s.synonym LIKE :term0 UNION SELECT t.ontology_id, t.name, t.id, t.number_of_children " +
+                                  "FROM hpo_web.db_term t WHERE t.name LIKE :term0 ) AS result_table ORDER BY " +
+                                  "number_of_children desc, name desc LIMIT 10",
+
+                              "SELECT * FROM ( SELECT t.ontology_id, t.name, t.id, t.number_of_children FROM " +
+                                "hpo_web.db_term t LEFT JOIN hpo_web.db_term_synonym s ON t.id = s.db_term_id WHERE " +
+                                  "s.synonym LIKE :term0 UNION SELECT t.ontology_id, t.name, t.id, t.number_of_children " +
+                                  "FROM hpo_web.db_term t WHERE t.name LIKE :term0 ) AS result_table ORDER BY " +
+                                  "number_of_children desc, name desc",
+
+                              "SELECT * FROM ( SELECT t.ontology_id, t.name, t.id, t.number_of_children " +
+                                  "FROM hpo_web.db_term t LEFT JOIN hpo_web.db_term_synonym s ON t.id = s.db_term_id " +
+                                  "WHERE s.synonym LIKE :term0 AND s.synonym LIKE :term1 " +
+                                  "UNION SELECT t.ontology_id, t.name, t.id, t.number_of_children " +
+                                  "FROM hpo_web.db_term t WHERE t.name LIKE :term0 AND t.name LIKE :term1 ) " +
+                                  "AS result_table ORDER BY number_of_children desc, name desc LIMIT 10"
+                            ]
+
+
+        expectedNamedParametersMap << [[term0: "% %"], [term0:"%abnorm%"], [term0: "%little%", term1: "%test%"]]
+        desc << ["test space query limit 10", "one term with no limit", "two-term with limit 10"]
+    }
+    /*void "test searchAll terms sort by number of descendants #desc"() {
+       @Shared def responseList = []
+        when:
+        SqlUtilsService sqlUtilsService = Mock()
+        service.sqlUtilsService = sqlUtilsService
+        responseList.addAll([new DbTerm(name: 'Abnormality of the upper limb bone', ontologyId: 'HP:000222333444XX', numberOfChildren: 10).save(),
+                             new DbTerm(name: 'Abnormality of the limb bone', ontologyId: 'HP:000222333XX', numberOfChildren: 20).save(),
+                             new DbTerm(name: 'Abnormality of limbs', ontologyId: 'HP:000222XX', numberOfChildren: 30).save(),
+                             new DbTerm(name: 'Abnormality of the eye', ontologyId: 'HP:000111XX', numberOfChildren: 40).save(),
+                             new DbTerm(name: 'Abnormality', ontologyId: 'HP:000XX', numberOfChildren: 50).save()])
         final Map resultMap = service.searchAll(query)
 
         then:
+        (0..1) * sqlUtilsService.executeQuery(_,_) >> mockQueryMethodResponse
         resultMap.terms.data*.name == expected
 
         where:
-        query | expected        | desc
-        'Abnormality'           | ['Abnormality', 'Abnormality of the eye', 'Abnormality of limbs', 'Abnormality of the limb bone', 'Abnormality of the upper limb bone']  | 'search sort 1'
-        'limb'                  | ['Abnormality of limbs', 'Abnormality of the limb bone', 'Abnormality of the upper limb bone']                                           | 'search sort 2'
-        'limb Abnormality'      | ['Abnormality of limbs', 'Abnormality of the limb bone', 'Abnormality of the upper limb bone']                                           | 'search sort 3'
-        'limb Abnormality bone' | ['Abnormality of the limb bone', 'Abnormality of the upper limb bone']                                                                   | 'search sort 4'
-        'limb upper bone'       | ['Abnormality of the upper limb bone']                                                                                                   | 'search sort 5'
-        'HP:000'                | ['Abnormality', 'Abnormality of the eye', 'Abnormality of limbs', 'Abnormality of the limb bone', 'Abnormality of the upper limb bone']  | 'search sort 6'
-        'HP:000222'             | ['Abnormality of limbs', 'Abnormality of the limb bone', 'Abnormality of the upper limb bone']                                           | 'search sort 7'
-        'HP:000222333'          | ['Abnormality of the limb bone', 'Abnormality of the upper limb bone']                                                                   | 'search sort 8'
-    }
+        query                   | expected                                                                                                                               | desc             | mockQueryMethodResponse
+        'Abnormality'           | ['Abnormality', 'Abnormality of the eye', 'Abnormality of limbs', 'Abnormality of the limb bone', 'Abnormality of the upper limb bone']  | 'search sort 1'  | [responseList[0], responseList[1], responseList[2], responseList[3], responseList[4]]
+        'limb Abnormality'      | ['Abnormality of limbs', 'Abnormality of the limb bone', 'Abnormality of the upper limb bone']                                           | 'search sort 3'  | [responseList[0], responseList[1], responseList[2]]
+        'limb Abnormality bone' | ['Abnormality of the limb bone', 'Abnormality of the upper limb bone']                                                                   | 'search sort 4'  | [responseList[0], responseList[1]]
+        'limb upper bone'       | ['Abnormality of the upper limb bone']                                                                                                   | 'search sort 5'  | [responseList[0]]
+        'HP:000'                | ['Abnormality', 'Abnormality of the eye', 'Abnormality of limbs', 'Abnormality of the limb bone', 'Abnormality of the upper limb bone']  | 'search sort 6'  | [responseList[0], responseList[1], responseList[2], responseList[3], responseList[4]]
+        'HP:000222'             | ['Abnormality of limbs', 'Abnormality of the limb bone', 'Abnormality of the upper limb bone']                                           | 'search sort 7'  | [responseList[0], responseList[1], responseList[2]]
+        'HP:000222333'          | ['Abnormality of the limb bone', 'Abnormality of the upper limb bone']                                                                   | 'search sort 8'  | [responseList[0], responseList[1]]
+    }*/
+
+
 
 
     void "test searchAll diseases #desc"() {

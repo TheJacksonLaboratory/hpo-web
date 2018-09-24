@@ -1,7 +1,9 @@
 package hpo.api
 
 import grails.compiler.GrailsCompileStatic
+import groovy.sql.GroovyRowResult
 import groovy.transform.TypeCheckingMode
+import hpo.api.db.utils.SqlUtilsService
 import hpo.api.disease.DbDisease
 import hpo.api.gene.DbGene
 import hpo.api.term.DbTerm
@@ -12,7 +14,7 @@ import org.hibernate.sql.JoinType
 @GrailsCompileStatic
 class HpoSearchService {
 
-
+  SqlUtilsService sqlUtilsService
     /**
      * Given a search query string, it executes domain object searches for terms, diseases and genes.
      * The given string is split by white spaces to form a list of terms. These are used to dynamically build a matching criteria.
@@ -26,7 +28,7 @@ class HpoSearchService {
 
       if (trimmedQ) {
         List<String> inputTerms = trimmedQ.split('\\s').toList()
-        resultMap.put('terms', searchTermsAll(inputTerms, offsetIn, maxIn))
+        resultMap.put('terms', newSearchTermAll(inputTerms, offsetIn, maxIn))
         resultMap.put('diseases', searchDiseasesAll(inputTerms, offsetIn, maxIn))
         resultMap.put('genes', searchGenesAll(inputTerms, offsetIn, maxIn))
       }
@@ -85,6 +87,9 @@ class HpoSearchService {
      */
     @GrailsCompileStatic(TypeCheckingMode.SKIP)
       private Map searchTermsAll(List<String> terms, int offsetIn = 0, int maxIn = 10) {
+        final String SEARCH_TERMS_AND_SYNONYMS = "INSERT INTO db_gene_db_diseases( db_gene_id, db_disease_id) VALUES(?,?)"
+
+
 
         final List<DbTerm> termResults = []
         final Map resultsMap = [:]
@@ -92,6 +97,7 @@ class HpoSearchService {
         params.max = maxIn // if -1, all results are returned
         params.offset = offsetIn
         params.sort = 'numberOfChildren'
+        params.sortPS = 'number_of_children'
         params.order = 'desc'
 
         // Search the term table
@@ -132,6 +138,73 @@ class HpoSearchService {
 
         return resultsMap
       }
+
+    @GrailsCompileStatic(TypeCheckingMode.SKIP)
+    public Map newSearchTermAll(List<String> terms, int offsetIn = 0, int maxIn = 10) {
+
+
+      final List<DbTerm> termResults = []
+      final Map resultsMap = [:]
+      Map params = [:]
+      params.max = maxIn // if -1, all results are returned
+      params.offset = offsetIn
+      params.sort = 'numberOfChildren'
+      params.sortPS = 'number_of_children'
+      params.order = 'desc'
+
+      if(terms[0].startsWith('HP:')){
+        BuildableCriteria c = DbTerm.createCriteria()
+        termResults = c.list(max: params.max, offset: params.offset) {
+          ilike('ontologyId', terms[0] + '%')
+          order(params.sort, params.order)
+        }
+      }else{
+        def termMap = [:]
+        String statement = buildSearchTermsAndSynonymsPS(terms, termMap, params)
+
+        for (GroovyRowResult result in sqlUtilsService.executeQuery(statement, termMap)){
+          DbTerm term = new DbTerm(result)
+          termResults.add(term)
+        }
+      }
+
+      resultsMap.put('data', termResults)
+      resultsMap.put('totalCount', termResults.size())
+      resultsMap.put('offset', offsetIn)
+
+      return resultsMap
+    }
+
+
+    @GrailsCompileStatic(TypeCheckingMode.SKIP)
+    static protected buildSearchTermsAndSynonymsPS(List<String> terms, termMap, params){
+      String synonymLikeSQL = ""
+      String termLikeSQL = ""
+
+      termMap.put('term0', "%" + terms[0] + "%");
+      if(terms.size() > 1){
+        for(def i=0; i < terms.size(); i++){
+          if(i != 0){
+            termMap.put('term' + i, "%" + terms[i] + "%");
+            synonymLikeSQL += 'AND s.synonym LIKE :' + "term" + i + " "
+            termLikeSQL += 'AND t.name LIKE :' + "term" + i + " "
+          }
+        }
+      }
+
+      String statement = "SELECT * FROM ( SELECT t.ontology_id, t.name, t.id, t.number_of_children " +
+        "FROM hpo_web.db_term t " +
+        "LEFT JOIN hpo_web.db_term_synonym s " +
+        "ON t.id = s.db_term_id " +
+        "WHERE s.synonym LIKE :term0 " + synonymLikeSQL + "UNION SELECT t.ontology_id, t.name, t.id, t.number_of_children" +
+        " FROM hpo_web.db_term t WHERE t.name LIKE :term0 " + termLikeSQL +
+        ") AS result_table ORDER BY " + params.sortPS + " " + params.order + ", name " + params.order
+
+      if(params.max != -1){
+        statement += " LIMIT " + params.max;
+      }
+      return statement
+    }
 
     /**
      * Builds and executes a query against DbGenes domain object to return genes by the entrezGeneSymbol.
