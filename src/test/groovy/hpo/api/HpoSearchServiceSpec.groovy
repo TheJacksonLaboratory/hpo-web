@@ -6,6 +6,7 @@ import hpo.api.db.utils.SqlUtilsService
 import hpo.api.disease.DbDisease
 import hpo.api.gene.DbGene
 import hpo.api.term.DbTerm
+import org.apache.commons.lang.StringUtils
 import spock.lang.Shared
 import spock.lang.Specification
 import spock.lang.Unroll
@@ -130,50 +131,62 @@ class HpoSearchServiceSpec extends Specification implements ServiceUnitTest<HpoS
       new DbDisease(db: 'DECIPHER', dbId: '3', diseaseName: 'A syndrome', diseaseId: 'DECIPHER:3').save()
 
       when:
-      final Map resultMap = service.searchAll(query)
+      query = service.trimAndSplit(query)
+      final Map resultMap = service.searchDiseasesAll(query, 0, 10)
 
       then:
-      resultMap.diseases.data*.diseaseName == expected
+      resultMap.data*.diseaseName == expected
 
       where:
-      query              | expected                                           | desc
-      null               | []                                                 | 'null'
-      ' '                | []                                                 | 'blank'
-      '   '              | []                                                 | 'blank'
-      '   \n'            | []                                                 | 'blank'
-      'eye'              | ['Cat eye syndrome', 'Eye syndrome']               | 'partial 1'
-      'cat'              | ['Cat eye syndrome']                               | 'partial 2'
-      'syndrome'         | ['A syndrome', 'Cat eye syndrome', 'Eye syndrome'] | 'partial & sort asc by disease name'
-      'syndrome eye cat' | ['Cat eye syndrome']                               | 'un-ordered search terms'
-      'CAT EYE'          | ['Cat eye syndrome']                               | 'ignore case'
-      'Cat eye syndrome' | ['Cat eye syndrome']                               | 'exact match'
+      query               | expected                                            | desc
+      'eye'               | ['Cat eye syndrome', 'Eye syndrome']               | 'partial 1'
+      'cat'               | ['Cat eye syndrome']                               | 'partial 2'
+      'syndrome'          | ['A syndrome', 'Cat eye syndrome', 'Eye syndrome'] | 'partial & sort asc by disease name'
+      'syndrome eye cat'  | ['Cat eye syndrome']                               | 'un-ordered search terms'
+      'CAT EYE'           | ['Cat eye syndrome']                               | 'ignore case'
+      'Cat eye syndrome'  | ['Cat eye syndrome']                               | 'exact match'
 
     }
 
     void "test searchAll genes #desc"() {
 
       setup:
-        new DbGene(entrezGeneId: '1', entrezGeneSymbol: 'BRAF').save()
-        new DbGene(entrezGeneId: '2', entrezGeneSymbol: 'BRAT1').save()
-        new DbGene(entrezGeneId: '3', entrezGeneSymbol: 'BRCA2').save()
-        new DbGene(entrezGeneId: '4', entrezGeneSymbol: 'BRCA1').save()
+        new DbGene(entrezGeneId: 1, entrezGeneSymbol: 'BRAF').save()
+        new DbGene(entrezGeneId: 2, entrezGeneSymbol: 'BRAT1').save()
+        new DbGene(entrezGeneId: 3, entrezGeneSymbol: 'BRCA2').save()
+        new DbGene(entrezGeneId: 4, entrezGeneSymbol: 'BRCA1').save()
 
       when:
-        final Map resultMap = service.searchAll(query)
+        query = service.trimAndSplit(query)
+        final Map resultMap = service.searchGenesAll(query, 0, 10)
 
       then:
-      resultMap.genes.data*.entrezGeneSymbol == expected
+      resultMap.data*.entrezGeneSymbol == expected
 
       where:
       query    | expected                            | desc
-      null     | []                                  | 'null'
-      ' '      | []                                  | 'blank'
-      '   '    | []                                  | 'blank'
-      '   \n'  | []                                  | 'blank'
       'BRA'    | ['BRAF', 'BRAT1']                   | 'partial 1'
       'BR'     | ['BRAF', 'BRAT1', 'BRCA1', 'BRCA2'] | 'sort asc by entrezGeneSymbol'
       'brca'   | ['BRCA1', 'BRCA2']                  | 'ignore case'
       'BRAF'   | ['BRAF']                            | 'exact match'
 
+    }
+
+    void "test trim and split #desc"(){
+      when:
+      final List<String> resultList = service.trimAndSplit(query)
+
+      then:
+      resultList == expected
+
+      where:
+      query   | expected    | desc
+      ''      | null        | "blank"
+      ' '     | null        | "one space"
+      ' \n'   | null        | "blank newline"
+      'TP53'  | ['TP53']      | "proper string"
+      'TP53 ' | ['TP53']      | "proper string with space"
+      'cat eyes' | ['cat','eyes'] | "two words no space"
+      ' cat eyes ' | ['cat', 'eyes'] | "two words leading and trailing space"
     }
 }

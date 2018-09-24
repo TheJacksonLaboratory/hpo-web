@@ -24,16 +24,25 @@ class HpoSearchService {
     Map<String, Map> searchAll(String searchTerm, Integer offsetIn = 0, Integer maxIn = 10) {
 
       final Map<String, Map> resultMap = ['terms': [data:[]] as Map, 'diseases': [data:[]] as Map, 'genes': [data:[]] as Map]
-      final String trimmedQ = StringUtils.trimToNull(searchTerm)
 
-      if (trimmedQ) {
-        List<String> inputTerms = trimmedQ.split('\\s').toList()
+
+      List<String> inputTerms = trimAndSplit(searchTerm)
+      if (inputTerms) {
         resultMap.put('terms', newSearchTermAll(inputTerms, offsetIn, maxIn))
         resultMap.put('diseases', searchDiseasesAll(inputTerms, offsetIn, maxIn))
         resultMap.put('genes', searchGenesAll(inputTerms, offsetIn, maxIn))
       }
       return resultMap
+    }
 
+    protected static List<String> trimAndSplit(String query){
+      final String trimmedQ = StringUtils.trimToNull(query)
+      if(trimmedQ){
+        List<String> inputTerms = trimmedQ.split('\\s').toList()
+        return inputTerms
+      }else{
+        return null
+      }
     }
 
     /**
