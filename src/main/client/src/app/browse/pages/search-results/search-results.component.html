@@ -62,7 +62,7 @@
                   <mat-paginator #termPaginator [pageSizeOptions]="[50, 100, 500]"></mat-paginator>
                 </div>
               </div>
-            <div class="container center" [hidden]="terms.length != 0">
+            <div class="container center" [hidden]="terms.length != 0 || isLoading == true">
               <h4>Sorry no term results found for.. "{{query}}"</h4>
             </div>
           </mat-tab>
@@ -109,7 +109,7 @@
                 <mat-paginator #diseasePaginator [pageSizeOptions]="[50, 100, 500]"></mat-paginator>
               </div>
             </div>
-            <div class="container center" [hidden]="diseases.length != 0">
+            <div class="container center" [hidden]="diseases.length != 0 || isLoading == true">
               <h4>Sorry no disease results found for.. "{{query}}"</h4>
             </div>
 
@@ -154,7 +154,7 @@
                 <mat-paginator #genePaginator [pageSizeOptions]="[50, 100, 500]"> </mat-paginator>
               </div>
             </div>
-            <div class="container center" [hidden]="genes.length != 0">
+            <div class="container center" [hidden]="genes.length != 0 || isLoading == true">
               <h4>Sorry no gene results found for.. "{{query}}"</h4>
             </div>
           </mat-tab>
