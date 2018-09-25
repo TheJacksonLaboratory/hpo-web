@@ -55,7 +55,7 @@
       </div>
       <br>
     </div>
-    <div class="no-result" *ngIf="(navFilter == 'term' && terms.length == 0) || (navFilter == 'disease' && diseases.length == 0) || (navFilter == 'gene' && genes.length == 0) || (genes.length == 0 && terms.length == 0 && diseases.length == 0)">
+    <div class="no-result" *ngIf="notFoundFlag">
       <h3>Sorry no results have been found!</h3>
     </div>
   </div>
