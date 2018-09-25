@@ -33,6 +33,11 @@
             <!-- Term summary -->
             <mat-card class="item-summary">
               <mat-card-content>
+                <div *ngIf="!treeData">
+                  <mat-progress-bar class="loading-result-details" color="primary" mode="buffer">
+                  </mat-progress-bar>
+                </div>
+                <div *ngIf="treeData">
                   <div>
                     <span class="item-title">{{termTitle}}</span>
                     <span class="item-id">{{term.id}}</span>
@@ -58,6 +63,7 @@
                     </mat-list-item>
                     <mat-divider></mat-divider>
                   </mat-list>
+                </div>
               </mat-card-content>
             </mat-card>
 
@@ -72,20 +78,6 @@
 
                       <div class="filter-container mat-elevation-z8">
 
-                            <!-- paging: associations subset count -->
-                            <div id="assocDiseasePagingSubset" *ngIf="!assocLoading && !displayAllDiseaseAssc" class="associationsPaging">
-                              <p>Displaying {{diseaseDisplayCount}} out of {{diseaseAssocCount}}.
-                                <a *ngIf="diseaseDisplayCount != diseaseAssocCount"
-                                   (click)="showAllDiseases($event)">View all
-                                </a>
-                              </p>
-                            </div>
-
-                            <!-- paging: associations display all count -->
-                            <div id="assocDiseasePagingAll" *ngIf="displayAllDiseaseAssc" class="associationsPaging">
-                              <p>Count: {{diseaseDisplayCount}} </p>
-                            </div>
-
                             <!-- filter. Display when all results are loaded -->
                             <div id="diseaseFilter" *ngIf="displayAllDiseaseAssc" class="filter-header">
                               <mat-form-field>
@@ -95,7 +87,7 @@
 
                             <div [hidden]="assocLoading"class="associations disease-association">
                               <mat-table #table [dataSource]="diseaseSource" matSort>
-                                <mat-header-row *matHeaderRowDef="diseaseColumns"></mat-header-row>
+                                <mat-header-row *matHeaderRowDef="diseaseColumns;"></mat-header-row>
                                 <mat-row *matRowDef="let row; columns: diseaseColumns;"></mat-row>
                                 <ng-container matColumnDef="diseaseId">
                                   <mat-header-cell *matHeaderCellDef> Disease Id </mat-header-cell>
@@ -122,6 +114,14 @@
                                 <mat-paginator  #diseasePaginator [pageSizeOptions]="[50, 100, 500]"></mat-paginator>
                               </div>
 
+                              <!-- paging: associations subset count -->
+                              <div id="assocDiseasePagingSubset" *ngIf="!assocLoading && !displayAllDiseaseAssc" class="associationsPaging">
+                                <p>Displaying {{diseaseDisplayCount}} out of {{diseaseAssocCount}}.
+                                  <a *ngIf="diseaseDisplayCount != diseaseAssocCount"
+                                     (click)="showAllDiseases($event)">View all
+                                  </a>
+                                </p>
+                              </div>
                             </div>
                       </div>
                 </div>
@@ -135,20 +135,6 @@
                 <div [hidden]="geneAssocCount == 0">
                     <mat-progress-bar  *ngIf="assocLoading" class="loading-result-details" color="primary" mode="buffer">
                     </mat-progress-bar>
-
-                    <!-- paging: associations subset count -->
-                    <div id="assocGenePagingSubset" *ngIf="!assocLoading && !displayAllGeneAssc" class="associationsPaging">
-                      <p>Displaying {{geneDisplayCount}} out of {{geneAssocCount}}.
-                        <a *ngIf="geneDisplayCount != geneAssocCount"
-                           (click)="showAllGenes($event)">View all
-                        </a>
-                      </p>
-                    </div>
-
-                    <!-- paging: associations display all count -->
-                    <div id="assocGenePagingAll" *ngIf="displayAllGeneAssc" class="associationsPaging">
-                      <p>Count: {{geneDisplayCount}} </p>
-                    </div>
 
                     <!-- filter. Display when all results are loaded -->
                     <div id="geneFilter" *ngIf="displayAllGeneAssc" class="filter-header">
@@ -181,6 +167,15 @@
 
                       <div [hidden]="!displayAllGeneAssc">
                         <mat-paginator  #genePaginator [pageSizeOptions]="[50, 100, 500]"></mat-paginator>
+                      </div>
+
+                      <!-- paging: associations subset count -->
+                      <div id="assocGenePagingSubset" *ngIf="!assocLoading && !displayAllGeneAssc" class="associationsPaging">
+                        <p>Displaying {{geneDisplayCount}} out of {{geneAssocCount}}.
+                          <a *ngIf="geneDisplayCount != geneAssocCount"
+                             (click)="showAllGenes($event)">View all
+                          </a>
+                        </p>
                       </div>
                     </div>
                 </div>
