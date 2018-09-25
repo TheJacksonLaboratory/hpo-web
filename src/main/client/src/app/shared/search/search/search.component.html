@@ -5,9 +5,9 @@
       <mat-option value="disease">Disease</mat-option>
       <mat-option value="gene">Gene</mat-option>
     </mat-select>
-    <input class="searchbar" matInput #search placeholder="Search for phenotypes, diseases, genes..." [value]="query"
-           (input)="suggestContent(search.value)"
-           (keyup.enter)="submitQuery()">
+    <input class="searchbar" matInput placeholder="Search for phenotypes, diseases, genes..."
+           (input)="contentChanging($event.target.value)"
+           (keyup.enter)="submitQuery($event.target.value)">
     <p class="hint">
       <strong>e.g. <a (click)="setQuery('Arachnodactyly')">Arachnodactyly</a> |
         <a (click)="setQuery('Marfan syndrome')">Marfan syndrome</a> |
@@ -24,7 +24,7 @@
       <div class="result-list">
             <span class="result" routerLink="/browse/term/{{item.ontologyId}}" *ngFor="let item of terms;" >
               <span class="id">{{item.ontologyId}}</span>
-              <span class="name" [innerHtml]="{name: item.name } | highlight: query"></span><br>
+              <span class="name" [innerHtml]="{name: item.name } | highlight: highlightText"></span><br>
             </span>
       </div>
       <br>
@@ -37,7 +37,7 @@
       <div class="result-list">
             <span class="result" routerLink="/browse/disease/{{item.diseaseId}}" *ngFor="let item of diseases;" >
               <span class="id">{{item.db}}</span>
-              <span class="name" [innerHtml]="{name: item.dbName } | highlight: query"></span><br>
+              <span class="name" [innerHtml]="{name: item.dbName } | highlight: highlightText"></span><br>
             </span>
       </div>
       <br>
@@ -50,7 +50,7 @@
       <div class="result-list">
             <span class="result" routerLink="/browse/gene/{{item.entrezGeneId}}" *ngFor="let item of genes;" >
               <span class="id">{{item.entrezGeneId}}</span>
-              <span class="name" [innerHtml]="{name: item.entrezGeneSymbol } | highlight: query"></span><br>
+              <span class="name" [innerHtml]="{name: item.entrezGeneSymbol } | highlight: highlightText"></span><br>
             </span>
       </div>
       <br>

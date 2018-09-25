@@ -15,15 +15,18 @@
 
  }
 
-.mat-column-dbDiseases{
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-}
-.item-summary.tree-navigation{
- padding: 15px !important;
- font-size:16px;
-}
+ .mat-column-dbDiseases{
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+ }
+ .tree-container{
+   padding-right:0;
+ }
+ .item-summary.tree-navigation{
+   padding: 15px !important;
+   font-size:16px;
+ }
 .tree-navigation .link{
   text-decoration: none;
 }

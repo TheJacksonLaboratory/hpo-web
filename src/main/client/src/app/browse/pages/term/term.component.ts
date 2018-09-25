@@ -81,6 +81,7 @@ export class TermComponent implements OnInit {
       .subscribe((data) => {
         this.setDefaults(data.details);
         this.treeData = data.relations;
+        this.treeData.children.sort((a, b) => a.childrenCount > b.childrenCount ? (-1) :1);
         this.termTitle = this.term.name;
       }, (error) => {
         // TODO:Implement Better Handling Here
