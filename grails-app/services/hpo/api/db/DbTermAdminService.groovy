@@ -49,6 +49,11 @@ class DbTermAdminService {
     log.info("db_term_relationship TRUNCATED..")
   }
 
+  void truncateDbTermSynonyms(){
+    sqlUtilsService.executeDelete("TRUNCATE TABLE db_term_synonym")
+    log.info("db_term_relationship TRUNCATED..")
+  }
+
   void loadDbTerms(List<Term> terms = hpoOntology.termMap.values()) {
     StopWatch stopWatch = new StopWatch()
     stopWatch.start()
@@ -75,7 +80,10 @@ class DbTermAdminService {
 
 
   private void loadSynonyms(DbTerm dbTerm, Term term){
-    List<TermSynonym> synonyms = term.getSynonyms().unique()
+    if(term.id.getIdWithPrefix() == "HP:0040064"){
+      def test = ""
+    }
+    List<TermSynonym> synonyms = term.getSynonyms()
     if(synonyms.size() > 0){
       sqlUtilsService.sql.withBatch(500, INSERT_DB_TERM_SYNONYM ) { BatchingPreparedStatementWrapper ps ->
         synonyms.each { TermSynonym synonym ->

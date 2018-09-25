@@ -17,6 +17,7 @@ class LoadHpoDbCommand implements GrailsApplicationCommand {
       appCtx.dbDiseaseAdminService.truncateDiseaseTermJoinTable() // Truncate Disease Join Table
       appCtx.dbTermAdminService.truncatedDbTermPath()
       appCtx.dbTermAdminService.tuncateDbTermRelationship()
+      appCtx.dbTermAdminService.truncateDbTermSynonyms() 
       appCtx.dbTermAdminService.truncateDbTerms()       // Truncate Term Table
       appCtx.dbGeneAdminService.truncateDbGenes()			// Truncate Gene Table
       appCtx.dbDiseaseAdminService.truncateDbDiseases() 		     // Truncate Disease
