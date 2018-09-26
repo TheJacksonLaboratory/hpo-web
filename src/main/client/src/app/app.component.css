@@ -33,26 +33,13 @@
 ::ng-deep .item-summary .mat-card-content  .associations h4{
   float:left;
 }
-::ng-deep .mat-table {
-  overflow: auto;
-  max-height: 500px;
-}
+
 ::ng-deep .associations {
-  margin: 0 5px 15px 5px;
+  margin: 0 0 15px 0;
 }
 ::ng-deep .title {
   padding: 10px;
   margin: 0;
-}
-::ng-deep .associations .mat-table{
-  max-height:346px;
-}
-::ng-deep .container-custom{
-  margin:0;
-  padding: 0 5px 0 5px;
-}
-::ng-deep .container-custom .row{
-  margin:0;
 }
 
 ::ng-deep .loading-result {
@@ -63,6 +50,29 @@
 ::ng-deep hr.underline-hr {
   margin:0;
   height:1px;
+}
+
+::ng-deep .mat-table {
+  overflow: auto;
+  max-height: 500px;
+}
+::ng-deep .mat-header-row{
+  background-color: rgb(78, 139, 162);
+}
+
+::ng-deep .mat-header-row .mat-header-cell {
+  color:white;
+}
+
+::ng-deep .associations .mat-table{
+  max-height:346px;
+}
+::ng-deep .container-custom{
+  margin:0;
+  padding: 0 5px 0 5px;
+}
+::ng-deep .container-custom .row{
+  margin:0;
 }
 
 ::ng-deep .mat-tab-label {
@@ -172,6 +182,36 @@
 ::ng-deep .table-spacer td, ::ng-deep .table-spacer th{
   padding:5px;
 }
+
+::ng-deep .filter-container .filter-header{
+  background-color: rgb(78, 139, 162);
+}
+
+::ng-deep .filter-container .filter-header .mat-form-field-label{
+  color:white;
+}
+
+::ng-deep .filter-container .filter-header .mat-form-field-underline{
+  background-color: rgba(255, 255, 255, 0.42);
+}
+
+::ng-deep .filter-container .filter-header .mat-form-field-ripple {
+  background-color: whitesmoke;
+}
+
+::ng-deep .filter-container .filter-header .mat-form-field-ripple .mat-form-field-label {
+  color: white;
+}
+
+::ng-deep .filter-container .filter-header .mat-form-field-ripple .mat-focused .mat-form-field-label {
+  color: white;
+}
+
+::ng-deep .filter-container .filter-header .mat-input-element {
+  color: white;
+}
+
+
 
 .sidenav {
   width: 50%;
