@@ -68,6 +68,7 @@
             </mat-card>
 
             <!-- TABS -->
+          <div class="hpo-group-tab">
             <mat-tab-group selectedIndex="0" class="term-details-tab-group mat-elevation-z6">
 
               <!-- Disease association -->
@@ -76,13 +77,15 @@
                       <mat-progress-bar  *ngIf="assocLoading" class="loading-result-details" color="primary" mode="buffer">
                       </mat-progress-bar>
 
-                      <div class="filter-container mat-elevation-z8">
+                      <div class="tab-output-container">
 
                             <!-- filter. Display when all results are loaded -->
-                            <div id="diseaseFilter" *ngIf="displayAllDiseaseAssc" class="filter-header">
-                              <mat-form-field>
-                                <input id="diseaseFilterInput" matInput (keyup)="applyDiseaseFilter($event.target.value)" placeholder="Filter by disease">
-                              </mat-form-field>
+                            <div class="filter-container">
+                              <div id="diseaseFilter" *ngIf="displayAllDiseaseAssc" class="filter-header">
+                                <mat-form-field>
+                                  <input id="diseaseFilterInput" matInput (keyup)="applyDiseaseFilter($event.target.value)" placeholder="Filter by disease">
+                                </mat-form-field>
+                              </div>
                             </div>
 
                             <div [hidden]="assocLoading"class="associations disease-association">
@@ -136,54 +139,59 @@
                     <mat-progress-bar  *ngIf="assocLoading" class="loading-result-details" color="primary" mode="buffer">
                     </mat-progress-bar>
 
-                    <!-- filter. Display when all results are loaded -->
-                    <div id="geneFilter" *ngIf="displayAllGeneAssc" class="filter-header">
-                      <mat-form-field>
-                        <input id="geneFilterInput" matInput (keyup)="applyGeneFilter($event.target.value)" placeholder="Filter by gene">
-                      </mat-form-field>
-                    </div>
-
-                    <div [hidden]="assocLoading" class="associations gene-association">
-                      <mat-table #table [dataSource]="geneSource" matSort>
-                        <mat-header-row *matHeaderRowDef="geneColumns"></mat-header-row>
-                        <mat-row *matRowDef="let row; columns: geneColumns;"></mat-row>
-                        <ng-container matColumnDef="entrezGeneId">
-                          <mat-header-cell *matHeaderCellDef> Gene Symbol </mat-header-cell>
-                          <mat-cell *matCellDef="let row">
-                            {{row.entrezGeneSymbol}}
-                            <a routerLink="/browse/gene/{{row.entrezGeneId}}"> ({{row.entrezGeneId}})</a>
-                          </mat-cell>
-                        </ng-container>
-                        <ng-container matColumnDef="dbDiseases">
-                          <mat-header-cell *matHeaderCellDef> Associated Diseases </mat-header-cell>
-                          <mat-cell *matCellDef="let row">
-                            <span *ngFor="let disease of row.dbDiseases">
-                                <a routerLink="/browse/disease/{{disease.diseaseId}}">({{disease.diseaseId}})</a> -
-                                {{disease.diseaseName}}<br>
-                            </span>
-                          </mat-cell>
-                        </ng-container>
-                      </mat-table>
-
-                      <div [hidden]="!displayAllGeneAssc">
-                        <mat-paginator  #genePaginator [pageSizeOptions]="[50, 100, 500]"></mat-paginator>
+                    <div class="tab-output-container">
+                      <div class="filter-container">
+                        <!-- filter. Display when all results are loaded -->
+                        <div id="geneFilter" *ngIf="displayAllGeneAssc" class="filter-header">
+                          <mat-form-field>
+                            <input id="geneFilterInput" matInput (keyup)="applyGeneFilter($event.target.value)" placeholder="Filter by gene">
+                          </mat-form-field>
+                        </div>
                       </div>
 
-                      <!-- paging: associations subset count -->
-                      <div id="assocGenePagingSubset" *ngIf="!assocLoading && !displayAllGeneAssc" class="associationsPaging">
-                        <p>Displaying {{geneDisplayCount}} out of {{geneAssocCount}}.
-                          <a *ngIf="geneDisplayCount != geneAssocCount"
-                             (click)="showAllGenes($event)">View all
-                          </a>
-                        </p>
+                      <div [hidden]="assocLoading" class="associations gene-association">
+                        <mat-table #table [dataSource]="geneSource" matSort>
+                          <mat-header-row *matHeaderRowDef="geneColumns"></mat-header-row>
+                          <mat-row *matRowDef="let row; columns: geneColumns;"></mat-row>
+                          <ng-container matColumnDef="entrezGeneId">
+                            <mat-header-cell *matHeaderCellDef> Gene Symbol </mat-header-cell>
+                            <mat-cell *matCellDef="let row">
+                              {{row.entrezGeneSymbol}}
+                              <a routerLink="/browse/gene/{{row.entrezGeneId}}"> ({{row.entrezGeneId}})</a>
+                            </mat-cell>
+                          </ng-container>
+                          <ng-container matColumnDef="dbDiseases">
+                            <mat-header-cell *matHeaderCellDef> Associated Diseases </mat-header-cell>
+                            <mat-cell *matCellDef="let row">
+                              <span *ngFor="let disease of row.dbDiseases">
+                                  <a routerLink="/browse/disease/{{disease.diseaseId}}">({{disease.diseaseId}})</a> -
+                                  {{disease.diseaseName}}<br>
+                              </span>
+                            </mat-cell>
+                          </ng-container>
+                        </mat-table>
+
+                        <div [hidden]="!displayAllGeneAssc">
+                          <mat-paginator  #genePaginator [pageSizeOptions]="[50, 100, 500]"></mat-paginator>
+                        </div>
+
+                        <!-- paging: associations subset count -->
+                        <div id="assocGenePagingSubset" *ngIf="!assocLoading && !displayAllGeneAssc" class="associationsPaging">
+                          <p>Displaying {{geneDisplayCount}} out of {{geneAssocCount}}.
+                            <a *ngIf="geneDisplayCount != geneAssocCount"
+                               (click)="showAllGenes($event)">View all
+                            </a>
+                          </p>
+                        </div>
                       </div>
-                    </div>
-                </div>
-                <div class="container center" [hidden]="geneAssocCount != 0">
-                  <h4>No gene associations found for <strong>{{term.id}}</strong></h4>
+                  </div>
+                  <div class="container center" [hidden]="geneAssocCount != 0">
+                    <h4>No gene associations found for <strong>{{term.id}}</strong></h4>
+                  </div>
                 </div>
               </mat-tab>
             </mat-tab-group>
+          </div>
         </div>
     </div>
   </div>

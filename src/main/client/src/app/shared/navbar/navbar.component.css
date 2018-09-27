@@ -52,34 +52,6 @@
   z-index: 20;
 }
 
-::ng-deep .navbar-search-wrapper{
-  font-size: 14px;
-  height: 100%;
-  margin: 25px 0 0 0;
-}
-
-::ng-deep .navbar-search-wrapper .search-wrapper .search-filter{
-  width: 20%;
-  font-size: 14px;
-  padding: 5px 5px 5px 10px;
-}
-
-::ng-deep .navbar-search-wrapper .search-wrapper .searchbar{
-  font-size: 14px;
-  padding: 5px 0 5px 10px;
-  width: 80%;
-  margin-top: 0;
-}
-::ng-deep .navbar-search-wrapper .search-wrapper .search-output {
-  width: 80%;
-  padding: 15px;
-  margin-left: 20%;
-  top: 0 !important;
-}
-::ng-deep .navbar-search-wrapper .search-wrapper .hint{
-  display: none;
-}
-
 .navbar-search-container .navbar-output {
   font-size: 14px;
   overflow-x: hidden;
@@ -92,14 +64,6 @@ button.mat-menu-item a{
   text-decoration: none;
   font-family: inherit;
 
-}
-
-::ng-deep .mat-menu-panel {
-  max-width: 380px !important;
-}
-
-::ng-deep .navbar-search-wrapper .search-output h3 {
-  font-size: 14px;
 }
 
 .navbar-home {
@@ -120,22 +84,11 @@ button.mat-menu-item a{
     height: 95px !important;
   }
 
-  ::ng-deep .mat-toolbar-single-row {
-    height: 165px !important;
-    flex-wrap:wrap;
-  }
-
-
   .navbar-search-wrapper{
     margin:0;
     width: 100%;
   }
 
-  ::ng-deep .navbar-search-wrapper .search-wrapper .search-filter {
-    width: 26%;
-    font-size: 14px;
-    padding: 5px 5px 5px 10px;
-  }
   .ontoversion{
     margin:0;
   }
