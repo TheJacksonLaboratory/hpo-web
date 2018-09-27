@@ -51,6 +51,24 @@ class HpoSearchServiceSpec extends Specification implements ServiceUnitTest<HpoS
 
     }*/
 
+    void "test trim and split #desc"(){
+      when:
+      final List<String> resultList = service.trimAndSplit(query)
+
+      then:
+      resultList == expected
+
+      where:
+      query   | expected    | desc
+      ''      | null        | "blank"
+      ' '     | null        | "one space"
+      ' \n'   | null        | "blank newline"
+      'TP53'  | ['TP53']      | "proper string"
+      'TP53 ' | ['TP53']      | "proper string with space"
+      'cat eyes' | ['cat','eyes'] | "two words no space"
+      ' cat eyes ' | ['cat', 'eyes'] | "two words leading and trailing space"
+    }
+
     void "test searchTerm prepared statement builder #desc"(){
         when:
         def termMap = [:]
@@ -93,32 +111,26 @@ class HpoSearchServiceSpec extends Specification implements ServiceUnitTest<HpoS
         expectedNamedParametersMap << [[term0: "% %"], [term0:"%abnorm%"], [term0: "%little%", term1: "%test%"]]
         desc << ["test space query limit 10", "one term with no limit", "two-term with limit 10"]
     }
-    /*void "test searchAll terms sort by number of descendants #desc"() {
-       @Shared def responseList = []
+    void "test searchAll terms sort by number of descendants #desc"() {
+        //
         when:
-        SqlUtilsService sqlUtilsService = Mock()
-        service.sqlUtilsService = sqlUtilsService
-        responseList.addAll([new DbTerm(name: 'Abnormality of the upper limb bone', ontologyId: 'HP:000222333444XX', numberOfChildren: 10).save(),
-                             new DbTerm(name: 'Abnormality of the limb bone', ontologyId: 'HP:000222333XX', numberOfChildren: 20).save(),
-                             new DbTerm(name: 'Abnormality of limbs', ontologyId: 'HP:000222XX', numberOfChildren: 30).save(),
-                             new DbTerm(name: 'Abnormality of the eye', ontologyId: 'HP:000111XX', numberOfChildren: 40).save(),
-                             new DbTerm(name: 'Abnormality', ontologyId: 'HP:000XX', numberOfChildren: 50).save()])
+        new DbTerm(name: 'Abnormality of the upper limb bone', ontologyId: 'HP:000222333444XX', numberOfChildren: 10).save()
+        new DbTerm(name: 'Abnormality of the limb bone', ontologyId: 'HP:000222333XX', numberOfChildren: 20).save()
+        new DbTerm(name: 'Abnormality of limbs', ontologyId: 'HP:000222XX', numberOfChildren: 30).save()
+        new DbTerm(name: 'Abnormality of the eye', ontologyId: 'HP:000111XX', numberOfChildren: 40).save()
+        new DbTerm(name: 'Abnormality', ontologyId: 'HP:000XX', numberOfChildren: 50).save()
+
         final Map resultMap = service.searchAll(query)
 
         then:
-        (0..1) * sqlUtilsService.executeQuery(_,_) >> mockQueryMethodResponse
         resultMap.terms.data*.name == expected
 
         where:
-        query                   | expected                                                                                                                               | desc             | mockQueryMethodResponse
-        'Abnormality'           | ['Abnormality', 'Abnormality of the eye', 'Abnormality of limbs', 'Abnormality of the limb bone', 'Abnormality of the upper limb bone']  | 'search sort 1'  | [responseList[0], responseList[1], responseList[2], responseList[3], responseList[4]]
-        'limb Abnormality'      | ['Abnormality of limbs', 'Abnormality of the limb bone', 'Abnormality of the upper limb bone']                                           | 'search sort 3'  | [responseList[0], responseList[1], responseList[2]]
-        'limb Abnormality bone' | ['Abnormality of the limb bone', 'Abnormality of the upper limb bone']                                                                   | 'search sort 4'  | [responseList[0], responseList[1]]
-        'limb upper bone'       | ['Abnormality of the upper limb bone']                                                                                                   | 'search sort 5'  | [responseList[0]]
-        'HP:000'                | ['Abnormality', 'Abnormality of the eye', 'Abnormality of limbs', 'Abnormality of the limb bone', 'Abnormality of the upper limb bone']  | 'search sort 6'  | [responseList[0], responseList[1], responseList[2], responseList[3], responseList[4]]
-        'HP:000222'             | ['Abnormality of limbs', 'Abnormality of the limb bone', 'Abnormality of the upper limb bone']                                           | 'search sort 7'  | [responseList[0], responseList[1], responseList[2]]
-        'HP:000222333'          | ['Abnormality of the limb bone', 'Abnormality of the upper limb bone']                                                                   | 'search sort 8'  | [responseList[0], responseList[1]]
-    }*/
+        query                   | expected                                                                                                                                 | desc
+        'HP:000'                | ['Abnormality', 'Abnormality of the eye', 'Abnormality of limbs', 'Abnormality of the limb bone', 'Abnormality of the upper limb bone']  | 'search sort 6'
+        'HP:000222'             | ['Abnormality of limbs', 'Abnormality of the limb bone', 'Abnormality of the upper limb bone']                                           | 'search sort 7'
+        'HP:000222333'          | ['Abnormality of the limb bone', 'Abnormality of the upper limb bone']                                                                   | 'search sort 8'
+    }
 
 
 
@@ -170,23 +182,5 @@ class HpoSearchServiceSpec extends Specification implements ServiceUnitTest<HpoS
       'brca'   | ['BRCA1', 'BRCA2']                  | 'ignore case'
       'BRAF'   | ['BRAF']                            | 'exact match'
 
-    }
-
-    void "test trim and split #desc"(){
-      when:
-      final List<String> resultList = service.trimAndSplit(query)
-
-      then:
-      resultList == expected
-
-      where:
-      query   | expected    | desc
-      ''      | null        | "blank"
-      ' '     | null        | "one space"
-      ' \n'   | null        | "blank newline"
-      'TP53'  | ['TP53']      | "proper string"
-      'TP53 ' | ['TP53']      | "proper string with space"
-      'cat eyes' | ['cat','eyes'] | "two words no space"
-      ' cat eyes ' | ['cat', 'eyes'] | "two words leading and trailing space"
     }
 }

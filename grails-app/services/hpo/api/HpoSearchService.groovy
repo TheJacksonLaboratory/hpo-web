@@ -28,7 +28,7 @@ class HpoSearchService {
 
       List<String> inputTerms = trimAndSplit(searchTerm)
       if (inputTerms) {
-        resultMap.put('terms', newSearchTermAll(inputTerms, offsetIn, maxIn))
+        resultMap.put('terms', searchTermAll(inputTerms, offsetIn, maxIn))
         resultMap.put('diseases', searchDiseasesAll(inputTerms, offsetIn, maxIn))
         resultMap.put('genes', searchGenesAll(inputTerms, offsetIn, maxIn))
       }
@@ -87,7 +87,7 @@ class HpoSearchService {
     /**
      * Builds and executes a query against DbTerm domain object to return Terms by ontology Id or the term name.
      * Searching by ontology ID, the string must match the 'HP:' suffix, only the first item in the list is considered
-     * Searching by name, all terms in the given list must be part of the name.
+     * Searching by name, all terms in the given list must be part of the name and also searches synonyms
      * Supports paging with offset and max result set params
      * @param terms
      * @param offsetIn
@@ -95,61 +95,7 @@ class HpoSearchService {
      * @return Map (total count, data<result set list>, offset)
      */
     @GrailsCompileStatic(TypeCheckingMode.SKIP)
-      private Map searchTermsAll(List<String> terms, int offsetIn = 0, int maxIn = 10) {
-        final String SEARCH_TERMS_AND_SYNONYMS = "INSERT INTO db_gene_db_diseases( db_gene_id, db_disease_id) VALUES(?,?)"
-
-
-
-        final List<DbTerm> termResults = []
-        final Map resultsMap = [:]
-        Map params = [:]
-        params.max = maxIn // if -1, all results are returned
-        params.offset = offsetIn
-        params.sort = 'numberOfChildren'
-        params.sortPS = 'number_of_children'
-        params.order = 'desc'
-
-        // Search the term table
-        BuildableCriteria c = DbTerm.createCriteria()
-        def results = c.list(max: params.max, offset: params.offset) {
-          if (terms[0].startsWith('HP:')) {
-            ilike('ontologyId', terms[0] + '%')
-          } else {
-            and {
-              for (term in terms) {
-                ilike('name', '%' + term + '%')
-              }
-            }
-          }
-          order(params.sort, params.order)
-        }
-
-        def synResults = []
-        // Search the synonyms with the entire string
-        // if we find something. Only suggest that one.
-        BuildableCriteria s = DbTerm.createCriteria()
-        synResults = s.list(max: params.max, offset: params.offset) {
-          dbTermSynonyms {
-            ilike("synonym", '%'+ terms.join(' ') + '%')
-          }
-          order(params.sort, params.order)
-        }
-        synResults.unique()
-        if(synResults.size() == 1){
-          results = synResults
-        }
-
-        termResults.addAll(results as List<DbTerm>)
-        termResults.unique()
-        resultsMap.put('data', termResults)
-        resultsMap.put('totalCount', termResults.size())
-        resultsMap.put('offset', offsetIn)
-
-        return resultsMap
-      }
-
-    @GrailsCompileStatic(TypeCheckingMode.SKIP)
-    public Map newSearchTermAll(List<String> terms, int offsetIn = 0, int maxIn = 10) {
+    public Map searchTermAll(List<String> terms, int offsetIn = 0, int maxIn = 10) {
 
 
       final List<DbTerm> termResults = []
