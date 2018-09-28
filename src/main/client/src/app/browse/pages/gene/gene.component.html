@@ -44,6 +44,7 @@
               </mat-card>
 
               <!--TABS -->
+          <div class="hpo-group-tab">
               <mat-tab-group class="term-details-tab-group mat-elevation-z6"
                       selectedIndex="0">
 
@@ -66,13 +67,15 @@
                   <mat-tab label="HPO Associations">
 
                     <div [hidden]="termAssoc.length == 0">
-                      <div class="filter-container mat-elevation-z8">
+                      <div class="tab-output-container">
                           <!-- filter -->
+                        <div class="filter-container">
                           <div class="filter-header">
                             <mat-form-field>
                               <input id="termFilterInput" matInput (keyup)="applyTermFilter($event.target.value)" placeholder="Filter">
                             </mat-form-field>
                           </div>
+                        </div>
 
                           <!-- term table -->
                           <mat-table #table [dataSource]="termDataSource" matSort>
@@ -109,15 +112,16 @@
                   <mat-tab label="Disease Associations">
 
                     <div [hidden]="diseaseAssoc.length == 0">
-                      <div class="filter-container mat-elevation-z8">
+                      <div class="tab-output-container mat-elevation-z8">
                           <!-- filter -->
+                        <div class="filter-container">
                           <div class="filter-header">
                             <mat-form-field>
                               <input id="diseaseFilterInput" matInput (keyup)="applyDiseaseFilter($event.target.value)" placeholder="Filter">
                             </mat-form-field>
                           </div>
-
-                          <!--<h4 class="title">Disease Associations</h4>-->
+                        </div>
+                          <!-- Disease Association Table -->
                           <mat-table #table [dataSource]="diseaseDataSource" matSort>
                             <mat-header-row *matHeaderRowDef="diseaseColumns"></mat-header-row>
                             <mat-row *matRowDef="let row; columns: diseaseColumns;"></mat-row>
@@ -144,6 +148,7 @@
                     </div>
                   </mat-tab>
               </mat-tab-group>
+          </div>
         </div>
     </div>
   </div>

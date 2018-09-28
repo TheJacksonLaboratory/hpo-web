@@ -23,6 +23,7 @@
               </mat-card>
 
               <!--TABS -->
+              <div class="hpo-group-tab">
               <mat-tab-group selectedIndex="0" class="disease-details-tab-group mat-elevation-z6">
 
                 <!--Term associations tab -->
@@ -30,7 +31,7 @@
                     <div class="tab-content">
                       <div class="associations term-association">
                         <div *ngFor="let catTermSource of catTermSources ">
-                          <h3 class="title">{{catTermSource.catLabel}}
+                          <h3 class="category-title">{{catTermSource.catLabel}}
                             <span *ngIf="catTermSource.annotationCount > 1">[ {{catTermSource.annotationCount}} annotations ]</span>
                             <span *ngIf="catTermSource.annotationCount == 1">[ {{catTermSource.annotationCount}} annotation ]</span>
                           </h3>
@@ -61,14 +62,17 @@
                   <mat-tab label="Gene Associations">
                     <!--<div class="tab-content">-->
                     <div [hidden]="geneAssoc.length == 0">
-                      <div class="filter-container mat-elevation-z8">
+                      <div class="tab-output-container">
 
                           <!-- filter -->
-                          <div class="filter-header">
-                            <mat-form-field>
-                              <input id="geneFilterInput" matInput (keyup)="applyGeneFilter($event.target.value)" placeholder="Filter">
-                            </mat-form-field>
+                          <div class="filter-container">
+                            <div class="filter-header">
+                              <mat-form-field>
+                                <input id="geneFilterInput" matInput (keyup)="applyGeneFilter($event.target.value)" placeholder="Filter">
+                              </mat-form-field>
+                            </div>
                           </div>
+                         <!-- Gene Association Table -->
                           <div class="associations gene-association">
                               <mat-table #table [dataSource]="geneDataSource" matSort>
                                 <mat-header-row *matHeaderRowDef="geneColumns"></mat-header-row>
@@ -97,6 +101,7 @@
 
                   </mat-tab>
                 </mat-tab-group>
+              </div>
             </div>
       </div>
   </div>

@@ -7,12 +7,14 @@
         <p *ngFor="let date of dates" [ngClass]="{'active': currentSelected == date}" (click)="setCurrentDate(date)">{{date}}</p>
       </div>
     </div>
-    <div class="news-section col-lg-offset-1 col-lg-9 mat-elevation-z4" *ngFor="let news of content">
-      <div class="news-title">
-       <span class="hr">{{news.title}}</span> <span class="news-date">{{news.date}}</span><br>
-      </div>
-      <br>
-      <div class="news-body" [innerHtml]="news.body">
+    <div class="col-lg-offset-1 col-lg-9">
+      <div class="news-section mat-elevation-z4" *ngFor="let news of content">
+        <div class="news-title">
+         <span class="hr">{{news.title}}</span> <span class="news-date">{{news.date}}</span><br>
+        </div>
+        <br>
+        <div class="news-body" [innerHtml]="news.body">
+        </div>
       </div>
     </div>
   </div>
