@@ -35,23 +35,19 @@ class DbTermAdminService {
 
   void truncateDbTerms() {
     sqlUtilsService.executeDelete("TRUNCATE TABLE db_term")
-    log.info("db_term TRUNCATED..")
 
   }
 
   void tuncateDbTermRelationship() {
     sqlUtilsService.executeDelete("TRUNCATE TABLE db_term_relationship")
-    log.info("db_term_relationship TRUNCATED..")
   }
 
   void truncatedDbTermPath() {
     sqlUtilsService.executeDelete("TRUNCATE TABLE db_term_path")
-    log.info("db_term_relationship TRUNCATED..")
   }
 
   void truncateDbTermSynonyms(){
     sqlUtilsService.executeDelete("TRUNCATE TABLE db_term_synonym")
-    log.info("db_term_relationship TRUNCATED..")
   }
 
   void loadDbTerms(List<Term> terms = hpoOntology.termMap.values()) {
@@ -73,7 +69,7 @@ class DbTermAdminService {
       }
     }
     DbTerm.withSession { Session session -> session.flush()}
-    log.info("flushed DbTerms duration: ${stopWatch} time: ${new Date()}")
+    log.info("flushed ${terms.size()} DbTerms duration: ${stopWatch} time: ${new Date()}")
     saveAncestorPaths(termToDbTermMap)
     saveTermParents()
   }

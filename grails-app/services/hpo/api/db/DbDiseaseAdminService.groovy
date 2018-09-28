@@ -50,7 +50,7 @@ class DbDiseaseAdminService {
         }
       }
 
-    log.info("Loading Diseases -  duration: ${stopWatch} time: ${new Date()} ]")
+    log.info("Loading Diseases ${hpoDiseases.size()} -  duration: ${stopWatch} time: ${new Date()} ]")
   }
   /**
    * loop over each line of the phenotype.tab file

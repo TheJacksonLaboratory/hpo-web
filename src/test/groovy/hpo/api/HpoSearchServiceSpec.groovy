@@ -88,22 +88,22 @@ class HpoSearchServiceSpec extends Specification implements ServiceUnitTest<HpoS
         expectedStatement << [
 
                               "SELECT * FROM ( SELECT t.ontology_id, t.name, t.id, t.number_of_children FROM " +
-                                "hpo_web.db_term t LEFT JOIN hpo_web.db_term_synonym s ON t.id = s.db_term_id WHERE " +
+                                "db_term t LEFT JOIN db_term_synonym s ON t.id = s.db_term_id WHERE " +
                                   "s.synonym LIKE :term0 UNION SELECT t.ontology_id, t.name, t.id, t.number_of_children " +
-                                  "FROM hpo_web.db_term t WHERE t.name LIKE :term0 ) AS result_table ORDER BY " +
+                                  "FROM db_term t WHERE t.name LIKE :term0 ) AS result_table ORDER BY " +
                                   "number_of_children desc, name desc LIMIT 10",
 
                               "SELECT * FROM ( SELECT t.ontology_id, t.name, t.id, t.number_of_children FROM " +
-                                "hpo_web.db_term t LEFT JOIN hpo_web.db_term_synonym s ON t.id = s.db_term_id WHERE " +
+                                "db_term t LEFT JOIN db_term_synonym s ON t.id = s.db_term_id WHERE " +
                                   "s.synonym LIKE :term0 UNION SELECT t.ontology_id, t.name, t.id, t.number_of_children " +
-                                  "FROM hpo_web.db_term t WHERE t.name LIKE :term0 ) AS result_table ORDER BY " +
+                                  "FROM db_term t WHERE t.name LIKE :term0 ) AS result_table ORDER BY " +
                                   "number_of_children desc, name desc",
 
                               "SELECT * FROM ( SELECT t.ontology_id, t.name, t.id, t.number_of_children " +
-                                  "FROM hpo_web.db_term t LEFT JOIN hpo_web.db_term_synonym s ON t.id = s.db_term_id " +
+                                  "FROM db_term t LEFT JOIN db_term_synonym s ON t.id = s.db_term_id " +
                                   "WHERE s.synonym LIKE :term0 AND s.synonym LIKE :term1 " +
                                   "UNION SELECT t.ontology_id, t.name, t.id, t.number_of_children " +
-                                  "FROM hpo_web.db_term t WHERE t.name LIKE :term0 AND t.name LIKE :term1 ) " +
+                                  "FROM db_term t WHERE t.name LIKE :term0 AND t.name LIKE :term1 ) " +
                                   "AS result_table ORDER BY number_of_children desc, name desc LIMIT 10"
                             ]
 

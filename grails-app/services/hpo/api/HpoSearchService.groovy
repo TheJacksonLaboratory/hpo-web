@@ -148,11 +148,11 @@ class HpoSearchService {
       }
 
       String statement = "SELECT * FROM ( SELECT t.ontology_id, t.name, t.id, t.number_of_children " +
-        "FROM hpo_web.db_term t " +
-        "LEFT JOIN hpo_web.db_term_synonym s " +
+        "FROM db_term t " +
+        "LEFT JOIN db_term_synonym s " +
         "ON t.id = s.db_term_id " +
         "WHERE s.synonym LIKE :term0 " + synonymLikeSQL + "UNION SELECT t.ontology_id, t.name, t.id, t.number_of_children" +
-        " FROM hpo_web.db_term t WHERE t.name LIKE :term0 " + termLikeSQL +
+        " FROM db_term t WHERE t.name LIKE :term0 " + termLikeSQL +
         ") AS result_table ORDER BY " + params.sortPS + " " + params.order + ", name " + params.order
 
       if(params.max != -1){
