@@ -14,7 +14,6 @@ class TermDetailsPage extends Page{
 
   static content = {
     diseasePagingElement(wait:true, required:false)  { $("div#assocDiseasePagingSubset")}
-    diseasePagingElementAll(wait:true, required:false)  { $("div#assocDiseasePagingAll")}
     diseaseViewAllLink(wait:true, required:false)  { $("div#assocDiseasePagingSubset a")}
     geneTabElement(wait:true) {$"#mat-tab-label-0-1"}
     diseaseTabElement(wait:true) {$"#mat-tab-label-0-0"}
@@ -47,6 +46,5 @@ class TermDetailsPage extends Page{
 
   def loadAllDiseases(){
     diseaseViewAllLink.click()
-    waitFor(10, 2) {diseasePagingElementAll}
   }
 }

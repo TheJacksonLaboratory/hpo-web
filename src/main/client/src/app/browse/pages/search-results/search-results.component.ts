@@ -35,7 +35,6 @@ export class SearchResultsComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private searchService: SearchService ) {
     this.route.queryParams.subscribe((params) => {
-      this.isLoading = true;
       this.query = params['q'];
       this.navFilter = params['navFilter'];
 
@@ -58,7 +57,7 @@ export class SearchResultsComponent implements OnInit {
     }
   }
   reloadResultsData(){
-
+    this.isLoading = true;
     this.searchService.searchFetchAll(this.query).subscribe((data) => {
       this.terms = data.terms;
       this.diseases = data.diseases;

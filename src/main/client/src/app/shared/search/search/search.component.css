@@ -25,6 +25,55 @@
   z-index:999;
   top: -50px;
 }
+
+
+.search-output .term-result .result-list .result:hover  {
+  text-decoration:underline #0085CA;
+}
+.search-output .disease-result .result-list .result:hover  {
+  text-decoration:underline #AB2328;
+}
+.search-output .gene-result .result-list .result:hover  {
+  text-decoration:underline #43B02A;
+}
+
+.disease-result .result .id{
+  color: grey;
+  font-size: 10px;
+  display: block;
+  float: left;
+  width: 50px;
+  margin: 5px 0 0 0;
+}
+
+.term-result .result .id{
+  color: grey;
+  font-size: 10px;
+  display: block;
+  float: left;
+  width: 60px;
+  margin: 5px 0 0 0;
+}
+
+.gene-result .result .id{
+  color: grey;
+  font-size: 10px;
+  display: block;
+  float: left;
+  width: 35px;
+  margin: 5px 0 0 0;
+}
+
+span.result-list, div.result-list  {
+  text-decoration:none;
+  color: black !important;
+  margin-top: 2.5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
 .search-output .result-list{
   margin-left: 15px;
   line-height: 20px;
@@ -73,14 +122,6 @@ p.hint a{
 }
 
 @media (max-width: 767px) {
-  ::ng-deep .navbar-search-wrapper .search-wrapper .searchbar{
-    font-size:12px !important;
-    width: 74%;
-  }
-  ::ng-deep .navbar-search-wrapper .search-wrapper .search-output{
-    width: 100%;
-    margin:0;
-  }
   p.hint{
     margin: 15px 0;
     font-size: 12px;

@@ -46,6 +46,7 @@ export class SearchComponent implements OnInit {
   query = new Subject();
   navFilter: string = "all";
   highlightText: string;
+  notFoundFlag: boolean = false;
 
   constructor(private router: Router, private searchService: SearchService) {
     this.router = router;
@@ -56,6 +57,7 @@ export class SearchComponent implements OnInit {
   ngOnInit() {
     this.query.debounceTime(650).subscribe((val: string) => {
       if(val && val.length >= 3){
+        this.notFoundFlag = false;
         this.highlightText = val;
         this.searchService.searchAll(val).subscribe((data) => {
           this.searchstate = "active";
@@ -65,6 +67,10 @@ export class SearchComponent implements OnInit {
           this.termsCount = data.termsTotalCount;
           this.diseasesCount = data.diseasesTotalCount;
           this.genesCount = data.genesTotalCount;
+          if(this.termsCount == 0 && this.diseasesCount == 0 && this.genesCount == 0){
+            this.notFoundFlag = true;
+          }
+
         }, (error) => {
           // TODO: Implement Better Error Handling
           console.log(error);

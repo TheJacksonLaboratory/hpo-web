@@ -1,23 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
-.container {
+
+
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
     padding-right: 5px;
     padding-left:  5px;
   }
-  @media (min-width: 768px) {
-    .container {
-      width: 750px;
-    }
+}
+@media (min-width: 992px) {
+  .container {
+    width: 970px;
   }
-  @media (min-width: 992px) {
-    .container {
-      width: 970px;
-    }
+}
+@media (min-width: 1200px) {
+  .container {
+    width:95%;
   }
-  @media (min-width: 1200px) {
-    .container {
-      width:95%;
-    }
-  }
+}
 
 a {
     color: #0000EE !important;
@@ -62,4 +62,326 @@ table, th, td {
 
 .small-icon {
   font-size: 10px;
+}
+
+.static-images {
+  width: 650px;
+  max-width: 100%;
+  height: auto;
+}
+
+.mat-menu-item {
+  font-size: 14px !important;
+}
+
+/* HomePage Search */
+.home-search .search-container .search-wrapper {
+  margin-top: 50px;
+  position: relative;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+@media (min-width: 992px) {
+  .home-search .search-container .search-wrapper {
+    width: 100%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .home-search .search-container .search-wrapper {
+    margin-left: 16.6667%;
+    width: 67.66666667%;
+  }
+}
+
+@media (max-width:767px) {
+  .home-search .search-container .search-filter {
+    width: 100% !important;
+  }
+
+  .home-search .search-container .search-wrapper {
+    margin-top: 15px !important;
+  }
+
+  .home-search .search-container .searchbar {
+    width: 100% !important;
+    font-size:12px !important;
+    margin:5px 0 0 0 !important;
+  }
+
+  .home-search .search-container .search-output {
+    width: 100% !important;
+    padding: 15px !important;
+    margin:0 !important;
+  }
+
+  .info-body .mat-list-item-content{
+    display: block !important;
+  }
+
+}
+
+.home-search .search-container .searchbar {
+  width: 80%;
+  font-size: 16px;
+  height: 45px;
+  margin: 0;
+  padding: 15px;
+}
+.home-search .search-container .search-filter {
+  width: 20%;
+  height: 45px;
+  font-size: 14px;
+  padding: 15px;
+}
+
+.home-search .search-container .search-output {
+  margin-left: 20%;
+  width: 80%;
+  padding: 15px;
+}
+
+.info-body.teaser .mat-list-item-content{
+  padding:0 !important;
+}
+
+a.mat-btn .mat-button-wrapper {
+  color: white;
+}
+
+.quick-links-card .mat-icon {
+  margin-left: auto;
+}
+
+/* Navbar Global Styles */
+.navbar-search-wrapper{
+  font-size: 14px;
+  height: 100%;
+  margin: 25px 0 0 0;
+}
+
+.navbar-search-wrapper .search-wrapper .search-filter{
+  width: 20%;
+  font-size: 14px;
+  padding: 5px 5px 5px 10px;
+}
+
+.navbar-search-wrapper .search-wrapper .searchbar{
+  font-size: 14px;
+  padding: 5px 0 5px 10px;
+  width: 80%;
+  margin-top: 0;
+}
+.navbar-search-wrapper .search-wrapper .search-output {
+  width: 80%;
+  padding: 15px;
+  margin-left: 20%;
+  top: 0 !important;
+}
+.navbar-search-wrapper .search-wrapper .hint{
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .navbar-search-wrapper .search-wrapper .searchbar {
+    font-size: 12px !important;
+    width: 74%;
+  }
+
+  .navbar-search-wrapper .search-wrapper .search-output {
+    width: 100%;
+    margin: 0;
+  }
+}
+
+.mat-menu-panel {
+  max-width: 380px !important;
+}
+
+.navbar-search-wrapper .search-output h3 {
+  font-size: 14px;
+}
+
+@media (max-width: 767px) {
+
+  .mat-toolbar-single-row {
+    height: 165px !important;
+    flex-wrap:wrap;
+  }
+
+  .navbar-search-wrapper .search-wrapper .search-filter {
+    width: 26%;
+    font-size: 14px;
+    padding: 5px 5px 5px 10px;
+  }
+
+}
+
+/* Term, Gene, Disease Page Elements */
+
+.pageTitle {
+  border-bottom: lightgray solid 1px;
+  padding-bottom: 10px;
+  margin: 0 30% 0 30%;
+}
+
+@media (max-width:767px) {
+
+  .pageTitle{
+    margin:0 5px 0 5px;
+    font-size:1.6em;
+  }
+
+}
+
+.item-title {
+  font-size: 24px;
+  text-align: center;
+  text-shadow: 1px 1px #D0D3D4;
+}
+
+.item-id {
+  font-size: 14px;
+  color: darkslategray;
+}
+
+.item-summary {
+  width:100%;
+  margin-bottom: 10px;
+}
+
+.item-summary .mat-list-item-content{
+  font-size:14px;
+  padding: 5px !important;
+  display:block !important;
+}
+
+.item-summary .mat-list-item{
+  height:auto !important;
+}
+
+.item-header{
+  margin-top: -10px;
+  margin-bottom: 10px;
+}
+
+.item-summary .mat-card-content  .associations h4{
+  float:left;
+}
+
+hr.underline-hr {
+  margin:0;
+  height:1px;
+}
+
+.associations {
+  margin: 0 0 15px 0;
+}
+
+/* Mat-Tab-group colors across multiple pages */
+
+.hpo-group-tab .mat-table {
+  overflow: auto;
+  max-height: 500px;
+}
+.hpo-group-tab .mat-header-row{
+  background-color: rgb(78, 139, 162);
+}
+
+.hpo-group-tab .mat-header-row .mat-header-cell {
+  color:white;
+}
+
+.hpo-group-tab .associations .mat-table{
+  max-height:346px;
+}
+
+.hpo-group-tab .mat-tab-label {
+  border-right: 1px solid rgba(0, 0, 0, 0.12);
+  font-size: 16px;
+}
+.hpo-group-tab .mat-tab-header {
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+  border-bottom: 5px solid rgba(41,101,124,1)
+}
+
+.hpo-group-tab .mat-tab-body-wrapper{
+  border-right: 5px solid rgba(41,101,124,1);
+  border-bottom: 5px solid rgba(41,101,124,1);
+  border-left: 5px solid rgba(41,101,124,1);
+}
+.hpo-group-tab .mat-tab-group.mat-primary .mat-ink-bar{
+  display:none !important;
+}
+
+.hpo-group-tab .mat-tab-group.mat-primary .mat-tab-label:not(.mat-tab-disabled):focus {
+  background-color: rgba(41,101,124,1);
+}
+
+.hpo-group-tab .mat-tab-label-active{
+  background-color: rgba(41,101,124,1);
+  font-weight: 900;
+  opacity: 1;
+  color: white;
+}
+
+.hpo-group-tab .mat-header-cell{
+  font-size: 14px;
+}
+
+.hpo-group-tab .mat-paginator{
+  font-size: 14px;
+}
+
+
+.hpo-group-tab .filter-container .filter-header{
+  background-color: rgb(78, 139, 162);
+}
+
+.hpo-group-tab .filter-container .filter-header .mat-form-field-label{
+  color:white;
+}
+
+.hpo-group-tab .filter-container .filter-header .mat-form-field-underline{
+  background-color: rgba(255, 255, 255, 0.42);
+}
+
+.hpo-group-tab .filter-container .filter-header .mat-form-field-ripple {
+  background-color: whitesmoke;
+}
+
+.hpo-group-tab .filter-container .filter-header .mat-form-field-ripple .mat-form-field-label {
+  color: white;
+}
+
+.hpo-group-tab .filter-container .filter-header .mat-form-field-ripple .mat-focused .mat-form-field-label {
+  color: white;
+}
+
+.hpo-group-tab .filter-container .filter-header .mat-input-element {
+  color: white;
+}
+
+.container-custom{
+  margin:0;
+  padding: 0 5px 0 5px;
+}
+.container-custom .row{
+  margin:0;
+}
+
+.mat-drawer{
+  z-index: 4;
+}
+
+.mat-drawer-content{
+  min-height:100%;
+  display:flex !important;
+  flex-direction: column;
+}
+
+.search-highlight{
+  font-weight: 800;
 }

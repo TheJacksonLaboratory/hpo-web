@@ -23,11 +23,6 @@ class HpoTermDetailsSpec extends  GebReportingSpec {
     then:
     termDetailsPage.diseasePagingElement.text().startsWith("Displaying")
 
-    when:
-    termDetailsPage.diseaseViewAllLink.click()
-
-    then:
-    termDetailsPage.diseasePagingElementAll.text().startsWith("Count:")
   }
 
   void "test gene paging element" (){
@@ -58,12 +53,7 @@ class HpoTermDetailsSpec extends  GebReportingSpec {
     termDetailsPage.loadAllDiseases()
 
     then:
-    termDetailsPage.diseasePagingElementAll.text().startsWith("Count:")
-
-    when:
-    waitFor(5){termDetailsPage.diseaseFilterElement.value('disability')}
-
-    then:
+    termDetailsPage.diseaseFilterElement.value('disability')
     waitFor {
       termDetailsPage.diseasePagingRangeLabelElement.text() == '1 - 5 of 5'
     }
