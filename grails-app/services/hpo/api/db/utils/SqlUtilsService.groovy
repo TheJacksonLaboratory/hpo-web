@@ -1,6 +1,7 @@
 package hpo.api.db.utils
 
 import grails.gorm.transactions.Transactional
+import groovy.sql.GroovyResultSet
 import groovy.sql.GroovyRowResult
 import groovy.sql.Sql
 import org.apache.commons.lang.time.StopWatch
@@ -60,4 +61,10 @@ class SqlUtilsService {
     final List<GroovyRowResult> rows = getSql().rows(sql, params)
     rows
   }
+
+  List<GroovyRowResult> executeQuery (String sql, Map params){
+    final List<GroovyRowResult> rows = getSql().rows(sql, params)
+    rows
+  }
+
 }

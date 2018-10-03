@@ -135,7 +135,7 @@ environments {
     development {
         dataSource {
           dbCreate = 'update'
-          url = "jdbc:h2:./build/devDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE"
+          url = "jdbc:h2:./build/devDb;IGNORECASE=TRUE;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE;MODE=MYSQL"
           grails.dbconsole.enabled = true
           grails.dbconsole.urlRoot = '/admin/dbconsole'
         }
@@ -143,7 +143,7 @@ environments {
     test {
         dataSource {
           dbCreate = 'update'
-          url = "jdbc:h2:./build/devDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE"
+          url = "jdbc:h2:./build/testDb;IGNORECASE=TRUE;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE;MODE=MYSQL"
           grails.dbconsole.enabled = true
           grails.dbconsole.urlRoot = '/admin/dbconsole'
         }

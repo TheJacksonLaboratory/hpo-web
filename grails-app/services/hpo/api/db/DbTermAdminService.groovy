@@ -35,18 +35,19 @@ class DbTermAdminService {
 
   void truncateDbTerms() {
     sqlUtilsService.executeDelete("TRUNCATE TABLE db_term")
-    log.info("db_term TRUNCATED..")
 
   }
 
   void tuncateDbTermRelationship() {
     sqlUtilsService.executeDelete("TRUNCATE TABLE db_term_relationship")
-    log.info("db_term_relationship TRUNCATED..")
   }
 
   void truncatedDbTermPath() {
     sqlUtilsService.executeDelete("TRUNCATE TABLE db_term_path")
-    log.info("db_term_relationship TRUNCATED..")
+  }
+
+  void truncateDbTermSynonyms(){
+    sqlUtilsService.executeDelete("TRUNCATE TABLE db_term_synonym")
   }
 
   void loadDbTerms(List<Term> terms = hpoOntology.termMap.values()) {
@@ -68,13 +69,16 @@ class DbTermAdminService {
       }
     }
     DbTerm.withSession { Session session -> session.flush()}
-    log.info("flushed DbTerms duration: ${stopWatch} time: ${new Date()}")
+    log.info("flushed ${terms.size()} DbTerms duration: ${stopWatch} time: ${new Date()}")
     saveAncestorPaths(termToDbTermMap)
     saveTermParents()
   }
 
 
   private void loadSynonyms(DbTerm dbTerm, Term term){
+    if(term.id.getIdWithPrefix() == "HP:0040064"){
+      def test = ""
+    }
     List<TermSynonym> synonyms = term.getSynonyms()
     if(synonyms.size() > 0){
       sqlUtilsService.sql.withBatch(500, INSERT_DB_TERM_SYNONYM ) { BatchingPreparedStatementWrapper ps ->

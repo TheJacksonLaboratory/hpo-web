@@ -1,5 +1,6 @@
 package hpo.api.term
 
+import groovy.sql.GroovyRowResult
 import org.monarchinitiative.phenol.ontology.data.Term
 import hpo.api.disease.DbDisease
 import hpo.api.gene.DbGene
@@ -61,6 +62,12 @@ class DbTerm {
     comment = term.comment
     ontologyId = term.id.idWithPrefix
     isObsolete = term.isObsolete()
+  }
+
+  DbTerm(GroovyRowResult result){
+    name = result.name
+    numberOfChildren = result.number_of_children
+    ontologyId = result.ontology_id
   }
 
   static transients = ['children', 'parents']

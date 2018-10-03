@@ -50,7 +50,7 @@ class DbGeneAdminService {
     }catch (Exception ex){
       log.error(ex.toString())
     }
-    log.info("Loading Genes - duration: ${stopWatch} time: ${new Date()}")
+    log.info("Loading Genes (${geneMap.size()}) - duration: ${stopWatch} time: ${new Date()}")
   }
 
   void joinGenesAndTermsWithSql() {
