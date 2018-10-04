@@ -1,9 +1,9 @@
-package hpo.api.specs
+package hpo.api.functional.specs
 
 import geb.spock.GebReportingSpec
 import grails.testing.mixin.integration.Integration
 import grails.transaction.Rollback
-import hpo.api.pages.TermDetailsPage
+import hpo.api.functional.pages.TermDetailsPage
 
 
 @Integration

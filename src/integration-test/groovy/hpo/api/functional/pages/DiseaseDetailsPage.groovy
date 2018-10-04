@@ -1,4 +1,4 @@
-package hpo.api.pages
+package hpo.api.functional.pages
 
 import geb.Page
 

@@ -1,8 +1,9 @@
-package hpo.api
+package hpo.api.integration
 
 import grails.gorm.transactions.Rollback
 import grails.testing.mixin.integration.Integration
 import groovy.sql.Sql
+import hpo.api.HpoSearchService
 import hpo.api.db.utils.SqlUtilsService
 import hpo.api.term.DbTerm
 import hpo.api.term.DbTermSynonym
@@ -23,7 +24,17 @@ class HpoSearchServiceIntegrationSpec extends Specification {
     def setup(){
     }
 
-    def setupData() {
+    /*
+     **********************
+     Definitive Testing would be great if we didn't have to commit the data for SQL queries to see it.
+     Subsequently.. in a ci-environment.. build will execute all integration tests. In essence to save
+     build command complexity. We will use data we expect from the ontology to verify.
+
+     This could change but I believe the trade off for build complexity will be worth it.
+     **********************
+
+     def setupData() {
+
       DbTerm.withTransaction {
         DbTerm term1 = new DbTerm(name: 'Microcephaly', ontologyId: 'HP:000222333444XX', numberOfChildren: 30)
         term1.save(flush: true, failOnError:true)
@@ -33,14 +44,12 @@ class HpoSearchServiceIntegrationSpec extends Specification {
         new DbTermSynonym(term2 , "small cranium").save(flush:true, failOnError: true)
         new DbTerm(name: 'Progressive Microcephaly', ontologyId: 'HP:000222XX', numberOfChildren: 10).save(flush: true, failOnError:true)
       }
-    }
+    } */
 
     def cleanup() {
     }
 
     void "test our search terms service #desc"() {
-      given:
-        setupData()
       when:
         Map resultMap = [:]
         query = hpoSearchService.trimAndSplit(query)
@@ -51,12 +60,12 @@ class HpoSearchServiceIntegrationSpec extends Specification {
       resultMap.data*.name == expected
 
       where:
-        query           | expected                                                                        | desc
-        'micro'         | ['Microcephaly', 'Congential Microcephaly', 'Progressive Microcephaly']         | "all three"
-        'Congential'    | ['Congential Microcephaly']                                                     | "just one"
-        'small skull'   | ['Microcephaly']                                                                | "synonym"
-        'skull small'   | ['Microcephaly']                                                                | "synyonm reverse order"
-        'small'         | ['Microcephaly', 'Congential Microcephaly']                                     | "synyonm partial two"
+        query           | expected                                                                                                      | desc
+        'small skull'   | ['Microcephaly', "Small flat posterior fossa", "Progressive microcephaly", "Congenital microcephaly"]         | "synonym small skull"
+        'sore mouth'    | ['Oral ulcer', "Angular cheilitis"]                                                                           | "synonym sore mouth"
+        'small nose'    | ['Short nose', "Hypoplastic nasal tip", "Hypoplastic nasal septum", "Hypoplastic nasal bridge"]               | "synonym small nose"
+        'short fore'    | ['Forearm undergrowth', "Ventral shortening of foreskin", "Short forearm"]                                    | "synonym short fore"
+        'eyeball size'  | ['Abnormality of globe size', 'Microphthalmia', 'Bilateral microphthalmos']                                   | "synonym eyeball size"
     }
 
 }
