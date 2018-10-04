@@ -2,17 +2,9 @@ package hpo.api.integration
 
 import grails.gorm.transactions.Rollback
 import grails.testing.mixin.integration.Integration
-import groovy.sql.Sql
 import hpo.api.HpoSearchService
-import hpo.api.db.utils.SqlUtilsService
-import hpo.api.term.DbTerm
-import hpo.api.term.DbTermSynonym
-import org.hibernate.Session
-import org.hibernate.SessionFactory
 import spock.lang.Specification
 import spock.lang.Unroll
-
-import javax.sql.DataSource
 
 @Integration
 @Rollback
