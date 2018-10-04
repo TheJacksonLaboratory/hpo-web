@@ -1,12 +1,10 @@
-package hpo.api.pages
+package hpo.api.functional.pages
 
-import geb.Module
 import geb.Page
 
+class DownloadOntologyPage extends Page {
 
-class DownloadAnnotationsPage extends Page {
-
-  static url = "/app/download/annotation"
+  static url = "/app/download/ontology"
   static content = {
     pageTitle(wait: true) { $(".pageTitle")}
     navSearchBar(wait: true) { $(".navbar-search-wrapper .searchbar") }

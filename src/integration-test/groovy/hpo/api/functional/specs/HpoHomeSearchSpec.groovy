@@ -1,11 +1,9 @@
-package hpo.api.specs
+package hpo.api.functional.specs
 
 import geb.spock.GebReportingSpec
 import grails.testing.mixin.integration.Integration
 import grails.transaction.Rollback
-
-import geb.spock.*
-import hpo.api.pages.HomePage
+import hpo.api.functional.pages.HomePage
 
 /**
  * See http://www.gebish.org/manual/current/ for more instructions
