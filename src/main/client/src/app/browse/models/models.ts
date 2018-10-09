@@ -49,6 +49,7 @@ export interface Term {
     xrefs?: Array<string>;
     purl?: string;
     childrenCount?: number;
+    synonym?: string;
 }
 
 export interface TermTree{

@@ -30,7 +30,8 @@
       <div class="result-list">
             <span class="result" routerLink="/browse/term/{{item.ontologyId}}" *ngFor="let item of terms;" >
               <span class="id">{{item.ontologyId}}</span>
-              <span class="name" [innerHtml]="{name: item.name } | highlight: queryText"></span><br>
+              <span class="name" *ngIf="!item.synonym" [innerHtml]="{name: item.name } | highlight: queryText"></span>
+              <span class="name" *ngIf="item.synonym" [innerHtml]="{name: item.synonym } | highlight: queryText"></span><br>
             </span>
       </div>
       <br>

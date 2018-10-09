@@ -1,11 +1,12 @@
-import hpo.api.term.DbTerm
+import hpo.api.model.SearchTermResult
 
 model {
-  DbTerm termLite
+  SearchTermResult termLite
 }
 json {
   name termLite.name
-  id termLite.id
+  id termLite.ontologyId
   childrenCount termLite.numberOfChildren
   ontologyId termLite.ontologyId
+  synonym termLite.synonym
 }
