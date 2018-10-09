@@ -44,8 +44,9 @@ export class SearchComponent implements OnInit {
   genesCount: number;
   searchstate: string = "inactive";
   query = new Subject();
+  queryString = "";
   navFilter: string = "all";
-  highlightText: string;
+  queryText: string;
   notFoundFlag: boolean = false;
 
   constructor(private router: Router, private searchService: SearchService) {
@@ -58,7 +59,7 @@ export class SearchComponent implements OnInit {
     this.query.debounceTime(650).subscribe((val: string) => {
       if(val && val.length >= 3){
         this.notFoundFlag = false;
-        this.highlightText = val;
+        this.queryText = val;
         this.searchService.searchAll(val).subscribe((data) => {
           this.searchstate = "active";
           this.terms = data.terms;
@@ -80,6 +81,7 @@ export class SearchComponent implements OnInit {
       }
     }); //End debounce subscribe
   }
+
   @HostListener('document:click', ['$event'])
   documentClick(event: Event): void {
     if(this.searchstate == "active") {

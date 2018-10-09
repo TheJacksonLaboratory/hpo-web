@@ -26,6 +26,14 @@
   top: -50px;
 }
 
+.search-output .search-all {
+  margin: 0 0 10px 10px;
+  font-weight: 900;
+}
+
+.search-output .search-all .name{
+  margin-left: 15px;
+}
 
 .search-output .term-result .result-list .result:hover  {
   text-decoration:underline #0085CA;
@@ -72,7 +80,6 @@ span.result-list, div.result-list  {
   overflow: hidden;
   text-overflow: ellipsis;
 }
-
 
 .search-output .result-list{
   margin-left: 15px;

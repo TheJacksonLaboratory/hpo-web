@@ -16,15 +16,21 @@
   <div class="search-spacer">
   </div>
   <div class="search-output mat-elevation-z4" [@searchState]="searchstate">
+    <div class="search-all">
+      <span class="result-title">
+        <a routerLink="/browse/search" [queryParams]="{'q': queryText, 'navFilter': 'all'}">Search All</a>
+      </span>
+        <span class="name" [innerHtml]="{name: queryText} | highlight: queryText"></span>
+    </div>
     <div class="term-result" *ngIf="(navFilter == 'term' || navFilter == 'all') && terms.length > 0">
           <span  class="result-title">
-             <a routerLink="/browse/search/"  [queryParams]="{'q':query, 'navFilter':'term'}">Terms ( {{termsCount}} )</a>
+             <a routerLink="/browse/search/"  [queryParams]="{'q': queryText, 'navFilter':'term'}">Terms ( {{termsCount}} )</a>
           </span>
       <br>
       <div class="result-list">
             <span class="result" routerLink="/browse/term/{{item.ontologyId}}" *ngFor="let item of terms;" >
               <span class="id">{{item.ontologyId}}</span>
-              <span class="name" [innerHtml]="{name: item.name } | highlight: highlightText"></span><br>
+              <span class="name" [innerHtml]="{name: item.name } | highlight: queryText"></span><br>
             </span>
       </div>
       <br>
@@ -32,12 +38,12 @@
 
     <div class="disease-result" *ngIf="(navFilter == 'disease' || navFilter == 'all') && diseases.length > 0">
           <span  class="result-title">
-            <a routerLink="/browse/search/"  [queryParams]="{'q':query, 'navFilter':'disease'}">Diseases ( {{diseasesCount}} )</a>
+            <a routerLink="/browse/search/"  [queryParams]="{'q': queryText, 'navFilter':'disease'}">Diseases ( {{diseasesCount}} )</a>
           </span>
       <div class="result-list">
             <span class="result" routerLink="/browse/disease/{{item.diseaseId}}" *ngFor="let item of diseases;" >
               <span class="id">{{item.db}}</span>
-              <span class="name" [innerHtml]="{name: item.dbName } | highlight: highlightText"></span><br>
+              <span class="name" [innerHtml]="{name: item.dbName } | highlight: queryText"></span><br>
             </span>
       </div>
       <br>
@@ -45,12 +51,12 @@
 
     <div class="gene-result" *ngIf="(navFilter == 'gene' || navFilter == 'all') && genes.length > 0">
           <span  class="result-title">
-            <a routerLink="/browse/search/"  [queryParams]="{'q':query, 'navFilter':'gene'}">Genes ( {{genesCount}} )</a>
+            <a routerLink="/browse/search/"  [queryParams]="{'q': queryText, 'navFilter':'gene'}">Genes ( {{genesCount}} )</a>
           </span>
       <div class="result-list">
             <span class="result" routerLink="/browse/gene/{{item.entrezGeneId}}" *ngFor="let item of genes;" >
               <span class="id">{{item.entrezGeneId}}</span>
-              <span class="name" [innerHtml]="{name: item.entrezGeneSymbol } | highlight: highlightText"></span><br>
+              <span class="name" [innerHtml]="{name: item.entrezGeneSymbol } | highlight: queryText"></span><br>
             </span>
       </div>
       <br>
