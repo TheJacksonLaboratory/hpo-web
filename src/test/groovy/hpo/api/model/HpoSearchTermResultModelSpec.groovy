@@ -1,10 +1,9 @@
 package hpo.api.model
 
 import groovy.sql.GroovyRowResult
-import org.grails.testing.GrailsUnitTest
 import spock.lang.Specification
 
-class HpoSearchTermResultModelSpec extends Specification implements GrailsUnitTest {
+class HpoSearchTermResultModelSpec extends Specification {
 
   def setup(){}
 
