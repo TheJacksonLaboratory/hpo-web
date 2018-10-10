@@ -58,7 +58,6 @@ export class SearchComponent implements OnInit {
   ngOnInit() {
     this.query.debounceTime(650).subscribe((val: string) => {
       if(val && val.length >= 3){
-        this.notFoundFlag = false;
         this.queryText = val;
         this.searchService.searchAll(val).subscribe((data) => {
           this.searchstate = "active";
@@ -68,8 +67,11 @@ export class SearchComponent implements OnInit {
           this.termsCount = data.termsTotalCount;
           this.diseasesCount = data.diseasesTotalCount;
           this.genesCount = data.genesTotalCount;
+          this.notFoundFlag = false;
           if(this.termsCount == 0 && this.diseasesCount == 0 && this.genesCount == 0){
             this.notFoundFlag = true;
+          }else{
+            this.notFoundFlag = false;
           }
 
         }, (error) => {

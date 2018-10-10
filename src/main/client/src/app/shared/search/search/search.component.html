@@ -16,11 +16,11 @@
   <div class="search-spacer">
   </div>
   <div class="search-output mat-elevation-z4" [@searchState]="searchstate">
-    <div class="search-all">
+    <div class="search-all" *ngIf="!notFoundFlag">
       <span class="result-title">
         <a routerLink="/browse/search" [queryParams]="{'q': queryText, 'navFilter': 'all'}">Search All</a>
       </span>
-        <span class="name" [innerHtml]="{name: queryText} | highlight: queryText"></span>
+        <span *ngIf="!notFoundFlag" class="name">{{queryText}}</span>
     </div>
     <div class="term-result" *ngIf="(navFilter == 'term' || navFilter == 'all') && terms.length > 0">
           <span  class="result-title">

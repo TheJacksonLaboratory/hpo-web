@@ -33,6 +33,7 @@
 
 .search-output .search-all .name{
   margin-left: 15px;
+  font-weight: bold;
 }
 
 .search-output .term-result .result-list .result:hover  {

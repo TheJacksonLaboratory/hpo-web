@@ -2,14 +2,20 @@ import { PipeTransform, Pipe } from '@angular/core';
 
 @Pipe({ name: 'highlight' })
 export class HighlightPipe implements PipeTransform {
-  transform(result: any, query: string): string {
-    let outHtml: string = "";
-    if (result && query) {
-      const regex = new RegExp(query, 'gi');
-      return  result.name.replace(regex, (match) => `<span class="search-highlight">${match}</span>`);
-    }
-    else{
-      return result.name;
+  transform(targetString: any, query: string): string {
+    let response = targetString["name"];
+    if (targetString && query) {
+      let subHighlight = query.trim().split(" ");
+      for(let x in subHighlight){
+          let replace = "";
+          const regex = new RegExp("(?<!<[^>]*)" + subHighlight[x], 'gi');
+          let match = response.match(regex);
+          if (match) {
+            replace = '<strong>' + match + '</strong>';
+            response = response.replace(regex, replace);
+          }
+      }
+      return response;
     }
   }
 }
