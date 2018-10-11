@@ -20,11 +20,13 @@
       <span class="result-title">
         <a routerLink="/browse/search" [queryParams]="{'q': queryText, 'navFilter': 'all'}">Search All</a>
       </span>
-        <span *ngIf="!notFoundFlag" class="name">{{queryText}}</span>
+      <a class="name" routerLink="/browse/search" [queryParams]="{'q': queryText, 'navFilter': 'all'}">
+        <span *ngIf="!notFoundFlag">{{queryText}}</span>
+      </a>
     </div>
     <div class="term-result" *ngIf="(navFilter == 'term' || navFilter == 'all') && terms.length > 0">
           <span  class="result-title">
-             <a routerLink="/browse/search/"  [queryParams]="{'q': queryText, 'navFilter':'term'}">Terms ( {{termsCount}} )</a>
+             Terms [ {{termsCount}} ]
           </span>
       <br>
       <div class="result-list">
@@ -39,7 +41,7 @@
 
     <div class="disease-result" *ngIf="(navFilter == 'disease' || navFilter == 'all') && diseases.length > 0">
           <span  class="result-title">
-            <a routerLink="/browse/search/"  [queryParams]="{'q': queryText, 'navFilter':'disease'}">Diseases ( {{diseasesCount}} )</a>
+            Diseases [ {{diseasesCount}} ]
           </span>
       <div class="result-list">
             <span class="result" routerLink="/browse/disease/{{item.diseaseId}}" *ngFor="let item of diseases;" >
@@ -52,7 +54,7 @@
 
     <div class="gene-result" *ngIf="(navFilter == 'gene' || navFilter == 'all') && genes.length > 0">
           <span  class="result-title">
-            <a routerLink="/browse/search/"  [queryParams]="{'q': queryText, 'navFilter':'gene'}">Genes ( {{genesCount}} )</a>
+            Genes [ {{genesCount}} ]
           </span>
       <div class="result-list">
             <span class="result" routerLink="/browse/gene/{{item.entrezGeneId}}" *ngFor="let item of genes;" >

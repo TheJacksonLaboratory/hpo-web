@@ -26,7 +26,7 @@
 
 
 .search-all-results-table .mat-column-ontologyId, .search-all-results-table .mat-column-diseaseId {
-  max-width: 150px;
+  max-width: 175px;
 }
 
 .search-all-results-table .mat-column-childrenCount {
