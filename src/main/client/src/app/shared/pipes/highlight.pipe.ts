@@ -7,14 +7,20 @@ export class HighlightPipe implements PipeTransform {
     if (targetString && query) {
       let subHighlight = query.trim().split(" ");
       for(let x in subHighlight){
+        if(subHighlight[x].length > 1){
           let replace = "";
-          const regex = new RegExp("(?<!<[^>]*)" + subHighlight[x], 'gi');
+          const regex = new RegExp("(?<!<[^>]*|@)" + subHighlight[x] + "(?!#)", 'gi');
           let match = response.match(regex);
-          if (match) {
-            replace = '<strong>' + match + '</strong>';
-            response = response.replace(regex, replace);
+          if (match && match.length > 1) {
+            replace = '@' + match[0] + '#';
+          }else{
+            replace = '@' + match + '#';
           }
+          response = response.replace(regex, replace);
+        }
       }
+      response = response.replace(/@/g, "<strong>");
+      response = response.replace(/#/g, "</strong>");
       return response;
     }
   }
