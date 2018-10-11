@@ -3,6 +3,7 @@ import {MatTableDataSource, MatPaginator} from '@angular/material';
 import {Term, Gene, Disease} from "../../models/models";
 import {SearchService} from "../../../shared/search/service/search.service";
 import {ActivatedRoute } from '@angular/router';
+import {map} from "rxjs/operator/map";
 
 @Component({
   selector: 'app-search-results',
@@ -19,13 +20,13 @@ export class SearchResultsComponent implements OnInit {
   navFilter : string = 'term';
   selectedTab : number = 0;
 
-  termDisplayedColumns = ['ontologyId', 'name', 'childrenCount'];
+  termDisplayedColumns = ['ontologyId', 'name', 'matching_string', 'childrenCount'];
   termDataSource : MatTableDataSource<Term>;
 
-  diseaseDisplayedColumns = ['diseaseId', 'dbName'];
+  diseaseDisplayedColumns = ['diseaseId', 'dbName', 'matching_string'];
   diseaseDataSource : MatTableDataSource<Disease>;
 
-  geneDisplayedColumns = ['entrezGeneId', 'entrezGeneSymbol'];
+  geneDisplayedColumns = ['entrezGeneId', 'entrezGeneSymbol', 'matching_string'];
   geneDataSource : MatTableDataSource<Gene>;
 
   @ViewChild('termPaginator') termPaginator: MatPaginator;
@@ -59,9 +60,9 @@ export class SearchResultsComponent implements OnInit {
   reloadResultsData(){
     this.isLoading = true;
     this.searchService.searchFetchAll(this.query).subscribe((data) => {
-      this.terms = data.terms;
-      this.diseases = data.diseases;
-      this.genes = data.genes;
+      this.terms = this.termMatchingStringBuilder(data.terms);
+      this.diseases = this.diseaseMatchingStringBuilder(data.diseases);
+      this.genes = this.genesMatchingStringBuilder(data.genes);
 
       this.termDataSource = new MatTableDataSource(this.terms);
       this.diseaseDataSource = new MatTableDataSource(this.diseases);
@@ -77,6 +78,39 @@ export class SearchResultsComponent implements OnInit {
       // TODO: Implement Better Error Handling
       console.log(error);
     });
+  }
+
+  // Method to convert a matching string column.
+  // If synonym exists, it's the matching string apply
+  // the highlight pipe. Otherwise the term is the matching string.
+  // This is needed for the way tables are built with angular material
+  termMatchingStringBuilder(terms){
+    for(let term of terms){
+      if(term.synonym != null){
+        term["matchingString"] = term.synonym;
+      }else{
+        term["matchingString"] = term.name;
+      }
+    }
+    return terms;
+  }
+
+  diseaseMatchingStringBuilder(diseases){
+    for(let disease of diseases){
+      if(disease.dbName){
+        disease["matchingString"] = disease.dbName;
+      }
+    }
+    return diseases;
+  }
+
+  genesMatchingStringBuilder(genes){
+    for(let gene of genes){
+      if(gene.entrezGeneSymbol){
+        gene["matchingString"] = gene.entrezGeneSymbol;
+      }
+    }
+    return genes;
   }
 
   applyTermFilter(filterValue: string) {

@@ -4,7 +4,7 @@ import { PipeTransform, Pipe } from '@angular/core';
 export class HighlightPipe implements PipeTransform {
   transform(targetString: any, query: string): string {
     let response = targetString["name"];
-    if (targetString && query) {
+    if (response && query) {
       let subHighlight = query.trim().split(" ");
       for(let x in subHighlight){
         if(subHighlight[x].length > 1){

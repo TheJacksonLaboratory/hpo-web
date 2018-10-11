@@ -23,3 +23,12 @@
   margin: 30px 10px 30px 10px;
   width: 99%;
 }
+
+
+.search-all-results-table .mat-column-ontologyId, .search-all-results-table .mat-column-diseaseId {
+  max-width: 150px;
+}
+
+.search-all-results-table .mat-column-childrenCount {
+  max-width: 100px;
+}
