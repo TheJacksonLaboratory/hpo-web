@@ -22,9 +22,9 @@ class HpoUtilities {
       // a primary id or an obsolete one.
       TermId compareTerm = TermId.constructWithPrefix(hpoTermQuery)
       TermId term = hpoOntology.getPrimaryTermId(compareTerm)
-      if(!term.equals(compareTerm)){
-        // We have found the true primary id for this term.
-        // Replace and continue with the default search
+      // ontology function always returns the primary, will return self if primary
+      // null if not an id in the ontology
+      if(term != null){
         return term.getIdWithPrefix()
       }
     }
