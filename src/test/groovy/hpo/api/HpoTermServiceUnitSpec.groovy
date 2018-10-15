@@ -7,6 +7,7 @@ import hpo.api.disease.DbDisease
 import hpo.api.gene.DbGene
 import hpo.api.term.DbTerm
 import hpo.api.util.HpoOntologyFactory
+import hpo.api.util.HpoUtilities
 import org.monarchinitiative.phenol.formats.hpo.HpoOntology
 import org.monarchinitiative.phenol.ontology.data.Term
 import org.monarchinitiative.phenol.ontology.data.TermId
@@ -20,13 +21,17 @@ class HpoTermServiceUnitSpec extends Specification implements ServiceUnitTest<Hp
 
     @Shared
     HpoOntology hpoOntology
+    @Shared
+    HpoUtilities hpoUtilities
 
     def setupSpec(){
         hpoOntology = new HpoOntologyFactory().getInstance()
+        hpoUtilities = new HpoUtilities(hpoOntology)
         mockDomains DbTerm, DbGene, DbDisease
     }
     def setup() {
         service.hpoOntology = hpoOntology
+        service.hpoUtilities = hpoUtilities
     }
     void 'test find associated genes given term using #desc'(){
       setup:

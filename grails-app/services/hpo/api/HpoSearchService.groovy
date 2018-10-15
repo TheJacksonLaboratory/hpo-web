@@ -7,13 +7,19 @@ import hpo.api.db.utils.SqlUtilsService
 import hpo.api.disease.DbDisease
 import hpo.api.gene.DbGene
 import hpo.api.term.DbTerm
+import hpo.api.util.HpoUtilities
 import org.apache.commons.lang.StringUtils
 import org.grails.datastore.mapping.query.api.BuildableCriteria
 import hpo.api.model.SearchTermResult
+import org.monarchinitiative.phenol.formats.hpo.HpoOntology
+import org.monarchinitiative.phenol.ontology.data.TermId
+
 @GrailsCompileStatic
 class HpoSearchService {
 
   SqlUtilsService sqlUtilsService
+  HpoOntology hpoOntology
+  HpoUtilities hpoUtilities
     /**
      * Given a search query string, it executes domain object searches for terms, diseases and genes.
      * The given string is split by white spaces to form a list of terms. These are used to dynamically build a matching criteria.
@@ -118,19 +124,19 @@ class HpoSearchService {
       params.order = 'desc'
 
       if(terms[0].toUpperCase().startsWith('HP:')){
+        terms[0] = hpoUtilities.checkReturnPrimaryId(terms[0])
         BuildableCriteria c = DbTerm.createCriteria()
         termResults = c.list(max: params.max, offset: params.offset) {
           ilike('ontologyId', terms[0] + '%')
           order(params.sort, params.order)
         }
+        termResults = termResults.collect{ DbTerm term -> new SearchTermResult(term)}
       }else{
         // Search term name join with a search on synonym name.
         def termMap = [:]
         String statement = buildSearchTermsAndSynonymsPS(terms, termMap, params)
-
-        for (GroovyRowResult result in sqlUtilsService.executeQuery(statement, termMap)){
-          termResults.add(new SearchTermResult(result))
-        }
+        List<GroovyRowResult> results = sqlUtilsService.executeQuery(statement, termMap)
+        termResults = results.collect{ it -> new SearchTermResult(it)}
         termResults = filterAndUnique(termResults, maxIn)
       }
 

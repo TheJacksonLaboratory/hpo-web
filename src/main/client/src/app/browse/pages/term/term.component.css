@@ -1,12 +1,17 @@
- .gene-association .mat-column-entrezGeneId{
-     max-width: 250px;
- }
- .disease-association .mat-column-diseaseId {
-     max-width: 250px;
- }
- .disease-association .mat-column-diseaseName {
-    margin-right: 100px;
- }
+.gene-association .mat-column-entrezGeneId{
+   max-width: 250px;
+}
+.disease-association .mat-column-diseaseId {
+   max-width: 250px;
+}
+.disease-association .mat-column-diseaseName {
+  margin-right: 100px;
+}
+
+
+.item-id .obsolete-arrow{
+  font-size:16px;
+}
 
 @media (max-width:767px) {
   .disease-association .mat-column-diseaseName {

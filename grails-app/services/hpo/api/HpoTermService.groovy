@@ -1,5 +1,6 @@
 package hpo.api
 
+import hpo.api.util.HpoUtilities
 import org.monarchinitiative.phenol.formats.hpo.HpoOntology
 import org.monarchinitiative.phenol.ontology.algo.OntologyTerms
 import org.monarchinitiative.phenol.ontology.data.Term
@@ -12,7 +13,6 @@ import hpo.api.disease.DbDisease
 import hpo.api.gene.DbGene
 import hpo.api.term.DbTerm
 import org.apache.commons.lang.time.StopWatch
-import org.hibernate.SessionFactory
 
 
 @GrailsCompileStatic
@@ -20,7 +20,7 @@ class HpoTermService {
 
   HpoOntology hpoOntology
   SqlUtilsService sqlUtilsService
-  SessionFactory sessionFactory
+  HpoUtilities hpoUtilities
   /**
    * Search For a Term By HPO ID
    *
@@ -30,6 +30,7 @@ class HpoTermService {
   Map searchTerm(String trimmedQ){
     Map result = [:]
       if (trimmedQ.startsWith('HP:')) {
+        trimmedQ = hpoUtilities.checkReturnPrimaryId(trimmedQ)
         DbTerm dbterm = DbTerm.findByOntologyId(trimmedQ)
         Term term = this.hpoOntology.termMap.get(TermId.constructWithPrefix(trimmedQ))
         result.put("TERM",term)
