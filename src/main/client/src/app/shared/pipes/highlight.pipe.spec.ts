@@ -22,13 +22,34 @@ describe('Highlight pipe test', () => {
     pipe = p;
   }));
 
-  it('highlights search term in the text', () => {
-    let result = pipe.transform({name:'search text'}, 'text');
-    expect(result).toBe('search <span class="search-highlight">text</span>')
-  });
+  let testData = [
+    {
+      targetString:{name: 'small skull'},
+      query: 'small skull',
+      expected: '<strong>small</strong> <strong>skull</strong>'
+    },
+    {
+      targetString:{name: 'small skull anantomy'},
+      query: 'small skull',
+      expected: '<strong>small</strong> <strong>skull</strong> anantomy'
+    },
+    {
+      targetString:{name: 'small anantomy skull'},
+      query: 'small skull',
+      expected: '<strong>small</strong> anantomy <strong>skull</strong>'
+    },
+    {
+      targetString:{name: 'small anantomy skull'},
+      query: 'small skull s',
+      expected: '<strong>small</strong> anantomy <strong>skull</strong>'
+    }
 
-  it('should return same text', () => {
-    let result = pipe.transform({name:'search text'}, '');
-    expect(result).toBe('search text', 'search text')
+  ];
+
+  it('highlights terms in the text', () => {
+    for(let idx in testData){
+      let result = pipe.transform(testData[idx]["targetString"], testData[idx]["query"]);
+      expect(testData[idx].expected).toEqual(result);
+    }
   });
 });

@@ -18,7 +18,7 @@
 
         <!--TABS -->
         <div class="hpo-group-tab">
-        <mat-tab-group class="term-details-tab-group mat-elevation-z6"
+        <mat-tab-group class="term-details-tab-group mat-elevation-z6 search-all-results-table"
                        [(selectedIndex)]="selectedTab">
 
           <!-- Term results tab -->
@@ -52,6 +52,12 @@
                     <ng-container matColumnDef="name">
                       <mat-header-cell *matHeaderCellDef> Term Name </mat-header-cell>
                       <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
+                    </ng-container>
+
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="matching_string">
+                      <mat-header-cell *matHeaderCellDef> Matching String </mat-header-cell>
+                      <mat-cell *matCellDef="let row" [innerHtml]="{name: row.matchingString } | highlight: query"></mat-cell>
                     </ng-container>
 
                     <!-- Weight Column -->
@@ -104,6 +110,13 @@
                     <mat-header-cell *matHeaderCellDef> Disease Name </mat-header-cell>
                     <mat-cell *matCellDef="let row"> {{row.dbName}} </mat-cell>
                   </ng-container>
+
+                  <!-- Matching String -->
+                  <ng-container matColumnDef="matching_string">
+                    <mat-header-cell *matHeaderCellDef> Matching String </mat-header-cell>
+                    <mat-cell *matCellDef="let row" [innerHtml]="{name: row.matchingString } | highlight: query">
+                    </mat-cell>
+                  </ng-container>
                 </mat-table>
 
                 <!--paging component-->
@@ -150,6 +163,14 @@
                     <mat-header-cell *matHeaderCellDef> Gene Symbol </mat-header-cell>
                     <mat-cell *matCellDef="let row"> {{row.entrezGeneSymbol}} </mat-cell>
                   </ng-container>
+
+                  <!-- Matching String -->
+                  <ng-container matColumnDef="matching_string">
+                    <mat-header-cell *matHeaderCellDef> Matching String </mat-header-cell>
+                    <mat-cell *matCellDef="let row" [innerHtml]="{name: row.matchingString } | highlight: query">
+                    </mat-cell>
+                  </ng-container>
+
                 </mat-table>
 
                 <mat-paginator #genePaginator [pageSizeOptions]="[50, 100, 500]"> </mat-paginator>

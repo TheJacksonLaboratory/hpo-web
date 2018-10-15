@@ -33,7 +33,7 @@ class HpoGeneDetailsSpec extends  GebReportingSpec {
 
     when:
       waitFor(25, 2){
-        geneDetailsPage.diseaseFilterElement.value('Bladder Cancer')
+        geneDetailsPage.diseaseFilterElement.value('bladder')
       }
 
     then:
@@ -55,7 +55,7 @@ class HpoGeneDetailsSpec extends  GebReportingSpec {
     }
     then:
     waitFor(25, 2) {
-      geneDetailsPage.termPagingRangeLabelElement.text() == '1 - 50 of 58'
+      geneDetailsPage.termPagingRangeLabelElement.text() == '1 - 50 of 59'
 
     }
 

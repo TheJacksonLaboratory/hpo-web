@@ -9,8 +9,7 @@ import hpo.api.gene.DbGene
 import hpo.api.term.DbTerm
 import org.apache.commons.lang.StringUtils
 import org.grails.datastore.mapping.query.api.BuildableCriteria
-import org.hibernate.sql.JoinType
-
+import hpo.api.model.SearchTermResult
 @GrailsCompileStatic
 class HpoSearchService {
 
@@ -98,7 +97,7 @@ class HpoSearchService {
     public Map searchTermAll(List<String> terms, int offsetIn = 0, int maxIn = 10) {
 
 
-      final List<DbTerm> termResults = []
+      List termResults = []
       final Map resultsMap = [:]
       Map params = [:]
       params.max = maxIn // if -1, all results are returned
@@ -114,13 +113,14 @@ class HpoSearchService {
           order(params.sort, params.order)
         }
       }else{
+        // Search term name join with a search on synonym name.
         def termMap = [:]
         String statement = buildSearchTermsAndSynonymsPS(terms, termMap, params)
 
         for (GroovyRowResult result in sqlUtilsService.executeQuery(statement, termMap)){
-          DbTerm term = new DbTerm(result)
-          termResults.add(term)
+          termResults.add(new SearchTermResult(result))
         }
+        termResults = filterAndUnique(termResults, maxIn)
       }
 
       resultsMap.put('data', termResults)
@@ -130,7 +130,46 @@ class HpoSearchService {
       return resultsMap
     }
 
+  /***
+   * Method to filter synonym and terms results. We want to know if the query matched a term(synonym == null)
+   * or a synonym. if it matched both, we will only take the term.
+   * If a term has multiple synonyms, take the smallest so long as the term was not matched. ^
+   * @param results
+   * @param limit
+   */
 
+  @GrailsCompileStatic(TypeCheckingMode.SKIP)
+    static protected filterAndUnique(List results, int limit){
+      def uniqueMap = [:]
+      results.each { term ->
+        if(!uniqueMap.containsKey(term.ontologyId) || term.synonym == null ){
+          // Not in our map drop it in or we found a term with a null synonym which means
+          // it has the most importance
+          uniqueMap[term.ontologyId] = term
+        }else if(uniqueMap.containsKey(term.ontologyId) &&
+          uniqueMap[term.ontologyId].synonym != null &&
+          uniqueMap[term.ontologyId].synonym.length() > term.synonym.length())
+        {
+          //in the map, synonym isn't null, and our new snyonym is shorter
+          uniqueMap[term.ontologyId] = term
+        }
+      }
+      // Limiter on SQL will not work with this funky logic, requested by @JulieMcMurry (Monarch Initiative)
+      if(limit != -1){
+        return uniqueMap.values().take(limit).collect()
+      }
+
+      return uniqueMap.values().collect()
+
+  }
+
+  /***
+   * Builds a prepared statement for searching terms and synonyms
+   * @param terms
+   * @param termMap
+   * @param params
+   * @return Sql
+   */
     @GrailsCompileStatic(TypeCheckingMode.SKIP)
     static protected buildSearchTermsAndSynonymsPS(List<String> terms, termMap, params){
       String synonymLikeSQL = ""
@@ -147,17 +186,15 @@ class HpoSearchService {
         }
       }
 
-      String statement = "SELECT * FROM ( SELECT t.ontology_id, t.name, t.id, t.number_of_children " +
-        "FROM db_term t " +
-        "LEFT JOIN db_term_synonym s " +
+      String statement = "SELECT * FROM ( SELECT t.ontology_id, t.name, t.id, t.number_of_children, NULL as synonym " +
+        "FROM db_term t WHERE t.name LIKE :term0 " + termLikeSQL +
+        "UNION SELECT t.ontology_id, t.name, t.id, t.number_of_children, s.synonym FROM db_term t " +
+        "RIGHT JOIN db_term_synonym s " +
         "ON t.id = s.db_term_id " +
-        "WHERE s.synonym LIKE :term0 " + synonymLikeSQL + "UNION SELECT t.ontology_id, t.name, t.id, t.number_of_children" +
-        " FROM db_term t WHERE t.name LIKE :term0 " + termLikeSQL +
+        "WHERE s.synonym LIKE :term0 " + synonymLikeSQL +
         ") AS result_table ORDER BY " + params.sortPS + " " + params.order + ", name " + params.order
 
-      if(params.max != -1){
-        statement += " LIMIT " + params.max;
-      }
+
       return statement
     }
 

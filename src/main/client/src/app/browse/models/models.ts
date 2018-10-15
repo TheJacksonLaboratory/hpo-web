@@ -4,6 +4,7 @@ export interface Gene {
     dbDiseases?: Disease[]
     hpoTermName?: Array<string>;
     hpoTermId?: object;
+    matchingString?:string;
 }
 export interface Disease {
     db?: string;
@@ -25,6 +26,7 @@ export interface Disease {
     date?: string;
     assignedBy?: string;
     description?: string;
+    matchingString?: string;
 }
 export class EntrezGene {
     uid?: string;
@@ -49,6 +51,8 @@ export interface Term {
     xrefs?: Array<string>;
     purl?: string;
     childrenCount?: number;
+    synonym?: string;
+    matchingString?:string;
 }
 
 export interface TermTree{

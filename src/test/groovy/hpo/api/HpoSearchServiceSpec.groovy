@@ -2,12 +2,11 @@ package hpo.api
 
 import grails.testing.gorm.DataTest
 import grails.testing.services.ServiceUnitTest
-import hpo.api.db.utils.SqlUtilsService
+import groovy.sql.GroovyRowResult
 import hpo.api.disease.DbDisease
 import hpo.api.gene.DbGene
+import hpo.api.model.SearchTermResult
 import hpo.api.term.DbTerm
-import org.apache.commons.lang.StringUtils
-import spock.lang.Shared
 import spock.lang.Specification
 import spock.lang.Unroll
 
@@ -79,38 +78,61 @@ class HpoSearchServiceSpec extends Specification implements ServiceUnitTest<HpoS
         termMap == expectedNamedParametersMap
 
         where:
-        terms  << [[" "] ,["abnorm"], ["little", "test"]]
+        terms  << [["abnorm"], ["little", "test"]]
         params << [
-                    [max: 10, offset: 0, sortPS : 'number_of_children', order: 'desc'],
                     [max: -1, offset: 0, sortPS : 'number_of_children', order: 'desc'],
                     [max: 10, offset: 1, sortPS: 'number_of_children', order: 'desc']
                   ]
         expectedStatement << [
 
-                              "SELECT * FROM ( SELECT t.ontology_id, t.name, t.id, t.number_of_children FROM " +
-                                "db_term t LEFT JOIN db_term_synonym s ON t.id = s.db_term_id WHERE " +
-                                  "s.synonym LIKE :term0 UNION SELECT t.ontology_id, t.name, t.id, t.number_of_children " +
-                                  "FROM db_term t WHERE t.name LIKE :term0 ) AS result_table ORDER BY " +
-                                  "number_of_children desc, name desc LIMIT 10",
+                              "SELECT * FROM ( SELECT t.ontology_id, t.name, t.id, t.number_of_children, NULL as synonym " +
+                                "FROM db_term t WHERE t.name LIKE :term0" +
+                                " UNION " +
+                                "SELECT t.ontology_id, t.name, t.id, t.number_of_children, s.synonym FROM " +
+                                "db_term t RIGHT JOIN db_term_synonym s ON t.id = s.db_term_id WHERE " +
+                                "s.synonym LIKE :term0 ) AS result_table ORDER BY " +
+                                "number_of_children desc, name desc",
 
-                              "SELECT * FROM ( SELECT t.ontology_id, t.name, t.id, t.number_of_children FROM " +
-                                "db_term t LEFT JOIN db_term_synonym s ON t.id = s.db_term_id WHERE " +
-                                  "s.synonym LIKE :term0 UNION SELECT t.ontology_id, t.name, t.id, t.number_of_children " +
-                                  "FROM db_term t WHERE t.name LIKE :term0 ) AS result_table ORDER BY " +
-                                  "number_of_children desc, name desc",
-
-                              "SELECT * FROM ( SELECT t.ontology_id, t.name, t.id, t.number_of_children " +
-                                  "FROM db_term t LEFT JOIN db_term_synonym s ON t.id = s.db_term_id " +
-                                  "WHERE s.synonym LIKE :term0 AND s.synonym LIKE :term1 " +
-                                  "UNION SELECT t.ontology_id, t.name, t.id, t.number_of_children " +
-                                  "FROM db_term t WHERE t.name LIKE :term0 AND t.name LIKE :term1 ) " +
-                                  "AS result_table ORDER BY number_of_children desc, name desc LIMIT 10"
+                              "SELECT * FROM ( SELECT t.ontology_id, t.name, t.id, t.number_of_children, NULL as synonym " +
+                                "FROM db_term t WHERE t.name LIKE :term0 AND t.name LIKE :term1" +
+                                " UNION " +
+                                "SELECT t.ontology_id, t.name, t.id, t.number_of_children, s.synonym FROM " +
+                                "db_term t RIGHT JOIN db_term_synonym s ON t.id = s.db_term_id WHERE " +
+                                "s.synonym LIKE :term0 AND s.synonym LIKE :term1 ) AS result_table ORDER BY " +
+                                "number_of_children desc, name desc",
                             ]
 
 
-        expectedNamedParametersMap << [[term0: "% %"], [term0:"%abnorm%"], [term0: "%little%", term1: "%test%"]]
-        desc << ["test space query limit 10", "one term with no limit", "two-term with limit 10"]
+        expectedNamedParametersMap << [[term0:"%abnorm%"], [term0: "%little%", term1: "%test%"]]
+        desc << ["one term with no limit", "two-term with no limit"]
     }
+
+    void "test searchTermAll filter unique #desc"(){
+      when:
+      def fakeList = []
+      fakeList.addAll(
+        new SearchTermResult([ontology_id: "HP:000", name:"Abnormality of eye", number_of_children: 1, synonym: "Eye Weirdness"] as GroovyRowResult),
+        new SearchTermResult([ontology_id: "HP:000", name:"Abnormality of eye", number_of_children: 1, synonym: "Eye Weird"] as GroovyRowResult),
+        new SearchTermResult([ontology_id: "HP:000", name:"Abnormality of eye", number_of_children: 1, synonym: null] as GroovyRowResult),
+        new SearchTermResult([ontology_id: "HP:001", name:"Abnormality of eyelid", number_of_children: 1, synonym: null] as GroovyRowResult),
+        new SearchTermResult([ontology_id: "HP:001", name:"Abnormality of eyelid", number_of_children: 1, synonym: "Eye"] as GroovyRowResult),
+        new SearchTermResult([ontology_id: "HP:002", name:"Abnormality of eyes", number_of_children: 1, synonym: "Eye Weirdness"] as GroovyRowResult),
+        new SearchTermResult([ontology_id: "HP:002", name:"Abnormality of eyes", number_of_children: 1, synonym: null] as GroovyRowResult),
+        new SearchTermResult([ontology_id: "HP:003", name:"Abnormality of eye center", number_of_children: 1, synonym: "Eye Center Weird"] as GroovyRowResult),
+        new SearchTermResult([ontology_id: "HP:003", name:"Abnormality of eye center", number_of_children: 1, synonym: "Eye Weird"] as GroovyRowResult),
+      )
+      final List resultList = service.filterAndUnique(fakeList, 10)
+
+      then:
+      resultList*.ontologyId == expectedId
+
+      where:
+      expectedId                                  | expectedSynonym                      | desc
+      ["HP:000", "HP:001", "HP:002", "HP:003" ]   |[null, null, null, "Eye Weird"]       | "Should choose null then synonyms with shortest"
+
+
+    }
+
     void "test searchAll terms sort by number of descendants #desc"() {
         //
         when:
