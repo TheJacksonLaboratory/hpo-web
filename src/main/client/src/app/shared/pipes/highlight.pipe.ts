@@ -1,5 +1,13 @@
 import { PipeTransform, Pipe } from '@angular/core';
 
+
+/*
+  Highlight pipe custom to HPO. Find regex matches and @ and # to beginning and end
+  Then. When researching for the next term. Avoid matches with @ and #.
+
+  At the end we want to bold the terms that are contained with @ and #
+    replace @ with <strong> & # with </strong>
+ */
 @Pipe({ name: 'highlight' })
 export class HighlightPipe implements PipeTransform {
   transform(targetString: any, query: string): string {
@@ -9,7 +17,10 @@ export class HighlightPipe implements PipeTransform {
       for(let x in subHighlight){
         if(subHighlight[x].length > 1){
           let replace = "";
-          const regex = new RegExp("(?<!<[^>]*|@)" + subHighlight[x] + "(?!#)", 'gi');
+          //(?<!@)" + subHighlight[x] + "(?!\#)" WORKS IN CHROME 62+ but not natively in other browsers
+          // lookahead -> lookbehind not suitable for production yet.
+          // Limited implementation to favor ending strings
+          const regex = new RegExp(subHighlight[x] + "(?!\#)", 'gi');
           let match = response.match(regex);
           if (match && match.length > 1) {
             replace = '@' + match[0] + '#';

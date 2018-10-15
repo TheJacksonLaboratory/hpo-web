@@ -15,7 +15,7 @@ class GeneDetailsPage extends Page{
   static content = {
 
     termTabElement(wait:true) {$"#mat-tab-label-0-1"}
-    termFilterElement(wait:true, required:false) { $("#termFilterInput")}
+    termFilterElement(wait:true, required:false) {$"#termFilterInput"}
     termPagingRangeLabelElement(wait:true, required: false) {$(".mat-paginator-range-label")}
 
     diseaseTabElement(wait:true) {$"#mat-tab-label-0-2"}
