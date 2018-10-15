@@ -65,12 +65,23 @@ class HpoSearchService {
         params.order = 'asc'
 
         BuildableCriteria c = DbDisease.createCriteria()
-        def results = c.list(max: params.max, offset: params.offset) {
-          for (term in terms) {
-            ilike('diseaseName', '%' + term + '%')
+        def results = []
+        def firstUpper = terms[0].toUpperCase();
+        if(firstUpper.startsWith('OMIM:') || firstUpper.startsWith("ORPHA:") || firstUpper.startsWith("MONDO:")){
+          results = c.list(max: params.max, offset: params.offset) {
+            ilike('diseaseId', terms[0] + '%')
+            order(params.sort, params.order)
           }
-          order(params.sort, params.order)
+        }else{
+           results = c.list(max: params.max, offset: params.offset) {
+            for (term in terms) {
+              ilike('diseaseName', '%' + term + '%')
+            }
+            order(params.sort, params.order)
+          }
         }
+
+
         int totalCount = results.totalCount
         diseaseResults.addAll(results as List<DbDisease>)
         diseaseResults.unique()
@@ -106,7 +117,7 @@ class HpoSearchService {
       params.sortPS = 'number_of_children'
       params.order = 'desc'
 
-      if(terms[0].startsWith('HP:')){
+      if(terms[0].toUpperCase().startsWith('HP:')){
         BuildableCriteria c = DbTerm.createCriteria()
         termResults = c.list(max: params.max, offset: params.offset) {
           ilike('ontologyId', terms[0] + '%')
