@@ -124,7 +124,7 @@ class HpoSearchService {
       params.order = 'desc'
 
       if(terms[0].toUpperCase().startsWith('HP:')){
-        terms[0] = hpoUtilities.checkReturnPrimaryId(terms[0])
+        terms[0] = hpoUtilities.checkReturnPrimaryId(terms[0].toUpperCase())
         BuildableCriteria c = DbTerm.createCriteria()
         termResults = c.list(max: params.max, offset: params.offset) {
           ilike('ontologyId', terms[0] + '%')
