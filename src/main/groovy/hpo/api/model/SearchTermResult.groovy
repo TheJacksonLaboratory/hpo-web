@@ -1,6 +1,7 @@
 package hpo.api.model
 
 import groovy.sql.GroovyRowResult
+import hpo.api.term.DbTerm
 
 class SearchTermResult {
 
@@ -14,6 +15,13 @@ class SearchTermResult {
     name = result.name
     numberOfChildren = result.number_of_children
     synonym = result.synonym
+  }
+
+  SearchTermResult(DbTerm term){
+    ontologyId = term.ontologyId
+    name = term.name
+    numberOfChildren = term.numberOfChildren
+    synonym = ""
   }
 
 }

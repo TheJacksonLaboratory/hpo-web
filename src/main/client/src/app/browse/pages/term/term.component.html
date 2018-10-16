@@ -40,6 +40,10 @@
                 <div *ngIf="treeData">
                   <div>
                     <span class="item-title">{{termTitle}}</span>
+                    <span class="item-id" *ngIf="paramId != term.id">
+                      <span class="crossout">{{paramId}}
+                      </span><i class="material-icons obsolete-arrow">arrow_right_alt</i>
+                    </span>
                     <span class="item-id">{{term.id}}</span>
                     <i matTooltip="Copy purl to clipboard!" matTooltipPosition="above"
                        (click)="copyToClipboard(term.purl)" class="material-icons copyToClipboard">content_copy</i>

@@ -19,6 +19,7 @@ import { TermService } from '../../services/term/term.service';
 export class TermComponent implements OnInit {
   termTitle: string;
   query: string;
+  paramId: string;
   term: Term = {"id":"", "name": "", "definition":"", "altTermIds": [], "comment":"", "synonyms": [], "isObsolete": true, "xrefs": [], "purl": ""};
   geneColumns = ['entrezGeneId','dbDiseases'];
   diseaseColumns = ['diseaseId', 'diseaseName', 'dbGenes'];
@@ -49,6 +50,7 @@ export class TermComponent implements OnInit {
     this.route.params.switchMap((params: Params) => {
       this.assocLoading = true;
       this.overlay = false;
+      this.paramId = params.id;
       this.refreshData(params.id);
       let geneService = this.termService.searchGenesByTerm(params.id);
       let diseaseService = this.termService.searchDiseasesByTerm(params.id);
@@ -70,7 +72,7 @@ export class TermComponent implements OnInit {
       this.assocLoading = false;
       this.displayAllDiseaseAssc = false;
 
-    }, err=>{
+    }, err => {
       // TODO: Implement Better Handling Here
       console.log(err);
     });
