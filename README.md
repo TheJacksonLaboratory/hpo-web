@@ -7,9 +7,15 @@ This guide uses the H2 database which is a grails out-of-the-box in-memory or fi
 
 ## Requirements
 
-+ Java 1.8
-* Git (Latest)
+### Launch requirements
 
++ Java 1.8
++ Git (Latest)
+
+### Dev requirements
++ Node.js (10.12.0)
++ NPM
++ Angular.cli
 
 ## Setup
 
