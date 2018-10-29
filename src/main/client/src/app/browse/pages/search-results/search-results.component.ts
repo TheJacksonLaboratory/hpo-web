@@ -1,9 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {MatTableDataSource, MatPaginator} from '@angular/material';
-import {Term, Gene, Disease} from "../../models/models";
-import {SearchService} from "../../../shared/search/service/search.service";
+import {Term, Gene, Disease} from '../../models/models';
+import {SearchService} from '../../../shared/search/service/search.service';
 import {ActivatedRoute } from '@angular/router';
-import {map} from "rxjs/operator/map";
 
 @Component({
   selector: 'app-search-results',
@@ -16,18 +15,18 @@ export class SearchResultsComponent implements OnInit {
   terms: Term[] = [];
   diseases: Disease[] = [];
   genes: Gene[] = [];
-  isLoading: boolean = true;
-  navFilter : string = 'term';
-  selectedTab : number = 0;
+  isLoading = true;
+  navFilter = 'term';
+  selectedTab = 0;
 
   termDisplayedColumns = ['ontologyId', 'name', 'matching_string', 'childrenCount'];
-  termDataSource : MatTableDataSource<Term>;
+  termDataSource: MatTableDataSource<Term>;
 
   diseaseDisplayedColumns = ['diseaseId', 'dbName', 'matching_string'];
-  diseaseDataSource : MatTableDataSource<Disease>;
+  diseaseDataSource: MatTableDataSource<Disease>;
 
   geneDisplayedColumns = ['entrezGeneId', 'entrezGeneSymbol', 'matching_string'];
-  geneDataSource : MatTableDataSource<Gene>;
+  geneDataSource: MatTableDataSource<Gene>;
 
   @ViewChild('termPaginator') termPaginator: MatPaginator;
   @ViewChild('diseasePaginator') diseasePaginator: MatPaginator;
@@ -47,17 +46,17 @@ export class SearchResultsComponent implements OnInit {
   ngOnInit() {
   }
 
-  setSelectedTab(){
-
-    if (this.navFilter ==  'disease'){
+  setSelectedTab() {
+    if (this.navFilter ===  'disease') {
       this.selectedTab = 1;
-    }else if (this.navFilter == 'gene'){
+    } else if (this.navFilter === 'gene') {
       this.selectedTab = 2;
-    }else if (this.navFilter == 'term' || this.navFilter == 'all'){
+    } else if (this.navFilter === 'term' || this.navFilter === 'all') {
       this.selectedTab = 0;
     }
   }
-  reloadResultsData(){
+
+  reloadResultsData() {
     this.isLoading = true;
     this.searchService.searchFetchAll(this.query).subscribe((data) => {
       this.terms = this.termMatchingStringBuilder(data.terms);
@@ -84,32 +83,32 @@ export class SearchResultsComponent implements OnInit {
   // If synonym exists, it's the matching string apply
   // the highlight pipe. Otherwise the term is the matching string.
   // This is needed for the way tables are built with angular material
-  termMatchingStringBuilder(terms){
-    for(let term of terms){
-      if(term.synonym != null){
-        term["matchingString"] = term.synonym;
-      }else{
-        term["matchingString"] = term.name;
+  termMatchingStringBuilder(terms) {
+    terms.map( term => {
+      if (term.synonym != null) {
+        term['matchingString'] = term.synonym;
+      } else {
+        term['matchingString'] = term.name;
       }
-    }
+    });
     return terms;
   }
 
-  diseaseMatchingStringBuilder(diseases){
-    for(let disease of diseases){
-      if(disease.dbName){
-        disease["matchingString"] = disease.dbName;
+  diseaseMatchingStringBuilder(diseases) {
+    diseases.map( disease => {
+      if (disease.dbName) {
+        disease['matchingString'] = disease.dbName;
       }
-    }
+    });
     return diseases;
   }
 
-  genesMatchingStringBuilder(genes){
-    for(let gene of genes){
-      if(gene.entrezGeneSymbol){
-        gene["matchingString"] = gene.entrezGeneSymbol;
-      }
-    }
+  genesMatchingStringBuilder(genes) {
+    genes.map( gene => {
+      if (gene.entrezGeneSymbol) {
+          gene['matchingString'] = gene.entrezGeneSymbol;
+        }
+      });
     return genes;
   }
 

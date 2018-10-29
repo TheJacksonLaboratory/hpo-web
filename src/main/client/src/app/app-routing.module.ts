@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { NoPageFoundComponent } from './error/no-page-found.component'
+import { NoPageFoundComponent } from './error/no-page-found.component';
 
 
 const appRoutes: Routes = [
-  { path: '', pathMatch: 'prefix',loadChildren: './static/static.module#StaticModule'},
+  { path: '', pathMatch: 'prefix', loadChildren: './static/static.module#StaticModule'},
   { path: 'browse', loadChildren: './browse/browser.module#BrowserHPOModule'},
   { path: '**', component: NoPageFoundComponent}
 
@@ -18,7 +18,7 @@ const appRoutes: Routes = [
       {enableTracing: false} // debugging purposes only
     )
   ],
-  exports:[RouterModule],
+  exports: [RouterModule],
   bootstrap: []
 })
 export class RoutingModule {}

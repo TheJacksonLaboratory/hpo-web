@@ -2,8 +2,8 @@ import {GeneService} from './gene.service';
 import {TestBed, inject} from '@angular/core/testing';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import {environment} from "../../../../environments/environment";
-import { Observable } from "rxjs/Observable";
-import 'rxjs/add/operator/map';
+import { Observable } from "rxjs";
+
 
 
 describe('GeneServiceSpec', () => {

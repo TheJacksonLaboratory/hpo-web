@@ -1,12 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from "@angular/forms";
-import { RouterModule } from "@angular/router";
-import { GlobalMaterialModules } from "../modules/global.module";
-import { ExtrasModule } from "../modules/extras.module";
-//Components
-//Service
-import { SearchService } from "./service/search.service";
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { GlobalMaterialModules } from '../modules/global.module';
+import { ExtrasModule } from '../modules/extras.module';
+import { SearchService } from './service/search.service';
 import { SearchComponent } from './search/search.component';
 
 

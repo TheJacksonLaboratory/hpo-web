@@ -7,10 +7,10 @@ import { ContactComponent } from './help/contact/contact.component';
 import { CitationComponent } from './resources/citation/citation.component';
 import { LicenseComponent } from './resources/license/license.component';
 import { FaqComponent } from './resources/faq/faq.component';
-import { NewsComponent } from "./news/news.component";
-import { OntologyComponent } from "./downloads/ontology/ontology.component";
-import { AnnotationsDownloadComponent } from "./downloads/annotations/annotations.component";
-import { DisclaimerComponent } from "./resources/disclaimer/disclaimer.component";
+import { NewsComponent } from './news/news.component';
+import { OntologyComponent } from './downloads/ontology/ontology.component';
+import { AnnotationsDownloadComponent } from './downloads/annotations/annotations.component';
+import { DisclaimerComponent } from './resources/disclaimer/disclaimer.component';
 
 const staticRoutes: Routes = [
   { path: '', component: HomeComponent},

@@ -1,14 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params} from '@angular/router';
 import { MatSort } from '@angular/material';
-import 'rxjs/add/operator/switchMap';
-import 'rxjs/add/observable/forkJoin';
-import { Observable } from "rxjs/Observable";
-// Models
-import { Term, Gene, Disease, TermTree} from '../../models/models';
-import {MatTableDataSource, MatPaginator} from '@angular/material';
-// Services
+import { MatTableDataSource, MatPaginator } from '@angular/material';
+import { forkJoin as observableForkJoin } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 import { TermService } from '../../services/term/term.service';
+import { Term, Gene, Disease, TermTree} from '../../models/models';
 
 
 @Component({
@@ -20,22 +17,23 @@ export class TermComponent implements OnInit {
   termTitle: string;
   query: string;
   paramId: string;
-  term: Term = {"id":"", "name": "", "definition":"", "altTermIds": [], "comment":"", "synonyms": [], "isObsolete": true, "xrefs": [], "purl": ""};
-  geneColumns = ['entrezGeneId','dbDiseases'];
+  term: Term = {'id': '', 'name': '', 'definition': '', 'altTermIds': [], 'comment': '', 'synonyms': [],
+    'isObsolete': true, 'xrefs': [], 'purl': ''};
+  geneColumns = ['entrezGeneId', 'dbDiseases'];
   diseaseColumns = ['diseaseId', 'diseaseName', 'dbGenes'];
   geneAssocCount: number;
   geneAssocMax: number;
   geneAssocOffset: number;
-  geneDisplayCount : number;
+  geneDisplayCount: number;
   diseaseAssocCount: number;
   diseaseAssocMax: number;
   diseaseAssocOffset: number;
-  diseaseDisplayCount : number;
-  geneSource : MatTableDataSource<Gene>;
-  diseaseSource : MatTableDataSource<Disease>;
+  diseaseDisplayCount: number;
+  geneSource: MatTableDataSource<Gene>;
+  diseaseSource: MatTableDataSource<Disease>;
   treeData: TermTree;
-  assocLoading: boolean = true;
-  overlay: boolean = false;
+  assocLoading = true;
+  overlay = false;
   displayAllDiseaseAssc = false;
   displayAllGeneAssc = false;
 
@@ -47,28 +45,29 @@ export class TermComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.params.switchMap((params: Params) => {
+    this.route.params.pipe(switchMap((params: Params) => {
+      const id = params['id'];
       this.assocLoading = true;
       this.overlay = false;
-      this.paramId = params.id;
-      this.refreshData(params.id);
-      let geneService = this.termService.searchGenesByTerm(params.id);
-      let diseaseService = this.termService.searchDiseasesByTerm(params.id);
-      return Observable.forkJoin(geneService, diseaseService)
-    }).subscribe(([res1,res2]) => {
+      this.paramId = id;
+      this.refreshData(id);
+      const geneService = this.termService.searchGenesByTerm(id);
+      const diseaseService = this.termService.searchDiseasesByTerm(id);
+      return observableForkJoin(geneService, diseaseService);
+    })).subscribe(([res1, res2]) => {
 
       this.geneSource = new MatTableDataSource(res1.genes);
       this.geneAssocCount = res1.geneCount;
       this.geneAssocMax = res1.max;
       this.geneAssocOffset = res1.offset;
-      this.geneDisplayCount = (res1.geneCount < res1.max)? res1.geneCount : res1.max;
+      this.geneDisplayCount = (res1.geneCount < res1.max) ? res1.geneCount : res1.max;
       this.displayAllGeneAssc = false;
 
       this.diseaseSource = new MatTableDataSource(res2.diseases);
       this.diseaseAssocCount = res2.diseaseCount;
       this.diseaseAssocMax = res2.max;
       this.diseaseAssocOffset = res2.offset;
-      this.diseaseDisplayCount = (res2.diseaseCount < res2.max)? res2.diseaseCount : res2.max;
+      this.diseaseDisplayCount = (res2.diseaseCount < res2.max) ? res2.diseaseCount : res2.max;
       this.assocLoading = false;
       this.displayAllDiseaseAssc = false;
 
@@ -78,12 +77,12 @@ export class TermComponent implements OnInit {
     });
   }
 
-  refreshData(query: string){
+  refreshData(query: string) {
     this.termService.searchTerm(query)
       .subscribe((data) => {
         this.setDefaults(data.details);
         this.treeData = data.relations;
-        this.treeData.children.sort((a, b) => a.childrenCount > b.childrenCount ? (-1) :1);
+        this.treeData.children.sort((a, b) => a.childrenCount > b.childrenCount ? (-1) : 1);
         this.termTitle = this.term.name;
       }, (error) => {
         // TODO:Implement Better Handling Here
@@ -91,7 +90,7 @@ export class TermComponent implements OnInit {
     });
   }
 
-  reloadDiseaseAssociations(offset : string, max: string){
+  reloadDiseaseAssociations(offset: string, max: string) {
     this.termService.searchDiseasesByTerm(this.term.id, offset, max)
       .subscribe((data) => {
 
@@ -105,10 +104,10 @@ export class TermComponent implements OnInit {
 
         this.diseaseSource.paginator = this.diseasePaginator;
 
-      })
+      });
   }
 
-  reloadGeneAssociations(offset : string, max: string){
+  reloadGeneAssociations(offset: string, max: string) {
     this.termService.searchGenesByTerm(this.term.id, offset, max)
       .subscribe((data) => {
 
@@ -121,30 +120,30 @@ export class TermComponent implements OnInit {
         this.assocLoading = false;
 
         this.geneSource.paginator = this.genePaginator;
-      })
+      });
   }
 
-  setDefaults(term: Term){
+  setDefaults(term: Term) {
     this.term = term;
-    this.term.comment = (term.comment != null) ? term.comment: "";
-    this.term.synonyms = (term.synonyms.length != 0) ? term.synonyms: ["No synonyms found for this term."];
-    this.term.definition = (term.definition != null) ? term.definition: "Sorry this term has no definition.";
-    this.term.purl = "http://purl.obolibrary.org/obo/" + term.id.replace(":","_");
-    this.term.xrefs = (term.xrefs != null) ? term.xrefs: [];
+    this.term.comment = (term.comment != null) ? term.comment : '';
+    this.term.synonyms = (term.synonyms.length !== 0) ? term.synonyms : ['No synonyms found for this term.'];
+    this.term.definition = (term.definition != null) ? term.definition : 'Sorry this term has no definition.';
+    this.term.purl = 'http://purl.obolibrary.org/obo/' + term.id.replace(':', '_');
+    this.term.xrefs = (term.xrefs != null) ? term.xrefs : [];
   }
 
-  showAllDiseases(event){
+  showAllDiseases(event) {
     this.assocLoading = true;
-    this.reloadDiseaseAssociations('0', '-1')
+    this.reloadDiseaseAssociations('0', '-1');
   }
 
-  showAllGenes(event){
+  showAllGenes(event) {
     this.assocLoading = true;
-    this.reloadGeneAssociations('0', '-1')
+    this.reloadGeneAssociations('0', '-1');
   }
 
-  copyToClipboard(text){
-    let txtArea = document.createElement("textarea");
+  copyToClipboard(text) {
+    const txtArea = document.createElement('textarea');
     txtArea.style.position = 'fixed';
     txtArea.style.top = '0';
     txtArea.style.left = '0';

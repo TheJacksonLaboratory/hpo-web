@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
-import { Observable } from "rxjs/Observable";
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class DiseaseService {
@@ -12,13 +12,13 @@ export class DiseaseService {
       })
     };
 
-    constructor(private http: HttpClient){
+    constructor(private http: HttpClient) {
     }
-    searchDisease(query: string): Observable<any>{
+    searchDisease(query: string): Observable<any> {
         return this.http
             .get(environment.HPO_API_DISEASE_SEARCH_URL + '?q=' + query, this.options);
     }
-    searchMonarch(query: string): Observable<any>{
+    searchMonarch(query: string): Observable<any> {
       return this.http
         .get(environment.HPO_MONARCH_DISEASE_URL + query, this.options);
     }

@@ -1,8 +1,10 @@
+
+import {map} from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Contributors } from "../../browse/models/models";
-import { Observable } from "rxjs/Observable";
-import 'rxjs/add/observable/of';
-import 'rxjs/add/operator/map';
+import { Observable } from "rxjs";
+
+
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from "../../../environments/environment";
 
@@ -14,19 +16,19 @@ export class ContributorsService {
   constructor(private http: HttpClient) { }
 
   getContributors(): Observable<Contributors[]> {
-   return this.http.get(environment.HPO_CONTRIBUTORS_URL, {responseType:'text'}).map(res => {
-      return this.buildContributors(res.split("\n"));
-    })
+   return this.http.get(environment.HPO_CONTRIBUTORS_URL, {responseType: 'text'}).pipe(map(res => {
+      return this.buildContributors(res.split('\n'));
+    }));
   }
 
   buildContributors(lines: string[]) {
-    if(lines){
-      for(let line of lines) {
-        let fields = line.split(",");
-        let firstName = fields.shift();
-        let lastName = fields.shift();
-        let location = fields.join(",").replace(/['"]+/g, '');
-        this.contributors.push({"firstName": firstName, "lastName": lastName, "location": location})
+    if (lines) {
+      for (const line of lines) {
+        const fields = line.split(',');
+        const firstName = fields.shift();
+        const lastName = fields.shift();
+        const location = fields.join(',').replace(/['"]+/g, '');
+        this.contributors.push({'firstName': firstName, 'lastName': lastName, 'location': location});
       }
     }
     return this.contributors;
