@@ -5,11 +5,16 @@ The following guide provides the steps for an out-of-the-box setup for the Human
 This guide uses the H2 database which is a grails out-of-the-box in-memory or file-base database for quick setup of small-low-volume projects.  
                     
 
-## Requirements
+## Requirements For Running
 
 + Java 1.8
 * Git (Latest)
 
+## Requirements For Development
+
++ AngularCLI (7.*) 
++ Node (11+)
++ Node Package Manager (6.4.1+)
 
 ## Setup
 
@@ -71,6 +76,7 @@ This guide uses the H2 database which is a grails out-of-the-box in-memory or fi
 + Run the hpo-web application. This step will launch the application in the local web container and make it available through the web browser
 
         ./gradlew bootRun
+        * if you are looking to use the grails console provide argument `-Dgrails.console=true`
 
 + To open the application site launch the browser and go to
  
@@ -122,3 +128,5 @@ This guide uses the H2 database which is a grails out-of-the-box in-memory or fi
 + To build with chrome headless for functional tests, execute:
 
       ./gradlew clean build -DchromeHeadless=true
+
++ If you would like to use a local instance of mysql.
