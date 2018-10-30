@@ -14,7 +14,7 @@ class HomePage extends Page {
 
   static content = {
     findTermInput(wait: true) { $(".home-search .searchbar") }
-    termResultsPanel(wait: true, required:false) { $(".search-output .term-result  .result-title") }
+    termResultsPanel(wait: true, required:false) { $(".search-output .term-result .result-title") }
     pageTitle(wait: true, required: false) { $(".home-search .title") }
     footerLink(wait: true) { $( "footer-hpo .mat-button-wrapper").text() }
   }

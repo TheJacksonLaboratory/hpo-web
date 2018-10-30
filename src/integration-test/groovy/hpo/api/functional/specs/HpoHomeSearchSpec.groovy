@@ -1,5 +1,6 @@
 package hpo.api.functional.specs
 
+import geb.navigator.EmptyNavigator
 import geb.spock.GebReportingSpec
 import grails.testing.mixin.integration.Integration
 import grails.transaction.Rollback
@@ -33,10 +34,16 @@ class HpoHomeSearchSpec extends  GebReportingSpec {
          HomePage homePage = browser.to(HomePage)
 
       when:
-        waitFor(25, 2){ homePage.findTermInput.value('limbs')}
+        waitFor(25, 2){ homePage.findTermInput}
 
       then:
-        homePage.termResultsPanel.text().startsWith("Terms")
+        homePage.findTermInput.value('limbs');
+
+      when:
+        waitFor(25, 2){ homePage.termResultsPanel.text().size() !=  0 }
+
+      then:
+        homePage.termResultsPanel.text().contains("Terms");
     }
 
   void "test js and css resource content type response"(){
