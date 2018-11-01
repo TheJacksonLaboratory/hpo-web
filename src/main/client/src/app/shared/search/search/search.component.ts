@@ -10,7 +10,7 @@ import {
   animate,
   transition, group
 } from '@angular/animations';
-import { Subject ,  pipe } from 'rxjs';
+import { Subject , pipe } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { distinctUntilChanged } from 'rxjs/operators';
 

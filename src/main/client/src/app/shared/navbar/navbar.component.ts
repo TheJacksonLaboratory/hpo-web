@@ -75,8 +75,7 @@ export class NavbarComponent implements OnInit {
   }
 
   suggestContent(query: string): void {
-    if (query) {
-      if (query.length >= 3 ) {
+    if (query && query.length >= 3 ) {
         this.query = query;
         this.searchService.searchAll(query).subscribe((data) => {
           this.searchstate = 'active';
@@ -90,6 +89,5 @@ export class NavbarComponent implements OnInit {
       } else {
         this.searchstate = 'inactive';
       }
-    }
   }
 }

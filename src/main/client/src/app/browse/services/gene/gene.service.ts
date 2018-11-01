@@ -4,7 +4,6 @@ import { environment } from '../../../../environments/environment';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
-
 @Injectable()
 export class GeneService {
   options = {
@@ -32,22 +31,16 @@ export class GeneService {
     params = params.append('columns', 'id,reviewed');
     return this.http
       .post(environment.HPO_UNIPROT_MAPPING_URL, null, { params: params, responseType: 'text' })
-      .pipe(map(res => {
-        return this.parseUniprotMapping(res.split('\n'));
-      }));
+      .pipe(map(res => this.parseUniprotMapping(res.split('\n'))));
   }
 
+  // Uniprot respopnses are in a tab seperated format.
+  // Particularly a response could have multiple proteins for a gene,
+  // however we only want the review one, if it has one otherwise assume it does not.
   private parseUniprotMapping(lines: string[]) {
-    let lineCount = 0;
-    for (const line of lines) {
-      if (lineCount !== 0) {
-        const mapping = line.split('\t');
-        if (mapping[1] === 'reviewed') {
-          return mapping[0];
-        }
-      }
-      lineCount++;
-    }
-    return null;
+    const reviewed = lines.map(line => line.split('\t'))
+      .filter(line => line[1] === 'reviewed');
+
+    return( (reviewed.length > 0) ? reviewed[0][0] : null);
   }
 }

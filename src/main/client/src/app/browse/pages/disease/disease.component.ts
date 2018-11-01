@@ -1,8 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MatSort } from '@angular/material';
 
-import { Disease, Gene, Term } from '../../models/models';
+import { Disease, Gene, Term, TermCategory } from '../../models/models';
 import { MatTableDataSource, MatPaginator} from '@angular/material';
 import { DiseaseService } from '../../services/disease/disease.service';
 
@@ -11,7 +11,7 @@ import { DiseaseService } from '../../services/disease/disease.service';
   templateUrl: './disease.component.html',
   styleUrls: ['./disease.component.css']
 })
-export class DiseaseComponent implements OnInit {
+export class DiseaseComponent {
   query: string;
   disease: Disease = {'db': '', 'dbObjectId': '0', 'dbName': '', 'dbReference': ''};
   termAssoc: Term[] = [];
@@ -21,19 +21,16 @@ export class DiseaseComponent implements OnInit {
   termDataSource: MatTableDataSource<Term>;
   geneDataSource: MatTableDataSource<Gene>;
   isLoading  = true;
-  catTermSources = [];
+  catTermSources: TermCategory[] = [];
   @ViewChild(MatSort) sort: MatSort;
 
   @ViewChild('genePaginator') genePaginator: MatPaginator;
 
   constructor(private route: ActivatedRoute, private diseaseService: DiseaseService) {
     this.route.params.subscribe( (params) => {
-      this.query = params['id'];
+      this.query = params.id;
       this.refreshData();
     });
-  }
-
-  ngOnInit() {
   }
 
   refreshData() {
@@ -67,15 +64,8 @@ export class DiseaseComponent implements OnInit {
       const termSource = new MatTableDataSource(catTermsMap[i].terms);
       this.catTermSources.push({catLabel, annotationCount,  termSource});
     }
-    this.catTermSources.sort((a, b) => {
-      if (a.annotationCount > b.annotationCount) {
-        return -1;
-      } else if (a.annotationCount < b.annotationCount) {
-        return 1;
-      } else {
-        return 0;
-      }
-    });
+    this.catTermSources.sort((a, b) => (a.annotationCount > b.annotationCount) ? -1 :
+      (a.annotationCount < b.annotationCount) ? 1 : 0);
   }
 
   applyGeneFilter(filterValue: string) {

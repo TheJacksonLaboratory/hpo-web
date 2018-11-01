@@ -83,7 +83,6 @@ export class GeneComponent implements OnInit {
   }
 
   uniprotWidgetInit() {
-
     this.uniProtLoading = true;
     // Make service call for Mapping  EntrezId to UniProtKB Accession
     this.geneService.searchUniprot(this.query).subscribe((uniprotId) => {
@@ -114,7 +113,7 @@ export class GeneComponent implements OnInit {
    */
   initTabs(event) {
       // initialize uniProt widget
-      if (event.index == 0 && ! this.uniProtWidgetInitilized ){
+      if (event.index === 0 && ! this.uniProtWidgetInitilized ){
         this.uniprotWidgetInit();
       }
   }

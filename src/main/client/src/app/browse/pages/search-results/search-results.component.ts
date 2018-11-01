@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import {MatTableDataSource, MatPaginator} from '@angular/material';
 import {Term, Gene, Disease} from '../../models/models';
 import {SearchService} from '../../../shared/search/service/search.service';
@@ -9,7 +9,7 @@ import {ActivatedRoute } from '@angular/router';
   templateUrl: './search-results.component.html',
   styleUrls: ['./search-results.component.css']
 })
-export class SearchResultsComponent implements OnInit {
+export class SearchResultsComponent {
 
   query: string;
   terms: Term[] = [];
@@ -41,9 +41,6 @@ export class SearchResultsComponent implements OnInit {
       this.reloadResultsData();
       this.setSelectedTab();
     });
-  }
-
-  ngOnInit() {
   }
 
   setSelectedTab() {

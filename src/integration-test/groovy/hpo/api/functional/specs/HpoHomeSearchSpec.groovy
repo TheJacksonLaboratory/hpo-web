@@ -40,7 +40,7 @@ class HpoHomeSearchSpec extends  GebReportingSpec {
         homePage.findTermInput.value('limbs');
 
       when:
-        waitFor(25, 2){ homePage.termResultsPanel.text().size() !=  0 }
+        waitFor(25, 2){ homePage.termResultsPanel.text().size() != 0 }
 
       then:
         homePage.termResultsPanel.text().contains("Terms");

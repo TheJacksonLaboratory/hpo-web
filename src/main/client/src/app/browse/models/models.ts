@@ -1,3 +1,5 @@
+import {MatTableDataSource} from "@angular/material";
+
 export interface Gene {
     entrezGeneSymbol: string;
     entrezGeneId: number;
@@ -71,5 +73,11 @@ export interface Contributors {
   lastName: string;
   firstName: string;
   location: string;
+}
+
+export interface TermCategory {
+  catLabel: String;
+  annotationCount: number;
+  termSource: any;
 }
 
