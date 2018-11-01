@@ -2,18 +2,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 // Components
-import { AnnotationComponent} from "./annotation/annotation.component";
-import { ClinicianGuideComponent} from "./clinician-guide/clinician-guide.component";
-import { CollaborationComponent } from "./collaboration/collaboration.component";
+import { AnnotationComponent} from './annotation/annotation.component';
+import { ClinicianGuideComponent} from './clinician-guide/clinician-guide.component';
+import { CollaborationComponent } from './collaboration/collaboration.component';
 import { DefinitionsComponent } from './definitions/definitions.component';
-import { HistoryComponent } from './history/history.component'
+import { HistoryComponent } from './history/history.component';
 import { IntroductionComponent } from './introduction/introduction.component';
 import { LaypersonComponent } from './layperson/layperson.component';
 import { MappingComponent } from './mapping/mapping.component';
-import { UsersComponent} from "./users/users.component";
-import {ContributorsComponent} from "./contributors/contributors.component";
-import {PublicationsComponent} from "./publications/publications.component";
-import {FundingComponent} from "./funding/funding.component";
+import { UsersComponent } from './users/users.component';
+import { ContributorsComponent } from './contributors/contributors.component';
+import { PublicationsComponent } from './publications/publications.component';
+import { FundingComponent } from './funding/funding.component';
 
 const helpRoutes: Routes = [
   { path: 'help',

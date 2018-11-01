@@ -20,10 +20,11 @@
 
  }
 
-.mat-column-dbDiseases{
+.mat-cell.mat-column-dbDiseases, .mat-cell.mat-column-dbGenes{
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
+  display: inline;
 }
 
  @media (min-width:767px) {

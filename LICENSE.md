@@ -1,4 +1,4 @@
-# SOFTWARE LICENSE AGREEMENT FOR NON-COMMERCIAL USE
+## SOFTWARE LICENSE AGREEMENT FOR NON-COMMERCIAL USE
 
 This Software License Agreement (this “Agreement”) is made between you (“You,” “Your,” or “Licensee”) and The Jackson Laboratory (“Licensor”). This Agreement grants to You a license to the Licensed Software subject to Your acceptance of all the terms and conditions contained in this Agreement. Please read the terms and conditions carefully. Your access and use of the Licensed Software shall be deemed your acceptance of this Agreement and the terms and conditions contained herein. If You do not agree to these terms, Licensor is unwilling to grant you the license contained in this Agreement and You should not access or use the Licensed Software.
 

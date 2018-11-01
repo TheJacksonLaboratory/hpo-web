@@ -1,17 +1,19 @@
+import {MatTableDataSource} from "@angular/material";
+
 export interface Gene {
     entrezGeneSymbol: string;
     entrezGeneId: number;
-    dbDiseases?: Disease[]
+    dbDiseases?: Disease[];
     hpoTermName?: Array<string>;
     hpoTermId?: object;
-    matchingString?:string;
+    matchingString?: string;
 }
 export interface Disease {
     db?: string;
     dbId?: string;
     diseaseId?: string;
     diseaseName?: string;
-    dbGenes?: Gene[]
+    dbGenes?: Gene[];
     dbObjectId?: string;
     dbName?: string;
     qualifier?: string;
@@ -33,9 +35,9 @@ export class EntrezGene {
     name?: string;
     maplocation?: string;
     summary?: string;
-    otheraliases?:string;
+    otheraliases?: string;
     aliases?: string[];
-    constructor(){
+    constructor() {
       this.otheraliases = '';
     }
 }
@@ -52,10 +54,10 @@ export interface Term {
     purl?: string;
     childrenCount?: number;
     synonym?: string;
-    matchingString?:string;
+    matchingString?: string;
 }
 
-export interface TermTree{
+export interface TermTree {
   parents: Term[];
   term: Term;
   children: Term[];
@@ -71,5 +73,11 @@ export interface Contributors {
   lastName: string;
   firstName: string;
   location: string;
+}
+
+export interface TermCategory {
+  catLabel: String;
+  annotationCount: number;
+  termSource: any;
 }
 

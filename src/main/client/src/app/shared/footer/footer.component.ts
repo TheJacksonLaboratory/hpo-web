@@ -6,12 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./footer.component.css']
 })
 export class FooterComponent implements OnInit {
-  title:String;
-  version:String;
+  title: string;
+  version: string;
 
   constructor() {
-    this.title = "Human Phenotype Ontology"
-    this.version =  "0.1"
+    this.title = 'Human Phenotype Ontology';
    }
 
   ngOnInit() {

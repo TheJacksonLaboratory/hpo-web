@@ -5,18 +5,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RoutingModule } from './app-routing.module';
 import { HttpClientModule} from '@angular/common/http';
 // Service
-import { SearchService } from "./shared/search/service/search.service";
+import { SearchService } from './shared/search/service/search.service';
 // Global Material Modules
-import { GlobalMaterialModules } from "./shared/modules/global.module";
-import { ExtrasModule } from "./shared/modules/extras.module";
+import { GlobalMaterialModules } from './shared/modules/global.module';
+import { ExtrasModule } from './shared/modules/extras.module';
 
-//Custom Shared Components
+// Custom Shared Components
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { NoPageFoundComponent } from './error/no-page-found.component';
-import {SearchModule} from "./shared/search/search.module";
-import {NewsService} from "./shared/news/news.service";
+import { SearchModule } from './shared/search/search.module';
+import { NewsService } from './shared/news/news.service';
 
 @NgModule({
   declarations: [

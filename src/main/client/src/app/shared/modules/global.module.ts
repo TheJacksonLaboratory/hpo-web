@@ -1,4 +1,4 @@
-import {NgModule} from "@angular/core";
+import { NgModule } from '@angular/core';
 
 // Material Modules
 import { MatMenuModule } from '@angular/material';
@@ -7,7 +7,7 @@ import { MatIconModule } from '@angular/material';
 import { MatToolbarModule} from '@angular/material';
 import { MatInputModule } from '@angular/material';
 import { MatCardModule } from '@angular/material';
-import { MatProgressBarModule }  from '@angular/material';
+import { MatProgressBarModule } from '@angular/material';
 import { MatTabsModule } from '@angular/material';
 import { MatTableModule } from '@angular/material';
 import { MatPaginatorModule } from '@angular/material';

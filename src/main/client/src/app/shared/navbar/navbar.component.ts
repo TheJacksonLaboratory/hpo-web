@@ -1,7 +1,7 @@
-import {Component, EventEmitter, HostListener, OnInit} from '@angular/core';
-import { NavigationEnd, Router} from "@angular/router";
-import { SearchService} from "../search/service/search.service";
-import {Disease, Gene, Term} from "../../browse/models/models";
+import {Component, EventEmitter, HostListener, OnInit, Output} from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
+import { SearchService} from '../search/service/search.service';
+import { Disease, Gene, Term } from '../../browse/models/models';
 import {
   trigger,
   state,
@@ -17,34 +17,33 @@ import {
     trigger('searchState', [
       state('inactive', style({
         'height': 0,
-        'overflow-y': "hidden"
+        'overflow-y': 'hidden'
       })),
       state('active',   style({
         'height': '*',
-        'overflow-y': "hidden"
+        'overflow-y': 'hidden'
       })),
       transition('inactive => active',
         animate('500ms ease-in-out')),
       transition('active => inactive',
         animate('400ms ease-in-out'))
       ])
-  ],
-  outputs:['navToggle']
+  ]
 })
 export class NavbarComponent implements OnInit {
-  title:string = "Human Phenotype Ontology";
-  ontologyVersion: string = "Ontology Version: 2018-10-09";
+  title = 'Human Phenotype Ontology';
+  ontologyVersion = 'Ontology Version: 2018-10-09';
 
-  query: string = "";
-  showSearch: boolean =  false;
-  navFilter: string = "all";
+  query = '';
+  showSearch =  false;
+  navFilter = 'all';
   terms: Term[] = [];
   diseases: Disease[] = [];
   genes: Gene[] = [];
-  searchstate: string = "inactive";
-  navToggle = new EventEmitter();
+  searchstate = 'inactive';
+  @Output() navToggle = new EventEmitter();
 
-  navOpen(){
+  navOpen() {
     this.navToggle.emit(true);
   }
   constructor(private router: Router, private searchService: SearchService ) {
@@ -53,15 +52,15 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
     this.router.events.subscribe((event) => {
-      if(event instanceof NavigationEnd){
-        if(this.router.url != "/"){
+      if (event instanceof NavigationEnd) {
+        if (this.router.url !== '/') {
           this.showSearch = true;
-        }else{
+        } else {
           this.showSearch = false;
           this.terms = [];
           this.diseases = [];
           this.genes = [];
-          this.query = "";
+          this.query = '';
         }
       }
     });
@@ -69,18 +68,17 @@ export class NavbarComponent implements OnInit {
 
   @HostListener('document:click', ['$event'])
   documentClick(event: Event): void {
-    if(this.searchstate == "active") {
-      this.searchstate = "inactive";
-      this.query = "";
+    if (this.searchstate === 'active') {
+      this.searchstate = 'inactive';
+      this.query = '';
     }
   }
 
   suggestContent(query: string): void {
-    if(query){
-      if(query.length >= 3 ){
+    if (query && query.length >= 3 ) {
         this.query = query;
         this.searchService.searchAll(query).subscribe((data) => {
-          this.searchstate = "active";
+          this.searchstate = 'active';
           this.terms = data.terms;
           this.diseases = data.diseases;
           this.genes = data.genes;
@@ -88,9 +86,8 @@ export class NavbarComponent implements OnInit {
           // TODO: Implement Better Error Handling
           console.log(error);
         });
-      }else{
-        this.searchstate = "inactive";
+      } else {
+        this.searchstate = 'inactive';
       }
-    }
   }
 }

@@ -1,10 +1,7 @@
 import {GeneService} from './gene.service';
 import {TestBed, inject} from '@angular/core/testing';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
-import {environment} from "../../../../environments/environment";
-import { Observable } from "rxjs/Observable";
-import 'rxjs/add/operator/map';
-
+import {environment} from '../../../../environments/environment';
 
 describe('GeneServiceSpec', () => {
 
@@ -12,9 +9,9 @@ describe('GeneServiceSpec', () => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
       providers: [GeneService]
-    })
+    });
   });
-  let query = "7157";
+  const query = '7157';
 
   it('should handle a searchGene service method ', inject([
     HttpTestingController, GeneService
@@ -36,20 +33,20 @@ describe('GeneServiceSpec', () => {
 
     request.flush(
 {
-      "gene":
+      'gene':
         {
-          "entrezGeneId": 7157, "entrezGeneSymbol": "TP53"
+          'entrezGeneId': 7157, 'entrezGeneSymbol': 'TP53'
         },
-      "termAssoc":
+      'termAssoc':
         [
-          {"ontologyId": "HP:0000505", "name": "Visual impairment"},
-          {"ontologyId": "HP:0002756", "name": "Pathologic fracture"},
-          {"ontologyId": "HP:0009919", "name": "Retinoblastoma"}
+          {'ontologyId': 'HP:0000505', 'name': 'Visual impairment'},
+          {'ontologyId': 'HP:0002756', 'name': 'Pathologic fracture'},
+          {'ontologyId': 'HP:0009919', 'name': 'Retinoblastoma'}
         ],
-      "diseaseAssoc": [
-        {"diseaseId": "OMIM:151623", "diseaseName": "#151623 LI-FRAUMENI SYNDROME 1", "dbId": "151623", "db": "OMIM"},
-        {"diseaseId": "OMIM:202300", "diseaseName": "ADRENOCORTICAL CARCINOMA, HEREDITARY", "dbId": "202300", "db": "OMIM"},
-        {"diseaseId": "ORPHA:2807", "diseaseName": "Papilloma of choroid plexus", "dbId": "2807", "db": "ORPHA"}
+      'diseaseAssoc': [
+        {'diseaseId': 'OMIM:151623', 'diseaseName': '#151623 LI-FRAUMENI SYNDROME 1', 'dbId': '151623', 'db': 'OMIM'},
+        {'diseaseId': 'OMIM:202300', 'diseaseName': 'ADRENOCORTICAL CARCINOMA, HEREDITARY', 'dbId': '202300', 'db': 'OMIM'},
+        {'diseaseId': 'ORPHA:2807', 'diseaseName': 'Papilloma of choroid plexus', 'dbId': '2807', 'db': 'ORPHA'}
       ]
       });
     httpMock.verify();
@@ -63,9 +60,9 @@ describe('GeneServiceSpec', () => {
     // using the mock below)
     geneService.searchGeneInfo(query).subscribe(geneResponse => {
       expect(geneResponse).toBeDefined();
-      expect(geneResponse.result[query].description).toEqual("tumor protein p53");
-      expect(geneResponse.result[query].name).toEqual("TP53");
-      expect(geneResponse.result[query].chromosome).toEqual("17");
+      expect(geneResponse.result[query].description).toEqual('tumor protein p53');
+      expect(geneResponse.result[query].name).toEqual('TP53');
+      expect(geneResponse.result[query].chromosome).toEqual('17');
     });
 
     // look up our request and access it
@@ -77,21 +74,21 @@ describe('GeneServiceSpec', () => {
     // triggering the test's subscribe method
     request.flush(
       {
-      "result": {
-          "7157":
+      'result': {
+          '7157':
             {
-              "uid": "7157",
-              "name": "TP53",
-              "description": "tumor protein p53",
-              "status": "",
-              "currentid": "",
-              "chromosome": "17",
-              "geneticsource": "genomic",
-              "maplocation": "17p13.1",
-              "otheraliases": "BCC7, LFS1, P53, TRP53",
-              "nomenclaturesymbol": "TP53",
-              "nomenclaturename": "tumor protein p53",
-              "nomenclaturestatus": "Official",
+              'uid': '7157',
+              'name': 'TP53',
+              'description': 'tumor protein p53',
+              'status': '',
+              'currentid': '',
+              'chromosome': '17',
+              'geneticsource': 'genomic',
+              'maplocation': '17p13.1',
+              'otheraliases': 'BCC7, LFS1, P53, TRP53',
+              'nomenclaturesymbol': 'TP53',
+              'nomenclaturename': 'tumor protein p53',
+              'nomenclaturestatus': 'Official',
           }
       }
     });

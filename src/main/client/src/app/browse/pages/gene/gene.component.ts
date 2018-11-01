@@ -10,25 +10,25 @@ import { environment } from '../../../../environments/environment';
 @Component({
   selector: 'app-gene',
   templateUrl: './gene.component.html',
-  styleUrls: ['./gene.component.css','../../../../../node_modules/ProtVista/style/main.css'],
+  styleUrls: ['./gene.component.css', '../../../../../node_modules/ProtVista/style/main.css'],
   encapsulation: ViewEncapsulation.None
 })
 export class GeneComponent implements OnInit {
   entrezGene: EntrezGene = new EntrezGene();
   gene: Gene;
   query: string;
-  uniprotId: string = "";
-  termAssoc: Term[]=[];
-  diseaseAssoc: Disease[]=[];
-  termDataSource : MatTableDataSource<Term>;
-  diseaseDataSource : MatTableDataSource<Disease>;
+  uniprotId = '';
+  termAssoc: Term[] = [];
+  diseaseAssoc: Disease[] = [];
+  termDataSource: MatTableDataSource<Term>;
+  diseaseDataSource: MatTableDataSource<Disease>;
   termColumns = ['ontologyId', 'name', 'definition'];
   diseaseColumns = ['diseaseId', 'diseaseName'];
-  isLoading: boolean = true;
-  uniProtWidgetInitilized =false;
+  isLoading = true;
+  uniProtWidgetInitilized = false;
   uniProtLoading = false;
   uniProtWidgetURL = environment.HPO_UNIPROT_WIDGET_URL;
-  mobile: boolean = false;
+  mobile = false;
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild('termPaginator') termPaginator: MatPaginator;
@@ -50,12 +50,12 @@ export class GeneComponent implements OnInit {
     });
   }
 
-  reloadGeneData(){
+  reloadGeneData() {
     this.geneService.searchGeneInfo(this.query)
       .subscribe((data) => {
         this.entrezGene = data.result[this.query];
-        this.entrezGene.aliases = this.entrezGene.otheraliases.split(",");
-        this.entrezGene.summary = this.entrezGene.summary ? this.entrezGene.summary: "No Entrez definition entry."
+        this.entrezGene.aliases = this.entrezGene.otheraliases.split(',');
+        this.entrezGene.summary = this.entrezGene.summary ? this.entrezGene.summary : 'No Entrez definition entry.';
       }, (error) => {
         // TODO: Implement Better Error Handling
         console.log(error);
@@ -77,19 +77,18 @@ export class GeneComponent implements OnInit {
         console.log(error);
       });
 
-    if(!this.mobile) {
+    if (!this.mobile) {
       this.uniprotWidgetInit();
     }
   }
 
   uniprotWidgetInit() {
-
     this.uniProtLoading = true;
     // Make service call for Mapping  EntrezId to UniProtKB Accession
     this.geneService.searchUniprot(this.query).subscribe((uniprotId) => {
       if (uniprotId != null) {
         // UniprotVista Viewer if identifier found.
-        let protVistaDiv = document.getElementsByClassName('ProtVistaReference');
+        const protVistaDiv = document.getElementsByClassName('ProtVistaReference');
         new ProtVista(
           {
             el: protVistaDiv[0],
@@ -99,22 +98,22 @@ export class GeneComponent implements OnInit {
           });
         this.uniprotId = uniprotId;
       } else {
-        this.uniprotId = "error";
+        this.uniprotId = 'error';
       }
       this.uniProtLoading = false;
     }, (error) => {
       // TODO: Implement Better Error Handling
       console.log(error);
     });
-    this.uniProtWidgetInitilized =true;
+    this.uniProtWidgetInitilized = true;
   }
 
   /**
    * Initialize tab components where needed
    */
   initTabs(event) {
-      //initialize uniProt widget
-      if (event.index == 0 && ! this.uniProtWidgetInitilized ){
+      // initialize uniProt widget
+      if (event.index === 0 && ! this.uniProtWidgetInitilized ){
         this.uniprotWidgetInit();
       }
   }

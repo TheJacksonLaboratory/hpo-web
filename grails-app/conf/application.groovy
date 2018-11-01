@@ -1,5 +1,11 @@
 import grails.util.Environment
 
+/* IF YOU WANT TO USE AN EXTERNAL ENVIRONMENT/DATABASE
+   Configure a file in the below directory given the environment
+   -development-config.groovy ( building, running the application)
+   -test-config.groovy (integrationTests, tests, ideally should be the same as development locally)
+   -production-config.groovy ( production level )
+ */
 String externalConfigDir = "~/.grails/hpo_web"
 grails.config.locations = [
     "${externalConfigDir}/${Environment.current.name}-config.groovy"

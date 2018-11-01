@@ -1,5 +1,5 @@
-import {NgModule} from "@angular/core";
-import { HighlightPipe } from "../pipes/highlight.pipe";
+import { NgModule } from '@angular/core';
+import { HighlightPipe } from '../pipes/highlight.pipe';
 
 @NgModule({
   imports: [],

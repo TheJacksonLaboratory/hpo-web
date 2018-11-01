@@ -39,7 +39,7 @@
                 </div>
                 <div *ngIf="treeData">
                   <div>
-                    <span class="item-title">{{termTitle}}</span>
+                    <span class="item-title">{{termTitle}}&nbsp;</span>
                     <span class="item-id" *ngIf="paramId != term.id">
                       <span class="crossout">{{paramId}}
                       </span><i class="material-icons obsolete-arrow">arrow_right_alt</i>
@@ -160,8 +160,8 @@
                           <ng-container matColumnDef="entrezGeneId">
                             <mat-header-cell *matHeaderCellDef> Gene Symbol </mat-header-cell>
                             <mat-cell *matCellDef="let row">
-                              {{row.entrezGeneSymbol}}
-                              <a routerLink="/browse/gene/{{row.entrezGeneId}}"> ({{row.entrezGeneId}})</a>
+                              {{row.entrezGeneSymbol}}&nbsp;
+                              <a routerLink="/browse/gene/{{row.entrezGeneId}}">[{{row.entrezGeneId}}]</a>
                             </mat-cell>
                           </ng-container>
                           <ng-container matColumnDef="dbDiseases">

@@ -8,7 +8,7 @@ class RestInterceptor {
       matchAll()
     }
     boolean before() {
-      if(!Environment.getCurrent().getName().equals("development")){
+      if(!System.properties['grails.console']){
         header( "X-Frame-Options", "DENY" )
         header( "X-Content-Type-Options", "nosniff" )
         header( "X-XSS-Protection", "1" )
