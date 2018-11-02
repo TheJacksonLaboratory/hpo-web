@@ -27,7 +27,7 @@ class HpoDiseaseDetailsSpec extends  GebReportingSpec {
           diseaseDetailsPage.geneTabElement.click()
         }
     then:
-    waitFor(25, 2) {
+    waitFor(35, 2) {
       diseaseDetailsPage.genePagingRangeLabelElement.text() == '1 - 4 of 4'
 
     }
