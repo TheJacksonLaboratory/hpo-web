@@ -50,7 +50,7 @@ class DbDiseaseAdminService {
         }
       }
 
-    log.info("Loading Diseases ${hpoDiseases.size()} -  duration: ${stopWatch} time: ${new Date()} ]")
+    log.info(" *** Loading Diseases ${hpoDiseases.size()} -  duration: ${stopWatch} time: ${new Date()} ] ***")
   }
   /**
    * loop over each line of the phenotype.tab file
@@ -62,6 +62,7 @@ class DbDiseaseAdminService {
    * </pre>
    */
   void joinDiseaseAndTermsWithSql() {
+    log.info("** Joining Diseases and Terms ***")
     StopWatch stopWatch = new StopWatch()
     stopWatch.start()
     Set<String> hpoIdWithPrefixNotFoundSet = [] as Set
@@ -70,7 +71,7 @@ class DbDiseaseAdminService {
     final Map<String, DbDisease> diseaseIdMap = domainUtilService.loadDbDiseases()
     final Map<String, DbTerm> hpoIdToDbTermMap = domainUtilService.loadHpoIdToDbTermMap()
     Multimap<TermId, TermId> termToDisease = hpoAssociationFactory.getTermToDisease()
-
+    Integer count = 0;
     Integer lastTermId = null
     Integer lastDiseaseId = null
       sqlUtilsService.sql.withBatch(500,INSERT_INTO_DB_TERM_DB_DISEASES ) { BatchingPreparedStatementWrapper ps ->
@@ -87,6 +88,7 @@ class DbDiseaseAdminService {
             if (dbTerm.id == lastTermId && dbDisease.id == lastDiseaseId) {
               log.info("DUPLICATE LINE: ${lastTermId} - ${lastDiseaseId}")
             } else {
+              count ++;
               ps.addBatch([
                 dbDisease.id as Object,
                 dbTerm.id as Object,
@@ -98,10 +100,8 @@ class DbDiseaseAdminService {
         }
       }
     log.info("hpoIdWithPrefixNotFoundSet.size() : ${hpoIdWithPrefixNotFoundSet.size()} ${new Date()}")
-    log.info("${hpoIdWithPrefixNotFoundSet}")
     log.info("entrezIdNotFoundSet.size() : ${diseaseIdNotFoundSet.size()} ${new Date()}")
-    log.info("${diseaseIdNotFoundSet}")
-    log.info("Joined Disease And Terms - duration: ${stopWatch} time: ${new Date()}")
+    log.info("**** Joined Disease And Terms - ${count} - duration: ${stopWatch} time: ${new Date()} ****")
   }
 
 
@@ -111,6 +111,7 @@ class DbDiseaseAdminService {
    *          7157                TP53                  HP:0002862
    */
   void joinDiseasesToGenesWithSql(){
+    log.info("*** Joining Diseases with Genes ***")
     StopWatch stopWatch = new StopWatch()
     stopWatch.start()
     Set<String> geneIdNotFoundSet = [] as Set
@@ -118,7 +119,7 @@ class DbDiseaseAdminService {
     final Map<String, DbDisease> diseaseIdMap = domainUtilService.loadDbDiseases()
     final Map<Integer, DbGene> geneIdMap = domainUtilService.loadDbGenes()
     Multimap<TermId, TermId> diseaseToGeneMap = hpoAssociation.getDiseaseToGeneIdMap();
-
+    Integer count = 0;
     sqlUtilsService.sql.withBatch(500, INSERT_INTO_DB_GENE_DB_DISEASES) { BatchingPreparedStatementWrapper ps ->
       for (Map.Entry<TermId, TermId> e : diseaseToGeneMap.entries()) {
         if(e.getValue().getId() != "-") {
@@ -132,6 +133,7 @@ class DbDiseaseAdminService {
           } else if (dbDisease == null) {
             diseaseIdNotFoundSet.add(disease)
           } else {
+            count++;
             ps.addBatch([
               dbGene.id as Object,
               dbDisease.id as Object
@@ -140,6 +142,8 @@ class DbDiseaseAdminService {
           }
         }
       }
+      log.info("Disease Gene Map Size: ${diseaseToGeneMap.size().toString()} ");
+      log.info("*** Disease Gene Map inserted: ${count} ****");
     }
   }
 }

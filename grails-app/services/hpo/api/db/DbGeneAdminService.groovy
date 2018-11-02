@@ -11,10 +11,8 @@ import org.apache.commons.lang.time.StopWatch
 import org.hibernate.Session
 import hpo.api.db.utils.DomainUtilService
 import org.monarchinitiative.phenol.formats.hpo.HpoGeneAnnotation
-import org.monarchinitiative.phenol.formats.hpo.HpoOntology
 import org.monarchinitiative.phenol.io.assoc.HpoAssociationParser
 import org.monarchinitiative.phenol.ontology.data.TermId
-import org.springframework.beans.factory.annotation.Autowired
 
 @Transactional
 @GrailsCompileStatic
@@ -35,6 +33,7 @@ class DbGeneAdminService {
   }
 
   void loadEntrezGenes() {
+    log.info("*** Loading Genes ***")
     StopWatch stopWatch = new StopWatch()
     stopWatch.start()
     Map<TermId, String> geneMap = hpoAssociation.getGeneIdToSymbolMap();
@@ -50,10 +49,11 @@ class DbGeneAdminService {
     }catch (Exception ex){
       log.error(ex.toString())
     }
-    log.info("Loading Genes (${geneMap.size()}) - duration: ${stopWatch} time: ${new Date()}")
+    log.info("*** Loading Genes Finished (${geneMap.size()}) - duration: ${stopWatch} time: ${new Date()} ***")
   }
 
   void joinGenesAndTermsWithSql() {
+    log.info("*** Joining Genes with Terms ***")
     StopWatch stopWatch = new StopWatch()
     stopWatch.start()
     Set<String> hpoIdWithPrefixNotFoundSet = [] as Set
@@ -87,11 +87,9 @@ class DbGeneAdminService {
       log.error(ex.toString())
     }
 
-    log.info("hpoIdWithPrefixNotFoundSet.size() : ${hpoIdWithPrefixNotFoundSet.size()} ${new Date()}")
-    log.info("${hpoIdWithPrefixNotFoundSet}")
+    log.info("hpoIdWithPrefixNotFoundSet.size() : ${hpoIdWithPrefixNotFoundSet.size()} Date: ${new Date()}")
     log.info("entrezIdNotFoundSet.size() : ${entrezIdNotFoundSet.size()} ${new Date()}")
-    log.info("${entrezIdNotFoundSet}")
-    log.info("Joined Genes And Terms - duration: ${stopWatch} time: ${new Date()}")
+    log.info("*** Joined Genes And Terms - duration: ${stopWatch} time: ${new Date()} ***")
   }
 }
 
