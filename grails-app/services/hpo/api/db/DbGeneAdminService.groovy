@@ -32,6 +32,15 @@ class DbGeneAdminService {
     sqlUtilsService.executeDelete("truncate table db_term_db_genes")
   }
 
+  void executeGeneSchemaLoad() throws Exception {
+    try{
+      loadEntrezGenes();
+      joinGenesAndTermsWithSql();
+    }catch (Exception e){
+      log.error(e.toString());
+    }
+  }
+
   void loadEntrezGenes() {
     log.info("*** Loading Genes ***")
     StopWatch stopWatch = new StopWatch()

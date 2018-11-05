@@ -38,6 +38,16 @@ class DbDiseaseAdminService {
     sqlUtilsService.executeDelete("truncate table db_gene_db_diseases")
   }
 
+  void executeDiseaseSchemaLoad(){
+    try{
+      loadDiseases();
+      joinDiseaseAndTermsWithSql();
+      joinDiseasesToGenesWithSql();
+    }catch (Exception e){
+      log.error(e.toString());
+    }
+  }
+
   void loadDiseases() throws SQLException {
     StopWatch stopWatch = new StopWatch()
     stopWatch.start()
