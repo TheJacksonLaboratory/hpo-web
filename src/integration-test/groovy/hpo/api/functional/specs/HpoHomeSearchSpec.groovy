@@ -1,9 +1,7 @@
 package hpo.api.functional.specs
 
-import geb.navigator.EmptyNavigator
 import geb.spock.GebReportingSpec
 import grails.testing.mixin.integration.Integration
-import grails.transaction.Rollback
 import hpo.api.functional.pages.HomePage
 
 /**
@@ -11,7 +9,6 @@ import hpo.api.functional.pages.HomePage
  */
 
 @Integration
-@Rollback
 class HpoHomeSearchSpec extends  GebReportingSpec {
 
   def setup() {

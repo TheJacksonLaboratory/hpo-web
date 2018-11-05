@@ -17,18 +17,21 @@ class LoadHpoDbCommand implements GrailsApplicationCommand {
       appCtx.dbDiseaseAdminService.truncateDiseaseTermJoinTable() // Truncate Disease Join Table
       appCtx.dbTermAdminService.truncatedDbTermPath()
       appCtx.dbTermAdminService.tuncateDbTermRelationship()
-      appCtx.dbTermAdminService.truncateDbTermSynonyms() 
+      appCtx.dbTermAdminService.truncateDbTermSynonyms()
       appCtx.dbTermAdminService.truncateDbTerms()       // Truncate Term Table
       appCtx.dbGeneAdminService.truncateDbGenes()			// Truncate Gene Table
       appCtx.dbDiseaseAdminService.truncateDbDiseases() 		     // Truncate Disease
       appCtx.sqlUtilsService.startForeignChecks()
 
-      appCtx.dbTermAdminService.loadDbTerms() 			// Load Terms Table
-      appCtx.dbGeneAdminService.loadEntrezGenes() 			// Load Genes Table
-      appCtx.dbGeneAdminService.joinGenesAndTermsWithSql() 	// Create Genes to Terms
-      appCtx.dbDiseaseAdminService.loadDiseases() 	 		     // Load Diseases
-      appCtx.dbDiseaseAdminService.joinDiseaseAndTermsWithSql()	 // Load Diseases To Term
-      appCtx.dbDiseaseAdminService.joinDiseasesToGenesWithSql()   // Load Disease To Gene*/
+      try{
+        appCtx.dbTermAdminService.loadDbTerms() 			// Load Terms Table
+        appCtx.dbGeneAdminService.executeGeneSchemaLoad() 			// Load Genes Table
+        appCtx.dbDiseaseAdminService.executeDiseaseSchemaLoad() 	 		     // Load Diseases
+      }catch(Exception e){
+        println(e.toString());
+        println("FAILED refreshing database duration: ${stopWatch} time: ${new Date()}")
+        return false
+      }
 
       println("finished refreshing database duration: ${stopWatch} time: ${new Date()}")
         return true

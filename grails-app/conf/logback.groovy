@@ -24,7 +24,8 @@ appender('STDOUT', ConsoleAppender) {
 //logger("org.hibernate.SQL",TRACE,['STDOUT'],false)
 //logger("org.hibernate.type.descriptor.sql.BasicBinder",TRACE,['STDOUT'],false)
 def targetDir = BuildSettings.TARGET_DIR
-if (Environment.isDevelopmentMode() && targetDir != null) {
+def env = System.getProperty("grails.env")
+if (env != "production"  && targetDir != null) {
   appender("FULL_STACKTRACE", FileAppender) {
     file = "${targetDir}/stacktrace.log"
     append = true

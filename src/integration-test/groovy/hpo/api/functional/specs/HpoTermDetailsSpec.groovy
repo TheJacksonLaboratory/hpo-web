@@ -2,12 +2,10 @@ package hpo.api.functional.specs
 
 import geb.spock.GebReportingSpec
 import grails.testing.mixin.integration.Integration
-import grails.transaction.Rollback
 import hpo.api.functional.pages.TermDetailsPage
 
 
 @Integration
-@Rollback
 class HpoTermDetailsSpec extends  GebReportingSpec {
   def setup() {
   }

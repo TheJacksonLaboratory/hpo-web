@@ -2,12 +2,10 @@ package hpo.api.functional.specs
 
 import geb.spock.GebReportingSpec
 import grails.testing.mixin.integration.Integration
-import grails.transaction.Rollback
 import hpo.api.functional.pages.GeneDetailsPage
 
 
 @Integration
-@Rollback
 class HpoGeneDetailsSpec extends  GebReportingSpec {
   def setup() {
   }
@@ -26,7 +24,7 @@ class HpoGeneDetailsSpec extends  GebReportingSpec {
           geneDetailsPage.diseaseTabElement.click()
         }
     then:
-    waitFor(25, 2) {
+    waitFor(35, 2) {
       geneDetailsPage.diseasePagingRangeLabelElement.text() == '1 - 6 of 6'
 
     }
