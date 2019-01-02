@@ -3,3 +3,10 @@
     width: 70%;
 }
 
+.faq .mat-expanded .mat-expansion-panel-header {
+  background-color: rgba(41,101,124,1)
+}
+
+.faq .mat-expanded .mat-expansion-panel-header-title{
+  color: white;
+}
