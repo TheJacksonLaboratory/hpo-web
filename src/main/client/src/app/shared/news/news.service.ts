@@ -50,7 +50,8 @@ export class NewsService {
       const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September',
         'October', 'November', 'December'];
       let monthIndex = d.getMonth();
-      let currentMonthYear = months[d.getMonth()] + ' ' +  d.getFullYear();
+      let year = d.getFullYear();
+      let currentMonthYear = months[d.getMonth()] + ' ' +  year;
       /* Loop until we have at least 3 items for the front page */
       while (news.length < 3) {
         /* check the hash for the current Month Year
@@ -65,8 +66,17 @@ export class NewsService {
             }
           }
         }
-        monthIndex = monthIndex === 1 ? 12 : monthIndex - 1;
-        currentMonthYear = months[monthIndex] + ' ' +  d.getFullYear();
+
+        if (monthIndex === 0) {
+          monthIndex = 11;
+          year = d.getFullYear() - 1;
+        } else if (d.getFullYear() - 2 === year) {
+          // Break out
+          break;
+        } else {
+          monthIndex = monthIndex - 1;
+        }
+        currentMonthYear = months[monthIndex] + ' ' + year;
       }
       return news;
     }
