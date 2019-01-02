@@ -22,7 +22,7 @@
                        [(selectedIndex)]="selectedTab">
 
           <!-- Term results tab -->
-          <mat-tab label="Term Results" [hidden]="!termDataSource">
+          <mat-tab label="Term Results [{{counts.term}}]" [hidden]="!termDataSource">
 
               <mat-progress-bar  *ngIf="isLoading" class="loading-result-details" color="primary" mode="buffer">
               </mat-progress-bar>
@@ -75,7 +75,7 @@
           </mat-tab>
 
           <!-- Disease results tab -->
-          <mat-tab label="Disease Results" [hidden]="!diseaseDataSource">
+          <mat-tab label="Disease Results [{{counts.disease}}]" [hidden]="!diseaseDataSource">
 
             <mat-progress-bar  *ngIf="isLoading" class="loading-result-details" color="primary" mode="buffer">
             </mat-progress-bar>
@@ -131,7 +131,7 @@
 
 
           <!-- Gene results tab -->
-          <mat-tab label="Gene Results">
+          <mat-tab label="Gene Results [{{counts.gene}}]">
             <mat-progress-bar  *ngIf="isLoading" class="loading-result-details" color="primary" mode="buffer">
             </mat-progress-bar>
             <div [hidden]="genes.length == 0">
