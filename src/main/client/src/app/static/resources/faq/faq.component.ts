@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ViewportScroller } from '@angular/common';
 
 @Component({
   selector: 'app-faq',
   templateUrl: './faq.component.html',
-  styleUrls: ['./faq.component.css']
+  styleUrls: ['./faq.component.scss']
 })
 export class FaqComponent implements OnInit {
 
@@ -21,7 +20,7 @@ export class FaqComponent implements OnInit {
     8: 'association-rules'
   };
 
-  constructor(private route: ActivatedRoute, private scroller: ViewportScroller) {}
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
