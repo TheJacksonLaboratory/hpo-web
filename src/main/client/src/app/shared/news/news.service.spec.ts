@@ -5,7 +5,7 @@ import {HttpClientTestingModule, HttpTestingController} from "@angular/common/ht
 describe('NewsService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports:[HttpClientTestingModule],
+      imports: [HttpClientTestingModule],
       providers: [NewsService]
     });
   });
@@ -16,30 +16,31 @@ describe('NewsService', () => {
 
   it('should return unique dates and current date items', inject([
     HttpTestingController, NewsService
-  ], (httpMock,  newsService: NewsService) => {
-    newsService["allNews"] = {
-      "April 2018": [
+  ], (httpMock, newsService: NewsService) => {
+    newsService['allNews'] = {
+      'April 2018': [
         {
-          "title": "Paper on novel annotation model",
-          "date": "April 9, 2018",
-          "body": "fake test body1",
-          "teaserTitle": "Novel annotation model"
+          'title': 'Paper on novel annotation model',
+          'date': 'April 9, 2018',
+          'body': 'fake test body1',
+          'teaserTitle': 'Novel annotation model'
         },
         {
-          "title": "Nature Genetics Paper on layperson vocabulary",
-          "date": "April 9, 2018",
-          "body": "fake test body2",
-          "teaserTitle": "Layperson vocabulary: Nature Genetics"
+          'title': 'Nature Genetics Paper on layperson vocabulary',
+          'date': 'April 9, 2018',
+          'body': 'fake test body2',
+          'teaserTitle': 'Layperson vocabulary: Nature Genetics'
         }
       ],
-      "March 2018": [
+      'March 2018': [
         {
-          "title": "March 2018 release",
-          "date": "March 9, 2018",
-          "body": "fake test body3",
-          "teaserTitle": "March 2018 Release"
+          'title': 'March 2018 release',
+          'date': 'March 9, 2018',
+          'body': 'fake test body3',
+          'teaserTitle': 'March 2018 Release'
         }
-      ]};
+      ]
+    };
 
     // call our service, and once the results come in
     // expect them to have the proper data (filled in
@@ -47,15 +48,58 @@ describe('NewsService', () => {
     newsService.getUniqueDates().subscribe(dates => {
       expect(dates).toBeDefined();
       expect(dates.length).toBe(2);
-      expect(dates[0]).toEqual("April 2018");
-      expect(dates[1]).toEqual("March 2018");
+      expect(dates[0]).toEqual('April 2018');
+      expect(dates[1]).toEqual('March 2018');
     });
 
-    newsService.getNewsByDate("April 2018").subscribe(dates => {
+    newsService.getNewsByDate('April 2018').subscribe(dates => {
       expect(dates.length).toBe(2);
-      expect(dates[0].body).toEqual("fake test body1");
-      expect(dates[1].body).toEqual("fake test body2");
+      expect(dates[0].body).toEqual('fake test body1');
+      expect(dates[1].body).toEqual('fake test body2');
+    });
+  }));
 
-    })
+  it('should get 3 most recent news items by date', inject([
+    HttpTestingController, NewsService
+  ], (httpMock, newsService: NewsService) => {
+    newsService['allNews'] = {
+      'April 2018': [
+        {
+          'title': 'Paper on novel annotation model',
+          'date': 'April 9, 2018',
+          'body': 'fake test body1',
+          'teaserTitle': 'Novel annotation model'
+        },
+        {
+          'title': 'Nature Genetics Paper on layperson vocabulary',
+          'date': 'April 10, 2018',
+          'body': 'fake test body2',
+          'teaserTitle': 'Layperson vocabulary: Nature Genetics'
+        }
+      ],
+      'March 2018': [
+        {
+          'title': 'March 2018 release',
+          'date': 'March 9, 2018',
+          'body': 'fake test body3',
+          'teaserTitle': 'March 2018 Release'
+        }
+      ],
+      'December 2019': [
+        {
+          'title': 'December 2019 release',
+          'date': 'December 17, 2019',
+          'body': 'fake test body3',
+          'teaserTitle': 'December 2019 Release'
+        }
+      ]
+
+    };
+    const teaserNews = newsService.getTeaserNews();
+    expect(teaserNews).toBeDefined();
+    expect(teaserNews.length).toBe(3);
+    expect(teaserNews[0].date).toEqual('December 17, 2019');
+    expect(teaserNews[1].date).toEqual('April 10, 2018');
+    expect(teaserNews[2].date).toEqual('April 9, 2018');
   }));
 });
