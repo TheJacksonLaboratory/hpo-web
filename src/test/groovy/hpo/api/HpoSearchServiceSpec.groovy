@@ -197,6 +197,33 @@ class HpoSearchServiceSpec extends Specification implements ServiceUnitTest<HpoS
 
     }
 
+
+    void "test searchAll disease by id with #desc"(){
+      setup:
+      new DbDisease(db: 'OMIM', dbId: '1', diseaseName: 'Cat eye syndrome', diseaseId: 'OMIM:1').save()
+      new DbDisease(db: 'OMIM', dbId: '2', diseaseName: 'Eye syndrome', diseaseId: 'OMIM:2').save()
+      new DbDisease(db: 'OMIM', dbId: '3', diseaseName: 'A syndrome', diseaseId: 'OMIM:3').save()
+      new DbDisease(db: 'OMIM', dbId: '10', diseaseName: 'A syndrome 10', diseaseId: 'OMIM:10').save()
+      new DbDisease(db: 'OMIM', dbId: '1093', diseaseName: 'A syndrome 1093', diseaseId: 'OMIM:1093').save()
+
+      when:
+      query = service.trimAndSplit(query)
+      final Map resultMap = service.searchDiseasesAll(query, 0, 10)
+
+      then:
+      resultMap.data*.diseaseId.containsAll(expected)
+      resultMap.data*.diseaseId.size() == expected.size()
+
+      where:
+      query       | expected                            | desc
+      "OMIM:1"    | ["OMIM:1", "OMIM:10", "OMIM:1093"]  | "correct notation"
+      "OMIM_1"    | ["OMIM:1", "OMIM:10", "OMIM:1093"]  | "incorrect underscore notation"
+      "MIM:2"     | ["OMIM:2"]                          | "short incorrect notation"
+      "MIM_2"     | ["OMIM:2"]                          | "short incorrect underscore notation"
+      "2"         | ["OMIM:2"]                          | "just the number id"
+      "10"        | ["OMIM:10", "OMIM:1093"]            | "partial number id"
+    }
+
     void "test searchAll genes #desc"() {
 
       setup:
