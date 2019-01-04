@@ -46,10 +46,12 @@ export class SearchResultsComponent {
   setSelectedTab() {
     // Filter should have precedence
     // then if the filter is as is default to the most counts
-    this.determineTab(this.navFilter);
-    const maxTab = Object.keys(this.counts).reduce((a, b) => this.counts[a] > this.counts[b] ? a : b);
-    this.determineTab(maxTab);
-
+    if (this.navFilter === 'all') {
+      const maxTab = Object.keys(this.counts).reduce((a, b) => this.counts[a] > this.counts[b] ? a : b);
+      this.determineTab(maxTab);
+    } else {
+      this.determineTab(this.navFilter);
+    }
   }
 
   determineTab(filterItem: string) {
