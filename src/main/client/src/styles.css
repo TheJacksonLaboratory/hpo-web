@@ -389,3 +389,7 @@ hr.underline-hr {
 .search-highlight{
   font-weight: 800;
 }
+
+.mat-raised-button{
+  border-radius: 0 !important;
+}

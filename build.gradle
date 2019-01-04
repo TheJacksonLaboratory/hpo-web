@@ -83,6 +83,9 @@ dependencies {
   compile "org.grails.plugins:views-json"
   compile "org.grails.plugins:views-json-templates"
 
+  compile 'builders.dsl:spreadsheet-builder-poi:1.0.5'
+  compile 'builders.dsl:spreadsheet-builder-groovy:1.0.5'
+
   console "org.grails:grails-console"
 
   runtime 'org.grails.plugins:grails-console:2.1.1'

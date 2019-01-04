@@ -16,6 +16,7 @@ import { DiseaseComponent } from './pages/disease/disease.component';
 import { GeneComponent } from './pages/gene/gene.component';
 import { ExtrasModule } from '../shared/modules/extras.module';
 import { SearchResultsComponent } from './pages/search-results/search-results.component';
+import { DialogExcelDownloadComponent } from '../shared/dialog-excel-download/dialog-excel-download.component';
 
 
 @NgModule({
@@ -30,6 +31,9 @@ import { SearchResultsComponent } from './pages/search-results/search-results.co
   providers: [ SearchService, TermService, GeneService, DiseaseService ],
   declarations: [ TermComponent, DiseaseComponent,
     GeneComponent,
-    SearchResultsComponent ]
+    SearchResultsComponent, DialogExcelDownloadComponent ],
+  entryComponents: [
+    DialogExcelDownloadComponent
+  ],
 })
 export class BrowserHPOModule { }

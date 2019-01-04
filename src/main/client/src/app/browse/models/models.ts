@@ -76,8 +76,12 @@ export interface Contributors {
 }
 
 export interface TermCategory {
-  catLabel: String;
+  catLabel: string;
   annotationCount: number;
   termSource: any;
 }
 
+export interface DialogData {
+  association: string;
+  term: string;
+}

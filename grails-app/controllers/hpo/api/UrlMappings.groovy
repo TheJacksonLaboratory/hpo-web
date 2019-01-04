@@ -45,9 +45,14 @@ class UrlMappings {
     "/api/hpo/search"(controller: 'hpoSearch', action: 'searchAll')
     "/api/hpo/search/gene"(controller: 'hpoGeneDetails', action: 'searchGene')
     "/api/hpo/search/disease"(controller: 'hpoDiseaseDetails', action: 'searchDisease')
+
     "/api/hpo/term/$id"(controller: 'hpoTerm', action: 'searchTerm')
     "/api/hpo/term/$id/genes"(controller: 'hpoTerm', action: 'searchGenesByTerm')
     "/api/hpo/term/$id/diseases"(controller: 'hpoTerm', action: 'searchDiseasesByTerm')
+
+    "/api/hpo/download/term"(controller: 'hpoExcel', action: 'downloadTermAnnotation')
+    "/api/hpo/download/disease"(controller: 'hpoExcel', action: 'downloadDiseaseAnnotation')
+    "/api/hpo/download/gene"(controller: 'hpoExcel', action: 'downloadTermAnnotation')
 
     "500"(view: '/error')
     "404"(view: '/notFound')

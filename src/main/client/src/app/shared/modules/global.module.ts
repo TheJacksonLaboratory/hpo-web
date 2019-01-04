@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 
 // Material Modules
-import { MatMenuModule } from '@angular/material';
+import {MatDialogModule, MatMenuModule} from '@angular/material';
 import { MatButtonModule } from '@angular/material';
 import { MatIconModule } from '@angular/material';
 import { MatToolbarModule} from '@angular/material';
@@ -36,7 +36,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     MatExpansionModule,
     MatSelectModule,
     MatDividerModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatDialogModule
   ],
   exports: [MatButtonModule,
     MatMenuModule,
@@ -54,7 +55,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     MatExpansionModule,
     MatSelectModule,
     MatDividerModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatDialogModule
   ],
 })
 export class GlobalMaterialModules { }

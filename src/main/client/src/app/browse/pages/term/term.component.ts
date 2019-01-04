@@ -1,11 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params} from '@angular/router';
-import { MatSort } from '@angular/material';
+import {MatDialog, MatSort} from '@angular/material';
 import { MatTableDataSource, MatPaginator } from '@angular/material';
 import { forkJoin as observableForkJoin } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { TermService } from '../../services/term/term.service';
 import { Term, Gene, Disease, TermTree} from '../../models/models';
+import {DialogExcelDownloadComponent} from '../../../shared/dialog-excel-download/dialog-excel-download.component';
 
 
 @Component({
@@ -41,7 +42,7 @@ export class TermComponent implements OnInit {
   @ViewChild('genePaginator') genePaginator: MatPaginator;
 
   @ViewChild(MatSort) sort: MatSort;
-  constructor(private route: ActivatedRoute, private termService: TermService) {
+  constructor(private route: ActivatedRoute, private termService: TermService, public dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -171,6 +172,17 @@ export class TermComponent implements OnInit {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
     this.geneSource.filter = filterValue;
+  }
+
+  downloadDialog(){
+    const dialogRef = this.dialog.open(DialogExcelDownloadComponent, {
+      width: '400px',
+      data: {term: this.term.id, association: ''}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.termService.downloadAssociations(this.term.id, result);
+    });
   }
 }
 
