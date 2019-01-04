@@ -44,33 +44,18 @@ export class NewsService {
   }
 
   getTeaserNews(): News[] {
-    if (this.allNews) {
-      const news = [];
-      const d = new Date();
-      const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September',
-        'October', 'November', 'December'];
-      let monthIndex = d.getMonth();
-      let currentMonthYear = months[d.getMonth()] + ' ' +  d.getFullYear();
-      /* Loop until we have at least 3 items for the front page */
-      while (news.length < 3) {
-        /* check the hash for the current Month Year
-        *  If not go back a month.
-        *  otherwise add that months news to the array.
-        * */
-        if (this.allNews[currentMonthYear]) {
-          for (const item of this.allNews[currentMonthYear]) {
-            item.monthYear = currentMonthYear;
-            if (news.length < 3) {
-              news.push(item);
-            }
-          }
-        }
-        monthIndex = monthIndex === 1 ? 12 : monthIndex - 1;
-        currentMonthYear = months[monthIndex] + ' ' +  d.getFullYear();
-      }
-      return news;
-    }
+   if (this.allNews) {
+     let news = Object.keys(this.allNews).map(key => this.allNews[key]);
+     news = [].concat.apply([], news);
+     news.sort((a, b) => {
+       const a1 = new Date(a.date);
+       const b1 = new Date(b.date);
+       return a1 > b1 ? -1 : a1 < b1 ? 1 : 0;
+     });
+     return news.slice(0, 3);
+   }
   }
+
   /* Get the news items from the api */
   setAllNews(): void {
     this.http.get(environment.HPO_NEWS_JSON_URL).subscribe((data) => {
