@@ -1,6 +1,7 @@
 import { TestBed, inject } from '@angular/core/testing';
 import { NewsService } from './news.service';
-import {HttpClientTestingModule, HttpTestingController} from "@angular/common/http/testing";
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { allMockNews, subMockNews } from "./news.mock";
 
 describe('NewsService', () => {
   beforeEach(() => {
@@ -17,30 +18,7 @@ describe('NewsService', () => {
   it('should return unique dates and current date items', inject([
     HttpTestingController, NewsService
   ], (httpMock, newsService: NewsService) => {
-    newsService['allNews'] = {
-      'April 2018': [
-        {
-          'title': 'Paper on novel annotation model',
-          'date': 'April 9, 2018',
-          'body': 'fake test body1',
-          'teaserTitle': 'Novel annotation model'
-        },
-        {
-          'title': 'Nature Genetics Paper on layperson vocabulary',
-          'date': 'April 9, 2018',
-          'body': 'fake test body2',
-          'teaserTitle': 'Layperson vocabulary: Nature Genetics'
-        }
-      ],
-      'March 2018': [
-        {
-          'title': 'March 2018 release',
-          'date': 'March 9, 2018',
-          'body': 'fake test body3',
-          'teaserTitle': 'March 2018 Release'
-        }
-      ]
-    };
+    newsService['allNews'] = subMockNews;
 
     // call our service, and once the results come in
     // expect them to have the proper data (filled in
@@ -62,39 +40,7 @@ describe('NewsService', () => {
   it('should get 3 most recent news items by date', inject([
     HttpTestingController, NewsService
   ], (httpMock, newsService: NewsService) => {
-    newsService['allNews'] = {
-      'April 2018': [
-        {
-          'title': 'Paper on novel annotation model',
-          'date': 'April 9, 2018',
-          'body': 'fake test body1',
-          'teaserTitle': 'Novel annotation model'
-        },
-        {
-          'title': 'Nature Genetics Paper on layperson vocabulary',
-          'date': 'April 10, 2018',
-          'body': 'fake test body2',
-          'teaserTitle': 'Layperson vocabulary: Nature Genetics'
-        }
-      ],
-      'March 2018': [
-        {
-          'title': 'March 2018 release',
-          'date': 'March 9, 2018',
-          'body': 'fake test body3',
-          'teaserTitle': 'March 2018 Release'
-        }
-      ],
-      'December 2019': [
-        {
-          'title': 'December 2019 release',
-          'date': 'December 17, 2019',
-          'body': 'fake test body3',
-          'teaserTitle': 'December 2019 Release'
-        }
-      ]
-
-    };
+    newsService['allNews'] = allMockNews;
     const teaserNews = newsService.getTeaserNews();
     expect(teaserNews).toBeDefined();
     expect(teaserNews.length).toBe(3);
