@@ -67,7 +67,9 @@
                     </mat-list-item>
                     <mat-divider></mat-divider>
                   </mat-list>
-                  <button class="mat-btn mat-raised-button download-annotations" (click)="downloadDialog()">Export Associations</button>
+                  <button class="mat-btn mat-raised-button download-annotations"
+                          [disabled]="this.diseaseAssocCount == 0 && this.geneAssocCount == 0"
+                          (click)="downloadDialog()">Export Associations</button>
                 </div>
               </mat-card-content>
             </mat-card>
@@ -188,13 +190,12 @@
                         </div>
                       </div>
                   </div>
-                  <div class="container center" [hidden]="geneAssocCount != 0">
-                    <h4>No gene associations found for <strong>{{term.id}}</strong></h4>
-                  </div>
+                </div>
+                <div class="container center" [hidden]="geneAssocCount != 0">
+                  <h4>No gene associations found for <strong>{{term.id}}</strong></h4>
                 </div>
               </mat-tab>
 
-              <mat-tab label="Download"></mat-tab>
             </mat-tab-group>
           </div>
         </div>

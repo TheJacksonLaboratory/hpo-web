@@ -2,9 +2,11 @@
 <div class="row" mat-dialog-content>
   <p>Which association would you like to download?</p>
   <div class="col-lg-6">
-    <button class="dialog-selection" mat-raised-button [mat-dialog-close]="'diseases'">Diseases</button>
+    <button class="dialog-selection" [disabled]="data.counts.diseases == 0"
+            mat-raised-button [mat-dialog-close]="'diseases'">Diseases</button>
   </div>
   <div class="col-lg-6">
-    <button class="dialog-selection" mat-raised-button [mat-dialog-close]="'genes'">Genes</button>
+    <button class="dialog-selection" [disabled]="data.counts.genes == 0"
+            mat-raised-button [mat-dialog-close]="'genes'">Genes</button>
   </div>
 </div>

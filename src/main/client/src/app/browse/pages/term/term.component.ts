@@ -1,12 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params} from '@angular/router';
-import {MatDialog, MatSort} from '@angular/material';
+import { MatDialog, MatSort } from '@angular/material';
 import { MatTableDataSource, MatPaginator } from '@angular/material';
 import { forkJoin as observableForkJoin } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { TermService } from '../../services/term/term.service';
-import { Term, Gene, Disease, TermTree} from '../../models/models';
-import {DialogExcelDownloadComponent} from '../../../shared/dialog-excel-download/dialog-excel-download.component';
+import { Term, Gene, Disease, TermTree } from '../../models/models';
+import { DialogExcelDownloadComponent } from '../../../shared/dialog-excel-download/dialog-excel-download.component';
 
 
 @Component({
@@ -174,14 +174,17 @@ export class TermComponent implements OnInit {
     this.geneSource.filter = filterValue;
   }
 
-  downloadDialog(){
+  downloadDialog() {
     const dialogRef = this.dialog.open(DialogExcelDownloadComponent, {
       width: '400px',
-      data: {term: this.term.id, association: ''}
+      data: {term: this.term.id, association: '',
+        counts: {genes: this.geneAssocCount, diseases: this.diseaseAssocCount}}
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.termService.downloadAssociations(this.term.id, result);
+      if (result) {
+        this.termService.downloadAssociations(this.term.id, result);
+      }
     });
   }
 }
