@@ -7,11 +7,7 @@
         <!-- Disease Banner -->
         <mat-card class="item-summary mat-elevation-z6">
           <mat-card-content>
-            <span class="item-title">Search Results</span>
-            <hr class="underline-hr">
-            <mat-list>
-              <mat-list-item><strong>Search Term:&nbsp;</strong> {{query}}</mat-list-item>
-            </mat-list>
+            <span class="item-title">Search Results for "{{query}}"</span>
           </mat-card-content>
         </mat-card>
 
@@ -22,7 +18,7 @@
                        [(selectedIndex)]="selectedTab">
 
           <!-- Term results tab -->
-          <mat-tab label="Term Results" [hidden]="!termDataSource">
+          <mat-tab label="Term Results [{{counts.term}}]" [hidden]="!termDataSource">
 
               <mat-progress-bar  *ngIf="isLoading" class="loading-result-details" color="primary" mode="buffer">
               </mat-progress-bar>
@@ -75,7 +71,7 @@
           </mat-tab>
 
           <!-- Disease results tab -->
-          <mat-tab label="Disease Results" [hidden]="!diseaseDataSource">
+          <mat-tab label="Disease Results [{{counts.disease}}]" [hidden]="!diseaseDataSource">
 
             <mat-progress-bar  *ngIf="isLoading" class="loading-result-details" color="primary" mode="buffer">
             </mat-progress-bar>
@@ -131,7 +127,7 @@
 
 
           <!-- Gene results tab -->
-          <mat-tab label="Gene Results">
+          <mat-tab label="Gene Results [{{counts.gene}}]">
             <mat-progress-bar  *ngIf="isLoading" class="loading-result-details" color="primary" mode="buffer">
             </mat-progress-bar>
             <div [hidden]="genes.length == 0">

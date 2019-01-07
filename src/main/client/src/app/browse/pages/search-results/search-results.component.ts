@@ -18,6 +18,7 @@ export class SearchResultsComponent {
   isLoading = true;
   navFilter = 'term';
   selectedTab = 0;
+  counts = {term: 0, disease: 0, gene: 0};
 
   termDisplayedColumns = ['ontologyId', 'name', 'matching_string', 'childrenCount'];
   termDataSource: MatTableDataSource<Term>;
@@ -39,16 +40,26 @@ export class SearchResultsComponent {
       this.navFilter = params['navFilter'];
 
       this.reloadResultsData();
-      this.setSelectedTab();
     });
   }
 
   setSelectedTab() {
-    if (this.navFilter ===  'disease') {
+    // Filter should have precedence
+    // then if the filter is as is default to the most counts
+    if (this.navFilter === 'all') {
+      const maxTab = Object.keys(this.counts).reduce((a, b) => this.counts[a] > this.counts[b] ? a : b);
+      this.determineTab(maxTab);
+    } else {
+      this.determineTab(this.navFilter);
+    }
+  }
+
+  determineTab(filterItem: string) {
+    if (filterItem ===  'disease') {
       this.selectedTab = 1;
-    } else if (this.navFilter === 'gene') {
+    } else if (filterItem === 'gene') {
       this.selectedTab = 2;
-    } else if (this.navFilter === 'term' || this.navFilter === 'all') {
+    } else if (filterItem === 'term') {
       this.selectedTab = 0;
     }
   }
@@ -60,6 +71,10 @@ export class SearchResultsComponent {
       this.diseases = this.diseaseMatchingStringBuilder(data.diseases);
       this.genes = this.genesMatchingStringBuilder(data.genes);
 
+      this.counts['term'] = data.termsTotalCount;
+      this.counts['disease'] = data.diseasesTotalCount;
+      this.counts['gene'] = data.genesTotalCount;
+
       this.termDataSource = new MatTableDataSource(this.terms);
       this.diseaseDataSource = new MatTableDataSource(this.diseases);
       this.geneDataSource = new MatTableDataSource(this.genes);
@@ -69,6 +84,7 @@ export class SearchResultsComponent {
       this.geneDataSource.paginator = this.genePaginator;
 
       this.isLoading = false;
+      this.setSelectedTab();
 
     }, (error) => {
       // TODO: Implement Better Error Handling
