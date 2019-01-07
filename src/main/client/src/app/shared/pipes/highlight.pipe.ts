@@ -32,7 +32,7 @@ export class HighlightPipe implements PipeTransform {
       }
       response = response.replace(/@/g, '<strong>');
       response = response.replace(/#/g, '</strong>');
-      return response;
+      return '<span>' + response + '</span>';
     }
   }
 }
