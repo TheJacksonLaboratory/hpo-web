@@ -52,7 +52,7 @@ class UrlMappings {
 
     "/api/hpo/download/term"(controller: 'hpoExcel', action: 'downloadTermAnnotation')
     "/api/hpo/download/disease"(controller: 'hpoExcel', action: 'downloadDiseaseAnnotation')
-    "/api/hpo/download/gene"(controller: 'hpoExcel', action: 'downloadTermAnnotation')
+    "/api/hpo/download/gene"(controller: 'hpoExcel', action: 'downloadGeneAnnotation')
 
     "500"(view: '/error')
     "404"(view: '/notFound')

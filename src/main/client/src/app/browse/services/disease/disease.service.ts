@@ -22,4 +22,9 @@ export class DiseaseService {
       return this.http
         .get(environment.HPO_MONARCH_DISEASE_URL + query, this.options);
     }
+
+  downloadAssociations(disease: string, association: string): void {
+    window.open(environment.HPO_API_DOWNLOAD_EXCEL_DISEASE_URL + '?identifier=' + disease + '&association=' + association,
+      '_blank');
+  }
 }

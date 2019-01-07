@@ -9,10 +9,22 @@ import {DialogData} from '../../browse/models/models';
 })
 export class DialogExcelDownloadComponent implements OnInit {
 
+  buttonText = {first: '', second: ''};
+
   constructor(public dialogRef: MatDialogRef<DialogExcelDownloadComponent>,
               @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
 
   ngOnInit() {
+    if (this.data.type === 'term') {
+      this.buttonText.first = 'Diseases';
+      this.buttonText.second = 'Genes';
+    } else if (this.data.type === 'disease') {
+      this.buttonText.first = 'Terms';
+      this.buttonText.second = 'Genes';
+    } else {
+      this.buttonText.first = 'Diseases';
+      this.buttonText.second = 'Terms';
+    }
   }
 
   onNoClick(): void {

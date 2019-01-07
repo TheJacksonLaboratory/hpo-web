@@ -3,10 +3,10 @@
   <p>Which association would you like to download?</p>
   <div class="col-lg-6">
     <button class="dialog-selection" [disabled]="data.counts.diseases == 0"
-            mat-raised-button [mat-dialog-close]="'diseases'">Diseases</button>
+            mat-raised-button [mat-dialog-close]="buttonText.first.toLowerCase()">{{buttonText.first}}</button>
   </div>
   <div class="col-lg-6">
     <button class="dialog-selection" [disabled]="data.counts.genes == 0"
-            mat-raised-button [mat-dialog-close]="'genes'">Genes</button>
+            mat-raised-button [mat-dialog-close]="buttonText.second.toLowerCase()">{{buttonText.second}}</button>
   </div>
 </div>

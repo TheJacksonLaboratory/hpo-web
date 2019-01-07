@@ -17,8 +17,6 @@
                 <mat-card-content>
                   <h3 class="card-title">Summary</h3>
                   <hr class="underline-hr">
-                  <p><strong>Entrez ID</strong>:&nbsp;{{entrezGene.uid}}</p>
-                  <p><strong>Gene Name</strong>:&nbsp;{{entrezGene.name}}</p>
                   <p><strong>Gene Location</strong>:&nbsp;{{entrezGene.maplocation}}</p>
                   <p><strong>Definition</strong><br>
                     <i>{{entrezGene.summary}}</i>
@@ -36,10 +34,15 @@
                     <hr class="underline-hr">
                     <mat-list>
                       <mat-list-item>
-                        <strong>Synonyms:&nbsp;</strong>
+                        <span *ngIf="entrezGene.aliases != ''">
+                          <strong>Synonyms:&nbsp;</strong>
                         <i *ngFor="let item of entrezGene.aliases; let isLast=last">{{item}}{{isLast ? '' : ', '}}</i>
+                        </span>
                       </mat-list-item>
-                    </mat-list>
+                    </mat-list><br>
+                    <button class="mat-btn mat-raised-button download-annotations"
+                            [disabled]="this.termAssoc.length == 0 && this.diseaseAssoc.length == 0"
+                            (click)="downloadDialog()">Export Associations</button>
                   </mat-card-content>
               </mat-card>
 

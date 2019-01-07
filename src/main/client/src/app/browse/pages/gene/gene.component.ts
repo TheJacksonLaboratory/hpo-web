@@ -2,10 +2,11 @@ import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import { GeneService } from '../../services/gene/gene.service';
 import { Gene, EntrezGene, Term, Disease } from '../../models/models';
 import { ActivatedRoute } from '@angular/router';
-import { MatSort } from '@angular/material';
+import { MatDialog, MatSort} from '@angular/material';
 import { MatTableDataSource, MatPaginator} from '@angular/material';
 import * as ProtVista from 'ProtVista';
 import { environment } from '../../../../environments/environment';
+import {DialogExcelDownloadComponent} from '../../../shared/dialog-excel-download/dialog-excel-download.component';
 
 @Component({
   selector: 'app-gene',
@@ -34,7 +35,7 @@ export class GeneComponent implements OnInit {
   @ViewChild('termPaginator') termPaginator: MatPaginator;
   @ViewChild('diseasePaginator') diseasePaginator: MatPaginator;
 
-  constructor(private route: ActivatedRoute, private geneService: GeneService) {
+  constructor(private route: ActivatedRoute, private geneService: GeneService,  public dialog: MatDialog) {
 
   }
 
@@ -62,6 +63,7 @@ export class GeneComponent implements OnInit {
       });
     this.geneService.searchGene(this.query)
       .subscribe((data) => {
+        this.gene = data.gene;
         this.termAssoc = data.termAssoc;
         this.diseaseAssoc = data.diseaseAssoc;
 
@@ -128,6 +130,20 @@ export class GeneComponent implements OnInit {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
     this.diseaseDataSource.filter = filterValue;
+  }
+
+  downloadDialog() {
+    const dialogRef = this.dialog.open(DialogExcelDownloadComponent, {
+      width: '400px',
+      data: {term: this.gene.entrezGeneId, association: '', type: 'gene',
+        counts: {diseases: this.diseaseAssoc.length, terms: this.termAssoc.length}}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.geneService.downloadAssociations(this.gene.entrezGeneId, result);
+      }
+    });
   }
 
 }

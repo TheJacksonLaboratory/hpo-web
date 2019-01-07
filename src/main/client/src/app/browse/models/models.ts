@@ -84,5 +84,6 @@ export interface TermCategory {
 export interface DialogData {
   association: string;
   term: string;
-  counts: {genes: number, diseases: number, terms: number};
+  type: string;
+  counts: {genes?: number, diseases?: number, terms?: number};
 }

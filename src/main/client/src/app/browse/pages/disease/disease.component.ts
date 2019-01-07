@@ -1,10 +1,11 @@
 import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { MatSort } from '@angular/material';
+import {MatDialog, MatSort} from '@angular/material';
 
 import { Disease, Gene, Term, TermCategory } from '../../models/models';
 import { MatTableDataSource, MatPaginator} from '@angular/material';
 import { DiseaseService } from '../../services/disease/disease.service';
+import {DialogExcelDownloadComponent} from '../../../shared/dialog-excel-download/dialog-excel-download.component';
 
 @Component({
   selector: 'app-disease',
@@ -26,7 +27,7 @@ export class DiseaseComponent {
 
   @ViewChild('genePaginator') genePaginator: MatPaginator;
 
-  constructor(private route: ActivatedRoute, private diseaseService: DiseaseService) {
+  constructor(private route: ActivatedRoute, private diseaseService: DiseaseService, public dialog: MatDialog) {
     this.route.params.subscribe( (params) => {
       this.query = params.id;
       this.refreshData();
@@ -72,6 +73,20 @@ export class DiseaseComponent {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
     this.geneDataSource.filter = filterValue;
+  }
+
+  downloadDialog() {
+    const dialogRef = this.dialog.open(DialogExcelDownloadComponent, {
+      width: '400px',
+      data: {term: this.disease.diseaseId, association: '', type: 'disease',
+        counts: {genes: this.geneAssoc.length, terms: this.termAssoc.length}}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.diseaseService.downloadAssociations(this.disease.diseaseId, result);
+      }
+    });
   }
 
 }
