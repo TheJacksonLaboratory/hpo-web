@@ -39,6 +39,7 @@ export class EntrezGene {
     aliases?: string[];
     constructor() {
       this.otheraliases = '';
+      this.aliases = [];
     }
 }
 export interface Term {

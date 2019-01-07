@@ -34,9 +34,9 @@
                     <hr class="underline-hr">
                     <mat-list>
                       <mat-list-item>
-                        <span *ngIf="entrezGene.aliases != ''">
+                        <span *ngIf="entrezGene.aliases.length > 0">
                           <strong>Synonyms:&nbsp;</strong>
-                        <i *ngFor="let item of entrezGene.aliases; let isLast=last">{{item}}{{isLast ? '' : ', '}}</i>
+                         <i *ngFor="let item of entrezGene.aliases; let isLast=last">{{item}}{{isLast ? '' : ', '}}</i>
                         </span>
                       </mat-list-item>
                     </mat-list><br>

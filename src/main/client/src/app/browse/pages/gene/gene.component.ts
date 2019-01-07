@@ -52,10 +52,11 @@ export class GeneComponent implements OnInit {
   }
 
   reloadGeneData() {
+    debugger;
     this.geneService.searchGeneInfo(this.query)
       .subscribe((data) => {
         this.entrezGene = data.result[this.query];
-        this.entrezGene.aliases = this.entrezGene.otheraliases.split(',');
+        this.entrezGene.aliases = this.entrezGene.otheraliases ? this.entrezGene.otheraliases.split(','): [];
         this.entrezGene.summary = this.entrezGene.summary ? this.entrezGene.summary : 'No Entrez definition entry.';
       }, (error) => {
         // TODO: Implement Better Error Handling
