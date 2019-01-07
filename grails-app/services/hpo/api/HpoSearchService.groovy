@@ -73,9 +73,10 @@ class HpoSearchService {
         BuildableCriteria c = DbDisease.createCriteria()
         def results = []
         def firstUpper = terms[0].toUpperCase();
-        if(firstUpper.startsWith('OMIM:') || firstUpper.startsWith("ORPHA:") || firstUpper.startsWith("MONDO:")){
+        if(isDiseaseIdSearch(firstUpper)){
+          firstUpper = conformDiseaseId(firstUpper);
           results = c.list(max: params.max, offset: params.offset) {
-            ilike('diseaseId', terms[0] + '%')
+            ilike('diseaseId', '%' + firstUpper + '%')
             order(params.sort, params.order)
           }
         }else{
@@ -99,6 +100,25 @@ class HpoSearchService {
         return resultsMap
 
       }
+
+    private boolean isDiseaseIdSearch(String diseaseId){
+      if ( diseaseId.startsWith("OMIM:") || diseaseId.startsWith("MIM:")
+        || diseaseId.startsWith("OMIM_") || diseaseId.startsWith("MIM_") || diseaseId.startsWith("ORPHA:") ||
+           diseaseId.startsWith("MONDO:") || diseaseId.isNumber()){
+        return true;
+      }
+      return false;
+    }
+
+    private String conformDiseaseId(String diseaseId){
+      String num = diseaseId.replaceAll("\\D+","");
+      if (  diseaseId.startsWith("MIM:") || diseaseId.startsWith("OMIM_") || diseaseId.startsWith("MIM_")){
+        return "OMIM:" + num;
+      }else if(diseaseId.startsWith("ORPHA_")){
+        return "ORPHA:" + num;
+      }
+      return diseaseId;
+    }
 
     /**
      * Builds and executes a query against DbTerm domain object to return Terms by ontology Id or the term name.

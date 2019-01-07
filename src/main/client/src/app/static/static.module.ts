@@ -34,6 +34,6 @@ import { DisclaimerComponent } from './resources/disclaimer/disclaimer.component
     ContactComponent, CitationComponent, LicenseComponent,
     FaqComponent, NewsComponent, OntologyComponent, AnnotationsDownloadComponent, DisclaimerComponent
   ],
-  providers:[SearchService]
+  providers: [SearchService]
 })
 export class StaticModule { }
