@@ -18,6 +18,7 @@ const staticRoutes: Routes = [
   { path: 'contact', component: ContactComponent},
   { path: 'license', component: LicenseComponent },
   { path: 'faq', component: FaqComponent},
+  { path: 'faq/:id', component: FaqComponent},
   {path:  'news', component: NewsComponent},
   { path: 'news/:id', component: NewsComponent},
   { path: 'help', loadChildren: './help/help.module#HelpModule'},
