@@ -167,4 +167,6 @@ bootRun {
         '-Dgrails.reload.enabled=true'
     )
     addResources = true
+
+  systemProperties System.properties
 }
