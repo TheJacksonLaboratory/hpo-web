@@ -120,14 +120,5 @@ class HpoExcelController implements GrailsConfigurationAware {
     } else {
       render(view: '/error')
     }
-
-  }
-
-  private boolean isValidTerm(String term){
-    if(params.term.startsWith("OMIM:") || params.term.startsWith("ORPHA:") ||
-      params.term.startsWith("HP:") || params.term.startsWith("NCBI:")){
-      return true;
-    }
-    return false;
   }
 }
