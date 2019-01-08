@@ -102,10 +102,13 @@ dependencies {
 
   testCompile "org.grails.plugins:geb"
   testCompile "io.github.bonigarcia:webdrivermanager:3.0.0"
-  testCompile "org.seleniumhq.selenium:selenium-java:3.4.0"
-  testCompile "org.seleniumhq.selenium:selenium-support:3.4.0"
+  testCompile "org.seleniumhq.selenium:selenium-java:3.6.0"
   testCompile "org.seleniumhq.selenium:selenium-htmlunit-driver:2.47.1"
-  testCompile "org.seleniumhq.selenium:selenium-chrome-driver:3.4.0"
+  testCompile "org.seleniumhq.selenium:selenium-remote-driver:3.6.0"
+  testCompile "org.seleniumhq.selenium:selenium-api:3.6.0"
+  testCompile "org.seleniumhq.selenium:selenium-support:3.6.0"
+  testRuntime "org.seleniumhq.selenium:selenium-chrome-driver:3.6.0"
+
   testCompile "com.codeborne:phantomjsdriver:1.3.0"
 }
 

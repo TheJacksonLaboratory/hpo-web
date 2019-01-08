@@ -52,7 +52,6 @@ export class GeneComponent implements OnInit {
   }
 
   reloadGeneData() {
-    debugger;
     this.geneService.searchGeneInfo(this.query)
       .subscribe((data) => {
         this.entrezGene = data.result[this.query];

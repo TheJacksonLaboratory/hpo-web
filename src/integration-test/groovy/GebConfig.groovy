@@ -1,8 +1,6 @@
-import io.github.bonigarcia.wdm.ChromeDriverManager
 import io.github.bonigarcia.wdm.WebDriverManager
 import org.openqa.selenium.chrome.ChromeDriver
 import org.openqa.selenium.chrome.ChromeOptions
-import org.openqa.selenium.firefox.FirefoxDriver
 import org.openqa.selenium.htmlunit.HtmlUnitDriver
 import org.openqa.selenium.phantomjs.PhantomJSDriver
 
@@ -17,6 +15,11 @@ def defaultChromeConfig = {
   ChromeOptions chromeOptions = new ChromeOptions()
   if(System.getProperty('chromeHeadless')){
     chromeOptions.addArguments('--headless')
+    chromeOptions.addArguments('--disable-gpu')
+    chromeOptions.addArguments('--no-sandbox')
+    chromeOptions.addArguments('--disable-extensions')
+    chromeOptions.addArguments('--disable-dev-shm-usage')
+    chromeOptions.addArguments('--disable-popup-blocking')
   }
   defaultBrowserSize(new ChromeDriver(chromeOptions))
 }
@@ -26,11 +29,12 @@ environments {
     driver = { new HtmlUnitDriver() }
   }
 
-  chrome {driver = defaultChromeConfig
+  chrome {
+    driver = defaultChromeConfig
   }
 
-  firefox {
-    driver = { new FirefoxDriver() }
+  chromeHeadless {
+    driver = defaultChromeConfig
   }
 
   phantomJs {

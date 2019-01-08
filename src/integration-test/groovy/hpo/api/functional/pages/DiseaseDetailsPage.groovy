@@ -18,6 +18,11 @@ class DiseaseDetailsPage extends Page{
     geneFilterElement(wait:true, required:false) { $("#geneFilterInput")}
     genePagingRangeLabelElement(wait:true, required: false) {$(".gene-association .mat-paginator-range-label")}
 
+    downloadAssociationButton(wait:true, required: false) { $(".download-associations")}
+    downloadAssociationDialog(wait:true, required: false) { $(".mat-dialog-container")}
+    downloadTermsAssociationButton(wait: true, required: false) { $(".dialog-selection").first()}
+    downloadGenesAssociationButton(wait: true, required: false) { $(".dialog-selection")[1]}
+
   }
 
 }
