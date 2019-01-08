@@ -19,7 +19,7 @@
                   <mat-list>
                     <mat-list-item>{{disease.description}}</mat-list-item>
                   </mat-list>
-                  <button class="mat-btn mat-raised-button download-annotations"
+                  <button class="mat-btn mat-raised-button download-associations"
                           [disabled]="this.termAssoc.length == 0 && this.geneAssoc.length == 0"
                           (click)="downloadDialog()">Export Associations</button>
                 </mat-card-content>

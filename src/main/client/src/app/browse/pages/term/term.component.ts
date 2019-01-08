@@ -177,7 +177,7 @@ export class TermComponent implements OnInit {
   downloadDialog() {
     const dialogRef = this.dialog.open(DialogExcelDownloadComponent, {
       width: '400px',
-      data: {term: this.term.id, association: '',
+      data: {term: this.term.id, association: '', type: 'term',
         counts: {genes: this.geneAssocCount, diseases: this.diseaseAssocCount}}
     });
 

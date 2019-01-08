@@ -25,6 +25,6 @@ export class DiseaseService {
 
   downloadAssociations(disease: string, association: string): void {
     window.open(environment.HPO_API_DOWNLOAD_EXCEL_DISEASE_URL + '?identifier=' + disease + '&association=' + association,
-      '_blank');
+      '_self');
   }
 }

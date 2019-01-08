@@ -50,6 +50,6 @@ export class TermService {
 
   downloadAssociations(term: string, association: string): void {
     window.open(environment.HPO_API_DOWNLOAD_EXCEL_TERM_URL + '?identifier=' + term + '&association=' + association,
-      '_blank');
+      '_self');
   }
 }

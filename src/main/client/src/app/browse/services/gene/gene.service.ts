@@ -46,6 +46,6 @@ export class GeneService {
 
   downloadAssociations(gene: number, association: string): void {
     window.open(environment.HPO_API_DOWNLOAD_EXCEL_GENE_URL + '?identifier=' + gene + '&association=' + association,
-      '_blank');
+      '_self');
   }
 }

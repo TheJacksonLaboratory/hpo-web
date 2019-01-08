@@ -11,9 +11,7 @@ import org.monarchinitiative.phenol.ontology.data.TermId
 @Transactional
 class HpoExcelService {
 
-  public static final String SHEET_NAME = "annotations"
-  public static final String HEADERS = "Isbn"
-  public static final String HEADER_NAME = "Name"
+  public static final String SHEET_NAME = "associations"
   public static final String EXCEL_FILE_SUFIX = ".xlsx"
   public static String EXCEL_FILE_PREFIX = ""
   public static String EXCEL_FILENAME = ""

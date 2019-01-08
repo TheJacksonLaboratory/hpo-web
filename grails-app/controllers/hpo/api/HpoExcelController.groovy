@@ -28,7 +28,7 @@ class HpoExcelController implements GrailsConfigurationAware {
       response.status = 200
 
       OutputStream outs
-      if (params.identifier.startsWith("HP:")) {
+      if ( params.identifier && params.identifier.startsWith("HP:")) {
         String termId = params.identifier
         if (params.association == "genes") {
           hpoExcelService.setExcelFilePrefixAndName("genes_for_" + termId.replace(":","_"))
