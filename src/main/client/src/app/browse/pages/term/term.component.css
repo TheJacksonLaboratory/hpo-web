@@ -1,4 +1,4 @@
-.gene-association .mat-column-entrezGeneId{
+.gene-association .mat-column-entrezGeneId {
    max-width: 250px;
 }
 .disease-association .mat-column-diseaseId {
@@ -9,7 +9,7 @@
 }
 
 
-.item-id .obsolete-arrow{
+.item-id .obsolete-arrow {
   font-size:16px;
 }
 
@@ -20,7 +20,7 @@
 
  }
 
-.mat-cell.mat-column-dbDiseases, .mat-cell.mat-column-dbGenes{
+.mat-cell.mat-column-dbDiseases, .mat-cell.mat-column-dbGenes {
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -34,12 +34,12 @@
    }
  }
 
-.item-summary.tree-navigation{
+.item-summary.tree-navigation {
  padding: 15px !important;
  font-size:16px;
 }
 
-.tree-navigation .link{
+.tree-navigation .link {
   text-decoration: none;
 }
 
@@ -61,7 +61,7 @@
   margin: 0 0 5px 10px;
   cursor: default;
 }
-.tree-navigation .badge.info-badge{
+.tree-navigation .badge.info-badge {
   border-radius:2px;
   background-color: dodgerblue;
   padding-bottom: 4px;
@@ -83,7 +83,7 @@
   line-height:2em;
   position:relative;
 }
-.tree li:last-child{
+.tree li:last-child {
   margin-top: 5px;
 }
 .tree li:first-child:before {
@@ -134,23 +134,23 @@
   margin-right:10px;
 }
 
-.mat-progress-bar{
+.mat-progress-bar {
   margin: 30px 0 30px 10px
 }
 
-.associationsPaging{
+.associationsPaging {
   text-align:right;
   padding: 10px 25px 0 0;
   margin-bottom: 1px;
   margin-top: 1px;
 }
 
-.associationsPaging p{
+.associationsPaging p {
   margin-bottom: 1px;
   margin-top: 1px;
   font-size: 14px;
 }
- .associationsPaging a{
+ .associationsPaging a {
    cursor:pointer;
  }
 
@@ -176,8 +176,4 @@
   font-size: 14px;
   width: 100%;
   padding-bottom: 1px;
-}
-
-.download-associations{
-  margin-top: 10px;
 }

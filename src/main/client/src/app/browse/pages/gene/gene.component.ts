@@ -1,12 +1,12 @@
-import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { GeneService } from '../../services/gene/gene.service';
 import { Gene, EntrezGene, Term, Disease } from '../../models/models';
 import { ActivatedRoute } from '@angular/router';
-import { MatDialog, MatSort} from '@angular/material';
-import { MatTableDataSource, MatPaginator} from '@angular/material';
+import { MatSort, MatTableDataSource, MatPaginator } from '@angular/material';
 import * as ProtVista from 'ProtVista';
+import { DialogExcelDownloadComponent } from '../../../shared/dialog-excel-download/dialog-excel-download.component';
 import { environment } from '../../../../environments/environment';
-import {DialogExcelDownloadComponent} from '../../../shared/dialog-excel-download/dialog-excel-download.component';
+import { DialogService } from '../../../shared/dialog-excel-download/dialog.service';
 
 @Component({
   selector: 'app-gene',
@@ -35,7 +35,7 @@ export class GeneComponent implements OnInit {
   @ViewChild('termPaginator') termPaginator: MatPaginator;
   @ViewChild('diseasePaginator') diseasePaginator: MatPaginator;
 
-  constructor(private route: ActivatedRoute, private geneService: GeneService,  public dialog: MatDialog) {
+  constructor(private route: ActivatedRoute, private geneService: GeneService,  public dialogService: DialogService) {
 
   }
 
@@ -133,17 +133,11 @@ export class GeneComponent implements OnInit {
   }
 
   downloadDialog() {
-    const dialogRef = this.dialog.open(DialogExcelDownloadComponent, {
-      width: '400px',
-      data: {term: this.gene.entrezGeneId, association: '', type: 'gene',
-        counts: {diseases: this.diseaseAssoc.length, terms: this.termAssoc.length}}
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.geneService.downloadAssociations(this.gene.entrezGeneId, result);
-      }
-    });
+    const counts =  {
+      diseases: this.diseaseAssoc.length,
+      terms: this.termAssoc.length
+    };
+    this.dialogService.openDownloadDialog(this.gene.entrezGeneId.toString(), 'gene', counts);
   }
 
 }

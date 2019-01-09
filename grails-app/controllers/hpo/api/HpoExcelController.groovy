@@ -62,7 +62,7 @@ class HpoExcelController implements GrailsConfigurationAware {
     response.status = 200
 
     OutputStream outs
-    if (params.identifier.startsWith("OMIM:") || params.term.startsWith("ORPHA:")) {
+    if ( params.identifier && (params.identifier.startsWith("OMIM:") || params.identifier.startsWith("ORPHA:"))) {
       String diseaseId = params.identifier
       if (params.association == "genes") {
         hpoExcelService.setExcelFilePrefixAndName("genes_for_" + diseaseId.replace(":","_"))
@@ -96,7 +96,7 @@ class HpoExcelController implements GrailsConfigurationAware {
     response.status = 200
 
     OutputStream outs
-    if (Integer.parseInt(params.identifier)) {
+    if (params.identifier && Integer.parseInt(params.identifier)) {
       Integer geneId = Integer.parseInt(params.identifier)
       if (params.association == "diseases") {
         hpoExcelService.setExcelFilePrefixAndName("diseases_for_" + geneId)

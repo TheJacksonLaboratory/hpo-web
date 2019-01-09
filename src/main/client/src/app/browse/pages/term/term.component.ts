@@ -1,12 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params} from '@angular/router';
-import { MatDialog, MatSort } from '@angular/material';
-import { MatTableDataSource, MatPaginator } from '@angular/material';
+import { MatSort, MatTableDataSource, MatPaginator } from '@angular/material';
 import { forkJoin as observableForkJoin } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { TermService } from '../../services/term/term.service';
 import { Term, Gene, Disease, TermTree } from '../../models/models';
 import { DialogExcelDownloadComponent } from '../../../shared/dialog-excel-download/dialog-excel-download.component';
+import { DialogService } from '../../../shared/dialog-excel-download/dialog.service';
 
 
 @Component({
@@ -42,7 +42,7 @@ export class TermComponent implements OnInit {
   @ViewChild('genePaginator') genePaginator: MatPaginator;
 
   @ViewChild(MatSort) sort: MatSort;
-  constructor(private route: ActivatedRoute, private termService: TermService, public dialog: MatDialog) {
+  constructor(private route: ActivatedRoute, private termService: TermService, private dialogService: DialogService) {
   }
 
   ngOnInit() {
@@ -175,17 +175,11 @@ export class TermComponent implements OnInit {
   }
 
   downloadDialog() {
-    const dialogRef = this.dialog.open(DialogExcelDownloadComponent, {
-      width: '400px',
-      data: {term: this.term.id, association: '', type: 'term',
-        counts: {genes: this.geneAssocCount, diseases: this.diseaseAssocCount}}
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.termService.downloadAssociations(this.term.id, result);
-      }
-    });
+    const counts = {
+      genes: this.geneAssocCount,
+      diseases: this.diseaseAssocCount
+    };
+    this.dialogService.openDownloadDialog(this.term.id, 'term', counts);
   }
 }
 
