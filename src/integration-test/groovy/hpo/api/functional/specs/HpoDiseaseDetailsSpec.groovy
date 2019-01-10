@@ -64,7 +64,7 @@ class HpoDiseaseDetailsSpec extends  GebReportingSpec {
 
     when: 'clicking gene association download'
     def identifier = diseaseDetailsPage.getPageUrl().split("/").last()
-    def association = diseaseDetailsPage.downloadGenesAssociationButton.attr('ng-reflect-dialog-result')
+    def association = diseaseDetailsPage.downloadGenesAssociationButton.text().toLowerCase()
     def url = API_DOWNLOAD_EXCEL_DISEASE_URL+ identifier + "&association=" + association
 
     then:
@@ -95,7 +95,7 @@ class HpoDiseaseDetailsSpec extends  GebReportingSpec {
 
     when: 'clicking gene association download'
     def identifier = diseaseDetailsPage.getPageUrl().split("/").last()
-    def association = diseaseDetailsPage.downloadTermsAssociationButton.attr('ng-reflect-dialog-result')
+    def association = diseaseDetailsPage.downloadTermsAssociationButton.text().toLowerCase()
     def url = API_DOWNLOAD_EXCEL_DISEASE_URL+ identifier + "&association=" + association
 
     then:

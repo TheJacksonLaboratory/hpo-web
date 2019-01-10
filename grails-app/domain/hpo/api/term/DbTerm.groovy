@@ -60,7 +60,7 @@ class DbTerm {
     name = term.name
     definition = term.definition
     comment = term.comment
-    ontologyId = term.id.idWithPrefix
+    ontologyId = term.id.toString()
     isObsolete = term.isObsolete()
   }
 

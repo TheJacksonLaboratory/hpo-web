@@ -97,21 +97,17 @@ class HpoDiseaseDetailsServiceUnitSpec extends Specification implements ServiceU
   }
 
   private static Term buildMockTerm(String id){
-    return new Term(
-      TermId.constructWithPrefix(id),
-      [],
-      'Test Term' ,
-      'Descriptive definition',
-      [],
-      'Informative commment',
-      [],
-      [],
-      false,
-      'someUser',
-      new Date(),
-      []
-    )
+    return new Term.Builder()
+      .id(TermId.of(id))
+      .name('Test Term')
+      .altTermIds([])
+      .definition('Descriptive definition')
+      .databaseXrefs([])
+      .comment('informative comment')
+      .createdBy('someUser').build()
+
   }
+  
   private static List<Term> buildMockTerms(List<String> ids){
     List<Term> terms = []
     ids.each{

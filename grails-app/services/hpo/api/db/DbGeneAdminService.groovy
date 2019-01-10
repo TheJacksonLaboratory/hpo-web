@@ -77,7 +77,7 @@ class DbGeneAdminService {
         final Sql sql = sqlUtilsService.getSql()
         sql.withBatch(500, INSERT_INTO_DB_TERM_DB_GENES) { BatchingPreparedStatementWrapper ps ->
           phenotypeToGene.each { HpoGeneAnnotation gene ->
-            final DbTerm dbTerm = hpoIdToDbTermMap.get(gene.getTermId().getIdWithPrefix().toString())
+            final DbTerm dbTerm = hpoIdToDbTermMap.get(gene.getTermId().toString())
             final DbGene dbGene = entrezIdToDbGeneMap.get(gene.getEntrezGeneId())
             if (dbTerm == null) {
               hpoIdWithPrefixNotFoundSet.add(gene.getTermId().toString())

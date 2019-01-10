@@ -20,12 +20,12 @@ class HpoUtilities {
     if(hpoTermQuery.size() == 10){
       // A search with the complete HPO id. Must see if it is
       // a primary id or an obsolete one.
-      TermId compareTerm = TermId.constructWithPrefix(hpoTermQuery)
+      TermId compareTerm = TermId.of(hpoTermQuery)
       TermId term = hpoOntology.getPrimaryTermId(compareTerm)
       // ontology function always returns the primary, will return self if primary
       // null if not an id in the ontology
       if(term != null){
-        return term.getIdWithPrefix()
+        return term.toString()
       }
     }
     return hpoTermQuery
