@@ -5,10 +5,8 @@ import builders.dsl.spreadsheet.query.api.SpreadsheetCriteriaResult
 import builders.dsl.spreadsheet.query.poi.PoiSpreadsheetCriteria
 import geb.spock.GebReportingSpec
 import grails.testing.mixin.integration.Integration
-import hpo.api.HpoExcelService
 import hpo.api.functional.pages.TermDetailsPage
-
-
+import hpo.api.HpoSpecHelpers
 
 @Integration
 class HpoTermDetailsSpec extends  GebReportingSpec {
@@ -28,7 +26,6 @@ class HpoTermDetailsSpec extends  GebReportingSpec {
     TermDetailsPage termDetailsPage = browser.to(TermDetailsPage)
     termDetailsPage.downloadAssociationButton.click()
 
-
     then: 'the dialog should open'
     waitFor{ termDetailsPage.downloadAssociationDialog }
 
@@ -44,18 +41,11 @@ class HpoTermDetailsSpec extends  GebReportingSpec {
     when: 'if we search for a row for a specific disease'
     ByteArrayInputStream bis = new ByteArrayInputStream(excelBytes);
     SpreadsheetCriteria query = PoiSpreadsheetCriteria.FACTORY.forStream(bis)
-    SpreadsheetCriteriaResult result = query.query {
-      sheet(HpoExcelService.SHEET_NAME) {
-        row {
-          cell {
-            value 'CHD7'
-          }
-        }
-      }
-    }
+    SpreadsheetCriteriaResult result = HpoSpecHelpers.queryExcelSheet(query, 'CHD7')
 
     then: 'a row is found'
     result.cells.size() == 1
+    result.cells.first().value.equals('CHD7')
 
   }
 
@@ -103,16 +93,18 @@ class HpoTermDetailsSpec extends  GebReportingSpec {
     }
   }
 
+
   def "diseases can be downloaded as an excel file"() {
 
-    when: 'clicking download association buttons'
+    given: 'we go to the page'
     TermDetailsPage termDetailsPage = browser.to(TermDetailsPage)
+
+    when: 'clicking export association button'
+    waitFor{ termDetailsPage.downloadAssociationButton.displayed }
     termDetailsPage.downloadAssociationButton.click()
 
-
     then: 'the dialog should open'
-    waitFor{ termDetailsPage.downloadAssociationDialog }
-
+    assert termDetailsPage.downloadAssociationDialog.isDisplayed()
 
     when: 'clicking disease association download'
     String identifier = termDetailsPage.getPageUrl().split("/").last()
@@ -125,18 +117,10 @@ class HpoTermDetailsSpec extends  GebReportingSpec {
     when: 'if we search for a row for a specific disease'
     ByteArrayInputStream bis = new ByteArrayInputStream(excelBytes);
     SpreadsheetCriteria query = PoiSpreadsheetCriteria.FACTORY.forStream(bis)
-    SpreadsheetCriteriaResult result = query.query {
-      sheet(HpoExcelService.SHEET_NAME) {
-        row {
-          cell {
-            value 'ORPHA:90796'
-          }
-        }
-      }
-    }
+    SpreadsheetCriteriaResult result = HpoSpecHelpers.queryExcelSheet(query, 'ORPHA:90796')
 
     then: 'a row is found'
     result.cells.size() == 1
+    result.cells.first().value.equals('ORPHA:90796')
   }
-
 }

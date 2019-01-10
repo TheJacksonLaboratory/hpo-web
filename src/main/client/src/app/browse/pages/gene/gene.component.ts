@@ -4,7 +4,6 @@ import { Gene, EntrezGene, Term, Disease } from '../../models/models';
 import { ActivatedRoute } from '@angular/router';
 import { MatSort, MatTableDataSource, MatPaginator } from '@angular/material';
 import * as ProtVista from 'ProtVista';
-import { DialogExcelDownloadComponent } from '../../../shared/dialog-excel-download/dialog-excel-download.component';
 import { environment } from '../../../../environments/environment';
 import { DialogService } from '../../../shared/dialog-excel-download/dialog.service';
 

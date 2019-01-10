@@ -398,4 +398,6 @@ hr.underline-hr {
 
 .download-associations {
   margin-top: 10px !important;
+  background-color: rgb(78, 139, 162) !important;
+  color: white !important;
 }

@@ -1,9 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { MatDialog, MatSort, MatTableDataSource, MatPaginator } from '@angular/material';
+import { MatSort, MatTableDataSource, MatPaginator } from '@angular/material';
 import { Disease, Gene, Term, TermCategory } from '../../models/models';
 import { DiseaseService } from '../../services/disease/disease.service';
-import { DialogExcelDownloadComponent } from '../../../shared/dialog-excel-download/dialog-excel-download.component';
 import { DialogService } from '../../../shared/dialog-excel-download/dialog.service';
 
 @Component({

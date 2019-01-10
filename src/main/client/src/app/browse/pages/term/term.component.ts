@@ -5,7 +5,6 @@ import { forkJoin as observableForkJoin } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { TermService } from '../../services/term/term.service';
 import { Term, Gene, Disease, TermTree } from '../../models/models';
-import { DialogExcelDownloadComponent } from '../../../shared/dialog-excel-download/dialog-excel-download.component';
 import { DialogService } from '../../../shared/dialog-excel-download/dialog.service';
 
 
