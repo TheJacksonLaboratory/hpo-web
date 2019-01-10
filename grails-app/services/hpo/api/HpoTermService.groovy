@@ -32,7 +32,7 @@ class HpoTermService {
       if (trimmedQ.startsWith('HP:')) {
         trimmedQ = hpoUtilities.checkReturnPrimaryId(trimmedQ)
         DbTerm dbterm = DbTerm.findByOntologyId(trimmedQ)
-        Term term = this.hpoOntology.termMap.get(TermId.constructWithPrefix(trimmedQ))
+        Term term = this.hpoOntology.termMap.get(TermId.of(trimmedQ))
         result.put("TERM",term)
         result.put("DBTERM",dbterm)
         return result
@@ -50,7 +50,7 @@ class HpoTermService {
 
     Map<String, Object> resultMap = [genes:[], geneCount:0, offset:offset, max:max]
     if (trimmedQ.startsWith('HP:')) {
-      final Term term = this.hpoOntology.termMap.get(TermId.constructWithPrefix(trimmedQ))
+      final Term term = this.hpoOntology.termMap.get(TermId.of(trimmedQ))
       final List<DbTerm> descendantTerms = findTermDescendants(term)
 
       if (descendantTerms) {
@@ -75,7 +75,7 @@ class HpoTermService {
 
     Map<String, Object> resultMap = [diseases:[], diseaseCount:0, offset:offset, max:max]
     if (trimmedQ.startsWith('HP:')) {
-      final Term term = this.hpoOntology.termMap.get(TermId.constructWithPrefix(trimmedQ))
+      final Term term = this.hpoOntology.termMap.get(TermId.of(trimmedQ))
       final List<DbTerm> descendantTerms = findTermDescendants(term)
 
       if (descendantTerms) {
@@ -100,7 +100,7 @@ class HpoTermService {
 
     List<DbTerm> descendantTerms = []
     final Set<TermId> termIds = OntologyTerms.childrenOf(term.id, this.hpoOntology)
-    final List<String>  termIdList = termIds*.getIdWithPrefix()
+    final List<String>  termIdList = termIds*.toString()
 
     if (termIdList) {
       descendantTerms = DbTerm.findAllByOntologyIdInList(termIdList)

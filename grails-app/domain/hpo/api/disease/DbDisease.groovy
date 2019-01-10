@@ -31,10 +31,10 @@ class DbDisease {
   DbDisease() {}
 
   DbDisease(HpoDisease disease) {
-    db = disease.getDiseaseDatabaseId().getPrefix().getValue().toString()
+    db = disease.getDiseaseDatabaseId().getPrefix()
     dbId = disease.getDiseaseDatabaseId().getId()
     diseaseName = fixDiseaseName(disease.getDiseaseDatabaseId().getId(), disease.getName())
-    diseaseId = disease.getDiseaseDatabaseId().getIdWithPrefix();
+    diseaseId = disease.getDiseaseDatabaseId().toString();
   }
 
 

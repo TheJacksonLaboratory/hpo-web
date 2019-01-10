@@ -5,8 +5,8 @@ model {
 }
 json{
   name term.name
-  id term.id.idWithPrefix
-  altTermIds term.altTermIds*.idWithPrefix
+  id term.id.toString()
+  altTermIds term.altTermIds*.toString()
   definition term.definition
   comment term.comment
   synonyms term.synonyms*.value

@@ -82,22 +82,20 @@ class HpoTermServiceViewSpec extends Specification implements JsonViewTest,DataT
     expectedDiseaseIds = ["OMIM:7","ORPHA:227"]
   }
   private static Term buildMockTerm(String id){
-    Term term = new Term(
-      TermId.constructWithPrefix(id),
-      [],
-      'Bladder neoplasm' ,
-      'Descriptive definition',
-      [],
-      'Informative commment',
-      [],
-      [],
-      false,
-      'someUser',
-      new Date(),
-      []
-    )
+    Term term = new Term.Builder()
+      .id(TermId.of(id))
+      .name('Bladder neoplasm')
+      .altTermIds([])
+      .definition('Descriptive definition')
+      .databaseXrefs([])
+      .comment('informative comment')
+      .createdBy('someUser').build()
+
+    term
   }
+
   private static DbGene buildMockGene(String symbol, Integer id){
     DbGene dbGene = new DbGene(entrezGeneSymbol:symbol, entrezGeneId:id)
+    dbGene
   }
 }

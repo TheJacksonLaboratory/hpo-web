@@ -69,34 +69,24 @@ class HpoGeneDetailsServiceUnitSpec extends Specification implements ServiceUnit
     }
     private static List<Term> buildMockTerms(){
     [
-      new Term(
-        TermId.constructWithPrefix("HPO:10406"),
-        [],
-        'Term 1' ,
-        'Descriptive definition',
-        [],
-        'Informative commment',
-        [],
-        [],
-        false,
-        'someUser',
-        new Date(),
-        []
-      ),
-      new Term(
-        TermId.constructWithPrefix("HPO:1337"),
-        [],
-        'Term 2' ,
-        'Descriptive definition',
-        [],
-        'Informative commment',
-        [],
-        [],
-        false,
-        'someUser',
-        new Date(),
-        []
-      )
+      new Term.Builder()
+        .id(TermId.of("HPO:10406"))
+        .name('Term 1')
+        .altTermIds([])
+        .definition('Descriptive definition')
+        .databaseXrefs([])
+        .comment('informative comment')
+        .createdBy('someUser').build()
+      ,
+
+      new Term.Builder()
+        .id(TermId.of("HPO:1337"))
+        .name('Term 2')
+        .altTermIds([])
+        .definition('Descriptive definition')
+        .databaseXrefs([])
+        .comment('informative comment')
+        .createdBy('someUser').build()
     ]
   }
 }

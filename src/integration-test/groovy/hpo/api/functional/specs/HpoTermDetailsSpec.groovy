@@ -32,7 +32,7 @@ class HpoTermDetailsSpec extends  GebReportingSpec {
 
     when: 'clicking disease association download'
     String identifier = termDetailsPage.getPageUrl().split("/").last()
-    String association = termDetailsPage.downloadGeneAssociationButton.attr('ng-reflect-dialog-result')
+    String association = termDetailsPage.downloadGeneAssociationButton.text().toLowerCase()
     String url = API_DOWNLOAD_EXCEL_TERM_URL+ identifier + "&association=" + association
 
     then:
@@ -108,7 +108,7 @@ class HpoTermDetailsSpec extends  GebReportingSpec {
 
     when: 'clicking disease association download'
     String identifier = termDetailsPage.getPageUrl().split("/").last()
-    String association = termDetailsPage.downloadDiseaseAssociationButton.attr('ng-reflect-dialog-result')
+    String association = termDetailsPage.downloadDiseaseAssociationButton.text().toLowerCase()
     String url = API_DOWNLOAD_EXCEL_TERM_URL + identifier + "&association=" + association
 
     then:

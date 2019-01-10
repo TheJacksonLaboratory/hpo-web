@@ -103,7 +103,7 @@ class HpoTermServiceUnitSpec extends Specification implements ServiceUnitTest<Hp
       Map termResponse = service.searchTerm(query)
 
       then:
-      termResponse?.TERM?.getId()?.getIdWithPrefix() == expected
+      termResponse?.TERM?.getId()?.toString() == expected
       where:
       query         |  expected                 | desc
       ''            |  null                    | 'nothing'
@@ -111,20 +111,14 @@ class HpoTermServiceUnitSpec extends Specification implements ServiceUnitTest<Hp
     }
 
     private static Term buildMockTerm(String id){
-      return new Term(
-        TermId.constructWithPrefix(id),
-        [],
-        'Bladder carcinoma' ,
-        'Descriptive definition',
-        [],
-        'Informative commment',
-        [],
-        [],
-        false,
-        'someUser',
-        new Date(),
-        []
-      )
+      return new Term.Builder()
+        .id(TermId.of(id))
+        .name('Bladder carcinoma')
+        .altTermIds([])
+        .definition('Descriptive definition')
+        .databaseXrefs([])
+        .comment('informative comment')
+        .createdBy('someUser').build()
     }
 
 

@@ -88,12 +88,12 @@ class DbDiseaseAdminService {
         int index = 0;
         for (Map.Entry<TermId, TermId> e : termToDisease.entries()) {
           index++;
-          final DbTerm dbTerm = hpoIdToDbTermMap.get(e.getKey().getIdWithPrefix())
-          final DbDisease dbDisease = diseaseIdMap.get(e.getValue().getIdWithPrefix())
+          final DbTerm dbTerm = hpoIdToDbTermMap.get(e.getKey().toString())
+          final DbDisease dbDisease = diseaseIdMap.get(e.getValue().toString())
           if (dbTerm == null) {
-            hpoIdWithPrefixNotFoundSet.add(e.getKey().getIdWithPrefix())
+            hpoIdWithPrefixNotFoundSet.add(e.getKey().toString())
           } else if (dbDisease == null) {
-            diseaseIdNotFoundSet.add(e.getValue().getIdWithPrefix()) // add diseaseid
+            diseaseIdNotFoundSet.add(e.getValue().toString()) // add diseaseid
           } else {
             if (dbTerm.id == lastTermId && dbDisease.id == lastDiseaseId) {
               log.info("DUPLICATE LINE: ${lastTermId} - ${lastDiseaseId}")
@@ -134,7 +134,7 @@ class DbDiseaseAdminService {
       for (Map.Entry<TermId, TermId> e : diseaseToGeneMap.entries()) {
         if(e.getValue().getId() != "-") {
           Integer gene = Integer.parseInt(e.getValue().getId());
-          String disease = e.getKey().getIdWithPrefix()
+          String disease = e.getKey().toString()
 
           final DbDisease dbDisease = diseaseIdMap.get(disease)
           final DbGene dbGene = geneIdMap.get(gene)

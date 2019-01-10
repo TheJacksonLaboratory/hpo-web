@@ -36,27 +36,21 @@ class DbTermUnitSpec extends Specification implements DomainUnitTest<DbTerm> {
 
   void "test term constructor"() {
     given:
-    Term term = new Term(
-      TermId.constructWithPrefix("HP:0000006"),
-      [],
-      'A term name',
-      'Descriptive definition',
-      [],
-      'Informative commment',
-      [],
-      [],
-      false,
-      'someUser',
-      new Date(),
-      []
-    )
+    Term term = new Term.Builder()
+      .id(TermId.of("HP:0000006"))
+      .name('A term name')
+      .altTermIds([])
+      .definition('Descriptive definition')
+      .databaseXrefs([])
+      .comment('informative comment')
+      .createdBy('someUser').build()
 
     when:
     DbTerm dbTerm = new DbTerm(term)
 
     then:
     verifyAll {
-      dbTerm.ontologyId == term.id.idWithPrefix
+      dbTerm.ontologyId == term.id.toString()
       dbTerm.name == term.name
       dbTerm.isObsolete == term.isObsolete()
       dbTerm.definition == term.definition
