@@ -16,12 +16,6 @@
     text-overflow: ellipsis;
     overflow: hidden;
 }
-.associations.gene-association {
-    float:left;
-}
-.associations.term-association {
-    float:left;
-}
 
 .disease-details-tab-group {
   border: 1px solid #e8e8e8;
