@@ -1,10 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { MatSort } from '@angular/material';
-
+import { MatSort, MatTableDataSource, MatPaginator } from '@angular/material';
 import { Disease, Gene, Term, TermCategory } from '../../models/models';
-import { MatTableDataSource, MatPaginator} from '@angular/material';
 import { DiseaseService } from '../../services/disease/disease.service';
+import { DialogService } from '../../../shared/dialog-excel-download/dialog.service';
 
 @Component({
   selector: 'app-disease',
@@ -26,7 +25,7 @@ export class DiseaseComponent {
 
   @ViewChild('genePaginator') genePaginator: MatPaginator;
 
-  constructor(private route: ActivatedRoute, private diseaseService: DiseaseService) {
+  constructor(private route: ActivatedRoute, private diseaseService: DiseaseService, public dialogService: DialogService) {
     this.route.params.subscribe( (params) => {
       this.query = params.id;
       this.refreshData();
@@ -74,4 +73,11 @@ export class DiseaseComponent {
     this.geneDataSource.filter = filterValue;
   }
 
+  downloadDialog() {
+    const counts = {
+      genes: this.geneAssoc.length,
+      terms: this.termAssoc.length
+    };
+    this.dialogService.openDownloadDialog(this.disease.diseaseId, 'disease', counts);
+  }
 }

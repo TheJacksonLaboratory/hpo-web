@@ -67,6 +67,9 @@
                     </mat-list-item>
                     <mat-divider></mat-divider>
                   </mat-list>
+                  <button class="mat-btn mat-raised-button download-associations"
+                          [disabled]="this.diseaseAssocCount == 0 && this.geneAssocCount == 0"
+                          (click)="downloadDialog()">Export Associations</button>
                 </div>
               </mat-card-content>
             </mat-card>
@@ -74,13 +77,11 @@
             <!-- TABS -->
           <div class="hpo-group-tab">
             <mat-tab-group selectedIndex="0" class="term-details-tab-group mat-elevation-z6">
-
               <!-- Disease association -->
               <mat-tab label="Disease Associations">
                 <div [hidden]="diseaseAssocCount == 0">
                       <mat-progress-bar  *ngIf="assocLoading" class="loading-result-details" color="primary" mode="buffer">
                       </mat-progress-bar>
-
                       <div class="tab-output-container">
 
                             <!-- filter. Display when all results are loaded -->
@@ -189,11 +190,12 @@
                         </div>
                       </div>
                   </div>
-                  <div class="container center" [hidden]="geneAssocCount != 0">
-                    <h4>No gene associations found for <strong>{{term.id}}</strong></h4>
-                  </div>
+                </div>
+                <div class="container center" [hidden]="geneAssocCount != 0">
+                  <h4>No gene associations found for <strong>{{term.id}}</strong></h4>
                 </div>
               </mat-tab>
+
             </mat-tab-group>
           </div>
         </div>

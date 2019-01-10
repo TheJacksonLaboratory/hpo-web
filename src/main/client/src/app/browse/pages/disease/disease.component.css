@@ -5,21 +5,21 @@
    max-width: 250px;
 }
 
-.mat-column-dbDiseases{
+.mat-column-dbDiseases {
    white-space: nowrap;
    text-overflow: ellipsis;
    overflow: hidden;
 }
-.gene-association .mat-column-diseaseName{
+.gene-association .mat-column-diseaseName {
     width:425px;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
 }
-.associations.gene-association{
+.associations.gene-association {
     float:left;
 }
-.associations.term-association{
+.associations.term-association {
     float:left;
 }
 
@@ -49,4 +49,3 @@
   background-color: rgb(78, 139, 162);
   color: white;
 }
-

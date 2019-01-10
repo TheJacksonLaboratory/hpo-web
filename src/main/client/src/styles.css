@@ -32,7 +32,7 @@ a:hover {
   margin-bottom: 15px;
 }
 
-.hr{
+.hr {
   border-bottom: 1px solid rgba(208, 211, 212, .8);
   width: 250px;
   margin: 5px 0 10px 0;
@@ -41,9 +41,11 @@ a:hover {
 p {
   font-size: 14px;
 }
+
 * {
   font-family: 'Titillium Web', sans-serif;
 }
+
 strong {
   font-weight:800;
 }
@@ -56,7 +58,7 @@ table, th, td {
   border: 1px solid black;
 }
 
-.center{
+.center {
   text-align: center;
 }
 
@@ -121,7 +123,7 @@ table, th, td {
     margin:0 !important;
   }
 
-  .info-body .mat-list-item-content{
+  .info-body .mat-list-item-content {
     display: block !important;
   }
 
@@ -147,7 +149,7 @@ table, th, td {
   padding: 15px;
 }
 
-.info-body.teaser .mat-list-item-content{
+.info-body.teaser .mat-list-item-content {
   padding:0 !important;
 }
 
@@ -160,19 +162,19 @@ a.mat-btn .mat-button-wrapper {
 }
 
 /* Navbar Global Styles */
-.navbar-search-wrapper{
+.navbar-search-wrapper {
   font-size: 14px;
   height: 100%;
   margin: 25px 0 0 0;
 }
 
-.navbar-search-wrapper .search-wrapper .search-filter{
+.navbar-search-wrapper .search-wrapper .search-filter {
   width: 20%;
   font-size: 14px;
   padding: 5px 5px 5px 10px;
 }
 
-.navbar-search-wrapper .search-wrapper .searchbar{
+.navbar-search-wrapper .search-wrapper .searchbar {
   font-size: 14px;
   padding: 5px 0 5px 10px;
   width: 80%;
@@ -184,7 +186,7 @@ a.mat-btn .mat-button-wrapper {
   margin-left: 20%;
   top: 0 !important;
 }
-.navbar-search-wrapper .search-wrapper .hint{
+.navbar-search-wrapper .search-wrapper .hint {
   display: none;
 }
 
@@ -256,22 +258,22 @@ a.mat-btn .mat-button-wrapper {
   margin-bottom: 10px;
 }
 
-.item-summary .mat-list-item-content{
+.item-summary .mat-list-item-content {
   font-size:14px;
   padding: 5px !important;
   display:block !important;
 }
 
-.item-summary .mat-list-item{
+.item-summary .mat-list-item {
   height:auto !important;
 }
 
-.item-header{
+.item-header {
   margin-top: -10px;
   margin-bottom: 10px;
 }
 
-.item-summary .mat-card-content  .associations h4{
+.item-summary .mat-card-content  .associations h4 {
   float:left;
 }
 
@@ -290,7 +292,7 @@ hr.underline-hr {
   overflow: auto;
   max-height: 500px;
 }
-.hpo-group-tab .mat-header-row{
+.hpo-group-tab .mat-header-row {
   background-color: rgb(78, 139, 162);
 }
 
@@ -298,7 +300,7 @@ hr.underline-hr {
   color:white;
 }
 
-.hpo-group-tab .associations .mat-table{
+.hpo-group-tab .associations .mat-table {
   max-height:346px;
 }
 
@@ -311,12 +313,12 @@ hr.underline-hr {
   border-bottom: 5px solid rgba(41,101,124,1)
 }
 
-.hpo-group-tab .mat-tab-body-wrapper{
+.hpo-group-tab .mat-tab-body-wrapper {
   border-right: 5px solid rgba(41,101,124,1);
   border-bottom: 5px solid rgba(41,101,124,1);
   border-left: 5px solid rgba(41,101,124,1);
 }
-.hpo-group-tab .mat-tab-group.mat-primary .mat-ink-bar{
+.hpo-group-tab .mat-tab-group.mat-primary .mat-ink-bar {
   display:none !important;
 }
 
@@ -324,31 +326,31 @@ hr.underline-hr {
   background-color: rgba(41,101,124,1);
 }
 
-.hpo-group-tab .mat-tab-label-active{
+.hpo-group-tab .mat-tab-label-active {
   background-color: rgba(41,101,124,1);
   font-weight: 900;
   opacity: 1;
   color: white;
 }
 
-.hpo-group-tab .mat-header-cell{
+.hpo-group-tab .mat-header-cell {
   font-size: 14px;
 }
 
-.hpo-group-tab .mat-paginator{
+.hpo-group-tab .mat-paginator {
   font-size: 14px;
 }
 
 
-.hpo-group-tab .filter-container .filter-header{
+.hpo-group-tab .filter-container .filter-header {
   background-color: rgb(78, 139, 162);
 }
 
-.hpo-group-tab .filter-container .filter-header .mat-form-field-label{
+.hpo-group-tab .filter-container .filter-header .mat-form-field-label {
   color:white;
 }
 
-.hpo-group-tab .filter-container .filter-header .mat-form-field-underline{
+.hpo-group-tab .filter-container .filter-header .mat-form-field-underline {
   background-color: rgba(255, 255, 255, 0.42);
 }
 
@@ -368,24 +370,34 @@ hr.underline-hr {
   color: white;
 }
 
-.container-custom{
+.container-custom {
   margin:0;
   padding: 0 5px 0 5px;
 }
-.container-custom .row{
+.container-custom .row {
   margin:0;
 }
 
-.mat-drawer{
+.mat-drawer {
   z-index: 4;
 }
 
-.mat-drawer-content{
+.mat-drawer-content {
   min-height:100%;
   display:flex !important;
   flex-direction: column;
 }
 
-.search-highlight{
+.search-highlight {
   font-weight: 800;
+}
+
+.mat-raised-button {
+  border-radius: 0 !important;
+}
+
+.download-associations {
+  margin-top: 10px !important;
+  background-color: rgb(78, 139, 162) !important;
+  color: white !important;
 }

@@ -22,26 +22,26 @@ describe('Highlight pipe test', () => {
     pipe = p;
   }));
 
-  let testData = [
+  const testData = [
     {
-      targetString:{name: 'small skull'},
+      targetString: {name: 'small skull'},
       query: 'small skull',
-      expected: '<strong>small</strong> <strong>skull</strong>'
+      expected: '<span><strong>small</strong> <strong>skull</strong></span>'
     },
     {
-      targetString:{name: 'small skull anantomy'},
+      targetString: {name: 'small skull anantomy'},
       query: 'small skull',
-      expected: '<strong>small</strong> <strong>skull</strong> anantomy'
+      expected: '<span><strong>small</strong> <strong>skull</strong> anantomy</span>'
     },
     {
-      targetString:{name: 'small anantomy skull'},
+      targetString: {name: 'small anantomy skull'},
       query: 'small skull',
-      expected: '<strong>small</strong> anantomy <strong>skull</strong>'
+      expected: '<span><strong>small</strong> anantomy <strong>skull</strong></span>'
     },
     {
-      targetString:{name: 'small anantomy skull'},
+      targetString: {name: 'small anantomy skull'},
       query: 'small skull s',
-      expected: '<strong>small</strong> anantomy <strong>skull</strong>'
+      expected: '<span><strong>small</strong> anantomy <strong>skull</strong></span>'
     }
 
   ];

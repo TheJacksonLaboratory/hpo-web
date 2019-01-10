@@ -43,4 +43,9 @@ export class GeneService {
 
     return( (reviewed.length > 0) ? reviewed[0][0] : null);
   }
+
+  downloadAssociations(gene: number, association: string): void {
+    window.open(environment.HPO_API_DOWNLOAD_EXCEL_GENE_URL + '?identifier=' + gene + '&association=' + association,
+      '_self');
+  }
 }

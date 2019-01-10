@@ -39,6 +39,7 @@ export class EntrezGene {
     aliases?: string[];
     constructor() {
       this.otheraliases = '';
+      this.aliases = [];
     }
 }
 export interface Term {
@@ -76,8 +77,14 @@ export interface Contributors {
 }
 
 export interface TermCategory {
-  catLabel: String;
+  catLabel: string;
   annotationCount: number;
   termSource: any;
 }
 
+export interface DialogData {
+  association: string;
+  term: string;
+  type: string;
+  counts: {genes?: number, diseases?: number, terms?: number};
+}
