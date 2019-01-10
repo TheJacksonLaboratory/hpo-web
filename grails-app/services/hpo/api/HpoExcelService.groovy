@@ -1,6 +1,7 @@
 package hpo.api
 
 import builders.dsl.spreadsheet.builder.poi.PoiSpreadsheetBuilder
+import grails.compiler.GrailsCompileStatic
 import grails.gorm.transactions.Transactional
 import hpo.api.disease.DbDisease
 import hpo.api.gene.DbGene
@@ -22,20 +23,18 @@ class HpoExcelService {
   }
 
   void exportExcelGenesFromTerm(OutputStream outs, List<DbGene> genes) {
-    PoiSpreadsheetBuilder.create(outs).build {
-      sheet(SHEET_NAME) { s ->
-        row {
+    PoiSpreadsheetBuilder.create(outs).build { w ->
+      w.sheet(SHEET_NAME) { s ->
+        s.row { r ->
           ["GENE_ENTREZ_ID", "GENE_SYMBOL", "DISEASE_IDS"].each { header ->
-            cell {
-              value header
-            }
+            r.cell(header)
           }
         }
         genes.each { gene ->
-          row {
-            cell(gene.getEntrezGeneId())
-            cell(gene.getEntrezGeneSymbol())
-            cell(String.join(",", gene.dbDiseases.diseaseId))
+          s.row { r ->
+            r.cell(gene.getEntrezGeneId())
+            r.cell(gene.getEntrezGeneSymbol())
+            r.cell(String.join(",", gene.dbDiseases.diseaseId))
           }
         }
       }
@@ -43,19 +42,17 @@ class HpoExcelService {
   }
 
   void exportExcelDiseaseFromTerm(OutputStream outs, List<DbDisease> diseases) {
-    PoiSpreadsheetBuilder.create(outs).build {
-      sheet(SHEET_NAME) { s ->
-        row {
+    PoiSpreadsheetBuilder.create(outs).build { w ->
+      w.sheet(SHEET_NAME) { s ->
+        s.row { r ->
           ["DISEASE_ID", "DISEASE_NAME"].each { header ->
-            cell {
-              value header
-            }
+            r.cell(header)
           }
         }
         diseases.each { disease ->
-          row {
-            cell(disease.getDiseaseId())
-            cell(disease.getDiseaseName())
+          s.row { r ->
+            r.cell(disease.getDiseaseId())
+            r.cell(disease.getDiseaseName())
           }
         }
       }
@@ -63,19 +60,17 @@ class HpoExcelService {
   }
 
   void exportExcelGenesFromDisease(OutputStream outs, Set<DbGene> genes){
-    PoiSpreadsheetBuilder.create(outs).build {
-      sheet(SHEET_NAME) { s ->
-        row {
+    PoiSpreadsheetBuilder.create(outs).build { w ->
+      w.sheet(SHEET_NAME) { s ->
+        s.row { r ->
           ["GENE_ENTREZ_ID", "GENE_SYMBOL"].each { header ->
-            cell {
-              value header
-            }
+            r.cell(header)
           }
         }
         genes.each { gene ->
-          row {
-            cell(gene.getEntrezGeneId())
-            cell(gene.getEntrezGeneSymbol())
+          s.row { r ->
+            r.cell(gene.getEntrezGeneId())
+            r.cell(gene.getEntrezGeneSymbol())
           }
         }
       }
@@ -84,20 +79,18 @@ class HpoExcelService {
 
   void exportExcelTermsFromDisease(OutputStream outs, Set<DbTerm> terms, List categories){
     Map<String, String> catMap = getCategoryForTerm(categories);
-    PoiSpreadsheetBuilder.create(outs).build {
-      sheet(SHEET_NAME) { s ->
-        row {
+    PoiSpreadsheetBuilder.create(outs).build { w ->
+      w.sheet(SHEET_NAME) { s ->
+        s.row { r ->
           ["HPO_TERM_ID", "HPO_TERM_NAME", "CATEGORY"].each { header ->
-            cell {
-              value header
-            }
+            r.cell(header)
           }
         }
         terms.each { term ->
-          row {
-            cell(term.getOntologyId())
-            cell(term.getName())
-            cell(catMap.get(term.getOntologyId()))
+          s.row { r ->
+            r.cell(term.getOntologyId())
+            r.cell(term.getName())
+            r.cell(catMap.get(term.getOntologyId()))
           }
         }
       }
@@ -116,19 +109,17 @@ class HpoExcelService {
   }
 
   void exportDiseaseFromGene(OutputStream outs, Set<DbDisease> diseases){
-    PoiSpreadsheetBuilder.create(outs).build {
-      sheet(SHEET_NAME) { s ->
-        row {
+    PoiSpreadsheetBuilder.create(outs).build { w ->
+      w.sheet(SHEET_NAME) { s ->
+        s.row { r ->
           ["HPO_TERM_ID", "HPO_TERM_NAME"].each { header ->
-            cell {
-              value header
-            }
+            r.cell(header)
           }
         }
         diseases.each { disease ->
-          row {
-            cell(disease.diseaseId)
-            cell(disease.diseaseName)
+          s.row { r ->
+            r.cell(disease.diseaseId)
+            r.cell(disease.diseaseName)
           }
         }
       }
@@ -136,19 +127,17 @@ class HpoExcelService {
   }
 
   void exportTermsFromGene(OutputStream outs, Set<DbTerm> terms){
-    PoiSpreadsheetBuilder.create(outs).build {
-      sheet(SHEET_NAME) { s ->
-        row {
+    PoiSpreadsheetBuilder.create(outs).build { w ->
+      w.sheet(SHEET_NAME) { s ->
+        s.row { r ->
           ["HPO_TERM_ID", "HPO_TERM_NAME"].each { header ->
-            cell {
-              value header
-            }
+            r.cell(header)
           }
         }
         terms.each { term ->
-          row {
-            cell(term.getOntologyId())
-            cell(term.getName())
+          s.row { r ->
+            r.cell(term.getOntologyId())
+            r.cell(term.getName())
           }
         }
       }
