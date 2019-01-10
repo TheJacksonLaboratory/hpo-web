@@ -1,13 +1,10 @@
 package hpo.api
 
 import builders.dsl.spreadsheet.builder.poi.PoiSpreadsheetBuilder
-import grails.compiler.GrailsCompileStatic
 import grails.gorm.transactions.Transactional
 import hpo.api.disease.DbDisease
 import hpo.api.gene.DbGene
 import hpo.api.term.DbTerm
-import org.apache.commons.lang.StringUtils
-import org.monarchinitiative.phenol.ontology.data.TermId
 
 @Transactional
 class HpoExcelService {
