@@ -56,10 +56,10 @@ class DbTermAdminService {
     Set<String> ontologyIdSet = [] as Set<String>
     Map<Term, DbTerm> termToDbTermMap = [:]
     for (Term term in terms) {
-      if (ontologyIdSet.contains(term.id.idWithPrefix)) {
+      if (ontologyIdSet.contains(term.id.toString())) {
         // do nothing
       } else {
-        ontologyIdSet.add(term.id.idWithPrefix)
+        ontologyIdSet.add(term.id.toString())
         DbTerm dbTerm = new DbTerm(term as Term)
         dbTerm.numberOfChildren = OntologyTerms.childrenOf(term.id, hpoOntology).size() - 1 //-1 exclude the current term
         dbTerm.save()
@@ -76,7 +76,7 @@ class DbTermAdminService {
 
 
   private void loadSynonyms(DbTerm dbTerm, Term term){
-    if(term.id.getIdWithPrefix() == "HP:0040064"){
+    if(term.id.toString() == "HP:0040064"){
       def test = ""
     }
     List<TermSynonym> synonyms = term.getSynonyms()
@@ -105,7 +105,7 @@ class DbTermAdminService {
           ps.addBatch([
             dbTerm.id,
             ancestorPath.collect { Term ancestorTerm -> ancestorTerm.name.toLowerCase() }.join(' > '),
-            ancestorPath.collect { Term ancestorTerm -> ancestorTerm.id.idWithPrefix }.toString(),
+            ancestorPath.collect { Term ancestorTerm -> ancestorTerm.id.toString() }.toString(),
             ancestorPath.size(),
           ])
         }

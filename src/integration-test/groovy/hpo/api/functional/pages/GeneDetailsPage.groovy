@@ -22,6 +22,10 @@ class GeneDetailsPage extends Page{
     diseaseFilterElement(wait:true, required:false) { $("#diseaseFilterInput")}
     diseasePagingRangeLabelElement(wait:true, required: false) {$(".mat-paginator-range-label")}
 
+    downloadAssociationButton(wait:true, required: false) { $(".download-associations")}
+    downloadAssociationDialog(wait:true, required: false) { $(".mat-dialog-container")}
+    downloadDiseaseAssociationButton(wait: true, required: false) { $(".dialog-selection").first()}
+    downloadTermsAssociationButton(wait: true, required: false) { $(".dialog-selection")[1]}
 
   }
 

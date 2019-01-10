@@ -47,7 +47,7 @@ class HpoDiseaseDetailsService {
 
     Set<DbTerm> dbTermList  = disease.dbTerms
     dbTermList.each {dbTerm ->
-      TermId termId = TermId.constructWithPrefix(dbTerm.getOntologyId())
+      TermId termId = TermId.of(dbTerm.getOntologyId())
       hpoCatMap.addAnnotatedTerm(termId, hpoOntology)
     }
 
@@ -62,7 +62,7 @@ class HpoDiseaseDetailsService {
         List<TermId> termIdList = cat.getAnnotatingTermIds()
         termIdList.each { tId ->
           Term term = hpoOntology.getTermMap().get(tId)
-          String termIdWithPrefix = term.getId().getIdWithPrefix()
+          String termIdWithPrefix = term.getId().toString()
 
           //add the DbTerm to the list of terms
           catDbTermList << DbTerm.findByOntologyId(termIdWithPrefix)

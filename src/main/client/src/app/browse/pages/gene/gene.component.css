@@ -9,23 +9,23 @@
   margin-right: 20px;
 
 }
-.gene-component .mat-column-dbDiseases{
+.gene-component .mat-column-dbDiseases {
    white-space: nowrap;
    text-overflow: ellipsis;
    overflow: hidden;
 }
-.gene-component .disease-association .mat-column-diseaseName{
+.gene-component .disease-association .mat-column-diseaseName {
     width:425px;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
 }
-.gene-component .associations.disease-association{
+.gene-component .associations.disease-association {
     float:left;
     margin:0 0 15px 8px;
     width: 99%;
 }
-.gene-component .associations.term-association{
+.gene-component .associations.term-association {
     float:left;
 }
 
@@ -43,11 +43,11 @@
 .up_pftv_aaviewer {
   margin:0 0 0 195px;
 }
-.gene-component .associations.col-lg-6{
+.gene-component .associations.col-lg-6 {
   width:49%;
 }
 
-.gene-component .loading-protvista{
+.gene-component .loading-protvista {
   margin: 30px 10px 30px 10px;
   width: 99%;
 }

@@ -42,11 +42,15 @@ class DbDiseaseUnitSpec extends Specification implements DomainUnitTest<DbDiseas
   }
   void "test disease constructor"() {
     given:
-    HpoAnnotation annotation = new HpoAnnotation(TermId.constructWithPrefix("HP:0000010"),
-    0.00, HpoOnset.ONSET, [])
+    HpoAnnotation annotation = new HpoAnnotation.Builder(TermId.of("HP:0000010"))
+      .onset(HpoOnset.ONSET)
+      .frequency(0.00, "some freq")
+      .citations([])
+      .modifiers([]).build()
+
     HpoDisease disease = new HpoDisease(
       "Small Cell Carcinoma Of The Bladder",
-      TermId.constructWithPrefix("ORPHA:284400"),
+      TermId.of("ORPHA:284400"),
       [annotation],
       [],
       []
@@ -57,10 +61,10 @@ class DbDiseaseUnitSpec extends Specification implements DomainUnitTest<DbDiseas
 
     then:
     verifyAll {
-      dbDisease.db  == disease.getDiseaseDatabaseId().getPrefix().getValue()
+      dbDisease.db  == disease.getDiseaseDatabaseId().getPrefix()
       dbDisease.dbId == disease.getDiseaseDatabaseId().getId()
       dbDisease.diseaseName == disease.getName()
-      dbDisease.diseaseId == disease.getDiseaseDatabaseId().getIdWithPrefix()
+      dbDisease.diseaseId == disease.getDiseaseDatabaseId().toString()
     }
   }
 

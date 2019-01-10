@@ -14,7 +14,6 @@ class TermDetailsPage extends Page{
 
   static content = {
     diseasePagingElement(wait:true, required:false)  { $("div#assocDiseasePagingSubset")}
-    diseaseViewAllLink(wait:true, required:false)  { $("div#assocDiseasePagingSubset a")}
     geneTabElement(wait:true) {$"#mat-tab-label-0-1"}
     diseaseTabElement(wait:true) {$"#mat-tab-label-0-0"}
     genePagingElement(wait:true, required:false)  { $("div#assocGenePagingSubset")}
@@ -26,6 +25,11 @@ class TermDetailsPage extends Page{
 
     geneFilterElement(wait:true, required:false) { $("div#geneFilterInput")}
     diseasePagingRangeLabelElement(wait:true, required: false) {$(".disease-association .mat-paginator-range-label")}
+
+    downloadAssociationButton(wait:true, required: false) { $(".download-associations")}
+    downloadAssociationDialog(wait:true, required: false) { $(".mat-dialog-container")}
+    downloadDiseaseAssociationButton(wait: true, required: false) { $(".dialog-selection").first()}
+    downloadGeneAssociationButton(wait: true, required: false) { $(".dialog-selection")[1]}
 
   }
 
