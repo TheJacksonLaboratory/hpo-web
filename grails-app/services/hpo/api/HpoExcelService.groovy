@@ -21,8 +21,7 @@ class HpoExcelService {
     EXCEL_FILENAME = EXCEL_FILE_PREFIX + EXCEL_FILE_SUFIX
   }
 
-  File exportExcelGenesFromTerm(OutputStream outs, List<DbGene> genes) {
-    File file = File.createTempFile(EXCEL_FILE_PREFIX, EXCEL_FILE_SUFIX)
+  void exportExcelGenesFromTerm(OutputStream outs, List<DbGene> genes) {
     PoiSpreadsheetBuilder.create(outs).build {
       sheet(SHEET_NAME) { s ->
         row {
@@ -41,11 +40,9 @@ class HpoExcelService {
         }
       }
     }
-    file
   }
 
-  File exportExcelDiseaseFromTerm(OutputStream outs, List<DbDisease> diseases) {
-    File file = File.createTempFile(EXCEL_FILE_PREFIX, EXCEL_FILE_SUFIX)
+  void exportExcelDiseaseFromTerm(OutputStream outs, List<DbDisease> diseases) {
     PoiSpreadsheetBuilder.create(outs).build {
       sheet(SHEET_NAME) { s ->
         row {
@@ -63,11 +60,9 @@ class HpoExcelService {
         }
       }
     }
-    file
   }
 
-  File exportExcelGenesFromDisease(OutputStream outs, Set<DbGene> genes){
-    File file = File.createTempFile(EXCEL_FILE_PREFIX, EXCEL_FILE_SUFIX)
+  void exportExcelGenesFromDisease(OutputStream outs, Set<DbGene> genes){
     PoiSpreadsheetBuilder.create(outs).build {
       sheet(SHEET_NAME) { s ->
         row {
@@ -85,12 +80,10 @@ class HpoExcelService {
         }
       }
     }
-    file
   }
 
-  File exportExcelTermsFromDisease(OutputStream outs, Set<DbTerm> terms, List categories){
+  void exportExcelTermsFromDisease(OutputStream outs, Set<DbTerm> terms, List categories){
     Map<String, String> catMap = getCategoryForTerm(categories);
-    File file = File.createTempFile(EXCEL_FILE_PREFIX, EXCEL_FILE_SUFIX)
     PoiSpreadsheetBuilder.create(outs).build {
       sheet(SHEET_NAME) { s ->
         row {
@@ -109,7 +102,6 @@ class HpoExcelService {
         }
       }
     }
-    file
   }
 
   protected static Map<String, String> getCategoryForTerm(List categoryList){
@@ -123,8 +115,7 @@ class HpoExcelService {
     return catMap;
   }
 
-  File exportDiseaseFromGene(OutputStream outs, Set<DbDisease> diseases){
-    File file = File.createTempFile(EXCEL_FILE_PREFIX, EXCEL_FILE_SUFIX)
+  void exportDiseaseFromGene(OutputStream outs, Set<DbDisease> diseases){
     PoiSpreadsheetBuilder.create(outs).build {
       sheet(SHEET_NAME) { s ->
         row {
@@ -142,11 +133,9 @@ class HpoExcelService {
         }
       }
     }
-    file
   }
 
-  File exportTermsFromGene(OutputStream outs, Set<DbTerm> terms){
-    File file = File.createTempFile(EXCEL_FILE_PREFIX, EXCEL_FILE_SUFIX)
+  void exportTermsFromGene(OutputStream outs, Set<DbTerm> terms){
     PoiSpreadsheetBuilder.create(outs).build {
       sheet(SHEET_NAME) { s ->
         row {
@@ -164,6 +153,5 @@ class HpoExcelService {
         }
       }
     }
-    file
   }
 }

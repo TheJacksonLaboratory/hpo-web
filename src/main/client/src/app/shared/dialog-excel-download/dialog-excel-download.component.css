@@ -1,5 +1,7 @@
-.dialog-selection{
+.dialog-selection {
   margin: 5px;
+  background-color: #ec9736;
+  color: white;
 }
 
 .mat-dialog-title {

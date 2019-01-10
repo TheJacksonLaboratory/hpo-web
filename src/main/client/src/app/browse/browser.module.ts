@@ -17,6 +17,7 @@ import { GeneComponent } from './pages/gene/gene.component';
 import { ExtrasModule } from '../shared/modules/extras.module';
 import { SearchResultsComponent } from './pages/search-results/search-results.component';
 import { DialogExcelDownloadComponent } from '../shared/dialog-excel-download/dialog-excel-download.component';
+import { DialogService } from '../shared/dialog-excel-download/dialog.service';
 
 
 @NgModule({
@@ -28,7 +29,7 @@ import { DialogExcelDownloadComponent } from '../shared/dialog-excel-download/di
     ExtrasModule
 
   ],
-  providers: [ SearchService, TermService, GeneService, DiseaseService ],
+  providers: [ SearchService, TermService, GeneService, DiseaseService, DialogService ],
   declarations: [ TermComponent, DiseaseComponent,
     GeneComponent,
     SearchResultsComponent, DialogExcelDownloadComponent ],
