@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Contributors } from "../../../browse/models/models";
+import { Contributors } from "../../../browser/models/models";
 import {ContributorsService} from "../../../shared/contributors/contributors.service";
 
 @Component({

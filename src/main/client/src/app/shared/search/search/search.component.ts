@@ -1,6 +1,6 @@
 import { Router } from '@angular/router';
 import { Component, OnInit, HostListener } from '@angular/core';
-import { Disease, Gene, Term } from '../../../browse/models/models';
+import { Disease, Gene, Term } from '../../../browser/models/models';
 import { SearchService } from '../service/search.service';
 
 import {

@@ -1,7 +1,7 @@
 
 import {map} from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import { Contributors } from "../../browse/models/models";
+import { Contributors } from "../../browser/models/models";
 import { Observable } from "rxjs";
 
 

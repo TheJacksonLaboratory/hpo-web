@@ -26,5 +26,7 @@ export const environment = {
   // Contributors File
   HPO_CONTRIBUTORS_URL: 'https://raw.githubusercontent.com/monarch-initiative/hpo-web-config/master/individual-contributors.csv',
   // News
-  HPO_NEWS_JSON_URL: 'https://raw.githubusercontent.com/monarch-initiative/hpo-web-config/master/news.json'
+  HPO_NEWS_JSON_URL: 'https://raw.githubusercontent.com/monarch-initiative/hpo-web-config/master/news.json',
+  // Publications
+  HPO_PUBLICATION_REST_URL: 'todo'
 };

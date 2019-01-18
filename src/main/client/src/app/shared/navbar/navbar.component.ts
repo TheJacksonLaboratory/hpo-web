@@ -1,7 +1,7 @@
 import {Component, EventEmitter, HostListener, OnInit, Output} from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { SearchService} from '../search/service/search.service';
-import { Disease, Gene, Term } from '../../browse/models/models';
+import { Disease, Gene, Term } from '../../browser/models/models';
 import {
   trigger,
   state,
