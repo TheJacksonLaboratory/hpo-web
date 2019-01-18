@@ -14,7 +14,7 @@ export class AppComponent {
   gaTrackId = '';
   mobileNavSection = 'home';
   parentSections = [];
-  constructor(private newsService: NewsService) {
+  constructor() {
 
     // Avoid google analytics for dev and testing unless explicitly indicated
     if (environment.production && window.location.host === 'hpo.jax.org') {
@@ -37,9 +37,6 @@ export class AppComponent {
 
       ga('send', 'pageview');
     }
-
-    newsService.setAllNews();
-
   }
 
   backNavigate() {
