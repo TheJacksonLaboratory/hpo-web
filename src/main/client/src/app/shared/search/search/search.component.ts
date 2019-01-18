@@ -1,5 +1,5 @@
 import { Router } from '@angular/router';
-import { Component, OnInit, HostListener } from '@angular/core';
+import {Component, OnInit, HostListener, ViewChild, ElementRef} from '@angular/core';
 import { Disease, Gene, Term } from '../../../browse/models/models';
 import { SearchService } from '../service/search.service';
 
@@ -51,6 +51,8 @@ export class SearchComponent implements OnInit {
   queryText: string;
   notFoundFlag = false;
 
+  @ViewChild('searchbar') searchBar: ElementRef;
+
   constructor(private router: Router, private searchService: SearchService) {
     this.router = router;
   }
@@ -61,7 +63,6 @@ export class SearchComponent implements OnInit {
       if (this.hasValidInput(val)) {
         this.queryText = val;
         this.searchService.searchAll(val).subscribe((data) => {
-          this.searchstate = 'active';
           this.terms = data.terms;
           this.diseases = data.diseases;
           this.genes = data.genes;
@@ -69,6 +70,7 @@ export class SearchComponent implements OnInit {
           this.diseasesCount = data.diseasesTotalCount;
           this.genesCount = data.genesTotalCount;
           this.notFoundFlag = (this.termsCount === 0 && this.diseasesCount === 0 && this.genesCount === 0);
+          this.searchstate = 'active';
         }, (error) => {
           // TODO: Implement Better Error Handling
           console.log(error);
@@ -84,7 +86,9 @@ export class SearchComponent implements OnInit {
   }
 
   setQuery(term: string): void {
+    this.queryString = term;
     this.contentChanging(term);
+    this.searchBar.nativeElement.focus();
   }
 
   hasValidInput(qString: string) {

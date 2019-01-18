@@ -16,7 +16,7 @@
   }
 
   & .search-filter {
-    width: 100px;
+    width: 20%;
     font-size: 14px;
   }
 
@@ -96,6 +96,18 @@
         border-right: 15px solid white;
         border-top: 21px solid rgba(41,101,124,1);
         width: 0;
+      }
+
+      @media(max-width: 767px) {
+        width: 70%;
+        &:after{
+          content: '';
+          position: absolute;
+          right: 30%;
+          border-right: 15px solid white;
+          border-top: 21px solid rgba(41,101,124,1);
+          width: 0;
+        }
       }
     }
 
