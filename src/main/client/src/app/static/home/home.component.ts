@@ -9,26 +9,18 @@ import { News } from '../../browse/models/models';
 })
 export class HomeComponent implements OnInit {
 
-  clearSearch = false;
   searchString: string;
   teaserNews: News[];
+  newsError: boolean;
   constructor(private newsService: NewsService) { }
 
   ngOnInit() {
-   this.teaserNews = this.newsService.getTeaserNews();
-  }
-  setOverlay(event: Event){
-    if (this.searchString && this.checkSourceClass(event.srcElement.className)) {
-      this.clearSearch = true;
-    } else {
-      this.clearSearch = false;
-    }
-  }
 
-  checkSourceClass(cls: string): boolean {
-    if (cls.includes('container') || cls.includes('row') ||
-      cls.includes('home-search')) {
-      return true;
-    }
+   this.newsService.getTeaserNews().subscribe(news => {
+     this.teaserNews = news;
+     }, (error) => {
+       this.newsError = true;
+       console.error(error);
+     });
   }
 }
