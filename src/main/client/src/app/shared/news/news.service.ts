@@ -1,9 +1,9 @@
 import { Injectable, OnInit } from '@angular/core';
 import { News } from '../../browse/models/models';
 import { Observable, of } from 'rxjs';
-import { HttpClient, HttpHeaders} from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import {map, publishReplay, refCount} from "rxjs/internal/operators";
+import { map, publishReplay, refCount } from 'rxjs/internal/operators';
 
 @Injectable()
 export class NewsService {

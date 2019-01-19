@@ -24,8 +24,6 @@ export class AppComponent {
       this.gaTrackId = environment.HPO_GOOGLE_ANALYTICS_TEST_TRACKING_ID;
     }
 
-    // console.log("loaded trackId :" + this.gaTrackId);
-
     if (this.gaTrackId.length > 0) {
       ga('create', this.gaTrackId, 'auto');
 

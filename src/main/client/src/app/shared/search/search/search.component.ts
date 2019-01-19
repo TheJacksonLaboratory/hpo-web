@@ -107,4 +107,8 @@ export class SearchComponent implements OnInit {
     this.router.navigate(['/browse/search'], {queryParams: {q: input, navFilter: this.navFilter}});
   }
 
+  isCorrectCategory(filter: string) {
+    return (filter === this.navFilter || this.navFilter === 'all');
+  }
+
 }
