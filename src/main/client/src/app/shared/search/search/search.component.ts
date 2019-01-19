@@ -1,5 +1,5 @@
 import { Router } from '@angular/router';
-import {Component, OnInit, HostListener, ViewChild, ElementRef} from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Disease, Gene, Term } from '../../../browse/models/models';
 import { SearchService } from '../service/search.service';
 
