@@ -40,7 +40,7 @@ class HpoHomeSearchSpec extends  GebReportingSpec {
         waitFor(25, 2){ homePage.termResultsPanel.text().size() != 0 }
 
       then:
-        homePage.termResultsPanel.text().contains("Terms");
+        homePage.termResultsPanel.text().contains("Phenotypes");
     }
 
   void "test js and css resource content type response"(){

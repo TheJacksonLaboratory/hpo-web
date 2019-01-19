@@ -47,16 +47,16 @@
   color:white;
 }
 
+.navbar-search-wrapper{
+  line-height: 20px;
+  padding: 15px 0 0 15px;
+  font-size: 14px;
+  height: 100%;
+}
+
 .navbar-search-container{
   height:100%;
   z-index: 20;
-}
-
-.navbar-search-container .navbar-output {
-  font-size: 14px;
-  overflow-x: hidden;
-  background-color:#e6e7e9;
-  cursor:pointer;
 }
 
 button.mat-menu-item a{

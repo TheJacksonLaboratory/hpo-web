@@ -1,5 +1,5 @@
 import { Router } from '@angular/router';
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Disease, Gene, Term } from '../../../browse/models/models';
 import { SearchService } from '../service/search.service';
 
@@ -17,7 +17,7 @@ import { distinctUntilChanged } from 'rxjs/operators';
 @Component({
   selector: 'searchbar',
   templateUrl: './search.component.html',
-  styleUrls: ['./search.component.css'],
+  styleUrls: ['./search.component.scss'],
   animations: [
     trigger('searchState', [
       state('inactive', style({
@@ -26,8 +26,8 @@ import { distinctUntilChanged } from 'rxjs/operators';
         'visibility': 'hidden'
       })),
       state('active',   style({
-        'height': '*',
-        'overflow-y': 'hidden',
+        'max-height': '500px',
+        'overflow-y': 'scroll',
         'visibility': 'visible'
       })),
       transition('inactive => active',
@@ -51,27 +51,26 @@ export class SearchComponent implements OnInit {
   queryText: string;
   notFoundFlag = false;
 
+  @ViewChild('searchbar') searchBar: ElementRef;
+
   constructor(private router: Router, private searchService: SearchService) {
     this.router = router;
   }
 
   ngOnInit() {
-    this.query.pipe(debounceTime(650),
+    this.query.pipe(debounceTime(425),
       distinctUntilChanged()).subscribe((val: string) => {
-      if (val && val.length >= 3) {
+      if (this.hasValidInput(val)) {
         this.queryText = val;
         this.searchService.searchAll(val).subscribe((data) => {
-          this.searchstate = 'active';
           this.terms = data.terms;
           this.diseases = data.diseases;
           this.genes = data.genes;
           this.termsCount = data.termsTotalCount;
           this.diseasesCount = data.diseasesTotalCount;
           this.genesCount = data.genesTotalCount;
-          this.notFoundFlag = false;
-          if (this.termsCount === 0 && this.diseasesCount === 0 && this.genesCount === 0) {
-            this.notFoundFlag = true;
-          }
+          this.notFoundFlag = (this.termsCount === 0 && this.diseasesCount === 0 && this.genesCount === 0);
+          this.searchstate = 'active';
         }, (error) => {
           // TODO: Implement Better Error Handling
           console.log(error);
@@ -82,25 +81,34 @@ export class SearchComponent implements OnInit {
     }); // End debounce subscribe
   }
 
-  @HostListener('document:click', ['$event'])
-  documentClick(event: Event): void {
-    if (this.searchstate === 'active') {
-      this.searchstate = 'inactive';
-    }
-  }
-
   contentChanging(input: string) {
       this.query.next(input);
   }
 
   setQuery(term: string): void {
+    this.queryString = term;
     this.contentChanging(term);
+    this.searchBar.nativeElement.focus();
   }
 
-  submitQuery(input: string) { // Goes to the big search page
+  hasValidInput(qString: string) {
+    return (qString && qString.length >= 3);
+  }
+
+  toggleDropdown() {
+    if (this.searchstate === 'inactive' && this.hasValidInput(this.queryText)) {
+      this.searchstate = 'active';
+      return;
+    }
+    this.searchstate = 'inactive';
+  }
+
+  // Submit query to search results page
+  submitQuery(input: string) {
     if (this.searchstate === 'active') {
       this.searchstate = 'inactive';
     }
     this.router.navigate(['/browse/search'], {queryParams: {q: input, navFilter: this.navFilter}});
   }
+
 }
