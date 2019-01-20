@@ -8,7 +8,6 @@ import {environment} from '../../../environments/environment';
 })
 export class FooterComponent implements OnInit {
   title: string;
-  version: string;
   version = 'hpo-web@${environment.VERSION} - hpo-obo@2018-12-21';
 
   constructor() {
