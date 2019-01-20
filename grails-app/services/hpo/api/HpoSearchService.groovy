@@ -136,6 +136,10 @@ class HpoSearchService {
 
       List termResults = []
       final Map resultsMap = [:]
+      /* Map needed to store total count of results before
+         limiter takes place.
+       */
+      Map finalTermResult = [:]
       Map params = [:]
       params.max = maxIn // if -1, all results are returned
       params.offset = offsetIn
@@ -150,18 +154,19 @@ class HpoSearchService {
           ilike('ontologyId', terms[0] + '%')
           order(params.sort, params.order)
         }
-        termResults = termResults.collect{ DbTerm term -> new SearchTermResult(term)}
+        finalTermResult["terms"] = termResults.collect{ DbTerm term -> new SearchTermResult(term)}
+        finalTermResult["totalCount"] = termResults.size()
       }else{
         // Search term name join with a search on synonym name.
         def termMap = [:]
         String statement = buildSearchTermsAndSynonymsPS(terms, termMap, params)
         List<GroovyRowResult> results = sqlUtilsService.executeQuery(statement, termMap)
         termResults = results.collect{ it -> new SearchTermResult(it)}
-        termResults = filterAndUnique(termResults, maxIn)
+        finalTermResult = filterAndUnique(termResults, maxIn)
       }
 
-      resultsMap.put('data', termResults)
-      resultsMap.put('totalCount', termResults.size())
+      resultsMap.put('data', finalTermResult['terms'])
+      resultsMap.put('totalCount', finalTermResult['totalCount'])
       resultsMap.put('offset', offsetIn)
 
       return resultsMap
@@ -178,6 +183,8 @@ class HpoSearchService {
   @GrailsCompileStatic(TypeCheckingMode.SKIP)
     static protected filterAndUnique(List results, int limit){
       def uniqueMap = [:]
+      def totalCount = 0
+      def terms
       results.each { term ->
         if(!uniqueMap.containsKey(term.ontologyId) || term.synonym == null ){
           // Not in our map drop it in or we found a term with a null synonym which means
@@ -193,10 +200,11 @@ class HpoSearchService {
       }
       // Limiter on SQL will not work with this funky logic, requested by @JulieMcMurry (Monarch Initiative)
       if(limit != -1){
-        return uniqueMap.values().take(limit).collect()
+        totalCount = uniqueMap.size()
+        return ['terms': uniqueMap.values().take(limit).collect(), 'totalCount': totalCount]
       }
-
-      return uniqueMap.values().collect()
+      terms = uniqueMap.values().collect()
+      return ['terms': terms, 'totalCount': terms.size()]
 
   }
 

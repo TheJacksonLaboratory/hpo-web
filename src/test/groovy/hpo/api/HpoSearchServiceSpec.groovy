@@ -136,10 +136,10 @@ class HpoSearchServiceSpec extends Specification implements ServiceUnitTest<HpoS
         new SearchTermResult([ontology_id: "HP:003", name:"Abnormality of eye center", number_of_children: 1, synonym: "Eye Center Weird"] as GroovyRowResult),
         new SearchTermResult([ontology_id: "HP:003", name:"Abnormality of eye center", number_of_children: 1, synonym: "Eye Weird"] as GroovyRowResult),
       )
-      final List resultList = service.filterAndUnique(fakeList, 10)
+      final Map resultMap = service.filterAndUnique(fakeList, 10)
 
       then:
-      resultList*.ontologyId == expectedId
+      resultMap['terms']*.ontologyId == expectedId
 
       where:
       expectedId                                  | expectedSynonym                      | desc
