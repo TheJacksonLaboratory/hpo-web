@@ -155,7 +155,7 @@ $orange-hover: rgba(236,151,54,0.8);
         & .name {
           font-size: 14px;
           white-space: nowrap;
-          overflow-x: hidden;
+          overflow: hidden;
           text-overflow: ellipsis;
         }
 
