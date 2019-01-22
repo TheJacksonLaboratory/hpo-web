@@ -37,7 +37,7 @@
 }
 
 .fill-remaining-space{
-    flex:1;
+    flex:1 1 auto;
 }
 
 .beta-flag{
@@ -49,7 +49,7 @@
 
 .navbar-search-wrapper{
   line-height: 20px;
-  padding: 15px 0 0 15px;
+  padding: 10px 0 0 15px;
   font-size: 14px;
   height: 100%;
 }
