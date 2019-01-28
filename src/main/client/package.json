@@ -1,6 +1,6 @@
 {
   "name": "hpo",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "license": "MIT",
   "scripts": {
     "ng": "ng",

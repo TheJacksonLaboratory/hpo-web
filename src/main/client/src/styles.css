@@ -115,6 +115,24 @@ a.mat-btn .mat-button-wrapper {
   padding-right: 15px;
 }
 
+.home-search .search-container .searchbar {
+  width: 80% !important;
+  font-size: 16px;
+  margin: 0;
+  padding: 15px;
+}
+
+.home-search .search-container .search-filter {
+  width: 20% !important;
+  padding: 15px;
+}
+
+.home-search .search-container .search-output {
+  margin-left: 20%;
+  width: 80% !important;
+}
+
+
 @media (min-width: 992px) {
   .home-search .search-container .search-wrapper {
     width: 100%;
@@ -139,13 +157,13 @@ a.mat-btn .mat-button-wrapper {
 
   .home-search .search-container .searchbar {
     width: 100% !important;
-    font-size:12px !important;
-    margin:5px 0 0 0 !important;
+    font-size: 12px !important;
+    margin: 5px 0 0 0 !important;
   }
 
   .home-search .search-container .search-output {
     width: 100% !important;
-    margin:0 !important;
+    margin: 0 !important;
   }
 
   .info-body .mat-list-item-content {
@@ -154,31 +172,9 @@ a.mat-btn .mat-button-wrapper {
 
 }
 
-.home-search .search-container .searchbar {
-  width: 80%;
-  font-size: 16px;
-  height: 45px;
-  margin: 0;
-  padding: 15px;
-}
-
-.home-search .search-container .search-filter {
-  width: 20%;
-  height: 45px;
-  font-size: 14px;
-  padding: 15px;
-}
-
-.home-search .search-container .search-output {
-  margin-left: 100px;
-  width: 80%;
-}
-
 .info-body.teaser .mat-list-item-content {
   padding:0 !important;
 }
-
-
 
 .quick-links-card .mat-icon {
   margin-left: auto;
@@ -186,36 +182,26 @@ a.mat-btn .mat-button-wrapper {
 
 /* Navbar Global Styles */
 .navbar-search-wrapper .search-wrapper .search-filter {
-  padding: 10px 15px 5px 10px;
-  height: 40px
+  padding: 15px;
 }
 
-.navbar-search-wrapper .search-wrapper .searchbar {
-  font-size: 14px;
-  padding: 5px 0 5px 10px;
-  width: 80%;
-  margin-top: 0;
-  height: 40px
-}
 .navbar-search-wrapper .search-wrapper .search-output {
-  margin-left: 100px;
   top: 0 !important;
-  width: 80%;
 }
 
 .navbar-search-wrapper .search-wrapper .hint {
   display: none;
 }
 
-@media (max-width: 767px) {
-  .navbar-search-wrapper .search-wrapper .searchbar {
-    font-size: 12px !important;
-    width: 74%;
+@media(max-width: 991px) {
+  .navbar-search-wrapper {
+    width: 70%;
   }
+}
 
-  .navbar-search-wrapper .search-wrapper .search-output {
-    width: 100%;
-    margin: 0;
+@media(min-width: 1200px) {
+  .navbar-search-wrapper {
+    width: 30%;
   }
 }
 
@@ -234,13 +220,6 @@ a.mat-btn .mat-button-wrapper {
     height: 165px !important;
     flex-wrap:wrap;
   }
-
-  .navbar-search-wrapper .search-wrapper .search-filter {
-    width: 26%;
-    font-size: 14px;
-    padding: 10px 10px 5px 10px;
-  }
-
 }
 
 /* Term, Gene, Disease Page Elements */
