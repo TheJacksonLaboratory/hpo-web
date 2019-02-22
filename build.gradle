@@ -48,6 +48,9 @@ dependencies {
   // Raw jar file with its dependencies. Remove when switch to maven
   //compile name:'phenol-core-1.2.1'
   //compile name:'phenol-io-1.2.1'
+  // Raw jar file for loinc2hpo
+  compile name:'Loinc2HpoLib'
+
   compile "org.prefixcommons:curie-util:0.0.2"
   compile group: 'net.sourceforge.owlapi', name: 'owlapi-distribution', version: '4.2.6'
   compile group: 'org.geneontology', name: 'obographs', version: '0.1.1'
