@@ -1,0 +1,13 @@
+loincId	loincScale	system	code	hpoTermId	isNegated	createdOn	createdBy	lastEditedOn	lastEditedBy	version	isFinalized	comment
+38230-9	Qn	FHIR	N	HP:0004363	true	2018-04-25T13:35:32	JGM:azhang	NA	NA	0.1	true	copied from: 38230-9
+38230-9	Qn	FHIR	H	HP:0003072	false	2018-04-25T13:35:32	JGM:azhang	NA	NA	0.1	true	copied from: 38230-9
+38230-9	Qn	FHIR	L	HP:0002901	false	2018-04-25T13:35:32	JGM:azhang	NA	NA	0.1	true	copied from: 38230-9
+738-5	Ord	FHIR	POS	HP:0001972	false	2018-04-06T09:35:51	JGM:azhang	2018-10-17T08:46:58	JGM:azhang	0.2	true	NA
+738-5	Ord	FHIR	NEG	HP:0001972	true	2018-04-06T09:35:51	JGM:azhang	2018-10-17T08:46:58	JGM:azhang	0.2	true	NA
+5778-6	Nom	snomed-ct	449071000124107	HP:0032001	false	2018-07-15T16:20:55	JGM:azhang	2018-09-28T14:38:47	JGM:azhang	0.2	true	NA
+5778-6	Nom	snomed-ct	449051000124102	HP:0040318	false	2018-07-15T16:20:55	JGM:azhang	2018-09-28T14:38:47	JGM:azhang	0.2	true	NA
+5778-6	Nom	snomed-ct	449081000124105	HP:0032002	false	2018-07-15T16:20:55	JGM:azhang	2018-09-28T14:38:47	JGM:azhang	0.2	true	NA
+5778-6	Nom	snomed-ct	449111000124104	HP:0040317	false	2018-07-15T16:20:55	JGM:azhang	2018-09-28T14:38:47	JGM:azhang	0.2	true	NA
+5778-6	Nom	snomed-ct	449101000124102	HP:0040320	false	2018-07-15T16:20:55	JGM:azhang	2018-09-28T14:38:47	JGM:azhang	0.2	true	NA
+5778-6	Nom	snomed-ct	449091000124108	HP:0032003	false	2018-07-15T16:20:55	JGM:azhang	2018-09-28T14:38:47	JGM:azhang	0.2	true	NA
+5778-6	Nom	snomed-ct	449061000124100	HP:0040322	false	2018-07-15T16:20:55	JGM:azhang	2018-09-28T14:38:47	JGM:azhang	0.2	true	NA

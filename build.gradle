@@ -92,6 +92,9 @@ dependencies {
 
   console "org.grails:grails-console"
 
+  compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.11.2'
+  compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.11.2'
+
   runtime 'org.grails.plugins:grails-console:2.1.1'
   runtime "org.glassfish.web:el-impl:2.1.2-b03"
   runtime "com.h2database:h2"
