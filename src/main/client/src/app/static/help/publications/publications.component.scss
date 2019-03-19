@@ -1,0 +1,66 @@
+.publications {
+
+  & ul{
+    list-style-type: none;
+    line-height: 30px;
+    text-align: justify;
+  }
+
+  mat-table {
+    max-height: 600px;
+    overflow-y: scroll;
+
+    & .mat-column-year, .mat-column-title, .mat-column-journal {
+      width: 5%;
+    }
+
+    & .mat-column-title, .mat-column-authors {
+      width: 35%;
+      padding: 0 0 15px;
+    }
+
+    & .mat-column-year, .mat-column-journal {
+      text-align: center;
+    }
+
+    & .mat-header-cell {
+
+    }
+
+    & td, th {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+      border-top: 0;
+      border-left: 0;
+      border-right: 0;
+    }
+
+    & th.mat-header-cell{
+      text-align: center;
+      color: black;
+      font-size: 16px;
+    }
+  }
+
+  & table {
+    border: none;
+  }
+
+  & table th{
+    text-align: center;
+  }
+}
+
+a.mat-btn {
+  text-decoration: none;
+  color: white !important;
+  background-color: #ec9736;
+}
+
+@media (max-width: 767px){
+  .publications ul{
+    list-style-type: square;
+    padding: 0;
+    margin: 0 15px 0 15px;
+    line-height: 25px;
+  }
+}

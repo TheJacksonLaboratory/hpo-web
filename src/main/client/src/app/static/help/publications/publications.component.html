@@ -1,5 +1,35 @@
 <div class="container publications">
   <h1 class="center pageTitle">Publications</h1>
+  <mat-table [dataSource]="publications" class="mat-elevation-z8">
+
+    <!-- Year Column -->
+    <ng-container matColumnDef="year">
+      <th mat-header-cell *matHeaderCellDef> Year </th>
+      <td mat-cell *matCellDef="let element"> {{element.year}} </td>
+    </ng-container>
+
+    <!-- Title Column -->
+    <ng-container matColumnDef="title">
+      <th mat-header-cell *matHeaderCellDef> Title </th>
+      <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+    </ng-container>
+
+    <!-- Authors Column -->
+    <ng-container matColumnDef="authors">
+      <th mat-header-cell *matHeaderCellDef> Authors </th>
+      <td mat-cell *matCellDef="let element"> {{element.authors}} </td>
+    </ng-container>
+
+    <!-- Journal Column -->
+    <ng-container matColumnDef="journal">
+      <th mat-header-cell *matHeaderCellDef> Journal </th>
+      <td mat-cell *matCellDef="let element"> {{element.journal}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </mat-table>
+
   <ul>
     <li>Posey J, et al. “Resolution of Disease Phenotypes Resulting from Multilocus Genomic Variation” NEJM (2017)</li>
     <li>D Smedley, et al. “Next-generation diagnostics and disease-gene discovery with the Exomiser” Nature Protocols (2015)</li>

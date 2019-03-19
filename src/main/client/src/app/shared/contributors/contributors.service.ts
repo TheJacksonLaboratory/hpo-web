@@ -1,12 +1,12 @@
 
-import {map} from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import { Contributors } from "../../browser/models/models";
+import { Contributors } from '../../browser/models/models';
 import { Observable } from "rxjs";
 
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { environment } from "../../../environments/environment";
+import { environment } from '../../../environments/environment';
 
 
 @Injectable()
