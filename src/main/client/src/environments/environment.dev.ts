@@ -2,6 +2,7 @@ const HPO_API_BASE_URL = '../api/hpo/';
 export const environment = {
   production: false,
 
+  VERSION: require('../../package.json').version,
   // HPO API environment variables
   HPO_API_SEARCH_URL:  HPO_API_BASE_URL + 'search',
   HPO_API_TERM_SEARCH_URL: HPO_API_BASE_URL + 'term/',

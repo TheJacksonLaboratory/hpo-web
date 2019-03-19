@@ -14,7 +14,7 @@ export class AppComponent {
   gaTrackId = '';
   mobileNavSection = 'home';
   parentSections = [];
-  constructor(private newsService: NewsService) {
+  constructor() {
 
     // Avoid google analytics for dev and testing unless explicitly indicated
     if (environment.production && window.location.host === 'hpo.jax.org') {
@@ -23,8 +23,6 @@ export class AppComponent {
     } else if (!environment.production && environment.HPO_ENABLE_GA_TEST) {
       this.gaTrackId = environment.HPO_GOOGLE_ANALYTICS_TEST_TRACKING_ID;
     }
-
-    // console.log("loaded trackId :" + this.gaTrackId);
 
     if (this.gaTrackId.length > 0) {
       ga('create', this.gaTrackId, 'auto');
@@ -37,9 +35,6 @@ export class AppComponent {
 
       ga('send', 'pageview');
     }
-
-    newsService.setAllNews();
-
   }
 
   backNavigate() {

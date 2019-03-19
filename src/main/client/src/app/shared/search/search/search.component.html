@@ -9,7 +9,8 @@
            (input)="contentChanging($event.target.value)"
            (keyup.enter)="submitQuery($event.target.value)"
            (focus)="toggleDropdown()"
-           (blur)="toggleDropdown()">
+           (blur)="toggleDropdown()"
+           [(ngModel)] = "queryString" #searchbar>
     <p class="hint">
       <strong>e.g. <a (click)="setQuery('Arachnodactyly')">Arachnodactyly</a> |
         <a (click)="setQuery('Marfan syndrome')">Marfan syndrome</a> |
@@ -23,40 +24,41 @@
           <span class="hidden-xs">Showing best results.</span>  See all results for '{{queryText}}'
         </a>
     </div>
-    <div class="term-result" *ngIf="(navFilter == 'term' || navFilter == 'all') && terms.length > 0">
+    <div class="term-result" *ngIf="isCorrectCategory('term') && terms.length > 0">
           <div  class="result-title">
              Phenotypes - {{terms.length}} of {{termsCount}} displayed
           </div>
       <div class="result-list">
-            <div class="result" routerLink="/browse/term/{{item.ontologyId}}" *ngFor="let item of terms;" >
-              <div class="id">{{item.ontologyId}}</div>
-              <div class="name" *ngIf="!item.synonym" [innerHtml]="{name: item.name } | highlight: queryText"></div>
-              <div class="name" *ngIf="item.synonym" [innerHtml]="{name: item.synonym } | highlight: queryText"></div><br>
-            </div>
+          <div class="result" routerLink="/browse/term/{{item.ontologyId}}" *ngFor="let item of terms;">
+            <div class="id">{{item.ontologyId}}</div>
+            <div class="name" *ngIf="!item.synonym" [innerHtml]="{name: item.name } | highlight: queryText"></div>
+            <div class="name" *ngIf="item.synonym" [innerHtml]="{name: item.synonym } | highlight: queryText"></div>
+            <br>
+          </div>
       </div>
     </div>
 
-    <div class="disease-result" *ngIf="(navFilter == 'disease' || navFilter == 'all') && diseases.length > 0">
+    <div class="disease-result" *ngIf="isCorrectCategory('disease') && diseases.length > 0">
           <div  class="result-title">
             Diseases - {{diseases.length}} of {{diseasesCount}} displayed
           </div>
       <div class="result-list">
-            <div class="result" routerLink="/browse/disease/{{item.diseaseId}}" *ngFor="let item of diseases;" >
-              <div class="id">{{item.db}}</div>
-              <div class="name" [innerHtml]="{name: item.dbName } | highlight: queryText"></div><br>
-            </div>
+          <div class="result" routerLink="/browse/disease/{{item.diseaseId}}" *ngFor="let item of diseases;">
+            <div class="id">{{item.db}}</div>
+            <div class="name" [innerHtml]="{name: item.dbName } | highlight: queryText"></div><br>
+          </div>
       </div>
     </div>
 
-    <div class="gene-result" *ngIf="(navFilter == 'gene' || navFilter == 'all') && genes.length > 0">
+    <div class="gene-result" *ngIf="isCorrectCategory('gene') && genes.length > 0">
           <div  class="result-title">
             Genes - {{genes.length}} of {{genesCount}} displayed
           </div>
       <div class="result-list">
-            <div class="result" routerLink="/browse/gene/{{item.entrezGeneId}}" *ngFor="let item of genes;" >
-              <div class="id">{{item.entrezGeneId}}</div>
-              <div class="name" [innerHtml]="{name: item.entrezGeneSymbol } | highlight: queryText"></div><br>
-            </div>
+          <div class="result" routerLink="/browse/gene/{{item.entrezGeneId}}" *ngFor="let item of genes;">
+            <div class="id">{{item.entrezGeneId}}</div>
+            <div class="name" [innerHtml]="{name: item.entrezGeneSymbol } | highlight: queryText"></div><br>
+          </div>
       </div>
     </div>
 

@@ -1,7 +1,7 @@
 import { TestBed, inject } from '@angular/core/testing';
 import { NewsService } from './news.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { allMockNews, subMockNews } from "./news.mock";
+import { allMockNews, subMockNews } from './news.mock';
 
 describe('NewsService', () => {
   beforeEach(() => {
@@ -41,11 +41,13 @@ describe('NewsService', () => {
     HttpTestingController, NewsService
   ], (httpMock, newsService: NewsService) => {
     newsService['allNews'] = allMockNews;
-    const teaserNews = newsService.getTeaserNews();
-    expect(teaserNews).toBeDefined();
-    expect(teaserNews.length).toBe(3);
-    expect(teaserNews[0].date).toEqual('December 17, 2019');
-    expect(teaserNews[1].date).toEqual('April 10, 2018');
-    expect(teaserNews[2].date).toEqual('April 9, 2018');
+    newsService.getTeaserNews().subscribe(teaserNews => {
+      expect(teaserNews).toBeDefined();
+      expect(teaserNews.length).toBe(3);
+      expect(teaserNews[0].date).toEqual('December 17, 2019');
+      expect(teaserNews[1].date).toEqual('April 10, 2018');
+      expect(teaserNews[2].date).toEqual('April 9, 2018');
+    });
+
   }));
 });

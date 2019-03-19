@@ -4,10 +4,9 @@
     "outDir": "../out-tsc/app",
     "baseUrl": "./",
     "module": "es6",
-    "types": []
+    "types": ["node", "jasmine"]
   },
   "exclude": [
-    "test.ts",
-    "**/*.spec.ts"
+    "test.ts"
   ]
 }

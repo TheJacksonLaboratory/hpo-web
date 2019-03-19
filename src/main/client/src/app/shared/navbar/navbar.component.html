@@ -64,9 +64,8 @@
   <button class="mobile-menu  hidden-sm hidden-md hidden-lg" color="white" mat-button (click)="navOpen()">
     <mat-icon>menu</mat-icon>
   </button>
-  <p class="ontoversion">{{ontologyVersion}}</p>
   <!-- Mobile Navbar -->
-  <div  *ngIf="showSearch" class="navbar-search-wrapper col-lg-4">
+  <div  *ngIf="showSearch" class="navbar-search-wrapper">
     <searchbar></searchbar>
   </div>
   <button class="mobile-menu hidden-xs hidden-md hidden-lg" color="white" mat-button (click)="navOpen()">

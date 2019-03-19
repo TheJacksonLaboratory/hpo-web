@@ -1,12 +1,14 @@
 import { Injectable, OnInit } from '@angular/core';
 import { News } from '../../browser/models/models';
 import { Observable, of } from 'rxjs';
-import { HttpClient, HttpHeaders} from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
+import { map, publishReplay, refCount } from 'rxjs/internal/operators';
 
 @Injectable()
 export class NewsService {
   private allNews: any;
+  private newsObservable$: any;
   options = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -16,52 +18,60 @@ export class NewsService {
 
   constructor(private http: HttpClient) { }
 
+
  /* Return a specific months news */
   getNewsByDate(date: string): Observable<News[]> {
     if (date) {
-      if (this.allNews[date]) {
-        return of(this.allNews[date]);
-      } else {
-        return of(null);
-      }
+      return this.getNews().pipe(
+        map(news => news[date])
+      );
     }
   }
 
   /* Return all unique month-years with news*/
   getUniqueDates(): Observable<Array<string>> {
-    if (this.allNews) {
-      return of(this._getDates());
-    } else {
-      return of(null);
-    }
+   return this.getNews().pipe(
+     map(news => this._getDates(news))
+   );
   }
 
   /* Return all month years */
-  private _getDates(): Array<string> {
-    if (this.allNews) {
-      return Object.keys(this.allNews);
-    }
+   _getDates(news: News[]): Array<string> {
+      return Object.keys(news);
   }
 
-  getTeaserNews(): News[] {
-   if (this.allNews) {
-     let news = Object.keys(this.allNews).map(key => this.allNews[key]);
-     news = [].concat.apply([], news);
-     news.sort((a, b) => {
-       const a1 = new Date(a.date);
-       const b1 = new Date(b.date);
-       return a1 > b1 ? -1 : a1 < b1 ? 1 : 0;
-     });
-     return news.slice(0, 3);
-   }
+  /* Get the teaser news for homepage */
+  getTeaserNews(): Observable<News[]> {
+    return this.getNews().pipe(
+       map(news => this.selectTeasers(news))
+     );
+  }
+
+  /* Get the 3 most recent news items */
+  selectTeasers(allNews: News[]) {
+    let news = Object.keys(allNews).map(key => allNews[key]);
+    news = [].concat.apply([], news);
+    news.sort((a, b) => {
+      const a1 = new Date(a.date);
+      const b1 = new Date(b.date);
+      return a1 > b1 ? -1 : a1 < b1 ? 1 : 0;
+    });
+    return news.slice(0, 3);
+  }
+
+  /* Get news items from github and store it as a "cache" */
+  getNews(): Observable<News[]> {
+    if (!this.newsObservable$) {
+      this.newsObservable$ =  this.http.get(environment.HPO_NEWS_JSON_URL).pipe(
+        publishReplay(1),
+        refCount()
+      );
+    }
+    return this.newsObservable$;
   }
 
   /* Get the news items from the api */
-  setAllNews(): void {
-    this.http.get(environment.HPO_NEWS_JSON_URL).subscribe((data) => {
-      this.allNews = data;
-    }, (error) => {
-      this.allNews = null;
-    });
+  setAllNews(news: News[]): void {
+      this.allNews = news;
   }
 }
