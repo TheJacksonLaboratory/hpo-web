@@ -7,7 +7,7 @@ import org.monarchinitiative.phenol.ontology.data.TermId
 import spock.lang.Shared
 import spock.lang.Specification
 
-class Loinc2HpoFactoryTest extends Specification {
+class Loinc2HpoFactorySpec extends Specification {
 
   @Shared
   Loinc2HpoFactory factory

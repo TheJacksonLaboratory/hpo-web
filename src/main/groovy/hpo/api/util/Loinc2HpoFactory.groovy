@@ -11,36 +11,33 @@ import org.monarchinitiative.phenol.ontology.data.TermId
 
 class Loinc2HpoFactory {
 
-  Map<LoincId, LOINC2HpoAnnotationImpl> annotationMap
-  Map<TermId, Set<LoincId>> reverseAnnotationMap
-  Map<LoincId, LoincEntry> loincEntryMap
   String annotationPath
   String loincEntryPath
 
+  Loinc2Hpo getInstance(){
+    Map<LoincId, LOINC2HpoAnnotationImpl> annotationMap = annotationMap()
+    return new Loinc2Hpo(annotationMap, reverseAnnotationMap(annotationMap), loincEntryMap())
+  }
 
   /**
    * @return annotation map from LOINC ids to the annotations
    */
   Map<LoincId, LOINC2HpoAnnotationImpl> annotationMap() {
-    if (annotationMap == null) {
-      if (annotationPath == null) {
-        annotationPath = new ClassPathResource('loinc2hpo_annotations_v2.0.tsv').file.absolutePath
-      }
-      // TODO: remove empty map after refactoring loinc2hpo
-      def parser = new LoincAnnotationSerializerToTSVSingleFile(new HashMap<TermId, Term>())
-      annotationMap = parser.parse(annotationPath)
-    }
-
-    return annotationMap
+    Map<LoincId, LOINC2HpoAnnotationImpl> annotationMap;
+    annotationPath = new ClassPathResource('loinc2hpo_annotations_v2.0.tsv').file.absolutePath
+    // TODO: remove empty map after refactoring loinc2hpo
+    def parser = new LoincAnnotationSerializerToTSVSingleFile(new HashMap<TermId, Term>())
+    return parser.parse(annotationPath);
   }
 
   /**
    * @return annotation map from HPO terms to sets of LOINC ids
    */
-  Map<TermId, Set<LoincId>> reverseAnnotationMap() {
-    if (reverseAnnotationMap == null) {
-      annotationMap = annotationMap()
-      reverseAnnotationMap = new HashMap<>()
+  Map<TermId, Set<LoincId>> reverseAnnotationMap(Map<LoincId, LOINC2HpoAnnotationImpl> annotationMap) {
+      if(annotationMap == null){
+        throw new IllegalStateException("Annotation Map is null.")
+      }
+      Map<TermId, Set<LoincId>> reverseAnnotationMap = new HashMap<>()
       annotationMap.entrySet().stream().forEach {entry ->
         entry.getValue().getCandidateHpoTerms().values().forEach {
           mapping ->
@@ -49,21 +46,12 @@ class Loinc2HpoFactory {
             reverseAnnotationMap.get(hpo).add(entry.getKey())
         }
       }
-    }
-
-    return reverseAnnotationMap
+    return reverseAnnotationMap;
   }
 
 
   Map<LoincId, LoincEntry> loincEntryMap() {
-    if (loincEntryMap == null) {
-      if (loincEntryPath == null) {
-        loincEntryPath = new ClassPathResource('LoincTableCore').file.absolutePath
-      }
-      loincEntryMap = LoincEntry.getLoincEntryList(loincEntryPath)
-    }
-
-    return loincEntryMap
+    loincEntryPath = new ClassPathResource('LoincTableCore.csv').file.absolutePath
+    return LoincEntry.getLoincEntryList(loincEntryPath)
   }
-
 }
