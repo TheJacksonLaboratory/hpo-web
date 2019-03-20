@@ -13,11 +13,7 @@ class HpoLoincServiceSpec extends Specification implements ServiceUnitTest<HpoLo
 
   @Shared
   Loinc2Hpo loinc2Hpo
-
-  void setupSpec() {
-    loinc2Hpo = new Loinc2HpoFactory().getInstance()
-  }
-
+  
   void setup(){
     service.hpoLoinc = loinc2Hpo
   }
