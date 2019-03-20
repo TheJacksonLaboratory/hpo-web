@@ -33,10 +33,11 @@ class Loinc2HpoFactorySpec extends Specification {
     given:
       String target1 = "38230-9"
       String target2 = "5778-6"
+      def annotationMap = factory.annotationMap()
 
     when:
-      Set<LoincId> result1 = factory.reverseAnnotationMap().get(TermId.of("HP:0004363"))
-      Set<LoincId> result2 = factory.reverseAnnotationMap().get(TermId.of("HP:0040318"))
+      Set<LoincId> result1 = factory.reverseAnnotationMap(annotationMap).get(TermId.of("HP:0004363"))
+      Set<LoincId> result2 = factory.reverseAnnotationMap(annotationMap).get(TermId.of("HP:0040318"))
 
     then:
       result1.size() == 1

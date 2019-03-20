@@ -11,8 +11,8 @@ import org.monarchinitiative.phenol.ontology.data.TermId
 
 class Loinc2HpoFactory {
 
-  String annotationPath
-  String loincEntryPath
+  String annotationPath = new ClassPathResource('loinc2hpo_annotations_v2.0.tsv').file.absolutePath
+  String loincEntryPath = new ClassPathResource('LoincTableCore.csv').file.absolutePath
 
   Loinc2Hpo getInstance(){
     Map<LoincId, LOINC2HpoAnnotationImpl> annotationMap = annotationMap()
@@ -24,7 +24,6 @@ class Loinc2HpoFactory {
    */
   Map<LoincId, LOINC2HpoAnnotationImpl> annotationMap() {
     Map<LoincId, LOINC2HpoAnnotationImpl> annotationMap;
-    annotationPath = new ClassPathResource('loinc2hpo_annotations_v2.0.tsv').file.absolutePath
     // TODO: remove empty map after refactoring loinc2hpo
     def parser = new LoincAnnotationSerializerToTSVSingleFile(new HashMap<TermId, Term>())
     return parser.parse(annotationPath);
@@ -51,7 +50,6 @@ class Loinc2HpoFactory {
 
 
   Map<LoincId, LoincEntry> loincEntryMap() {
-    loincEntryPath = new ClassPathResource('LoincTableCore.csv').file.absolutePath
     return LoincEntry.getLoincEntryList(loincEntryPath)
   }
 }
