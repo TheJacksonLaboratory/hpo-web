@@ -1,8 +1,11 @@
 package spring
+
+import groovy.sql.Sql
 import hpo.api.util.HpoAssociationFactory
 import hpo.api.util.HpoOntologyFactory
 import hpo.api.util.HpoUtilities
 import hpo.api.util.Loinc2HpoFactory
+import org.springframework.beans.factory.config.MethodInvokingFactoryBean
 
 // Place your Spring DSL code here
 beans = {
@@ -17,5 +20,12 @@ beans = {
 
     hpoUtilities(HpoUtilities, hpoOntology)
 
-    groovySql(groovy.sql.Sql, ref('dataSource'))
+    groovySql(Sql, ref('dataSource'))
+
+    // To disable log4j dependency logger
+    log4jConfigurer(MethodInvokingFactoryBean) {
+      targetClass = "org.springframework.util.Log4jConfigurer"
+      targetMethod = "initLogging"
+      arguments = ["classpath:grails-app/log4j2.properties"]
+    }
 }

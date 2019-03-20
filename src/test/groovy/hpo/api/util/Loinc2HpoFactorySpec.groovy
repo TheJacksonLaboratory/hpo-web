@@ -6,7 +6,9 @@ import org.monarchinitiative.loinc2hpo.loinc.LoincId
 import org.monarchinitiative.phenol.ontology.data.TermId
 import spock.lang.Shared
 import spock.lang.Specification
+import spock.lang.Unroll
 
+@Unroll
 class Loinc2HpoFactorySpec extends Specification {
 
   @Shared
@@ -18,32 +20,36 @@ class Loinc2HpoFactorySpec extends Specification {
     factory.setLoincEntryPath(new ClassPathResource("LoincTableCore_test.csv").file.absolutePath)
   }
 
-  def "AnnotationMap"() {
-    given:
-      int SIZE = 3
+  def "Annotation map has correct size and keys"() {
 
     when:
-      int size = factory.annotationMap().size()
+      def resultMap = factory.annotationMap()
 
     then:
-      size == SIZE
+      resultMap.size() == expectedSize
+      resultMap.keySet().toString() == expectedKeys
+
+    where:
+    expectedSize | expectedKeys
+    3            | '[38230-9, 738-5, 5778-6]'
+
   }
 
-  def "ReverseAnnotationMap"() {
+  def "ReverseAnnotationMap returns #desc"() {
     given:
-      String target1 = "38230-9"
-      String target2 = "5778-6"
       def annotationMap = factory.annotationMap()
 
     when:
-      Set<LoincId> result1 = factory.reverseAnnotationMap(annotationMap).get(TermId.of("HP:0004363"))
-      Set<LoincId> result2 = factory.reverseAnnotationMap(annotationMap).get(TermId.of("HP:0040318"))
+      Set<LoincId> result = factory.reverseAnnotationMap(annotationMap).get(TermId.of(inputTerm))
 
     then:
-      result1.size() == 1
-    (++result1.iterator()).toString() == target1
-      result2.size() == 1
-    (++result2.iterator()).toString() == target2
+      result.size() == expectedSize
+      result*.toString() == expectedTarget;
+
+    where:
+    inputTerm     | expectedSize | expectedTarget   | desc
+    "HP:0004363"  |   1          | ["38230-9"]        | "correct result"
+    "HP:0040318"  |   1          | ["5778-6"]         | "correct result1"
 
 
   }
