@@ -51,23 +51,24 @@ class Loinc2HpoFactorySpec extends Specification {
     "HP:0004363"  |   1          | ["38230-9"]        | "correct result"
     "HP:0040318"  |   1          | ["5778-6"]         | "correct result1"
 
-
   }
 
-  def "LoincEntryMap"() {
+  def "LoincEntryMap returns #desc"() {
+
     given:
-      int SIZE = 3
-      LoincId query = new LoincId("10040-4")
+    def loincMap = factory.loincEntryMap()
 
     when:
-      int size = factory.loincEntryMap().size()
-      LoincEntry entry = factory.loincEntryMap().get(query)
+    LoincEntry result = loincMap.get(new LoincId(inputTerm))
 
     then:
-      size == SIZE
-      entry != null
-      entry.getLOINC_Number() == query
-      entry.getLongName() == "S wave amplitude in lead V1"
-      entry.getScale() == "Qn"
+    result*.getScale() == expectedScale
+    result*.getLongName() == expectedName;
+
+    where:
+    inputTerm     | expectedScale | expectedName                                | desc
+    "10040-4"     |   ["Qn"]      | ["S wave amplitude in lead V1"]             | "correct result"
+    "38230-9"     |   ["Qn"]      | ["Calcium.ionized [Mass/volume] in Blood"]  | "correct result1"
+
   }
 }
