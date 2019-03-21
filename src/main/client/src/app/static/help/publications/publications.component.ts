@@ -46,17 +46,9 @@ export class PublicationsComponent implements OnInit {
   filterPredicate(data: Publication, filter: string) {
     const filterVal = filter.split('~');
     const matchesCategory = function(item: Publication, category: string) {
-      if (category === 'all') {
-        return true;
-      } else if (category === 'us' && item.inhouse === true) {
-        return true;
-      } else if (category === 'hpo' && item.hpo === true) {
-        return true;
-      } else if (category === 'monarch' && item.monarch === true) {
-        return true;
-      }
-      return false;
+      return (category === 'all' || (category === 'us' && item.inhouse === true));
     };
+
     // Filter by category first
     const categoryBoolean = matchesCategory(data, filterVal[0]);
 
