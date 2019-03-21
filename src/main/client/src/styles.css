@@ -376,3 +376,8 @@ hr.underline-hr {
   background-color: rgb(78, 139, 162) !important;
   color: white !important;
 }
+
+.mat-sort-header-stem, .mat-sort-header-arrow {
+  color: white !important;
+  opacity: .6 !important;
+}

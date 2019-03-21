@@ -43,6 +43,6 @@ export class PublicationsService {
         }
       }
     }
-    return contributors;
+    return contributors.sort((a, b) => (a.year > b.year ? -1 : (a.year < b.year ? 1 : 0)));
   }
 }

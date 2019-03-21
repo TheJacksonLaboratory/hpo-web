@@ -1,6 +1,6 @@
 .publications {
 
-  & ul{
+  & ul {
     list-style-type: none;
     line-height: 30px;
     text-align: justify;
@@ -10,43 +10,61 @@
     max-height: 600px;
     overflow-y: scroll;
 
-    & .mat-column-year, .mat-column-title, .mat-column-journal {
-      width: 5%;
-    }
-
-    & .mat-column-title, .mat-column-authors {
-      width: 35%;
-      padding: 0 0 15px;
-    }
-
-    & .mat-column-year, .mat-column-journal {
-      text-align: center;
-    }
-
     & .mat-header-cell {
-
+      padding: 15px 5px 0 10px;
+      background-color: #4e8ba2;
+      color: white !important;
     }
 
-    & td, th {
-      border-bottom: 1px solid rgba(0, 0, 0, 0.12);
-      border-top: 0;
-      border-left: 0;
-      border-right: 0;
-    }
-
-    & th.mat-header-cell{
+    & .mat-column-year {
+      max-width: fit-content;
       text-align: center;
-      color: black;
-      font-size: 16px;
+    }
+
+    & .mat-column-journal {
+      max-width: 15%;
+    }
+
+    & mat-row {
+      .mat-column-journal {
+        padding: 0 15px 0 15px;
+      }
+
+      .mat-column-title {
+        padding: 0 10px 0 10px;
+      }
+
+      .mat-column-year{
+        padding: 0 10px 0 10px;
+      }
+    }
+
+    @media screen and (max-width: 767px) {
+      & .mat-column-journal, .mat-column-authors {
+        display: none;
+      }
     }
   }
 
-  & table {
-    border: none;
-  }
+  .filters {
+    margin-top: 15px;
 
-  & table th{
-    text-align: center;
+    .topics {
+      margin-left: 25px;
+    }
+
+    & .count {
+      float: right;
+    }
+
+    @media screen and (max-width: 767px) {
+      & .topics{
+        margin-left:0;
+      }
+      & .count {
+        float: unset;
+      }
+    }
   }
 }
 
@@ -56,11 +74,4 @@ a.mat-btn {
   background-color: #ec9736;
 }
 
-@media (max-width: 767px){
-  .publications ul{
-    list-style-type: square;
-    padding: 0;
-    margin: 0 15px 0 15px;
-    line-height: 25px;
-  }
-}
+

@@ -90,15 +90,15 @@ export interface DialogData {
 }
 
 export interface Publication {
-  authors: String;
-  title: String;
-  journal: String;
+  authors: string;
+  title: string;
+  journal: string;
   year: Number;
-  volume: String;
-  pages: String;
-  pmid: String;
+  volume: string;
+  pages: string;
+  pmid: string;
   inhouse: boolean;
   hpo: boolean;
   monarch: boolean;
-  topicList: Array<String>;
+  topicList: string[];
 }
