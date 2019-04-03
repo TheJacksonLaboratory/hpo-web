@@ -16,6 +16,10 @@
       color: white !important;
     }
 
+    & .mat-header-cell:first-child{
+      padding-left: 24px;
+    }
+
     & .mat-column-year {
       max-width: fit-content;
       text-align: center;

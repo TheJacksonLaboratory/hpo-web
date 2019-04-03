@@ -16,7 +16,7 @@ export class PublicationsComponent implements OnInit {
 
   publications: MatTableDataSource<Publication>;
   constructor(private pubService: PublicationsService) { }
-  displayedColumns: string[] = ['year', 'title', 'journal', 'authors'];
+  displayedColumns: string[] = [ 'authors', 'year', 'title', 'journal'];
   category = 'all';
   topics = new FormControl();
   topicList = [];

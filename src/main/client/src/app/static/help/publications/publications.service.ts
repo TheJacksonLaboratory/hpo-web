@@ -26,8 +26,10 @@ export class PublicationsService {
       for (const line of lines) {
         const fields = line.split('\t');
         if (!fields[0].startsWith('#') && line !== '') {
+          let authors = fields.shift();
+          authors = authors.split(',').length >= 3 ? authors.split(',').slice(0, 4).join(',') + ' et al.' : authors;
           const contributor =  {
-            'authors': fields.shift(),
+            'authors':  authors,
             'title': fields.shift(),
             'journal': fields.shift(),
             'year': +fields.shift(),
