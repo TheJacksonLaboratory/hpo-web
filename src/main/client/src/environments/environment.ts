@@ -34,6 +34,6 @@ export const environment = {
   // News
   HPO_NEWS_JSON_URL: 'https://raw.githubusercontent.com/monarch-initiative/hpo-web-config/master/news.json',
   // Publications
-  HPO_PUBLICATION_REST_URL: 'todo'
+  HPO_PUBLICATION_REST_URL: 'https://raw.githubusercontent.com/monarch-initiative/hpo-web-config/master/hpocitations.txt'
 };
 
