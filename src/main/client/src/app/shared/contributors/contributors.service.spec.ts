@@ -2,7 +2,7 @@ import { TestBed, inject } from '@angular/core/testing';
 import { ContributorsService } from './contributors.service';
 import { HttpClientTestingModule, HttpTestingController } from "@angular/common/http/testing";
 import { environment } from "../../../environments/environment";
-import { Contributors } from "../../browse/models/models";
+import { Contributors } from "../../browser/models/models";
 
 describe('ContributorsService', () => {
   beforeEach(() => {
