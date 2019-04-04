@@ -4,9 +4,8 @@ import { MatSort, MatTableDataSource, MatPaginator } from '@angular/material';
 import { forkJoin as observableForkJoin } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { TermService } from '../../services/term/term.service';
-import { Term, Gene, Disease, TermTree } from '../../models/models';
+import { Term, Gene, Disease, TermTree, LoincEntry } from '../../models/models';
 import { DialogService } from '../../../shared/dialog-excel-download/dialog.service';
-
 
 @Component({
   selector: 'app-term',
@@ -20,17 +19,23 @@ export class TermComponent implements OnInit {
   term: Term = {'id': '', 'name': '', 'definition': '', 'altTermIds': [], 'comment': '', 'synonyms': [],
     'isObsolete': true, 'xrefs': [], 'purl': ''};
   geneColumns = ['entrezGeneId', 'dbDiseases'];
-  diseaseColumns = ['diseaseId', 'diseaseName', 'dbGenes'];
+  geneSource: MatTableDataSource<Gene>;
   geneAssocCount: number;
   geneAssocMax: number;
   geneAssocOffset: number;
   geneDisplayCount: number;
+
+  diseaseColumns = ['diseaseId', 'diseaseName', 'dbGenes'];
   diseaseAssocCount: number;
   diseaseAssocMax: number;
   diseaseAssocOffset: number;
   diseaseDisplayCount: number;
-  geneSource: MatTableDataSource<Gene>;
   diseaseSource: MatTableDataSource<Disease>;
+
+  loincSource: MatTableDataSource<LoincEntry>;
+  loincColumns = ['id', 'longName'];
+  loincDisplayCount: number;
+
   treeData: TermTree;
   assocLoading = true;
   overlay = false;
@@ -53,8 +58,9 @@ export class TermComponent implements OnInit {
       this.refreshData(id);
       const geneService = this.termService.searchGenesByTerm(id);
       const diseaseService = this.termService.searchDiseasesByTerm(id);
-      return observableForkJoin(geneService, diseaseService);
-    })).subscribe(([res1, res2]) => {
+      const loincService = this.termService.searchLoincByTerm(id);
+      return observableForkJoin(geneService, diseaseService, loincService);
+    })).subscribe(([res1, res2, res3]) => {
 
       this.geneSource = new MatTableDataSource(res1.genes);
       this.geneAssocCount = res1.geneCount;
@@ -71,6 +77,8 @@ export class TermComponent implements OnInit {
       this.assocLoading = false;
       this.displayAllDiseaseAssc = false;
 
+      this.loincSource = new MatTableDataSource(res3.loincEntries);
+      this.loincDisplayCount = res3.loincEntries.length;
     }, err => {
       // TODO: Implement Better Handling Here
       console.log(err);

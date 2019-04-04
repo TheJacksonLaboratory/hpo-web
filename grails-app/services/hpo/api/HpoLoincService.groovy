@@ -21,10 +21,11 @@ class HpoLoincService {
     Map<LoincId, LoincEntry> loincEntryMap = hpoLoinc.getLoincEntryMap()
 
     Set<LoincEntry> result = new HashSet<>()
-
-    loincIds.each { LoincId loincId ->
-      LoincEntry loincEntry = loincEntryMap.get(loincId)
-      result.add(loincEntry)
+    if(loincIds != null){
+      loincIds.each { LoincId loincId ->
+        LoincEntry loincEntry = loincEntryMap.get(loincId)
+        result.add(loincEntry)
+      }
     }
 
     return result

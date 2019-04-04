@@ -88,3 +88,8 @@ export interface DialogData {
   type: string;
   counts: {genes?: number, diseases?: number, terms?: number};
 }
+
+export interface LoincEntry {
+  id: string;
+  longName: string;
+}

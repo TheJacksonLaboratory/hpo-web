@@ -21,11 +21,4 @@ beans = {
     hpoUtilities(HpoUtilities, hpoOntology)
 
     groovySql(Sql, ref('dataSource'))
-
-    // To disable log4j dependency logger
-    log4jConfigurer(MethodInvokingFactoryBean) {
-      targetClass = "org.springframework.util.Log4jConfigurer"
-      targetMethod = "initLogging"
-      arguments = ["classpath:grails-app/log4j2.properties"]
-    }
 }

@@ -22,6 +22,12 @@ export class TermService {
             .get(environment.HPO_API_TERM_SEARCH_URL + '/' + query, options);
     }
 
+    searchLoincByTerm(query: string): Observable<any>{
+      const options = {headers: null, params: null};
+      options.headers = this.headers;
+      return this.http.get(environment.HPO_API_TERM_SEARCH_URL + query + '/loinc', options);
+    }
+
     searchGenesByTerm(query: string, offset: string = '0', max: string = '20'): Observable<any> {
       const params =   new HttpParams()
         .set('offset', offset)
