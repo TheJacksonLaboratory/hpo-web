@@ -94,7 +94,7 @@
                             </div>
 
                             <div [hidden]="assocLoading"class="associations disease-association">
-                              <mat-table #table [dataSource]="diseaseSource" matSort>
+                              <mat-table #table [dataSource]="diseaseSource">
                                 <mat-header-row *matHeaderRowDef="diseaseColumns;"></mat-header-row>
                                 <mat-row *matRowDef="let row; columns: diseaseColumns;"></mat-row>
                                 <ng-container matColumnDef="diseaseId">
@@ -155,7 +155,7 @@
                       </div>
 
                       <div [hidden]="assocLoading" class="associations gene-association">
-                        <mat-table #table [dataSource]="geneSource" matSort>
+                        <mat-table #table [dataSource]="geneSource">
                           <mat-header-row *matHeaderRowDef="geneColumns"></mat-header-row>
                           <mat-row *matRowDef="let row; columns: geneColumns;"></mat-row>
                           <ng-container matColumnDef="entrezGeneId">
@@ -198,47 +198,47 @@
 
               <!-- Loinc Association -->
               <mat-tab label="LOINC Associations">
-                <div [hidden]="loincDisplayCount == 0">
-                  <mat-progress-bar  *ngIf="assocLoading" class="loading-result-details" color="primary" mode="buffer">
-                  </mat-progress-bar>
-                  <div class="tab-output-container">
-                    <div [hidden]="assocLoading" class="associations loinc-association">
-                      <mat-table #table [dataSource]="loincSource" matSort>
-                        <mat-header-row *matHeaderRowDef="loincColumns"></mat-header-row>
-                        <mat-row *matRowDef="let row; columns: loincColumns;"></mat-row>
-                        <ng-container matColumnDef="id">
-                          <mat-header-cell *matHeaderCellDef> LOINC Code </mat-header-cell>
-                          <mat-cell *matCellDef="let row">
-                            <a href="http://loinc.org/{{row.id}}" target="__blank">{{row.id}}</a>
-                          </mat-cell>
-                        </ng-container>
-                        <ng-container matColumnDef="longName">
-                          <mat-header-cell *matHeaderCellDef> LOINC Name </mat-header-cell>
-                          <mat-cell *matCellDef="let row">
-                            {{row.longName}}
-                          </mat-cell>
-                        </ng-container>
-                      </mat-table>
-                      <!-- paging: associations subset count -->
-                      <div *ngIf="!assocLoading" class="associationsPaging">
-                        <p>Displaying {{loincDisplayCount}} LOINC associations.</p>
-                      </div>
-                      <div *ngIf="!assocLoading" class="loinc-license">
-                        <sup>**</sup>This material contains content from LOINC® (
-                        <a href="http://loinc.org" target="__blank">http://loinc.org</a>). The LOINC Table, LOINC Table
-                        Core, LOINC Panels and Forms File, LOINC Answer File, LOINC Part File, LOINC Group File, LOINC
-                        Document Ontology File, LOINC Hierarchies, LOINC Linguistic Variants File, LOINC/RSNA Radiology
-                        Playbook, and LOINC/IEEE Medical Device Code Mapping Table are copyright © 1995-2018,
-                        Regenstrief Institute, Inc. and the Logical Observation Identifiers Names and Codes (LOINC)
-                        Committee and is available at no cost under the license at
-                        <a href="http://loinc.org/license" target="__blank">http://loinc.org/license</a>.
+                  <div [hidden]="loincDisplayCount == 0">
+                    <mat-progress-bar  *ngIf="assocLoading" class="loading-result-details" color="primary" mode="buffer">
+                    </mat-progress-bar>
+                    <div class="tab-output-container">
+                      <div [hidden]="assocLoading" class="associations loinc-association">
+                        <mat-table #table [dataSource]="loincSource" matSort>
+                          <mat-header-row *matHeaderRowDef="loincColumns"></mat-header-row>
+                          <mat-row *matRowDef="let row; columns: loincColumns;"></mat-row>
+                          <ng-container matColumnDef="id">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header> LOINC Code </mat-header-cell>
+                            <mat-cell *matCellDef="let row">
+                              <a href="http://loinc.org/{{row.id}}" target="__blank">{{row.id}}</a>
+                            </mat-cell>
+                          </ng-container>
+                          <ng-container matColumnDef="longName">
+                            <mat-header-cell *matHeaderCellDef> LOINC Name </mat-header-cell>
+                            <mat-cell *matCellDef="let row">
+                              {{row.longName}}
+                            </mat-cell>
+                          </ng-container>
+                        </mat-table>
+                        <!-- paging: associations subset count -->
+                        <div *ngIf="!assocLoading" class="associationsPaging">
+                          <p>Displaying {{loincDisplayCount}} LOINC associations.</p>
+                        </div>
+                        <div *ngIf="!assocLoading" class="loinc-license">
+                          <sup>**</sup>This material contains content from LOINC® (
+                          <a href="http://loinc.org" target="__blank">http://loinc.org</a>). The LOINC Table, LOINC Table
+                          Core, LOINC Panels and Forms File, LOINC Answer File, LOINC Part File, LOINC Group File, LOINC
+                          Document Ontology File, LOINC Hierarchies, LOINC Linguistic Variants File, LOINC/RSNA Radiology
+                          Playbook, and LOINC/IEEE Medical Device Code Mapping Table are copyright © 1995-2018,
+                          Regenstrief Institute, Inc. and the Logical Observation Identifiers Names and Codes (LOINC)
+                          Committee and is available at no cost under the license at
+                          <a href="http://loinc.org/license" target="__blank">http://loinc.org/license</a>.
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div class="container center" [hidden]="loincDisplayCount != 0">
-                  <h4>No LOINC associations found for <strong>{{term.id}}</strong></h4>
-                </div>
+                  <div class="container center" [hidden]="loincDisplayCount != 0">
+                    <h4>No LOINC associations found for <strong>{{term.id}}</strong></h4>
+                  </div>
               </mat-tab>
             </mat-tab-group>
           </div>
