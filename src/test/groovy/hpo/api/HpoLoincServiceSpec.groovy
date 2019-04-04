@@ -2,7 +2,6 @@ package hpo.api
 
 import grails.testing.services.ServiceUnitTest
 import hpo.api.util.Loinc2Hpo
-import hpo.api.util.Loinc2HpoFactory
 import org.monarchinitiative.loinc2hpo.loinc.LoincEntry
 import org.monarchinitiative.loinc2hpo.loinc.LoincId
 import org.monarchinitiative.phenol.ontology.data.TermId
@@ -13,7 +12,7 @@ class HpoLoincServiceSpec extends Specification implements ServiceUnitTest<HpoLo
 
   @Shared
   Loinc2Hpo loinc2Hpo
-  
+
   void setup(){
     service.hpoLoinc = loinc2Hpo
   }
