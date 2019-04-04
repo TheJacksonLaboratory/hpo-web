@@ -4,14 +4,14 @@ import { FooterComponent } from './shared/footer/footer.component';
 import { AppComponent } from './app.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { environment } from '../environments/environment';
-import { HttpClientTestingModule } from "@angular/common/http/testing";
-import { GlobalMaterialModules } from "./shared/modules/global.module";
-import { FormsModule } from "@angular/forms";
-import { ExtrasModule } from "./shared/modules/extras.module";
-import { SearchService } from "./shared/search/service/search.service";
-import { NewsService } from "./shared/news/news.service";
-import { SearchModule } from "./shared/search/search.module";
-import { NoopAnimationsModule } from "@angular/platform-browser/animations";
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { GlobalMaterialModules } from './shared/modules/global.module';
+import { FormsModule } from '@angular/forms';
+import { ExtrasModule } from './shared/modules/extras.module';
+import { SearchService } from './shared/search/service/search.service';
+import { NewsService } from './shared/news/news.service';
+import { SearchModule } from './shared/search/search.module';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 
 describe('AppComponent', () => {

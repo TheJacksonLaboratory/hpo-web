@@ -88,3 +88,17 @@ export interface DialogData {
   type: string;
   counts: {genes?: number, diseases?: number, terms?: number};
 }
+
+export interface Publication {
+  authors: string;
+  title: string;
+  journal: string;
+  year: Number;
+  volume: string;
+  pages: string;
+  pmid: string;
+  inhouse: boolean;
+  hpo: boolean;
+  monarch: boolean;
+  topicList: string[];
+}

@@ -1,5 +1,5 @@
 import { Injectable, OnInit } from '@angular/core';
-import { News } from '../../browse/models/models';
+import { News } from '../../browser/models/models';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';

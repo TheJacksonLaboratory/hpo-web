@@ -28,7 +28,7 @@ import { DisclaimerComponent } from './resources/disclaimer/disclaimer.component
     ToolsModule,
     GlobalMaterialModules,
     SearchModule,
-    StaticRoutingModule,
+    StaticRoutingModule
   ],
   declarations: [ HomeComponent,
     ContactComponent, CitationComponent, LicenseComponent,
