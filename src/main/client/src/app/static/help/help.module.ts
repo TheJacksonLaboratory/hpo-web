@@ -16,13 +16,16 @@ import { UsersComponent} from './users/users.component';
 import { ContributorsComponent } from './contributors/contributors.component';
 import { PublicationsComponent } from './publications/publications.component';
 import { FundingComponent } from './funding/funding.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
   imports: [
     CommonModule,
     HelpRoutingModule,
-    GlobalMaterialModules
+    GlobalMaterialModules,
+    FormsModule,
+    ReactiveFormsModule
   ],
   declarations: [AnnotationComponent, ClinicianGuideComponent, CollaborationComponent,
     DefinitionsComponent, HistoryComponent, IntroductionComponent, LaypersonComponent , MappingComponent,

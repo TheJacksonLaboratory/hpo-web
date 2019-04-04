@@ -1,4 +1,4 @@
-import {News} from '../../browse/models/models';
+import {News} from '../../browser/models/models';
 
 const april2018news = [
     {

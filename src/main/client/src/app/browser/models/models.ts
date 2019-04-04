@@ -93,3 +93,17 @@ export interface LoincEntry {
   id: string;
   longName: string;
 }
+
+export interface Publication {
+  authors: string;
+  title: string;
+  journal: string;
+  year: Number;
+  volume: string;
+  pages: string;
+  pmid: string;
+  inhouse: boolean;
+  hpo: boolean;
+  monarch: boolean;
+  topicList: string[];
+}

@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { DialogExcelDownloadComponent } from './dialog-excel-download.component';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from "@angular/material";
-import {DialogData} from "../../browse/models/models";
+import {DialogData} from "../../browser/models/models";
 
 
 describe('DialogExcelDownloadComponent', () => {
