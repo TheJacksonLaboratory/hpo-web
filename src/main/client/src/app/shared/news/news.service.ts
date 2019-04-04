@@ -56,6 +56,10 @@ export class NewsService {
       const b1 = new Date(b.date);
       return a1 > b1 ? -1 : a1 < b1 ? 1 : 0;
     });
+    news.forEach(function(item) {
+      const monthYear = item.date.split(',');
+      item.monthYear = monthYear[0].split(' ')[0] + monthYear[1];
+    });
     return news.slice(0, 3);
   }
 
