@@ -12,11 +12,13 @@
 
         <mat-form-field class="topics">
           <mat-label>Topics</mat-label>
-          <mat-select (selectionChange)="applyPublicationsFilter()" panelClass="topics-panel" [formControl]="topics" multiple>
+          <mat-select (selectionChange)="applyPublicationsFilter()" panelClass="topics-panel"
+                      [formControl]="topics" multiple>
             <mat-option *ngFor="let topic of topicList" [value]="topic">{{topic}}</mat-option>
           </mat-select>
         </mat-form-field>
-        <p class="count" *ngIf="publications">Displaying {{publications.filteredData.length}} of {{publications.data.length}} Publications</p>
+        <p class="count" *ngIf="publications">Displaying {{publications.filteredData.length}} of
+          {{publications.data.length}} Publications</p>
       </div>
       <mat-table [dataSource]="publications" class="mat-elevation-z8" matSort>
         <!-- Year Column -->

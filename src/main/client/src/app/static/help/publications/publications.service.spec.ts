@@ -1,9 +1,6 @@
 import { TestBed } from '@angular/core/testing';
-
 import { PublicationsService } from './publications.service';
-import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {MatTableModule} from '@angular/material';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('PublicationsService', () => {
   beforeEach(() => TestBed.configureTestingModule({
