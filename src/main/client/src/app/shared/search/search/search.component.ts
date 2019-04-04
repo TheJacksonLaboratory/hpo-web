@@ -33,7 +33,7 @@ import { distinctUntilChanged } from 'rxjs/operators';
       transition('inactive => active',
         animate('350ms ease-in-out')),
       transition('active => inactive',
-        animate('400ms ease-in-out'))
+        animate('200ms ease-in-out'))
     ])
   ]
 })
@@ -96,7 +96,7 @@ export class SearchComponent implements OnInit {
   }
 
   toggleDropdown() {
-    if (this.searchstate === 'inactive' && this.hasValidInput(this.queryText)) {
+    if (this.searchstate === 'inactive' && this.hasValidInput(this.queryString)) {
       this.searchstate = 'active';
       return;
     }
