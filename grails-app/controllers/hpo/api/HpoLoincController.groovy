@@ -1,7 +1,11 @@
 package hpo.api
 
+import org.monarchinitiative.phenol.ontology.data.TermId
+
 class HpoLoincController {
 
+
+  HpoLoincService hpoLoincService
   /**
    * Search by LoincId, show a list of HPO terms
    * @param loincId
@@ -15,9 +19,8 @@ class HpoLoincController {
    * Search by an hpo termId, show a list of LOINC codes
    * @param hpoId
    */
-  def searchByHpoId(String hpoId){
-
-    //@TODO: show at front end
+  def searchByHpoId(String id){
+    render(view: 'loinc', model: [entryList: hpoLoincService.searchByHpo(TermId.of(id)).toList()])
   }
 
 }
