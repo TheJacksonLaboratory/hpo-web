@@ -203,11 +203,11 @@
                     </mat-progress-bar>
                     <div class="tab-output-container">
                       <div [hidden]="assocLoading" class="associations loinc-association">
-                        <mat-table #table [dataSource]="loincSource" matSort>
+                        <mat-table #table [dataSource]="loincSource">
                           <mat-header-row *matHeaderRowDef="loincColumns"></mat-header-row>
                           <mat-row *matRowDef="let row; columns: loincColumns;"></mat-row>
                           <ng-container matColumnDef="id">
-                            <mat-header-cell *matHeaderCellDef mat-sort-header> LOINC Code </mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef> LOINC Code </mat-header-cell>
                             <mat-cell *matCellDef="let row">
                               <a href="http://loinc.org/{{row.id}}" target="__blank">{{row.id}}</a>
                             </mat-cell>

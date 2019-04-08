@@ -76,7 +76,6 @@ export class TermComponent implements OnInit {
       this.diseaseDisplayCount = (res2.diseaseCount < res2.max) ? res2.diseaseCount : res2.max;
       this.assocLoading = false;
       this.displayAllDiseaseAssc = false;
-      debugger;
       this.loincSource = new MatTableDataSource(res3.loincEntries);
       this.loincSource.sort = this.sort;
       this.loincDisplayCount = res3.loincEntries.length;
