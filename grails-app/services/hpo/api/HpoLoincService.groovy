@@ -2,7 +2,6 @@ package hpo.api
 
 import grails.compiler.GrailsCompileStatic
 import hpo.api.util.Loinc2Hpo
-import hpo.api.util.Loinc2HpoFactory
 import org.monarchinitiative.loinc2hpo.loinc.LoincEntry
 import org.monarchinitiative.loinc2hpo.loinc.LoincId
 import org.monarchinitiative.phenol.ontology.data.TermId
@@ -30,6 +29,4 @@ class HpoLoincService {
 
     return result
   }
-
-
 }
