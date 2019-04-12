@@ -81,7 +81,7 @@
                         </div>
 
                           <!-- term table -->
-                          <mat-table #table [dataSource]="termDataSource" matSort>
+                          <mat-table [dataSource]="termDataSource" matSort>
                             <mat-header-row *matHeaderRowDef="termColumns"></mat-header-row>
                             <mat-row *matRowDef="let row; columns: termColumns;"></mat-row>
                             <ng-container matColumnDef="ontologyId">
@@ -125,7 +125,7 @@
                           </div>
                         </div>
                           <!-- Disease Association Table -->
-                          <mat-table #table [dataSource]="diseaseDataSource" matSort>
+                          <mat-table [dataSource]="diseaseDataSource" matSort>
                             <mat-header-row *matHeaderRowDef="diseaseColumns"></mat-header-row>
                             <mat-row *matRowDef="let row; columns: diseaseColumns;"></mat-row>
                             <ng-container matColumnDef="diseaseId">

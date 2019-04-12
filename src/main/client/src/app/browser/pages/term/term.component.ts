@@ -37,6 +37,9 @@ export class TermComponent implements OnInit {
   loincDisplayCount: number;
 
   treeData: TermTree;
+  termTreeMainWidth: number;
+
+
   assocLoading = true;
   overlay = false;
   displayAllDiseaseAssc = false;
@@ -89,9 +92,20 @@ export class TermComponent implements OnInit {
     this.termService.searchTerm(query)
       .subscribe((data) => {
         this.setDefaults(data.details);
+        const maxTermWidth = 100;
         this.treeData = data.relations;
+        this.treeData.maxTermWidth = maxTermWidth;
+        const termCount = this.treeData.termCount;
         this.treeData.children.sort((a, b) => a.childrenCount > b.childrenCount ? (-1) : 1);
+        this.treeData.children.map(term => {
+          const percent = term.childrenCount / termCount;
+          const newWidth =  Math.ceil(maxTermWidth * percent);
+          const newMargin = -115 + ((maxTermWidth - newWidth)  - 5) ;
+          term.treeCountWidth = newWidth;
+          term.treeMargin = newMargin;
+        });
         this.termTitle = this.term.name;
+
       }, (error) => {
         // TODO:Implement Better Handling Here
         console.log(error);
@@ -101,7 +115,6 @@ export class TermComponent implements OnInit {
   reloadDiseaseAssociations(offset: string, max: string) {
     this.termService.searchDiseasesByTerm(this.term.id, offset, max)
       .subscribe((data) => {
-
         this.diseaseSource = new MatTableDataSource(data.diseases);
         this.diseaseAssocCount = data.diseaseCount;
         this.diseaseAssocOffset = data.offset;
@@ -109,7 +122,6 @@ export class TermComponent implements OnInit {
         this.diseaseDisplayCount = data.diseaseCount;
         this.displayAllDiseaseAssc = true;
         this.assocLoading = false;
-
         this.diseaseSource.paginator = this.diseasePaginator;
 
       });
@@ -118,7 +130,6 @@ export class TermComponent implements OnInit {
   reloadGeneAssociations(offset: string, max: string) {
     this.termService.searchGenesByTerm(this.term.id, offset, max)
       .subscribe((data) => {
-
         this.geneSource = new MatTableDataSource(data.genes);
         this.geneAssocCount = data.geneCount;
         this.geneAssocOffset = data.offset;
@@ -126,7 +137,6 @@ export class TermComponent implements OnInit {
         this.geneDisplayCount = data.geneCount;
         this.displayAllGeneAssc = true;
         this.assocLoading = false;
-
         this.geneSource.paginator = this.genePaginator;
       });
   }
@@ -187,6 +197,10 @@ export class TermComponent implements OnInit {
       diseases: this.diseaseAssocCount
     };
     this.dialogService.openDownloadDialog(this.term.id, 'term', counts);
+  }
+
+  setTreeStyles(child: Term): any {
+    return {'width': child.treeCountWidth + 'px', 'margin-left': child.treeMargin + 'px', 'margin-right': '20px'};
   }
 }
 
