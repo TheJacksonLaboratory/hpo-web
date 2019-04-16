@@ -56,12 +56,15 @@ export interface Term {
     childrenCount?: number;
     synonym?: string;
     matchingString?: string;
+    treeCountWidth?: number;
+    treeMargin?: number;
 }
 
 export interface TermTree {
   parents: Term[];
-  term: Term;
+  termCount: number;
   children: Term[];
+  maxTermWidth?: number;
 }
 export interface News {
   title: string;

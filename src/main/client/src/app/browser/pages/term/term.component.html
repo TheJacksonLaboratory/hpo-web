@@ -2,24 +2,35 @@
   <div class="container-custom">
     <div class="row">
         <!-- Term navigtaion tree - left pane-->
-        <div class="col-lg-3 tree-container">
-          <mat-card class="item-summary tree-navigation">
+        <div class="col-lg-4 tree-container">
+          <mat-card class="tree-navigation">
             <mat-card-content>
-              <h3 class="card-title">Hierarchy</h3>
-              <span matTooltip="Neighborhood View of HPO Hierarchy" matTooltipPosition="left" class="badge info-badge">i</span>
+              <div>
+                <h4 class="no-descendants">No. Descendants</h4>
+                <h3 class="card-title">Hierarchy</h3>
+                <span matTooltip="Neighborhood View of HPO Hierarchy" matTooltipPosition="left" class="info-badge">
+                  <i class="material-icons">help_outline</i>
+                </span>
+              </div>
               <hr class="underline-hr">
                     <ul class="tree" *ngIf="treeData">
                       <li *ngFor="let parent of treeData.parents">
+                        <span class="tree-counts" [ngStyle]="{'margin-left': '-100px', 'margin-right': '5px'}"
+                              matTooltip="{{parent.childrenCount}}" *ngIf="parent.childrenCount != 0"
+                              matTooltipPosition="above"> </span>
                         <a class="link"  routerLink="../{{parent.ontologyId}}" >{{parent.name}}</a>
-                        <span matTooltip="# of Descendants" matTooltipPosition="above"  *ngIf="parent.childrenCount != 0" class="badge tree-badge">{{parent.childrenCount}}</span>
                       </li>
                       <li>
-                        <span class="term"><strong>{{term.name}}</strong></span>
-                          <span class="badge tree-badge" matTooltip="# of Descendants" *ngIf="treeData.termCount != 0" matTooltipPosition="above">{{treeData.termCount}}</span>
+                        <div class="term">
+                          <span class="tree-counts" [ngStyle]="{'margin-left': '-115px'}"
+                                *ngIf="treeData.termCount != 0" matTooltip="{{treeData.termCount}}" matTooltipPosition="above"> </span>
+                          <strong>{{term.name}}</strong>
+                        </div>
                         <ul>
-                          <li *ngFor="let child of treeData.children">
+                          <li *ngFor="let child of treeData.children" class="children">
+                            <span class="tree-counts" [ngStyle]="setTreeStyles(child)" *ngIf="child.childrenCount != 0"
+                                  matTooltip="{{child.childrenCount}}" matTooltipPosition="above"> </span>
                             <a class="link" routerLink="../{{child.ontologyId}}">{{child.name}}</a>
-                            <span matTooltip="# of Descendants" matTooltipPosition="above" *ngIf="child.childrenCount != 0" class="badge tree-badge">{{child.childrenCount}}</span>
                           </li>
                         </ul>
                       </li>
@@ -29,7 +40,7 @@
         </div>
 
        <!-- right pane -->
-        <div class="col-lg-9">
+        <div class="col-lg-8">
             <!-- Term summary -->
             <mat-card class="item-summary">
               <mat-card-content>
@@ -94,7 +105,7 @@
                             </div>
 
                             <div [hidden]="assocLoading"class="associations disease-association">
-                              <mat-table #table [dataSource]="diseaseSource">
+                              <mat-table [dataSource]="diseaseSource">
                                 <mat-header-row *matHeaderRowDef="diseaseColumns;"></mat-header-row>
                                 <mat-row *matRowDef="let row; columns: diseaseColumns;"></mat-row>
                                 <ng-container matColumnDef="diseaseId">
@@ -155,7 +166,7 @@
                       </div>
 
                       <div [hidden]="assocLoading" class="associations gene-association">
-                        <mat-table #table [dataSource]="geneSource">
+                        <mat-table [dataSource]="geneSource">
                           <mat-header-row *matHeaderRowDef="geneColumns"></mat-header-row>
                           <mat-row *matRowDef="let row; columns: geneColumns;"></mat-row>
                           <ng-container matColumnDef="entrezGeneId">
@@ -203,7 +214,7 @@
                     </mat-progress-bar>
                     <div class="tab-output-container">
                       <div [hidden]="assocLoading" class="associations loinc-association">
-                        <mat-table #table [dataSource]="loincSource">
+                        <mat-table [dataSource]="loincSource">
                           <mat-header-row *matHeaderRowDef="loincColumns"></mat-header-row>
                           <mat-row *matRowDef="let row; columns: loincColumns;"></mat-row>
                           <ng-container matColumnDef="id">
