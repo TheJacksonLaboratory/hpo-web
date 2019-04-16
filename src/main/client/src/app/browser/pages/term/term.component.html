@@ -15,17 +15,21 @@
               <hr class="underline-hr">
                     <ul class="tree" *ngIf="treeData">
                       <li *ngFor="let parent of treeData.parents">
-                        <span class="tree-counts" [ngStyle]="{'margin-left': '-100px', 'margin-right': '5px'}"></span>
+                        <span class="tree-counts" [ngStyle]="{'margin-left': '-100px', 'margin-right': '5px'}"
+                              matTooltip="{{parent.childrenCount}}" *ngIf="parent.childrenCount != 0"
+                              matTooltipPosition="above"> </span>
                         <a class="link"  routerLink="../{{parent.ontologyId}}" >{{parent.name}}</a>
                       </li>
                       <li>
-                        <span class="term">
-                          <span class="tree-counts" [ngStyle]="{'margin-left': '-115px'}"></span>
+                        <div class="term">
+                          <span class="tree-counts" [ngStyle]="{'margin-left': '-115px'}"
+                                *ngIf="treeData.termCount != 0" matTooltip="{{treeData.termCount}}" matTooltipPosition="above"> </span>
                           <strong>{{term.name}}</strong>
-                        </span>
+                        </div>
                         <ul>
                           <li *ngFor="let child of treeData.children" class="children">
-                            <span class="tree-counts" [ngStyle]="setTreeStyles(child)"></span>
+                            <span class="tree-counts" [ngStyle]="setTreeStyles(child)" *ngIf="child.childrenCount != 0"
+                                  matTooltip="{{child.childrenCount}}" matTooltipPosition="above"> </span>
                             <a class="link" routerLink="../{{child.ontologyId}}">{{child.name}}</a>
                           </li>
                         </ul>
