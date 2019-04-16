@@ -50,7 +50,7 @@ This guide uses the H2 database which is a grails out-of-the-box in-memory or fi
 
 + Build the application with a gradle task.
 
-        ./gradlew clean build
+        ./gradlew build -Dgrails.env="test" -DchromeHeadless=true -Dwdm.chromeDriverVersion=2.35
         
         E.g.
         ...

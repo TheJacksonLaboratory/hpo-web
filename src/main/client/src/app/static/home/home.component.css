@@ -154,6 +154,7 @@ a.mat-btn{
   padding: 15px;
   color: white;
   position:absolute;
+  box-shadow: 1px 1px 8px darkgrey;
 }
 
 .mailing-list-wrapper a, .mailing-list-wrapper a:hover, .mailing-list-wrapper a:active, .mailing-list-wrapper a:visited,
@@ -179,6 +180,7 @@ a.mat-btn{
 a .irdirc{
   height: 100px;
   float:right;
+  box-shadow: 1px 1px 8px darkgrey;
 }
 
 
@@ -191,6 +193,7 @@ a .irdirc{
   a .irdirc{
     height: 100px;
     float:left;
+    box-shadow: 1px 1px 8px darkgrey;
   }
 
   .home-highlight-menu {

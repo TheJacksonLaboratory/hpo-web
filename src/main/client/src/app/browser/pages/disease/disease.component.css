@@ -1,0 +1,45 @@
+.term-association .mat-column-ontologyId {
+    max-width: 150px;
+}
+.term-association .mat-column-name {
+   max-width: 250px;
+}
+
+.mat-column-dbDiseases {
+   white-space: nowrap;
+   text-overflow: ellipsis;
+   overflow: hidden;
+}
+.gene-association .mat-column-diseaseName {
+    width:425px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.disease-details-tab-group {
+  border: 1px solid #e8e8e8;
+}
+
+.tab-output-container {
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+}
+
+.filter-header {
+  min-height: 64px;
+  padding: 8px 24px 0;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+.associations.term-association .category-title {
+  padding: 10px;
+  margin: 0;
+  background-color: rgb(78, 139, 162);
+  color: white;
+}

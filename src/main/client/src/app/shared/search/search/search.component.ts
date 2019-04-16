@@ -1,6 +1,6 @@
 import { Router } from '@angular/router';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { Disease, Gene, Term } from '../../../browse/models/models';
+import { Disease, Gene, Term } from '../../../browser/models/models';
 import { SearchService } from '../service/search.service';
 
 import {
@@ -31,9 +31,9 @@ import { distinctUntilChanged } from 'rxjs/operators';
         'visibility': 'visible'
       })),
       transition('inactive => active',
-        animate('350ms ease-in-out')),
+        animate('500ms ease-in-out')),
       transition('active => inactive',
-        animate('400ms ease-in-out'))
+        animate('200ms ease-in-out'))
     ])
   ]
 })
@@ -96,7 +96,7 @@ export class SearchComponent implements OnInit {
   }
 
   toggleDropdown() {
-    if (this.searchstate === 'inactive' && this.hasValidInput(this.queryText)) {
+    if (this.searchstate === 'inactive' && this.hasValidInput(this.queryString)) {
       this.searchstate = 'active';
       return;
     }
