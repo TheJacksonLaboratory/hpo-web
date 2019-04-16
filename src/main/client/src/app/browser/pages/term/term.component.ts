@@ -4,9 +4,8 @@ import { MatSort, MatTableDataSource, MatPaginator } from '@angular/material';
 import { forkJoin as observableForkJoin } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { TermService } from '../../services/term/term.service';
-import { Term, Gene, Disease, TermTree } from '../../models/models';
+import { Term, Gene, Disease, TermTree, LoincEntry } from '../../models/models';
 import { DialogService } from '../../../shared/dialog-excel-download/dialog.service';
-
 
 @Component({
   selector: 'app-term',
@@ -20,18 +19,26 @@ export class TermComponent implements OnInit {
   term: Term = {'id': '', 'name': '', 'definition': '', 'altTermIds': [], 'comment': '', 'synonyms': [],
     'isObsolete': true, 'xrefs': [], 'purl': ''};
   geneColumns = ['entrezGeneId', 'dbDiseases'];
-  diseaseColumns = ['diseaseId', 'diseaseName', 'dbGenes'];
+  geneSource: MatTableDataSource<Gene>;
   geneAssocCount: number;
   geneAssocMax: number;
   geneAssocOffset: number;
   geneDisplayCount: number;
+
+  diseaseColumns = ['diseaseId', 'diseaseName', 'dbGenes'];
   diseaseAssocCount: number;
   diseaseAssocMax: number;
   diseaseAssocOffset: number;
   diseaseDisplayCount: number;
-  geneSource: MatTableDataSource<Gene>;
   diseaseSource: MatTableDataSource<Disease>;
+
+  loincSource: MatTableDataSource<LoincEntry>;
+  loincColumns = ['id', 'longName'];
+  loincDisplayCount: number;
+
   treeData: TermTree;
+  termTreeMainWidth: number;
+
   assocLoading = true;
   overlay = false;
   displayAllDiseaseAssc = false;
@@ -39,8 +46,8 @@ export class TermComponent implements OnInit {
 
   @ViewChild('diseasePaginator') diseasePaginator: MatPaginator;
   @ViewChild('genePaginator') genePaginator: MatPaginator;
-
   @ViewChild(MatSort) sort: MatSort;
+
   constructor(private route: ActivatedRoute, private termService: TermService, private dialogService: DialogService) {
   }
 
@@ -53,8 +60,9 @@ export class TermComponent implements OnInit {
       this.refreshData(id);
       const geneService = this.termService.searchGenesByTerm(id);
       const diseaseService = this.termService.searchDiseasesByTerm(id);
-      return observableForkJoin(geneService, diseaseService);
-    })).subscribe(([res1, res2]) => {
+      const loincService = this.termService.searchLoincByTerm(id);
+      return observableForkJoin(geneService, diseaseService, loincService);
+    })).subscribe(([res1, res2, res3]) => {
 
       this.geneSource = new MatTableDataSource(res1.genes);
       this.geneAssocCount = res1.geneCount;
@@ -70,7 +78,9 @@ export class TermComponent implements OnInit {
       this.diseaseDisplayCount = (res2.diseaseCount < res2.max) ? res2.diseaseCount : res2.max;
       this.assocLoading = false;
       this.displayAllDiseaseAssc = false;
-
+      this.loincSource = new MatTableDataSource(res3.loincEntries);
+      this.loincSource.sort = this.sort;
+      this.loincDisplayCount = res3.loincEntries.length;
     }, err => {
       // TODO: Implement Better Handling Here
       console.log(err);
@@ -81,9 +91,20 @@ export class TermComponent implements OnInit {
     this.termService.searchTerm(query)
       .subscribe((data) => {
         this.setDefaults(data.details);
+        const maxTermWidth = 100;
         this.treeData = data.relations;
+        this.treeData.maxTermWidth = maxTermWidth;
+        const termCount = this.treeData.termCount;
         this.treeData.children.sort((a, b) => a.childrenCount > b.childrenCount ? (-1) : 1);
+        this.treeData.children.map(term => {
+          const percent = term.childrenCount / termCount;
+          const newWidth =  Math.ceil(maxTermWidth * percent);
+          const newMargin = -115 + ((maxTermWidth - newWidth)  - 5) ;
+          term.treeCountWidth = newWidth;
+          term.treeMargin = newMargin;
+        });
         this.termTitle = this.term.name;
+
       }, (error) => {
         // TODO:Implement Better Handling Here
         console.log(error);
@@ -93,7 +114,6 @@ export class TermComponent implements OnInit {
   reloadDiseaseAssociations(offset: string, max: string) {
     this.termService.searchDiseasesByTerm(this.term.id, offset, max)
       .subscribe((data) => {
-
         this.diseaseSource = new MatTableDataSource(data.diseases);
         this.diseaseAssocCount = data.diseaseCount;
         this.diseaseAssocOffset = data.offset;
@@ -101,7 +121,6 @@ export class TermComponent implements OnInit {
         this.diseaseDisplayCount = data.diseaseCount;
         this.displayAllDiseaseAssc = true;
         this.assocLoading = false;
-
         this.diseaseSource.paginator = this.diseasePaginator;
 
       });
@@ -110,7 +129,6 @@ export class TermComponent implements OnInit {
   reloadGeneAssociations(offset: string, max: string) {
     this.termService.searchGenesByTerm(this.term.id, offset, max)
       .subscribe((data) => {
-
         this.geneSource = new MatTableDataSource(data.genes);
         this.geneAssocCount = data.geneCount;
         this.geneAssocOffset = data.offset;
@@ -118,7 +136,6 @@ export class TermComponent implements OnInit {
         this.geneDisplayCount = data.geneCount;
         this.displayAllGeneAssc = true;
         this.assocLoading = false;
-
         this.geneSource.paginator = this.genePaginator;
       });
   }
@@ -179,6 +196,10 @@ export class TermComponent implements OnInit {
       diseases: this.diseaseAssocCount
     };
     this.dialogService.openDownloadDialog(this.term.id, 'term', counts);
+  }
+
+  setTreeStyles(child: Term): any {
+    return {'width': child.treeCountWidth + 'px', 'margin-left': child.treeMargin + 'px', 'margin-right': '20px'};
   }
 }
 

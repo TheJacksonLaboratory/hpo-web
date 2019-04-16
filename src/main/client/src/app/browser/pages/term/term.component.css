@@ -8,6 +8,9 @@
   margin-right: 100px;
 }
 
+.loinc-association .mat-column-id {
+  max-width: 150px;
+}
 
 .item-id .obsolete-arrow {
   font-size:16px;
@@ -27,16 +30,29 @@
   display: inline;
 }
 
- @media (min-width:767px) {
+.tree-container{
+  margin-bottom: 15px;
+}
+
+@media (min-width: 1200px){
+
+  .tree-container {
+    width: 28.333333%;
+  }
+}
+
+@media (min-width:767px) {
 
    .tree-container{
      padding-right:0;
    }
  }
 
-.item-summary.tree-navigation {
- padding: 15px !important;
- font-size:16px;
+.tree-navigation {
+  padding: 0 15px 15px 15px;
+}
+.tree-navigation .tree {
+  margin-left: 10rem !important;
 }
 
 .tree-navigation .link {
@@ -44,7 +60,9 @@
 }
 
 .card-title {
- margin: 0 0 5px 0;
+  margin: 0 0 5px 100px;
+  text-align: center;
+  display: inline-block;
 }
 
 .tree,
@@ -61,20 +79,26 @@
   margin: 0 0 5px 10px;
   cursor: default;
 }
-.tree-navigation .badge.info-badge {
-  border-radius:2px;
-  background-color: dodgerblue;
-  padding-bottom: 4px;
-  margin: -25px 0 0 0;
+.tree-navigation .info-badge {
+  margin: 15px 0 0 0;
   float: right;
   cursor: default;
 }
 
- .tree li:last-child span.term {
+ .tree li:last-child div.term {
   border-left: 1px solid;
   padding: 5px 0 0 10px;
   font-weight: 900;
  }
+
+.tree li .tree-counts {
+  background: lightgray;
+  display: inline-block;
+  height: 10px;
+  width: 100px;
+  max-width: 100px;
+  margin-right: 15px;
+}
 
 .tree li ul {margin-left:1em}
 .tree li:last-child, .tree li:last-child li {
@@ -83,12 +107,15 @@
   line-height:2em;
   position:relative;
 }
+
 .tree li:last-child {
   margin-top: 5px;
 }
+
 .tree li:first-child:before {
   border:none;
 }
+
 .tree li ul:before {
   content:"";
   display:block;
@@ -111,11 +138,11 @@
   top:1em;
   left:0;
 }
+
 .tree li ul li:last-child:before {
   background:white;
   height:auto;
   top:1em;
-  bottom:0;
 }
 
 .term-toolbar {
@@ -160,7 +187,6 @@
   padding: 5px;
 }
 
-
 .tab-output-container {
   display: flex;
   flex-direction: column;
@@ -176,4 +202,15 @@
   font-size: 14px;
   width: 100%;
   padding-bottom: 1px;
+}
+
+.loinc-license {
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.51);
+  margin: 15px 15px 0 15px;
+}
+
+.no-descendants {
+  color: lightgray;
+  display: inline-block;
 }

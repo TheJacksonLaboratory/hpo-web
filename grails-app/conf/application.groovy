@@ -29,7 +29,6 @@ grails {
 
 }
 
-
 info {
     app {
         name = '@info.app.name@'

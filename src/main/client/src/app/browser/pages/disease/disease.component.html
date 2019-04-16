@@ -38,7 +38,7 @@
                             <span *ngIf="catTermSource.annotationCount > 1">[ {{catTermSource.annotationCount}} annotations ]</span>
                             <span *ngIf="catTermSource.annotationCount == 1">[ {{catTermSource.annotationCount}} annotation ]</span>
                           </h3>
-                          <mat-table #table [dataSource]="catTermSource.termSource" matSort>
+                          <mat-table [dataSource]="catTermSource.termSource" matSort>
                             <mat-header-row *matHeaderRowDef="termColumns"></mat-header-row>
                             <mat-row *matRowDef="let row; columns: termColumns;"></mat-row>
                             <ng-container matColumnDef="ontologyId">
@@ -77,7 +77,7 @@
                           </div>
                          <!-- Gene Association Table -->
                           <div class="associations gene-association">
-                              <mat-table #table [dataSource]="geneDataSource" matSort>
+                              <mat-table [dataSource]="geneDataSource" matSort>
                                 <mat-header-row *matHeaderRowDef="geneColumns"></mat-header-row>
                                 <mat-row *matRowDef="let row; columns: geneColumns;"></mat-row>
                                 <ng-container matColumnDef="entrezGeneId">

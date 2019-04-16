@@ -1,6 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
 
-
 @media (min-width: 768px) {
   .container {
     width: 750px;
@@ -132,6 +131,67 @@ a.mat-btn .mat-button-wrapper {
   width: 80% !important;
 }
 
+@media(min-width: 2000px ){
+  .col-lg-1 {
+    width: 6.333333%;
+  }
+
+  .col-lg-2 {
+    width: 12.6666%;
+  }
+
+  .col-lg-3 {
+    width: 20%;
+  }
+
+  .col-lg-4 {
+    width: 26.3333%;
+  }
+
+  .col-lg-5 {
+    width: 32.666%;
+  }
+
+  .col-lg-6 {
+    width: 40%;
+  }
+
+  .col-lg-7 {
+    width: 50%;
+  }
+
+  .col-lg-8 {
+    width: 56%;
+  }
+
+  .col-lg-9 {
+    width: 63%;
+  }
+
+  .col-lg-10 {
+    width: 70%;
+  }
+
+  .col-lg-11{
+    width: 76%;
+  }
+
+  .col-lg-12 {
+    width: 82%;
+  }
+
+  .col-lg-offset-1 {
+    margin-left: 16%
+  }
+
+  .col-lg-offset-2 {
+    margin-left: 22.333%
+  }
+
+  .home-highlight-menu {
+    margin: 50px 0 0 20% !important;
+  }
+}
 
 @media (min-width: 992px) {
   .home-search .search-container .search-wrapper {

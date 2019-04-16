@@ -1,5 +1,4 @@
 import grails.util.BuildSettings
-import grails.util.Environment
 import org.springframework.boot.logging.logback.ColorConverter
 import org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter
 
@@ -48,10 +47,10 @@ if (env != "production"  && targetDir != null) {
     }
   }
   // Logging for SQL
-  logger("org.hibernate.SQL", TRACE, ['HIBERNATE_SQL'], false)
-  logger("org.hibernate.type.descriptor.sql.BasicBinder", TRACE, ['HIBERNATE_SQL'], false)
+  logger("org.hibernate.SQL", DEBUG, ['HIBERNATE_SQL'], false)
+  logger("org.hibernate.type.descriptor.sql.BasicBinder", DEBUG, ['HIBERNATE_SQL'], false)
 
-  logger("hpo.api", DEBUG, ['HPO'], false)
+  logger("hpo.api", WARN, ['HPO'], false)
   //
   logger("StackTrace", ERROR, ['FULL_STACKTRACE'], false)
 }

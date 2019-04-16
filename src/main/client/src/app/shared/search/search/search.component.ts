@@ -31,7 +31,7 @@ import { distinctUntilChanged } from 'rxjs/operators';
         'visibility': 'visible'
       })),
       transition('inactive => active',
-        animate('350ms ease-in-out')),
+        animate('500ms ease-in-out')),
       transition('active => inactive',
         animate('200ms ease-in-out'))
     ])
