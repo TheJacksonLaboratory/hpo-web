@@ -39,7 +39,6 @@ export class TermComponent implements OnInit {
   treeData: TermTree;
   termTreeMainWidth: number;
 
-
   assocLoading = true;
   overlay = false;
   displayAllDiseaseAssc = false;
