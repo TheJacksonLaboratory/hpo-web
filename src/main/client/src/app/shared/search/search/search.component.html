@@ -8,8 +8,8 @@
     <input class="searchbar" matInput placeholder="Search for phenotypes, diseases, genes..."
            (input)="contentChanging($event.target.value)"
            (keyup.enter)="submitQuery($event.target.value)"
-           (focus)="toggleDropdown()"
-           (blur)="toggleDropdown()"
+           (focus)="toggleDropdown($event)"
+           (blur)="toggleDropdown($event)"
            [(ngModel)] = "queryString" #searchbar>
     <p class="hint">
       <strong>e.g. <a (click)="setQuery('Arachnodactyly')">Arachnodactyly</a> |

@@ -95,10 +95,14 @@ export class SearchComponent implements OnInit {
     return (qString && qString.length >= 3);
   }
 
-  toggleDropdown() {
+  toggleDropdown(target: any) {
     if (this.searchstate === 'inactive' && this.hasValidInput(this.queryString)) {
       this.searchstate = 'active';
       return;
+    } else if (target.relatedTarget != null) {
+      if (target.relatedTarget.className.includes('result')) {
+        return;
+      }
     }
     this.searchstate = 'inactive';
   }
@@ -114,5 +118,4 @@ export class SearchComponent implements OnInit {
   isCorrectCategory(filter: string) {
     return (filter === this.navFilter || this.navFilter === 'all');
   }
-
 }
