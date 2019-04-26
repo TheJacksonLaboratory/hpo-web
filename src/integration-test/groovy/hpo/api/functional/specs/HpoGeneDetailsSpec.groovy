@@ -61,7 +61,7 @@ class HpoGeneDetailsSpec extends  GebReportingSpec {
     }
     then:
     waitFor(25, 2) {
-      geneDetailsPage.termPagingRangeLabelElement.text() == '1 - 50 of 59'
+      geneDetailsPage.termPagingRangeLabelElement.text() == '1 - 50 of 60'
 
     }
 
