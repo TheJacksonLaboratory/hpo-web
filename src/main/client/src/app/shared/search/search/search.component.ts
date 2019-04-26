@@ -118,4 +118,8 @@ export class SearchComponent implements OnInit {
   isCorrectCategory(filter: string) {
     return (filter === this.navFilter || this.navFilter === 'all');
   }
+  // Hack because blur on input will cancel router link apparently.
+  closeDropDown() {
+    this.searchstate = 'inactive';
+  }
 }
