@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { MatSort, MatTableDataSource, MatPaginator } from '@angular/material';
 import { Disease, Gene, Term, TermCategory } from '../../models/models';
 import { DiseaseService } from '../../services/disease/disease.service';
@@ -25,7 +25,8 @@ export class DiseaseComponent {
 
   @ViewChild('genePaginator') genePaginator: MatPaginator;
 
-  constructor(private route: ActivatedRoute, private diseaseService: DiseaseService, public dialogService: DialogService) {
+  constructor(private route: ActivatedRoute, private diseaseService: DiseaseService, public dialogService: DialogService,
+              private router: Router) {
     this.route.params.subscribe( (params) => {
       this.query = params.id;
       this.refreshData();
@@ -44,14 +45,23 @@ export class DiseaseComponent {
         this.geneDataSource = new MatTableDataSource(this.geneAssoc);
 
         this.geneDataSource.paginator = this.genePaginator;
+        this.diseaseService.searchMonarch(this.query)
+          .subscribe((mData) => {
+            this.disease.description = mData.description;
+          });
         this.isLoading = false;
       }, (error) => {
+        const errorString = 'Could not find requested disease. Please ensure the disease id is valid by searching otherwise ' +
+          'please try our sample terms <a href="browse/term/HP:0001631"><i>Atrial septal defect</i></a>, ' +
+          '<a href="browse/disease/OMIM:154700"><i>Marfan Syndrome</i></a> or ' +
+          '<a href="browse/gene/2200"><i>FBN1</i></a>.';
+        this.router.navigate(['/error'], {
+          state: {
+            description: errorString
+          }});
         console.log(error);
       });
-    this.diseaseService.searchMonarch(this.query)
-      .subscribe((data) => {
-      this.disease.description = data.description;
-    });
+
   }
   /**
    * Sets DB sources for Category-Term map data

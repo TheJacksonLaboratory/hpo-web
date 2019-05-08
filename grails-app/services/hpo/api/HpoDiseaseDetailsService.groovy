@@ -19,12 +19,13 @@ class HpoDiseaseDetailsService {
     Map resultMap = ["disease": '', "termAssoc": [], "geneAssoc": [], "catTerms":[[:]]]
     if (query) {
       DbDisease disease = getDisease(query)
-      if (disease) {
-        resultMap.put("disease", disease)
-        resultMap.put("termAssoc", disease.dbTerms)
-        resultMap.put("geneAssoc", disease.dbGenes)
-        resultMap.put("catTerms", getDiseaseCategoriesWithTerms(disease))
+      if (!disease) {
+        return null
       }
+      resultMap.put("disease", disease)
+      resultMap.put("termAssoc", disease.dbTerms)
+      resultMap.put("geneAssoc", disease.dbGenes)
+      resultMap.put("catTerms", getDiseaseCategoriesWithTerms(disease))
     }
     return resultMap
   }

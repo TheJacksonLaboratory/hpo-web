@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { GeneService } from '../../services/gene/gene.service';
 import { Gene, EntrezGene, Term, Disease } from '../../models/models';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { MatSort, MatTableDataSource, MatPaginator } from '@angular/material';
 import * as ProtVista from 'ProtVista';
 import { environment } from '../../../../environments/environment';
@@ -34,7 +34,8 @@ export class GeneComponent implements OnInit {
   @ViewChild('termPaginator') termPaginator: MatPaginator;
   @ViewChild('diseasePaginator') diseasePaginator: MatPaginator;
 
-  constructor(private route: ActivatedRoute, private geneService: GeneService,  public dialogService: DialogService) {
+  constructor(private route: ActivatedRoute, private geneService: GeneService,  public dialogService: DialogService,
+              private router: Router) {
 
   }
 
@@ -45,7 +46,6 @@ export class GeneComponent implements OnInit {
 
     this.route.params.subscribe((params) => {
       this.query = params.id;
-
       this.reloadGeneData();
     });
   }
@@ -75,6 +75,14 @@ export class GeneComponent implements OnInit {
         this.isLoading = false;
       }, (error) => {
         // TODO: Implement Better Error Handling
+        const errorString = 'Could not find requested ' + this.query + '. Please ensure the gene id is valid by searching otherwise ' +
+          'please try our sample terms <a href="browse/term/HP:0001631"><i>Atrial septal defect</i></a>, ' +
+          '<a href="browse/disease/OMIM:154700"><i>Marfan Syndrome</i></a> or ' +
+          '<a href="browse/gene/2200"><i>FBN1</i></a>.';
+        this.router.navigate(['/error'], {
+          state: {
+            description: errorString
+          }});
         console.log(error);
       });
 

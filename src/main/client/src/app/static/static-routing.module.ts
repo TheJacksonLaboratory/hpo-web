@@ -25,7 +25,7 @@ const staticRoutes: Routes = [
   { path: 'download/ontology', component: OntologyComponent },
   { path: 'download/annotation', component: AnnotationsDownloadComponent },
   { path: 'tools', loadChildren: './tools/tools.module#ToolsModule'},
-  { path: 'disclaimer', component: DisclaimerComponent}
+  { path: 'disclaimer', component: DisclaimerComponent },
 
 ];
 export const staticRouting = RouterModule.forChild(staticRoutes);

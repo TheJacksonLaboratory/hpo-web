@@ -5,6 +5,11 @@ class HpoDiseaseDetailsController {
     HpoDiseaseDetailsService hpoDiseaseDetailsService
 
     def searchDisease(String q){
-        render(view: 'searchDisease', model: [resultMap: hpoDiseaseDetailsService.searchDisease(q)])
+        def res = hpoDiseaseDetailsService.searchDisease(q)
+        if(res){
+          render(view: 'searchDisease', model: [resultMap: hpoDiseaseDetailsService.searchDisease(q)])
+        } else {
+          render(view:'/notFound')
+        }
     }
 }

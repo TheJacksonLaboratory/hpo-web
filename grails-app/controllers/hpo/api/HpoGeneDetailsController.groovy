@@ -5,6 +5,11 @@ class HpoGeneDetailsController {
 	static responseFormats = ['json', 'xml']
 
   def searchGene(Integer q){
-    render(view: 'searchGene', model: [resultMap: hpoGeneDetailsService.searchGene(q)])
+    def res = hpoGeneDetailsService.searchGene(q)
+    if(res){
+      render(view: 'searchGene', model: [resultMap:res ])
+    }else {
+      render(view: '/notFound')
+    }
   }
 }

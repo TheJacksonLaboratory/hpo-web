@@ -33,6 +33,9 @@ class HpoTermService {
         trimmedQ = hpoUtilities.checkReturnPrimaryId(trimmedQ)
         DbTerm dbterm = DbTerm.findByOntologyId(trimmedQ)
         Term term = this.hpoOntology.termMap.get(TermId.of(trimmedQ))
+        if(term == null){
+          return null
+        }
         result.put("TERM",term)
         result.put("DBTERM",dbterm)
         return result
@@ -51,8 +54,10 @@ class HpoTermService {
     Map<String, Object> resultMap = [genes:[], geneCount:0, offset:offset, max:max]
     if (trimmedQ.startsWith('HP:')) {
       final Term term = this.hpoOntology.termMap.get(TermId.of(trimmedQ))
+      if (term == null) {
+        return null
+      }
       final List<DbTerm> descendantTerms = findTermDescendants(term)
-
       if (descendantTerms) {
         Map<String, Object> queryResults= findDbGenes(descendantTerms, offset, max)
         resultMap.genes = queryResults.geneList
@@ -76,8 +81,10 @@ class HpoTermService {
     Map<String, Object> resultMap = [diseases:[], diseaseCount:0, offset:offset, max:max]
     if (trimmedQ.startsWith('HP:')) {
       final Term term = this.hpoOntology.termMap.get(TermId.of(trimmedQ))
+      if(term == null) {
+        return null
+      }
       final List<DbTerm> descendantTerms = findTermDescendants(term)
-
       if (descendantTerms) {
         Map<String, Object> queryResults= findDbDiseases(descendantTerms, offset, max)
         resultMap.diseases = queryResults.diseaseList
