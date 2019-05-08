@@ -7,7 +7,7 @@ class HpoGeneDetailsController {
   def searchGene(Integer q){
     def res = hpoGeneDetailsService.searchGene(q)
     if(res){
-      render(view: 'searchGene', model: [resultMap:res ])
+      render(view: 'searchGene', model: [resultMap: res])
     }else {
       render(view: '/notFound')
     }
