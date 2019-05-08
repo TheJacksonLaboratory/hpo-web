@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { MatSort, MatTableDataSource, MatPaginator } from '@angular/material';
-import {forkJoin as observableForkJoin, throwError} from 'rxjs';
+import { forkJoin as observableForkJoin } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { TermService } from '../../services/term/term.service';
 import { Term, Gene, Disease, TermTree, LoincEntry } from '../../models/models';

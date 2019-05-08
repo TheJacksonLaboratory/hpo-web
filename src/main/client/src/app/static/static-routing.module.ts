@@ -13,15 +13,15 @@ import { AnnotationsDownloadComponent } from './downloads/annotations/annotation
 import { DisclaimerComponent } from './resources/disclaimer/disclaimer.component';
 
 const staticRoutes: Routes = [
-  { path: '', component: HomeComponent},
+  { path: '', component: HomeComponent },
   { path: 'citation', component: CitationComponent },
-  { path: 'contact', component: ContactComponent},
+  { path: 'contact', component: ContactComponent },
   { path: 'license', component: LicenseComponent },
-  { path: 'faq', component: FaqComponent},
-  { path: 'faq/:id', component: FaqComponent},
-  {path:  'news', component: NewsComponent},
-  { path: 'news/:id', component: NewsComponent},
-  { path: 'help', loadChildren: './help/help.module#HelpModule'},
+  { path: 'faq', component: FaqComponent },
+  { path: 'faq/:id', component: FaqComponent },
+  { path:  'news', component: NewsComponent },
+  { path: 'news/:id', component: NewsComponent },
+  { path: 'help', loadChildren: './help/help.module#HelpModule' },
   { path: 'download/ontology', component: OntologyComponent },
   { path: 'download/annotation', component: AnnotationsDownloadComponent },
   { path: 'tools', loadChildren: './tools/tools.module#ToolsModule'},
