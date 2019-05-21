@@ -28,8 +28,8 @@ class HpoGeneDetailsController {
       value = "gene entrez id",
       example = "2200",
       dataType = "integer")])
-  def searchGene(Integer q){
-    def res = hpoGeneDetailsService.searchGene(q)
+  def searchGene(Integer id){
+    def res = hpoGeneDetailsService.searchGene(id)
     if(res.gene != ''){
       render(view: 'searchGene', model: [resultMap: res])
     }else {

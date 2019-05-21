@@ -29,10 +29,10 @@ class HpoDiseaseDetailsController {
       value = "OMIM or ORPHA id",
       example = "OMIM:154700",
       dataType = "string")])
-    def searchDisease(String q){
-      def res = hpoDiseaseDetailsService.searchDisease(q)
+    def searchDisease(String id){
+      def res = hpoDiseaseDetailsService.searchDisease(id)
       if(res.disease != ''){
-        render(view: 'searchDisease', model: [resultMap: hpoDiseaseDetailsService.searchDisease(q)])
+        render(view: 'searchDisease', model: [resultMap: res])
       } else {
         render(view:'/notFound')
       }
