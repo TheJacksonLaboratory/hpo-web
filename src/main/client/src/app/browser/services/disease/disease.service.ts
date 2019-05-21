@@ -16,7 +16,7 @@ export class DiseaseService {
     }
     searchDisease(query: string): Observable<any> {
         return this.http
-            .get(environment.HPO_API_DISEASE_SEARCH_URL + '?q=' + query, this.options);
+            .get(environment.HPO_API_DISEASE_SEARCH_URL + '/' + query, this.options);
     }
     searchMonarch(query: string): Observable<any> {
       return this.http

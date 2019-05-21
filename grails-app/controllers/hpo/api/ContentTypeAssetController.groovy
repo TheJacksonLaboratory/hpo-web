@@ -11,12 +11,12 @@ class ContentTypeAssetController implements ResourceLoaderAware {
       String requestURI = request.getProperty('requestURI')
       try{
         file  = resourceLoader.getResource(requestURI).getFile()
+        render(file: file, contentType: contentType)
       }catch(FileNotFoundException e){
         redirect (
           view: '/notFound'
         )
       }
-      render(file: file, contentType: contentType)
     }
 
   @Override
