@@ -29,6 +29,7 @@ export class GeneComponent implements OnInit {
   uniProtLoading = false;
   uniProtWidgetURL = environment.HPO_UNIPROT_WIDGET_URL;
   mobile = false;
+  entrezError = false;
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild('termPaginator') termPaginator: MatPaginator;
@@ -57,7 +58,7 @@ export class GeneComponent implements OnInit {
         this.entrezGene.aliases = this.entrezGene.otheraliases ? this.entrezGene.otheraliases.split(','): [];
         this.entrezGene.summary = this.entrezGene.summary ? this.entrezGene.summary : 'No Entrez definition entry.';
       }, (error) => {
-        // TODO: Implement Better Error Handling
+        this.entrezError = true;
         console.log(error);
       });
     this.geneService.searchGene(this.query)
@@ -74,11 +75,7 @@ export class GeneComponent implements OnInit {
 
         this.isLoading = false;
       }, (error) => {
-        // TODO: Implement Better Error Handling
-        const errorString = 'Could not find requested ' + this.query + '. Please ensure the gene id is valid by searching otherwise ' +
-          'please try our sample terms <a href="browse/term/HP:0001631"><i>Atrial septal defect</i></a>, ' +
-          '<a href="browse/disease/OMIM:154700"><i>Marfan Syndrome</i></a> or ' +
-          '<a href="browse/gene/2200"><i>FBN1</i></a>.';
+        const errorString = 'Could not find requested entrez id ' + this.query + '.';
         this.router.navigate(['/error'], {
           state: {
             description: errorString

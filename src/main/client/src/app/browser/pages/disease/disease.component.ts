@@ -51,10 +51,7 @@ export class DiseaseComponent {
           });
         this.isLoading = false;
       }, (error) => {
-        const errorString = 'Could not find requested disease. Please ensure the disease id is valid by searching otherwise ' +
-          'please try our sample terms <a href="browse/term/HP:0001631"><i>Atrial septal defect</i></a>, ' +
-          '<a href="browse/disease/OMIM:154700"><i>Marfan Syndrome</i></a> or ' +
-          '<a href="browse/gene/2200"><i>FBN1</i></a>.';
+        const errorString = 'Could not find requested disease id.';
         this.router.navigate(['/error'], {
           state: {
             description: errorString
@@ -67,12 +64,13 @@ export class DiseaseComponent {
    * Sets DB sources for Category-Term map data
    */
   setCatTermsDBSource(catTermsMap) {
-    for (let i in catTermsMap) {
-      const catLabel = catTermsMap[i].catLabel;
-      const annotationCount = catTermsMap[i].terms.length;
-      const termSource = new MatTableDataSource(catTermsMap[i].terms);
+    catTermsMap.map( term => {
+      const catLabel = term.catLabel;
+      const annotationCount = term.terms.length;
+      const termSource = new MatTableDataSource(term.terms);
       this.catTermSources.push({catLabel, annotationCount,  termSource});
-    }
+    });
+
     this.catTermSources.sort((a, b) => (a.annotationCount > b.annotationCount) ? -1 :
       (a.annotationCount < b.annotationCount) ? 1 : 0);
   }

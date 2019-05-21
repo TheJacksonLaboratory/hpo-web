@@ -29,12 +29,12 @@ class HpoDiseaseDetailsController {
       value = "OMIM or ORPHA id",
       example = "OMIM:154700",
       dataType = "string")])
-  def searchDisease(String id){
-    def res = hpoDiseaseDetailsService.searchDisease(id)
-    if(res){
-      render(view: 'searchDisease', model: [resultMap: hpoDiseaseDetailsService.searchDisease(id)])
-    } else {
-      render(view:'/notFound')
+    def searchDisease(String q){
+      def res = hpoDiseaseDetailsService.searchDisease(q)
+      if(res.disease != ''){
+        render(view: 'searchDisease', model: [resultMap: hpoDiseaseDetailsService.searchDisease(q)])
+      } else {
+        render(view:'/notFound')
+      }
     }
   }
-}

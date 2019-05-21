@@ -84,10 +84,7 @@ export class TermComponent implements OnInit {
       this.loincDisplayCount = res3.loincEntries.length;
     }, err => {
       // TODO: Implement Better Handling Here
-      const errorString = '<p>Could not find requested ' + this.paramId + '. Please ensure the term id is valid by searching otherwise ' +
-        'please try our sample terms <a href="browse/term/HP:0001631"><i>Atrial septal defect</i></a>, ' +
-        '<a href="browse/disease/OMIM:154700"><i>Marfan Syndrome</i></a> or ' +
-        '<a href="browse/gene/2200"><i>FBN1</i></a></p>';
+      const errorString = 'Could not find requested ' + this.paramId + '.';
       this.router.navigate(['/error'], {
         state: {
           description: errorString
@@ -114,7 +111,7 @@ export class TermComponent implements OnInit {
         });
         this.termTitle = this.term.name;
       }, (error) => {
-        // TODO:Implement Better Handling Here bubbles up
+        // Error bubbles up
         console.log(error);
     });
   }
