@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { GeneService } from '../../services/gene/gene.service';
 import { Gene, EntrezGene, Term, Disease } from '../../models/models';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatSort, MatTableDataSource, MatPaginator } from '@angular/material';
 import * as ProtVista from 'ProtVista';
 import { environment } from '../../../../environments/environment';
@@ -29,12 +29,14 @@ export class GeneComponent implements OnInit {
   uniProtLoading = false;
   uniProtWidgetURL = environment.HPO_UNIPROT_WIDGET_URL;
   mobile = false;
+  entrezError = false;
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild('termPaginator') termPaginator: MatPaginator;
   @ViewChild('diseasePaginator') diseasePaginator: MatPaginator;
 
-  constructor(private route: ActivatedRoute, private geneService: GeneService,  public dialogService: DialogService) {
+  constructor(private route: ActivatedRoute, private geneService: GeneService,  public dialogService: DialogService,
+              private router: Router) {
 
   }
 
@@ -45,7 +47,6 @@ export class GeneComponent implements OnInit {
 
     this.route.params.subscribe((params) => {
       this.query = params.id;
-
       this.reloadGeneData();
     });
   }
@@ -57,7 +58,7 @@ export class GeneComponent implements OnInit {
         this.entrezGene.aliases = this.entrezGene.otheraliases ? this.entrezGene.otheraliases.split(','): [];
         this.entrezGene.summary = this.entrezGene.summary ? this.entrezGene.summary : 'No Entrez definition entry.';
       }, (error) => {
-        // TODO: Implement Better Error Handling
+        this.entrezError = true;
         console.log(error);
       });
     this.geneService.searchGene(this.query)
@@ -74,7 +75,11 @@ export class GeneComponent implements OnInit {
 
         this.isLoading = false;
       }, (error) => {
-        // TODO: Implement Better Error Handling
+        const errorString = 'Could not find requested entrez id ' + this.query + '.';
+        this.router.navigate(['/error'], {
+          state: {
+            description: errorString
+          }});
         console.log(error);
       });
 
