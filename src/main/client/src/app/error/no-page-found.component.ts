@@ -13,11 +13,13 @@ export class NoPageFoundComponent {
   errorFlag = false;
 
   constructor(private router: Router) {
-    const routeConfig = this.router.getCurrentNavigation().extras.state;
+    const routeConfig = this.router.getCurrentNavigation();
     if (routeConfig != null) {
-      if (routeConfig.description != null) {
-         this.errorFlag = true;
-         this.errorMessage = routeConfig.description;
+      if (routeConfig.extras.state != null) {
+        if (routeConfig.extras.state.description != null) {
+          this.errorFlag = true;
+          this.errorMessage = routeConfig.extras.state.description;
+        }
       }
     }
   }

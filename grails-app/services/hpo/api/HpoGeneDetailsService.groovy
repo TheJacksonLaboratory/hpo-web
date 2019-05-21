@@ -12,7 +12,7 @@ class HpoGeneDetailsService {
     if (query) {
       DbGene gene = getGene(query)
       if(!gene){
-        return null
+        return resultMap
       }
       resultMap.put("gene", gene)
       resultMap.put("termAssoc", gene.dbTerms)

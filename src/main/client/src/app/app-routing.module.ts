@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { NoPageFoundComponent } from './error/no-page-found.component';
 
 
-const appRoutes: Routes = [
+export const appRoutes: Routes = [
   { path: '', pathMatch: 'prefix', loadChildren: './static/static.module#StaticModule'},
   { path: 'browse', loadChildren: './browser/browser.module#BrowserHPOModule'},
   { path: '**', component: NoPageFoundComponent}

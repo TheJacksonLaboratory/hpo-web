@@ -20,7 +20,7 @@ class HpoDiseaseDetailsService {
     if (query) {
       DbDisease disease = getDisease(query)
       if (!disease) {
-        return null
+        return resultMap
       }
       resultMap.put("disease", disease)
       resultMap.put("termAssoc", disease.dbTerms)

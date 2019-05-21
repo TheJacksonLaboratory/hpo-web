@@ -6,7 +6,7 @@ class HpoDiseaseDetailsController {
 
     def searchDisease(String q){
       def res = hpoDiseaseDetailsService.searchDisease(q)
-      if(res){
+      if(res.disease != ''){
         render(view: 'searchDisease', model: [resultMap: hpoDiseaseDetailsService.searchDisease(q)])
       } else {
         render(view:'/notFound')
