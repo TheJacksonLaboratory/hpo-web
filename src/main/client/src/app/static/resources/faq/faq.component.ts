@@ -14,10 +14,11 @@ export class FaqComponent implements OnInit {
     2: 'content-change',
     3: 'collaboration',
     4: 'ontology',
-    5: 'annotation-use',
-    6: 'genes-phenotypes',
-    7: 'frequencies',
-    8: 'association-rules'
+    5: 'susceptibility',
+    6: 'annotation-use',
+    7: 'genes-phenotypes',
+    8: 'frequencies',
+    9: 'association-rules'
   };
 
   constructor(private route: ActivatedRoute) {}

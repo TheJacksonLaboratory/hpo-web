@@ -61,13 +61,39 @@
           Ontologies and terminologies can be used as tools for standardizing and exchanging data. Ontologies such as the HPO typically enable sophisticated computational algorithms that exploit the semantic relations between terms.
         </p>
       </mat-expansion-panel>
+      <mat-expansion-panel [expanded]="openPanel == 5" id = "susceptibility">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <strong>How does the HPO project model susceptibility?</strong>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <p>
+          The word susceptibility can be defined as a state  of being liable to be influenced or harmed by a particular thing. In genetics, the word susceptibility can be used with a variety of meanings.
+	  <ol><li>To refer to an allele that confers some (usually small) increased risk of developing a polygenic (complex) disease. A disease such as Asthma for instance currently has 733 such loci listed
+	      in <a href="https://www.ebi.ac.uk/gwas/efotraits/EFO_0000270" target="_blank">GWAS catalog</a>, as well as ten entries in <a href="https://omim.org/entry/600807" target="_blank">OMIM</a>. The
+	      HPO project does not consider these "susceptibility" entries in OMIM to be separate diseases.</li>
+	    <li>Similarly, some congenital anomalies such as Cleft palate are polygenic diseases, with over 150 loci in <a href="https://www.ebi.ac.uk/gwas/efotraits/HP_0000175" target="_blank">GWAS catalog</a>. These
+	      loci are treated analogously.</li>
+	    <li>Susceptibility to a cancer that is inherited as a Mendelian trait. The classic example is <a href="https://omim.org/entry/604370" target="_blank">BRCA1</a>. The susceptibility associated with
+	      a pathogenic BRCA1 mutation is substantially higher than the susceptibility associated with an allele related to a polygenic disease. Also, the susceptibility is transmitted as a Mendelian trait.
+	      The clinical aspects may differ in important ways for distinct cancer susceptibility loci. For instance, the risk of ovarian cancer is higher for BRCA1 mutation carriers than for BRCA2 mutation carriers (
+	      <a href="https://www.ncbi.nlm.nih.gov/pubmed/28632866" target="_blank">Kuchenbaecker et al, 2017</a>).
+	    <li>Inherited susceptibility to certain kinds of infectious disease may occur as a Mendelian trait. For instance, WHIM syndrome confers suceptibility to human papilloma virus infection induced warts,
+	      condyloma acuminata and carcinomas (<a href="https://www.ncbi.nlm.nih.gov/pubmed/19057201/" target="_blank">Kawai and Malech, 2009</a>). Susceptibility to infections may also be a polygenic trait. The HPO
+	      models Mendelian traits as diseases, e.g., <a href="https://hpo.jax.org/app/browse/disease/OMIM:193670">WHIM syndrome</a>).
+	    <li>In some cases, susceptibility to diseases such as neurodegeneration can be inherited as a Mendelian trait, including Huntington disease and some forms of Parkinson disease and Alzheimer disease.
+	      <a href="https://hpo.jax.org/app/browse/disease/OMIM:146500" target="_blank">Mutliple system atrophy</a> may be occur sporadically or in rare cases be inherited as a Mendelian trait. For this reason,
+	      HPO models this as a distinct disease.</li>
+	    </ol>
+        </p>
+      </mat-expansion-panel>
     </mat-accordion>
       <h3>
         Annotation
       </h3>
       <mat-accordion>
 
-        <mat-expansion-panel [expanded]="openPanel == 5" id = "annotation-use">
+        <mat-expansion-panel [expanded]="openPanel == 6" id = "annotation-use">
           <mat-expansion-panel-header>
             <mat-panel-title>
               <strong>How do I use HPO Annotations?</strong>
@@ -77,7 +103,7 @@
             <a routerLink="/browse/disease/ORPHA:171719">Cutis laxa-Marfanoid syndrome </a> is annotated by the HPO terms for <a routerLink="/browse/term/HP:0002827">Hip dislocation</a>, <a routerLink="/browse/term/HP:0001371">Flexion contracture</a> and many more.</p>
         </mat-expansion-panel>
 
-        <mat-expansion-panel [expanded]="openPanel == 6" id="genes-phenotypes">
+        <mat-expansion-panel [expanded]="openPanel == 7" id="genes-phenotypes">
           <mat-expansion-panel-header>
               <mat-panel-title>
               <strong>What is the difference between genes_to_phenotypes.txt and phenotype_to_genes.txt ?</strong>
@@ -105,7 +131,7 @@
           </ul>
         </mat-expansion-panel>
 
-        <mat-expansion-panel [expanded]="openPanel == 7" id = "frequencies">
+        <mat-expansion-panel [expanded]="openPanel == 8" id = "frequencies">
           <mat-expansion-panel-header>
             <mat-panel-title>
               <strong>What is the difference between “ALL_FREQUENCIES” and “FREQUENT_FEATURES”?</strong>
@@ -115,7 +141,7 @@
             “FREQUENT_FEATURES” means that we exclude all features seen in less than 50% of the patients.</p>
          </mat-expansion-panel>
 
-          <mat-expansion-panel [expanded]="openPanel == 8" id = "association-rules">
+          <mat-expansion-panel [expanded]="openPanel == 9" id = "association-rules">
               <mat-expansion-panel-header>
                 <mat-panel-title>
                   <strong>What is your procedure for associating genes with HPO phenotypes?</strong>
