@@ -184,12 +184,16 @@ a.mat-btn .mat-button-wrapper {
     margin-left: 16%
   }
 
+  .home-item.col-lg-offset-1 {
+    margin-left: 12%;
+  }
+
   .col-lg-offset-2 {
     margin-left: 22.333%
   }
 
   .home-highlight-menu {
-    margin: 50px 0 0 20% !important;
+    margin: 50px 0 0 15% !important;
   }
 }
 
