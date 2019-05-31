@@ -1,5 +1,4 @@
 import grails.util.Environment
-import io.swagger.models.Scheme
 /* IF YOU WANT TO USE AN EXTERNAL ENVIRONMENT/DATABASE
    Configure a file in the below directory given the environment
    -development-config.groovy ( building, running the application)
