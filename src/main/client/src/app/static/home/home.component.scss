@@ -153,6 +153,9 @@ a .irdirc{
     color: white;
     cursor: pointer;
     display: flex;
+    @media screen and (max-width: 640px ){
+      margin-bottom: 5px;
+    }
 
     &.dark {
       background: rgba(39,84,103,1);
@@ -163,9 +166,9 @@ a .irdirc{
     }
 
     & .tool-icon {
-      height: 60px;
-      width: 60px;
-      margin: 15px 15px 0 0;
+      height: 100px;
+      width: 100px;
+      padding: 0 0 0 5px;
       float: left;
       display: inline-block;
     }
@@ -229,9 +232,6 @@ a .irdirc{
     padding: 40px 0;
     flex: 0;
     margin-left: 25px;
-    @media screen and (max-width: 640px ){
-      margin-left: 0;
-    }
     cursor: pointer;
   }
 
