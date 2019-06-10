@@ -3,7 +3,6 @@
   "compilerOptions": {
     "outDir": "../out-tsc/app",
     "baseUrl": "./",
-    "module": "es6",
     "types": ["node", "jasmine"]
   },
   "exclude": [

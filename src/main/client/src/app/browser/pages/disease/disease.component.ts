@@ -21,9 +21,9 @@ export class DiseaseComponent {
   geneDataSource: MatTableDataSource<Gene>;
   isLoading  = true;
   catTermSources: TermCategory[] = [];
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatSort, { static: false }) sort: MatSort;
 
-  @ViewChild('genePaginator') genePaginator: MatPaginator;
+  @ViewChild('genePaginator', { static: true }) genePaginator: MatPaginator;
 
   constructor(private route: ActivatedRoute, private diseaseService: DiseaseService, public dialogService: DialogService,
               private router: Router) {

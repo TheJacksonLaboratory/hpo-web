@@ -51,7 +51,7 @@ export class SearchComponent implements OnInit {
   queryText: string;
   notFoundFlag = false;
 
-  @ViewChild('searchbar') searchBar: ElementRef;
+  @ViewChild('searchbar', { static: true }) searchBar: ElementRef;
 
   constructor(private router: Router, private searchService: SearchService) {
     this.router = router;

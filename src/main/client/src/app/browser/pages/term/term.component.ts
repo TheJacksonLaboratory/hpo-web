@@ -44,9 +44,9 @@ export class TermComponent implements OnInit {
   displayAllDiseaseAssc = false;
   displayAllGeneAssc = false;
 
-  @ViewChild('diseasePaginator') diseasePaginator: MatPaginator;
-  @ViewChild('genePaginator') genePaginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild('diseasePaginator', { static: true }) diseasePaginator: MatPaginator;
+  @ViewChild('genePaginator', { static: true }) genePaginator: MatPaginator;
+  @ViewChild(MatSort, { static: false }) sort: MatSort;
 
   constructor(private route: ActivatedRoute, private termService: TermService, private dialogService: DialogService,
               private router: Router) {

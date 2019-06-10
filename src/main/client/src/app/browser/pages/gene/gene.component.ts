@@ -31,9 +31,9 @@ export class GeneComponent implements OnInit {
   mobile = false;
   entrezError = false;
 
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChild('termPaginator') termPaginator: MatPaginator;
-  @ViewChild('diseasePaginator') diseasePaginator: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
+  @ViewChild('termPaginator', { static: true }) termPaginator: MatPaginator;
+  @ViewChild('diseasePaginator', { static: true }) diseasePaginator: MatPaginator;
 
   constructor(private route: ActivatedRoute, private geneService: GeneService,  public dialogService: DialogService,
               private router: Router) {
