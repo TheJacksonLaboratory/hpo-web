@@ -29,9 +29,9 @@ export class SearchResultsComponent {
   geneDisplayedColumns = ['entrezGeneId', 'entrezGeneSymbol', 'matching_string'];
   geneDataSource: MatTableDataSource<Gene>;
 
-  @ViewChild('termPaginator') termPaginator: MatPaginator;
-  @ViewChild('diseasePaginator') diseasePaginator: MatPaginator;
-  @ViewChild('genePaginator') genePaginator: MatPaginator;
+  @ViewChild('termPaginator', { static: true }) termPaginator: MatPaginator;
+  @ViewChild('diseasePaginator', { static: true }) diseasePaginator: MatPaginator;
+  @ViewChild('genePaginator', { static: true }) genePaginator: MatPaginator;
 
 
   constructor(private route: ActivatedRoute, private searchService: SearchService ) {

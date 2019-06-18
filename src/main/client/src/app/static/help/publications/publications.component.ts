@@ -20,7 +20,7 @@ export class PublicationsComponent implements OnInit {
   category = 'all';
   topics = new FormControl();
   topicList = [];
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   ngOnInit() {
     this.pubService.getPublications().subscribe(publications => {
