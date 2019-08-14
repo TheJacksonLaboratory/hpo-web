@@ -1,0 +1,11 @@
+.loinc-img {
+  max-width: 500px;
+  width: 100%;
+  margin: auto;
+  display: block;
+}
+
+
+.subtitle .material-icons {
+  font-size: 16px !important;
+}
