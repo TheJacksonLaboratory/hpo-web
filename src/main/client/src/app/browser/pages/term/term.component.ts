@@ -62,7 +62,7 @@ export class TermComponent implements OnInit {
       const geneService = this.termService.searchGenesByTerm(id);
       const diseaseService = this.termService.searchDiseasesByTerm(id);
       const loincService = this.termService.searchLoincByTerm(id);
-      return observableForkJoin(geneService, diseaseService, loincService);
+      return observableForkJoin([geneService, diseaseService, loincService]);
     })).subscribe(([res1, res2, res3]) => {
 
       this.geneSource = new MatTableDataSource(res1.genes);
