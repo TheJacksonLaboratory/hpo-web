@@ -17,7 +17,7 @@ export class TermComponent implements OnInit {
   query: string;
   paramId: string;
   term: Term = {'id': '', 'name': '', 'definition': '', 'altTermIds': [], 'comment': '', 'synonyms': [],
-    'isObsolete': true, 'xrefs': [], 'purl': ''};
+    'isObsolete': true, 'xrefs': [], 'pubmedXrefs': [], 'purl': ''};
   geneColumns = ['entrezGeneId', 'dbDiseases'];
   geneSource: MatTableDataSource<Gene>;
   geneAssocCount: number;
@@ -152,6 +152,7 @@ export class TermComponent implements OnInit {
       this.term.definition = (term.definition != null) ? term.definition : 'Sorry this term has no definition.';
       this.term.purl = 'http://purl.obolibrary.org/obo/' + term.id.replace(':', '_');
       this.term.xrefs = (term.xrefs != null) ? term.xrefs : [];
+      this.term.pubmedXrefs = (term.pubmedXrefs != null) ? term.pubmedXrefs : [];
     }
   }
 

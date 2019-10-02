@@ -56,8 +56,8 @@
                       </span><i class="material-icons obsolete-arrow">arrow_right_alt</i>
                     </span>
                     <span class="item-id">{{term.id}}</span>
-                    <i matTooltip="Copy purl to clipboard!" matTooltipPosition="above"
-                       (click)="copyToClipboard(term.purl)" class="material-icons copyToClipboard">content_copy</i>
+                   <!-- <i matTooltip="Copy purl to clipboard!" matTooltipPosition="above"
+                       (click)="copyToClipboard(term.purl)" class="material-icons copyToClipboard">content_copy</i>-->
                   </div>
 
                   <hr class="underline-hr">
@@ -72,8 +72,12 @@
                       <strong>Comment:</strong> &nbsp;&nbsp; {{term.comment}}
                       </mat-list-item>
                     <mat-divider></mat-divider>
+                    <mat-list-item *ngIf="term.pubmedXrefs.length > 0">
+                      <strong>Pubmed References:</strong> &nbsp;&nbsp;
+                      <i *ngFor="let item of term.pubmedXrefs; let isLast=last">{{item}}{{isLast ? '' : ', '}}</i>
+                    </mat-list-item>
                     <mat-list-item *ngIf="term.xrefs.length > 0">
-                      <strong>Xrefs:</strong> &nbsp;&nbsp;
+                      <strong>Cross References:</strong> &nbsp;&nbsp;
                       <i *ngFor="let item of term.xrefs; let isLast=last">{{item}}{{isLast ? '' : ', '}}</i>
                     </mat-list-item>
                     <mat-divider></mat-divider>

@@ -12,4 +12,5 @@ json{
   synonyms term.synonyms*.value
   isObsolete term.isObsolete()
   xrefs term.xrefs*.name
+  pubmedRefs term.databaseXrefs*.toString()
 }

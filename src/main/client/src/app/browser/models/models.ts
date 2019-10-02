@@ -1,5 +1,3 @@
-import {MatTableDataSource} from "@angular/material";
-
 export interface Gene {
     entrezGeneSymbol: string;
     entrezGeneId: number;
@@ -58,6 +56,7 @@ export interface Term {
     matchingString?: string;
     treeCountWidth?: number;
     treeMargin?: number;
+    pubmedXrefs: Array<string>;
 }
 
 export interface TermTree {
