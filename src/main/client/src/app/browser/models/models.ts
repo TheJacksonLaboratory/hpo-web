@@ -56,7 +56,7 @@ export interface Term {
     matchingString?: string;
     treeCountWidth?: number;
     treeMargin?: number;
-    pubmedXrefs: Array<string>;
+    pubmedXrefs: Array<any>;
 }
 
 export interface TermTree {

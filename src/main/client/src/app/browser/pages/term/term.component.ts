@@ -152,7 +152,9 @@ export class TermComponent implements OnInit {
       this.term.definition = (term.definition != null) ? term.definition : 'Sorry this term has no definition.';
       this.term.purl = 'http://purl.obolibrary.org/obo/' + term.id.replace(':', '_');
       this.term.xrefs = (term.xrefs != null) ? term.xrefs : [];
-      this.term.pubmedXrefs = (term.pubmedXrefs != null) ? term.pubmedXrefs : [];
+      this.term.pubmedXrefs = (term.pubmedXrefs != null) ? term.pubmedXrefs.map(pmid => {
+          return {whole: pmid, id: pmid.split(':')[1]};
+        }) : [];
     }
   }
 
