@@ -59,11 +59,12 @@ class HpoDiseaseDetailsSpec extends  GebReportingSpec {
     waitFor { diseaseDetailsPage.downloadAssociationButton.displayed }
     diseaseDetailsPage.downloadAssociationButton.click()
 
-    then: 'the dialog should open'
+    /*then: 'the dialog should open'
     assert diseaseDetailsPage.downloadAssociationDialog.isDisplayed()
 
-    when: 'clicking gene association download'
+    when: 'clicking gene association download'*/
     def identifier = diseaseDetailsPage.getPageUrl().split("/").last()
+    waitFor { diseaseDetailsPage.downloadAssociationDialog.displayed }
     def association = diseaseDetailsPage.downloadGenesAssociationButton.text().toLowerCase()
     def url = API_DOWNLOAD_EXCEL_DISEASE_URL+ identifier + "&association=" + association
 
@@ -90,11 +91,12 @@ class HpoDiseaseDetailsSpec extends  GebReportingSpec {
     waitFor { diseaseDetailsPage.downloadAssociationButton.displayed }
     diseaseDetailsPage.downloadAssociationButton.click()
 
-    then: 'the dialog should open'
+    /*then: 'the dialog should open'
     assert diseaseDetailsPage.downloadAssociationDialog.isDisplayed()
 
-    when: 'clicking gene association download'
+    when: 'clicking gene association download'*/
     def identifier = diseaseDetailsPage.getPageUrl().split("/").last()
+    waitFor {diseaseDetailsPage.downloadAssociationDialog.displayed}
     def association = diseaseDetailsPage.downloadTermsAssociationButton.text().toLowerCase()
     def url = API_DOWNLOAD_EXCEL_DISEASE_URL+ identifier + "&association=" + association
 

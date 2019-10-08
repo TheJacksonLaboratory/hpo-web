@@ -2,7 +2,9 @@ package hpo.api
 
 import grails.compiler.GrailsCompileStatic
 import groovy.transform.TypeCheckingMode
+import hpo.api.annotation.DbAnnotation
 import hpo.api.disease.DbDisease
+import hpo.api.model.AnnotationResult
 import hpo.api.term.DbTerm
 import org.monarchinitiative.phenol.formats.hpo.HpoOntology
 import org.monarchinitiative.phenol.formats.hpo.category.HpoCategory
@@ -10,7 +12,7 @@ import org.monarchinitiative.phenol.formats.hpo.category.HpoCategoryMap
 import org.monarchinitiative.phenol.ontology.data.TermId
 import org.monarchinitiative.phenol.ontology.data.Term
 
-@GrailsCompileStatic
+@GrailsCompileStatic(TypeCheckingMode.SKIP)
 class HpoDiseaseDetailsService {
 
   HpoOntology hpoOntology
@@ -23,7 +25,7 @@ class HpoDiseaseDetailsService {
         return resultMap
       }
       resultMap.put("disease", disease)
-      resultMap.put("termAssoc", disease.dbTerms)
+      resultMap.put("termAssoc", getTermsAssociatedByDisease(disease))
       resultMap.put("geneAssoc", disease.dbGenes)
       resultMap.put("catTerms", getDiseaseCategoriesWithTerms(disease))
     }
@@ -32,6 +34,10 @@ class HpoDiseaseDetailsService {
 
   DbDisease getDisease(String query) {
     DbDisease.findByDiseaseId(query)
+  }
+
+  List<DbTerm> getTermsAssociatedByDisease(DbDisease disease){
+    return DbAnnotation.findAllByDbDisease(disease).dbTerm
   }
 
   /**
@@ -46,7 +52,7 @@ class HpoDiseaseDetailsService {
     HpoCategoryMap hpoCatMap = new HpoCategoryMap()
     List<Map> catList = []
 
-    Set<DbTerm> dbTermList  = disease.dbTerms
+    Set<DbTerm> dbTermList  = DbAnnotation.findAllByDbDisease(disease).dbTerm
     dbTermList.each {dbTerm ->
       TermId termId = TermId.of(dbTerm.getOntologyId())
       hpoCatMap.addAnnotatedTerm(termId, hpoOntology)
@@ -57,25 +63,30 @@ class HpoDiseaseDetailsService {
     hpoCatList.each { cat ->
         Map categoryTermMap = [:]
         cat.getNumberOfAnnotations()
-        List<DbTerm> catDbTermList = []
+        List<AnnotationResult> catAnnotationResult = []
 
         //get category terms
         List<TermId> termIdList = cat.getAnnotatingTermIds()
         termIdList.each { tId ->
           Term term = hpoOntology.getTermMap().get(tId)
-          String termIdWithPrefix = term.getId().toString()
 
-          //add the DbTerm to the list of terms
-          catDbTermList << DbTerm.findByOntologyId(termIdWithPrefix)
+          // add the DbTerm to the list of terms
+          catAnnotationResult << buildAnnotationResult(disease, term)
         }
 
         //populate the map
         categoryTermMap.put("catLabel", cat.getLabel())
-        categoryTermMap.put("terms", catDbTermList)
+        categoryTermMap.put("terms", catAnnotationResult)
         catList.add(categoryTermMap)
     }
 
     catList //return
+  }
+
+  AnnotationResult buildAnnotationResult(DbDisease disease, Term term){
+    DbTerm dbTerm = DbTerm.findByOntologyId(term.getId().toString())
+    DbAnnotation annotation = DbAnnotation.findWhere(dbTerm: dbTerm, dbDisease: disease)
+    return new AnnotationResult(annotation.getDbTerm(), annotation.getOnset(), annotation.getFrequency())
   }
 
 }

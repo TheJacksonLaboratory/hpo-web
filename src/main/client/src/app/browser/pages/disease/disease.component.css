@@ -5,6 +5,14 @@
    max-width: 250px;
 }
 
+.term-association .mat-column-onset {
+  max-width: 150px;
+}
+
+.term-association .mat-column-frequency {
+  max-width: 100px;
+}
+
 .mat-column-dbDiseases {
    white-space: nowrap;
    text-overflow: ellipsis;

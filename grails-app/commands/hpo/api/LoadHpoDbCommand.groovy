@@ -14,7 +14,7 @@ class LoadHpoDbCommand implements GrailsApplicationCommand {
       appCtx.sqlUtilsService.stopForeignChecks()
       appCtx.dbGeneAdminService.truncateGeneTermJoinTable()	// Truncate Genes to Terms
       appCtx.dbDiseaseAdminService.truncateDiseaseGeneJoinTable() // Truncate Disease To Gene
-      appCtx.dbDiseaseAdminService.truncateDiseaseTermJoinTable() // Truncate Disease Join Table
+      appCtx.dbDiseaseAdminService.truncateAnnotationTable() // Truncate Disease Term Table
       appCtx.dbTermAdminService.truncatedDbTermPath()
       appCtx.dbTermAdminService.tuncateDbTermRelationship()
       appCtx.dbTermAdminService.truncateDbTermSynonyms()
@@ -33,7 +33,7 @@ class LoadHpoDbCommand implements GrailsApplicationCommand {
         return false
       }
 
-      println("finished refreshing database duration: ${stopWatch} time: ${new Date()}")
+      println("Finished refreshing database duration: ${stopWatch} time: ${new Date()}")
         return true
     }
 }
