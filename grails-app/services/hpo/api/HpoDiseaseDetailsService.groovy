@@ -50,37 +50,36 @@ class HpoDiseaseDetailsService {
   private List<Map> getDiseaseCategoriesWithTerms(DbDisease disease){
 
     HpoCategoryMap hpoCatMap = new HpoCategoryMap()
-    List<Map> catList = []
 
     Set<DbTerm> dbTermList  = DbAnnotation.findAllByDbDisease(disease).dbTerm
     dbTermList.each {dbTerm ->
-      TermId termId = TermId.of(dbTerm.getOntologyId())
+      final TermId termId = TermId.of(dbTerm.getOntologyId())
       hpoCatMap.addAnnotatedTerm(termId, hpoOntology)
     }
 
-    List<HpoCategory> hpoCatList = hpoCatMap.getActiveCategoryList()
+    final List<HpoCategory> hpoCatList = hpoCatMap.getActiveCategoryList()
 
-    hpoCatList.each { cat ->
-        Map categoryTermMap = [:]
-        cat.getNumberOfAnnotations()
-        List<AnnotationResult> catAnnotationResult = []
+    final List<Map> catList = hpoCatList.collect { cat ->
+      Map categoryTermMap = [:]
+      cat.getNumberOfAnnotations()
+      List<AnnotationResult> catAnnotationResult = []
 
-        //get category terms
-        List<TermId> termIdList = cat.getAnnotatingTermIds()
-        termIdList.each { tId ->
-          Term term = hpoOntology.getTermMap().get(tId)
+      //get category terms
+      List<TermId> termIdList = cat.getAnnotatingTermIds()
+      termIdList.each { tId ->
+        Term term = hpoOntology.getTermMap().get(tId)
 
-          // add the DbTerm to the list of terms
-          catAnnotationResult << buildAnnotationResult(disease, term)
-        }
+        // add the DbTerm to the list of terms
+        catAnnotationResult << buildAnnotationResult(disease, term)
+      }
 
-        //populate the map
-        categoryTermMap.put("catLabel", cat.getLabel())
-        categoryTermMap.put("terms", catAnnotationResult)
-        catList.add(categoryTermMap)
+      //populate the map
+      categoryTermMap.put("catLabel", cat.getLabel())
+      categoryTermMap.put("terms", catAnnotationResult)
+      return categoryTermMap
     }
 
-    catList //return
+    return catList
   }
 
   AnnotationResult buildAnnotationResult(DbDisease disease, Term term){
