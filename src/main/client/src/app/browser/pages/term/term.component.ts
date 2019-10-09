@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Params} from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { MatSort, MatTableDataSource, MatPaginator } from '@angular/material';
 import { forkJoin as observableForkJoin } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
@@ -44,11 +44,12 @@ export class TermComponent implements OnInit {
   displayAllDiseaseAssc = false;
   displayAllGeneAssc = false;
 
-  @ViewChild('diseasePaginator') diseasePaginator: MatPaginator;
-  @ViewChild('genePaginator') genePaginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild('diseasePaginator', { static: true }) diseasePaginator: MatPaginator;
+  @ViewChild('genePaginator', { static: true }) genePaginator: MatPaginator;
+  @ViewChild(MatSort, { static: false }) sort: MatSort;
 
-  constructor(private route: ActivatedRoute, private termService: TermService, private dialogService: DialogService) {
+  constructor(private route: ActivatedRoute, private termService: TermService, private dialogService: DialogService,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -61,7 +62,7 @@ export class TermComponent implements OnInit {
       const geneService = this.termService.searchGenesByTerm(id);
       const diseaseService = this.termService.searchDiseasesByTerm(id);
       const loincService = this.termService.searchLoincByTerm(id);
-      return observableForkJoin(geneService, diseaseService, loincService);
+      return observableForkJoin([geneService, diseaseService, loincService]);
     })).subscribe(([res1, res2, res3]) => {
 
       this.geneSource = new MatTableDataSource(res1.genes);
@@ -83,6 +84,11 @@ export class TermComponent implements OnInit {
       this.loincDisplayCount = res3.loincEntries.length;
     }, err => {
       // TODO: Implement Better Handling Here
+      const errorString = 'Could not find requested ' + this.paramId + '.';
+      this.router.navigate(['/error'], {
+        state: {
+          description: errorString
+        }});
       console.log(err);
     });
   }
@@ -104,9 +110,8 @@ export class TermComponent implements OnInit {
           term.treeMargin = newMargin;
         });
         this.termTitle = this.term.name;
-
       }, (error) => {
-        // TODO:Implement Better Handling Here
+        // Error bubbles up
         console.log(error);
     });
   }
@@ -122,7 +127,6 @@ export class TermComponent implements OnInit {
         this.displayAllDiseaseAssc = true;
         this.assocLoading = false;
         this.diseaseSource.paginator = this.diseasePaginator;
-
       });
   }
 
@@ -141,12 +145,14 @@ export class TermComponent implements OnInit {
   }
 
   setDefaults(term: Term) {
-    this.term = term;
-    this.term.comment = (term.comment != null) ? term.comment : '';
-    this.term.synonyms = (term.synonyms.length !== 0) ? term.synonyms : ['No synonyms found for this term.'];
-    this.term.definition = (term.definition != null) ? term.definition : 'Sorry this term has no definition.';
-    this.term.purl = 'http://purl.obolibrary.org/obo/' + term.id.replace(':', '_');
-    this.term.xrefs = (term.xrefs != null) ? term.xrefs : [];
+    if (term) {
+      this.term = term;
+      this.term.comment = (term.comment != null) ? term.comment : '';
+      this.term.synonyms = (term.synonyms.length !== 0) ? term.synonyms : ['No synonyms found for this term.'];
+      this.term.definition = (term.definition != null) ? term.definition : 'Sorry this term has no definition.';
+      this.term.purl = 'http://purl.obolibrary.org/obo/' + term.id.replace(':', '_');
+      this.term.xrefs = (term.xrefs != null) ? term.xrefs : [];
+    }
   }
 
   showAllDiseases(event) {

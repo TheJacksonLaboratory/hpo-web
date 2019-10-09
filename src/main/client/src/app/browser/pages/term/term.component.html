@@ -208,7 +208,8 @@
               </mat-tab>
 
               <!-- Loinc Association -->
-              <mat-tab label="LOINC Associations">
+              <div *ngIf="loincDisplayCount != 0">
+                <mat-tab label="LOINC Associations">
                   <div [hidden]="loincDisplayCount == 0">
                     <mat-progress-bar  *ngIf="assocLoading" class="loading-result-details" color="primary" mode="buffer">
                     </mat-progress-bar>
@@ -247,10 +248,11 @@
                       </div>
                     </div>
                   </div>
-                  <div class="container center" [hidden]="loincDisplayCount != 0">
+                  <!--<div class="container center" [hidden]="loincDisplayCount != 0">
                     <h4>No LOINC associations found for <strong>{{term.id}}</strong></h4>
-                  </div>
-              </mat-tab>
+                  </div>-->
+                </mat-tab>
+              </div>
             </mat-tab-group>
           </div>
         </div>

@@ -8,7 +8,7 @@
 <div class="empty-space"></div>
 <div class="container">
     <div class="col-lg-offset-1 col-lg-6">
-      <h3>The Human Phenotype Ontology</h3>
+      <h2>The Human Phenotype Ontology</h2>
       <hr>
       <div class="info-body">
         <p>The Human Phenotype Ontology (HPO) provides a standardized vocabulary of phenotypic abnormalities encountered
@@ -29,7 +29,7 @@
       </div>
     </div>
     <div class="col-lg-4">
-      <h3>News & Updates</h3>
+      <h2>News & Updates</h2>
       <hr>
       <div class="info-body teaser">
         <div *ngIf="teaserNews">
@@ -51,65 +51,57 @@
 </div>
 <div class="container">
   <div class="home-highlight-menu">
-      <div class="col-lg-2 home-highlight-item monarch">
-        <div class="home-highlight-title">
-          <h4>Monarch Initiative</h4>
-        </div>
-        <div class="home-highlight-body">
-          <div class="home-highlight-image">
-            <img class="logo" src="assets/monarch-logo.png" />
-          </div>
-          <p>Cross-species genomic and phenotypic analysis</p>
-          <a mat-raised-button href="https://monarchinitiative.org/" target="__blank" class="mat-btn">Explore Monarch!</a>
-        </div>
+    <div routerLink="/tools/exomiser" class="home-item dark offset col-lg-5">
+      <img class="tool-icon" src="assets/highlight-images/exomiser.png" />
+      <div class="home-body">
+        <h2 class="title">Exomiser</h2>
+        <p class="description"><i>Evaluate variants based on the predicted pathogenicity.</i></p>
       </div>
-    <div class="col-lg-2 home-highlight-item">
-      <div class="home-highlight-title">
-        <h4>Phenomizer</h4>
-      </div>
-      <div class="home-highlight-body">
-        <div class="home-highlight-image">
-          <img class="image" src="assets/highlight-images/phenomizer_s.png"/>
-        </div>
-        <p>Rank disease differential diagnosis by clinical features</p>
-        <a mat-raised-button routerLink="/tools/phenomizer" class="mat-btn">Learn How!</a>
-      </div>
+      <i class="material-icons hidden-xs">
+        chevron_right
+      </i>
     </div>
-    <div class="col-lg-2 home-highlight-item">
-      <div class="home-highlight-title">
-        <h4>Exomiser</h4>
+    <div routerLink="/tools/phenomizer" class="home-item light col-lg-offset-1 col-lg-5">
+      <img class="tool-icon" src="assets/highlight-images/phenomizer.png" />
+      <div class="home-body">
+        <h2 class="title">Phenomizer</h2>
+        <p class="description"><i>Rank disease differential diagnosis by clinical features.</i></p>
       </div>
-      <div class="home-highlight-body">
-        <div class="home-highlight-image">
-          <img class="image" src="assets/highlight-images/exomiser_s.jpg" />
-        </div>
-        <p>Evaluate variants based on the predicted pathogenicity</p>
-        <a mat-raised-button routerLink="/tools/exomiser" class="mat-btn">View tool!</a>
-      </div>
+      <i class="material-icons hidden-xs">
+        chevron_right
+      </i>
     </div>
-    <div class="col-lg-2 home-highlight-item">
-      <div class="home-highlight-title">
-        <h4>Clinical annotation</h4>
+    <div routerLink="/tools/genomiser" class="home-item light offset col-lg-5">
+      <img class="tool-icon" src="assets/highlight-images/genomiser.png" />
+      <div class="home-body">
+        <h2 class="title">Genomiser</h2>
+        <p class="description"><i>Analyze genome sequence data for non-coding variants.</i></p>
       </div>
-      <div class="home-highlight-body">
-        <div class="home-highlight-image">
-          <img class="image" src="assets/highlight-images/patientarchive_s.png" />
-        </div>
-        <p>Create structured and precise patient phenotype profiles</p>
-        <a mat-raised-button routerLink="/tools/clinical-annotation" class="mat-btn">Check it out!</a>
-      </div>
+      <i class="material-icons hidden-xs">
+        chevron_right
+      </i>
     </div>
-    <div class="col-lg-2 home-highlight-item">
-      <div class="home-highlight-title">
-        <h4>Genomiser</h4>
+    <div routerLink="/tools/clinical-annotation" class="home-item dark col-lg-offset-1 col-lg-5">
+      <img class="tool-icon" src="assets/highlight-images/patientarchive.png" />
+      <div class="home-body">
+        <h2 class="title">Clinical Annotation</h2>
+        <p class="description"><i>Create structured and precise patient phenotype profiles.</i></p>
       </div>
-      <div class="home-highlight-body">
-        <div class="home-highlight-image">
-          <img class="image" src="assets/highlight-images/genomiser_s.jpg" /><br>
-        </div>
-        <p>Analyze genome sequence data for non-coding variants</p>
-        <a mat-raised-button routerLink="/tools/genomiser" class="mat-btn">View Tool!</a>
-      </div>
+      <i class="material-icons hidden-xs">
+        chevron_right
+      </i>
+    </div>
+  </div>
+</div>
+<br><br>
+<div class="container">
+  <div class="monarch-banner col-lg-offset-1 col-lg-10 mat-elevation-z1">
+    <a href="https://monarchinitiative.org/" target="__blank">
+      <img class="logo" src="assets/monarch-logo.png"/>
+    </a>
+    <div class="body">
+      <span class="text">Cross-species disease discovery and diagnosis.</span>
+      <a mat-raised-button href="https://monarchinitiative.org/" target="__blank" class="mat-btn button">Explore Monarch Initiative</a>
     </div>
   </div>
 </div>

@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatSort, MatTableDataSource, MatPaginator } from '@angular/material';
 import { Disease, Gene, Term, TermCategory } from '../../models/models';
 import { DiseaseService } from '../../services/disease/disease.service';
@@ -21,11 +21,12 @@ export class DiseaseComponent {
   geneDataSource: MatTableDataSource<Gene>;
   isLoading  = true;
   catTermSources: TermCategory[] = [];
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatSort, { static: false }) sort: MatSort;
 
-  @ViewChild('genePaginator') genePaginator: MatPaginator;
+  @ViewChild('genePaginator', { static: true }) genePaginator: MatPaginator;
 
-  constructor(private route: ActivatedRoute, private diseaseService: DiseaseService, public dialogService: DialogService) {
+  constructor(private route: ActivatedRoute, private diseaseService: DiseaseService, public dialogService: DialogService,
+              private router: Router) {
     this.route.params.subscribe( (params) => {
       this.query = params.id;
       this.refreshData();
@@ -44,25 +45,32 @@ export class DiseaseComponent {
         this.geneDataSource = new MatTableDataSource(this.geneAssoc);
 
         this.geneDataSource.paginator = this.genePaginator;
+        this.diseaseService.searchMonarch(this.query)
+          .subscribe((mData) => {
+            this.disease.description = mData.description;
+          });
         this.isLoading = false;
       }, (error) => {
+        const errorString = 'Could not find requested disease id.';
+        this.router.navigate(['/error'], {
+          state: {
+            description: errorString
+          }});
         console.log(error);
       });
-    this.diseaseService.searchMonarch(this.query)
-      .subscribe((data) => {
-      this.disease.description = data.description;
-    });
+
   }
   /**
    * Sets DB sources for Category-Term map data
    */
   setCatTermsDBSource(catTermsMap) {
-    for (let i in catTermsMap) {
-      const catLabel = catTermsMap[i].catLabel;
-      const annotationCount = catTermsMap[i].terms.length;
-      const termSource = new MatTableDataSource(catTermsMap[i].terms);
+    catTermsMap.map( term => {
+      const catLabel = term.catLabel;
+      const annotationCount = term.terms.length;
+      const termSource = new MatTableDataSource(term.terms);
       this.catTermSources.push({catLabel, annotationCount,  termSource});
-    }
+    });
+
     this.catTermSources.sort((a, b) => (a.annotationCount > b.annotationCount) ? -1 :
       (a.annotationCount < b.annotationCount) ? 1 : 0);
   }

@@ -1,0 +1,25 @@
+.page-intro, .page-title {
+  text-align: center;
+}
+
+.page-title i {
+  position:relative;
+  top: calc(50% - 10px);
+  font-size: 48px;
+}
+
+.page-intro {
+  margin: 2.5rem 0;
+}
+
+.page-header {
+  margin: 5rem 0 0 0;
+}
+
+
+a { cursor: pointer;}
+
+a.mat-btn {
+  text-decoration: none;
+  background-color: #ec9736;
+}

@@ -19,7 +19,7 @@ export class TermService {
       options.headers = this.headers;
 
         return this.http
-            .get(environment.HPO_API_TERM_SEARCH_URL + '/' + query, options);
+            .get(environment.HPO_API_TERM_SEARCH_URL + query, options);
     }
 
     searchLoincByTerm(query: string): Observable<any>{

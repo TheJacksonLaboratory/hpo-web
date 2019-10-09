@@ -11,6 +11,9 @@ class HpoGeneDetailsService {
     Map resultMap = ["gene": '', "termAssoc": [], "diseaseAssoc": []]
     if (query) {
       DbGene gene = getGene(query)
+      if(!gene){
+        return resultMap
+      }
       resultMap.put("gene", gene)
       resultMap.put("termAssoc", gene.dbTerms)
       resultMap.put("diseaseAssoc", gene.dbDiseases)

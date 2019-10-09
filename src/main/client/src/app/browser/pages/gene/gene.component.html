@@ -15,12 +15,19 @@
             <!-- Gene Summary -->
             <mat-card class="item-summary">
                 <mat-card-content>
-                  <h3 class="card-title">Summary</h3>
-                  <hr class="underline-hr">
-                  <p><strong>Gene Location</strong>:&nbsp;{{entrezGene.maplocation}}</p>
-                  <p><strong>Definition</strong><br>
-                    <i>{{entrezGene.summary}}</i>
-                  </p>
+                  <div *ngIf="!entrezError">
+                    <h3 class="card-title">Summary</h3>
+                    <hr class="underline-hr">
+                    <p><strong>Gene Location</strong>:&nbsp;{{entrezGene.maplocation}}</p>
+                    <p><strong>Definition</strong><br>
+                      <i>{{entrezGene.summary}}</i>
+                    </p>
+                  </div>
+                  <div *ngIf="entrezError">
+                    Entrez API Error. If you recieved this error please report it.
+                    <a mat-raised-button href="https://github.com/TheJacksonLaboratory/hpo-web/issues" target="__blank" class="mat-btn">Report Issue</a>
+                  </div>
+
                 </mat-card-content>
             </mat-card>
         </div>
