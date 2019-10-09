@@ -15,7 +15,8 @@ export class DiseaseComponent {
   disease: Disease = {'db': '', 'dbObjectId': '0', 'dbName': '', 'dbReference': ''};
   termAssoc: Term[] = [];
   geneAssoc: Gene[] = [];
-  termColumns = ['ontologyId', 'name', 'definition'];
+  termColumns = ['ontologyId', 'name', 'onset', 'frequency', 'definition'];
+  hasTerms = false;
   geneColumns = ['entrezGeneId', 'entrezGeneSymbol'];
   termDataSource: MatTableDataSource<Term>;
   geneDataSource: MatTableDataSource<Gene>;
@@ -37,11 +38,8 @@ export class DiseaseComponent {
     this.diseaseService.searchDisease(this.query)
       .subscribe((data) => {
         this.disease  = data.disease;
-        this.termAssoc = data.termAssoc;
         this.geneAssoc = data.geneAssoc;
         this.setCatTermsDBSource (data.catTermsMap);
-
-        this.termDataSource = new MatTableDataSource(this.termAssoc);
         this.geneDataSource = new MatTableDataSource(this.geneAssoc);
 
         this.geneDataSource.paginator = this.genePaginator;
@@ -67,7 +65,14 @@ export class DiseaseComponent {
     catTermsMap.map( term => {
       const catLabel = term.catLabel;
       const annotationCount = term.terms.length;
-      const termSource = new MatTableDataSource(term.terms);
+      if (term.terms.length > 0) {
+        this.hasTerms = true;
+      }
+      const termSource = new MatTableDataSource(term.terms.map( fterm => {
+        fterm.frequency = fterm.frequency === 'UNKNOWN' ? '-' : fterm.frequency;
+        fterm.onset = fterm.onset === 'UNKNOWN' ? '-' : fterm.onset;
+        return fterm;
+      }));
       this.catTermSources.push({catLabel, annotationCount,  termSource});
     });
 

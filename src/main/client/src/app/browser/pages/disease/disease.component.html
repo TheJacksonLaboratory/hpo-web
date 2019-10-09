@@ -1,12 +1,12 @@
 <div class="disease-component">
-  <div class="container-custom" [hidden]="isLoading">
+  <div class="container-custom">
     <div class="item-header">
       <span [hidden]="!isLoading">
           <mat-progress-bar  class="loading-result-details" color="primary" mode="buffer">
           </mat-progress-bar>
       </span>
     </div>
-</div>
+  </div>
   <div [hidden]="isLoading" class="container">
       <div class="row">
             <div class="col-lg-offset-2 col-lg-8">
@@ -20,7 +20,7 @@
                     <mat-list-item>{{disease.description}}</mat-list-item>
                   </mat-list>
                   <button class="mat-btn mat-raised-button download-associations"
-                          [disabled]="this.termAssoc.length == 0 && this.geneAssoc.length == 0"
+                          [disabled]="this.hasTerms && this.geneAssoc.length == 0"
                           (click)="downloadDialog()">Export Associations</button>
                 </mat-card-content>
               </mat-card>
@@ -44,12 +44,20 @@
                             <ng-container matColumnDef="ontologyId">
                               <mat-header-cell *matHeaderCellDef> Term Identifier </mat-header-cell>
                                 <mat-cell *matCellDef="let row">
-                                  <a routerLink="/browse/term/{{row.ontologyId}}">{{row.ontologyId}}</a>
+                                  <a routerLink="/browse/term/{{row.ontologyId}}">{{row.ontologyId}}</a><br>
                                 </mat-cell>
                             </ng-container>
-                            <ng-container matColumnDef="name">
+                           <ng-container matColumnDef="name">
                               <mat-header-cell *matHeaderCellDef>Term Name </mat-header-cell>
                               <mat-cell *matCellDef="let row">{{row.name}}</mat-cell>
+                            </ng-container>
+                            <ng-container matColumnDef="onset">
+                              <mat-header-cell *matHeaderCellDef>Onset</mat-header-cell>
+                              <mat-cell *matCellDef="let row">{{row.onset}}</mat-cell>
+                            </ng-container>
+                            <ng-container matColumnDef="frequency">
+                              <mat-header-cell *matHeaderCellDef>Frequency</mat-header-cell>
+                              <mat-cell *matCellDef="let row">{{row.frequency}}</mat-cell>
                             </ng-container>
                             <ng-container matColumnDef="definition">
                               <mat-header-cell *matHeaderCellDef>Definition</mat-header-cell>

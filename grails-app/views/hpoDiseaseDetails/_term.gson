@@ -1,6 +1,12 @@
-import hpo.api.term.DbTerm
+import hpo.api.model.AnnotationResult
 
 model {
-  DbTerm term
+  AnnotationResult term
 }
-json g.render(term,[includes: ['name','ontologyId', 'definition']])
+json {
+  ontologyId term.ontologyId
+  name term.termName
+  definition term.definition
+  frequency term.frequency
+  onset term.onset
+}

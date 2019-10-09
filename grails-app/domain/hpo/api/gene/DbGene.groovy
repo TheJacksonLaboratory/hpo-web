@@ -1,10 +1,12 @@
 package hpo.api.gene
 
-
+import grails.compiler.GrailsCompileStatic
+import groovy.transform.TypeCheckingMode
 import hpo.api.disease.DbDisease
 import hpo.api.term.DbTerm
 import org.monarchinitiative.phenol.formats.hpo.HpoGeneAnnotation
 
+@GrailsCompileStatic(TypeCheckingMode.SKIP)
 class DbGene {
 
   Integer entrezGeneId

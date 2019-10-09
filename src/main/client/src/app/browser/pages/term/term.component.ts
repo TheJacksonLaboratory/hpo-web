@@ -17,7 +17,7 @@ export class TermComponent implements OnInit {
   query: string;
   paramId: string;
   term: Term = {'id': '', 'name': '', 'definition': '', 'altTermIds': [], 'comment': '', 'synonyms': [],
-    'isObsolete': true, 'xrefs': [], 'purl': ''};
+    'isObsolete': true, 'xrefs': [], 'pubmedXrefs': [], 'purl': ''};
   geneColumns = ['entrezGeneId', 'dbDiseases'];
   geneSource: MatTableDataSource<Gene>;
   geneAssocCount: number;
@@ -62,7 +62,7 @@ export class TermComponent implements OnInit {
       const geneService = this.termService.searchGenesByTerm(id);
       const diseaseService = this.termService.searchDiseasesByTerm(id);
       const loincService = this.termService.searchLoincByTerm(id);
-      return observableForkJoin(geneService, diseaseService, loincService);
+      return observableForkJoin([geneService, diseaseService, loincService]);
     })).subscribe(([res1, res2, res3]) => {
 
       this.geneSource = new MatTableDataSource(res1.genes);
@@ -152,6 +152,9 @@ export class TermComponent implements OnInit {
       this.term.definition = (term.definition != null) ? term.definition : 'Sorry this term has no definition.';
       this.term.purl = 'http://purl.obolibrary.org/obo/' + term.id.replace(':', '_');
       this.term.xrefs = (term.xrefs != null) ? term.xrefs : [];
+      this.term.pubmedXrefs = (term.pubmedXrefs != null) ? term.pubmedXrefs.map(pmid => {
+          return {whole: pmid, id: pmid.split(':')[1]};
+        }) : [];
     }
   }
 

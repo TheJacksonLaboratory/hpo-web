@@ -1,5 +1,6 @@
 package hpo.api
 
+import groovy.transform.TypeCheckingMode
 import hpo.api.util.HpoUtilities
 import org.monarchinitiative.phenol.formats.hpo.HpoOntology
 import org.monarchinitiative.phenol.ontology.algo.OntologyTerms
@@ -14,8 +15,7 @@ import hpo.api.gene.DbGene
 import hpo.api.term.DbTerm
 import org.apache.commons.lang.time.StopWatch
 
-
-@GrailsCompileStatic
+@GrailsCompileStatic(TypeCheckingMode.SKIP)
 class HpoTermService {
 
   HpoOntology hpoOntology
@@ -152,7 +152,7 @@ class HpoTermService {
 
     final String placeholders = terms*.id.collect{'?'}.join(',')
     final String query = """
-      select db_disease_id from db_term_db_diseases
+      select db_disease_id from db_annotation
       where db_term_id in ( ${placeholders})
     """
 
