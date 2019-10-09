@@ -20,6 +20,184 @@
   for the annotation of disease entities (e.g.<i>Noonan syndrome</i>) and not individuals (such as a person who has been diagnosed with <i>Noonan syndrome</i>).
   We recommend looking at <a href="https://phenotips.org/" target="__blank">PhenoTips</a>  or <a href="http://www.patientarchive.org/#/home" target="__blank">Patient Archive</a>
   if you are aiming at annotating clinical findings of individuals with hereditary diseases.</p>
+  
+	<h2>Current Annotation File format (2019 onwards)</h2>
+	The HPO transitioned to a new annotation file format in 2019 (Details in <a href="https://www.ncbi.nlm.nih.gov/pubmed/30476213" target="_blank"> K&ouml;hler et al, 2019</a>). 
+	
+
+<table align="center" class="table-spacer">
+      <thead>
+        <tr>
+          <th>Column</th>
+          <th>Content</th>
+          <th>Required</th>
+          <th>Example</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>DatabaseId</td>
+          <td>required</td>
+          <td>MIM:154700</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>DB_Name</td>
+          <td>required</td>
+          <td>Achondrogenesis, type IB</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Qualifier</td>
+          <td>optional</td>
+          <td>NOT</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>HPO_ID</td>
+          <td>required</td>
+          <td>HP:0002487</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>DB_Reference</td>
+          <td>required</td>
+          <td>OMIM:154700 or PMID:15517394</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td>Evidence_Code</td>
+          <td>required</td>
+          <td>IEA</td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td>Onset modifier</td>
+          <td>optional</td>
+          <td>HP:0003577</td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td>Frequency</td>
+          <td>optional</td>
+          <td><a routerLink="/browse/term/HP:0003577">HP:0003577</a> or 12/45 or 22%</td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td>Sex</td>
+          <td>optional</td>
+          <td>MALE or FEMALE</td>
+        </tr>
+         <tr>
+          <td>10</td>
+          <td>Modifier</td>
+          <td>optional</td>
+          <td><a routerLink="/browse/term/HP:0025257">HP:0025257</a>(“;”-separated list)</td>
+        </tr>
+        <tr>
+          <td>11</td>
+          <td>Aspect</td>
+          <td>required</td>
+          <td>P, C, I, or M</td>
+        </tr>
+        <tr>
+          <td>12</td>
+          <td>BiocurationBy</td>
+          <td>required</td>
+          <td>HPO:skoehler[YYYY-MM-DD]</td>
+        </tr>
+      </tbody>
+    </table>
+    
+     <ol class="no-indent-list">
+  <li>
+    <strong>DatabaseId</strong>
+    <p>This field refers to the database and database identifier of the disease being annotated. Annotations from
+    <a href="https://omim.org/" target="__blank">OMIM</a>,
+     <a href="http://www.orpha.net/consor/cgi-bin/index.php" target="__blank">Orphanet</a>,
+     <a href="https://decipher.sanger.ac.uk/" target="__blank">DECIPHER</a> are currently available.
+  </p>
+  </li>
+  <li>
+      <strong>Qualifer:</strong>
+      <p>This optional field can be used to qualify the annotation shown in field 5. The only allowed values of this field are NOT and (empty string).
+      <em>NOT</em>: The disorder being annotated is NOT characterized by the feature associated with HPO_ID in column 5. Note that annotations with the NOT modifier are moved to separate file!</p>
+  </li>
+  <li>
+      <strong>HPO_ID:</strong>
+      <p>This field is for the HPO identifier for the term attributed to the DB_Object_ID. This field is mandatory, cardinality 1.</p>
+  </li>
+  <li>
+      <strong>DB_Reference:</strong>
+      <p>This required field indicates the source of the information used for the annotation. This may be the clinical experience of the annotator or may be taken from
+      an article as indicated by a PubMed id. Each collaborating center of the Human Phenotype Ontology consortium is assigned a HPO:Ref id.
+        In addition, if appropriate, a PubMed id for an article describing the clinical abnormality may be used.</p>
+  </li>
+  <li>
+    <strong>Evidence:</strong>
+    <p>This required field indicates the level of evidence supporting the annotation. Annotations that have been extracted by parsing the
+    Clinical Features sections of the omim.txt file are assigned the evidence code <strong>IEA</strong> (inferred from electronic annotation). Please note that you need to
+    contact OMIM in order to reuse these annotations in other software products.
+      Other codes include <strong>PCS</strong> for published clinical study. This should be used for information extracted from articles in the medical literature.
+      Generally, annotations of this type will include the PubMed id of the published study in the DB_Reference field.
+      <strong>ICE</strong> can be used for annotations based on individual clinical experience.
+      This may be appropriate for disorders with a limited amount of published data. This must be accompanied by an entry in
+      the DB:Reference field denoting the individual or center performing the annotation together with an identifier. For instance, GH:007 might be used to refer to
+      the seventh such annotation made by a specialist from Gotham Hospital
+      (assuming the prefix GH has been registered with the HPO). Finally we have <strong>TAS</strong>, which stands for “traceable author statement”, usually
+      reviews or disease entries (e.g. OMIM) that only refers to the original publication.</p>
+  </li>
+  <li>
+    <strong>Onset</strong>
+    <p>A term-id from the HPO-sub-ontology below the term <a routerLink="/browse/term/HP:0003674">Age of onset</a>.</p>
+  </li>
+  <li>
+    <strong>Frequency</strong>
+    <p>A term-id from the HPO-sub-ontology below the term <a routerLink="/browse/term/HP:0040279">Frequency</a>.</p>
+    There are three allowed options for this field.
+    <ol>
+      <li>
+        A term-id from the HPO-sub-ontology below the term <a routerLink="/browse/term/HP:0040279">Frequency</a>.</li>
+      <li>
+        A count of patients affected within a cohort. For instance, 7/13 would indicate that 7 of the 13 patients with the
+      specified disease were found to have the phenotypic abnormality referred to by the HPO term in question in the study
+      referred to by the DB_Reference</li>
+      <li>
+        A percentage value such as 17%, again referring to the percentage of patients  found to have the phenotypic abnormality referred to by the HPO term in question in the study
+      referred to by the DB_Reference. If possible, the 7/13 format is preferred over the percentage format if the exact data is available.
+      </li>
+    </ol>
+  </li>
+
+  <li>
+    <strong>Sex:</strong>
+    <p>This field contains the strings MALE or FEMALE if the annotation in question is limited to
+  males or females. This field refers to the phenotypic (and not the chromosomal) sex, and does not intend to capture
+  the further complexities of sex determination. If a phenotype is limited to one or the other sex, then the corresponding
+  term from the <a routerLink="/browse/term/HP:0012823">Clinical modifier</a> subontology should also be used in the Modifier field.</p>
+  </li>
+  <li><strong>Modifier:</strong>
+    <p>A term from the <a routerLink="/browse/term/HP:0012823">Clinical modifier</a> subontology</p>
+  </li>
+  <li>
+    <strong>Aspect:</strong>
+    <p>one of P (Phenotypic abnormality), I (inheritance), C (onset and clinical course). This field is mandatory; cardinality 1</p>
+  </li>
+  <li>
+    <strong>BiocurationBy</strong>
+    <p>This refers to the center or user making the annotation and the date on which the annotation was made; format is YYYY-MM-DD this field is mandatory. Multiple entries can be separated by a semicolon if an 
+annotation was revised, e.g., HPO:skoehler[2010-04-21];HPO:lcarmody[2019-06-02]</p>
+  </li>
+  </ol>
+
+<p>See the <a href="https://hpo-annotation-qc.readthedocs.io/en/latest/annotationFormat.html#phenotype-hpoa-format" target="_blank" >online documentation</a> for more information about this format.</p>
+
+
+	<h2>2009-2018 Annotation file format</h2>
+	<p>We will maintain the previous annotation format for the foreseeable future as a service to our users but ask users to update their pipelines to the new format.</p>
+  
+  
   <p>
     <i>The flat file format comprises 14 tab-delimited fields. Please note there are several differences compared with our previous annotation file format that was in use
     from 2009 to March, 2018.</i>
