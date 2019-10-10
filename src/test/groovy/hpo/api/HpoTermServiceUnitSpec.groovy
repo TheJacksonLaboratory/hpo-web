@@ -78,7 +78,7 @@ class HpoTermServiceUnitSpec extends Specification implements ServiceUnitTest<Hp
         ["id": 1, "db": "OMIM", "dbId": "7","diseaseName":"Bladder Carcinoma", "diseaseId": "OMIM:7"],
         ["id": 2, "db": "ORPHA", "dbId": "227","diseaseName":"Bladder Failure", "diseaseId": "ORPHA:227"]]
       diseases.each{
-        new DbAnnotation(dbTerm1, new DbDisease(db: it.db, dbId:it.dbId, diseaseName: it.diseaseName, diseaseId: it.diseaseId), "", "").save()
+        new DbAnnotation(dbTerm1, new DbDisease(db: it.db, dbId:it.dbId, diseaseName: it.diseaseName, diseaseId: it.diseaseId), "", "", "").save()
       }
       dbTerm1.save()
 
@@ -179,7 +179,7 @@ class HpoTermServiceUnitSpec extends Specification implements ServiceUnitTest<Hp
       ["id": 4, "db": "OMIM", "dbId": "4","diseaseName":"Bladder Carcinoma", "diseaseId": "OM:4"],
       ["id": 5, "db": "OMIM", "dbId": "5","diseaseName":"Bladder Carcinoma", "diseaseId": "OM:5"]]
     diseases.each{
-      new DbAnnotation(dbTerm1, new DbDisease(db: it.db, dbId:it.dbId, diseaseName: it.diseaseName, diseaseId: it.diseaseId), "", "").save()
+      new DbAnnotation(dbTerm1, new DbDisease(db: it.db, dbId:it.dbId, diseaseName: it.diseaseName, diseaseId: it.diseaseId), "", "", "").save()
     }
 
     when: "we query for a term"

@@ -49,7 +49,7 @@ class HpoDiseaseDetailsServiceUnitSpec extends Specification implements ServiceU
     DbDisease dbDisease = buildMockDisease()
     List<Term> terms = buildMockTerms(["HP:0001597","HP:0000982"])
     terms.each{
-      new DbAnnotation(new DbTerm(it), dbDisease, "NA", "NA").save()
+      new DbAnnotation(new DbTerm(it), dbDisease, "NA", "NA", "NA").save()
     }
     dbDisease.save()
 
@@ -77,7 +77,7 @@ class HpoDiseaseDetailsServiceUnitSpec extends Specification implements ServiceU
     List<Term> terms = buildMockTerms(["HP:0001597","HP:0000982"])
     List<AnnotationResult> annotationResultList = []
     terms.each {
-      new DbAnnotation(new DbTerm(it), dbDisease1, "NA", "NA").save()
+      new DbAnnotation(new DbTerm(it), dbDisease1, "NA", "NA", "NA").save()
     }
     dbDisease1.save()
 

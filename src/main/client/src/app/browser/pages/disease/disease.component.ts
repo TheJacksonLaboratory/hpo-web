@@ -15,7 +15,7 @@ export class DiseaseComponent {
   disease: Disease = {'db': '', 'dbObjectId': '0', 'dbName': '', 'dbReference': ''};
   termAssoc: Term[] = [];
   geneAssoc: Gene[] = [];
-  termColumns = ['ontologyId', 'name', 'onset', 'frequency', 'definition'];
+  termColumns = ['ontologyId', 'name', 'onset', 'frequency', 'citations' ];
   hasTerms = false;
   geneColumns = ['entrezGeneId', 'entrezGeneSymbol'];
   termDataSource: MatTableDataSource<Term>;
@@ -39,6 +39,7 @@ export class DiseaseComponent {
       .subscribe((data) => {
         this.disease  = data.disease;
         this.geneAssoc = data.geneAssoc;
+        this.catTermSources = [];
         this.setCatTermsDBSource (data.catTermsMap);
         this.geneDataSource = new MatTableDataSource(this.geneAssoc);
 
@@ -68,16 +69,26 @@ export class DiseaseComponent {
       if (term.terms.length > 0) {
         this.hasTerms = true;
       }
-      const termSource = new MatTableDataSource(term.terms.map( fterm => {
+      const catTermSource = term.terms.map( fterm => {
         fterm.frequency = fterm.frequency === 'UNKNOWN' ? '-' : fterm.frequency;
         fterm.onset = fterm.onset === 'UNKNOWN' ? '-' : fterm.onset;
+        fterm.citations = this.formatCitations(fterm.citations);
         return fterm;
-      }));
+      });
+      const termSource = new MatTableDataSource(catTermSource);
       this.catTermSources.push({catLabel, annotationCount,  termSource});
     });
 
     this.catTermSources.sort((a, b) => (a.annotationCount > b.annotationCount) ? -1 :
       (a.annotationCount < b.annotationCount) ? 1 : 0);
+  }
+
+  formatCitations(citations: string) {
+    const formattedCitations = citations.split(',');
+    if (formattedCitations[0] === 'UNKNOWN') {
+       formattedCitations[0] = '-' ;
+    }
+    return formattedCitations;
   }
 
   applyGeneFilter(filterValue: string) {

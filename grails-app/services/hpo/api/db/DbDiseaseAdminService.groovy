@@ -25,7 +25,7 @@ class DbDiseaseAdminService {
   SqlUtilsService sqlUtilsService
   DomainUtilService domainUtilService
   // USE SQL TO INSERT
-  final static String INSERT_INTO_DB_ANNOTATION = "INSERT INTO db_annotation(db_disease_id, db_term_id, onset, frequency) VALUES(?,?, ?, ?)"
+  final static String INSERT_INTO_DB_ANNOTATION = "INSERT INTO db_annotation(db_disease_id, db_term_id, onset, frequency, citations) VALUES(?,?, ?, ?, ?)"
   final static String INSERT_INTO_DB_GENE_DB_DISEASES = "INSERT INTO db_gene_db_diseases( db_gene_id, db_disease_id) VALUES(?,?)"
 
   void truncateDbDiseases() {
@@ -109,12 +109,14 @@ class DbDiseaseAdminService {
                   dbDisease.id as Object,
                   dbTerm.id as Object,
                   formatOnsetString(annotation.onset.toString()),
-                  formatFrequencyString(annotation.frequencyString, hpoIdToDbTermMap)
+                  formatFrequencyString(annotation.frequencyString, hpoIdToDbTermMap),
+                  formatCitations(annotation.getCitations())
                 ])
               } else {
                 ps.addBatch([
                   dbDisease.id as Object,
                   dbTerm.id as Object,
+                  "UNKNOWN",
                   "UNKNOWN",
                   "UNKNOWN"
                 ])
@@ -129,6 +131,11 @@ class DbDiseaseAdminService {
     log.info("hpoIdWithPrefixNotFoundSet.size() : ${hpoIdWithPrefixNotFoundSet.size()} ${new Date()}")
     log.info("entrezIdNotFoundSet.size() : ${diseaseIdNotFoundSet.size()} ${new Date()}")
     log.info("**** Joined Disease And Terms - ${count} - duration: ${stopWatch} time: ${new Date()} ****")
+  }
+
+  String formatCitations(List<String> citations){
+    final String filteredCitations = citations.findAll{ it.startsWith("PMID:")}.join(",")
+    return  filteredCitations.length() > 1 ? filteredCitations : "UNKNOWN"
   }
 
   String formatOnsetString(String onset){

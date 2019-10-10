@@ -85,7 +85,7 @@ class HpoDiseaseDetailsService {
   AnnotationResult buildAnnotationResult(DbDisease disease, Term term){
     DbTerm dbTerm = DbTerm.findByOntologyId(term.getId().toString())
     DbAnnotation annotation = DbAnnotation.findWhere(dbTerm: dbTerm, dbDisease: disease)
-    return new AnnotationResult(annotation.getDbTerm(), annotation.getOnset(), annotation.getFrequency())
+    return new AnnotationResult(annotation.getDbTerm(), annotation.getOnset(), annotation.getFrequency(), annotation.getCitations())
   }
 
 }

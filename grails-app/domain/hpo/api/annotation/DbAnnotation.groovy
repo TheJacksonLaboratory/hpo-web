@@ -9,22 +9,25 @@ class DbAnnotation {
     DbDisease dbDisease
     String frequency
     String onset
+    String citations
 
     static constraints = {
       dbTerm()
       dbDisease()
-      onset(nullable: true)
-      frequency(nullable: true)
+      onset()
+      frequency()
+      citations()
     }
 
     static mapping = {
       version false
     }
 
-    DbAnnotation(term, disease, freq, onst){
-      dbTerm = term
-      dbDisease = disease
-      frequency = freq
-      onset = onst
+    DbAnnotation(term, disease, frequency, onset, citations){
+      this.dbTerm = term
+      this.dbDisease = disease
+      this.frequency = frequency
+      this.onset = onset
+      this.citations = citations
     }
 }
