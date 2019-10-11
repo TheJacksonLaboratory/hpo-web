@@ -9,16 +9,16 @@ class AnnotationResult {
   String definition
   String frequency
   String onset
-  String citations
+  String sources
 
 
-  AnnotationResult(DbTerm term, onset, frequency, citations){
+  AnnotationResult(DbTerm term, onset, frequency, sources){
     this.ontologyId = term.getOntologyId()
     this.termName = term.getName()
     this.definition = term.getDefinition()
     this.onset = onset
     this.frequency = frequency
-    this.citations = citations
+    this.sources = sources
   }
 
 }

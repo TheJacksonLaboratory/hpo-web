@@ -25,7 +25,7 @@ class DbDiseaseAdminService {
   SqlUtilsService sqlUtilsService
   DomainUtilService domainUtilService
   // USE SQL TO INSERT
-  final static String INSERT_INTO_DB_ANNOTATION = "INSERT INTO db_annotation(db_disease_id, db_term_id, onset, frequency, citations) VALUES(?,?, ?, ?, ?)"
+  final static String INSERT_INTO_DB_ANNOTATION = "INSERT INTO db_annotation(db_disease_id, db_term_id, onset, frequency, sources) VALUES(?,?, ?, ?, ?)"
   final static String INSERT_INTO_DB_GENE_DB_DISEASES = "INSERT INTO db_gene_db_diseases( db_gene_id, db_disease_id) VALUES(?,?)"
 
   void truncateDbDiseases() {
@@ -41,7 +41,7 @@ class DbDiseaseAdminService {
 
   void executeDiseaseSchemaLoad(){
     try{
-      loadDiseases();
+      loadDiseases()
       createTermDiseaseAnnotationSql()
       joinDiseasesToGenesWithSql()
     }catch (Exception e){
@@ -110,7 +110,7 @@ class DbDiseaseAdminService {
                   dbTerm.id as Object,
                   formatOnsetString(annotation.onset.toString()),
                   formatFrequencyString(annotation.frequencyString, hpoIdToDbTermMap),
-                  formatCitations(annotation.getCitations())
+                  formatSources(annotation.getCitations())
                 ])
               } else {
                 ps.addBatch([
@@ -133,9 +133,9 @@ class DbDiseaseAdminService {
     log.info("**** Joined Disease And Terms - ${count} - duration: ${stopWatch} time: ${new Date()} ****")
   }
 
-  String formatCitations(List<String> citations){
-    final String filteredCitations = citations.findAll{ it.startsWith("PMID:")}.join(",")
-    return  filteredCitations.length() > 1 ? filteredCitations : "UNKNOWN"
+  String formatSources(List<String> sources){
+    final String joinedSources = sources.join(",")
+    return  joinedSources.length() > 1 ? joinedSources : "UNKNOWN"
   }
 
   String formatOnsetString(String onset){

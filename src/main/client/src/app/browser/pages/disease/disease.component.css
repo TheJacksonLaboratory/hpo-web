@@ -1,12 +1,13 @@
 .term-association .mat-column-ontologyId {
     max-width: 150px;
 }
-.term-association .mat-column-name {
-   max-width: 250px;
+
+.term-association .mat-column-onset, .term-association .mat-column-frequency, .term-association .mat-column-sources   {
+  max-width: 175px;
 }
 
-.term-association .mat-column-onset, .term-association .mat-column-frequency, .term-association .mat-column-citations   {
-  max-width: 175px;
+.term-association .mat-column-sources .material-icons,.term-association .mat-column-sources .material-icons-outlined {
+  font-size: 18px;
 }
 
 .mat-column-dbDiseases {

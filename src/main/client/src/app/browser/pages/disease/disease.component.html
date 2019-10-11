@@ -63,10 +63,21 @@
                               <mat-header-cell *matHeaderCellDef>Frequency</mat-header-cell>
                               <mat-cell *matCellDef="let row">{{row.frequency}}</mat-cell>
                             </ng-container>
-                            <ng-container matColumnDef="citations">
-                              <mat-header-cell *matHeaderCellDef>Citations</mat-header-cell>
+                            <ng-container matColumnDef="sources">
+                              <mat-header-cell *matHeaderCellDef>Source(s)</mat-header-cell>
                               <mat-cell *matCellDef="let row">
-                                {{row.citations}}
+                                <span *ngFor="let source of row.sources">
+                                  <span *ngIf="isPubmed(source)">
+                                    <a [href]="getPubmedUrl(source)" target="_blank">
+                                      <i class="material-icons-outlined">library_books</i>
+                                    </a>
+                                  </span>
+                                  <span *ngIf="!isPubmed(source)">
+                                    <a [href]="getExternalDiseaseUrl(source)" target="_blank">
+                                      <i class="material-icons">open_in_new</i>
+                                    </a>
+                                  </span>
+                                </span>
                               </mat-cell>
                             </ng-container>
                           </mat-table>
