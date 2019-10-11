@@ -9,4 +9,5 @@ json {
   definition term.definition
   frequency term.frequency
   onset term.onset
+  sources term.sources
 }

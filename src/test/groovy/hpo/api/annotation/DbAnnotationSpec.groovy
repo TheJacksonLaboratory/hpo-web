@@ -22,7 +22,8 @@ class DbAnnotationSpec extends Specification implements DomainUnitTest<DbAnnotat
       DbDisease dbDisease = buildMockDisease()
       String frequency = "1/3000"
       String onset = "early late stage"
-      DbAnnotation dbAnnotation = new DbAnnotation(term, dbDisease, frequency, onset)
+      String citation = "PMID:0000"
+      DbAnnotation dbAnnotation = new DbAnnotation(term, dbDisease, frequency, onset, citation)
 
       then:
       dbAnnotation.getFrequency() == frequency

@@ -15,7 +15,7 @@ export class DiseaseComponent {
   disease: Disease = {'db': '', 'dbObjectId': '0', 'dbName': '', 'dbReference': ''};
   termAssoc: Term[] = [];
   geneAssoc: Gene[] = [];
-  termColumns = ['ontologyId', 'name', 'onset', 'frequency', 'definition'];
+  termColumns = ['ontologyId', 'name', 'onset', 'frequency', 'sources' ];
   hasTerms = false;
   geneColumns = ['entrezGeneId', 'entrezGeneSymbol'];
   termDataSource: MatTableDataSource<Term>;
@@ -39,6 +39,7 @@ export class DiseaseComponent {
       .subscribe((data) => {
         this.disease  = data.disease;
         this.geneAssoc = data.geneAssoc;
+        this.catTermSources = [];
         this.setCatTermsDBSource (data.catTermsMap);
         this.geneDataSource = new MatTableDataSource(this.geneAssoc);
 
@@ -68,16 +69,44 @@ export class DiseaseComponent {
       if (term.terms.length > 0) {
         this.hasTerms = true;
       }
-      const termSource = new MatTableDataSource(term.terms.map( fterm => {
+      const catTermSource = term.terms.map( fterm => {
         fterm.frequency = fterm.frequency === 'UNKNOWN' ? '-' : fterm.frequency;
         fterm.onset = fterm.onset === 'UNKNOWN' ? '-' : fterm.onset;
+        const source = fterm.sources.split(',');
+        fterm.sources = source[0] === 'UNKNOWN' ? [this.query] : source;
         return fterm;
-      }));
+      });
+      const termSource = new MatTableDataSource(catTermSource);
       this.catTermSources.push({catLabel, annotationCount,  termSource});
     });
+    // sort by custom list
+    const sort_categories = ['Inheritance', 'Growth', 'Head and neck', 'Ear', 'Eye', 'Cardiovascular', 'Respiratory System',
+      'Thoracic cavity', 'Breast', 'Digestive System', 'Endocrine', 'Genitourinary system', 'Immunology',
+      'Blood and blood-forming tissues', 'Skeletal system', 'Musculature', 'Limbs', 'Connective tissue',
+      'Skin, Hair, and Nails', 'Nervous System', 'Voice', 'Prenatal and Birth', 'Constitutional Symptom',
+      'Neoplasm', 'Metabolism/Laboratory abnormality', 'Cellular phenotype' ];
 
-    this.catTermSources.sort((a, b) => (a.annotationCount > b.annotationCount) ? -1 :
-      (a.annotationCount < b.annotationCount) ? 1 : 0);
+    this.catTermSources.sort( function(a, b) {
+      return sort_categories.indexOf(a.catLabel) - sort_categories.indexOf(b.catLabel);
+    });
+  }
+
+  isPubmed(source: string) {
+    return source.startsWith('PMID:');
+  }
+
+  getPubmedUrl(source: string){
+    return 'https://www.ncbi.nlm.nih.gov/pubmed/' + source.split(':')[1];
+  }
+
+  getExternalDiseaseUrl(source: string) {
+    const sourceParts = source.split(':');
+    if (sourceParts[0].startsWith('OMIM')) {
+      return 'https://omim.org/entry/' + sourceParts[1];
+    } else if(sourceParts[0].startsWith('ORPHA')){
+      return 'https://www.orpha.net/consor/cgi-bin/OC_Exp.php?Lng=EN&Expert=' + sourceParts[1];
+    }
+
   }
 
   applyGeneFilter(filterValue: string) {

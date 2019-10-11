@@ -51,7 +51,7 @@ class HpoDiseaseDetailsService {
 
     HpoCategoryMap hpoCatMap = new HpoCategoryMap()
 
-    Set<DbTerm> dbTermList  = DbAnnotation.findAllByDbDisease(disease).dbTerm
+    Set<DbTerm> dbTermList  = getTermsAssociatedByDisease(disease)
     dbTermList.each {dbTerm ->
       final TermId termId = TermId.of(dbTerm.getOntologyId())
       hpoCatMap.addAnnotatedTerm(termId, hpoOntology)
@@ -85,7 +85,7 @@ class HpoDiseaseDetailsService {
   AnnotationResult buildAnnotationResult(DbDisease disease, Term term){
     DbTerm dbTerm = DbTerm.findByOntologyId(term.getId().toString())
     DbAnnotation annotation = DbAnnotation.findWhere(dbTerm: dbTerm, dbDisease: disease)
-    return new AnnotationResult(annotation.getDbTerm(), annotation.getOnset(), annotation.getFrequency())
+    return new AnnotationResult(annotation.getDbTerm(), annotation.getOnset(), annotation.getFrequency(), annotation.getSources())
   }
 
 }
