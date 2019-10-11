@@ -2,7 +2,6 @@ package hpo.api.term
 
 import groovy.sql.GroovyRowResult
 import org.monarchinitiative.phenol.ontology.data.Term
-import hpo.api.disease.DbDisease
 import hpo.api.gene.DbGene
 
 /**
@@ -37,11 +36,11 @@ class DbTerm {
     definition(type: 'text')
     comment(type: 'text')
     numberOfChildren()
+    version false
   }
 
   static hasMany = [dbTermPaths: DbTermPath,
                     dbGenes: DbGene,
-                    dbDiseases: DbDisease,
                     dbTermParents: DbTermRelationship,
                     dbTermChildren: DbTermRelationship,
                     dbTermSynonyms: DbTermSynonym]
@@ -50,7 +49,6 @@ class DbTerm {
 
   Set<DbTermPath> dbTermPaths = [] as Set<DbTermPath>
   Set<DbGene> dbGenes = [] as Set<DbGene>
-  Set<DbGene> dbDiseases = [] as Set<DbGene>
   Set<DbTermRelationship> dbTermParents = [] as Set<DbTermRelationship>
   Set<DbTermRelationship> dbTermChildren = [] as Set<DbTermRelationship>
 

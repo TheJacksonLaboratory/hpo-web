@@ -1,11 +1,14 @@
 package hpo.api.disease
 
+import grails.compiler.GrailsCompileStatic
+import groovy.transform.TypeCheckingMode
 import hpo.api.gene.DbGene
 import hpo.api.term.DbTerm
 import org.apache.commons.lang.NullArgumentException
 import org.monarchinitiative.phenol.formats.hpo.HpoDisease
 import org.apache.commons.lang.WordUtils
 
+@GrailsCompileStatic(TypeCheckingMode.SKIP)
 class DbDisease {
 
   String db
@@ -23,10 +26,10 @@ class DbDisease {
     diseaseName(type: 'text')
     version false
   }
-  Set<DbTerm> dbTerms = [] as Set<DbTerm>
+
   Set<DbGene> dbGenes = [] as Set<DbGene>
-  static hasMany = [dbTerms: DbTerm, dbGenes: DbGene]
-  static belongsTo = [DbTerm, DbGene]
+  static hasMany = [dbGenes: DbGene]
+  static belongsTo = [DbGene]
 
   DbDisease() {}
 

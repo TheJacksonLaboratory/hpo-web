@@ -2,8 +2,10 @@ package hpo.api
 
 import grails.testing.gorm.DataTest
 import grails.testing.services.ServiceUnitTest
+import hpo.api.annotation.DbAnnotation
 import hpo.api.disease.DbDisease
 import hpo.api.gene.DbGene
+import hpo.api.model.AnnotationResult
 import hpo.api.term.DbTerm
 import hpo.api.util.HpoOntologyFactory
 import org.monarchinitiative.phenol.formats.hpo.HpoOntology
@@ -16,7 +18,7 @@ import spock.lang.Unroll
 class HpoDiseaseDetailsServiceUnitSpec extends Specification implements ServiceUnitTest<HpoDiseaseDetailsService>, DataTest {
 
   def setup() {
-    mockDomains DbGene, DbTerm, DbDisease
+    mockDomains DbGene, DbTerm, DbDisease, DbAnnotation
   }
 
   void "test find associated genes given disease using #desc"() {
@@ -47,7 +49,7 @@ class HpoDiseaseDetailsServiceUnitSpec extends Specification implements ServiceU
     DbDisease dbDisease = buildMockDisease()
     List<Term> terms = buildMockTerms(["HP:0001597","HP:0000982"])
     terms.each{
-      dbDisease.addToDbTerms(new DbTerm(it))
+      new DbAnnotation(new DbTerm(it), dbDisease, "NA", "NA", "NA").save()
     }
     dbDisease.save()
 
@@ -73,8 +75,9 @@ class HpoDiseaseDetailsServiceUnitSpec extends Specification implements ServiceU
     DbDisease dbDisease1 = buildMockDisease()
 
     List<Term> terms = buildMockTerms(["HP:0001597","HP:0000982"])
-    terms.each{
-      dbDisease1.addToDbTerms(new DbTerm(it))
+    List<AnnotationResult> annotationResultList = []
+    terms.each {
+      new DbAnnotation(new DbTerm(it), dbDisease1, "NA", "NA", "NA").save()
     }
     dbDisease1.save()
 
@@ -82,13 +85,14 @@ class HpoDiseaseDetailsServiceUnitSpec extends Specification implements ServiceU
     Map resultMap = service.searchDisease(query)
 
     then:
-    resultMap.catTerms == expected
+    resultMap.catTerms.get(0).catLabel == expectedLabel
+    resultMap.catTerms.get(0).terms?.size == expectedTermLength
 
     where:
-    query           | expected                                                  | desc
-    null            | [[:]]                                                     | 'nothing'
-    "ORPHA:79501"   | [[catLabel:'Skin, Hair, and Nails', terms:[null, null]]]  | 'disease by id'
-    "XXXXXXXXXXX"   | [[:]]                                                     | 'invalid by id'
+    query           | expectedLabel            | expectedTermLength      | desc
+    null            | null                     | null                    | 'nothing'
+    "ORPHA:79501"   | 'Skin, Hair, and Nails'  | 2                       | 'disease by id'
+    "XXXXXXXXXXX"   | null                     | null                    | 'invalid by id'
 
   }
 

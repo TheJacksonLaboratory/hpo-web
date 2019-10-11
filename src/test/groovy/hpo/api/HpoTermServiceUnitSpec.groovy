@@ -6,6 +6,7 @@ import hpo.api.db.utils.SqlUtilsService
 import hpo.api.disease.DbDisease
 import hpo.api.gene.DbGene
 import hpo.api.term.DbTerm
+import hpo.api.annotation.DbAnnotation
 import hpo.api.util.HpoOntologyFactory
 import hpo.api.util.HpoUtilities
 import org.monarchinitiative.phenol.formats.hpo.HpoOntology
@@ -27,7 +28,7 @@ class HpoTermServiceUnitSpec extends Specification implements ServiceUnitTest<Hp
     def setupSpec(){
         hpoOntology = new HpoOntologyFactory().getInstance()
         hpoUtilities = new HpoUtilities(hpoOntology)
-        mockDomains DbTerm, DbGene, DbDisease
+        mockDomains DbTerm, DbGene, DbDisease, DbAnnotation
     }
     def setup() {
         service.hpoOntology = hpoOntology
@@ -77,9 +78,10 @@ class HpoTermServiceUnitSpec extends Specification implements ServiceUnitTest<Hp
         ["id": 1, "db": "OMIM", "dbId": "7","diseaseName":"Bladder Carcinoma", "diseaseId": "OMIM:7"],
         ["id": 2, "db": "ORPHA", "dbId": "227","diseaseName":"Bladder Failure", "diseaseId": "ORPHA:227"]]
       diseases.each{
-        dbTerm1.addToDbDiseases(new DbDisease(db: it.db, dbId:it.dbId, diseaseName: it.diseaseName, diseaseId: it.diseaseId))
+        new DbAnnotation(dbTerm1, new DbDisease(db: it.db, dbId:it.dbId, diseaseName: it.diseaseName, diseaseId: it.diseaseId), "", "", "").save()
       }
       dbTerm1.save()
+
       when: "we query for a term"
       Map<String, Object> diseaseResult = service.searchDiseasesByTerm(query, 0, 20 )
 
@@ -177,9 +179,9 @@ class HpoTermServiceUnitSpec extends Specification implements ServiceUnitTest<Hp
       ["id": 4, "db": "OMIM", "dbId": "4","diseaseName":"Bladder Carcinoma", "diseaseId": "OM:4"],
       ["id": 5, "db": "OMIM", "dbId": "5","diseaseName":"Bladder Carcinoma", "diseaseId": "OM:5"]]
     diseases.each{
-      dbTerm1.addToDbDiseases(new DbDisease(db: it.db, dbId:it.dbId, diseaseName: it.diseaseName, diseaseId: it.diseaseId))
+      new DbAnnotation(dbTerm1, new DbDisease(db: it.db, dbId:it.dbId, diseaseName: it.diseaseName, diseaseId: it.diseaseId), "", "", "").save()
     }
-    dbTerm1.save()
+
     when: "we query for a term"
     Map<String, Object> serviceResult = service.searchDiseasesByTerm(queryTerm, offset, max )
 
@@ -189,8 +191,8 @@ class HpoTermServiceUnitSpec extends Specification implements ServiceUnitTest<Hp
     serviceResult.diseaseCount == rCount
     serviceResult.offset == rOffset
     serviceResult.max == rMax
-    where:
 
+    where:
     queryTerm     | offset | max | rDiseases                                |  rCount | rOffset | rMax | desc                         | mockQueryMethodResponse
     ''            | 0      | 20  | []                                       |  0      | 0       | 20   |'nothing and default paging'  | []
     'HP:0002862'  | 0      | 20  | ["OM:1", "OM:3", "OM:4", "OM:5", "OM:2"] |  5      | 0       | 20   |'exact id and default paging' | [[db_disease_id: 1], [db_disease_id: 2], [db_disease_id: 3], [db_disease_id: 4], [db_disease_id: 5]]

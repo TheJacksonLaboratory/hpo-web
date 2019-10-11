@@ -7,8 +7,7 @@ import { Observable } from 'rxjs';
 export class DiseaseService {
     options = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Accept': 'q=0.8;application/json;q=0.9'
+        'Accept': 'application/json'
       })
     };
 
