@@ -26,23 +26,25 @@ class UrlMappings {
 
     "/"(uri: '/app/index.html')
     "/app/"(uri: '/app/index.html')
+    "/app/*.js"(controller: 'contentTypeAsset', action:'setCharEncoding') {
+     contentType = 'text/javascript; charset=UTF-8'
+    }
+   "/app/*.map"(controller: 'contentTypeAsset', action:'setCharEncoding') {
+     contentType = 'application/json; charset=UTF-8'
+   }
+   "/app/assets/*.js"(controller: 'contentTypeAsset', action:'setCharEncoding') {
+     contentType = 'text/javascript; charset=UTF-8'
+   }
+   "/app/*.css"(controller: 'contentTypeAsset', action:'setCharEncoding') {
+     contentType = 'text/css; charset=UTF-8'
+   }
+   "/app/assets/*.css"(controller: 'contentTypeAsset', action:'setCharEncoding') {
+     contentType = 'text/css; charset=UTF-8'
+   }
+
     "/app/**"(uri: '/app/index.html')
 
-    "/app/*.js"(controller: 'contentTypeAsset', action:'setCharEncoding') {
-      contentType = 'text/javascript; charset=UTF-8'
-    }
-    "/app/*.map"(controller: 'contentTypeAsset', action:'setCharEncoding') {
-      contentType = 'application/json; charset=UTF-8'
-    }
-    "/app/assets/*.js"(controller: 'contentTypeAsset', action:'setCharEncoding') {
-      contentType = 'text/javascript; charset=UTF-8'
-    }
-    "/app/*.css"(controller: 'contentTypeAsset', action:'setCharEncoding') {
-      contentType = 'text/css; charset=UTF-8'
-    }
-    "/app/assets/*.css"(controller: 'contentTypeAsset', action:'setCharEncoding') {
-      contentType = 'text/css; charset=UTF-8'
-    }
+
 
     "/api/hpo/search"(controller: 'hpoSearch', action: 'searchAll')
 
