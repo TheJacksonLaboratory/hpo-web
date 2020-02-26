@@ -39,7 +39,7 @@
                             <span *ngIf="catTermSource.annotationCount == 1">[ {{catTermSource.annotationCount}} annotation ]</span>
                           </h3>
                           <mat-table [dataSource]="catTermSource.termSource" matSort>
-                            <mat-header-row *matHeaderRowDef="termColumns"></mat-header-row>
+                            <mat-header-row *matHeaderRowDef="termColumns; sticky: true"></mat-header-row>
                             <mat-row *matRowDef="let row; columns: termColumns;"></mat-row>
                             <ng-container matColumnDef="ontologyId">
                               <mat-header-cell *matHeaderCellDef> Term Identifier </mat-header-cell>
