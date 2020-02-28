@@ -6,7 +6,7 @@
   <div class="nav-components  hidden-xs hidden-sm">
       <button mat-button [matMenuTriggerFor]="toolsMenu">Tools <mat-icon>arrow_drop_down</mat-icon></button>
       <button mat-button [matMenuTriggerFor]="downloadsMenu">Downloads <mat-icon>arrow_drop_down</mat-icon></button>
-      <button mat-button [matMenuTriggerFor]="helpMenu">Help <mat-icon>arrow_drop_down</mat-icon></button>
+      <button mat-button [matMenuTriggerFor]="docsMenu">Documentation <mat-icon>arrow_drop_down</mat-icon></button>
   </div>
   <!-- Tools Menu and SubMenus -->
   <mat-menu [overlapTrigger]="false" class="hpo-menus" #toolsMenu="matMenu">
@@ -30,14 +30,12 @@
   </mat-menu>
 
   <!-- Help Menu and SubMenus -->
-  <mat-menu [overlapTrigger]="false" #helpMenu="matMenu">
-    <button mat-menu-item [matMenuTriggerFor]="infoMenu">Information</button>
+  <mat-menu [overlapTrigger]="false" #docsMenu="matMenu">
+    <button mat-menu-item [matMenuTriggerFor]="infoMenu">About</button>
     <button mat-menu-item routerLink="help/clinician-guide"> Clinicians Guide </button>
     <button mat-menu-item [matMenuTriggerFor]="howtoMenu">How to..</button>
-    <button mat-menu-item routerLink="help/layperson"> Layperson Synonyms </button>
-    <button mat-menu-item routerLink="help/mapping"> Translations and Mapping </button>
-
-    <button mat-menu-item routerLink="faq"> FAQ </button>
+    <button mat-menu-item [matMenuTriggerFor]="helpMenu">Help</button>
+    <button mat-menu-item [matMenuTriggerFor]="otherMenu">Other</button>
   </mat-menu>
   <mat-menu  #howtoMenu="matMenu">
     <button mat-menu-item routerLink="help/annotations"> Use Annotations </button>
@@ -45,14 +43,21 @@
     <button mat-menu-item routerLink="citation"> Cite HPO </button>
     <button mat-menu-item routerLink="license"> License HPO </button>
   </mat-menu>
+  <mat-menu  #helpMenu="matMenu">
+  <button mat-menu-item routerLink="faq"> FAQ </button>
+  <button mat-menu-item routerLink="contact"> Contact </button>
+  </mat-menu>
+  <mat-menu  #otherMenu="matMenu">
+    <button mat-menu-item routerLink="help/layperson"> Layperson Synonyms </button>
+    <button mat-menu-item routerLink="help/mapping"> Translations and Mapping </button>
+  </mat-menu>
   <mat-menu  #infoMenu="matMenu">
     <button mat-menu-item routerLink="help/introduction"> Introduction </button>
-    <button mat-menu-item routerLink="help/history"> History </button>
-    <button mat-menu-item routerLink="contact"> Contact </button>
     <button mat-menu-item routerLink="help/users">  Users </button>
     <button mat-menu-item routerLink="help/contributors"> Contributors </button>
     <button mat-menu-item routerLink="help/publications"> Publications </button>
     <button mat-menu-item routerLink="help/funding"> Funding </button>
+    <button mat-menu-item routerLink="help/history"> History </button>
   </mat-menu>
   <mat-menu [overlapTrigger]="false" #downloadsMenu="matMenu">
     <button mat-menu-item routerLink="download/ontology"> Ontology </button>
