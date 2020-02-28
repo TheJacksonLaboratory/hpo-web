@@ -1,11 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { MatSort, MatTableDataSource, MatPaginator } from '@angular/material';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator} from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import { forkJoin as observableForkJoin } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { TermService } from '../../services/term/term.service';
 import { Term, Gene, Disease, TermTree, LoincEntry } from '../../models/models';
 import { DialogService } from '../../../shared/dialog-excel-download/dialog.service';
+
 
 @Component({
   selector: 'app-term',
@@ -46,7 +49,7 @@ export class TermComponent implements OnInit {
 
   @ViewChild('diseasePaginator', { static: true }) diseasePaginator: MatPaginator;
   @ViewChild('genePaginator', { static: true }) genePaginator: MatPaginator;
-  @ViewChild(MatSort, { static: false }) sort: MatSort;
+  @ViewChild(MatSort) sort: MatSort;
 
   constructor(private route: ActivatedRoute, private termService: TermService, private dialogService: DialogService,
               private router: Router) {

@@ -1,6 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MatSort, MatTableDataSource, MatPaginator } from '@angular/material';
+import { MatTableDataSource  } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
+import { MatPaginator} from '@angular/material/paginator';
 import { Disease, Gene, Term, TermCategory } from '../../models/models';
 import { DiseaseService } from '../../services/disease/disease.service';
 import { DialogService } from '../../../shared/dialog-excel-download/dialog.service';
@@ -22,7 +24,7 @@ export class DiseaseComponent {
   geneDataSource: MatTableDataSource<Gene>;
   isLoading  = true;
   catTermSources: TermCategory[] = [];
-  @ViewChild(MatSort, { static: false }) sort: MatSort;
+  @ViewChild(MatSort) sort: MatSort;
 
   @ViewChild('genePaginator', { static: true }) genePaginator: MatPaginator;
 
@@ -95,7 +97,7 @@ export class DiseaseComponent {
     return source.startsWith('PMID:');
   }
 
-  getPubmedUrl(source: string){
+  getPubmedUrl(source: string) {
     return 'https://www.ncbi.nlm.nih.gov/pubmed/' + source.split(':')[1];
   }
 
@@ -103,10 +105,23 @@ export class DiseaseComponent {
     const sourceParts = source.split(':');
     if (sourceParts[0].startsWith('OMIM')) {
       return 'https://omim.org/entry/' + sourceParts[1];
-    } else if(sourceParts[0].startsWith('ORPHA')){
+    } else if(sourceParts[0].startsWith('ORPHA')) {
       return 'https://www.orpha.net/consor/cgi-bin/OC_Exp.php?Lng=EN&Expert=' + sourceParts[1];
     }
+  }
 
+  isSourceOrpha(source: string) {
+    const sourceParts = source.split(':');
+    if (sourceParts[0].startsWith('ORPHA')) {
+      return true;
+    }
+  }
+
+  isSourceOmim(source: string){
+    const sourceParts = source.split(':');
+    if (sourceParts[0].startsWith('OMIM')) {
+      return true;
+    }
   }
 
   applyGeneFilter(filterValue: string) {

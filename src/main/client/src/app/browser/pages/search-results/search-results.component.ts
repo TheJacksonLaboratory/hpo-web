@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
-import {MatTableDataSource, MatPaginator} from '@angular/material';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 import {Term, Gene, Disease} from '../../models/models';
 import {SearchService} from '../../../shared/search/service/search.service';
 import {ActivatedRoute } from '@angular/router';

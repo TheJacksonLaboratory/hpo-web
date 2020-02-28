@@ -69,11 +69,13 @@
                                 <span *ngFor="let source of row.sources">
                                   <span *ngIf="isPubmed(source)">
                                     <a [href]="getPubmedUrl(source)" target="_blank">
-                                      <i class="material-icons-outlined">library_books</i>
+                                      <i class="material-icons-outlined">library_books</i> PubMed
                                     </a>
                                   </span>
                                   <span *ngIf="!isPubmed(source)">
                                     <a [href]="getExternalDiseaseUrl(source)" target="_blank">
+                                      <span *ngIf="isSourceOmim(source)">OMIM &nbsp;</span>
+                                      <span *ngIf="isSourceOrpha(source)">ORPHA &nbsp;</span>
                                       <i class="material-icons">open_in_new</i>
                                     </a>
                                   </span>
