@@ -4,7 +4,7 @@ import grails.compiler.GrailsCompileStatic
 import groovy.transform.TypeCheckingMode
 import hpo.api.disease.DbDisease
 import hpo.api.term.DbTerm
-import org.monarchinitiative.phenol.formats.hpo.HpoGeneAnnotation
+import org.monarchinitiative.phenol.annotations.formats.hpo.HpoGeneAnnotation
 
 @GrailsCompileStatic(TypeCheckingMode.SKIP)
 class DbGene {

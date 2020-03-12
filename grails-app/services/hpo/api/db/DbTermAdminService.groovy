@@ -3,14 +3,12 @@ package hpo.api.db
 
 import grails.gorm.transactions.Transactional
 import groovy.sql.BatchingPreparedStatementWrapper
-import hpo.api.term.DbTermSynonym
-import org.monarchinitiative.phenol.formats.hpo.HpoOntology
 import org.monarchinitiative.phenol.ontology.algo.OntologyTerms
+import org.monarchinitiative.phenol.ontology.data.Ontology
 import org.monarchinitiative.phenol.ontology.data.Term
 import org.monarchinitiative.phenol.ontology.data.TermId
 import hpo.api.db.utils.SqlUtilsService
 import hpo.api.term.DbTerm
-import hpo.api.term.DbTermPath
 import hpo.api.term.DbTermRelationship
 import hpo.api.util.AncestorPathsBuilder
 import org.apache.commons.lang.time.StopWatch
@@ -27,7 +25,7 @@ class DbTermAdminService {
 
   SessionFactory sessionFactory
 
-  HpoOntology hpoOntology
+  Ontology hpoOntology
   SqlUtilsService sqlUtilsService
   final static String INSERT_DB_TERM_PATH = "INSERT INTO db_term_path (db_term_id, path_names, path_ids ,path_length) VALUES(?,?,?,?)"
   final static String INSERT_DB_TERM_SYNONYM = "INSERT INTO db_term_synonym (db_term_id, synonym) VALUES (?,?)"

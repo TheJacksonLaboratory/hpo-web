@@ -1,11 +1,11 @@
 package hpo.api.util
 
-import org.monarchinitiative.phenol.formats.hpo.HpoOntology
+import org.monarchinitiative.phenol.ontology.data.Ontology
 import org.monarchinitiative.phenol.ontology.data.TermId
 
 class HpoUtilities {
 
-  HpoOntology hpoOntology
+  Ontology hpoOntology
 
   /***
    * Method to check if a given hpo id string is a primary id,
@@ -13,7 +13,7 @@ class HpoUtilities {
    * @return primaryId: string
    */
 
-   HpoUtilities(HpoOntology hpoOntology){
+   HpoUtilities(Ontology hpoOntology){
      this.hpoOntology = hpoOntology
    }
    String checkReturnPrimaryId(String hpoTermQuery){

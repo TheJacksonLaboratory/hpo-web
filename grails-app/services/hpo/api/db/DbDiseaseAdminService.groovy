@@ -10,9 +10,9 @@ import hpo.api.term.DbTerm
 import hpo.api.util.HpoAssociationFactory
 import org.apache.commons.lang.time.StopWatch
 import hpo.api.db.utils.DomainUtilService
-import org.monarchinitiative.phenol.formats.hpo.HpoAnnotation
-import org.monarchinitiative.phenol.formats.hpo.HpoDisease
-import org.monarchinitiative.phenol.io.assoc.HpoAssociationParser
+import org.monarchinitiative.phenol.annotations.assoc.HpoAssociationParser
+import org.monarchinitiative.phenol.annotations.formats.hpo.HpoAnnotation
+import org.monarchinitiative.phenol.annotations.formats.hpo.HpoDisease
 import org.monarchinitiative.phenol.ontology.data.TermId
 
 import java.sql.SQLException
@@ -171,7 +171,7 @@ class DbDiseaseAdminService {
     Set<String> diseaseIdNotFoundSet = [] as Set
     final Map<String, DbDisease> diseaseIdMap = domainUtilService.loadDbDiseases()
     final Map<Integer, DbGene> geneIdMap = domainUtilService.loadDbGenes()
-    Multimap<TermId, TermId> diseaseToGeneMap = hpoAssociation.getDiseaseToGeneIdMap();
+    Multimap<TermId, TermId> diseaseToGeneMap = hpoAssociation.getDiseaseToGeneIdMap()
     Integer count = 0;
     sqlUtilsService.sql.withBatch(500, INSERT_INTO_DB_GENE_DB_DISEASES) { BatchingPreparedStatementWrapper ps ->
       for (Map.Entry<TermId, TermId> e : diseaseToGeneMap.entries()) {

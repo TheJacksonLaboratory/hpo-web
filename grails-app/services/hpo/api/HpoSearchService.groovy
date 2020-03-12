@@ -11,14 +11,13 @@ import hpo.api.util.HpoUtilities
 import org.apache.commons.lang.StringUtils
 import org.grails.datastore.mapping.query.api.BuildableCriteria
 import hpo.api.model.SearchTermResult
-import org.monarchinitiative.phenol.formats.hpo.HpoOntology
-import org.monarchinitiative.phenol.ontology.data.TermId
+import org.monarchinitiative.phenol.ontology.data.Ontology
 
 @GrailsCompileStatic
 class HpoSearchService {
 
   SqlUtilsService sqlUtilsService
-  HpoOntology hpoOntology
+  Ontology hpoOntology
   HpoUtilities hpoUtilities
     /**
      * Given a search query string, it executes domain object searches for terms, diseases and genes.

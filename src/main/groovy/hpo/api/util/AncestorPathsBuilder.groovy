@@ -1,19 +1,18 @@
 package hpo.api.util
 
-import org.monarchinitiative.phenol.formats.hpo.HpoOntology
+import org.monarchinitiative.phenol.ontology.data.Ontology
 import org.monarchinitiative.phenol.ontology.data.Term
 import org.monarchinitiative.phenol.ontology.data.TermId
-import org.springframework.beans.factory.annotation.Autowired
 
 /**
  * Created by djd on 10/24/17.
  */
 class AncestorPathsBuilder {
-    final private HpoOntology hpoOntology
+    final private Ontology hpoOntology
 
 //    final private Map<Term,List<List<Term>>> termToAncestorPaths = [:].withDefault {[]}
 
-    AncestorPathsBuilder(HpoOntology hpoOntology){
+    AncestorPathsBuilder(Ontology hpoOntology){
         this.hpoOntology = hpoOntology
     }
 

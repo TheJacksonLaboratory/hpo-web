@@ -2,8 +2,6 @@ package hpo.api
 
 import grails.config.Config
 import grails.core.support.GrailsConfigurationAware
-import hpo.api.disease.DbDisease
-import org.monarchinitiative.phenol.formats.hpo.HpoDisease
 
 class HpoExcelController implements GrailsConfigurationAware {
 

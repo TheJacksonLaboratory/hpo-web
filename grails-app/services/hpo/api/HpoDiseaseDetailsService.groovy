@@ -6,16 +6,16 @@ import hpo.api.annotation.DbAnnotation
 import hpo.api.disease.DbDisease
 import hpo.api.model.AnnotationResult
 import hpo.api.term.DbTerm
-import org.monarchinitiative.phenol.formats.hpo.HpoOntology
-import org.monarchinitiative.phenol.formats.hpo.category.HpoCategory
-import org.monarchinitiative.phenol.formats.hpo.category.HpoCategoryMap
+import org.monarchinitiative.phenol.annotations.formats.hpo.category.HpoCategory
+import org.monarchinitiative.phenol.annotations.formats.hpo.category.HpoCategoryMap
+import org.monarchinitiative.phenol.ontology.data.Ontology
 import org.monarchinitiative.phenol.ontology.data.TermId
 import org.monarchinitiative.phenol.ontology.data.Term
 
 @GrailsCompileStatic(TypeCheckingMode.SKIP)
 class HpoDiseaseDetailsService {
 
-  HpoOntology hpoOntology
+  Ontology hpoOntology
 
   Map searchDisease(String query) {
     Map resultMap = ["disease": '', "termAssoc": [], "geneAssoc": [], "catTerms":[[:]]]

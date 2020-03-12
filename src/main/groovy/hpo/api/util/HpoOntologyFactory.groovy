@@ -1,7 +1,7 @@
 package hpo.api.util
 
-import org.monarchinitiative.phenol.formats.hpo.HpoOntology
-import org.monarchinitiative.phenol.io.obo.hpo.HpOboParser
+import org.monarchinitiative.phenol.ontology.data.Ontology
+import org.monarchinitiative.phenol.io.OntologyLoader
 import groovy.transform.CompileStatic
 import org.grails.io.support.ClassPathResource
 
@@ -11,8 +11,8 @@ import org.grails.io.support.ClassPathResource
  */
 @CompileStatic
 class HpoOntologyFactory {
-    HpoOntology getInstance() {
+    Ontology getInstance() {
         final File file = new ClassPathResource('hp_mostrecent.obo').file
-        return new HpOboParser(file).parse()
+        return OntologyLoader.loadOntology(file)
     }
 }

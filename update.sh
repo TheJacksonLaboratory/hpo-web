@@ -34,7 +34,7 @@ wget -O src/main/resources/Homo_sapiens.gene_info.gz ftp://ftp.ncbi.nih.gov/gene
 if [ -f src/main/resources/phenotype.hpoa ]; then
         mv src/main/resources/phenotype.hpoa src/main/resources/phenotype.hpoa.old
 fi
-wget -O src/main/resources/phenotype.hpoa http://compbio.charite.de/jenkins/job/hpo.annotations.current/lastSuccessfulBuild/artifact/misc_2018/phenotype.hpoa
+wget -O src/main/resources/phenotype.hpoa http://compbio.charite.de/jenkins/job/hpo.annotations.current/lastSuccessfulBuild/artifact/current/phenotype.hpoa
 
 # EXIT
 exit 0;
