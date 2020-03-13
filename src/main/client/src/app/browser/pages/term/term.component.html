@@ -113,7 +113,7 @@
 
                             <div [hidden]="assocLoading"class="associations disease-association">
                               <mat-table [dataSource]="diseaseSource">
-                                <mat-header-row *matHeaderRowDef="diseaseColumns;"></mat-header-row>
+                                <mat-header-row *matHeaderRowDef="diseaseColumns; sticky: true"></mat-header-row>
                                 <mat-row *matRowDef="let row; columns: diseaseColumns;"></mat-row>
                                 <ng-container matColumnDef="diseaseId">
                                   <mat-header-cell *matHeaderCellDef> Disease Id </mat-header-cell>
@@ -174,7 +174,7 @@
 
                       <div [hidden]="assocLoading" class="associations gene-association">
                         <mat-table [dataSource]="geneSource">
-                          <mat-header-row *matHeaderRowDef="geneColumns"></mat-header-row>
+                          <mat-header-row *matHeaderRowDef="geneColumns; sticky: true"></mat-header-row>
                           <mat-row *matRowDef="let row; columns: geneColumns;"></mat-row>
                           <ng-container matColumnDef="entrezGeneId">
                             <mat-header-cell *matHeaderCellDef> Gene Symbol </mat-header-cell>
@@ -223,7 +223,7 @@
                     <div class="tab-output-container">
                       <div [hidden]="assocLoading" class="associations loinc-association">
                         <mat-table [dataSource]="loincSource">
-                          <mat-header-row *matHeaderRowDef="loincColumns"></mat-header-row>
+                          <mat-header-row *matHeaderRowDef="loincColumns; sticky: true"></mat-header-row>
                           <mat-row *matRowDef="let row; columns: loincColumns;"></mat-row>
                           <ng-container matColumnDef="id">
                             <mat-header-cell *matHeaderCellDef> LOINC Code </mat-header-cell>

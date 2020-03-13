@@ -5,7 +5,11 @@
     "baseUrl": "./",
     "types": ["node", "jasmine"]
   },
-  "exclude": [
-    "test.ts"
+  "files": [
+    "main.ts",
+    "polyfills.ts"
+  ],
+  "include": [
+    "src/**/*.d.ts"
   ]
 }

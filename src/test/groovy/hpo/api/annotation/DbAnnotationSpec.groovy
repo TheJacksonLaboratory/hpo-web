@@ -3,7 +3,7 @@ package hpo.api.annotation
 import grails.testing.gorm.DomainUnitTest
 import hpo.api.disease.DbDisease
 import hpo.api.term.DbTerm
-import org.monarchinitiative.phenol.formats.hpo.HpoDisease
+import org.monarchinitiative.phenol.annotations.formats.hpo.HpoDisease
 import org.monarchinitiative.phenol.ontology.data.Term
 import org.monarchinitiative.phenol.ontology.data.TermId
 import spock.lang.Specification
@@ -52,6 +52,8 @@ class DbAnnotationSpec extends Specification implements DomainUnitTest<DbAnnotat
           new HpoDisease(
           "Small Cell Carcinoma Of The Bladder",
           TermId.of("ORPHA:284400"),
+          [],
+          [],
           [],
           [],
           []

@@ -48,3 +48,8 @@
   background-color: rgb(78, 139, 162);
   color: white;
 }
+
+
+.material-icons {
+  vertical-align: middle !important;
+}

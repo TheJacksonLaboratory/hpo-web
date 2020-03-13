@@ -2,8 +2,8 @@ package hpo.api
 
 import groovy.transform.TypeCheckingMode
 import hpo.api.util.HpoUtilities
-import org.monarchinitiative.phenol.formats.hpo.HpoOntology
 import org.monarchinitiative.phenol.ontology.algo.OntologyTerms
+import org.monarchinitiative.phenol.ontology.data.Ontology
 import org.monarchinitiative.phenol.ontology.data.Term
 import org.monarchinitiative.phenol.ontology.data.TermId
 
@@ -18,7 +18,7 @@ import org.apache.commons.lang.time.StopWatch
 @GrailsCompileStatic(TypeCheckingMode.SKIP)
 class HpoTermService {
 
-  HpoOntology hpoOntology
+  Ontology hpoOntology
   SqlUtilsService sqlUtilsService
   HpoUtilities hpoUtilities
   /**

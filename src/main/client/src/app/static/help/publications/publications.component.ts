@@ -4,7 +4,8 @@ import { Publication} from '../../../browser/models/models';
 import { FormControl } from '@angular/forms';
 import { from } from 'rxjs';
 import { distinct, map, toArray, flatMap } from 'rxjs/operators';
-import { MatSort, MatTableDataSource } from '@angular/material';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
 
 
 @Component({

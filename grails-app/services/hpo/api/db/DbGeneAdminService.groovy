@@ -10,8 +10,8 @@ import hpo.api.term.DbTerm
 import org.apache.commons.lang.time.StopWatch
 import org.hibernate.Session
 import hpo.api.db.utils.DomainUtilService
-import org.monarchinitiative.phenol.formats.hpo.HpoGeneAnnotation
-import org.monarchinitiative.phenol.io.assoc.HpoAssociationParser
+import org.monarchinitiative.phenol.annotations.assoc.HpoAssociationParser
+import org.monarchinitiative.phenol.annotations.formats.hpo.HpoGeneAnnotation
 import org.monarchinitiative.phenol.ontology.data.TermId
 
 @Transactional
@@ -35,9 +35,9 @@ class DbGeneAdminService {
   void executeGeneSchemaLoad() throws Exception {
     try{
       loadEntrezGenes();
-      joinGenesAndTermsWithSql();
+      joinGenesAndTermsWithSql()
     }catch (Exception e){
-      log.error(e.toString());
+      log.error(e.toString())
     }
   }
 

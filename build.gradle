@@ -44,8 +44,10 @@ integrationTest {
 dependencies {
   profile "org.grails.profiles:web"
   //Use this once phenols on maven
-  compile 'org.monarchinitiative.phenol:phenol-core:1.3.1'
-  compile 'org.monarchinitiative.phenol:phenol-io:1.3.1'
+  compile 'org.monarchinitiative.phenol:phenol-core:1.4.3'
+  compile 'org.monarchinitiative.phenol:phenol-io:1.4.3'
+  compile 'org.monarchinitiative.phenol:phenol-annotations:1.4.3'
+  compile 'com.google.guava:guava:28.2-jre'
 
   // Raw jar file with its dependencies. Remove when switch to maven
   //compile name:'phenol-core-1.2.1'
@@ -55,7 +57,6 @@ dependencies {
 
   compile "org.prefixcommons:curie-util:0.0.2"
   compile group: 'net.sourceforge.owlapi', name: 'owlapi-distribution', version: '4.2.6'
-  compile group: 'org.geneontology', name: 'obographs', version: '0.1.1'
   compile group: 'org.jgrapht', name: 'jgrapht-core', version: '1.2.0'
 
   compile 'com.google.guava:guava:22.0'
@@ -120,7 +121,7 @@ dependencies {
 
 
 node {
-    version = '11.0.0'
+    version = '13.0.0'
     npmVersion = '6.4.1'
     download = true
     nodeModulesDir = file("src/main/client")
