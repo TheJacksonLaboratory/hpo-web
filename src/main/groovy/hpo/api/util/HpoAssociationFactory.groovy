@@ -35,7 +35,7 @@ class HpoAssociationFactory {
     Multimap<TermId, TermId> termToDisease = ArrayListMultimap.create()
     this.diseaseMap.each { k, v ->
       v.getPhenotypicAbnormalityTermIdList().each { termId ->
-        termToDisease.put(k, termId)
+        termToDisease.put(termId, k)
       }
     }
     return termToDisease
@@ -48,6 +48,7 @@ class HpoAssociationFactory {
   Map<TermId, HpoDisease> getDiseaseMap(){
     return this.diseaseMap
   }
+
   Multimap<TermId, TermId> getTermToDisease(){
     return this.termToDisease
   }
