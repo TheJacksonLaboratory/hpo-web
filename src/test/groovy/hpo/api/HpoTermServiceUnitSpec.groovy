@@ -9,7 +9,7 @@ import hpo.api.term.DbTerm
 import hpo.api.annotation.DbAnnotation
 import hpo.api.util.HpoOntologyFactory
 import hpo.api.util.HpoUtilities
-import org.monarchinitiative.phenol.formats.hpo.HpoOntology
+import org.monarchinitiative.phenol.ontology.data.Ontology
 import org.monarchinitiative.phenol.ontology.data.Term
 import org.monarchinitiative.phenol.ontology.data.TermId
 import spock.lang.Shared
@@ -21,7 +21,7 @@ class HpoTermServiceUnitSpec extends Specification implements ServiceUnitTest<Hp
 
 
     @Shared
-    HpoOntology hpoOntology
+    Ontology hpoOntology
     @Shared
     HpoUtilities hpoUtilities
 

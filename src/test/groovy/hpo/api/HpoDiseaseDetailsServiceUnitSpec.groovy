@@ -8,7 +8,7 @@ import hpo.api.gene.DbGene
 import hpo.api.model.AnnotationResult
 import hpo.api.term.DbTerm
 import hpo.api.util.HpoOntologyFactory
-import org.monarchinitiative.phenol.formats.hpo.HpoOntology
+import org.monarchinitiative.phenol.ontology.data.Ontology
 import org.monarchinitiative.phenol.ontology.data.Term
 import org.monarchinitiative.phenol.ontology.data.TermId
 import spock.lang.Specification
@@ -44,7 +44,7 @@ class HpoDiseaseDetailsServiceUnitSpec extends Specification implements ServiceU
   }
   void "test find associated terms given disease using #desc"() {
     setup:
-    HpoOntology hpoOntology = new HpoOntologyFactory().getInstance()
+    Ontology hpoOntology = new HpoOntologyFactory().getInstance()
     service.hpoOntology = hpoOntology
     DbDisease dbDisease = buildMockDisease()
     List<Term> terms = buildMockTerms(["HP:0001597","HP:0000982"])
@@ -70,7 +70,7 @@ class HpoDiseaseDetailsServiceUnitSpec extends Specification implements ServiceU
   void "test find category-terms map given disease using #desc"() {
     setup:
 
-    HpoOntology hpoOntology = new HpoOntologyFactory().getInstance()
+    Ontology hpoOntology = new HpoOntologyFactory().getInstance()
     service.hpoOntology = hpoOntology
     DbDisease dbDisease1 = buildMockDisease()
 
@@ -91,7 +91,7 @@ class HpoDiseaseDetailsServiceUnitSpec extends Specification implements ServiceU
     where:
     query           | expectedLabel            | expectedTermLength      | desc
     null            | null                     | null                    | 'nothing'
-    "ORPHA:79501"   | 'Skin, Hair, and Nails'  | 2                       | 'disease by id'
+    "ORPHA:79501"   | 'Inheritance'            | 2                       | 'disease by id'
     "XXXXXXXXXXX"   | null                     | null                    | 'invalid by id'
 
   }

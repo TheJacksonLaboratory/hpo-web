@@ -9,7 +9,7 @@ import hpo.api.model.SearchTermResult
 import hpo.api.term.DbTerm
 import hpo.api.util.HpoOntologyFactory
 import hpo.api.util.HpoUtilities
-import org.monarchinitiative.phenol.formats.hpo.HpoOntology
+import org.monarchinitiative.phenol.ontology.data.Ontology
 import spock.lang.Shared
 import spock.lang.Specification
 import spock.lang.Unroll
@@ -18,7 +18,7 @@ import spock.lang.Unroll
 class HpoSearchServiceSpec extends Specification implements ServiceUnitTest<HpoSearchService>, DataTest {
 
     @Shared
-    HpoOntology hpoOntology
+    Ontology hpoOntology
     @Shared
     HpoUtilities hpoUtilities
 

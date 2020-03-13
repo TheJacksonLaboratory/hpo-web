@@ -1,6 +1,6 @@
 package hpo.api.util
 
-import org.monarchinitiative.phenol.formats.hpo.HpoOntology
+import org.monarchinitiative.phenol.ontology.data.Ontology
 import spock.lang.Shared
 import spock.lang.Specification
 import spock.lang.Unroll
@@ -9,7 +9,7 @@ import spock.lang.Unroll
 class HpoUtilitiesSpec extends Specification {
 
   @Shared
-  HpoOntology hpoOntology
+  Ontology hpoOntology
 
   def setupSpec(){
     hpoOntology = new HpoOntologyFactory().getInstance()

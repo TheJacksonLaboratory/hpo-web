@@ -16,7 +16,7 @@ class DbTermSynonymSpec extends Specification implements DomainUnitTest<DbTermSy
 
     void "test term synonym constructor and term constructor"() {
       given:
-      TermSynonym syn = new TermSynonym("test synonym1",null, '', [])
+      TermSynonym syn = new TermSynonym("test synonym1",null, '', [], '')
       Term term = new Term.Builder()
         .id(TermId.of("HP:0000006"))
         .name('A term name')

@@ -2,11 +2,10 @@ package hpo.api.disease
 
 
 import grails.testing.gorm.DomainUnitTest
-import hpo.api.disease.DbDisease
 import org.apache.commons.lang.NullArgumentException
-import org.monarchinitiative.phenol.formats.hpo.HpoAnnotation
-import org.monarchinitiative.phenol.formats.hpo.HpoDisease
-import org.monarchinitiative.phenol.formats.hpo.HpoOnset
+import org.monarchinitiative.phenol.annotations.formats.hpo.HpoAnnotation
+import org.monarchinitiative.phenol.annotations.formats.hpo.HpoDisease
+import org.monarchinitiative.phenol.annotations.formats.hpo.HpoOnset;
 import org.monarchinitiative.phenol.ontology.data.TermId
 import spock.lang.Specification
 import spock.lang.Unroll
@@ -53,7 +52,7 @@ class DbDiseaseUnitSpec extends Specification implements DomainUnitTest<DbDiseas
       TermId.of("ORPHA:284400"),
       [annotation],
       [],
-      []
+      [], [], []
     )
 
     when:
