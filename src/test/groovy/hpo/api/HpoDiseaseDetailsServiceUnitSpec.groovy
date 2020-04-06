@@ -91,7 +91,7 @@ class HpoDiseaseDetailsServiceUnitSpec extends Specification implements ServiceU
     where:
     query           | expectedLabel            | expectedTermLength      | desc
     null            | null                     | null                    | 'nothing'
-    "ORPHA:79501"   | 'Inheritance'            | 2                       | 'disease by id'
+    "ORPHA:79501"   | 'Skin, Hair, and Nails'  | 2                       | 'disease by id'
     "XXXXXXXXXXX"   | null                     | null                    | 'invalid by id'
 
   }
