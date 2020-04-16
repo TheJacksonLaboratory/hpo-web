@@ -26,7 +26,8 @@ environments {
 }
 
 waiting {
-  timeout = 5
+  timeout = 30
+  retryInterval = 1.0
 }
 atCheckWaiting = true
 cacheDriverPerThread = true
