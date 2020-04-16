@@ -24,28 +24,21 @@ class HpoGeneDetailsSpec extends  GebReportingSpec {
   void "test disease association filter" (){
 
     given:
+    System.out.println("Starting filter test")
       GeneDetailsPage geneDetailsPage = browser.to(GeneDetailsPage)
 
     when:
-        waitFor(25){
-          geneDetailsPage.diseaseTabElement
-          geneDetailsPage.diseaseTabElement.click()
-        }
-    then:
-    waitFor(35, 2) {
-      geneDetailsPage.diseasePagingRangeLabelElement.text() == '1 - 6 of 6'
-
-    }
-
-    when:
-      waitFor(25, 2){
+      waitFor {
+        geneDetailsPage.diseaseTabElement
+        geneDetailsPage.diseaseTabElement.click()
+      }
+      waitFor {
         geneDetailsPage.diseaseFilterElement.value('bladder')
       }
 
     then:
-      waitFor(25, 2) {
-        geneDetailsPage.diseasePagingRangeLabelElement.text() == '1 - 1 of 1'
-      }
+      assert geneDetailsPage.diseasePagingRangeLabelElement.text().trim().equals("1 – 1 of 1")
+
   }
 
 
@@ -55,25 +48,16 @@ class HpoGeneDetailsSpec extends  GebReportingSpec {
     GeneDetailsPage geneDetailsPage = browser.to(GeneDetailsPage)
 
     when:
-    waitFor(25){
+    waitFor {
       geneDetailsPage.termTabElement
       geneDetailsPage.termTabElement.click()
     }
-    then:
-    waitFor(25, 2) {
-      geneDetailsPage.termPagingRangeLabelElement.text() == '1 - 50 of 60'
-
-    }
-
-    when:
-    waitFor(25, 2){
+    waitFor {
       geneDetailsPage.termFilterElement.value('Leuk')
     }
 
     then:
-    waitFor(25, 2) {
-      geneDetailsPage.termPagingRangeLabelElement.text() == '1 - 2 of 2'
-    }
+    assert geneDetailsPage.termPagingRangeLabelElement.text().trim().equals("1 – 2 of 2")
   }
 
   def "terms can be downloaded as an excel file from gene association"() {
@@ -117,7 +101,7 @@ class HpoGeneDetailsSpec extends  GebReportingSpec {
     geneDetailsPage.downloadAssociationButton.click()
 
     then: 'the dialog should open'
-    assert geneDetailsPage.downloadAssociationDialog.isDisplayed()
+    assert waitFor {geneDetailsPage.downloadAssociationDialog.isDisplayed()}
 
     when: 'clicking disease association download'
     String identifier = geneDetailsPage.getPageUrl().split("/").last()

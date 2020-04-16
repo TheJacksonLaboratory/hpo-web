@@ -165,6 +165,15 @@ war.dependsOn(buildClientProd)
 
 test.dependsOn(clientTest)
 
+/* Integration test standard out testing
+
+integrationTest {
+  testLogging {
+    exceptionFormat = 'full'
+    events 'failed', 'standardOut', 'standardError'
+  }
+}*/
+
 clean {
     delete fileTree(dir: "src/main/webapp/app")
 }

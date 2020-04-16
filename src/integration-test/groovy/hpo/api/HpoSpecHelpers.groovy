@@ -17,6 +17,6 @@ class HpoSpecHelpers
         }
       }
     }
-    result
+    return result
   }
 }
