@@ -88,9 +88,7 @@ class HpoTermDetailsSpec extends  GebReportingSpec {
 
     then:
     termDetailsPage.diseaseFilterElement.value('disability')
-    waitFor {
-      termDetailsPage.diseasePagingRangeLabelElement.text() == '1 - 5 of 5'
-    }
+    assert termDetailsPage.diseasePagingRangeLabelElement.text().trim().equals("1 – 5 of 5")
   }
 
 
@@ -104,7 +102,7 @@ class HpoTermDetailsSpec extends  GebReportingSpec {
     termDetailsPage.downloadAssociationButton.click()
 
     then: 'the dialog should open'
-    assert termDetailsPage.downloadAssociationDialog.isDisplayed()
+    assert waitFor { termDetailsPage.downloadAssociationDialog.displayed }
 
     when: 'clicking disease association download'
     String identifier = termDetailsPage.getPageUrl().split("/").last()
