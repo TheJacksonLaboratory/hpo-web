@@ -37,6 +37,10 @@ class HpoAssociationFactory {
       v.getPhenotypicAbnormalityTermIdList().each { termId ->
         termToDisease.put(termId, k)
       }
+
+      v.getModesOfInheritance().each { termId ->
+        termToDisease.put(termId, k)
+      }
     }
     return termToDisease
   }
