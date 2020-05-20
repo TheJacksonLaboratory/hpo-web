@@ -44,23 +44,20 @@ class UrlMappings {
 
     "/app/**"(uri: '/app/index.html')
 
-
-
     "/api/hpo/search"(controller: 'hpoSearch', action: 'searchAll')
-
     "/api/hpo/term/$id"(controller: 'hpoTerm', action: 'searchTerm')
     "/api/hpo/term/$id/genes"(controller: 'hpoTerm', action: 'searchGenesByTerm')
     "/api/hpo/term/$id/diseases"(controller: 'hpoTerm', action: 'searchDiseasesByTerm')
     "/api/hpo/term/$id/loinc"(controller: 'hpoTerm', action: 'searchLoincByTerm')
-
     "/api/hpo/gene/$id"(controller: 'hpoGeneDetails', action: 'searchGene')
     "/api/hpo/disease/$id"(controller: 'hpoDiseaseDetails', action: 'searchDisease')
-
     "/api/hpo/download/term"(controller: 'hpoExcel', action: 'downloadTermAnnotation')
     "/api/hpo/download/disease"(controller: 'hpoExcel', action: 'downloadDiseaseAnnotation')
     "/api/hpo/download/gene"(controller: 'hpoExcel', action: 'downloadGeneAnnotation')
-
     "/api/hpo/docs/$action?/$id?"(controller: "apiDoc", action: "getDocuments")
+
+    "/api/maxo/$id"(controller: "hpoMaxo", action: 'searchMaxo')
+
     "500"(view: '/error')
     "404"(view: '/notFound')
   }

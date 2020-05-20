@@ -7,7 +7,7 @@ import hpo.api.disease.DbDisease
 import hpo.api.gene.DbGene
 import hpo.api.model.SearchTermResult
 import hpo.api.term.DbTerm
-import hpo.api.util.HpoOntologyFactory
+import hpo.api.util.OntologyFactory
 import hpo.api.util.HpoUtilities
 import org.monarchinitiative.phenol.ontology.data.Ontology
 import spock.lang.Shared
@@ -23,7 +23,7 @@ class HpoSearchServiceSpec extends Specification implements ServiceUnitTest<HpoS
     HpoUtilities hpoUtilities
 
     def setupSpec() {
-      hpoOntology = new HpoOntologyFactory().getInstance()
+      hpoOntology = new OntologyFactory().getHpoOntology()
       hpoUtilities = new HpoUtilities(hpoOntology)
       mockDomain DbTerm
       mockDomain DbDisease

@@ -7,7 +7,7 @@ import hpo.api.disease.DbDisease
 import hpo.api.gene.DbGene
 import hpo.api.model.AnnotationResult
 import hpo.api.term.DbTerm
-import hpo.api.util.HpoOntologyFactory
+import hpo.api.util.OntologyFactory
 import org.monarchinitiative.phenol.ontology.data.Ontology
 import org.monarchinitiative.phenol.ontology.data.Term
 import org.monarchinitiative.phenol.ontology.data.TermId
@@ -44,7 +44,7 @@ class HpoDiseaseDetailsServiceUnitSpec extends Specification implements ServiceU
   }
   void "test find associated terms given disease using #desc"() {
     setup:
-    Ontology hpoOntology = new HpoOntologyFactory().getInstance()
+    Ontology hpoOntology = new OntologyFactory().getHpoOntology()
     service.hpoOntology = hpoOntology
     DbDisease dbDisease = buildMockDisease()
     List<Term> terms = buildMockTerms(["HP:0001597","HP:0000982"])
@@ -70,7 +70,7 @@ class HpoDiseaseDetailsServiceUnitSpec extends Specification implements ServiceU
   void "test find category-terms map given disease using #desc"() {
     setup:
 
-    Ontology hpoOntology = new HpoOntologyFactory().getInstance()
+    Ontology hpoOntology = new OntologyFactory().getHpoOntology()
     service.hpoOntology = hpoOntology
     DbDisease dbDisease1 = buildMockDisease()
 
