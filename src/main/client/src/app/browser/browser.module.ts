@@ -1,7 +1,7 @@
 // Modules
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserRoutingModule } from './browser-routing.module';
 // Material Modules
 import { GlobalMaterialModules } from '../shared/modules/global.module';
@@ -18,12 +18,14 @@ import { ExtrasModule } from '../shared/modules/extras.module';
 import { SearchResultsComponent } from './pages/search-results/search-results.component';
 import { DialogExcelDownloadComponent } from '../shared/dialog-excel-download/dialog-excel-download.component';
 import { DialogService } from '../shared/dialog-excel-download/dialog.service';
+import { CustomComponent } from './pages/custom/custom.component';
 
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     BrowserRoutingModule,
     GlobalMaterialModules,
     ExtrasModule
@@ -32,7 +34,7 @@ import { DialogService } from '../shared/dialog-excel-download/dialog.service';
   providers: [ SearchService, TermService, GeneService, DiseaseService, DialogService ],
   declarations: [ TermComponent, DiseaseComponent,
     GeneComponent,
-    SearchResultsComponent, DialogExcelDownloadComponent ],
+    SearchResultsComponent, DialogExcelDownloadComponent, CustomComponent ],
   entryComponents: [
     DialogExcelDownloadComponent
   ],

@@ -54,8 +54,14 @@ export class TermService {
         .get(environment.HPO_API_TERM_SEARCH_URL + query + '/diseases', options);
     }
 
-  downloadAssociations(term: string, association: string): void {
-    window.open(environment.HPO_API_DOWNLOAD_EXCEL_TERM_URL + '?identifier=' + term + '&association=' + association,
-      '_self');
-  }
+    downloadAssociations(term: string, association: string): void {
+      window.open(environment.HPO_API_DOWNLOAD_EXCEL_TERM_URL + '?identifier=' + term + '&association=' + association,
+        '_self');
+    }
+
+    searchIntersectingAnnotations(terms: string[]): Observable<any> {
+      const params = new HttpParams().set("query", terms.join(","));
+      return this.http.get(environment.HPO_API_TERM_SEARCH_URL + "/intersecting", {params: params});
+
+    }
 }

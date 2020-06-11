@@ -165,6 +165,37 @@ class HpoTermService {
   }
 
   /**
+   * Given a list of DBTerms, it constructs a sql query and executes to obtain a list of associated disease Ids
+   * @param terms
+   * @return List of disease Ids
+   */
+  List<DbDisease> findIntersectingTermDiseaseAssociations(List termIds){
+    //def termIds = ["HP:0000189", "HP:0002705"] // "HP:0000678"
+    List<DbTerm> terms = DbTerm.findAllByOntologyIdInList(termIds)
+    List<DbTerm> allTerms = []
+    terms.each { it ->
+      def term = this.hpoOntology.termMap.get(TermId.of(it.ontologyId))
+      allTerms.addAll(findTermDescendants(term))
+    }
+
+    final String placeholders = allTerms*.id.collect{'?'}.join(',')
+    final String query = """
+      select count(db_disease_id) as num_associated, db_disease_id from db_annotation
+      where db_term_id in (${placeholders}) GROUP BY db_disease_id ORDER BY count(db_disease_id) DESC
+    """
+    final List<GroovyRowResult> rows = sqlUtilsService.executeQuery(query, allTerms*.id as List<Object>)
+    final List<Long> diseaseIdList = rows.findAll{ row -> row.num_associated == terms.size() }.collect{row->
+      row.db_disease_id
+    } as List<Long>
+
+    def diseaseList = []
+    if (diseaseIdList) {
+      diseaseList = DbDisease.findAllByIdInList(diseaseIdList, [sort: 'diseaseName', order: 'asc'])
+    }
+    diseaseList
+  }
+
+  /**
    * Given the list of DbTerms find associated genes
    * @param terms
    * @param offset -- for paging

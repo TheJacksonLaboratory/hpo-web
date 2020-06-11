@@ -1,0 +1,84 @@
+<div class="news container">
+  <h1 class="center">Discover Annotations</h1>
+  <h5 class="center">Use this tool to find intersecting disease annotations for a phenotype profile. Similarly, there is a
+    <a href="https://monarchinitiative.org/analyze/phenotypes" target="_blank">tool</a> that
+    the <a href="https://monarchinitiative.org/about/monarch" target="_blank">Monarch Initiative</a> provides that
+    will allow you compare your profile across species with a specific set of
+    genes or diseases.
+  </h5>
+
+  <div class="col-lg-offset-2 col-lg-8">
+    <mat-horizontal-stepper labelPosition="bottom" #stepper>
+      <mat-step [completed]="submittedTerms">
+        <form class="discover-form">
+          <ng-template matStepLabel>Build Phenotype List</ng-template>
+          <mat-button-toggle-group #group="matButtonToggleGroup" aria-label="Font Style">
+            <mat-button-toggle value="search">Search & Add</mat-button-toggle>
+            <mat-button-toggle value="list">Paste HPO List</mat-button-toggle>
+          </mat-button-toggle-group>
+          <br>
+          <div *ngIf="group.value === 'search'">
+            <mat-form-field class="discover-search">
+              <input type="text"
+                     placeholder="Search for Phenotypes..."
+                     aria-label="Number"
+                     matInput
+                     [formControl]="myControl"
+                     [matAutocomplete]="auto">
+              <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                <mat-option *ngFor="let option of filteredOptions | async" [value]="option.id" (click)="addTerm(option)">
+                  {{option.id}} - {{option.name}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+          <div *ngIf="group.value === 'list'">
+            <mat-form-field class="discover-search" [style.fontSize]="'14px'">
+              <mat-label>Paste Comma-Seperated HPO List (HP</mat-label>
+              <textarea matInput
+                        cdkTextareaAutosize
+                        #autosize="cdkTextareaAutosize"
+                        cdkAutosizeMinRows="1"
+                        cdkAutosizeMaxRows="100"></textarea>
+            </mat-form-field>
+          </div>
+        </form>
+        <div class="center" *ngIf="selectedTerms.length > 0">
+          <h3>Your Phenotype Profile</h3>
+          <mat-list>
+            <mat-list-item class="phenotype-list" *ngFor="let phenotype of selectedTerms; let i = index">
+              <p class="phenotype-list-item">{{phenotype.id}} - {{phenotype.name}} <mat-icon class="remove-term-icon" (click)="removeTerm(i)">delete_forever</mat-icon></p>
+            </mat-list-item>
+          </mat-list>
+          <button class="submit-btn" mat-stroked-button color="primary" *ngIf="selectedTerms.length > 0" (click)="submitTerms()">Discover <mat-icon>arrow_right</mat-icon></button>
+        </div>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Your Annotations</ng-template>
+          <table mat-table [dataSource]="associationData" class="example-table"
+                 matSort matSortActive="created" matSortDisableClear matSortDirection="desc">
+            <!-- Number Column -->
+            <ng-container matColumnDef="diseaseId">
+              <th mat-header-cell *matHeaderCellDef>Disease Identifier</th>
+              <td mat-cell *matCellDef="let row">{{row.diseaseId}}</td>
+            </ng-container>
+            <!-- Created Column -->
+            <ng-container matColumnDef="diseaseName">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+                Disease Name
+              </th>
+              <td mat-cell *matCellDef="let row">{{row.diseaseName}}</td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+          <mat-paginator [length]="resultsLength" [pageSize]="30"></mat-paginator>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button (click)="stepper.reset(); submittedTerms = false">Reset</button>
+        </div>
+      </mat-step>
+    </mat-horizontal-stepper>
+  </div>
+</div>

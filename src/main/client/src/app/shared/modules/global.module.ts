@@ -17,6 +17,9 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatAutocompleteModule } from "@angular/material/autocomplete";
+import { MatStepperModule } from "@angular/material/stepper";
+import { MatButtonToggleModule } from "@angular/material/button-toggle";
 
 
 @NgModule({
@@ -37,7 +40,10 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatSelectModule,
     MatDividerModule,
     MatSidenavModule,
-    MatDialogModule
+    MatDialogModule,
+    MatStepperModule,
+    MatAutocompleteModule,
+    MatButtonToggleModule
   ],
   exports: [MatButtonModule,
     MatMenuModule,
@@ -56,7 +62,10 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatSelectModule,
     MatDividerModule,
     MatSidenavModule,
-    MatDialogModule
+    MatDialogModule,
+    MatAutocompleteModule,
+    MatStepperModule,
+    MatButtonToggleModule
   ],
 })
 export class GlobalMaterialModules {
