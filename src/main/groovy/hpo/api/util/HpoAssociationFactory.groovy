@@ -37,6 +37,10 @@ class HpoAssociationFactory {
       v.getPhenotypicAbnormalityTermIdList().each { termId ->
         termToDisease.put(termId, k)
       }
+
+      v.getModesOfInheritance().each { termId ->
+        termToDisease.put(termId, k)
+      }
     }
     return termToDisease
   }
@@ -51,5 +55,9 @@ class HpoAssociationFactory {
 
   Multimap<TermId, TermId> getTermToDisease(){
     return this.termToDisease
+  }
+
+  HpoDisease findDisease(String diseaseId){
+    return this.diseaseMap.get(TermId.of(diseaseId));
   }
 }
