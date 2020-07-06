@@ -2,7 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import { Observable } from "rxjs";
 import { FormControl } from "@angular/forms";
 import { startWith } from "rxjs/internal/operators/startWith";
-import {catchError, debounceTime, map} from "rxjs/operators";
+import {catchError, debounceTime, filter, map} from "rxjs/operators";
 import { TermService } from "../../services/term/term.service";
 import { switchMap } from "rxjs/internal/operators/switchMap";
 import {SearchService} from "../../../shared/search/service/search.service";
@@ -15,12 +15,12 @@ import {of} from "rxjs/internal/observable/of";
 
 @Component({
   selector: 'app-custom',
-  templateUrl: './custom.component.html',
-  styleUrls: ['./custom.component.scss']
+  templateUrl: './intersecting.component.html',
+  styleUrls: ['./intersecting.component.scss']
 })
-export class CustomComponent implements OnInit {
+export class IntersectingComponent implements OnInit {
 
-  @ViewChild('stepper') private stepper: MatStepper;
+  @ViewChild('stepper') stepper: MatStepper;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
@@ -29,7 +29,7 @@ export class CustomComponent implements OnInit {
   selectedTerms: Term[] = [];
   submittedTerms = false;
   associationData;
-  loadingIntersectingAssociations = false;
+  loadingIntersectingAssociations = true;
   intersectingAssocationError = false;
   displayedColumns: string[] = ['diseaseId', 'diseaseName'];
   resultsLength = 0;
@@ -39,14 +39,18 @@ export class CustomComponent implements OnInit {
   ngOnInit(): void {
     this.filteredOptions = this.myControl.valueChanges
       .pipe(
-        startWith(''),
-        switchMap(val => this.searchService.searchAll(val)),
+        filter(x => x != null && x != ''),
+        switchMap(val =>
+          this.searchService.searchAll(val)
+        ),
         map(response => response.terms)
       );
   }
 
   addTerm(term: any){
-    this.selectedTerms.push(term);
+    if(!this.selectedTerms.some(existent => existent.id == term.id)){
+      this.selectedTerms.push(term);
+    }
   }
 
   removeTerm(index: number){
@@ -54,18 +58,15 @@ export class CustomComponent implements OnInit {
   }
 
   submitTerms() {
-    // Fire Analysis
-    // Move to next step
     this.stepper.next();
     this.submittedTerms = true;
     this.loadingIntersectingAssociations = true;
-    console.log(this.selectedTerms);
     let termIds = this.selectedTerms.map(term => term.ontologyId);
     this.termService.searchIntersectingAnnotations(termIds).pipe(
       map(data => {
         // Flip flag to show that loading has finished.
         this.loadingIntersectingAssociations = false;
-        this.resultsLength = data.length;
+        this.resultsLength = data.associations.length;
         return data.associations;
       }),
       catchError(() => {
@@ -74,5 +75,12 @@ export class CustomComponent implements OnInit {
         return of([]);
       })
     ).subscribe(data => this.associationData = data);
+  }
+
+  resetStepper(){
+    this.stepper.reset();
+    this.submittedTerms = false;
+    this.selectedTerms=[];
+    this.myControl.reset();
   }
 }

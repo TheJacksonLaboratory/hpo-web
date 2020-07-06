@@ -170,28 +170,32 @@ class HpoTermService {
    * @return List of disease Ids
    */
   List<DbDisease> findIntersectingTermDiseaseAssociations(List termIds){
-    //def termIds = ["HP:0000189", "HP:0002705"] // "HP:0000678"
     List<DbTerm> terms = DbTerm.findAllByOntologyIdInList(termIds)
-    List<DbTerm> allTerms = []
+    boolean intersectingFlag = false
+    List<GroovyRowResult> intersecting = []
+    // Intersect Annotations for each term ( and its children ) with the next.
     terms.each { it ->
       def term = this.hpoOntology.termMap.get(TermId.of(it.ontologyId))
-      allTerms.addAll(findTermDescendants(term))
+      final List<DbTerm> allTerms = findTermDescendants(term)
+      final String placeholders = allTerms*.id.collect{'?'}.join(',')
+      final String query = """
+      SELECT DISTINCT db_disease_id FROM db_annotation
+      WHERE db_term_id in (${placeholders})
+      """
+      final List<GroovyRowResult> rows = sqlUtilsService.executeQuery(query, allTerms*.id as List<Object>)
+      if(!intersectingFlag){
+        intersecting.addAll(rows)
+        intersectingFlag = true
+      } else {
+        intersecting = intersecting.intersect(rows)
+      }
+    }
+    List<DbDisease> diseaseList = []
+    if(intersecting.size() > 0){
+      diseaseList = DbDisease.findAllByIdInList(intersecting.collect{row->row.db_disease_id} as List<Long> ,
+        [sort: 'diseaseName', order: 'asc'])
     }
 
-    final String placeholders = allTerms*.id.collect{'?'}.join(',')
-    final String query = """
-      select count(db_disease_id) as num_associated, db_disease_id from db_annotation
-      where db_term_id in (${placeholders}) GROUP BY db_disease_id ORDER BY count(db_disease_id) DESC
-    """
-    final List<GroovyRowResult> rows = sqlUtilsService.executeQuery(query, allTerms*.id as List<Object>)
-    final List<Long> diseaseIdList = rows.findAll{ row -> row.num_associated == terms.size() }.collect{row->
-      row.db_disease_id
-    } as List<Long>
-
-    def diseaseList = []
-    if (diseaseIdList) {
-      diseaseList = DbDisease.findAllByIdInList(diseaseIdList, [sort: 'diseaseName', order: 'asc'])
-    }
     diseaseList
   }
 

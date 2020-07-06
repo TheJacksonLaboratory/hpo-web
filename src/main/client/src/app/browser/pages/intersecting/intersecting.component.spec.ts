@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CustomComponent } from './custom.component';
+import { IntersectingComponent } from './intersecting.component';
 
-describe('CustomComponent', () => {
-  let component: CustomComponent;
-  let fixture: ComponentFixture<CustomComponent>;
+describe('IntersectingComponent', () => {
+  let component: IntersectingComponent;
+  let fixture: ComponentFixture<IntersectingComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CustomComponent ]
+      declarations: [ IntersectingComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CustomComponent);
+    fixture = TestBed.createComponent(IntersectingComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

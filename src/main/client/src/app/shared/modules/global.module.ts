@@ -20,6 +20,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { MatStepperModule } from "@angular/material/stepper";
 import { MatButtonToggleModule } from "@angular/material/button-toggle";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {MatChipsModule} from "@angular/material/chips";
 
 
 @NgModule({
@@ -43,7 +45,8 @@ import { MatButtonToggleModule } from "@angular/material/button-toggle";
     MatDialogModule,
     MatStepperModule,
     MatAutocompleteModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    MatChipsModule
   ],
   exports: [MatButtonModule,
     MatMenuModule,
@@ -65,7 +68,8 @@ import { MatButtonToggleModule } from "@angular/material/button-toggle";
     MatDialogModule,
     MatAutocompleteModule,
     MatStepperModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    MatChipsModule
   ],
 })
 export class GlobalMaterialModules {

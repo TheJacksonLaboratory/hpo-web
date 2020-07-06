@@ -2,7 +2,7 @@
   <div class="container-custom">
     <div class="item-header">
       <span [hidden]="!isLoading">
-          <mat-progress-bar  class="loading-result-details" color="primary" mode="buffer">
+          <mat-progress-bar  class="loading-result-details" color="primary" mode="indeterminate">
           </mat-progress-bar>
       </span>
     </div>
@@ -105,7 +105,7 @@
                          <!-- Gene Association Table -->
                           <div class="associations gene-association">
                               <mat-table [dataSource]="geneDataSource" matSort>
-                                <mat-header-row *matHeaderRowDef="geneColumns"></mat-header-row>
+                                <mat-header-row *matHeaderRowDef="geneColumns; sticky: true"></mat-header-row>
                                 <mat-row *matRowDef="let row; columns: geneColumns;"></mat-row>
                                 <ng-container matColumnDef="entrezGeneId">
                                   <mat-header-cell *matHeaderCellDef>Gene Identifier </mat-header-cell>
