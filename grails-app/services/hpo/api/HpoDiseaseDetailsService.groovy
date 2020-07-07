@@ -6,6 +6,7 @@ import hpo.api.annotation.DbAnnotation
 import hpo.api.disease.DbDisease
 import hpo.api.model.AnnotationResult
 import hpo.api.term.DbTerm
+import hpo.api.util.HpoAssociationFactory
 import org.monarchinitiative.phenol.annotations.formats.hpo.category.HpoCategory
 import org.monarchinitiative.phenol.annotations.formats.hpo.category.HpoCategoryMap
 import org.monarchinitiative.phenol.ontology.data.Ontology
@@ -16,6 +17,7 @@ import org.monarchinitiative.phenol.ontology.data.Term
 class HpoDiseaseDetailsService {
 
   Ontology hpoOntology
+  HpoAssociationFactory hpoAssociationFactory
 
   Map searchDisease(String query) {
     Map resultMap = ["disease": '', "termAssoc": [], "geneAssoc": [], "catTerms":[[:]]]
@@ -85,6 +87,10 @@ class HpoDiseaseDetailsService {
   AnnotationResult buildAnnotationResult(DbDisease disease, Term term){
     DbTerm dbTerm = DbTerm.findByOntologyId(term.getId().toString())
     DbAnnotation annotation = DbAnnotation.findWhere(dbTerm: dbTerm, dbDisease: disease)
+    if(annotation == null){
+      // Mode of Inheritance Term.
+      return new AnnotationResult(dbTerm, "-", "-", disease.getDiseaseId())
+    }
     return new AnnotationResult(annotation.getDbTerm(), annotation.getOnset(), annotation.getFrequency(), annotation.getSources())
   }
 

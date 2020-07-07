@@ -7,7 +7,9 @@ import hpo.api.disease.DbDisease
 import hpo.api.gene.DbGene
 import hpo.api.model.AnnotationResult
 import hpo.api.term.DbTerm
-import hpo.api.util.OntologyFactory
+import hpo.api.util.HpoAssociationFactory
+import hpo.api.util.HpoOntologyFactory
+import org.monarchinitiative.phenol.annotations.formats.hpo.HpoDisease
 import org.monarchinitiative.phenol.ontology.data.Ontology
 import org.monarchinitiative.phenol.ontology.data.Term
 import org.monarchinitiative.phenol.ontology.data.TermId
@@ -19,6 +21,12 @@ class HpoDiseaseDetailsServiceUnitSpec extends Specification implements ServiceU
 
   def setup() {
     mockDomains DbGene, DbTerm, DbDisease, DbAnnotation
+    service.hpoAssociationFactory = Stub(HpoAssociationFactory) {
+      findDisease(_) >> new HpoDisease(
+        "",
+        null,
+        [], [], [], [], [])
+    }
   }
 
   void "test find associated genes given disease using #desc"() {
