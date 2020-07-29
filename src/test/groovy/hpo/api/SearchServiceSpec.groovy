@@ -5,7 +5,10 @@ import grails.testing.services.ServiceUnitTest
 import groovy.sql.GroovyRowResult
 import hpo.api.disease.DbDisease
 import hpo.api.gene.DbGene
+import hpo.api.model.MaxoSearchResult
 import hpo.api.model.SearchTermResult
+import hpo.api.term.DbMaxo
+import hpo.api.term.DbMaxoSynonym
 import hpo.api.term.DbTerm
 import hpo.api.util.OntologyFactory
 import hpo.api.util.HpoUtilities
@@ -15,7 +18,7 @@ import spock.lang.Specification
 import spock.lang.Unroll
 
 @Unroll
-class HpoSearchServiceSpec extends Specification implements ServiceUnitTest<HpoSearchService>, DataTest {
+class SearchServiceSpec extends Specification implements ServiceUnitTest<SearchService>, DataTest {
 
     @Shared
     Ontology hpoOntology
@@ -28,6 +31,8 @@ class HpoSearchServiceSpec extends Specification implements ServiceUnitTest<HpoS
       mockDomain DbTerm
       mockDomain DbDisease
       mockDomain DbGene
+      mockDomain DbMaxo
+      mockDomain DbMaxoSynonym
     }
 
     def setup() {
@@ -247,4 +252,26 @@ class HpoSearchServiceSpec extends Specification implements ServiceUnitTest<HpoS
       'BRAF'   | ['BRAF']                            | 'exact match'
 
     }
+
+  void "test searchMaxo #desc"() {
+    setup:
+    new DbMaxo(ontologyId: "MAXO:1111111", name: "maxo ontology 1", definition: "a term 1", comment: "yes").save()
+    new DbMaxo(ontologyId: "MAXO:4444444", name: "maxo ontology 4", definition: "a term 4", comment: "yes").save()
+    new DbMaxo(ontologyId: "MAXO:3333333", name: "maxo ontology 3", definition: "a term 3", comment: "no").save()
+    new DbMaxo(ontologyId: "MAXO:2222222", name: "maxo ontology 2", definition: "a term 2", comment: "yes").save()
+
+    when:
+      final List<MaxoSearchResult> resultList = service.searchMaxo(inputQuery)
+
+    then:
+      resultList.size() == expectedSize
+      expectedNames.containsAll(resultList*.maxoTerm*.name)
+
+    where:
+    inputQuery  | expectedSize  | expectedNames                                                                 | desc
+    "ontol"    | 4             | ['maxo ontology 1', 'maxo ontology 2', 'maxo ontology 3', 'maxo ontology 4']  | "a generic term"
+    "MAXO_1"    | 1             | ['maxo ontology 1']                                                           | "an id with underscore"
+    "MAXO:2"    | 1             | ['maxo ontology 2']                                                           | "an id normal"
+    "xyz"       | 0             | []                                                                            | "value not found in db"
+  }
 }

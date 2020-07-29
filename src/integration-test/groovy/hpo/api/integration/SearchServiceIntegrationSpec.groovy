@@ -2,16 +2,16 @@ package hpo.api.integration
 
 import grails.gorm.transactions.Rollback
 import grails.testing.mixin.integration.Integration
-import hpo.api.HpoSearchService
+import hpo.api.SearchService
 import spock.lang.Specification
 import spock.lang.Unroll
 
 @Integration
 @Rollback
 @Unroll
-class HpoSearchServiceIntegrationSpec extends Specification {
+class SearchServiceIntegrationSpec extends Specification {
 
-    HpoSearchService hpoSearchService
+    SearchService hpoSearchService
 
     def setup(){
     }

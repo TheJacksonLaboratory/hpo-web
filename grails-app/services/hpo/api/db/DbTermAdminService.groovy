@@ -31,6 +31,7 @@ class DbTermAdminService {
   SqlUtilsService sqlUtilsService
   final static String INSERT_DB_TERM_PATH = "INSERT INTO db_term_path (db_term_id, path_names, path_ids ,path_length) VALUES(?,?,?,?)"
   final static String INSERT_DB_TERM_SYNONYM = "INSERT INTO db_term_synonym (db_term_id, synonym) VALUES (?,?)"
+  final static String INSERT_DB_MAXO_SYNONYM = "INSERT INTO db_maxo_synonym (db_maxo_id, synonym) VALUES (?,?)"
   Map<DbTerm, List<Term>> termParentsMap = [:]
 
   void truncateDbTerms() {
@@ -66,7 +67,7 @@ class DbTermAdminService {
         DbTerm dbTerm = new DbTerm(term as Term)
         dbTerm.numberOfChildren = OntologyTerms.childrenOf(term.id, hpoOntology).size() - 1 //-1 exclude the current term
         dbTerm.save()
-        loadSynonyms(dbTerm, term)
+        loadHpoSynonyms(dbTerm, term)
         termToDbTermMap.put(term, dbTerm)
         getParents(term, dbTerm)
       }
@@ -86,17 +87,29 @@ class DbTermAdminService {
         ontologyIdSet.add(term.id.toString())
         DbMaxo dbMaxo = new DbMaxo(term as Term)
         dbMaxo.save()
+        loadMaxoSynonyms(dbMaxo, term)
       }
     }
     DbMaxo.withSession { Session session -> session.flush()}
     log.info("DbMaxo duration: ${stopWatch} time: ${new Date()}")
   }
 
-
-  private void loadSynonyms(DbTerm dbTerm, Term term){
-    if(term.id.toString() == "HP:0040064"){
-      def test = ""
+  private void loadMaxoSynonyms(DbMaxo dbMaxo, Term term){
+    List<TermSynonym> synonyms = term.getSynonyms()
+    if(synonyms.size() > 0){
+      sqlUtilsService.sql.withBatch(500, INSERT_DB_MAXO_SYNONYM ) { BatchingPreparedStatementWrapper ps ->
+        synonyms.each { TermSynonym synonym ->
+          if(synonym.getValue() != ' ' && synonym.getValue() != '') {
+            ps.addBatch([
+              dbMaxo.id,
+              synonym.getValue()
+            ])
+          }
+        }
+      }
     }
+  }
+  private void loadHpoSynonyms(DbTerm dbTerm, Term term){
     List<TermSynonym> synonyms = term.getSynonyms()
     if(synonyms.size() > 0){
       sqlUtilsService.sql.withBatch(500, INSERT_DB_TERM_SYNONYM ) { BatchingPreparedStatementWrapper ps ->

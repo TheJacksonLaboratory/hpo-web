@@ -20,11 +20,14 @@ class DbMaxo {
       comment(type: 'text')
     }
 
+    static hasMany = [dbMaxoSynonym: DbMaxoSynonym]
+
+
     DbMaxo(Term term) {
-      name = term.name
-      definition = term.definition
-      comment = term.comment
-      ontologyId = term.id.toString()
-      isObsolete = term.isObsolete()
-    }
+    name = term.name
+    definition = term.definition
+    comment = term.comment
+    ontologyId = term.id.toString().replace('OBO:', '')
+    isObsolete = term.isObsolete()
+  }
 }

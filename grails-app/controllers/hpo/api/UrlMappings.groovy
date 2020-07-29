@@ -56,7 +56,7 @@ class UrlMappings {
     "/api/hpo/download/gene"(controller: 'hpoExcel', action: 'downloadGeneAnnotation')
     "/api/hpo/docs/$action?/$id?"(controller: "apiDoc", action: "getDocuments")
 
-    "/api/maxo/$id"(controller: "hpoMaxo", action: 'searchMaxo')
+    "/api/maxo/search"(controller: "maxoSearch", action: 'searchMaxo')
 
     "500"(view: '/error')
     "404"(view: '/notFound')
