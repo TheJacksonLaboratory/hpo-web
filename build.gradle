@@ -111,8 +111,9 @@ dependencies {
   testCompile "org.grails:grails-datastore-rest-client"
   testCompile "org.grails:grails-web-testing-support"
 
-  testCompile "org.grails.plugins:geb:2.0.0.RC1"
-  testCompile "io.github.bonigarcia:webdrivermanager:3.0.0"
+  testCompile "org.gebish:geb-core:3.4"
+  testCompile "org.gebish:geb-spock:3.4"
+  testCompile "io.github.bonigarcia:webdrivermanager:4.1.0"
   testCompile "org.seleniumhq.selenium:selenium-api:3.14.0"
   testCompile "org.seleniumhq.selenium:selenium-support:3.14.0"
   testCompile "org.seleniumhq.selenium:selenium-chrome-driver:3.14.0"
@@ -121,7 +122,7 @@ dependencies {
 
 
 node {
-    version = '13.0.0'
+    version = '12.0.0'
     npmVersion = '6.4.1'
     download = true
     nodeModulesDir = file("src/main/client")
@@ -164,6 +165,7 @@ war {
 war.dependsOn(buildClientProd)
 
 test.dependsOn(clientTest)
+//integrationTest.dependsOn(clientIntegrationTest)
 
 /* Integration test standard out testing
 

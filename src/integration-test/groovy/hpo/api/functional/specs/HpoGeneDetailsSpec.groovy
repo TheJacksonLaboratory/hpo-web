@@ -25,7 +25,7 @@ class HpoGeneDetailsSpec extends  GebReportingSpec {
 
     given:
     System.out.println("Starting filter test")
-      GeneDetailsPage geneDetailsPage = browser.to(GeneDetailsPage)
+    GeneDetailsPage geneDetailsPage = browser.to(GeneDetailsPage)
 
     when:
       waitFor {

@@ -25,7 +25,7 @@ class HpoDiseaseDetailsSpec extends  GebReportingSpec {
   void "test gene association filter" (){
 
     given:
-      DiseaseDetailsPage diseaseDetailsPage = browser.to(DiseaseDetailsPage)
+    DiseaseDetailsPage diseaseDetailsPage = browser.to(DiseaseDetailsPage)
 
     when:
       waitFor(10){
