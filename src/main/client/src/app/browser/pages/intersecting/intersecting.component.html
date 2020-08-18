@@ -1,11 +1,11 @@
 <div class="news container">
-  <h1 class="center">Discover Annotations</h1>
-  <h5 class="center">Use this tool to find intersecting disease annotations for a phenotype profile. Similarly, there is a
+  <h1 class="center">Intersecting Disease Tool</h1>
+  <h4 class="center">Use this tool to find intersecting disease annotations for a phenotype profile. Similarly, there is a
     <a href="https://monarchinitiative.org/analyze/phenotypes" target="_blank">tool</a> that
     the <a href="https://monarchinitiative.org/about/monarch" target="_blank">Monarch Initiative</a> provides that
     will allow you compare your profile across species with a specific set of
     genes or diseases.
-  </h5>
+  </h4>
 
   <div class="col-lg-offset-2 col-lg-8">
     <mat-horizontal-stepper labelPosition="bottom" #stepper>
@@ -15,7 +15,7 @@
           <br>
           <mat-form-field class="discover-search">
             <input type="text"
-                   placeholder="Search for Phenotypes to add..."
+                   placeholder="Search for a phenotype to add..."
                    aria-label="Number"
                    matInput
                    [formControl]="myControl"

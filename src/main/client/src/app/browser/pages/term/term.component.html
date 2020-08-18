@@ -88,6 +88,8 @@
                   <button class="mat-btn mat-raised-button download-associations"
                           [disabled]="this.diseaseAssocCount == 0 && this.geneAssocCount == 0"
                           (click)="downloadDialog()">Export Associations</button>
+                  <button class="mat-btn mat-raised-button intersecting-diseases"
+                          routerLink="/browse/intersecting">Intersecting Disease Tool</button>
                 </div>
               </mat-card-content>
             </mat-card>
@@ -98,7 +100,7 @@
               <!-- Disease association -->
               <mat-tab label="Disease Associations">
                 <div [hidden]="diseaseAssocCount == 0">
-                      <mat-progress-bar  *ngIf="assocLoading" class="loading-result-details" color="primary" mode="buffer">
+                      <mat-progress-bar  *ngIf="assocLoading" class="loading-result-details" color="primary" mode="indeterminate">
                       </mat-progress-bar>
                       <div class="tab-output-container">
 
@@ -159,7 +161,7 @@
               <!-- Gene Association -->
               <mat-tab label="Gene Associations">
                 <div [hidden]="geneAssocCount == 0">
-                    <mat-progress-bar  *ngIf="assocLoading" class="loading-result-details" color="primary" mode="buffer">
+                    <mat-progress-bar  *ngIf="assocLoading" class="loading-result-details" color="primary" mode="indeterminate">
                     </mat-progress-bar>
 
                     <div class="tab-output-container">
@@ -218,7 +220,7 @@
               <div *ngIf="loincDisplayCount != 0">
                 <mat-tab label="LOINC Associations">
                   <div [hidden]="loincDisplayCount == 0">
-                    <mat-progress-bar  *ngIf="assocLoading" class="loading-result-details" color="primary" mode="buffer">
+                    <mat-progress-bar  *ngIf="assocLoading" class="loading-result-details" color="primary" mode="indeterminate">
                     </mat-progress-bar>
                     <div class="tab-output-container">
                       <div [hidden]="assocLoading" class="associations loinc-association">

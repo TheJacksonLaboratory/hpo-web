@@ -108,7 +108,7 @@ class HpoTermController {
 
   @ApiOperation(
     value = "Get a list of intersecting disease associations for a set of terms",
-    nickname = "term/intersecting",
+    nickname = "term/intersecting?q={query}",
     produces = "application/json",
     httpMethod = "GET"
   )
@@ -116,10 +116,16 @@ class HpoTermController {
           @ApiResponse(code = 400, message = "No id's given.")
   ])
   @ApiImplicitParams([
-          @ApiImplicitParam(name = "")
+          @ApiImplicitParam(name = "query",
+            paramType="path",
+            required = true,
+            value = "list of term ontology ids",
+            example = "HP:0000365,HP:0006385",
+            dataType = "string"
+          )
   ])
-  def searchIntersectingAssociations(String query){
-    def terms = query.split(",").collect()
+  def searchIntersectingAssociations(String q){
+    def terms = q.split(",").collect()
     terms.each {
       // Confirm that these are actually all hpo terms?
       it ->

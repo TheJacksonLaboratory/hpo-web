@@ -60,7 +60,7 @@ export class TermService {
     }
 
     searchIntersectingAnnotations(terms: string[]): Observable<any> {
-      const params = new HttpParams().set("query", terms.join(","));
+      const params = new HttpParams().set("q", terms.join(","));
       return this.http.get(environment.HPO_API_TERM_SEARCH_URL + "/intersecting", {params: params});
 
     }

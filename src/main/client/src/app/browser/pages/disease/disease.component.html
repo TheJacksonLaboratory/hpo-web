@@ -22,6 +22,8 @@
                   <button class="mat-btn mat-raised-button download-associations"
                           [disabled]="this.hasTerms && this.geneAssoc.length == 0"
                           (click)="downloadDialog()">Export Associations</button>
+                  <button class="mat-btn mat-raised-button intersecting-diseases"
+                          routerLink="/browse/intersecting">Intersecting Disease Tool</button>
                 </mat-card-content>
               </mat-card>
 
