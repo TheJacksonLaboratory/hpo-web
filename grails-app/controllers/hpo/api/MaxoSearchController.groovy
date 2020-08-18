@@ -1,4 +1,5 @@
 package hpo.api
+
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiImplicitParam
 import io.swagger.annotations.ApiImplicitParams
@@ -6,16 +7,15 @@ import io.swagger.annotations.ApiOperation
 import io.swagger.annotations.ApiResponse
 import io.swagger.annotations.ApiResponses
 
-
-@Api(value = "/api/hpo", tags = ["Search"], description = "Search API")
-class HpoSearchController {
-  static responseFormats = ['json']
+@Api(value = "/api/maxo", tags = ["Search"], description = "Search API")
+class MaxoSearchController {
 
   SearchService searchService
 
+
   @ApiOperation(
-    value = "Search terms, diseases or genes",
-    nickname = "search/?q={query}",
+    value = "Search Medical Action Ontology",
+    nickname = "search/maxo/?q={query}",
     produces = "application/json",
     httpMethod = "GET"
   )
@@ -26,14 +26,12 @@ class HpoSearchController {
     @ApiImplicitParam(name = "query",
       paramType = "path",
       required = true,
-      example = "arach",
+      example = "therapy",
       dataType = "string")])
-  def searchAll(String q, boolean fetchAll){
-
-    if (fetchAll){
-      render(view: 'searchAll', model: [resultMap: searchService.searchAll(q, 0, -1)])
-    }else{
-      render(view: 'searchAll', model: [resultMap: searchService.searchAll(q)])
+  def searchMaxo(String q){
+    if(q){
+      render(view: 'getMaxoSearchResults', model: [maxoSearchResultList: searchService.searchMaxo(q)])
     }
+    render("/notFound")
   }
 }
