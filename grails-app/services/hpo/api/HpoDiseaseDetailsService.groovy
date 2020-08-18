@@ -58,11 +58,6 @@ class HpoDiseaseDetailsService {
       final TermId termId = TermId.of(dbTerm.getOntologyId())
       hpoCatMap.addAnnotatedTerm(termId, hpoOntology)
     }
-    // Inheritance hack uses assocations loaded in memory via bean, ideally we would add to the data model.
-    final List<TermId> inheritance = hpoAssociationFactory.findDisease(disease.getDiseaseId()).getModesOfInheritance()
-    inheritance.each { inh ->
-      hpoCatMap.addAnnotatedTerm(inh, hpoOntology)
-    }
 
     final List<HpoCategory> hpoCatList = hpoCatMap.getActiveCategoryList()
 
@@ -70,17 +65,13 @@ class HpoDiseaseDetailsService {
       Map categoryTermMap = [:]
       cat.getNumberOfAnnotations()
       List<AnnotationResult> catAnnotationResult = []
-
-      //get category terms
       List<TermId> termIdList = cat.getAnnotatingTermIds()
+
       termIdList.each { tId ->
         Term term = hpoOntology.getTermMap().get(tId)
-
-        // add the DbTerm to the list of terms
         catAnnotationResult << buildAnnotationResult(disease, term)
       }
 
-      //populate the map
       categoryTermMap.put("catLabel", cat.getLabel())
       categoryTermMap.put("terms", catAnnotationResult)
       return categoryTermMap

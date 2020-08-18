@@ -10,9 +10,14 @@ import org.grails.io.support.ClassPathResource
  * Created by djd on 9/11/17.
  */
 @CompileStatic
-class HpoOntologyFactory {
-    Ontology getInstance() {
+class OntologyFactory {
+    Ontology getHpoOntology() {
         final File file = new ClassPathResource('hp_mostrecent.obo').file
         return OntologyLoader.loadOntology(file)
+    }
+
+    Ontology getMaxoOntology() {
+      final File file = new ClassPathResource('maxo_mostrecent.obo').file
+      return OntologyLoader.loadOntology(file)
     }
 }
