@@ -34,6 +34,7 @@ class HpoDiseaseDetailsSpec extends  GebReportingSpec {
       }
       waitFor(25, 2){
         diseaseDetailsPage.geneFilterElement.value('RB1')
+        diseaseDetailsPage.genePagingRangeLabelElement.isDisplayed()
       }
 
     then:
@@ -46,7 +47,7 @@ class HpoDiseaseDetailsSpec extends  GebReportingSpec {
     DiseaseDetailsPage diseaseDetailsPage = browser.to(DiseaseDetailsPage)
 
     when: 'clicking export association button'
-    waitFor { diseaseDetailsPage.downloadAssociationButton.displayed }
+    waitFor { diseaseDetailsPage.downloadAssociationButton.isDisplayed() }
     diseaseDetailsPage.downloadAssociationButton.click()
 
     then: 'the dialog should open'
@@ -54,7 +55,7 @@ class HpoDiseaseDetailsSpec extends  GebReportingSpec {
 
     when: 'clicking gene association download'
     def identifier = diseaseDetailsPage.getPageUrl().split("/").last()
-    waitFor { diseaseDetailsPage.downloadAssociationDialog.displayed }
+    waitFor { diseaseDetailsPage.downloadAssociationDialog.isDisplayed() }
     def association = diseaseDetailsPage.downloadGenesAssociationButton.text().toLowerCase()
     def url = API_DOWNLOAD_EXCEL_DISEASE_URL+ identifier + "&association=" + association
 
@@ -78,15 +79,15 @@ class HpoDiseaseDetailsSpec extends  GebReportingSpec {
     DiseaseDetailsPage diseaseDetailsPage = browser.to(DiseaseDetailsPage)
 
     when: 'clicking export association button'
-    waitFor { diseaseDetailsPage.downloadAssociationButton.displayed }
+    waitFor { diseaseDetailsPage.downloadAssociationButton.isDisplayed() }
 
     then: 'the dialog should open'
     diseaseDetailsPage.downloadAssociationButton.click()
-    waitFor { diseaseDetailsPage.downloadAssociationDialog.displayed }
+    waitFor { diseaseDetailsPage.downloadAssociationDialog.isDisplayed() }
 
     when: 'clicking gene association download'
     def identifier = diseaseDetailsPage.getPageUrl().split("/").last()
-    waitFor {diseaseDetailsPage.downloadAssociationDialog.displayed}
+    waitFor {diseaseDetailsPage.downloadAssociationDialog.isDisplayed()}
     def association = diseaseDetailsPage.downloadTermsAssociationButton.text().toLowerCase()
     def url = API_DOWNLOAD_EXCEL_DISEASE_URL+ identifier + "&association=" + association
 
