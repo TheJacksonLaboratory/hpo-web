@@ -51,7 +51,7 @@ class HpoDiseaseDetailsSpec extends  GebReportingSpec {
     diseaseDetailsPage.downloadAssociationButton.click()
 
     then: 'the dialog should open'
-    assert waitFor{diseaseDetailsPage.downloadAssociationDialog.isDisplayed()}
+    assert diseaseDetailsPage.downloadAssociationDialog.displayed
 
     when: 'clicking gene association download'
     def identifier = diseaseDetailsPage.getPageUrl().split("/").last()
@@ -80,10 +80,10 @@ class HpoDiseaseDetailsSpec extends  GebReportingSpec {
 
     when: 'clicking export association button'
     waitFor { diseaseDetailsPage.downloadAssociationButton.isDisplayed() }
+    diseaseDetailsPage.downloadAssociationButton.click()
 
     then: 'the dialog should open'
-    diseaseDetailsPage.downloadAssociationButton.click()
-    waitFor { diseaseDetailsPage.downloadAssociationDialog.isDisplayed() }
+    assert diseaseDetailsPage.downloadAssociationDialog.displayed
 
     when: 'clicking gene association download'
     def identifier = diseaseDetailsPage.getPageUrl().split("/").last()
