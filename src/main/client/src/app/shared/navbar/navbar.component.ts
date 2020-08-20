@@ -88,4 +88,8 @@ export class NavbarComponent implements OnInit {
         this.searchstate = 'inactive';
       }
   }
+
+  navigateToDocs(){
+    window.open("/api/hpo/docs", "__blank");
+  }
 }

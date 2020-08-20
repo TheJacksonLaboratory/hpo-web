@@ -1,0 +1,6 @@
+model {
+  List associations
+}
+json{
+  associations tmpl.disease(associations)
+}

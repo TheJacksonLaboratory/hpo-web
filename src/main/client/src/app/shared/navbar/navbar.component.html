@@ -10,14 +10,12 @@
   </div>
   <!-- Tools Menu and SubMenus -->
   <mat-menu [overlapTrigger]="false" class="hpo-menus" #toolsMenu="matMenu">
-    <button mat-menu-item routerLink="tools"> Overview </button>
-    <button mat-menu-item routerLink="tools/clinical-annotation"> Clinical Annotation </button>
+    <button mat-menu-item routerLink="tools/external"> Profile Search </button>
     <button mat-menu-item [matMenuTriggerFor]="genomicMenu">Genomic Tools</button>
     <button mat-menu-item [matMenuTriggerFor]="phenomicMenu">Phenomic Tools</button>
     <button mat-menu-item routerLink="tools/hpo-browser"> Other HPO Browsers </button>
     <button mat-menu-item routerLink="tools/workbench"> HPO Workbench </button>
     <button mat-menu-item routerLink="tools/external"> External Tools </button>
-    <button mat-menu-item routerLink="tools/other"> Other Tools </button>
   </mat-menu>
   <mat-menu class="hpo-menus"  #genomicMenu="matMenu">
     <button mat-menu-item routerLink="tools/genomiser"> Genomiser: Analyze non-coding variants </button>
@@ -38,6 +36,7 @@
     <button mat-menu-item [matMenuTriggerFor]="otherMenu">Other</button>
   </mat-menu>
   <mat-menu  #howtoMenu="matMenu">
+    <button mat-menu-item (click)="navigateToDocs()"> Use HPO API </button>
     <button mat-menu-item routerLink="help/annotations"> Use Annotations </button>
     <button mat-menu-item routerLink="help/collaboration"> Contribute to HPO </button>
     <button mat-menu-item routerLink="citation"> Cite HPO </button>

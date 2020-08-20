@@ -8,7 +8,7 @@
     "build": "ng build --aot --configuration=dev --base-href /app/",
     "buildProd": "ng build --prod=true --aot --configuration=production --base-href /app/",
     "buildWatch": "ng build --aot --configuration=dev --watch=true --base-href /app/",
-    "test": "ng test --watch false",
+    "test": "ng test --watch false --progress=false",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },

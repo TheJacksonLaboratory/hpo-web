@@ -3,7 +3,7 @@
     <div class="row">
       <div class="item-header">
           <span [hidden]="!isLoading">
-              <mat-progress-bar  class="loading-result-details" color="primary" mode="buffer">
+              <mat-progress-bar  class="loading-result-details" color="primary" mode="indeterminate">
               </mat-progress-bar>
           </span>
 
@@ -60,7 +60,7 @@
 
                   <!-- Widget tab -->
                   <mat-tab label="UniProt Viewer" *ngIf="!mobile">
-                    <mat-progress-bar  *ngIf="uniProtLoading" class="loading-protvista" color="primary" mode="buffer">
+                    <mat-progress-bar  *ngIf="uniProtLoading" class="loading-protvista" color="primary" mode="indeterminate">
                     </mat-progress-bar>
 
                     <div class="ProtVistaContainer col-lg-12" >
