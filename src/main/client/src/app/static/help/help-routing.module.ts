@@ -14,6 +14,7 @@ import { UsersComponent } from './users/users.component';
 import { ContributorsComponent } from './contributors/contributors.component';
 import { PublicationsComponent } from './publications/publications.component';
 import { FundingComponent } from './funding/funding.component';
+import { IndigenousComponent } from './indigenous/indigenous.component';
 
 const helpRoutes: Routes = [
   { path: 'help',
@@ -26,7 +27,8 @@ const helpRoutes: Routes = [
     { path: 'history', component: HistoryComponent},
     { path: 'introduction', component: IntroductionComponent},
     { path: 'layperson', component: LaypersonComponent},
-    { path: 'mapping', component: MappingComponent},
+    { path: 'translations', component: MappingComponent},
+    { path: 'indigenous-languages', component: IndigenousComponent},
     { path: 'users', component: UsersComponent},
     { path: 'contributors', component: ContributorsComponent},
     { path: 'publications', component: PublicationsComponent},
