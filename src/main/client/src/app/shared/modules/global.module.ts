@@ -20,8 +20,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { MatStepperModule } from "@angular/material/stepper";
 import { MatButtonToggleModule } from "@angular/material/button-toggle";
-import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
-import {MatChipsModule} from "@angular/material/chips";
+import { MatChipsModule } from "@angular/material/chips";
 
 
 @NgModule({

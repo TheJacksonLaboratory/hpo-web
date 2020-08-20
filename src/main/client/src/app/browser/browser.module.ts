@@ -18,7 +18,7 @@ import { ExtrasModule } from '../shared/modules/extras.module';
 import { SearchResultsComponent } from './pages/search-results/search-results.component';
 import { DialogExcelDownloadComponent } from '../shared/dialog-excel-download/dialog-excel-download.component';
 import { DialogService } from '../shared/dialog-excel-download/dialog.service';
-import { IntersectingComponent } from './pages/intersecting/intersecting.component';
+import { ProfileSearchComponent } from './pages/profile-search/profile-search.component';
 
 
 @NgModule({
@@ -34,7 +34,7 @@ import { IntersectingComponent } from './pages/intersecting/intersecting.compone
   providers: [ SearchService, TermService, GeneService, DiseaseService, DialogService ],
   declarations: [ TermComponent, DiseaseComponent,
     GeneComponent,
-    SearchResultsComponent, DialogExcelDownloadComponent, IntersectingComponent ],
+    SearchResultsComponent, DialogExcelDownloadComponent, ProfileSearchComponent ],
   entryComponents: [
     DialogExcelDownloadComponent
   ],

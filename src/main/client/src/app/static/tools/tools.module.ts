@@ -17,7 +17,7 @@ import { HpobrowserComponent } from './hpobrowser/hpobrowser.component';
     CommonModule,
     ToolsRoutingModule
   ],
-  declarations: [PhenomizerComponent, ExternalToolsComponent, PhenogramVizComponent,
+  declarations: [ PhenomizerComponent, ExternalToolsComponent, PhenogramVizComponent,
     ExomiserComponent, GenomiserComponent, WorkbenchComponent, HpobrowserComponent ]
 })
 export class ToolsModule { }
