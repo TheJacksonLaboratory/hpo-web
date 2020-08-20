@@ -15,10 +15,10 @@ import {of} from "rxjs/internal/observable/of";
 
 @Component({
   selector: 'app-custom',
-  templateUrl: './intersecting.component.html',
-  styleUrls: ['./intersecting.component.scss']
+  templateUrl: './profile-search.component.html',
+  styleUrls: ['./profile-search.component.scss']
 })
-export class IntersectingComponent implements OnInit {
+export class ProfileSearchComponent implements OnInit {
 
   @ViewChild('stepper') stepper: MatStepper;
   @ViewChild(MatPaginator) paginator: MatPaginator;

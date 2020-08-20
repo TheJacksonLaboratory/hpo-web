@@ -441,13 +441,6 @@ hr.underline-hr {
   color: white !important;
 }
 
-.intersecting-diseases {
-  margin-top: 10px !important;
-  margin-left: 10px !important;
-  background-color: rgb(78, 139, 162) !important;
-  color: white !important;
-}
-
 .mat-sort-header-stem, .mat-sort-header-arrow {
   color: white !important;
   opacity: .6 !important;

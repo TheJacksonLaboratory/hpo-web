@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { IntersectingComponent } from './intersecting.component';
+import { ProfileSearchComponent } from './profile-search.component';
 import {SearchService} from "../../../shared/search/service/search.service";
 import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {TermService} from "../../services/term/term.service";
 import {GlobalMaterialModules} from "../../../shared/modules/global.module";
 import {NoopAnimationsModule} from "@angular/platform-browser/animations";
 
-describe('IntersectingComponent', () => {
-  let component: IntersectingComponent;
-  let fixture: ComponentFixture<IntersectingComponent>;
+describe('ProfileSearchComponent', () => {
+  let component: ProfileSearchComponent;
+  let fixture: ComponentFixture<ProfileSearchComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ IntersectingComponent ],
+      declarations: [ ProfileSearchComponent ],
       providers: [ SearchService, TermService ],
       imports: [ HttpClientTestingModule, GlobalMaterialModules, NoopAnimationsModule ]
     })
@@ -21,7 +21,7 @@ describe('IntersectingComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(IntersectingComponent);
+    fixture = TestBed.createComponent(ProfileSearchComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
