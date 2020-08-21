@@ -26149,6 +26149,11 @@
 618979	-	phenotype	-	C3888126	-
 618980	201134	gene	-	-	-
 618981	57020	gene	-	-	-
-618982	-	phenotype	-	NULL	-
+618982	3071	phenotype	 GeneMap	CN283327	-
 618983	2525	phenotype	 GeneMap	CN283320	nondisease
 618984	256979	gene	-	-	-
+618988	645104	gene	-	-	-
+618989	338773	gene	-	-	-
+618990	84141	gene	-	-	-
+618991	57715	gene	-	-	-
+618993	727800	gene	-	-	-
