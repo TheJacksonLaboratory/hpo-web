@@ -12,7 +12,7 @@ const browserRoutes: Routes = [
     { path: 'term/:id', component: TermComponent },
     { path: 'disease/:id', component: DiseaseComponent},
     { path: 'gene/:id', component: GeneComponent },
-    { path: 'search', component: SearchResultsComponent},
+    { path: 'search', component: SearchResultsComponent },
     { path: 'profile-search', component: ProfileSearchComponent }
 ];
 export const browserRouting = RouterModule.forChild(browserRoutes);
