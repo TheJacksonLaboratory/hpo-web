@@ -8,6 +8,7 @@ class DbMaxoSynonym {
     synonym()
   }
   static mapping = {
+    synonym(type: 'text')
     version false
   }
 

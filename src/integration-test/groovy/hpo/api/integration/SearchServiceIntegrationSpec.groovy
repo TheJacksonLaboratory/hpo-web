@@ -11,7 +11,7 @@ import spock.lang.Unroll
 @Unroll
 class SearchServiceIntegrationSpec extends Specification {
 
-    SearchService hpoSearchService
+    SearchService searchService
 
     def setup(){
     }
@@ -44,8 +44,8 @@ class SearchServiceIntegrationSpec extends Specification {
     void "test our search terms service #desc"() {
       when:
         Map resultMap = [:]
-        query = hpoSearchService.trimAndSplit(query)
-        resultMap = hpoSearchService.searchTermAll(query)
+        query = searchService.trimAndSplit(query)
+        resultMap = searchService.searchTermAll(query)
 
 
       then:

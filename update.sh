@@ -18,7 +18,7 @@ if [ -f src/main/resources/hp_mostrecent.obo ]; then
 fi
 wget -O src/main/resources/hp_mostrecent.obo https://raw.githubusercontent.com/obophenotype/human-phenotype-ontology/master/hp.obo
 
-# HPO OBO
+# MAXO OBO
 if [ -f src/main/resources/maxo_mostrecent.obo ]; then
 	mv src/main/resources/maxo_mostrecent.obo src/main/resources/maxo_mostrecent.obo.old
 fi

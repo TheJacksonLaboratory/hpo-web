@@ -10,14 +10,12 @@
   </div>
   <!-- Tools Menu and SubMenus -->
   <mat-menu [overlapTrigger]="false" class="hpo-menus" #toolsMenu="matMenu">
-    <button mat-menu-item routerLink="tools"> Overview </button>
-    <button mat-menu-item routerLink="tools/clinical-annotation"> Clinical Annotation </button>
+    <button mat-menu-item routerLink="browse/profile-search"> Profile Search </button>
     <button mat-menu-item [matMenuTriggerFor]="genomicMenu">Genomic Tools</button>
     <button mat-menu-item [matMenuTriggerFor]="phenomicMenu">Phenomic Tools</button>
     <button mat-menu-item routerLink="tools/hpo-browser"> Other HPO Browsers </button>
     <button mat-menu-item routerLink="tools/workbench"> HPO Workbench </button>
     <button mat-menu-item routerLink="tools/external"> External Tools </button>
-    <button mat-menu-item routerLink="tools/other"> Other Tools </button>
   </mat-menu>
   <mat-menu class="hpo-menus"  #genomicMenu="matMenu">
     <button mat-menu-item routerLink="tools/genomiser"> Genomiser: Analyze non-coding variants </button>
@@ -35,9 +33,10 @@
     <button mat-menu-item routerLink="help/clinician-guide"> Clinicians Guide </button>
     <button mat-menu-item [matMenuTriggerFor]="howtoMenu">How to..</button>
     <button mat-menu-item [matMenuTriggerFor]="helpMenu">Help</button>
-    <button mat-menu-item [matMenuTriggerFor]="otherMenu">Other</button>
+    <button mat-menu-item [matMenuTriggerFor]="otherMenu">Translations</button>
   </mat-menu>
   <mat-menu  #howtoMenu="matMenu">
+    <button mat-menu-item (click)="navigateToDocs()"> Use HPO API </button>
     <button mat-menu-item routerLink="help/annotations"> Use Annotations </button>
     <button mat-menu-item routerLink="help/collaboration"> Contribute to HPO </button>
     <button mat-menu-item routerLink="citation"> Cite HPO </button>
@@ -48,8 +47,10 @@
   <button mat-menu-item routerLink="contact"> Contact </button>
   </mat-menu>
   <mat-menu  #otherMenu="matMenu">
+    <button mat-menu-item routerLink="help/translations"> Translations and Mapping </button>
+    <button mat-menu-item routerLink="help/indigenous-languages"> Indigenous Languages </button>
     <button mat-menu-item routerLink="help/layperson"> Layperson Synonyms </button>
-    <button mat-menu-item routerLink="help/mapping"> Translations and Mapping </button>
+    
   </mat-menu>
   <mat-menu  #infoMenu="matMenu">
     <button mat-menu-item routerLink="help/introduction"> Introduction </button>
