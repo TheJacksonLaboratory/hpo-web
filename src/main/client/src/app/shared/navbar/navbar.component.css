@@ -10,14 +10,13 @@
 }
 
 .nav-components {
-    margin-left:25px;
     color:white;
 }
 
 .nav-brand .nav-logo {
-    height: 45px;
-    width: 125px;
-    margin: 0 0 0 15px;
+    height: 50px;
+    width: 50px;
+    margin: 0 0 0 1rem;
     float:left;
     cursor: pointer;
 }
@@ -34,6 +33,8 @@
 }
 .nav-components .mat-button {
   margin-left: 15px;
+  font-size: 1.6rem;
+  font-weight: bold;
 }
 
 .fill-remaining-space{
