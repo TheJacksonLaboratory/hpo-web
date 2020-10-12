@@ -12,7 +12,7 @@ class HpoUtilitiesSpec extends Specification {
   Ontology hpoOntology
 
   def setupSpec(){
-    hpoOntology = new HpoOntologyFactory().getInstance()
+    hpoOntology = new OntologyFactory().getHpoOntology()
   }
 
   def setup(){

@@ -17,6 +17,7 @@ import { ContributorsComponent } from './contributors/contributors.component';
 import { PublicationsComponent } from './publications/publications.component';
 import { FundingComponent } from './funding/funding.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { IndigenousComponent } from './indigenous/indigenous.component';
 
 
 @NgModule({
@@ -29,7 +30,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   ],
   declarations: [AnnotationComponent, ClinicianGuideComponent, CollaborationComponent,
     DefinitionsComponent, HistoryComponent, IntroductionComponent, LaypersonComponent , MappingComponent,
-    UsersComponent, ContributorsComponent, PublicationsComponent, FundingComponent
+    UsersComponent, ContributorsComponent, PublicationsComponent, FundingComponent, IndigenousComponent
     ],
   providers: [ContributorsService]
 })

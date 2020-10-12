@@ -18,6 +18,13 @@ if [ -f src/main/resources/hp_mostrecent.obo ]; then
 fi
 wget -O src/main/resources/hp_mostrecent.obo https://raw.githubusercontent.com/obophenotype/human-phenotype-ontology/master/hp.obo
 
+# MAXO OBO
+if [ -f src/main/resources/maxo_mostrecent.obo ]; then
+	mv src/main/resources/maxo_mostrecent.obo src/main/resources/maxo_mostrecent.obo.old
+fi
+wget -O src/main/resources/maxo_mostrecent.obo https://raw.githubusercontent.com/monarch-initiative/MAxO/master/maxo-base.obo
+
+
 # ORPHANET 2 GENE
 if [ -f src/main/resources/orphanet_disease2gene.xml ]; then
 	mv src/main/resources/orphanet_disease2gene.xml src/main/resources/orphanet_disease2gene.xml.old

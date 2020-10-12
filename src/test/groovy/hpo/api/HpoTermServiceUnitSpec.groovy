@@ -7,7 +7,7 @@ import hpo.api.disease.DbDisease
 import hpo.api.gene.DbGene
 import hpo.api.term.DbTerm
 import hpo.api.annotation.DbAnnotation
-import hpo.api.util.HpoOntologyFactory
+import hpo.api.util.OntologyFactory
 import hpo.api.util.HpoUtilities
 import org.monarchinitiative.phenol.ontology.data.Ontology
 import org.monarchinitiative.phenol.ontology.data.Term
@@ -26,7 +26,7 @@ class HpoTermServiceUnitSpec extends Specification implements ServiceUnitTest<Hp
     HpoUtilities hpoUtilities
 
     def setupSpec(){
-        hpoOntology = new HpoOntologyFactory().getInstance()
+        hpoOntology = new OntologyFactory().getHpoOntology()
         hpoUtilities = new HpoUtilities(hpoOntology)
         mockDomains DbTerm, DbGene, DbDisease, DbAnnotation
     }

@@ -65,8 +65,8 @@ class DbGeneAdminService {
     log.info("*** Joining Genes with Terms ***")
     StopWatch stopWatch = new StopWatch()
     stopWatch.start()
-    Set<String> hpoIdWithPrefixNotFoundSet = [] as Set
-    Set<Integer> entrezIdNotFoundSet = [] as Set
+    Set<String> hpoIdWithPrefixNotFoundSet = [] as Set<String>
+    Set<Integer> entrezIdNotFoundSet = [] as Set<Integer>
 
     final Map<Integer, DbGene> entrezIdToDbGeneMap = domainUtilService.loadDbGenes()
     final Map<String, DbTerm> hpoIdToDbTermMap = domainUtilService.loadHpoIdToDbTermMap()

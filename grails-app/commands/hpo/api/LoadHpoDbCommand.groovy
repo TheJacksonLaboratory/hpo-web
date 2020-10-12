@@ -13,6 +13,7 @@ class LoadHpoDbCommand implements GrailsApplicationCommand {
       def appCtx = getApplicationContext()
       appCtx.sqlUtilsService.stopForeignChecks()
       appCtx.dbGeneAdminService.truncateGeneTermJoinTable()	// Truncate Genes to Terms
+      appCtx.dbTermAdminService.truncateDbMaxo()
       appCtx.dbDiseaseAdminService.truncateDiseaseGeneJoinTable() // Truncate Disease To Gene
       appCtx.dbDiseaseAdminService.truncateAnnotationTable() // Truncate Disease Term Table
       appCtx.dbTermAdminService.truncatedDbTermPath()
@@ -25,6 +26,7 @@ class LoadHpoDbCommand implements GrailsApplicationCommand {
 
       try{
         appCtx.dbTermAdminService.loadDbTerms() 			// Load Terms Table
+        appCtx.dbTermAdminService.loadDbMaxo()        // Load Maxo Table
         appCtx.dbGeneAdminService.executeGeneSchemaLoad() 			// Load Genes Table
         appCtx.dbDiseaseAdminService.executeDiseaseSchemaLoad() 	 		     // Load Diseases
       }catch(Exception e){

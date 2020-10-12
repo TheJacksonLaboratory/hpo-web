@@ -45,7 +45,7 @@
             <mat-card class="item-summary">
               <mat-card-content>
                 <div *ngIf="!treeData">
-                  <mat-progress-bar class="loading-result-details" color="primary" mode="buffer">
+                  <mat-progress-bar class="loading-result-details" color="primary" mode="indeterminate">
                   </mat-progress-bar>
                 </div>
                 <div *ngIf="treeData">
@@ -98,7 +98,7 @@
               <!-- Disease association -->
               <mat-tab label="Disease Associations">
                 <div [hidden]="diseaseAssocCount == 0">
-                      <mat-progress-bar  *ngIf="assocLoading" class="loading-result-details" color="primary" mode="buffer">
+                      <mat-progress-bar  *ngIf="assocLoading" class="loading-result-details" color="primary" mode="indeterminate">
                       </mat-progress-bar>
                       <div class="tab-output-container">
 
@@ -159,7 +159,7 @@
               <!-- Gene Association -->
               <mat-tab label="Gene Associations">
                 <div [hidden]="geneAssocCount == 0">
-                    <mat-progress-bar  *ngIf="assocLoading" class="loading-result-details" color="primary" mode="buffer">
+                    <mat-progress-bar  *ngIf="assocLoading" class="loading-result-details" color="primary" mode="indeterminate">
                     </mat-progress-bar>
 
                     <div class="tab-output-container">
@@ -218,7 +218,7 @@
               <div *ngIf="loincDisplayCount != 0">
                 <mat-tab label="LOINC Associations">
                   <div [hidden]="loincDisplayCount == 0">
-                    <mat-progress-bar  *ngIf="assocLoading" class="loading-result-details" color="primary" mode="buffer">
+                    <mat-progress-bar  *ngIf="assocLoading" class="loading-result-details" color="primary" mode="indeterminate">
                     </mat-progress-bar>
                     <div class="tab-output-container">
                       <div [hidden]="assocLoading" class="associations loinc-association">

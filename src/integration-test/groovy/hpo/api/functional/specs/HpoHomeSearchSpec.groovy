@@ -28,7 +28,7 @@ class HpoHomeSearchSpec extends  GebReportingSpec {
     void "test term search input" (){
 
       given:
-         HomePage homePage = browser.to(HomePage)
+        HomePage homePage = browser.to(HomePage)
 
       when:
         waitFor(25, 2){ homePage.findTermInput}

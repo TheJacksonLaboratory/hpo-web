@@ -8,7 +8,7 @@ import {environment} from '../../../environments/environment';
 })
 export class FooterComponent implements OnInit {
   title: string;
-  version = `hpo-web@${environment.VERSION} - hpo-obo@2020-06-08`;
+  version = `hpo-web@${environment.VERSION} - hpo-obo@2020-08-11`;
 
   constructor() {
     this.title = 'Human Phenotype Ontology';
