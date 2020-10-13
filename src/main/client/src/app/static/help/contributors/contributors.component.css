@@ -6,3 +6,7 @@
 .contributors .section ul{
   list-style-type: none;
 }
+
+.row {
+  margin: unset;
+}
