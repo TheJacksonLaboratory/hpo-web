@@ -8,8 +8,6 @@ import hpo.api.disease.DbDisease
 import hpo.api.gene.DbGene
 import hpo.api.term.DbTerm
 import hpo.api.term.DbTermRelationship
-import hpo.api.util.HpoOntologyFactory
-import spock.lang.Shared
 import spock.lang.Specification
 
 class HpoTermServiceViewSpec extends Specification implements JsonViewTest,DataTest {

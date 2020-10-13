@@ -5,8 +5,8 @@ import builders.dsl.spreadsheet.query.api.SpreadsheetCriteriaResult
 import builders.dsl.spreadsheet.query.poi.PoiSpreadsheetCriteria
 import geb.spock.GebReportingSpec
 import grails.testing.mixin.integration.Integration
-import hpo.api.functional.pages.TermDetailsPage
 import hpo.api.HpoSpecHelpers
+import hpo.api.functional.pages.TermDetailsPage
 
 @Integration
 class HpoTermDetailsSpec extends  GebReportingSpec {
@@ -16,6 +16,7 @@ class HpoTermDetailsSpec extends  GebReportingSpec {
 
   def setup() {
   }
+
 
   def cleanup() {
   }
@@ -39,7 +40,7 @@ class HpoTermDetailsSpec extends  GebReportingSpec {
     def excelBytes = downloadBytes(url)
 
     when: 'if we search for a row for a specific disease'
-    ByteArrayInputStream bis = new ByteArrayInputStream(excelBytes);
+    ByteArrayInputStream bis = new ByteArrayInputStream(excelBytes)
     SpreadsheetCriteria query = PoiSpreadsheetCriteria.FACTORY.forStream(bis)
     SpreadsheetCriteriaResult result = HpoSpecHelpers.queryExcelSheet(query, 'CHD7')
 

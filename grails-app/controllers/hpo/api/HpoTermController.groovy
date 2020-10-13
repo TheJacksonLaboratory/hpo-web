@@ -104,4 +104,37 @@ class HpoTermController {
   def searchLoincByTerm(String id){
     render(view: '/hpoLoinc/loinc', model: [entryList: hpoLoincService.searchByHpo(TermId.of(id)).toList()])
   }
+
+
+  @ApiOperation(
+    value = "Get a list of intersecting disease associations for a set of terms",
+    nickname = "term/intersecting?q={query}",
+    produces = "application/json",
+    httpMethod = "GET"
+  )
+  @ApiResponses([
+          @ApiResponse(code = 400, message = "No id's given.")
+  ])
+  @ApiImplicitParams([
+          @ApiImplicitParam(name = "query",
+            paramType="path",
+            required = true,
+            value = "list of term ontology ids",
+            example = "HP:0000365,HP:0006385",
+            dataType = "string"
+          )
+  ])
+  def searchIntersectingAssociations(String q){
+    def terms = q.split(",").collect()
+    terms.each {
+      // Confirm that these are actually all hpo terms?
+      it ->
+      def term = it.split(":")
+      if(!term[0].equals("HP") && !Integer.parseInt(term[1])){
+        // Good enough
+        render(400)
+      }
+        render(view:'/hpoDiseaseDetails/intersect', model: [associations: hpoTermService.findIntersectingTermDiseaseAssociations(terms)])
+    }
+  }
 }

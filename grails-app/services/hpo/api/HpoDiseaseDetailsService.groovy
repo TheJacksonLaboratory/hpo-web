@@ -65,17 +65,13 @@ class HpoDiseaseDetailsService {
       Map categoryTermMap = [:]
       cat.getNumberOfAnnotations()
       List<AnnotationResult> catAnnotationResult = []
-
-      //get category terms
       List<TermId> termIdList = cat.getAnnotatingTermIds()
+
       termIdList.each { tId ->
         Term term = hpoOntology.getTermMap().get(tId)
-
-        // add the DbTerm to the list of terms
         catAnnotationResult << buildAnnotationResult(disease, term)
       }
 
-      //populate the map
       categoryTermMap.put("catLabel", cat.getLabel())
       categoryTermMap.put("terms", catAnnotationResult)
       return categoryTermMap

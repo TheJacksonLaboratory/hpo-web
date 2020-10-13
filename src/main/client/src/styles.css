@@ -434,7 +434,7 @@ hr.underline-hr {
   font-weight: 800;
 }
 
-.download-associations {
+.download-associations, .lyfe-language-btn {
   margin-top: 10px !important;
   background-color: rgb(78, 139, 162) !important;
   color: white !important;

@@ -9,6 +9,7 @@ class DbTermSynonym {
     synonym()
   }
   static mapping = {
+    synonym(type: 'text')
     version false
   }
 

@@ -1,0 +1,89 @@
+<div class="news container">
+  <h1 class="center">Profile Search</h1>
+  <h4 class="center">This tool will find diseases that share your profile of phenotypes. Similarly, there is a
+    <a href="https://monarchinitiative.org/analyze/phenotypes" target="_blank">tool</a> that
+    the <a href="https://monarchinitiative.org/about/monarch" target="_blank">Monarch Initiative</a> provides that
+    will allow you compare your profile across species with a specific set of
+    genes or diseases.
+  </h4>
+
+  <div class="col-lg-offset-2 col-lg-8">
+    <mat-horizontal-stepper labelPosition="bottom" #stepper>
+      <mat-step [completed]="submittedTerms">
+        <form class="discover-form">
+          <ng-template matStepLabel>Build Phenotype List</ng-template>
+          <br>
+          <mat-form-field class="discover-search">
+            <input type="text"
+                   placeholder="Search for a phenotype to add..."
+                   aria-label="Number"
+                   matInput
+                   [formControl]="myControl"
+                   [matAutocomplete]="auto">
+            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+              <mat-option *ngFor="let option of filteredOptions | async" (click)="addTerm(option)">
+                {{option.id}} - {{option.name}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </form>
+        <div class="center" *ngIf="selectedTerms.length > 0">
+          <h3>Your Phenotype Profile</h3>
+          <mat-list>
+            <mat-list-item class="phenotype-list" *ngFor="let phenotype of selectedTerms; let i = index">
+              <p class="phenotype-list-item">{{phenotype.id}} - {{phenotype.name}} <mat-icon class="remove-term-icon" (click)="removeTerm(i)">delete_forever</mat-icon></p>
+            </mat-list-item>
+          </mat-list>
+          <button class="submit-btn" mat-stroked-button color="primary" *ngIf="selectedTerms.length > 0" (click)="submitTerms()">Discover <mat-icon>arrow_right</mat-icon></button>
+        </div>
+      </mat-step>
+      <mat-step class="hpo-group-tab">
+        <ng-template matStepLabel>Your Annotations</ng-template>
+          <div class="hpo-group-tab">
+            <div class="associations">
+              <div class="text-center">
+                <mat-progress-bar
+                  class="example-margin"
+                  [color]="'accent'"
+                  [mode]="'indeterminate'"
+                  *ngIf="loadingIntersectingAssociations">
+                </mat-progress-bar>
+              </div>
+              <div *ngIf="!loadingIntersectingAssociations" >
+              <mat-chip-list aria-label="Your Selected Terms">
+                <mat-chip class="query-chip" *ngFor="let term of selectedTerms">
+                  {{term.id}} - {{term.name}}
+                </mat-chip>
+              </mat-chip-list>
+              <mat-table class="intersecting-table mat-elevation-z6" [dataSource]="associationData"
+                     matSort matSortActive="created" matSortDisableClear matSortDirection="desc">
+                <!-- Number Column -->
+                <ng-container matColumnDef="diseaseId">
+                  <mat-header-cell *matHeaderCellDef>Disease Identifier</mat-header-cell>
+                  <mat-cell  *matCellDef="let row">
+                    <a routerLink="/browse/disease/{{row.diseaseId}}">{{row.diseaseId}}</a>
+                  </mat-cell>
+                </ng-container>
+                <!-- Created Column -->
+                <ng-container matColumnDef="diseaseName">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+                    Disease Name
+                  </mat-header-cell>
+                  <mat-cell  *matCellDef="let row">{{row.diseaseName}}</mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                <mat-paginator [length]="resultsLength" [pageSize]="30"></mat-paginator>
+              </mat-table>
+                <p class="not-found" *ngIf="resultsLength == 0"><strong>No intersecting diseases for found your phenotypes.</strong></p>
+              <button class="back-btn" mat-raised-button (click)="resetStepper()">Reset</button>
+              </div>
+            </div>
+          </div>
+        <div>
+        </div>
+      </mat-step>
+    </mat-horizontal-stepper>
+  </div>
+</div>

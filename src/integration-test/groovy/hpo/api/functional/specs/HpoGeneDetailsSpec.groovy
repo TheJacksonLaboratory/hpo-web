@@ -24,8 +24,7 @@ class HpoGeneDetailsSpec extends  GebReportingSpec {
   void "test disease association filter" (){
 
     given:
-    System.out.println("Starting filter test")
-      GeneDetailsPage geneDetailsPage = browser.to(GeneDetailsPage)
+    GeneDetailsPage geneDetailsPage = browser.to(GeneDetailsPage)
 
     when:
       waitFor {
@@ -34,6 +33,7 @@ class HpoGeneDetailsSpec extends  GebReportingSpec {
       }
       waitFor {
         geneDetailsPage.diseaseFilterElement.value('bladder')
+        geneDetailsPage.diseasePagingRangeLabelElement.isDisplayed()
       }
 
     then:
@@ -54,6 +54,7 @@ class HpoGeneDetailsSpec extends  GebReportingSpec {
     }
     waitFor {
       geneDetailsPage.termFilterElement.value('Leuk')
+      geneDetailsPage.termPagingRangeLabelElement.isDisplayed()
     }
 
     then:
@@ -66,7 +67,7 @@ class HpoGeneDetailsSpec extends  GebReportingSpec {
     GeneDetailsPage geneDetailsPage = browser.to(GeneDetailsPage)
 
     when: 'clicking export association button'
-    waitFor{ geneDetailsPage.downloadAssociationButton.displayed }
+    waitFor{ geneDetailsPage.downloadAssociationButton.isDisplayed() }
     geneDetailsPage.downloadAssociationButton.click()
 
     then: 'the dialog should open'
@@ -97,7 +98,7 @@ class HpoGeneDetailsSpec extends  GebReportingSpec {
     GeneDetailsPage geneDetailsPage = browser.to(GeneDetailsPage)
 
     when: 'clicking export association button'
-    waitFor{ geneDetailsPage.downloadAssociationButton.displayed }
+    waitFor{ geneDetailsPage.downloadAssociationButton.isDisplayed() }
     geneDetailsPage.downloadAssociationButton.click()
 
     then: 'the dialog should open'

@@ -2,15 +2,15 @@ package spring
 
 import groovy.sql.Sql
 import hpo.api.util.HpoAssociationFactory
-import hpo.api.util.HpoOntologyFactory
+import hpo.api.util.OntologyFactory
 import hpo.api.util.HpoUtilities
 import hpo.api.util.Loinc2HpoFactory
-import org.springframework.beans.factory.config.MethodInvokingFactoryBean
 
 // Place your Spring DSL code here
 beans = {
-    hpoOntologyFactory(HpoOntologyFactory)
-    hpoOntology(hpoOntologyFactory: "getInstance")
+    ontologyFactory(OntologyFactory)
+    hpoOntology(ontologyFactory: "getHpoOntology")
+    maxoOntology(ontologyFactory: "getMaxoOntology")
 
     hpoAssociationFactory(HpoAssociationFactory, hpoOntology)
     hpoAssociation(hpoAssociationFactory: "getInstance")
