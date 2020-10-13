@@ -59,9 +59,21 @@ a.mat-btn{
 .home-search .search-container {
   margin: 0 auto;
   max-height: 100%;
-  height: 170px;
+  height: 250px;
   background-color: rgba(41,101,124,1);
   border: solid 2px #325364;
+
+  & .main-logo {
+    margin: 1rem auto 2.5rem auto;
+    height: 100px;
+    display: block;
+  }
+
+  @media screen and (max-width: 767px){
+    & .main-logo {
+      height: 75px;
+    }
+  }
 }
 
 .info-body p, .info-body .list {
