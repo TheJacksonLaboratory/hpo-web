@@ -1,6 +1,6 @@
 <div class="container">
   <h1 class="center pageTitle">Collaborating with HPO</h1>
-  <h2>How to contribute to the HPO</h2>
+  <h2>Contributing</h2>
   <p>
     We welcome the participation of interested colleagues. We have been collaborating with many clinicians and translational researchers to refine and
   extend the HPO resources since 2009, and anticipate continuing this process for the foreseeable future.
@@ -23,13 +23,87 @@
     <em>Atrial septal defect</em>.
   <h2>Bundled terms</h2>
   <p>
-  If you find a description in a publication such as <em>Sparse eyebrows and eyelashes</em>, note that the description is referring to two separate phenotypic features.
-The HPO would encode this using two different terms,  <a routerLink="/browse/term/HP:0045075">Sparse eyebrow</a>  and
-<a routerLink="/browse/term/HP:0000653">Sparse eyelashes</a>.  The idea is that one HPO term should refer to an <em>atomic</em> phenotypic abnormality rather than
-to a collection of abnormalities observed in an individual patient. Please <em>debundle</em> the description and proceed as described above. This is a central
-tenet of  <a href="https://www.ncbi.nlm.nih.gov/pubmed/22504886" target="__blank">Deep phenotyping</a>.
+    If you find a description in a publication such as <em>Sparse eyebrows and eyelashes</em>, note that the description is referring to two separate phenotypic features.
+  The HPO would encode this using two different terms,  <a routerLink="/browse/term/HP:0045075">Sparse eyebrow</a>  and
+  <a routerLink="/browse/term/HP:0000653">Sparse eyelashes</a>.  The idea is that one HPO term should refer to an <em>atomic</em> phenotypic abnormality rather than
+  to a collection of abnormalities observed in an individual patient. Please <em>debundle</em> the description and proceed as described above. This is a central
+  tenet of  <a href="https://www.ncbi.nlm.nih.gov/pubmed/22504886" target="__blank">Deep phenotyping</a>.
   </p>
-
+  <h3>Anatomy of a good term suggestion</h3>
+  <p>A good term request provides the information shown in Table 1. Please use our 
+    <a href="https://github.com/obophenotype/human-phenotype-ontology/issues" target="_blank">GitHub issue tracker</a>, choosing the “New Term” template.</p>
+  <table class="contribute-example">
+    <tr>
+      <th>Item</th>
+      <th>Example</th>
+    </tr>
+    <tr>
+      <td>Preferred term label:</td>
+      <td>Elevated D-dimers</td>
+    </tr>
+    <tr>
+      <td>Synonyms:</td>
+      <td>Elevated D-dimer level</td>
+    </tr>
+    <tr>
+      <td>Definition:</td>
+      <td>An increased concentration of D-dimers, a marker of fibrin degradation, in the blood circulation. PMID:19008457</td>
+    </tr>
+    <tr>
+      <td>Comment:</td>
+      <td>If appropriate, provide additional information or context to support the definition</td>
+    </tr>
+    <tr>
+      <td>Parent term:</td>
+      <td>Abnormality of fibrinolysis HP:0040224 (it is easiest to copy the link to this term from the HPO website).</td>
+    </tr>
+    <tr>
+      <td>Diseases characterized by this term:</td>
+      <td>2/2 individuals with Pseudo-TORCH syndrome 3 (OMIM:618886); PMID:31836668 </td>
+    </tr>
+    <figcaption><strong>Table 1</strong>. Components of a complete and well-structured new term request. </figcaption>
+  </table>
+  <h3>How to suggest new disease annotations</h3>
+  <p>We welcome suggestions for novel disease annotations (HPOAs) to add to HPO. These can be made by submitting a ticket to the HPO tracker with the information shown in Table 2. Please use our <a href="https://github.com/obophenotype/human-phenotype-ontology/issues" target="_blank">GitHub issue tracker</a>, choosing the “New Annotation” template.</p>
+  <table class="contribute-example">
+    <tr>
+      <th>Item</th>
+      <th>Example</th>
+    </tr>
+    <tr>
+      <td>Disease ID:</td>
+      <td>OMIM:265380</td>
+    </tr>
+    <tr>
+      <td>Disease Name:</td>
+      <td>Alveolar capillary dysplasia with misalignment of pulmonary veins1</td>
+    </tr>
+    <tr>
+      <td>HPO id:</td>
+      <td>HP:0001734</td>
+    </tr>
+    <tr>
+      <td>HPO term name:</td>
+      <td>Annular pancreas</td>
+    </tr>
+    <tr>
+      <td>Frequency:</td>
+      <td>2/14</td>
+    </tr>
+    <tr>
+      <td>Onset</td>
+      <td>Congenital onset  (use terms from the HPO <a href="https://hpo.jax.org/app/browse/term/HP:0003674" target="_blank">Onset</a> hierarchy)</td>
+    </tr>
+    <tr>
+      <td>PMID</td>
+      <td>PMID:19500772</td>
+    </tr>
+    <tr>
+      <td>Comment</td>
+      <td>Any other information or context</td>
+    </tr>
+    <figcaption><strong>Table 2</strong>. Components of a complete and well-structured new disease annotation request.</figcaption>
+  </table>
 <h2>The distinction between diseases and phenotypes</h2>
 <p>The community uses the word <em>phenotype</em> with multiple meanings.
   The HPO defines a disease as an entity that has all four of the following features:</p>

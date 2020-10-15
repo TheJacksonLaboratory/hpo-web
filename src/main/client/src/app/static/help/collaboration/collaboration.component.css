@@ -1,0 +1,16 @@
+.contribute-example, .contribute-example tr, .contribute-example td, .contribute-example th {
+    border: 0 !important;
+}
+
+.contribute-example th {
+    background-color: lightgray;
+    text-align: left;
+}
+
+.contribute-example td:nth-child(1) {
+    font-weight: bold;
+}
+
+.contribute-example figcaption {
+    margin: 1rem 0 0 0;
+}
