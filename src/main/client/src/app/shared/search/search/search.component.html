@@ -5,7 +5,7 @@
       <mat-option value="disease">Disease</mat-option>
       <mat-option value="gene">Gene</mat-option>
     </mat-select>
-    <input class="searchbar" matInput placeholder="Search for phenotypes, diseases, genes..."
+    <input class="searchbar" matInput placeholder="Search for phenotypes, diseases or genes..."
            (input)="contentChanging($event.target.value)"
            (keyup.enter)="submitQuery($event.target.value)"
            (focus)="toggleDropdown($event)"
