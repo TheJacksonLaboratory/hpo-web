@@ -65,21 +65,21 @@
                             </ng-container>
                             <ng-container matColumnDef="sources">
                               <mat-header-cell *matHeaderCellDef>Source(s)</mat-header-cell>
-                              <mat-cell *matCellDef="let row">
-                                <span *ngFor="let source of row.sources">
-                                  <span *ngIf="isPubmed(source)">
+                              <mat-cell [ngClass]="{'source-cell': row.sources.length > 1}" *matCellDef="let row">
+                                <ng-container *ngFor="let source of row.sources">
+                                  <div class="source" *ngIf="isPubmed(source)">
                                     <a [href]="getPubmedUrl(source)" target="_blank">
                                       PubMed <i class="material-icons-outlined">library_books</i>
                                     </a>
-                                  </span>
-                                  <span *ngIf="!isPubmed(source)">
+                                  </div>
+                                  <div  class="source" *ngIf="!isPubmed(source)">
                                     <a [href]="getExternalDiseaseUrl(source)" target="_blank">
                                       <span *ngIf="isSourceOmim(source)">OMIM &nbsp;</span>
                                       <span *ngIf="isSourceOrpha(source)">ORPHA &nbsp;</span>
                                       <i class="material-icons">open_in_new</i>
                                     </a>
-                                  </span>
-                                </span>
+                                  </div>
+                                </ng-container>
                               </mat-cell>
                             </ng-container>
                           </mat-table>
