@@ -28,7 +28,7 @@ describe('DiseaseServiceSpec', () => {
     });
 
     // look up our request and access it
-    const request = httpMock.expectOne(environment.HPO_API_DISEASE_SEARCH_URL + '/' + query);
+    const request = httpMock.expectOne(environment.HPO_API_DISEASE_SEARCH_URL + query);
     // verify it is a GET
     expect(request.request.method).toEqual('GET');
 
