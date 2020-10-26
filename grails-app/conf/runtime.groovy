@@ -16,6 +16,6 @@ swagger {
       url = "https://github.com/TheJacksonLaboratory/hpo-web/blob/master/LICENSE.md"
     }
   }
-  schemes = [Scheme.HTTP]
+  schemes = [Scheme.HTTPS, Scheme.HTTP]
   consumes = ["application/json"]
 }

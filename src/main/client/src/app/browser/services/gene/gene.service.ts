@@ -16,7 +16,7 @@ export class GeneService {
   }
   searchGene(query: string): Observable<any> {
       return this.http
-          .get(environment.HPO_API_GENE_SEARCH_URL + '/' + query, this.options);
+          .get(environment.HPO_API_GENE_SEARCH_URL + query, this.options);
   }
   searchGeneInfo(query: string): Observable<any> {
     return this.http

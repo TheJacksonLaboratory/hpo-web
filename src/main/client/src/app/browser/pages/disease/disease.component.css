@@ -49,6 +49,11 @@
   color: white;
 }
 
+.report-issue {
+  margin: 1rem 0 0 .5rem;
+  background-color: #ec9736;
+  color: white !important;
+}
 
 .material-icons {
   vertical-align: middle !important;

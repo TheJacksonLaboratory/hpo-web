@@ -137,4 +137,11 @@ export class DiseaseComponent {
     };
     this.dialogService.openDownloadDialog(this.disease.diseaseId, 'disease', counts);
   }
+
+  reportIssue(){
+    if(this.disease.db.toUpperCase().includes("ORPHA")){
+      window.open("https://www.orpha.net/consor/cgi-bin/Directory_Contact.php?lng=EN", "_blank");
+    } else
+      window.open("https://github.com/obophenotype/human-phenotype-ontology/issues", "_blank");
+  }
 }

@@ -8,7 +8,7 @@ import io.swagger.annotations.ApiResponse
 import io.swagger.annotations.ApiResponses
 import org.monarchinitiative.phenol.ontology.data.TermId
 
-@Api(value = "/api/hpo", tags = ["Term"], description = "Term API")
+@Api(value = "/api/hpo", tags = ["Term"])
 class HpoTermController {
   HpoTermService hpoTermService
   HpoTermRelationsService hpoTermRelationsService

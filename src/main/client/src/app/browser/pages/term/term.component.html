@@ -85,9 +85,9 @@
                     </mat-list-item>
                     <mat-divider></mat-divider>
                   </mat-list>
-                  <button class="mat-btn mat-raised-button download-associations"
+                  <button mat-raised-button class="download-associations"
                           [disabled]="this.diseaseAssocCount == 0 && this.geneAssocCount == 0"
-                          (click)="downloadDialog()">Export Associations</button>
+                          (click)="downloadDialog()"><span class="material-icons">get_app</span> Export Associations</button>
                 </div>
               </mat-card-content>
             </mat-card>

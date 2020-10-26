@@ -25,8 +25,8 @@ export class ContributorsService {
     if (lines) {
       for (const line of lines) {
         const fields = line.split(',');
-        const firstName = fields.shift();
         const lastName = fields.shift();
+        const firstName = fields.shift();
         const location = fields.join(',').replace(/['"]+/g, '');
         this.contributors.push({'firstName': firstName, 'lastName': lastName, 'location': location});
       }

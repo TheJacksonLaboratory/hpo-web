@@ -47,9 +47,9 @@
                         </span>
                       </mat-list-item>
                     </mat-list><br>
-                    <button class="mat-btn mat-raised-button download-associations"
+                    <button mat-raised-button class="download-associations"
                             [disabled]="this.termAssoc.length == 0 && this.diseaseAssoc.length == 0"
-                            (click)="downloadDialog()">Export Associations</button>
+                            (click)="downloadDialog()"> <span class="material-icons">get_app</span> Export Associations</button>
                   </mat-card-content>
               </mat-card>
 
