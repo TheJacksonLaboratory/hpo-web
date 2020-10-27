@@ -10,7 +10,7 @@ import {ContributorsService} from "../../../shared/contributors/contributors.ser
 export class ContributorsComponent implements OnInit {
 
   contributorsSource: Contributors[];
-  displayedColumns = ['firstName', 'lastName', 'location'];
+  displayedColumns = ['lastName', 'firstName', 'location'];
   constructor(private contribService: ContributorsService) { }
 
   ngOnInit() {
