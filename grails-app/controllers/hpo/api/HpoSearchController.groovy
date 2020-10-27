@@ -7,7 +7,7 @@ import io.swagger.annotations.ApiResponse
 import io.swagger.annotations.ApiResponses
 
 
-@Api(value = "/api/hpo", tags = ["Search"], description = "Search API")
+@Api(value = "/api/hpo", tags = ["Search"])
 class HpoSearchController {
   static responseFormats = ['json']
 

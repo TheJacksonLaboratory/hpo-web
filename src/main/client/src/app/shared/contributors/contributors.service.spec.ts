@@ -21,8 +21,8 @@ describe('ContributorsService', () => {
     service.contributors = [];
     service.getContributors().subscribe(contributors =>{
       expect(contributors.length).toEqual(6);
-      expect(contributors[5].firstName).toEqual("Tester");
-      expect(contributors[5].lastName).toEqual("Six");
+      expect(contributors[5].firstName).toEqual("Six");
+      expect(contributors[5].lastName).toEqual("Tester");
       expect(contributors[5].location).toEqual("Testing Desk 6");
     });
 

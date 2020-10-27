@@ -9,10 +9,10 @@ export const environment = {
   VERSION: require('../../package.json').version,
   // HPO API environment variables
   HPO_API_SEARCH_URL:  HPO_API_BASE_URL + 'search',
-  HPO_API_TERM_SEARCH_URL: HPO_API_BASE_URL + 'term',
+  HPO_API_TERM_SEARCH_URL: HPO_API_BASE_URL + 'term/',
   HPO_API_TERM_TREE_URL: HPO_API_BASE_URL + 'term/relations',
-  HPO_API_GENE_SEARCH_URL: HPO_API_BASE_URL + 'gene',
-  HPO_API_DISEASE_SEARCH_URL: HPO_API_BASE_URL + 'disease',
+  HPO_API_GENE_SEARCH_URL: HPO_API_BASE_URL + 'gene/',
+  HPO_API_DISEASE_SEARCH_URL: HPO_API_BASE_URL + 'disease/',
   HPO_API_DOWNLOAD_EXCEL_TERM_URL: HPO_API_BASE_URL + 'download/term',
   HPO_API_DOWNLOAD_EXCEL_DISEASE_URL: HPO_API_BASE_URL + 'download/disease',
   HPO_API_DOWNLOAD_EXCEL_GENE_URL: HPO_API_BASE_URL + 'download/gene',

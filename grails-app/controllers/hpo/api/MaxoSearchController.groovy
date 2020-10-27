@@ -7,7 +7,7 @@ import io.swagger.annotations.ApiOperation
 import io.swagger.annotations.ApiResponse
 import io.swagger.annotations.ApiResponses
 
-@Api(value = "/api/maxo", tags = ["Search"], description = "Search API")
+@Api(value = "/api/maxo", tags = ["Search"])
 class MaxoSearchController {
 
   SearchService searchService

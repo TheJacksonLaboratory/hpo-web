@@ -7,7 +7,7 @@ import io.swagger.annotations.ApiOperation
 import io.swagger.annotations.ApiResponse
 import io.swagger.annotations.ApiResponses
 
-@Api(value = "/api/hpo", tags = ["Gene"], description = "Gene Details API")
+@Api(value = "/api/hpo", tags = ["Gene"])
 class HpoGeneDetailsController {
   HpoGeneDetailsService hpoGeneDetailsService
 	static responseFormats = ['json', 'xml']
