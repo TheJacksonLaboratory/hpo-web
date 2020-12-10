@@ -61,7 +61,13 @@ class HpoTermController {
         required = true,
         value = "term ontology id",
         example = "HP:0001166",
-        dataType = "string")])
+        dataType = "string"),
+      @ApiImplicitParam(name = "max",
+        paramType = "query", required = false, value = "an upper limit for docs to return. (-1 for all) ",
+        defaultValue = "20", example = "5", dataType = "integer"),
+      @ApiImplicitParam(name = "offset", paramType = "query",  required = false, value = "a page when max value is set",
+      defaultValue = "0", example = "1", dataType = "integer")
+    ])
     def searchGenesByTerm(Integer offset, Integer max){
       if (!offset) offset = 0
       if (!max)  max = 20
@@ -70,7 +76,6 @@ class HpoTermController {
         render(view: '/hpoGeneDetails/searchGenesByTerm', model: [resultMap: res ])
       } else {
         render(view: '/notFound')
-
       }
     }
 
@@ -89,7 +94,11 @@ class HpoTermController {
         required = true,
         value = "term ontology id",
         example = "HP:0001166",
-        dataType = "string")])
+        dataType = "string"),@ApiImplicitParam(name = "max",
+      paramType = "query", required = false, value = "an upper limit for docs to return. (-1 for all) ",
+      defaultValue = "20", example = "5", dataType = "integer"),
+      @ApiImplicitParam(name = "offset", paramType = "query",  required = false, value = "a page when max value is set",
+        defaultValue = "0", example = "1", dataType = "integer")])
     def searchDiseasesByTerm(Integer offset, Integer max){
       if (!offset) offset = 0
       if (!max)  max = 20
