@@ -8554,7 +8554,6 @@ synonym: "HSCT" EXACT ABBREVIATION []
 is_a: MAXO:0000068 ! transplantation procedure
 property_value: http://purl.org/dc/elements/1.1/date 2020-11-19T19:56:02Z xsd:dateTime
 created_by: http://orcid.org/0000-0001-7941-2961
-has_synonym_type: ABBREVIATION
 
 [Term]
 id: MAXO:0000748
