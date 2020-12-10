@@ -15,7 +15,7 @@ class MaxoSearchController {
 
   @ApiOperation(
     value = "Search Medical Action Ontology",
-    nickname = "search/maxo/?q={query}",
+    nickname = "search/?q={query}",
     produces = "application/json",
     httpMethod = "GET"
   )
@@ -31,7 +31,8 @@ class MaxoSearchController {
   def searchMaxo(String q){
     if(q){
       render(view: 'getMaxoSearchResults', model: [maxoSearchResultList: searchService.searchMaxo(q)])
+    } else {
+      render("/notFound")
     }
-    render("/notFound")
   }
 }
