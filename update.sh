@@ -16,7 +16,7 @@ wget -O src/main/resources/mim2gene_medgen.txt ftp://ftp.ncbi.nlm.nih.gov/gene/D
 if [ -f src/main/resources/hp_mostrecent.obo ]; then
 	mv src/main/resources/hp_mostrecent.obo src/main/resources/hp_mostrecent.obo.old
 fi
-wget -O src/main/resources/hp_mostrecent.obo https://raw.githubusercontent.com/obophenotype/human-phenotype-ontology/master/hp.obo
+wget -O src/main/resources/hp_mostrecent.obo http://purl.obolibrary.org/obo/hp.obo
 
 # MAXO OBO
 if [ -f src/main/resources/maxo_mostrecent.obo ]; then
@@ -41,7 +41,7 @@ wget -O src/main/resources/Homo_sapiens.gene_info.gz ftp://ftp.ncbi.nih.gov/gene
 if [ -f src/main/resources/phenotype.hpoa ]; then
         mv src/main/resources/phenotype.hpoa src/main/resources/phenotype.hpoa.old
 fi
-wget -O src/main/resources/phenotype.hpoa http://compbio.charite.de/jenkins/job/hpo.annotations.current/lastSuccessfulBuild/artifact/current/phenotype.hpoa
+wget -O src/main/resources/phenotype.hpoa http://purl.obolibrary.org/obo/hp/hpoa/phenotype.hpoa
 
 # EXIT
 exit 0;
