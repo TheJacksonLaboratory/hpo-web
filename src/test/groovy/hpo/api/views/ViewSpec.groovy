@@ -10,17 +10,14 @@ import hpo.api.term.DbTerm
 import hpo.api.term.DbTermRelationship
 import spock.lang.Specification
 
-class HpoTermServiceViewSpec extends Specification implements JsonViewTest,DataTest {
+class ViewSpec extends Specification implements JsonViewTest,DataTest {
 
   def setupSpec(){
     mockDomains DbTerm, DbGene, DbDisease
   }
   void "test searchTerm template for term details service"(){
     setup:
-    //Build a Term Object
-    Term term = buildMockTerm("HP:0009725")
-    //Create DbTerm and its relationship
-    DbTerm dbTerm = new DbTerm(term).save()
+    DbTerm dbTerm = new DbTerm(ontologyId: "HP:0009725", name:"bladder neoplasm").save()
     DbTerm termParent = new DbTerm(ontologyId: "HP:0010786", name: "Urinary tract neoplasm")
     DbTerm termChild = new DbTerm(ontologyId: "HP:0002862", name: "Bladder carcinoma")
     new DbTermRelationship(termParent: termParent, termChild: dbTerm).save()
@@ -79,17 +76,24 @@ class HpoTermServiceViewSpec extends Specification implements JsonViewTest,DataT
     where:
     expectedDiseaseIds = ["OMIM:7","ORPHA:227"]
   }
-  private static Term buildMockTerm(String id){
-    Term term = new Term.Builder()
-      .id(TermId.of(id))
-      .name('Bladder neoplasm')
-      .altTermIds([])
-      .definition('Descriptive definition')
-      .databaseXrefs([])
-      .comment('informative comment')
-      .createdBy('someUser').build()
 
-    term
+  void "test search descendants"(){
+    setup:
+      List<DbTerm> fakeServiceResponse = [
+        new DbTerm(ontologyId: "HP:0003674", name: "Onset"),
+        new DbTerm(ontologyId: "HP:0003577", name: "Congenital onset"),
+        new DbTerm(ontologyId: "HP:0003581", name: "Adult onset")
+      ]
+    when: "search descendants view spec"
+      mappingContext.addPersistentEntity(DbTerm)
+      def result = render(view: '/hpoSearch/descendants', model: [descendantList: fakeServiceResponse])
+      result = result.json
+    then: "json is correct"
+      result.size() == 3
+      result[0].name == "Onset"
+      result[1].name == "Congenital onset"
+      result[2].ontologyId == "HP:0003581"
+
   }
 
   private static DbGene buildMockGene(String symbol, Integer id){
