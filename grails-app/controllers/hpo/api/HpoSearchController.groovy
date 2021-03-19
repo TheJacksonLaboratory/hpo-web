@@ -12,6 +12,7 @@ class HpoSearchController {
   static responseFormats = ['json']
 
   SearchService searchService
+  HpoTermRelationsService hpoTermRelationsService
 
   @ApiOperation(
     value = "Search terms, diseases or genes",
@@ -24,16 +25,41 @@ class HpoSearchController {
   )
   @ApiImplicitParams([
     @ApiImplicitParam(name = "query",
-      paramType = "path",
+      paramType = "query",
       required = true,
       example = "arach",
       dataType = "string")])
   def searchAll(String q, boolean fetchAll){
-
     if (fetchAll){
       render(view: 'searchAll', model: [resultMap: searchService.searchAll(q, 0, -1)])
     }else{
       render(view: 'searchAll', model: [resultMap: searchService.searchAll(q)])
     }
+  }
+
+  @ApiOperation(
+    value = "Anchor Descendant Search Starting from the given hpo term id",
+    nickname = "descendants/?start={start}&query={query}",
+    produces = "application/json",
+    httpMethod = "GET"
+  )
+  @ApiResponses([
+    @ApiResponse(code = 404, message = "Something was wrong with the request")]
+  )
+  @ApiImplicitParams([
+    @ApiImplicitParam(name = "start",
+      paramType = "query",
+      required = true,
+      example = "HP:0003674",
+      dataType = "string"),
+    @ApiImplicitParam(name = "start",
+      paramType = "query",
+      required = true,
+      example = "juvenile",
+      dataType = "string")
+  ])
+  def descendantSearch(String start, String query){
+      def list = hpoTermRelationsService.findAllDescendants(start, query)
+      render(view: '/hpoSearch/descendants', model: [descendantList: list])
   }
 }

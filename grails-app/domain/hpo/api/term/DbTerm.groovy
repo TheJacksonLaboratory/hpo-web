@@ -88,4 +88,28 @@ class DbTerm {
     dbTermChildren*.termParent
   }
 
+  boolean equals(o) {
+    if (this.is(o)) return true
+    if (getClass() != o.class) return false
+
+    DbTerm dbTerm = (DbTerm) o
+
+    if (isObsolete != dbTerm.isObsolete) return false
+    if (comment != dbTerm.comment) return false
+    if (definition != dbTerm.definition) return false
+    if (name != dbTerm.name) return false
+    if (ontologyId != dbTerm.ontologyId) return false
+
+    return true
+  }
+
+  int hashCode() {
+    int result
+    result = (ontologyId != null ? ontologyId.hashCode() : 0)
+    result = 31 * result + (name != null ? name.hashCode() : 0)
+    result = 31 * result + (isObsolete ? 1 : 0)
+    result = 31 * result + (definition != null ? definition.hashCode() : 0)
+    result = 31 * result + (comment != null ? comment.hashCode() : 0)
+    return result
+  }
 }
