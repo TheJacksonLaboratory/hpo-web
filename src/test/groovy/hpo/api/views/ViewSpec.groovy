@@ -1,13 +1,13 @@
 package hpo.api.views
 
-import org.monarchinitiative.phenol.ontology.data.Term
-import org.monarchinitiative.phenol.ontology.data.TermId
 import grails.plugin.json.view.test.*
 import grails.testing.gorm.DataTest
 import hpo.api.disease.DbDisease
 import hpo.api.gene.DbGene
 import hpo.api.term.DbTerm
 import hpo.api.term.DbTermRelationship
+import org.monarchinitiative.phenol.ontology.data.Term
+import org.monarchinitiative.phenol.ontology.data.TermId
 import spock.lang.Specification
 
 class ViewSpec extends Specification implements JsonViewTest,DataTest {
@@ -17,6 +17,7 @@ class ViewSpec extends Specification implements JsonViewTest,DataTest {
   }
   void "test searchTerm template for term details service"(){
     setup:
+    Term term = buildMockTerm("HP:0009725")
     DbTerm dbTerm = new DbTerm(ontologyId: "HP:0009725", name:"bladder neoplasm").save()
     DbTerm termParent = new DbTerm(ontologyId: "HP:0010786", name: "Urinary tract neoplasm")
     DbTerm termChild = new DbTerm(ontologyId: "HP:0002862", name: "Bladder carcinoma")
@@ -24,7 +25,7 @@ class ViewSpec extends Specification implements JsonViewTest,DataTest {
     new DbTermRelationship(termParent: dbTerm, termChild: termChild).save()
 
     when:"search term gson is rendered"
-    Map serviceMap = [TERM:term,DBTERM:dbTerm]
+    Map serviceMap = [TERM: term, DBTERM: dbTerm]
     mappingContext.addPersistentEntity(DbTerm)
     def result = render(view: "/hpoTermDetails/searchTerm", model:[result:serviceMap]).json
 
@@ -94,6 +95,19 @@ class ViewSpec extends Specification implements JsonViewTest,DataTest {
       result[1].name == "Congenital onset"
       result[2].ontologyId == "HP:0003581"
 
+  }
+
+  private static Term buildMockTerm(String id){
+    Term term = new Term.Builder()
+      .id(TermId.of(id))
+      .name('Bladder neoplasm')
+      .altTermIds([])
+      .definition('Descriptive definition')
+      .databaseXrefs([])
+      .comment('informative comment')
+      .createdBy('someUser').build()
+
+    term
   }
 
   private static DbGene buildMockGene(String symbol, Integer id){

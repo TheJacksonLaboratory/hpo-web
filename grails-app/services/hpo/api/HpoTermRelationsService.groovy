@@ -36,27 +36,28 @@ class HpoTermRelationsService {
   }
 
   /**
-   * Given an hpo ontology id, get all descendants with given term
+   * Given an hpo ontology id, get all descendants starting with that therm
+   * then filter the resulting set by the query passed. If none, return all.
    * @param ontologyId
    * @return list of term suggestions
    */
-  List<DbTerm> findAllDescendants(String ontologyId, String query){
+  List<DbTerm> findAllDescendants(String ontologyId, String query) {
     ontologyId = StringUtils.trimToNull(ontologyId);
-    TermId hpoId = TermId.of(ontologyId);
-    if(hpoId){
-      Set<TermId> children = OntologyTerms.childrenOf(hpoId, hpoOntology)
-      return children.collect {
-        DbTerm.findByOntologyId(it)
-      }.collect().sort { x,y ->
-        x.getName() <=> y.getName()
-      }.findAll { term ->
-        if(query.isEmpty()){
-          return term
-        } else {
-          return term.getName().toLowerCase().contains(query.toLowerCase())
-        }
-      } as List<DbTerm>
+    if (ontologyId) {
+      TermId hpoId = TermId.of(ontologyId);
+      if (hpoId) {
+        Set<TermId> children = OntologyTerms.childrenOf(hpoId, hpoOntology)
+        final List<DbTerm> descendants = children.collect { DbTerm.findByOntologyId(it.toString()) }
+        final List<DbTerm> sortedDescendants = descendants.sort { x, y -> x.getName().toLowerCase() <=> y.getName().toLowerCase() }
+        return sortedDescendants.findAll { term ->
+          if (query.isEmpty()) {
+            return term
+          } else {
+            return term.getName().toLowerCase().contains(query.toLowerCase())
+          }
+        } as List<DbTerm>
+      }
     }
-    return []
+    return [];
   }
 }

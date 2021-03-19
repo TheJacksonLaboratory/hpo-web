@@ -74,7 +74,7 @@ class HpoSearchControllerSpec extends Specification implements ControllerUnitTes
     controller.getModelAndView().getViewName() == '/hpoSearch/descendants'
 
     and: 'the map returned by the service is passed in the model as resultMap'
-    controller.modelAndView.model.descendantList.size() == expected.size()
+    controller.modelAndView.model.descendantList == expected
 
     where:
     anchor          | query       | mockReturn                                          | expected
