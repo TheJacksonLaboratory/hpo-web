@@ -36,7 +36,7 @@ class HpoTermRelationsService {
   }
 
   /**
-   * Given an hpo ontology id, get all descendants starting with that therm
+   * Given an hpo ontology id, get all descendants starting with that term
    * then filter the resulting set by the query passed. If none, return all.
    * @param ontologyId
    * @return list of term suggestions
