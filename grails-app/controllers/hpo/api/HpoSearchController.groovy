@@ -39,7 +39,7 @@ class HpoSearchController {
 
   @ApiOperation(
     value = "Anchor Descendant Search Starting from the given hpo term id",
-    nickname = "descendants/?start={start}&query={query}",
+    nickname = "search/descendants/?start={start}&query={query}",
     produces = "application/json",
     httpMethod = "GET"
   )
@@ -52,7 +52,7 @@ class HpoSearchController {
       required = true,
       example = "HP:0003674",
       dataType = "string"),
-    @ApiImplicitParam(name = "start",
+    @ApiImplicitParam(name = "query",
       paramType = "query",
       required = true,
       example = "juvenile",
