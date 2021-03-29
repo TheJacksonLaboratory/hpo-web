@@ -28,16 +28,23 @@ class SearchService {
    * @param searchTerm
    * @return Map
    */
-  Map<String, Map> searchAll(String searchTerm, Integer offsetIn = 0, Integer maxIn = 10) {
+  Map<String, Map> searchAll(String searchTerm, Integer offsetIn = 0, Integer maxIn = 10, String category) {
 
     final Map<String, Map> resultMap = ['terms': [data:[]] as Map, 'diseases': [data:[]] as Map, 'genes': [data:[]] as Map]
 
-
     List<String> inputTerms = trimAndSplit(searchTerm)
     if (inputTerms) {
-      resultMap.put('terms', searchTermAll(inputTerms, offsetIn, maxIn))
-      resultMap.put('diseases', searchDiseasesAll(inputTerms, offsetIn, maxIn))
-      resultMap.put('genes', searchGenesAll(inputTerms, offsetIn, maxIn))
+      if(category == "terms" || !category){
+        resultMap.put('terms', searchTermAll(inputTerms, offsetIn, maxIn))
+      }
+
+      if(category == "genes" || !category){
+        resultMap.put('diseases', searchDiseasesAll(inputTerms, offsetIn, maxIn))
+      }
+
+      if(category == "diseases" || !category){
+        resultMap.put('genes', searchGenesAll(inputTerms, offsetIn, maxIn))
+      }
     }
     return resultMap
   }

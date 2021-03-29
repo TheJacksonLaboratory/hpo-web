@@ -162,7 +162,7 @@ class SearchServiceSpec extends Specification implements ServiceUnitTest<SearchS
         new DbTerm(name: 'Abnormality of the eye', ontologyId: 'HP:000111XX', numberOfChildren: 40).save()
         new DbTerm(name: 'Abnormality', ontologyId: 'HP:000XX', numberOfChildren: 50).save()
 
-        final Map resultMap = service.searchAll(query)
+        final Map resultMap = service.searchAll(query, "")
 
         then:
         resultMap.terms.data*.name == expected

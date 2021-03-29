@@ -20,6 +20,6 @@ export class SearchService {
 
     searchFetchAll(query: string): Observable<any> {
       return this.http
-        .get(environment.HPO_API_SEARCH_URL + '?q=' + query + '&fetchAll=true', this.options);
+        .get(environment.HPO_API_SEARCH_URL + '?q=' + query + '&max=-1', this.options);
     }
 }
