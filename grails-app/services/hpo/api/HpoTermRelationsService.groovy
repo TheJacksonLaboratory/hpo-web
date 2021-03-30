@@ -50,10 +50,10 @@ class HpoTermRelationsService {
         final List<DbTerm> descendants = children.collect { DbTerm.findByOntologyId(it.toString()) }
         final List<DbTerm> sortedDescendants = descendants.sort { x, y -> x.getName().toLowerCase() <=> y.getName().toLowerCase() }
         return sortedDescendants.findAll { term ->
-          if (query.isEmpty()) {
+          if (query == null) {
             return term
           } else {
-            return term.getName().toLowerCase().contains(query.toLowerCase())
+            return term.getName().toLowerCase().contains(query.toLowerCase()) && term.getOntologyId() != ontologyId
           }
         } as List<DbTerm>
       }
