@@ -53,7 +53,7 @@ class HpoTermRelationsService {
           if (query == null) {
             return term
           } else {
-            return term.getName().toLowerCase().contains(query.toLowerCase())
+            return term.getName().toLowerCase().contains(query.toLowerCase()) && term.getOntologyId() != ontologyId
           }
         } as List<DbTerm>
       }
