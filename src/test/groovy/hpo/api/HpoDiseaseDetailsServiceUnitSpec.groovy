@@ -93,14 +93,14 @@ class HpoDiseaseDetailsServiceUnitSpec extends Specification implements ServiceU
     Map resultMap = service.searchDisease(query)
 
     then:
-    resultMap.catTerms.get(0).catLabel == expectedLabel
-    resultMap.catTerms.get(0).terms?.size == expectedTermLength
+    resultMap.catTerms.collect{it -> it.catLabel} == expectedLabels
+    resultMap.catTerms.size() == expectedTermLength
 
     where:
-    query           | expectedLabel            | expectedTermLength      | desc
-    null            | null                     | null                    | 'nothing'
-    "ORPHA:79501"   | 'Skin, Hair, and Nails'  | 2                       | 'disease by id'
-    "XXXXXXXXXXX"   | null                     | null                    | 'invalid by id'
+    query           | expectedLabels            | expectedTermLength      | desc
+    null            | []                      | 0                    | 'nothing'
+    "ORPHA:79501"   | ['Limbs', 'Skin, Hair, and Nails' ] | 2                       | 'disease by id'
+    "XXXXXXXXXXX"   | []                       | 0                    | 'invalid by id'
 
   }
 
@@ -119,7 +119,7 @@ class HpoDiseaseDetailsServiceUnitSpec extends Specification implements ServiceU
       .createdBy('someUser').build()
 
   }
-  
+
   private static List<Term> buildMockTerms(List<String> ids){
     List<Term> terms = []
     ids.each{
