@@ -20,7 +20,7 @@ class HpoDiseaseDetailsService {
   HpoAssociationFactory hpoAssociationFactory
 
   Map searchDisease(String query) {
-    Map resultMap = ["disease": '', "termAssoc": [], "geneAssoc": [], "catTerms":[[:]]]
+    Map resultMap = ["disease": '', "termAssoc": [], "geneAssoc": [], "catTerms":[]]
     if (query) {
       DbDisease disease = getDisease(query)
       if (!disease) {
@@ -47,6 +47,8 @@ class HpoDiseaseDetailsService {
    * of maps [category : [ Terms ]]
    * @param disease
    * @return
+   *
+   * TODO: Rework, simplify into using just a map
    */
   @GrailsCompileStatic(TypeCheckingMode.SKIP)
   private List<Map> getDiseaseCategoriesWithTerms(DbDisease disease){
@@ -60,7 +62,6 @@ class HpoDiseaseDetailsService {
     }
 
     final List<HpoCategory> hpoCatList = hpoCatMap.getActiveCategoryList()
-
     final List<Map> catList = hpoCatList.collect { cat ->
       Map categoryTermMap = [:]
       cat.getNumberOfAnnotations()
