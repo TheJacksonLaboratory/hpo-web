@@ -12,15 +12,16 @@ export class HomeComponent implements OnInit {
   searchString: string;
   teaserNews: News[];
   newsError: boolean;
+  loadingNews: boolean = false;
   constructor(private newsService: NewsService) { }
 
   ngOnInit() {
-
-   this.newsService.getTeaserNews().subscribe(news => {
+    this.loadingNews = true;
+    this.newsService.getTeaserNews().subscribe(news => {
      this.teaserNews = news;
      }, (error) => {
        this.newsError = true;
        console.error(error);
-     });
-  }
+     }, ()=> this.loadingNews = false);
+    }
 }

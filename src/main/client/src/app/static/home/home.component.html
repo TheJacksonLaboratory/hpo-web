@@ -47,6 +47,7 @@
         <div *ngIf="newsError">
           Temporarily Unavailable. Please <a routerLink="/contact">contact us </a> if this does not return soon.
         </div>
+        <mat-progress-bar mode="indeterminate" *ngIf="loadingNews"></mat-progress-bar>
       </div>
     </div>
 </div>
