@@ -1,5 +1,6 @@
 .main {
     flex:auto;
+    padding: 0 15px;
 }
 
 .sidenav {

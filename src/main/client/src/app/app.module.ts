@@ -18,6 +18,7 @@ import { NoPageFoundComponent } from './error/no-page-found.component';
 import { SearchModule } from './shared/search/search.module';
 import { NewsService } from './shared/news/news.service';
 import { SafeHtmlPipe } from './shared/pipes/sanitize.pipe';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { SafeHtmlPipe } from './shared/pipes/sanitize.pipe';
     GlobalMaterialModules,
     ExtrasModule,
     RoutingModule,
-    SearchModule
+    SearchModule,
+    FlexLayoutModule
   ],
   providers: [SearchService, NewsService],
   bootstrap: [AppComponent]

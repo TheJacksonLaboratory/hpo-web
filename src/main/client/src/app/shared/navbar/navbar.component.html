@@ -3,7 +3,7 @@
     <img src="assets/hpo-logo-white-no-words.png" class="nav-logo"/>
   </div>
   <!-- Main Desktop Navbar -->
-  <div class="nav-components  hidden-xs hidden-sm">
+  <div class="nav-components" fxHide fxShow.gt-sm>
       <button mat-button [matMenuTriggerFor]="toolsMenu">Tools <mat-icon>arrow_drop_down</mat-icon></button>
       <button mat-button [matMenuTriggerFor]="downloadsMenu">Downloads <mat-icon>arrow_drop_down</mat-icon></button>
       <button mat-button [matMenuTriggerFor]="docsMenu">Documentation <mat-icon>arrow_drop_down</mat-icon></button>
@@ -50,7 +50,7 @@
     <button mat-menu-item routerLink="help/translations"> Translations and Mapping </button>
     <button mat-menu-item routerLink="help/indigenous-languages"> Indigenous Languages </button>
     <button mat-menu-item routerLink="help/layperson"> Layperson Synonyms </button>
-    
+
   </mat-menu>
   <mat-menu  #infoMenu="matMenu">
     <button mat-menu-item routerLink="help/introduction"> Introduction </button>
@@ -68,15 +68,12 @@
   <div class="fill-remaining-space">
 
   </div>
-  <button class="mobile-menu  hidden-sm hidden-md hidden-lg" color="white" mat-button (click)="navOpen()">
+  <button class="mobile-menu" fxShow fxHide.gt-sm color="white" mat-button (click)="navOpen()">
     <mat-icon>menu</mat-icon>
   </button>
   <!-- Mobile Navbar -->
   <div  *ngIf="showSearch" class="navbar-search-wrapper">
     <searchbar></searchbar>
   </div>
-  <button class="mobile-menu hidden-xs hidden-md hidden-lg" color="white" mat-button (click)="navOpen()">
-    <mat-icon>menu</mat-icon>
-  </button>
 </mat-toolbar>
 

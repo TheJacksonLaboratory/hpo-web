@@ -1,22 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-
-@media (min-width: 768px) {
-  .container {
-    width: 750px;
-    padding-right: 5px;
-    padding-left:  5px;
-  }
-}
-@media (min-width: 992px) {
-  .container {
-    width: 970px;
-  }
-}
-@media (min-width: 1200px) {
-  .container {
-    width:95%;
-  }
-}
+@import url("https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css");
 
 a {
     color: #0000EE !important;
