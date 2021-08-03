@@ -12,7 +12,7 @@ buildscript {
     }
 }
 
-version "1.7.9"
+version "1.7.12"
 group "hpo.angular.app"
 
 apply plugin:"eclipse"
@@ -162,7 +162,7 @@ war {
 
 war.dependsOn(buildClientProd)
 
-test.dependsOn(clientTest)
+//test.dependsOn(clientTest)
 //integrationTest.dependsOn(clientIntegrationTest)
 
 /* Integration test standard out testing
