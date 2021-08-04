@@ -21,6 +21,7 @@ import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { MatStepperModule } from "@angular/material/stepper";
 import { MatButtonToggleModule } from "@angular/material/button-toggle";
 import { MatChipsModule } from "@angular/material/chips";
+import { FlexLayoutModule } from "@angular/flex-layout";
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { MatChipsModule } from "@angular/material/chips";
     MatStepperModule,
     MatAutocompleteModule,
     MatButtonToggleModule,
-    MatChipsModule
+    MatChipsModule,
+    FlexLayoutModule
   ],
   exports: [MatButtonModule,
     MatMenuModule,
@@ -68,7 +70,8 @@ import { MatChipsModule } from "@angular/material/chips";
     MatAutocompleteModule,
     MatStepperModule,
     MatButtonToggleModule,
-    MatChipsModule
+    MatChipsModule,
+    FlexLayoutModule
   ],
 })
 export class GlobalMaterialModules {

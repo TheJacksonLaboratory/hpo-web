@@ -3,14 +3,12 @@ $category-label-green: rgba(41,101,124,1);
 $orange-hover: rgba(236,151,54,0.8);
 
 .search-wrapper {
-  height:100%;
   z-index: 2;
 
   & .searchbar {
     background-color: white;
     border-style: none;
     outline: none;
-    width: 75%;
     height: 45px;
     font-size: 14px;
     padding: 5px 0 5px 10px;
@@ -34,7 +32,6 @@ $orange-hover: rgba(236,151,54,0.8);
   }
 
   & .search-filter {
-    width: 25%;
     font-size: 14px;
     height: 45px;
   }
@@ -45,8 +42,8 @@ $orange-hover: rgba(236,151,54,0.8);
     background-color: white;
     position: relative;
     z-index: 999;
-    top: -50px;
     padding:0 0 20px 0;
+    margin-top: -45px;
 
     & .search-all {
       padding: 0 10px 0 10px;
@@ -208,7 +205,6 @@ p {
   &.hint {
     color:white;
     text-align: center;
-    margin-left: 15px;
 
     & a {
       color: #ec9736 !important;
