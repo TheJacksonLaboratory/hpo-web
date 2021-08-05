@@ -50,6 +50,7 @@ export class SearchComponent implements OnInit {
   navFilter = 'all';
   queryText: string;
   notFoundFlag = false;
+  loadingSearchResults = false;
 
   @ViewChild('searchbar', { static: true }) searchBar: ElementRef;
 
@@ -61,6 +62,7 @@ export class SearchComponent implements OnInit {
     this.query.pipe(debounceTime(425),
       distinctUntilChanged()).subscribe((val: string) => {
       if (this.hasValidInput(val)) {
+        this.loadingSearchResults = true;
         this.queryText = val;
         this.searchService.searchAll(val).subscribe((data) => {
           this.terms = data.terms;
@@ -74,6 +76,9 @@ export class SearchComponent implements OnInit {
         }, (error) => {
           // TODO: Implement Better Error Handling
           console.log(error);
+          this.loadingSearchResults = false;
+        }, () => {
+          this.loadingSearchResults = false;
         });
       } else {
         this.searchstate = 'inactive';

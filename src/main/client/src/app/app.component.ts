@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { NewsService } from './shared/news/news.service';
 import { environment } from '../environments/environment';
 
 declare let ga: Function;

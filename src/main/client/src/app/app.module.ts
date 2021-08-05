@@ -35,8 +35,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     GlobalMaterialModules,
     ExtrasModule,
     RoutingModule,
-    SearchModule,
-    FlexLayoutModule
+    SearchModule
   ],
   providers: [SearchService, NewsService],
   bootstrap: [AppComponent]

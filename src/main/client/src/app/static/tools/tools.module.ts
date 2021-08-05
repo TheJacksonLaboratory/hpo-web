@@ -10,12 +10,14 @@ import { ExomiserComponent } from './exomiser/exomiser.component';
 import { GenomiserComponent } from './genomiser/genomiser.component';
 import { WorkbenchComponent } from './workbench/workbench.component';
 import { HpobrowserComponent } from './hpobrowser/hpobrowser.component';
+import { GlobalMaterialModules } from "../../shared/modules/global.module";
 
 
 @NgModule({
   imports: [
     CommonModule,
-    ToolsRoutingModule
+    ToolsRoutingModule,
+    GlobalMaterialModules
   ],
   declarations: [ PhenomizerComponent, ExternalToolsComponent, PhenogramVizComponent,
     ExomiserComponent, GenomiserComponent, WorkbenchComponent, HpobrowserComponent ]
