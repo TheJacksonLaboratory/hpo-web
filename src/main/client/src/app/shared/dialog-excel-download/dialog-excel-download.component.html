@@ -1,11 +1,11 @@
 <h4 mat-dialog-title>{{data.term}}</h4>
-<div class="row" mat-dialog-content>
-  <p>Which association would you like to download?</p>
-  <div class="col-lg-6">
+<div fxLayout="row wrap" fxLayoutAlign="center" mat-dialog-content>
+  <p fxFlex="100">Which association would you like to download?</p>
+  <div fxFlex="50">
     <button class="dialog-selection" [disabled]="data.counts.diseases == 0"
             mat-raised-button [mat-dialog-close]="buttonText.first.toLowerCase()">{{buttonText.first}}</button>
   </div>
-  <div class="col-lg-6">
+  <div fxFlex="50">
     <button class="dialog-selection" [disabled]="data.counts.genes == 0"
             mat-raised-button [mat-dialog-close]="buttonText.second.toLowerCase()">{{buttonText.second}}</button>
   </div>

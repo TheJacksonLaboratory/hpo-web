@@ -14,7 +14,6 @@
           <button mat-menu-item (click)="mobileNavigate('helpMenu')"> Help <mat-icon>arrow_right</mat-icon> </button>
         </div>
         <div *ngIf="mobileNavSection == 'toolsMenu'">
-          <button mat-menu-item (click)="sidenav.close()" routerLink="tools/clinical-annotation"> Clinical Annotation </button>
           <button mat-menu-item (click)="mobileNavigate('genomicTools')">Genomic Tools <mat-icon>arrow_right</mat-icon></button>
           <button mat-menu-item (click)="mobileNavigate('phenomicTools')">Phenomic Tools <mat-icon>arrow_right</mat-icon></button>
           <button mat-menu-item (click)="sidenav.close()" routerLink="tools/hpo-browser"> Other HPO Browsers </button>
@@ -38,7 +37,7 @@
           <button mat-menu-item (click)="sidenav.close()" routerLink="help/clinician-guide"> Clinicians Guide </button>
           <button mat-menu-item (click)="mobileNavigate('howToMenu')">How to.. <mat-icon>arrow_right</mat-icon></button>
           <button mat-menu-item (click)="sidenav.close()"  routerLink="help/layperson"> Layperson Synonyms </button>
-          <button mat-menu-item (click)="sidenav.close()"  routerLink="help/mapping"> Translations and Mapping </button>
+          <button mat-menu-item (click)="sidenav.close()"  routerLink="help/translations"> Translations and Mapping </button>
           <button mat-menu-item (click)="sidenav.close()" routerLink="faq"> FAQ </button>
         </div>
 

@@ -6,12 +6,11 @@
               <mat-progress-bar  class="loading-result-details" color="primary" mode="indeterminate">
               </mat-progress-bar>
           </span>
-
       </div>
     </div>
 
-    <div class="row">
-        <div class="col-lg-3">
+    <div fxLayout="row wrap">
+        <div fxFlex="100" fxFlex.gt-sm="25">
             <!-- Gene Summary -->
             <mat-card class="item-summary">
                 <mat-card-content>
@@ -27,12 +26,11 @@
                     Entrez API Error. If you recieved this error please report it.
                     <a mat-raised-button href="https://github.com/TheJacksonLaboratory/hpo-web/issues" target="__blank" class="mat-btn">Report Issue</a>
                   </div>
-
                 </mat-card-content>
             </mat-card>
         </div>
 
-        <div class="col-lg-9">
+        <div fxFlex fxFlexOffset.gt-sm="1">
               <!-- Gene Banner -->
               <mat-card class="item-summary mat-elevation-z6">
                   <mat-card-content>
@@ -63,7 +61,7 @@
                     <mat-progress-bar  *ngIf="uniProtLoading" class="loading-protvista" color="primary" mode="indeterminate">
                     </mat-progress-bar>
 
-                    <div class="ProtVistaContainer col-lg-12" >
+                    <div class="ProtVistaContainer">
                       <p *ngIf="uniprotId != 'error'"><a href="{{uniProtWidgetURL}}{{this.uniprotId}}" target="__blank">{{this.uniprotId}}</a></p>
                       <div class="ProtVistaReference">
                         <div *ngIf="uniprotId == 'error'">

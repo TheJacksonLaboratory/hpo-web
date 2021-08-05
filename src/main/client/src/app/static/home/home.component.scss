@@ -69,6 +69,12 @@ a.mat-btn{
     display: block;
   }
 
+  @media screen and (min-width: 767px){
+    & .searchbar-container {
+      width: 50%;
+      margin: 0 auto;
+    }
+  }
   @media screen and (max-width: 767px){
     & .main-logo {
       height: 75px;
@@ -226,11 +232,14 @@ a .irdirc{
   height: 200px;
   padding: 25px;
   display: flex;
+  flex: 0;
+  margin-left: 25px;
+  cursor: pointer;
 
   & .description {
     flex: 1 auto;
-    margin: 3rem 0 0 1rem;
-    font-size: 1.6rem;
+    margin: 5rem 0 0 1rem;
+    font-size: 2rem;
     text-align: center;
 
     & h2 {
@@ -242,9 +251,7 @@ a .irdirc{
     width: 250px;
     float: left;
     padding: 40px 0;
-    flex: 0;
-    margin-left: 25px;
-    cursor: pointer;
+    margin: 0 auto;
   }
 
   & .button {

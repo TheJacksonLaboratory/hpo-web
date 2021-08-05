@@ -1,5 +1,5 @@
 <div class="search-wrapper" fxLayout="row wrap" fxLayoutAlign="center">
-    <mat-select class="search-filter" placeholder="All" [(value)]="navFilter" fxFlex.gt-sm="10" fxFlex="90">
+    <mat-select class="search-filter" placeholder="All" [(value)]="navFilter" fxFlex.gt-sm="20" fxFlex="80">
       <mat-option value="all">All</mat-option>
       <mat-option value="term">Term</mat-option>
       <mat-option value="disease">Disease</mat-option>
@@ -10,7 +10,7 @@
            (keyup.enter)="submitQuery($event.target.value)"
            (focus)="toggleDropdown($event)"
            (blur)="toggleDropdown($event)"
-           [(ngModel)] = "queryString" #searchbar fxFlex.gt-sm="50" fxFlex="90">
+           [(ngModel)] = "queryString" #searchbar fxFlex="80">
     <span fxFill></span>
     <p class="hint" fxFlex>
       <strong>e.g. <a (click)="setQuery('Arachnodactyly')">Arachnodactyly</a> |
@@ -18,10 +18,10 @@
         <a (click)="setQuery('FBN1')">FBN1</a></strong>
     </p>
   <span fxFill></span>
-  <div class="search-output mat-elevation-z4" [@searchState]="searchstate" fxFlex.gt-sm="50" fxFlexOffset.gt-sm="10" fxFlex="90">
+  <div class="search-output mat-elevation-z4" [@searchState]="searchstate" fxFlexOffset.gt-sm="20" fxFlex="80">
     <div class="search-all" *ngIf="!notFoundFlag">
         <a routerLink="/browse/search" [queryParams]="{'q': queryText, 'navFilter': 'all'}">
-          <span class="hidden-xs">Showing best results.</span>  See all results for '{{queryText}}'
+          <span fxHide.xs>Showing best results.</span>  See all results for '{{queryText}}'
         </a>
     </div>
     <mat-progress-bar mode="query" *ngIf="loadingSearchResults"></mat-progress-bar>

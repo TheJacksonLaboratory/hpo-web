@@ -33,7 +33,7 @@
 }
 .nav-components .mat-button {
   margin-left: 15px;
-  font-size: 1rem;
+  font-size: 1.6rem;
   font-weight: bold;
 }
 
@@ -87,6 +87,7 @@ button.mat-menu-item a{
 
   .navbar-search-wrapper{
     margin:0;
+    padding: 0;
     width: 100%;
   }
 

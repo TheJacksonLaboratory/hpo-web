@@ -1,8 +1,8 @@
 <div class="term-component">
   <div class="container-custom">
-    <div class="row">
+    <div fxLayout="row wrap">
         <!-- Term navigtaion tree - left pane-->
-        <div class="col-lg-4 tree-container">
+        <div class="tree-container" fxFlex.gt-sm="25" fxFill>
           <mat-card class="tree-navigation">
             <mat-card-content>
               <div>
@@ -40,7 +40,7 @@
         </div>
 
        <!-- right pane -->
-        <div class="col-lg-8">
+        <div fxFlex.gt-sm fxFlexOffset.gt-sm="1" fxFill>
             <!-- Term summary -->
             <mat-card class="item-summary">
               <mat-card-content>
