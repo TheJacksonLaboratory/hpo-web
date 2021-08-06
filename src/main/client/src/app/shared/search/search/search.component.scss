@@ -43,7 +43,6 @@ $orange-hover: rgba(236,151,54,0.8);
     position: relative;
     z-index: 999;
     padding:0 0 20px 0;
-    margin-top: -45px;
 
     & .search-all {
       padding: 0 10px 0 10px;
@@ -116,7 +115,7 @@ $orange-hover: rgba(236,151,54,0.8);
       &:after {
         content: '';
         position: absolute;
-        right: 36%;
+        right: 40%;
         border-right: 15px solid white;
         border-top: 20px solid $category-label-green;
         width: 0;

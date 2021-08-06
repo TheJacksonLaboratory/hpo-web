@@ -13,6 +13,7 @@ body {
 
 * {
   box-sizing: border-box;
+  font-family: 'Titillium Web', sans-serif;
 }
 
 button, input, optgroup, select, textarea {
@@ -179,6 +180,7 @@ a:hover {
     color: #551A8B !important;
     text-decoration: underline;
 }
+
 .main {
   margin-top:15px;
   margin-bottom: 15px;
@@ -192,10 +194,6 @@ a:hover {
 
 p {
   font-size: 14px;
-}
-
-* {
-  font-family: 'Titillium Web', sans-serif;
 }
 
 strong {
