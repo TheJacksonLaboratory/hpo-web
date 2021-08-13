@@ -1,35 +1,38 @@
 <div class="container">
   <h1 class="pageTitle center">Exomiser</h1>
-<p>
-  Whole-exome sequencing (WES) has revolutionized research into novel disease-gene discovery
-However, many cases remain unsolved due to the sheer number of candidate variants remaining after common filtering strategies
-such as removing low quality and common variants and those deemed unlikely to be pathogenic.
-  <a href="https://www.ncbi.nlm.nih.gov/pubmed/24162188" target="_blank">Exomiser</a> filters a whole-exome data
-  set by removing off-target, common, and synonymous variants from
-  further consideration and evaluates the remaining variants based on the predicted pathogenicity and minor
-  allele frequency (variant score). Optionally, an assumed mode of inheritance is used to further filter genes
-  with variants present in a pattern compatible with the assumed mode of inheritance (e.g., homozygous or compound
-  heterozygous for autosomal recessive). These genes are then assigned a phenotypic relevance score based on
-  comparison with mouse and zebrafish models with mutations in orthologous genes. The final ranking is calculated as
-  the sum of the individual
-   scores to yield the PHIVE score.
-</p>
+  <p>
+    Whole-exome sequencing (WES) has revolutionized research into novel disease-gene discovery
+    However, many cases remain unsolved due to the sheer number of candidate variants remaining after common filtering
+    strategies
+    such as removing low quality and common variants and those deemed unlikely to be pathogenic.
+    <a href="https://www.ncbi.nlm.nih.gov/pubmed/24162188" target="_blank">Exomiser</a> filters a whole-exome data
+    set by removing off-target, common, and synonymous variants from
+    further consideration and evaluates the remaining variants based on the predicted pathogenicity and minor
+    allele frequency (variant score). Optionally, an assumed mode of inheritance is used to further filter genes
+    with variants present in a pattern compatible with the assumed mode of inheritance (e.g., homozygous or compound
+    heterozygous for autosomal recessive). These genes are then assigned a phenotypic relevance score based on
+    comparison with mouse and zebrafish models with mutations in orthologous genes. The final ranking is calculated as
+    the sum of the individual
+    scores to yield the PHIVE score.
+  </p>
 
-<div fxLayout="row" fxLayoutAlign="center">
-  <img class="static-images" src="assets/tools-images/exomiser1.jpg" />
-</div>
+  <div fxLayout="row" fxLayoutAlign="center">
+    <img class="static-images" src="assets/tools-images/exomiser1.jpg"/>
+  </div>
 
 
-<p>The Exomiser uses a cross-species phenotype matching algorithm. The user enters a human phenotype as a list of HPO terms.
-  All genes with variants that survive the initial filtering steps are then screened for mouse models with phenotypic
-   to the human disease.
- </p>
+  <p>The Exomiser uses a cross-species phenotype matching algorithm. The user enters a human phenotype as a list of HPO
+    terms.
+    All genes with variants that survive the initial filtering steps are then screened for mouse models with phenotypic
+    to the human disease.
+  </p>
 
-<div fxLayout="row" fxLayoutAlign="center">
-  <img class="static-images" src="assets/tools-images/exomiser2.jpg" />
-</div>
-<p>The Exomiser is available as a downloadable Java application Exomiser.
-  An online demonstration is available at the <a target="__blank" href="https://monarchinitiative.org/page/exomes">Monarch Initiative website</a>
-</p>
+  <div fxLayout="row" fxLayoutAlign="center">
+    <img class="static-images" src="assets/tools-images/exomiser2.jpg"/>
+  </div>
+  <p>The Exomiser is available as a downloadable Java application Exomiser.
+    An online demonstration is available at the <a target="__blank" href="https://monarchinitiative.org/page/exomes">Monarch
+      Initiative website</a>
+  </p>
 
 </div>

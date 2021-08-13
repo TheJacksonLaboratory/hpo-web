@@ -1,16 +1,14 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import { Observable } from "rxjs";
-import { FormControl } from "@angular/forms";
-import { startWith } from "rxjs/internal/operators/startWith";
-import {catchError, debounceTime, filter, map} from "rxjs/operators";
-import { TermService } from "../../services/term/term.service";
-import { switchMap } from "rxjs/internal/operators/switchMap";
+import {Observable} from "rxjs";
+import {FormControl} from "@angular/forms";
+import {catchError, filter, map} from "rxjs/operators";
+import {TermService} from "../../services/term/term.service";
+import {switchMap} from "rxjs/internal/operators/switchMap";
 import {SearchService} from "../../../shared/search/service/search.service";
 import {MatStepper} from "@angular/material/stepper";
 import {MatSort} from "@angular/material/sort";
 import {MatPaginator} from "@angular/material/paginator";
-import {MatTableDataSource} from "@angular/material/table";
-import {Disease, Term} from "../../models/models";
+import {Term} from "../../models/models";
 import {of} from "rxjs/internal/observable/of";
 
 @Component({
@@ -34,7 +32,8 @@ export class ProfileSearchComponent implements OnInit {
   displayedColumns: string[] = ['diseaseId', 'diseaseName'];
   resultsLength = 0;
 
-  constructor(private searchService: SearchService, private termService: TermService) { }
+  constructor(private searchService: SearchService, private termService: TermService) {
+  }
 
   ngOnInit(): void {
     this.filteredOptions = this.myControl.valueChanges
@@ -47,13 +46,13 @@ export class ProfileSearchComponent implements OnInit {
       );
   }
 
-  addTerm(term: any){
-    if(!this.selectedTerms.some(existent => existent.id == term.id)){
+  addTerm(term: any) {
+    if (!this.selectedTerms.some(existent => existent.id == term.id)) {
       this.selectedTerms.push(term);
     }
   }
 
-  removeTerm(index: number){
+  removeTerm(index: number) {
     this.selectedTerms.splice(index);
   }
 
@@ -77,10 +76,10 @@ export class ProfileSearchComponent implements OnInit {
     ).subscribe(data => this.associationData = data);
   }
 
-  resetStepper(){
+  resetStepper() {
     this.stepper.reset();
     this.submittedTerms = false;
-    this.selectedTerms=[];
+    this.selectedTerms = [];
     this.myControl.reset();
   }
 }

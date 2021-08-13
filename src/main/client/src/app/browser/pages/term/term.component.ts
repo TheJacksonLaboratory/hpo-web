@@ -1,13 +1,13 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
-import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator} from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { forkJoin as observableForkJoin } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
-import { TermService } from '../../services/term/term.service';
-import { Term, Gene, Disease, TermTree, LoincEntry } from '../../models/models';
-import { DialogService } from '../../../shared/dialog-excel-download/dialog.service';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {ActivatedRoute, Params, Router} from '@angular/router';
+import {MatTableDataSource} from '@angular/material/table';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
+import {forkJoin as observableForkJoin} from 'rxjs';
+import {switchMap} from 'rxjs/operators';
+import {TermService} from '../../services/term/term.service';
+import {Disease, Gene, LoincEntry, Term, TermTree} from '../../models/models';
+import {DialogService} from '../../../shared/dialog-excel-download/dialog.service';
 
 
 @Component({
@@ -19,8 +19,10 @@ export class TermComponent implements OnInit {
   termTitle: string;
   query: string;
   paramId: string;
-  term: Term = {'id': '', 'name': '', 'definition': '', 'altTermIds': [], 'comment': '', 'synonyms': [],
-    'isObsolete': true, 'xrefs': [], 'pubmedXrefs': [], 'purl': ''};
+  term: Term = {
+    'id': '', 'name': '', 'definition': '', 'altTermIds': [], 'comment': '', 'synonyms': [],
+    'isObsolete': true, 'xrefs': [], 'pubmedXrefs': [], 'purl': ''
+  };
   geneColumns = ['entrezGeneId', 'dbDiseases'];
   geneSource: MatTableDataSource<Gene>;
   geneAssocCount: number;
@@ -47,8 +49,8 @@ export class TermComponent implements OnInit {
   displayAllDiseaseAssc = false;
   displayAllGeneAssc = false;
 
-  @ViewChild('diseasePaginator', { static: true }) diseasePaginator: MatPaginator;
-  @ViewChild('genePaginator', { static: true }) genePaginator: MatPaginator;
+  @ViewChild('diseasePaginator', {static: true}) diseasePaginator: MatPaginator;
+  @ViewChild('genePaginator', {static: true}) genePaginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private route: ActivatedRoute, private termService: TermService, private dialogService: DialogService,
@@ -91,7 +93,8 @@ export class TermComponent implements OnInit {
       this.router.navigate(['/error'], {
         state: {
           description: errorString
-        }});
+        }
+      });
       console.log(err);
     });
   }
@@ -107,8 +110,8 @@ export class TermComponent implements OnInit {
         this.treeData.children.sort((a, b) => a.childrenCount > b.childrenCount ? (-1) : 1);
         this.treeData.children.map(term => {
           const percent = term.childrenCount / termCount;
-          const newWidth =  Math.ceil(maxTermWidth * percent);
-          const newMargin = -115 + ((maxTermWidth - newWidth)  - 5) ;
+          const newWidth = Math.ceil(maxTermWidth * percent);
+          const newMargin = -115 + ((maxTermWidth - newWidth) - 5);
           term.treeCountWidth = newWidth;
           term.treeMargin = newMargin;
         });
@@ -116,7 +119,7 @@ export class TermComponent implements OnInit {
       }, (error) => {
         // Error bubbles up
         console.log(error);
-    });
+      });
   }
 
   reloadDiseaseAssociations(offset: string, max: string) {
@@ -156,8 +159,8 @@ export class TermComponent implements OnInit {
       this.term.purl = 'http://purl.obolibrary.org/obo/' + term.id.replace(':', '_');
       this.term.xrefs = (term.xrefs != null) ? term.xrefs : [];
       this.term.pubmedXrefs = (term.pubmedXrefs != null) ? term.pubmedXrefs.map(pmid => {
-          return {whole: pmid, id: pmid.split(':')[1]};
-        }) : [];
+        return {whole: pmid, id: pmid.split(':')[1]};
+      }) : [];
     }
   }
 

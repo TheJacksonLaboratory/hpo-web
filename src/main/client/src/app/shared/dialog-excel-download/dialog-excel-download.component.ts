@@ -1,6 +1,6 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { DialogData } from '../../browser/models/models';
+import {Component, Inject, OnInit} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {DialogData} from '../../browser/models/models';
 
 @Component({
   selector: 'app-dialog-excel-download',
@@ -12,7 +12,8 @@ export class DialogExcelDownloadComponent implements OnInit {
   buttonText = {first: '', second: ''};
 
   constructor(public dialogRef: MatDialogRef<DialogExcelDownloadComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
+              @Inject(MAT_DIALOG_DATA) public data: DialogData) {
+  }
 
   ngOnInit() {
     if (this.data.type === 'term') {

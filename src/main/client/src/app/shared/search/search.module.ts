@@ -1,11 +1,11 @@
-import {ModuleWithProviders, NgModule} from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
-import { GlobalMaterialModules } from '../modules/global.module';
-import { ExtrasModule } from '../modules/extras.module';
-import { SearchService } from './service/search.service';
-import { SearchComponent } from './search/search.component';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormsModule} from '@angular/forms';
+import {RouterModule} from '@angular/router';
+import {GlobalMaterialModules} from '../modules/global.module';
+import {ExtrasModule} from '../modules/extras.module';
+import {SearchService} from './service/search.service';
+import {SearchComponent} from './search/search.component';
 
 
 @NgModule({
@@ -16,9 +16,9 @@ import { SearchComponent } from './search/search.component';
     RouterModule,
     ExtrasModule
   ],
-  declarations: [ SearchComponent ],
+  declarations: [SearchComponent],
   providers: [SearchService],
-  exports: [ SearchComponent ]
+  exports: [SearchComponent]
 })
 export class SearchModule {
 }

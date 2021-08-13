@@ -1,7 +1,7 @@
 import {ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import { News } from '../../browser/models/models';
-import { NewsService } from '../../shared/news/news.service';
-import { ActivatedRoute } from '@angular/router';
+import {News} from '../../browser/models/models';
+import {NewsService} from '../../shared/news/news.service';
+import {ActivatedRoute} from '@angular/router';
 import {MediaMatcher} from "@angular/cdk/layout";
 import {MatSidenav} from "@angular/material/sidenav";
 
@@ -22,7 +22,7 @@ export class NewsComponent implements OnInit, OnDestroy {
   @ViewChild('sidenav')
   private sidenav: MatSidenav;
 
-  constructor(private newsService: NewsService, private route: ActivatedRoute, changeDetectorRef: ChangeDetectorRef, media: MediaMatcher ) {
+  constructor(private newsService: NewsService, private route: ActivatedRoute, changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addEventListener('change', this._mobileQueryListener);

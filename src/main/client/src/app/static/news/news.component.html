@@ -9,7 +9,8 @@
     <mat-sidenav #sidenav [mode]="mobileQuery.matches ? 'over' : 'side'"
                  [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
       <mat-nav-list>
-        <mat-list-item *ngFor="let date of dates" [ngClass]="{'active': currentSelected == date}" (click)="setCurrentDate(date)">
+        <mat-list-item *ngFor="let date of dates" [ngClass]="{'active': currentSelected == date}"
+                       (click)="setCurrentDate(date)">
           <div class="news-dates">
             {{date}}
           </div>
@@ -29,6 +30,7 @@
     </mat-sidenav-content>
   </mat-sidenav-container>
   <div *ngIf="error" class="center">
-    <h3>Sorry something went wrong. Please try again, if this error continues <a routerLink="/contact">contact</a> the developers.</h3>
+    <h3>Sorry something went wrong. Please try again, if this error continues <a routerLink="/contact">contact</a> the
+      developers.</h3>
   </div>
 </div>

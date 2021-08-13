@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { AnnotationComponent } from './annotation.component';
+import {AnnotationComponent} from './annotation.component';
 
 describe('AnnotationComponent', () => {
   let component: AnnotationComponent;
@@ -8,9 +8,9 @@ describe('AnnotationComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AnnotationComponent ]
+      declarations: [AnnotationComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

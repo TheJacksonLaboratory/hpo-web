@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-phenomizer',
@@ -6,7 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./phenomizer.component.css']
 })
 export class PhenomizerComponent implements OnInit {
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }

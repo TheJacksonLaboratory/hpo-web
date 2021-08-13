@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { HpobrowserComponent } from './hpobrowser.component';
+import {HpobrowserComponent} from './hpobrowser.component';
 
 describe('HpobrowserComponent', () => {
   let component: HpobrowserComponent;
@@ -8,9 +8,9 @@ describe('HpobrowserComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HpobrowserComponent ]
+      declarations: [HpobrowserComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

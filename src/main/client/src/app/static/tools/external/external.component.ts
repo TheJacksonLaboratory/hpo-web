@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-externalhpo',
@@ -6,7 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./external.component.css']
 })
 export class ExternalToolsComponent implements OnInit {
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }

@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ExternalToolsComponent } from './external.component';
+import {ExternalToolsComponent} from './external.component';
 
 describe('ExternalToolsComponent', () => {
   let component: ExternalToolsComponent;
@@ -8,9 +8,9 @@ describe('ExternalToolsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ExternalToolsComponent ]
+      declarations: [ExternalToolsComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

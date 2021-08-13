@@ -1,9 +1,9 @@
-import { Injectable, OnInit } from '@angular/core';
-import { News } from '../../browser/models/models';
-import { Observable, of } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { environment } from '../../../environments/environment';
-import { map, publishReplay, refCount } from 'rxjs/internal/operators';
+import {Injectable} from '@angular/core';
+import {News} from '../../browser/models/models';
+import {Observable} from 'rxjs';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {environment} from '../../../environments/environment';
+import {map, publishReplay, refCount} from 'rxjs/internal/operators';
 
 @Injectable()
 export class NewsService {
@@ -16,10 +16,11 @@ export class NewsService {
     })
   };
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
 
- /* Return a specific months news */
+  /* Return a specific months news */
   getNewsByDate(date: string): Observable<News[]> {
     if (date) {
       return this.getNews().pipe(
@@ -30,21 +31,21 @@ export class NewsService {
 
   /* Return all unique month-years with news*/
   getUniqueDates(): Observable<Array<string>> {
-   return this.getNews().pipe(
-     map(news => this._getDates(news))
-   );
+    return this.getNews().pipe(
+      map(news => this._getDates(news))
+    );
   }
 
   /* Return all month years */
-   _getDates(news: News[]): Array<string> {
-      return Object.keys(news);
+  _getDates(news: News[]): Array<string> {
+    return Object.keys(news);
   }
 
   /* Get the teaser news for homepage */
   getTeaserNews(): Observable<News[]> {
     return this.getNews().pipe(
-       map(news => this.selectTeasers(news))
-     );
+      map(news => this.selectTeasers(news))
+    );
   }
 
   /* Get the 3 most recent news items */
@@ -56,7 +57,7 @@ export class NewsService {
       const b1 = new Date(b.date);
       return a1 > b1 ? -1 : a1 < b1 ? 1 : 0;
     });
-    news.forEach(function(item) {
+    news.forEach(function (item) {
       const monthYear = item.date.split(',');
       item.monthYear = monthYear[0].split(' ')[0] + monthYear[1];
     });
@@ -66,7 +67,7 @@ export class NewsService {
   /* Get news items from github and store it as a "cache" */
   getNews(): Observable<News[]> {
     if (!this.newsObservable$) {
-      this.newsObservable$ =  this.http.get(environment.HPO_NEWS_JSON_URL).pipe(
+      this.newsObservable$ = this.http.get(environment.HPO_NEWS_JSON_URL).pipe(
         publishReplay(1),
         refCount()
       );
@@ -76,6 +77,6 @@ export class NewsService {
 
   /* Get the news items from the api */
   setAllNews(news: News[]): void {
-      this.allNews = news;
+    this.allNews = news;
   }
 }

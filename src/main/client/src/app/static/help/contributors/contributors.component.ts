@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Contributors } from "../../../browser/models/models";
+import {Component, OnInit} from '@angular/core';
+import {Contributors} from "../../../browser/models/models";
 import {ContributorsService} from "../../../shared/contributors/contributors.service";
 
 @Component({
@@ -11,7 +11,9 @@ export class ContributorsComponent implements OnInit {
 
   contributorsSource: Contributors[];
   displayedColumns = ['lastName', 'firstName', 'location'];
-  constructor(private contribService: ContributorsService) { }
+
+  constructor(private contribService: ContributorsService) {
+  }
 
   ngOnInit() {
 

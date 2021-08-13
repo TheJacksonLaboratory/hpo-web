@@ -52,8 +52,8 @@
               "optimization": {
                 "scripts": true,
                 "styles": {
-                "minify": true,
-                "inlineCritical": false
+                  "minify": true,
+                  "inlineCritical": false
                 },
                 "fonts": true
               },

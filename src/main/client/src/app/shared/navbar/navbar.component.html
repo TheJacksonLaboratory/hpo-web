@@ -4,65 +4,71 @@
   </div>
   <!-- Main Desktop Navbar -->
   <div class="nav-components" fxHide fxShow.gt-sm>
-      <button mat-button [matMenuTriggerFor]="toolsMenu">Tools <mat-icon>arrow_drop_down</mat-icon></button>
-      <button mat-button [matMenuTriggerFor]="downloadsMenu">Downloads <mat-icon>arrow_drop_down</mat-icon></button>
-      <button mat-button [matMenuTriggerFor]="docsMenu">Documentation <mat-icon>arrow_drop_down</mat-icon></button>
+    <button mat-button [matMenuTriggerFor]="toolsMenu">Tools
+      <mat-icon>arrow_drop_down</mat-icon>
+    </button>
+    <button mat-button [matMenuTriggerFor]="downloadsMenu">Downloads
+      <mat-icon>arrow_drop_down</mat-icon>
+    </button>
+    <button mat-button [matMenuTriggerFor]="docsMenu">Documentation
+      <mat-icon>arrow_drop_down</mat-icon>
+    </button>
   </div>
   <!-- Tools Menu and SubMenus -->
   <mat-menu [overlapTrigger]="false" class="hpo-menus" #toolsMenu="matMenu">
-    <button mat-menu-item routerLink="browse/profile-search"> Profile Search </button>
+    <button mat-menu-item routerLink="browse/profile-search"> Profile Search</button>
     <button mat-menu-item [matMenuTriggerFor]="genomicMenu">Genomic Tools</button>
     <button mat-menu-item [matMenuTriggerFor]="phenomicMenu">Phenomic Tools</button>
-    <button mat-menu-item routerLink="tools/hpo-browser"> Other HPO Browsers </button>
-    <button mat-menu-item routerLink="tools/workbench"> HPO Workbench </button>
-    <button mat-menu-item routerLink="tools/external"> External Tools </button>
+    <button mat-menu-item routerLink="tools/hpo-browser"> Other HPO Browsers</button>
+    <button mat-menu-item routerLink="tools/workbench"> HPO Workbench</button>
+    <button mat-menu-item routerLink="tools/external"> External Tools</button>
   </mat-menu>
-  <mat-menu class="hpo-menus"  #genomicMenu="matMenu">
-    <button mat-menu-item routerLink="tools/genomiser"> Genomiser: Analyze non-coding variants </button>
-    <button mat-menu-item routerLink="tools/exomiser"> Exomiser: Prioritize variants from VCF </button>
+  <mat-menu class="hpo-menus" #genomicMenu="matMenu">
+    <button mat-menu-item routerLink="tools/genomiser"> Genomiser: Analyze non-coding variants</button>
+    <button mat-menu-item routerLink="tools/exomiser"> Exomiser: Prioritize variants from VCF</button>
   </mat-menu>
-  <mat-menu class="hpo-menus"  #phenomicMenu="matMenu">
-    <button mat-menu-item routerLink="tools/phenomizer"> Phenomizer: Clinical diagnostics </button>
-    <button mat-menu-item routerLink="tools/phenogramviz"> PhenoGramViz: Evaluation of CNV's </button>
-    <button mat-menu-item routerLink="tools/loinc2hpo"> LOINC2HPO: Integration of Laboratory Tests </button>
+  <mat-menu class="hpo-menus" #phenomicMenu="matMenu">
+    <button mat-menu-item routerLink="tools/phenomizer"> Phenomizer: Clinical diagnostics</button>
+    <button mat-menu-item routerLink="tools/phenogramviz"> PhenoGramViz: Evaluation of CNV's</button>
+    <button mat-menu-item routerLink="tools/loinc2hpo"> LOINC2HPO: Integration of Laboratory Tests</button>
   </mat-menu>
 
   <!-- Help Menu and SubMenus -->
   <mat-menu [overlapTrigger]="false" #docsMenu="matMenu">
     <button mat-menu-item [matMenuTriggerFor]="infoMenu">About</button>
-    <button mat-menu-item routerLink="help/clinician-guide"> Clinicians Guide </button>
+    <button mat-menu-item routerLink="help/clinician-guide"> Clinicians Guide</button>
     <button mat-menu-item [matMenuTriggerFor]="howtoMenu">How to..</button>
     <button mat-menu-item [matMenuTriggerFor]="helpMenu">Help</button>
     <button mat-menu-item [matMenuTriggerFor]="otherMenu">Translations</button>
   </mat-menu>
-  <mat-menu  #howtoMenu="matMenu">
-    <button mat-menu-item (click)="navigateToDocs()"> Use HPO API </button>
-    <button mat-menu-item routerLink="help/annotations"> Use Annotations </button>
-    <button mat-menu-item routerLink="help/collaboration"> Contribute to HPO </button>
-    <button mat-menu-item routerLink="citation"> Cite HPO </button>
-    <button mat-menu-item routerLink="license"> License HPO </button>
+  <mat-menu #howtoMenu="matMenu">
+    <button mat-menu-item (click)="navigateToDocs()"> Use HPO API</button>
+    <button mat-menu-item routerLink="help/annotations"> Use Annotations</button>
+    <button mat-menu-item routerLink="help/collaboration"> Contribute to HPO</button>
+    <button mat-menu-item routerLink="citation"> Cite HPO</button>
+    <button mat-menu-item routerLink="license"> License HPO</button>
   </mat-menu>
-  <mat-menu  #helpMenu="matMenu">
-  <button mat-menu-item routerLink="faq"> FAQ </button>
-  <button mat-menu-item routerLink="contact"> Contact </button>
+  <mat-menu #helpMenu="matMenu">
+    <button mat-menu-item routerLink="faq"> FAQ</button>
+    <button mat-menu-item routerLink="contact"> Contact</button>
   </mat-menu>
-  <mat-menu  #otherMenu="matMenu">
-    <button mat-menu-item routerLink="help/translations"> Translations and Mapping </button>
-    <button mat-menu-item routerLink="help/indigenous-languages"> Indigenous Languages </button>
-    <button mat-menu-item routerLink="help/layperson"> Layperson Synonyms </button>
+  <mat-menu #otherMenu="matMenu">
+    <button mat-menu-item routerLink="help/translations"> Translations and Mapping</button>
+    <button mat-menu-item routerLink="help/indigenous-languages"> Indigenous Languages</button>
+    <button mat-menu-item routerLink="help/layperson"> Layperson Synonyms</button>
 
   </mat-menu>
-  <mat-menu  #infoMenu="matMenu">
-    <button mat-menu-item routerLink="help/introduction"> Introduction </button>
-    <button mat-menu-item routerLink="help/users">  Users </button>
-    <button mat-menu-item routerLink="help/contributors"> Contributors </button>
-    <button mat-menu-item routerLink="help/publications"> Publications </button>
-    <button mat-menu-item routerLink="help/funding"> Funding </button>
-    <button mat-menu-item routerLink="help/history"> History </button>
+  <mat-menu #infoMenu="matMenu">
+    <button mat-menu-item routerLink="help/introduction"> Introduction</button>
+    <button mat-menu-item routerLink="help/users"> Users</button>
+    <button mat-menu-item routerLink="help/contributors"> Contributors</button>
+    <button mat-menu-item routerLink="help/publications"> Publications</button>
+    <button mat-menu-item routerLink="help/funding"> Funding</button>
+    <button mat-menu-item routerLink="help/history"> History</button>
   </mat-menu>
   <mat-menu [overlapTrigger]="false" #downloadsMenu="matMenu">
-    <button mat-menu-item routerLink="download/ontology"> Ontology </button>
-    <button mat-menu-item routerLink="download/annotation"> Annotation </button>
+    <button mat-menu-item routerLink="download/ontology"> Ontology</button>
+    <button mat-menu-item routerLink="download/annotation"> Annotation</button>
   </mat-menu>
   <!-- ------ -->
   <div class="fill-remaining-space">
@@ -72,7 +78,7 @@
     <mat-icon>menu</mat-icon>
   </button>
   <!-- Mobile Navbar -->
-  <div  *ngIf="showSearch" class="navbar-search-wrapper">
+  <div *ngIf="showSearch" class="navbar-search-wrapper">
     <searchbar></searchbar>
   </div>
 </mat-toolbar>

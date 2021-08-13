@@ -2,7 +2,7 @@
   <div class="container-custom">
     <div class="item-header">
       <span [hidden]="!isLoading">
-          <mat-progress-bar  class="loading-result-details" color="primary" mode="indeterminate">
+          <mat-progress-bar class="loading-result-details" color="primary" mode="indeterminate">
           </mat-progress-bar>
       </span>
     </div>
@@ -20,9 +20,11 @@
               </mat-list>
               <button mat-raised-button class="download-associations"
                       [disabled]="this.hasTerms && this.geneAssoc.length == 0"
-                      (click)="downloadDialog()"> <span class="material-icons">get_app</span> Export Associations</button>
+                      (click)="downloadDialog()"><span class="material-icons">get_app</span> Export Associations
+              </button>
               <button mat-raised-button class="report-issue"
-                      (click)="reportIssue()"> <span class="material-icons">bug_report</span> Report Entry Issue</button>
+                      (click)="reportIssue()"><span class="material-icons">bug_report</span> Report Entry Issue
+              </button>
             </mat-card-content>
           </mat-card>
 
@@ -43,13 +45,13 @@
                         <mat-header-row *matHeaderRowDef="termColumns; sticky: true"></mat-header-row>
                         <mat-row *matRowDef="let row; columns: termColumns;"></mat-row>
                         <ng-container matColumnDef="ontologyId">
-                          <mat-header-cell *matHeaderCellDef> Term Identifier </mat-header-cell>
+                          <mat-header-cell *matHeaderCellDef> Term Identifier</mat-header-cell>
                           <mat-cell *matCellDef="let row">
                             <a routerLink="/browse/term/{{row.ontologyId}}">{{row.ontologyId}}</a><br>
                           </mat-cell>
                         </ng-container>
                         <ng-container matColumnDef="name">
-                          <mat-header-cell *matHeaderCellDef>Term Name </mat-header-cell>
+                          <mat-header-cell *matHeaderCellDef>Term Name</mat-header-cell>
                           <mat-cell *matCellDef="let row">{{row.name}}</mat-cell>
                         </ng-container>
                         <!--<ng-container matColumnDef="definition">
@@ -73,7 +75,7 @@
                                   PubMed <i class="material-icons-outlined">library_books</i>
                                 </a>
                               </div>
-                              <div  class="source" *ngIf="!isPubmed(source)">
+                              <div class="source" *ngIf="!isPubmed(source)">
                                 <a [href]="getExternalDiseaseUrl(source)" target="_blank">
                                   <span *ngIf="isSourceOmim(source)">OMIM &nbsp;</span>
                                   <span *ngIf="isSourceOrpha(source)">ORPHA &nbsp;</span>
@@ -99,7 +101,8 @@
                     <div class="filter-container">
                       <div class="filter-header">
                         <mat-form-field>
-                          <input id="geneFilterInput" matInput (keyup)="applyGeneFilter($event.target.value)" placeholder="Filter">
+                          <input id="geneFilterInput" matInput (keyup)="applyGeneFilter($event.target.value)"
+                                 placeholder="Filter">
                         </mat-form-field>
                       </div>
                     </div>
@@ -109,7 +112,7 @@
                         <mat-header-row *matHeaderRowDef="geneColumns; sticky: true"></mat-header-row>
                         <mat-row *matRowDef="let row; columns: geneColumns;"></mat-row>
                         <ng-container matColumnDef="entrezGeneId">
-                          <mat-header-cell *matHeaderCellDef>Gene Identifier </mat-header-cell>
+                          <mat-header-cell *matHeaderCellDef>Gene Identifier</mat-header-cell>
                           <mat-cell *matCellDef="let row">
                             <a routerLink="/browse/gene/{{row.entrezGeneId}}">{{row.entrezGeneId}}</a>
                           </mat-cell>
@@ -120,13 +123,13 @@
                         </ng-container>
                       </mat-table>
 
-                      <mat-paginator #genePaginator [pageSizeOptions]="[50, 100, 500]"> </mat-paginator>
+                      <mat-paginator #genePaginator [pageSizeOptions]="[50, 100, 500]"></mat-paginator>
                     </div>
                   </div>
                 </div>
 
                 <!-- no results found -->
-                <div class="container center" [hidden]="geneAssoc.length != 0">
+                <div class="container center" [hidden]="geneAssoc.length !== 0">
                   <h4>No gene results found for "{{query}}"</h4>
                 </div>
 

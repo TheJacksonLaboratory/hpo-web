@@ -1,18 +1,11 @@
-import { Router } from '@angular/router';
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { Disease, Gene, Term } from '../../../browser/models/models';
-import { SearchService } from '../service/search.service';
+import {Router} from '@angular/router';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Disease, Gene, Term} from '../../../browser/models/models';
+import {SearchService} from '../service/search.service';
 
-import {
-  trigger,
-  state,
-  style,
-  animate,
-  transition, group
-} from '@angular/animations';
-import { Subject , pipe } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
-import { distinctUntilChanged } from 'rxjs/operators';
+import {animate, state, style, transition, trigger} from '@angular/animations';
+import {Subject} from 'rxjs';
+import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
 
 @Component({
   selector: 'searchbar',
@@ -25,7 +18,7 @@ import { distinctUntilChanged } from 'rxjs/operators';
         'overflow-y': 'hidden',
         'visibility': 'hidden'
       })),
-      state('active',   style({
+      state('active', style({
         'max-height': '500px',
         'overflow-y': 'scroll',
         'visibility': 'visible'
@@ -52,7 +45,7 @@ export class SearchComponent implements OnInit {
   notFoundFlag = false;
   loadingSearchResults = false;
 
-  @ViewChild('searchbar', { static: true }) searchBar: ElementRef;
+  @ViewChild('searchbar', {static: true}) searchBar: ElementRef;
 
   constructor(private router: Router, private searchService: SearchService) {
     this.router = router;
@@ -87,7 +80,7 @@ export class SearchComponent implements OnInit {
   }
 
   contentChanging(input: string) {
-      this.query.next(input);
+    this.query.next(input);
   }
 
   setQuery(term: string): void {
@@ -123,6 +116,7 @@ export class SearchComponent implements OnInit {
   isCorrectCategory(filter: string) {
     return (filter === this.navFilter || this.navFilter === 'all');
   }
+
   // Hack because blur on input will cancel router link apparently.
   closeDropDown() {
     this.searchstate = 'inactive';

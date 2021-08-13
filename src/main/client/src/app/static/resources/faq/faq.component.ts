@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-faq',
@@ -9,7 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 export class FaqComponent implements OnInit {
 
   openPanel: number;
-  panelHash =  {
+  panelHash = {
     1: 'hpo-relation',
     2: 'content-change',
     3: 'collaboration',
@@ -21,7 +21,8 @@ export class FaqComponent implements OnInit {
     9: 'association-rules'
   };
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute) {
+  }
 
   ngOnInit() {
     this.route.params.subscribe((params) => {

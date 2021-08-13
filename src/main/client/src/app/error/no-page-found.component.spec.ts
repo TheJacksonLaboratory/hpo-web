@@ -1,7 +1,7 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { NoPageFoundComponent } from './no-page-found.component';
-import { RouterTestingModule } from '@angular/router/testing';
+import {NoPageFoundComponent} from './no-page-found.component';
+import {RouterTestingModule} from '@angular/router/testing';
 
 describe('NoPageFoundComponent', () => {
   let component: NoPageFoundComponent;
@@ -9,10 +9,10 @@ describe('NoPageFoundComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ NoPageFoundComponent ],
-      imports: [ RouterTestingModule ]
+      declarations: [NoPageFoundComponent],
+      imports: [RouterTestingModule]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
