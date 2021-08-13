@@ -1,11 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { PublicationsService } from './publications.service';
-import { Publication} from '../../../browser/models/models';
-import { FormControl } from '@angular/forms';
-import { from } from 'rxjs';
-import { distinct, map, toArray, flatMap } from 'rxjs/operators';
-import { MatTableDataSource } from '@angular/material/table';
-import { MatSort } from '@angular/material/sort';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {PublicationsService} from './publications.service';
+import {Publication} from '../../../browser/models/models';
+import {FormControl} from '@angular/forms';
+import {from} from 'rxjs';
+import {distinct, flatMap, map, toArray} from 'rxjs/operators';
+import {MatTableDataSource} from '@angular/material/table';
+import {MatSort} from '@angular/material/sort';
 
 
 @Component({
@@ -16,16 +16,19 @@ import { MatSort } from '@angular/material/sort';
 export class PublicationsComponent implements OnInit {
 
   publications: MatTableDataSource<Publication>;
-  constructor(private pubService: PublicationsService) { }
-  displayedColumns: string[] = [ 'authors', 'year', 'title', 'journal'];
+
+  constructor(private pubService: PublicationsService) {
+  }
+
+  displayedColumns: string[] = ['authors', 'year', 'title', 'journal'];
   category = 'all';
   topics = new FormControl();
   topicList = [];
-  @ViewChild(MatSort, { static: true }) sort: MatSort;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   ngOnInit() {
     this.pubService.getPublications().subscribe(publications => {
-      this.publications =  new MatTableDataSource(publications);
+      this.publications = new MatTableDataSource(publications);
       this.publications.sort = this.sort;
       this.publications.filterPredicate = this.filterPredicate;
       this.findUniquePublicationTopics(publications);
@@ -46,7 +49,7 @@ export class PublicationsComponent implements OnInit {
 
   filterPredicate(data: Publication, filter: string) {
     const filterVal = filter.split('~');
-    const matchesCategory = function(item: Publication, category: string) {
+    const matchesCategory = function (item: Publication, category: string) {
       return (category === 'all' || (category === 'us' && item.inhouse === true));
     };
 
@@ -58,7 +61,7 @@ export class PublicationsComponent implements OnInit {
     }
 
     // Filter by tag
-    const topicSize = filterVal[1].split(',')[0] === '' || filterVal[1].split(',')[0] === 'null'  ? 0 : filterVal[1].split(',').length;
+    const topicSize = filterVal[1].split(',')[0] === '' || filterVal[1].split(',')[0] === 'null' ? 0 : filterVal[1].split(',').length;
     const topicBool = data.topicList.map(topic => {
       return filterVal[1].includes(topic.toUpperCase());
     });

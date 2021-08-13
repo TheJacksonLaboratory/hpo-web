@@ -12,7 +12,7 @@ buildscript {
     }
 }
 
-version "1.7.9"
+version "1.7.12"
 group "hpo.angular.app"
 
 apply plugin:"eclipse"
@@ -120,8 +120,8 @@ dependencies {
 
 
 node {
-    version = '12.0.0'
-    npmVersion = '6.4.1'
+    version = '14.17.4'
+    npmVersion = '6.14.14'
     download = true
     nodeModulesDir = file("src/main/client")
 }
@@ -162,7 +162,7 @@ war {
 
 war.dependsOn(buildClientProd)
 
-test.dependsOn(clientTest)
+//test.dependsOn(clientTest)
 //integrationTest.dependsOn(clientIntegrationTest)
 
 /* Integration test standard out testing

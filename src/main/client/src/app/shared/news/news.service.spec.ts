@@ -1,7 +1,7 @@
-import { TestBed, inject } from '@angular/core/testing';
-import { NewsService } from './news.service';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { allMockNews, subMockNews } from './news.mock';
+import {inject, TestBed} from '@angular/core/testing';
+import {NewsService} from './news.service';
+import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
+import {allMockNews, subMockNews} from './news.mock';
 
 describe('NewsService', () => {
   beforeEach(() => {

@@ -1,9 +1,11 @@
 .gene-association .mat-column-entrezGeneId {
-   max-width: 250px;
+  max-width: 250px;
 }
+
 .disease-association .mat-column-diseaseId {
-   max-width: 250px;
+  max-width: 250px;
 }
+
 .disease-association .mat-column-diseaseName {
   margin-right: 100px;
 }
@@ -13,15 +15,15 @@
 }
 
 .item-id .obsolete-arrow {
-  font-size:16px;
+  font-size: 16px;
 }
 
-@media (max-width:767px) {
+@media (max-width: 767px) {
   .disease-association .mat-column-diseaseName {
     margin-right: 10px;
   }
 
- }
+}
 
 .mat-cell.mat-column-dbDiseases, .mat-cell.mat-column-dbGenes {
   white-space: nowrap;
@@ -30,27 +32,28 @@
   display: inline;
 }
 
-.tree-container{
+.tree-container {
   margin-bottom: 15px;
 }
 
-@media (min-width: 1200px){
+@media (min-width: 1200px) {
 
   .tree-container {
     width: 28.333333%;
   }
 }
 
-@media (min-width:767px) {
+@media (min-width: 767px) {
 
-   .tree-container{
-     padding-right:0;
-   }
- }
+  .tree-container {
+    padding-right: 0;
+  }
+}
 
 .tree-navigation {
   padding: 0 15px 15px 15px;
 }
+
 .tree-navigation .tree {
   margin-left: 10rem !important;
 }
@@ -67,29 +70,30 @@
 
 .tree,
 .tree ul {
-  padding:0;
-  list-style:none;
-  position:relative;
+  padding: 0;
+  list-style: none;
+  position: relative;
 }
 
-.tree .badge.tree-badge{
-  border-radius:2px;
+.tree .badge.tree-badge {
+  border-radius: 2px;
   background-color: #5fbc4a;
   padding-bottom: 4px;
   margin: 0 0 5px 10px;
   cursor: default;
 }
+
 .tree-navigation .info-badge {
   margin: 15px 0 0 0;
   float: right;
   cursor: default;
 }
 
- .tree li:last-child div.term {
+.tree li:last-child div.term {
   border-left: 1px solid;
   padding: 5px 0 0 10px;
   font-weight: 900;
- }
+}
 
 .tree li .tree-counts {
   background: lightgray;
@@ -100,12 +104,15 @@
   margin-right: 15px;
 }
 
-.tree li ul {margin-left:1em}
+.tree li ul {
+  margin-left: 1em
+}
+
 .tree li:last-child, .tree li:last-child li {
-  margin:0;
-  padding:0 1em;
-  line-height:2em;
-  position:relative;
+  margin: 0;
+  padding: 0 1em;
+  line-height: 2em;
+  position: relative;
 }
 
 .tree li:last-child {
@@ -113,52 +120,53 @@
 }
 
 .tree li:first-child:before {
-  border:none;
+  border: none;
 }
 
 .tree li ul:before {
-  content:"";
-  display:block;
-  width:0;
-  position:absolute;
-  top:0;
-  bottom:0;
-  left:0;
-  border-left:1px solid;
+  content: "";
+  display: block;
+  width: 0;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  border-left: 1px solid;
 }
 
 .tree li ul li:before {
-  content:"";
-  display:block;
-  width:10px;
-  height:2px;
-  border-top:1px solid;
-  margin-top:-1px;
-  position:absolute;
-  top:1em;
-  left:0;
+  content: "";
+  display: block;
+  width: 10px;
+  height: 2px;
+  border-top: 1px solid;
+  margin-top: -1px;
+  position: absolute;
+  top: 1em;
+  left: 0;
 }
 
 .tree li ul li:last-child:before {
-  background:white;
-  height:auto;
-  top:1em;
+  background: white;
+  height: auto;
+  top: 1em;
 }
 
 .term-toolbar {
-  margin-top:-40px;
-  float:right;
+  margin-top: -40px;
+  float: right;
   width: 75px;
 }
+
 .term-toolbar .mat-toolbar {
-  min-height:40px;
-  max-height:50px;
+  min-height: 40px;
+  max-height: 50px;
 }
 
 .term-toolbar .mat-toolbar .mat-button {
-  max-width:30px;
-  min-width:25px;
-  margin-right:10px;
+  max-width: 30px;
+  min-width: 25px;
+  margin-right: 10px;
 }
 
 .mat-progress-bar {
@@ -166,7 +174,7 @@
 }
 
 .associationsPaging {
-  text-align:right;
+  text-align: right;
   padding: 10px 25px 0 0;
   margin-bottom: 1px;
   margin-top: 1px;
@@ -177,11 +185,12 @@
   margin-top: 1px;
   font-size: 14px;
 }
- .associationsPaging a {
-   cursor:pointer;
- }
 
-.copyToClipboard{
+.associationsPaging a {
+  cursor: pointer;
+}
+
+.copyToClipboard {
   font-size: 12px;
   cursor: copy;
   padding: 5px;

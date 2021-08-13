@@ -1,13 +1,12 @@
-import { TestBed, inject } from '@angular/core/testing';
-import { ContributorsService } from './contributors.service';
-import { HttpClientTestingModule, HttpTestingController } from "@angular/common/http/testing";
-import { environment } from "../../../environments/environment";
-import { Contributors } from "../../browser/models/models";
+import {inject, TestBed} from '@angular/core/testing';
+import {ContributorsService} from './contributors.service';
+import {HttpClientTestingModule, HttpTestingController} from "@angular/common/http/testing";
+import {environment} from "../../../environments/environment";
 
 describe('ContributorsService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports:[HttpClientTestingModule],
+      imports: [HttpClientTestingModule],
       providers: [ContributorsService]
     });
   });
@@ -19,7 +18,7 @@ describe('ContributorsService', () => {
   it('should return contributors', inject([ContributorsService, HttpTestingController], (service: ContributorsService, httpMock) => {
 
     service.contributors = [];
-    service.getContributors().subscribe(contributors =>{
+    service.getContributors().subscribe(contributors => {
       expect(contributors.length).toEqual(6);
       expect(contributors[5].firstName).toEqual("Six");
       expect(contributors[5].lastName).toEqual("Tester");

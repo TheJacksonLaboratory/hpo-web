@@ -1,14 +1,14 @@
-import { DomSanitizer } from '@angular/platform-browser'
-import { TestBed, inject } from '@angular/core/testing';
+import {DomSanitizer} from '@angular/platform-browser'
+import {inject, TestBed} from '@angular/core/testing';
 
-import { HighlightPipe } from './highlight.pipe';
+import {HighlightPipe} from './highlight.pipe';
 
 describe('Highlight pipe test', () => {
   let pipe: HighlightPipe;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [ {
+      providers: [{
         provide: DomSanitizer,
         useValue: {
           bypassSecurityTrustHtml: v => v
@@ -47,7 +47,7 @@ describe('Highlight pipe test', () => {
   ];
 
   it('highlights terms in the text', () => {
-    for(let idx in testData){
+    for (let idx in testData) {
       let result = pipe.transform(testData[idx]["targetString"], testData[idx]["query"]);
       expect(testData[idx].expected).toEqual(result);
     }

@@ -1,69 +1,72 @@
 <div class="container">
   <h1 class="center pageTitle">LOINC 2 HPO</h1>
   <h3 class="subtitle">Integrating laboratory tests for deep phenotyping and biomarker discovery
-    <a href="https://npjdigitalmedcommunity.nature.com/users/256992-aaron-zhang/posts/48542-integrating-laboratory-tests-for-deep-phenotyping-and-biomarker-discovery"
-       target="_blank">
-    <i class="material-icons">
-    launch
-    </i>
+    <a
+      href="https://npjdigitalmedcommunity.nature.com/users/256992-aaron-zhang/posts/48542-integrating-laboratory-tests-for-deep-phenotyping-and-biomarker-discovery"
+      target="_blank">
+      <i class="material-icons">
+        launch
+      </i>
     </a>
   </h3>
   <p>Electronic health records (EHRs) have been widely adopted in US hospitals since the last decade, generating a vast
-  amount of data waiting to be explored. Clinical laboratory tests are one of the key components of EHR. Because of the
-  objectivity of laboratory tests and the sheer volume that each person can accumulate in routine health care, they
-  are a gold mine for extracting detailed phenotypic profiles of patient, a practice that we referred to
-  “deep phenotyping”. Laboratory tests are uniquely identified with
-  <a href="https://loinc.org/" target="_blank">Laboratory Observation Identifier Names and Codes</a>
-  (LOINC), which is a universal code system that defines various kinds of clinical laboratory tests and other
-  measurements. The entire LOINC database have more than 86,000 codes, however, multiple codes are used to represent
-  different ways of measuring the same metabolite. For example, there are five different types of laboratory tests that
-  measure nitrite in urine, which differ in the kind of assays utilized, output formats, or the output units. Although
-  such technical details are useful for uniquely identifying the laboratory tests, they pose a challenge if one hopes
+    amount of data waiting to be explored. Clinical laboratory tests are one of the key components of EHR. Because of
+    the
+    objectivity of laboratory tests and the sheer volume that each person can accumulate in routine health care, they
+    are a gold mine for extracting detailed phenotypic profiles of patient, a practice that we referred to
+    “deep phenotyping”. Laboratory tests are uniquely identified with
+    <a href="https://loinc.org/" target="_blank">Laboratory Observation Identifier Names and Codes</a>
+    (LOINC), which is a universal code system that defines various kinds of clinical laboratory tests and other
+    measurements. The entire LOINC database have more than 86,000 codes, however, multiple codes are used to represent
+    different ways of measuring the same metabolite. For example, there are five different types of laboratory tests
+    that
+    measure nitrite in urine, which differ in the kind of assays utilized, output formats, or the output units. Although
+    such technical details are useful for uniquely identifying the laboratory tests, they pose a challenge if one hopes
     to combine them for statistical analysis as they require domain expertise and are hard to scale.</p>
 
   <p>Our group has contributed to patient phenotyping by developing the
-  <a href="https://hpo.jax.org/app/" target="_blank">Human Phenotype Ontology</a> (HPO), which is a
-  vocabulary for describing patient abnormal phenotypes. HPO currently (April 2019) contains ~14,000 terms, many of
-  them represent the medical implications of clinical laboratory tests, such as Hypokalemia and Nitrituria. The terms
-  form a hierarchical tree structure, where the root terms are more generic and the leaf terms are more specific.
-  According to the hierarchical structure of the HPO, if a patient is annotated to a certain phenotype such as Sinus
-  venosus atrial septal defect, then that patient is inferred to have all of the more general ancestor terms such as
-  Atrial septal defect and so on. In addition, HPO also contains disease annotations for all rare and many common
-  diseases. HPO has been adopted by organizations such as the 100,000 Genomes Project, the NIH Undiagnosed Diseases
-  Network and Project, and many others and become the de facto standard for computational genomic diagnosis. In the
-  current paper, we represent laboratory test results with HPO terms, thereby integrating similar laboratory tests
+    <a href="https://hpo.jax.org/app/" target="_blank">Human Phenotype Ontology</a> (HPO), which is a
+    vocabulary for describing patient abnormal phenotypes. HPO currently (April 2019) contains ~14,000 terms, many of
+    them represent the medical implications of clinical laboratory tests, such as Hypokalemia and Nitrituria. The terms
+    form a hierarchical tree structure, where the root terms are more generic and the leaf terms are more specific.
+    According to the hierarchical structure of the HPO, if a patient is annotated to a certain phenotype such as Sinus
+    venosus atrial septal defect, then that patient is inferred to have all of the more general ancestor terms such as
+    Atrial septal defect and so on. In addition, HPO also contains disease annotations for all rare and many common
+    diseases. HPO has been adopted by organizations such as the 100,000 Genomes Project, the NIH Undiagnosed Diseases
+    Network and Project, and many others and become the de facto standard for computational genomic diagnosis. In the
+    current paper, we represent laboratory test results with HPO terms, thereby integrating similar laboratory tests
     together and extracting detailed patient profiles at the same time.</p>
 
-    <img class="loinc-img" src="assets/hpo-diagram.png"/>
+  <img class="loinc-img" src="assets/hpo-diagram.png"/>
 
   <p>The essential component of our approach is an accurate map between laboratory test results to their medical
-  implications in HPO terms. For instance, a test for the concentration of potassium in the blood (LOINC:6298-4).
-  If the result is high, our procedure infers the corresponding HPO term for Hyperkalemia (HP:0002153). Analogously,
-  a low result is mapped to Hypokalemia (HP:0002900). The HPO is an ontology of abnormal phenotypes, and thus there
-  is no term that specifically represents a normal test result. However, computational analysis can record negated
-  HPO terms, and the normal test result is represented as NOT Abnormal blood potassium concentration  (HP:0011042).
-  Other types of laboratory tests, such as ordinal type that have negative or positive findings, or nominal type that
-  have a list of potential findings, are also mapped to their corresponding HPO terms. We have a team of multiple MDs
+    implications in HPO terms. For instance, a test for the concentration of potassium in the blood (LOINC:6298-4).
+    If the result is high, our procedure infers the corresponding HPO term for Hyperkalemia (HP:0002153). Analogously,
+    a low result is mapped to Hypokalemia (HP:0002900). The HPO is an ontology of abnormal phenotypes, and thus there
+    is no term that specifically represents a normal test result. However, computational analysis can record negated
+    HPO terms, and the normal test result is represented as NOT Abnormal blood potassium concentration (HP:0011042).
+    Other types of laboratory tests, such as ordinal type that have negative or positive findings, or nominal type that
+    have a list of potential findings, are also mapped to their corresponding HPO terms. We have a team of multiple MDs
     and biomedical PhDs to ensure that we achieve the highest possible quality of mappings.</p>
 
   <p>With the mapping in hand, our next step was to devise an algorithm that checks the value of a laboratory test with
-  the reference ranges and then find the correct HPO term for the corresponding result. Because laboratory tests are
-  reported in different formats depending on vendors, we targeted toward laboratory tests encoded as observations in
+    the reference ranges and then find the correct HPO term for the corresponding result. Because laboratory tests are
+    reported in different formats depending on vendors, we targeted toward laboratory tests encoded as observations in
     the <a href="https://www.hl7.org/fhir/index.html" target="_blank">FHIR</a> format, which is vendor-independent
     standards for transmitting EHR data. However, it is quite feasible to
-  adapt our software to other formats, such as <a href="https://www.i2b2.org/" target="_blank">i2b2</a> or
+    adapt our software to other formats, such as <a href="https://www.i2b2.org/" target="_blank">i2b2</a> or
     <a href="https://www.ohdsi.org/data-standardization/the-common-data-model/" target="_blank">OMOP</a>.</p>
 
   <img class="loinc-img" src="assets/loinc2hpo.png"/>
 
   <p>In our study, we also demonstrated our approach with an EHR dataset on 15,681 de-identified patients with asthma
-  or asthma-like symptoms. We were able to transform 88.6% into HPO terms. On average, each patient were assigned
-  to 633 HPO term-encoded phenotypes, which collapsed to 57 unique HPO terms because patients were tested multiple
-  times with the same laboratory test over the tracking period. Using a logistic regression approach, we identified
-  numerous HPO terms significantly associated with frequent prednisone prescriptions and acute asthma diagnosis,
-  including many terms related to well known prednisone side effects as well as many published asthma biomarkers.
-  Because our approach is very generic, it can be applied to many readily available dataset sitting in data warehouses
-  and EHR systems to study other diseases of interest. Our library can also be coupled with more sophisticated
+    or asthma-like symptoms. We were able to transform 88.6% into HPO terms. On average, each patient were assigned
+    to 633 HPO term-encoded phenotypes, which collapsed to 57 unique HPO terms because patients were tested multiple
+    times with the same laboratory test over the tracking period. Using a logistic regression approach, we identified
+    numerous HPO terms significantly associated with frequent prednisone prescriptions and acute asthma diagnosis,
+    including many terms related to well known prednisone side effects as well as many published asthma biomarkers.
+    Because our approach is very generic, it can be applied to many readily available dataset sitting in data warehouses
+    and EHR systems to study other diseases of interest. Our library can also be coupled with more sophisticated
     statistical and machine-learning approaches to perform phenotype-driven analysis.</p>
 </div>
 

@@ -1,62 +1,66 @@
 export interface Gene {
-    entrezGeneSymbol: string;
-    entrezGeneId: number;
-    dbDiseases?: Disease[];
-    hpoTermName?: Array<string>;
-    hpoTermId?: object;
-    matchingString?: string;
+  entrezGeneSymbol: string;
+  entrezGeneId: number;
+  dbDiseases?: Disease[];
+  hpoTermName?: Array<string>;
+  hpoTermId?: object;
+  matchingString?: string;
 }
+
 export interface Disease {
-    db?: string;
-    dbId?: string;
-    diseaseId?: string;
-    diseaseName?: string;
-    dbGenes?: Gene[];
-    dbObjectId?: string;
-    dbName?: string;
-    qualifier?: string;
-    hpoId?: string;
-    dbReference?: string;
-    evidenceDescription?: string;
-    onsetModifier?: string;
-    frequencyModifier?: string;
-    with?: string;
-    aspect?: string;
-    synonym?: string;
-    date?: string;
-    assignedBy?: string;
-    description?: string;
-    matchingString?: string;
+  db?: string;
+  dbId?: string;
+  diseaseId?: string;
+  diseaseName?: string;
+  dbGenes?: Gene[];
+  dbObjectId?: string;
+  dbName?: string;
+  qualifier?: string;
+  hpoId?: string;
+  dbReference?: string;
+  evidenceDescription?: string;
+  onsetModifier?: string;
+  frequencyModifier?: string;
+  with?: string;
+  aspect?: string;
+  synonym?: string;
+  date?: string;
+  assignedBy?: string;
+  description?: string;
+  matchingString?: string;
 }
+
 export class EntrezGene {
-    uid?: string;
-    name?: string;
-    maplocation?: string;
-    summary?: string;
-    otheraliases?: string;
-    aliases?: string[];
-    constructor() {
-      this.otheraliases = '';
-      this.aliases = [];
-    }
+  uid?: string;
+  name?: string;
+  maplocation?: string;
+  summary?: string;
+  otheraliases?: string;
+  aliases?: string[];
+
+  constructor() {
+    this.otheraliases = '';
+    this.aliases = [];
+  }
 }
+
 export interface Term {
-    name?: string;
-    ontologyId?: string;
-    id?: string;
-    definition?: string;
-    altTermIds?: Array<string>;
-    comment?: string;
-    synonyms?: Array<string>;
-    isObsolete?: boolean;
-    xrefs?: Array<string>;
-    purl?: string;
-    childrenCount?: number;
-    synonym?: string;
-    matchingString?: string;
-    treeCountWidth?: number;
-    treeMargin?: number;
-    pubmedXrefs: Array<any>;
+  name?: string;
+  ontologyId?: string;
+  id?: string;
+  definition?: string;
+  altTermIds?: Array<string>;
+  comment?: string;
+  synonyms?: Array<string>;
+  isObsolete?: boolean;
+  xrefs?: Array<string>;
+  purl?: string;
+  childrenCount?: number;
+  synonym?: string;
+  matchingString?: string;
+  treeCountWidth?: number;
+  treeMargin?: number;
+  pubmedXrefs: Array<any>;
 }
 
 export interface TermTree {
@@ -65,6 +69,7 @@ export interface TermTree {
   children: Term[];
   maxTermWidth?: number;
 }
+
 export interface News {
   title: string;
   body: string;
@@ -72,6 +77,7 @@ export interface News {
   teaserTitle: string;
   monthYear?: string;
 }
+
 export interface Contributors {
   lastName: string;
   firstName: string;
@@ -88,7 +94,7 @@ export interface DialogData {
   association: string;
   term: string;
   type: string;
-  counts: {genes?: number, diseases?: number, terms?: number};
+  counts: { genes?: number, diseases?: number, terms?: number };
 }
 
 export interface LoincEntry {

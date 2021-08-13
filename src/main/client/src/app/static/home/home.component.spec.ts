@@ -1,13 +1,13 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatCardModule} from '@angular/material/card';
-import { HomeComponent } from './home.component';
-import { MatIconModule} from "@angular/material/icon";
-import { MatListModule} from "@angular/material/list";
-import { SearchModule} from "../../shared/search/search.module";
-import { NoopAnimationsModule } from "@angular/platform-browser/animations";
-import { HttpClientTestingModule } from "@angular/common/http/testing";
-import { NewsService } from "../../shared/news/news.service";
-import { RouterTestingModule} from "@angular/router/testing";
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {MatCardModule} from '@angular/material/card';
+import {HomeComponent} from './home.component';
+import {MatIconModule} from "@angular/material/icon";
+import {MatListModule} from "@angular/material/list";
+import {SearchModule} from "../../shared/search/search.module";
+import {NoopAnimationsModule} from "@angular/platform-browser/animations";
+import {HttpClientTestingModule} from "@angular/common/http/testing";
+import {NewsService} from "../../shared/news/news.service";
+import {RouterTestingModule} from "@angular/router/testing";
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -15,7 +15,7 @@ describe('HomeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HomeComponent ],
+      declarations: [HomeComponent],
       imports: [MatCardModule,
         MatIconModule,
         MatListModule,
@@ -24,9 +24,9 @@ describe('HomeComponent', () => {
         HttpClientTestingModule,
         RouterTestingModule
       ],
-      providers: [ NewsService ]
+      providers: [NewsService]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

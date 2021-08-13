@@ -1,5 +1,5 @@
 import {GeneService} from './gene.service';
-import {TestBed, inject} from '@angular/core/testing';
+import {inject, TestBed} from '@angular/core/testing';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import {environment} from '../../../../environments/environment';
 
@@ -32,22 +32,27 @@ describe('GeneServiceSpec', () => {
     expect(request.request.method).toEqual('GET');
 
     request.flush(
-{
-      'gene':
-        {
-          'entrezGeneId': 7157, 'entrezGeneSymbol': 'TP53'
-        },
-      'termAssoc':
-        [
-          {'ontologyId': 'HP:0000505', 'name': 'Visual impairment'},
-          {'ontologyId': 'HP:0002756', 'name': 'Pathologic fracture'},
-          {'ontologyId': 'HP:0009919', 'name': 'Retinoblastoma'}
-        ],
-      'diseaseAssoc': [
-        {'diseaseId': 'OMIM:151623', 'diseaseName': '#151623 LI-FRAUMENI SYNDROME 1', 'dbId': '151623', 'db': 'OMIM'},
-        {'diseaseId': 'OMIM:202300', 'diseaseName': 'ADRENOCORTICAL CARCINOMA, HEREDITARY', 'dbId': '202300', 'db': 'OMIM'},
-        {'diseaseId': 'ORPHA:2807', 'diseaseName': 'Papilloma of choroid plexus', 'dbId': '2807', 'db': 'ORPHA'}
-      ]
+      {
+        'gene':
+          {
+            'entrezGeneId': 7157, 'entrezGeneSymbol': 'TP53'
+          },
+        'termAssoc':
+          [
+            {'ontologyId': 'HP:0000505', 'name': 'Visual impairment'},
+            {'ontologyId': 'HP:0002756', 'name': 'Pathologic fracture'},
+            {'ontologyId': 'HP:0009919', 'name': 'Retinoblastoma'}
+          ],
+        'diseaseAssoc': [
+          {'diseaseId': 'OMIM:151623', 'diseaseName': '#151623 LI-FRAUMENI SYNDROME 1', 'dbId': '151623', 'db': 'OMIM'},
+          {
+            'diseaseId': 'OMIM:202300',
+            'diseaseName': 'ADRENOCORTICAL CARCINOMA, HEREDITARY',
+            'dbId': '202300',
+            'db': 'OMIM'
+          },
+          {'diseaseId': 'ORPHA:2807', 'diseaseName': 'Papilloma of choroid plexus', 'dbId': '2807', 'db': 'ORPHA'}
+        ]
       });
     httpMock.verify();
   }));
@@ -74,7 +79,7 @@ describe('GeneServiceSpec', () => {
     // triggering the test's subscribe method
     request.flush(
       {
-      'result': {
+        'result': {
           '7157':
             {
               'uid': '7157',
@@ -89,9 +94,9 @@ describe('GeneServiceSpec', () => {
               'nomenclaturesymbol': 'TP53',
               'nomenclaturename': 'tumor protein p53',
               'nomenclaturestatus': 'Official',
-          }
-      }
-    });
+            }
+        }
+      });
     // make sure it actually got processed...
     httpMock.verify();
   }));

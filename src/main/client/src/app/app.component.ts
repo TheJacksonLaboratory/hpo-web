@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
-import { NewsService } from './shared/news/news.service';
-import { environment } from '../environments/environment';
+import {Component} from '@angular/core';
+import {environment} from '../environments/environment';
 
 declare let ga: Function;
 
@@ -14,6 +13,7 @@ export class AppComponent {
   gaTrackId = '';
   mobileNavSection = 'home';
   parentSections = [];
+
   constructor() {
 
     // Avoid google analytics for dev and testing unless explicitly indicated
@@ -42,8 +42,8 @@ export class AppComponent {
   }
 
   mobileNavigate(dest: string) {
-      this.parentSections.push(this.mobileNavSection);
-      this.mobileNavSection = dest;
+    this.parentSections.push(this.mobileNavSection);
+    this.mobileNavSection = dest;
   }
 
 }

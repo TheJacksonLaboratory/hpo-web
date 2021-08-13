@@ -1,7 +1,7 @@
-import { DiseaseService } from './disease.service';
-import { TestBed, inject} from '@angular/core/testing';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { environment } from '../../../../environments/environment';
+import {DiseaseService} from './disease.service';
+import {inject, TestBed} from '@angular/core/testing';
+import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
+import {environment} from '../../../../environments/environment';
 
 describe('DiseaseServiceSpec', () => {
 
@@ -33,7 +33,7 @@ describe('DiseaseServiceSpec', () => {
     expect(request.request.method).toEqual('GET');
 
     request.flush(
-  {
+      {
         'disease': {
           'diseaseId': 'OMIM:202300',
           'diseaseName': 'ADRENOCORTICAL CARCINOMA, HEREDITARY',
@@ -43,11 +43,11 @@ describe('DiseaseServiceSpec', () => {
         'termAssoc': [
           {'ontologyId': 'HP:0006744', 'name': 'Adrenocortical carcinoma'},
           {'ontologyId': 'HP:0000007', 'name': 'Autosomal recessive inheritance'}
-          ],
+        ],
         'geneAssoc': [
           {'entrezGeneId': 7157, 'entrezGeneSymbol': 'TP53'}
-          ]
-        });
+        ]
+      });
     httpMock.verify();
   }));
 });
