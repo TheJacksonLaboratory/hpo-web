@@ -1,5 +1,5 @@
 format-version: 1.2
-data-version: maxo/releases/2021-06-11/maxo-base.owl
+data-version: maxo/releases/2021-08-19/maxo-base.owl
 ontology: maxo/maxo-base
 property_value: http://purl.org/dc/elements/1.1/creator "Leigh Carmody" xsd:string
 property_value: http://purl.org/dc/elements/1.1/creator "Peter Robinson" xsd:string
@@ -7,7 +7,7 @@ property_value: http://purl.org/dc/elements/1.1/description "An ontology to repr
 property_value: http://purl.org/dc/elements/1.1/title "Medical Action Ontology" xsd:string
 property_value: http://purl.org/dc/elements/1.1/type IAO:8000001
 property_value: http://purl.org/dc/terms/license https://creativecommons.org/licenses/by/4.0/
-property_value: owl:versionInfo "2021-06-11" xsd:string
+property_value: owl:versionInfo "2021-08-19" xsd:string
 
 [Term]
 id: MAXO:0000001
@@ -218,7 +218,7 @@ id: MAXO:0000018
 name: biomarker analysis
 def: "A broad subcategory of medical signs or objective indications of medical state which can be measured accurately and reproducibly." [PMID:20978388]
 xref: NCIT:C63333
-is_a: MAXO:0000117 ! contraceptive pregnancy prevention
+is_a: MAXO:0000003 ! diagnostic procedure
 property_value: http://purl.org/dc/elements/1.1/date 2018-11-16T20:22:04Z xsd:dateTime
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -328,8 +328,6 @@ name: dehydration prevention recommendation
 def: "A medical requirement or recommendation of avoiding or preventing Dehydration." []
 synonym: "avoid Dehydration recommendation" EXACT []
 synonym: "Dehydration avoidance" EXACT []
-intersection_of: MAXO:0001113 ! prevention of abnormal physiologic state
-intersection_of: MAXO:0000521 HP:0001944 ! avoided behavior
 property_value: http://purl.org/dc/elements/1.1/date 2020-09-15T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -339,8 +337,6 @@ name: hypertension prevention recommendation
 def: "A medical requirement or recommendation of avoiding or preventing Hypertension." []
 synonym: "avoid Hypertension recommendation" EXACT []
 synonym: "Hypertension avoidance" EXACT []
-intersection_of: MAXO:0001113 ! prevention of abnormal physiologic state
-intersection_of: MAXO:0000521 HP:0000822 ! avoided behavior
 property_value: http://purl.org/dc/elements/1.1/date 2020-09-15T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -350,8 +346,6 @@ name: obesity prevention recommendation
 def: "A medical requirement or recommendation of avoiding or preventing Obesity." []
 synonym: "avoid Obesity recommendation" EXACT []
 synonym: "Obesity avoidance" EXACT []
-intersection_of: MAXO:0001113 ! prevention of abnormal physiologic state
-intersection_of: MAXO:0000521 HP:0001513 ! avoided behavior
 property_value: http://purl.org/dc/elements/1.1/date 2020-09-15T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -361,8 +355,6 @@ name: inflammation of the skin prevention recommendation
 def: "A medical requirement or recommendation of avoiding or preventing Inflammatory abnormality of the skin." []
 synonym: "avoid Inflammatory abnormality of the skin recommendation" EXACT []
 synonym: "Inflammatory abnormality of the skin avoidance" EXACT []
-intersection_of: MAXO:0001113 ! prevention of abnormal physiologic state
-intersection_of: MAXO:0000521 HP:0011123 ! avoided behavior
 property_value: http://purl.org/dc/elements/1.1/date 2020-09-15T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -536,7 +528,6 @@ synonym: "transplantation surgical procedure" EXACT []
 xref: NCIT:C15342
 xref: NCIT:C15431
 xref: OBI:0000105
-is_a: MAXO:0000002 ! therapeutic procedure
 is_a: MAXO:0000004 ! surgical procedure
 property_value: http://purl.org/dc/elements/1.1/date 2019-01-15T19:15:04Z xsd:dateTime
 created_by: http://orcid.org/0000-0001-7941-2961
@@ -970,6 +961,7 @@ synonym: "contraceptive management" EXACT []
 synonym: "pregnancy prevention" EXACT []
 xref: NCIT:C37932
 is_a: MAXO:0000017 ! preventative therapeutics
+is_a: MAXO:0000782 ! obstetrics and gynecology procedure
 property_value: http://purl.org/dc/elements/1.1/date 2019-01-19T21:34:14Z xsd:dateTime
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -3687,6 +3679,7 @@ name: phosphodiesterase inhibitor bronchodilator agent therapy
 def: "Treatment with a phosphodiesterase (PDE) inhibitor that decreases mean pulmonary arterial pressure." []
 synonym: "phosphodiesterase inhibitor bronchodilator drug treatment" EXACT []
 is_a: MAXO:0000316 ! bronchodilator agent therapy
+is_a: MAXO:0000908 ! phosphodiesterase inhibitor therapy
 property_value: http://purl.org/dc/elements/1.1/date 2019-01-22T21:11:08Z xsd:dateTime
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -4887,7 +4880,7 @@ synonym: "abscission" EXACT []
 synonym: "excision" BROAD []
 synonym: "surgical removal" EXACT []
 xref: NCIT:C15232
-is_a: MAXO:0000004 ! surgical procedure
+is_a: MAXO:0000885 ! surgical removal procedure
 property_value: http://purl.org/dc/elements/1.1/date 2019-12-27T17:21:50Z xsd:dateTime
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -4983,7 +4976,6 @@ name: pain management
 def: "The management of pain by interventional procedures, pharmacotherapy, physical therapy, psychological counseling, or complementary and alternative medical therapies designed to treat or alleviate pain." []
 synonym: "pain therapy" EXACT []
 is_a: MAXO:0000002 ! therapeutic procedure
-is_a: MAXO:0000021 ! palliative care
 property_value: http://purl.org/dc/elements/1.1/date 2020-01-08T17:26:31Z xsd:dateTime
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -5108,8 +5100,6 @@ name: therapeutic procedure avoidance
 def: "Avoid the administration or use of therapeutic procedure." []
 synonym: "avoid therapeutic procedure" EXACT []
 synonym: "avoiding therapeutic procedure" EXACT []
-intersection_of: MAXO:0001014 ! medical action avoidance
-intersection_of: MAXO:0001015 MAXO:0000002 ! avoided medical action therapeutic procedure
 property_value: http://purl.org/dc/elements/1.1/date 2020-01-12T20:39:14Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -5119,8 +5109,6 @@ name: diagnostic procedure avoidance
 def: "Avoid the administration or use of diagnostic procedure." []
 synonym: "avoid diagnostic procedure" EXACT []
 synonym: "avoiding diagnostic procedure" EXACT []
-intersection_of: MAXO:0001014 ! medical action avoidance
-intersection_of: MAXO:0001015 MAXO:0000003 ! avoided medical action diagnostic procedure
 property_value: http://purl.org/dc/elements/1.1/date 2020-01-12T20:39:14Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -5130,8 +5118,6 @@ name: preventative therapeutics avoidance
 def: "Avoid the administration or use of preventative therapeutics." []
 synonym: "avoid preventative therapeutics" EXACT []
 synonym: "avoiding preventative therapeutics" EXACT []
-intersection_of: MAXO:0001014 ! medical action avoidance
-intersection_of: MAXO:0001015 MAXO:0000017 ! avoided medical action preventative therapeutics
 property_value: http://purl.org/dc/elements/1.1/date 2020-01-12T20:39:14Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -5555,15 +5541,8 @@ created_by: http://orcid.org/0000-0001-7941-2961
 
 [Term]
 id: MAXO:0000511
-name: bilevel positive airway pressure ventilation
-def: "A form of non-invasive mechanical pressure support ventilation that uses a time-cycled change of the applied positive airway pressure level to support spontaneous breathing activity." [NCIT:C124039]
-synonym: "BiPAP ventilation" EXACT ABBREVIATION []
-synonym: "biphasic positive airway pressure ventilation" EXACT []
-xref: MeSH:D007385
-xref: NCIT:C124039
-is_a: MAXO:0000509 ! positive controlled ventilation
-property_value: http://purl.org/dc/elements/1.1/date 2020-01-23T18:27:45Z xsd:dateTime
-created_by: http://orcid.org/0000-0001-7941-2961
+name: obsolete bilevel positive airway pressure ventilation
+replaced_by: MAXO:0000956
 
 [Term]
 id: MAXO:0000512
@@ -6380,19 +6359,7 @@ created_by: http://orcid.org/0000-0001-7941-2961
 
 [Term]
 id: MAXO:0000595
-name: radiograph imaging procedure
-def: "A procedure producing an image on a radiosensitive surface by x-ray radiation that has penetrated and passed through a structure in order to diagnose or treat a patient." []
-synonym: "radiogram imaging procedure" EXACT []
-synonym: "radiographic imaging procedure" EXACT []
-synonym: "radiographic procedure" EXACT []
-synonym: "radiography" EXACT []
-synonym: "radiography imaging procedure" EXACT []
-synonym: "X-ray imaging procedure" EXACT []
-xref: NCIT:C38101
-xref: NCIT:C60727
 is_a: MAXO:0000005 ! clinical imaging procedure
-property_value: http://purl.org/dc/elements/1.1/date 2020-04-07T15:49:43Z xsd:dateTime
-created_by: http://orcid.org/0000-0001-7941-2961
 
 [Term]
 id: MAXO:0000596
@@ -8721,7 +8688,7 @@ synonym: "serum HCG pregnancy measurement" EXACT []
 synonym: "serum human chorionic gonadotropin measurement" EXACT []
 xref: NCIT:C73495
 is_a: MAXO:0000784 ! HCG measurement
-is_a: MAXO:0000788 ! serum chemistry measurement
+is_a: MAXO:0001174 ! serum protein measurement
 property_value: http://purl.org/dc/elements/1.1/date 2021-02-09T20:22:47Z xsd:dateTime
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -8733,7 +8700,7 @@ synonym: "urine HCG pregancy test" EXACT []
 synonym: "urine HCG pregnancy measurement" EXACT []
 synonym: "urine human chorionic gonadotropin measurement" EXACT []
 is_a: MAXO:0000784 ! HCG measurement
-is_a: MAXO:0000789 ! urine chemistry measurement
+is_a: MAXO:0000851 ! urine protein measurement
 property_value: http://purl.org/dc/elements/1.1/date 2021-02-09T20:24:57Z xsd:dateTime
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -9255,7 +9222,6 @@ def: "The determination of the amount of alanine aminotransferase (human) presen
 comment: Alanine aminotransferase is an enzyme produced mainly in the liver. When serum activity is measured, it provides a marker of hepatic disease. {xref="PMID:1992953"}
 synonym: "alanine aminotransferase (human) assessment" EXACT []
 synonym: "alanine aminotransferase (human) test" EXACT []
-synonym: "alanine aminotransferase measurement" EXACT []
 synonym: "alanine transaminase measurement" EXACT []
 synonym: "ALT test" EXACT []
 synonym: "GPT test" EXACT []
@@ -9372,7 +9338,7 @@ created_by: http://orcid.org/0000-0001-7941-2961
 id: MAXO:0000848
 name: bilirubin measurement
 def: "The measurement of bilirubin present in a particular sample." []
-is_a: MAXO:0000605 ! protein measurement
+is_a: MAXO:0000566 ! clinical chemistry assessment
 property_value: http://purl.org/dc/elements/1.1/date 2021-02-17T15:06:51Z xsd:dateTime
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -9665,6 +9631,663 @@ property_value: http://purl.org/dc/elements/1.1/date 2021-06-08T15:31:21Z xsd:da
 created_by: http://orcid.org/0000-0001-7941-2961
 
 [Term]
+id: MAXO:0000882
+name: behavioral intervention
+def: "The use of operant conditioning, including rewards and punishments, in helping a person create an atmosphere where he or she does not contribute to painful stimuli." [NCIT:C15184]
+synonym: "behavior conditioning therapy" EXACT []
+synonym: "behavioral modification" EXACT []
+synonym: "behavioral treatment" EXACT []
+synonym: "behavioural intervention" EXACT []
+synonym: "behavioural modification" EXACT []
+xref: NCIT:C15184
+is_a: MAXO:0000010 ! cognitive and behavioral intervention
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-05T17:18:12Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0000883
+name: cognitive behavior therapy
+def: "A type of psychotherapy utilized to treat different forms of mental disorders.The treatment involves the identification of unhelpful or destructive patterns of thinking and behaviors and the subsequent replacement with behaviors that are beneficial and constructive." [NCIT:C64345]
+synonym: "cognitive therapy" EXACT []
+xref: NCIT:C64345
+is_a: MAXO:0000077 ! behavioral counseling
+is_a: MAXO:0000882 ! behavioral intervention
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-05T17:53:44Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0000884
+name: behavioral dietary intervention
+def: "The use of operant conditioning to alter a person's dietary choices and behaviors." [NCIT:C67021]
+xref: NCIT:C67021
+is_a: MAXO:0000088 ! dietary intervention
+is_a: MAXO:0000882 ! behavioral intervention
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-05T17:56:02Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0000885
+name: surgical removal procedure
+def: "A surgical procedure that leads to the removal of body part or body fluid." []
+is_a: MAXO:0000004 ! surgical procedure
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-05T19:16:15Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0000886
+name: kidney function testing
+def: "A laboratory procedure that evaluates the kidney function." [NCIT:C74972]
+synonym: "rental function test" EXACT []
+xref: NCIT:C74972
+is_a: MAXO:0000003 ! diagnostic procedure
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-06T18:59:22Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0000887
+name: glomerular filtration rate test
+def: "A measurement of the volume of fluid filtered from the renal glomerular capillaries into the Bowman's capsule per unit time." []
+synonym: "GFR test" EXACT ABBREVIATION []
+is_a: MAXO:0000886 ! kidney function testing
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-09T13:28:29Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0000888
+name: estimated glomerular filtration rate calculation
+def: "An estimated rate of glomerular filtration is calculated from blood creatinine test, age, body size and gender." []
+synonym: "eGFR test" EXACT []
+is_a: MAXO:0000887 ! glomerular filtration rate test
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-09T15:51:41Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0000889
+name: renal calculi removal
+def: "Removal of hard deposits made of minerals and salts also called 'kidney stones' or 'renal calculi' by any of a number of methods." []
+synonym: "kidney stone removal" EXACT []
+is_a: MAXO:0000890 ! calculi removal
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-09T16:22:26Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0000890
+name: calculi removal
+def: "Removal of hard deposits made of minerals and salts also called 'stones' or 'calculi' by any of a number of methods. Stones can be found in the kidney, gallbladder, urethra, salivary gland or other ducts." []
+synonym: "stone removal" EXACT []
+is_a: MAXO:0000885 ! surgical removal procedure
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-09T16:46:18Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0000891
+name: lithotripsy
+def: "A procedure to break a stone into small particles that can be more easily cleared from the body." [NCIT:C51994]
+xref: NCIT:C51994
+is_a: MAXO:0000890 ! calculi removal
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-09T17:17:19Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0000892
+name: renal lithotripsy
+is_a: MAXO:0000889 ! renal calculi removal
+is_a: MAXO:0000891 ! lithotripsy
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-09T17:20:00Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0000893
+name: laser lithotripsy
+def: "A scope is inserted in the urinary tract to locate the stone. Using an optical fiber, laser light is directly emitted to the stone causing stone fragmentation." []
+is_a: MAXO:0000891 ! lithotripsy
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-09T17:21:56Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0000894
+name: extracorporeal shock wave lithotripsy
+def: "Using a lithotripter to aim sound waves directly at stones through the body, the shock waves break down stones or calculi which are then able to pass." []
+synonym: "ESWL" EXACT ABBREVIATION []
+synonym: "extracorporeal shock-wave lithotripsy" EXACT []
+synonym: "shock wave lithotripsy" EXACT []
+synonym: "shock-wave lithotripsy" EXACT []
+is_a: MAXO:0000891 ! lithotripsy
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-09T17:22:14Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0000895
+name: percutaneous nephrolithotomy
+def: "A small cut is made through the patient's back and a nephroscope is inserted to locate and remove the kidney stone." []
+is_a: MAXO:0000889 ! renal calculi removal
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-09T18:17:54Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0000896
+name: ureteroscopy
+def: "Examination of the ureter using a specialized video camera (ureteroscope)." []
+is_a: MAXO:0000131 ! location specific endoscopy
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-09T18:21:21Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0000897
+name: ureteroscopic stone removal
+def: "A ureteroscope is inserted into the ureter and a wire basket inserted through the tube to remove the stone(s). In addition, a laser or other mechanical device can be used to break up the stone(s)." []
+is_a: MAXO:0000890 ! calculi removal
+is_a: MAXO:0000896 ! ureteroscopy
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-09T18:26:36Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0000898
+name: purine antagonist agent therapy
+def: "Treatment with an antimetabolite that affects the metabolism and utilization of purines." []
+synonym: "purine inhibitor agent therapy" EXACT []
+xref: NCIT:C1556
+is_a: MAXO:0000233 ! antimetabolite agent therapy
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-09T19:15:23Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0000900
+name: electrocardiography
+def: "A procedure that displays the electrical activity of the heart." [NCIT:C38053]
+synonym: "ECG" EXACT ABBREVIATION []
+synonym: "EKG" EXACT ABBREVIATION []
+xref: NCIT:C38053
+is_a: MAXO:0000493 ! cardiovascular diagnostic procedure
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-09T19:19:35Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0000903
+name: aspirin therapy
+def: "Treatment with acetylsalicylic acid. It is often a treatment for pain, fever, inflammation or to reduce risk of heart attack." []
+synonym: "acetylsalicylic acid therapy" EXACT []
+synonym: "treatment with aspirin" EXACT []
+is_a: MAXO:0000221 ! nonsteroidal anti-inflammatory agent therapy
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-10T14:35:53Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0000904
+name: alpha-glucosidase inhibitor therapy
+def: "Treatment with an inhibitor that inteferes with the action of alpha-glucosidase." []
+xref: CHEBI:67239
+is_a: MAXO:0000257 ! antidiabetic agent therapy
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-10T14:39:44Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0000905
+name: benzodiazepine agent therapy
+def: "Treatment with one of a group of heterocyclic compounds with a core structure containing a benzene ring fused to a diazepine ring. It is often used to treat anxiety." []
+xref: CHEBI:22720
+is_a: MAXO:0000163 ! anxiolytic agent therapy
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-10T14:58:25Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0000906
+name: T-type calcium channel blocking agent therapy
+def: "Treatment with a pharmaceutical agent that inhibits T-type calcium channels." []
+synonym: "T-type calcium channel antagonist therapy" EXACT []
+is_a: MAXO:0000434 ! calcium channel blocking agent therapy
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-10T15:05:39Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0000907
+name: L-type calcium channel blocking agent therapy
+def: "Treatment with a pharmaceutical agent that inhibits L-type calcium channels." []
+synonym: "L-type calcium channel antagonist therapy" EXACT []
+is_a: MAXO:0000434 ! calcium channel blocking agent therapy
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-10T15:10:56Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0000908
+name: phosphodiesterase inhibitor therapy
+def: "Treatment with a phosphodiesterase (PDE) inhibitor." []
+synonym: "PDE inhibitor therapy" EXACT []
+is_a: MAXO:0000648 ! enzyme inhibitor agent therapy
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-10T15:15:41Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0000909
+name: weight loss pharmacotherapy
+def: "An agent or drug used to reduce or control weight." []
+is_a: MAXO:0000058 ! pharmacotherapy
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-10T18:20:00Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0000910
+name: anti-obesity agent therapy
+def: "Treatment with an agent or drug to reduce or control weight in obese patients." []
+xref: CHEBI:74518
+is_a: MAXO:0000909 ! weight loss pharmacotherapy
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-10T18:21:20Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0000911
+name: pain management for palliative care
+def: "The management of pain by interventional procedures, pharmacotherapy, physical therapy, psychological counseling, or complementary and alternative medical therapies designed to treat or alleviate pain specifically for patients receiving palliative care treatment." []
+is_a: MAXO:0000021 ! palliative care
+is_a: MAXO:0000457 ! pain management
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-11T14:13:00Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0000912
+name: assessment for sleep disturbance
+def: "A measurement or assessment to determine if a patient's sleep is disrupted." []
+synonym: "assessement for sleep disorders" EXACT []
+synonym: "sleep assessment" EXACT []
+synonym: "sleep disturbance screening" EXACT []
+is_a: MAXO:0000003 ! diagnostic procedure
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-11T14:52:56Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0000913
+name: sleep assessment questionnaire
+def: "A questionnaire designed to determine sleep quality, daytime sleepiness, or other issues related to having restful sleep." []
+is_a: MAXO:0000912 ! assessment for sleep disturbance
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-11T14:56:38Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0000914
+name: actigraphy
+def: "Use of a portable device (actigraph) to study sleep-wake patterns and circadian rhythms by assessing movement." [PMID:26608435]
+is_a: MAXO:0000912 ! assessment for sleep disturbance
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-11T14:59:42Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0000915
+name: polysomnography
+def: "A group of tests (usually central electroencephalogram (EEG) (C3 or C4), reference occipital EEG (O1 or O2), right and left electro-oculogram (EOG), mental or submental electromylogram (EMG), thoracic effort, abdominal effort, nasal and oral airflow, a microphone to record snoring, pulse oxygen saturation, EKG, and video recording to document body positions during sleep) taken during sleep." [PMID:26608435]
+synonym: "PSG" EXACT ABBREVIATION []
+xref: NCIT:C114185
+is_a: MAXO:0000912 ! assessment for sleep disturbance
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-11T15:00:34Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0000916
+name: airway endoscopy
+def: "An instrument is inserted into the air passage of a patient while the patient is breathing spontaneously or is under controlled ventilation. The airway is illuminated, enabling the surgeon to look for any abnormality under magnification and to perform any procedure both in the upper and lower air passages." [PMID:26862286]
+is_a: MAXO:0000131 ! location specific endoscopy
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-11T15:32:04Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0000917
+name: placement of a stent
+def: "Insertion of a tube into a blocked passageway, such as a blood vessel, to keep it open." []
+synonym: "stenting" RELATED []
+is_a: MAXO:0000473 ! medical device implantation
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-11T16:01:02Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0000918
+name: insertion of a nasopharyngeal stent
+def: "A tube-shaped medical device is inserted into the nasal passage to prevent obstruction of the airway." []
+synonym: "placement of nasal stent" EXACT []
+synonym: "placement of nasopharyngeal stent" EXACT []
+is_a: MAXO:0000917 ! placement of a stent
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-11T16:26:00Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0000919
+name: dietician evaluation
+def: "An evaluation by a professional trained and qualified to provide nutritional services at individual, institutional and community levels in term of assessing nutritional needs." []
+synonym: "nutritionist evaluation" NARROW []
+xref: NCIT:C28248
+is_a: MAXO:0000731 ! allied health professional evaluation
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-11T17:06:20Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0000920
+name: physical therapist evaluation
+def: "An evaluation by a trained and certified individual who applies knowledge of the concepts, principles, and practices of physical therapy for the treatment or prevention of physical disability or disease." []
+synonym: "physiotherapist evaluation" EXACT []
+xref: NCIT:C53422
+is_a: MAXO:0000731 ! allied health professional evaluation
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-11T17:11:32Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0000921
+name: respiratory therapist evaluation
+def: "An evaluation by a professional  trained and qualified to perform technical work concerned with administering therapeutic and diagnostic respiratory care and life support to patients with cardiopulmonary deficiencies and abnormalities." []
+xref: NCIT:C53425
+is_a: MAXO:0000731 ! allied health professional evaluation
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-11T17:34:31Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0000922
+name: social worker evaluation
+def: "Evaluation by a professionally trained person who is employed in the administration of charity, social service, and welfare. The assistance this professional provides helps disadvantaged individuals and families adjust themselves to the community." []
+xref: NCIT:C28190
+is_a: MAXO:0000731 ! allied health professional evaluation
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-11T17:59:26Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0000923
+name: newborn examination
+def: "A general assessment of the overall health of a newborn." [NCIT:C84749]
+xref: NCIT:C84749
+is_a: MAXO:0000527 ! physical examination
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-11T19:22:27Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0000924
+name: newborn behavior examination
+def: "The assessment of behavior in neonates." [NCIT:C81314]
+xref: NCIT:C81314
+is_a: MAXO:0000923 ! newborn examination
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-11T19:25:11Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0000925
+name: Apgar testing
+def: "A test conducted at 1 minute and 5 minutes after birth to determine the overall health of the newborn." []
+xref: NCIT:C81230
+is_a: MAXO:0000923 ! newborn examination
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-11T19:31:30Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0000926
+name: intrapartum fetal stimulation
+def: "Any method used to elicit a fetal heart rate acceleration response during labor." [NCIT:C114084]
+xref: NCIT:C114084
+is_a: MAXO:0000782 ! obstetrics and gynecology procedure
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-11T19:47:14Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0000927
+name: newborn heart rate measurement
+def: "Determination of the newborn's heart rate." []
+xref: NCIT:C87103
+is_a: MAXO:0000490 ! heart rate measurement
+is_a: MAXO:0000923 ! newborn examination
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-11T20:53:10Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0000928
+name: manual fetal rotation
+def: "A procedure during labor in which the occiput is manually rotated from posterior to anterior." [NCIT:C114133]
+xref: NCIT:C114133
+is_a: MAXO:0000782 ! obstetrics and gynecology procedure
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-11T20:56:18Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0000929
+name: external fetal rotation
+def: "A manual method of maneuvering the fetus from outside the mother's abdomen to convert a breech into a cephalic presentation." [NCIT:C92776]
+xref: NCIT:C92776
+is_a: MAXO:0000782 ! obstetrics and gynecology procedure
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-11T20:58:11Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0000930
+name: speech therapy
+def: "The treatment of communication disorders (speech disorders and language disorders), cognitive-communication disorders, voice disorders, and swallowing disorders." [NCIT:C159273]
+synonym: "speech language therapy" EXACT []
+xref: NCIT:C159273
+is_a: MAXO:0000002 ! therapeutic procedure
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-12T13:17:16Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0000931
+name: psychologist evaluation
+def: "An evaluation by a person who specializes in the study of mind and behavior or in the treatment of mental, emotional, and behavioral disorders." [NCIT:C28181]
+xref: NCIT:C28181
+is_a: MAXO:0000731 ! allied health professional evaluation
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-12T13:32:47Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0000932
+name: electroencephalography
+def: "The neurophysiologic exploration of the electrical activity of the brain by the application of electrodes to the scalp. The resulting traces are known as an electroencephalogram (EEG). This test is used to assess brain damage, epilepsy and other problems." [NCIT:C38054]
+synonym: "EEG" EXACT ABBREVIATION []
+xref: NCIT:C38054
+is_a: MAXO:0000003 ! diagnostic procedure
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-12T13:47:43Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0000933
+name: enzyme replacement or supplementation therapy
+def: "Treatment with a synthetic enzyme or mixture of enzymes used to replace or supplement enzymes to treat enzyme deficiency." []
+xref: NCIT:C29726
+is_a: MAXO:0000015 ! biologic therapy
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-12T13:51:53Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0000934
+name: urine phosphoethanolamine measurement
+def: "Detection of phosphoethanolamine in urine." []
+is_a: MAXO:0000789 ! urine chemistry measurement
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-12T13:57:56Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0000935
+name: bone specific alkaline phosphatase measurement
+def: "The determination of the amount of bone specific alkaline phosphatase present in a sample." [NCIT:C92287]
+synonym: "ALPBS test" EXACT ABBREVIATION []
+synonym: "bone ALP measurement" EXACT ABBREVIATION []
+xref: NCIT:C92287
+is_a: MAXO:0000844 ! alkaline phosphatase measurement
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-12T14:00:14Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0000936
+name: alkaline phosphatase enzyme activity test
+def: "Measurement of alkaline phosphatase enzamatic activity in a biological sample." []
+is_a: MAXO:0000844 ! alkaline phosphatase measurement
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-12T14:13:09Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0000937
+name: inorganic pyrophosphate measurement
+def: "The determination of the amount of inorganic pyrophosphate present in a sample." []
+synonym: "PPI measurement" EXACT ABBREVIATION []
+synonym: "PPi measurement" EXACT ABBREVIATION []
+xref: NCIT:C161358
+is_a: MAXO:0000566 ! clinical chemistry assessment
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-12T15:24:26Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0000938
+name: resective brain surgery
+def: "Open brain surgery to remove part of the brain causing seizures." []
+is_a: MAXO:0000448 ! surgical resection
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-12T15:36:25Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0000939
+name: stimulation procedure
+def: "Procedure to arouse the body or parts to increase functional activity." []
+is_a: MAXO:0000002 ! therapeutic procedure
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-12T15:41:57Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0000940
+name: responsive neurostimulation
+def: "Placement of a stimulator electrode in the part of the brain causing seizures." []
+synonym: "RNS" EXACT []
+is_a: MAXO:0000939 ! stimulation procedure
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-12T15:44:05Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0000941
+name: extracardiac stimulation
+is_a: MAXO:0000939 ! stimulation procedure
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-12T15:47:24Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0000942
+name: vagus nerve stimulation
+def: "A procedure that uses a device to stimulate the vagus nerve with electrical impulses." []
+is_a: MAXO:0000939 ! stimulation procedure
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-12T19:05:29Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0000943
+name: deep brain stimulation
+def: "A neurosurgical procedure involving the placement of a medical device called a neurostimulator (sometimes referred to as a \"brain pacemaker\"), which sends electrical impulses, through implanted electrodes, to specific targets in the brain (brain nuclei) for the treatment of movement disorders, including Parkinson's disease, essential tremor, and dystonia.[1] and other conditions such as obsessive-compulsive disorder and epilepsy." [https://en.wikipedia.org/wiki/Deep_brain_stimulation]
+synonym: "DBS" EXACT ABBREVIATION []
+is_a: MAXO:0000939 ! stimulation procedure
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-12T19:24:31Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0000944
+name: cranial electrical stimulation
+def: "The use of skin electrodes to pass a low intensity, pulsed electrical current through the scalp and into the brain. This procedure is used to treat a variety of illnesses including anxiety, depression, and chronic pain." []
+xref: NCIT:C116561
+is_a: MAXO:0000939 ! stimulation procedure
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-12T19:29:07Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0000945
+name: spinal cord stimulation
+def: "An invasive procedure to stimulate the spinal cord to aid in the management of chronic, intractable pain of the trunk and/or limbs, including unilateral or bilateral pain." []
+is_a: MAXO:0000939 ! stimulation procedure
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-12T19:30:24Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0000946
+name: neurosurgical procedure
+def: "Any surgical procedure performed on nervous system tissue." []
+synonym: "neurosurgery" EXACT []
+is_a: MAXO:0000004 ! surgical procedure
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-12T19:44:10Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0000947
+name: brain surgery
+def: "Surgery performed on any part of the brain." [NCIT:C154268]
+xref: NCIT:C154268
+is_a: MAXO:0000946 ! neurosurgical procedure
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-12T19:45:31Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0000948
+name: craniotomy
+def: "Surgical creation of an opening of the skull." [NCIT:C15214]
+synonym: "cranial surgery" BROAD []
+xref: NCIT:C15214
+is_a: MAXO:0000946 ! neurosurgical procedure
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-12T19:47:17Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0000949
+name: calcitonin treatment
+def: "Treatment with a hormone that is naturally produced in the thyroid. When calcitonin given to patients with osteoporosis, calcitonin produces modest increases in bone mass because it slows the rate at which osteoclasts absorb bone." []
+synonym: "calcitonin therapy" EXACT []
+is_a: MAXO:0000015 ! biologic therapy
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-12T19:57:09Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0000950
+name: supportive care
+def: "Supportive therapy involves the teaching of such life skills as managing medication, learning to socialize, handling finances, and getting a job." []
+is_a: MAXO:0000002 ! therapeutic procedure
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-12T20:10:44Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0000951
+name: physiological support therapy
+def: "Therapeutic care designed to maintain the natural processes of the body and return to a more normal state of health." [NCIT:C66895]
+is_a: MAXO:0000002 ! therapeutic procedure
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-12T20:14:31Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0000952
+name: hydration therapy
+is_a: MAXO:0000951 ! physiological support therapy
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-12T20:16:16Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0000953
+name: saline hydration
+def: "Use of isotonic saline intravenously." []
+is_a: MAXO:0000952 ! hydration therapy
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-12T20:16:36Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0000954
+name: bisphosphonate agent therapy
+def: "Treatment with a set of compounds that allow osteoblasts (bone building cells) to work more effectively, improving bone mass. Bisphosphonates are used in the treatment of osteoporosis, Paget's disease of bone, and may be used to lower high calcium levels." []
+is_a: MAXO:0000058 ! pharmacotherapy
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-12T20:21:07Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0000955
+name: bi-level positive airway pressure ventilation
+def: "Bi-level positive airway pressure (or trade name BiPAP) delivers, by mask, two levels of pressure in response to patient flow. It is intended to support ventilation in a nonin-vasive way in spontaneously but insufficiently breathing patients in the home care environment." [PMID:11353935]
+comment: Two new ventilatory techniques with almost identical names have been developed for adults: BiPAP(trademark) and BIPAP. BiPAP is a trade name derived from 'bi-level positive airway pressure'. BiPAP delivers, by mask, two levels of pressure in response to patient flow. It is intended to support ventilation in a nonin-vasive way in spontaneously but insufficiently breathing patients in the home care environment. In contrast, BIPAP (biphasic positive airway pressure) is a mode of ventilation developed for full ventilatory support in intensive care settings with the use of an endotracheal tube. {xref="PMID:11353935"}
+synonym: "BiPAP" EXACT ABBREVIATION []
+is_a: MAXO:0000509 ! positive controlled ventilation
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-13T20:17:37Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0000956
+name: biphasic positive airway pressure ventilation
+def: "Biphasic positive airway pressure ventilation (BIPAP) is a mode of ventilation developed for full ventilatory support in intensive care settings with the use of an endotracheal tube." [PMID:11353935]
+comment: Recently two new ventilatory techniques with almost identical names have been developed for adults: BiPAP(trademark) and BIPAP. BiPAP is a trade name derived from 'bi-level positive airway pressure'. BiPAP delivers, by mask, two levels of pressure in response to patient flow. It is intended to support ventilation in a nonin-vasive way in spontaneously but insufficiently breathing patients in the home care environment. In contrast, BIPAP (biphasic positive airway pressure) is a mode of ventilation developed for full ventilatory support in intensive care settings with the use of an endotracheal tube. {xref="PMID:11353935"}
+synonym: "BIPAP" EXACT ABBREVIATION []
+is_a: MAXO:0000509 ! positive controlled ventilation
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-13T20:22:51Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
 id: MAXO:0001000
 name: functional magnetic resonance imaging procedure
 def: "The principle of functional MRI imaging is to take a series of images of an organ in quick succession and to statistically analyze the images for differences among them.  Most commonly used in studies of brain function." [NCIT:C17958]
@@ -9802,8 +10425,6 @@ name: aerobic exercise therapy avoidance
 def: "Avoid the administration or use of aerobic exercise therapy." []
 synonym: "avoid aerobic exercise therapy" EXACT []
 synonym: "avoiding aerobic exercise therapy" EXACT []
-intersection_of: MAXO:0001014 ! medical action avoidance
-intersection_of: MAXO:0001015 MAXO:0000065 ! avoided medical action aerobic exercise therapy
 property_value: http://purl.org/dc/elements/1.1/date 2019-05-19T20:39:14Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -10720,8 +11341,6 @@ name: ketosis prevention recommendation
 def: "A medical requirement or recommendation of avoiding or preventing Ketosis." []
 synonym: "avoid Ketosis recommendation" EXACT []
 synonym: "Ketosis avoidance" EXACT []
-intersection_of: MAXO:0001113 ! prevention of abnormal physiologic state
-intersection_of: MAXO:0000521 HP:0001946 ! avoided behavior
 property_value: http://purl.org/dc/elements/1.1/date 2020-09-15T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -10731,8 +11350,6 @@ name: Diabetes mellitus prevention recommendation
 def: "A medical requirement or recommendation of avoiding or preventing Diabetes mellitus." []
 synonym: "avoid Diabetes mellitus recommendation" EXACT []
 synonym: "Diabetes mellitus avoidance" EXACT []
-intersection_of: MAXO:0001113 ! prevention of abnormal physiologic state
-intersection_of: MAXO:0000521 HP:0000819 ! avoided behavior
 property_value: http://purl.org/dc/elements/1.1/date 2020-09-15T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -10742,8 +11359,6 @@ name: fever prevention recommendation
 def: "A medical requirement or recommendation of avoiding or preventing Fever." []
 synonym: "avoid Fever recommendation" EXACT []
 synonym: "Fever avoidance" EXACT []
-intersection_of: MAXO:0001113 ! prevention of abnormal physiologic state
-intersection_of: MAXO:0000521 HP:0001945 ! avoided behavior
 property_value: http://purl.org/dc/elements/1.1/date 2020-09-15T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -10753,8 +11368,6 @@ name: seizure prevention recommendation
 def: "Recommendation to avoid triggers known to cause seizures or take medicine to avoid seizures." []
 synonym: "avoid Seizure recommendation" EXACT []
 synonym: "Seizure avoidance" EXACT []
-intersection_of: MAXO:0001113 ! prevention of abnormal physiologic state
-intersection_of: MAXO:0000521 HP:0001250 ! avoided behavior
 property_value: http://purl.org/dc/elements/1.1/date 2020-09-15T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -10764,8 +11377,6 @@ name: hypotension prevention recommendation
 def: "A medical requirement or recommendation of avoiding or preventing Hypotension." []
 synonym: "avoid Hypotension recommendation" EXACT []
 synonym: "Hypotension avoidance" EXACT []
-intersection_of: MAXO:0001113 ! prevention of abnormal physiologic state
-intersection_of: MAXO:0000521 HP:0002615 ! avoided behavior
 property_value: http://purl.org/dc/elements/1.1/date 2020-09-15T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -10775,8 +11386,6 @@ name: hyperglycemia prevention recommendation
 def: "A medical requirement or recommendation of avoiding or preventing Hyperglycemia." []
 synonym: "avoid Hyperglycemia recommendation" EXACT []
 synonym: "Hyperglycemia avoidance" EXACT []
-intersection_of: MAXO:0001113 ! prevention of abnormal physiologic state
-intersection_of: MAXO:0000521 HP:0003074 ! avoided behavior
 property_value: http://purl.org/dc/elements/1.1/date 2020-09-15T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -10786,8 +11395,6 @@ name: weight loss avoidance recommendation
 def: "A medical requirement or recommendation of avoiding or preventing Weight loss." []
 synonym: "avoid Weight loss recommendation" EXACT []
 synonym: "Weight loss avoidance" EXACT []
-intersection_of: MAXO:0001113 ! prevention of abnormal physiologic state
-intersection_of: MAXO:0000521 HP:0001824 ! avoided behavior
 property_value: http://purl.org/dc/elements/1.1/date 2020-09-15T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -10853,8 +11460,6 @@ name: blood transfusion avoidance
 def: "Avoid the administration or use of blood transfusion." []
 synonym: "avoid blood transfusion" EXACT []
 synonym: "avoiding blood transfusion" EXACT []
-intersection_of: MAXO:0001014 ! medical action avoidance
-intersection_of: MAXO:0001015 MAXO:0000756 ! avoided medical action blood transfusion
 property_value: http://purl.org/dc/elements/1.1/date 2020-11-19T20:39:14Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -10864,8 +11469,6 @@ name: radiograph imaging procedure avoidance
 def: "Avoid the administration or use of radiograph imaging procedure." []
 synonym: "avoid radiograph imaging procedure" EXACT []
 synonym: "avoiding radiograph imaging procedure" EXACT []
-intersection_of: MAXO:0001014 ! medical action avoidance
-intersection_of: MAXO:0001015 MAXO:0000595 ! avoided medical action radiograph imaging procedure
 property_value: http://purl.org/dc/elements/1.1/date 2020-11-19T20:39:14Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -11024,12 +11627,12 @@ created_by: http://orcid.org/0000-0001-7941-2961
 
 [Term]
 id: MAXO:0001143
-name: omega-3-fatty acidomega-3 fatty acid supplementation
-def: "Addition of omega-3-fatty acidomega-3 fatty acid to a the diet for complete nutrition support." []
-synonym: "dietary supplementation of omega-3-fatty acidomega-3 fatty acid" EXACT []
+name: omega-3 fatty acidomega-3-fatty acid supplementation
+def: "Addition of omega-3 fatty acidomega-3-fatty acid to a the diet for complete nutrition support." []
+synonym: "dietary supplementation of omega-3 fatty acidomega-3-fatty acid" EXACT []
 synonym: "eicosapentaenoic acid supplementation" EXACT []
-synonym: "omega-3-fatty acidomega-3 fatty acid supplemental intake" EXACT []
-synonym: "supplementation of omega-3-fatty acidomega-3 fatty acid" EXACT []
+synonym: "omega-3 fatty acidomega-3-fatty acid supplemental intake" EXACT []
+synonym: "supplementation of omega-3 fatty acidomega-3-fatty acid" EXACT []
 property_value: http://purl.org/dc/elements/1.1/date 2020-11-23T09:00:01Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -11177,8 +11780,6 @@ def: "A medical requirement or recommendation of avoiding the consumption of fis
 synonym: "avoid fish steak (raw) intake" EXACT []
 synonym: "avoiding fish steak (raw) intake" EXACT []
 synonym: "fish steak (raw) consumption avoidance" EXACT []
-intersection_of: MAXO:0000056 ! nutrition intake avoidance
-intersection_of: MAXO:0001027 FOODON:03308394 ! avoided food
 property_value: http://purl.org/dc/elements/1.1/date 2021-02-10T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -11191,8 +11792,6 @@ synonym: "avoiding cow milk (raw) intake" EXACT []
 synonym: "cow milk (raw) consumption avoidance" EXACT []
 synonym: "raw milk intake avoidance" EXACT []
 synonym: "unpasturised milk intake avoidance" EXACT []
-intersection_of: MAXO:0000056 ! nutrition intake avoidance
-intersection_of: MAXO:0001027 FOODON:03307455 ! avoided food
 property_value: http://purl.org/dc/elements/1.1/date 2021-02-10T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -11369,13 +11968,73 @@ property_value: http://purl.org/dc/elements/1.1/date 2020-06-24T20:39:14Z xsd:st
 created_by: http://orcid.org/0000-0001-7941-2961
 
 [Term]
+id: MAXO:0001176
+name: potassium channel modulator agent therapy
+def: "Treatment with drug or agent that regulates potassium channels." []
+synonym: "K-channel modulator therapy" EXACT []
+synonym: "potassium channel modulator therapy" EXACT []
+synonym: "treatment with potassium channel modulator" EXACT []
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-10T11:00:00Z xsd:string
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0001177
+name: potassium channel blocker agent therapy
+def: "Treatment with a drug or agent that inhibits potassium channels." []
+synonym: "K-channel antagonist therapy" EXACT []
+synonym: "K-channel inhibitor therapy" EXACT []
+synonym: "potassium channel antagonist therapy" EXACT []
+synonym: "potassium channel blocker therapy" EXACT []
+synonym: "treatment with potassium channel blocker" EXACT []
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-10T11:00:00Z xsd:string
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0001178
+name: xanthine oxidase inhibitor agent therapy
+def: "Treatment with a drug or agent that inhibits xanthine oxidase." []
+synonym: "EC 1.17.3.2 (xanthine oxidase) inhibitor therapy" EXACT []
+synonym: "treatment with EC 1.17.3.2 (xanthine oxidase) inhibitor" EXACT []
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-10T11:00:00Z xsd:string
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0001179
+name: purinergic receptor P2 antagonist agent therapy
+def: "Treatment with a drug or agent that inhibits purinergic P2 receptor." []
+synonym: "P2 antagonist therapy" EXACT []
+synonym: "purinergic receptor P2 antagonist therapy" EXACT []
+synonym: "treatment with purinergic receptor P2 antagonist" EXACT []
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-10T11:00:00Z xsd:string
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0001180
+name: P2Y12 receptor antagonist agent therapy
+def: "Treatment with a drug or agent that inhibits P2Y12 receptor." []
+synonym: "ADP receptor inhibitor therapy" EXACT []
+synonym: "P2Y12 receptor antagonist therapy" EXACT []
+synonym: "purinergic PY12 antagonist therapy" EXACT []
+synonym: "treatment with P2Y12 receptor antagonist" EXACT []
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-10T11:00:00Z xsd:string
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0001181
+name: serum alkaline phosphatase measurement
+def: "The determination of the amount of alkaline phosphatase present in blood serum." []
+synonym: "alkaline phosphatase blood serum assessment" EXACT []
+synonym: "blood serum alkaline phosphatase test" EXACT []
+synonym: "serum Alk phos measurement" EXACT []
+property_value: http://purl.org/dc/elements/1.1/date 2021-08-12T15:25:01Z xsd:string
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
 id: MAXO:0002000
 name: cannabis consumption avoidance
 def: "A medical requirement or recommendation of avoiding cannabis consumption." []
 synonym: "avoid cannabis consumption" EXACT []
 synonym: "cessation of cannabis consumption" EXACT []
-intersection_of: MAXO:0000525 ! cognitive and behavioral intervention avoidance
-intersection_of: MAXO:0000521 NBO:0045004 ! avoided behavior
 property_value: http://purl.org/dc/elements/1.1/date 2020-01-28T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -11385,8 +12044,6 @@ name: tobacco consumption avoidance
 def: "A medical requirement or recommendation of avoiding tobacco consumption." []
 synonym: "avoid tobacco consumption" EXACT []
 synonym: "cessation of tobacco consumption" EXACT []
-intersection_of: MAXO:0000525 ! cognitive and behavioral intervention avoidance
-intersection_of: MAXO:0000521 NBO:0045000 ! avoided behavior
 property_value: http://purl.org/dc/elements/1.1/date 2020-01-28T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -11396,8 +12053,6 @@ name: smoking behavior avoidance
 def: "A medical requirement or recommendation of avoiding smoking behavior." []
 synonym: "avoid smoking behavior" EXACT []
 synonym: "cessation of smoking behavior" EXACT []
-intersection_of: MAXO:0000525 ! cognitive and behavioral intervention avoidance
-intersection_of: MAXO:0000521 NBO:0015005 ! avoided behavior
 property_value: http://purl.org/dc/elements/1.1/date 2020-01-28T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -11407,8 +12062,6 @@ name: consumption of an addictive substance avoidance
 def: "A medical requirement or recommendation of avoiding consumption of an addictive substance." []
 synonym: "avoid consumption of an addictive substance" EXACT []
 synonym: "cessation of consumption of an addictive substance" EXACT []
-intersection_of: MAXO:0000525 ! cognitive and behavioral intervention avoidance
-intersection_of: MAXO:0000521 NBO:0001884 ! avoided behavior
 property_value: http://purl.org/dc/elements/1.1/date 2020-01-28T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -11417,8 +12070,6 @@ id: MAXO:0002004
 name: agitation avoidance
 def: "A medical requirement or recommendation of avoiding agitation behavior." []
 synonym: "avoid agitation behavior" EXACT []
-intersection_of: MAXO:0000525 ! cognitive and behavioral intervention avoidance
-intersection_of: MAXO:0000521 NBO:0000129 ! avoided behavior
 property_value: http://purl.org/dc/elements/1.1/date 2020-01-28T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -11427,8 +12078,6 @@ id: MAXO:0002005
 name: fear or anxiety avoidance
 def: "A medical requirement or recommendation of avoiding fear/anxiety related behavior." []
 synonym: "avoid fear/anxiety related behavior" EXACT []
-intersection_of: MAXO:0000525 ! cognitive and behavioral intervention avoidance
-intersection_of: MAXO:0000521 NBO:0000018 ! avoided behavior
 property_value: http://purl.org/dc/elements/1.1/date 2020-01-28T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -11437,8 +12086,6 @@ id: MAXO:0002006
 name: sexual activity avoidance
 def: "A medical requirement or recommendation of avoiding sexual activity." []
 synonym: "avoid sexual activity" EXACT []
-intersection_of: MAXO:0000525 ! cognitive and behavioral intervention avoidance
-intersection_of: MAXO:0000521 NBO:0000034 ! avoided behavior
 property_value: http://purl.org/dc/elements/1.1/date 2020-01-28T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -11447,8 +12094,6 @@ id: MAXO:0002007
 name: copulation avoidance
 def: "A medical requirement or recommendation of avoiding copulation." []
 synonym: "avoid copulation" EXACT []
-intersection_of: MAXO:0000525 ! cognitive and behavioral intervention avoidance
-intersection_of: MAXO:0000521 NBO:0000060 ! avoided behavior
 property_value: http://purl.org/dc/elements/1.1/date 2020-01-28T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -11457,8 +12102,6 @@ id: MAXO:0002008
 name: stress avoidance
 def: "A medical requirement or recommendation of avoiding stress related behavior." []
 synonym: "avoid stress related behavior" EXACT []
-intersection_of: MAXO:0000525 ! cognitive and behavioral intervention avoidance
-intersection_of: MAXO:0000521 NBO:0000469 ! avoided behavior
 property_value: http://purl.org/dc/elements/1.1/date 2020-01-28T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -11472,8 +12115,6 @@ synonym: "avoiding gluten intake" EXACT []
 synonym: "celiac dietary intake" EXACT []
 synonym: "gluten consumption avoidance" EXACT []
 synonym: "gluten-free dietary intake" EXACT []
-intersection_of: MAXO:0000056 ! nutrition intake avoidance
-intersection_of: MAXO:0001027 FOODON:03420177 ! avoided food
 property_value: http://purl.org/dc/elements/1.1/date 2019-07-11T09:00:01Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -11484,8 +12125,6 @@ def: "A medical requirement or recommendation of avoiding the consumption of liq
 synonym: "avoid liquid intake" EXACT []
 synonym: "avoiding liquid intake" EXACT []
 synonym: "liquid consumption avoidance" EXACT []
-intersection_of: MAXO:0000056 ! nutrition intake avoidance
-intersection_of: MAXO:0001027 FOODON:03412974 ! avoided food
 property_value: http://purl.org/dc/elements/1.1/date 2019-07-11T09:00:01Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -11496,8 +12135,6 @@ def: "A medical requirement or recommendation of avoiding the consumption of pro
 synonym: "avoid protein extract, concentrate or isolate intake" EXACT []
 synonym: "avoiding protein extract, concentrate or isolate intake" EXACT []
 synonym: "protein extract, concentrate or isolate consumption avoidance" EXACT []
-intersection_of: MAXO:0000056 ! nutrition intake avoidance
-intersection_of: MAXO:0001027 FOODON:03420236 ! avoided food
 property_value: http://purl.org/dc/elements/1.1/date 2019-11-13T02:36:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -11511,8 +12148,6 @@ synonym: "fat or oil consumption avoidance" EXACT []
 synonym: "limited fat dietary intake" EXACT []
 synonym: "low fat dietary intake" EXACT []
 synonym: "non-fat dietary intake" EXACT []
-intersection_of: MAXO:0000056 ! nutrition intake avoidance
-intersection_of: MAXO:0001027 FOODON:03420190 ! avoided food
 property_value: http://purl.org/dc/elements/1.1/date 2019-11-13T02:36:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -11670,11 +12305,11 @@ created_by: http://orcid.org/0000-0001-7941-2961
 
 [Term]
 id: MAXO:0010019
-name: thiamine (b1)thiamine supplementation
-def: "Addition of thiamine (b1)thiamine to a the diet for complete nutrition support." []
-synonym: "dietary supplementation of thiamine (b1)thiamine" EXACT []
-synonym: "supplementation of thiamine (b1)thiamine" EXACT []
-synonym: "thiamine (b1)thiamine supplemental intake" EXACT []
+name: thiaminethiamine (b1)vitamin B1 supplementation
+def: "Addition of thiaminethiamine (b1)vitamin B1 to a the diet for complete nutrition support." []
+synonym: "dietary supplementation of thiaminethiamine (b1)vitamin B1" EXACT []
+synonym: "supplementation of thiaminethiamine (b1)vitamin B1" EXACT []
+synonym: "thiaminethiamine (b1)vitamin B1 supplemental intake" EXACT []
 property_value: http://purl.org/dc/elements/1.1/date 2019-11-13T04:45:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -11763,10 +12398,10 @@ created_by: http://orcid.org/0000-0001-7941-2961
 [Term]
 id: MAXO:0010028
 name: cyanocobalamin supplementation
-def: "Addition of cyanocob(III)alamincyanocobalamin (b12) to a the diet for complete nutrition support." []
-synonym: "cyanocob(III)alamincyanocobalamin (b12) supplemental intake" EXACT []
-synonym: "dietary supplementation of cyanocob(III)alamincyanocobalamin (b12)" EXACT []
-synonym: "supplementation of cyanocob(III)alamincyanocobalamin (b12)" EXACT []
+def: "Addition of cyanocobalamin (b12)cyanocob(III)alamin to a the diet for complete nutrition support." []
+synonym: "cyanocobalamin (b12)cyanocob(III)alamin supplemental intake" EXACT []
+synonym: "dietary supplementation of cyanocobalamin (b12)cyanocob(III)alamin" EXACT []
+synonym: "supplementation of cyanocobalamin (b12)cyanocob(III)alamin" EXACT []
 property_value: http://purl.org/dc/elements/1.1/date 2019-11-13T04:45:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -11823,6 +12458,7 @@ created_by: http://orcid.org/0000-0001-7941-2961
 id: MAXO:0010034
 name: corneal transplantation
 def: "The surgical transfer of a healthy cornea to a patient." []
+synonym: "keratoplasty" EXACT []
 synonym: "transplantation of cornea" EXACT []
 xref: NCIT:C50514
 property_value: http://purl.org/dc/elements/1.1/date 2020-01-20T10:00:01Z xsd:string
@@ -11919,8 +12555,6 @@ def: "A medical requirement or recommendation of avoiding the consumption of alc
 synonym: "alcoholic beverage consumption avoidance" EXACT []
 synonym: "avoid alcoholic beverage intake" EXACT []
 synonym: "avoiding alcoholic beverage intake" EXACT []
-intersection_of: MAXO:0000056 ! nutrition intake avoidance
-intersection_of: MAXO:0001027 FOODON:00001579 ! avoided food
 property_value: http://purl.org/dc/elements/1.1/date 2019-11-18T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -11934,8 +12568,6 @@ synonym: "broad bean (whole) consumption avoidance" EXACT []
 synonym: "fava bean avoidance" EXACT []
 synonym: "fava bean consumption avoidance" EXACT []
 synonym: "windsor bean intake avoidance" EXACT []
-intersection_of: MAXO:0000056 ! nutrition intake avoidance
-intersection_of: MAXO:0001027 FOODON:03301227 ! avoided food
 property_value: http://purl.org/dc/elements/1.1/date 2020-01-13T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -11946,8 +12578,6 @@ def: "A medical requirement or recommendation of avoiding the consumption of mea
 synonym: "avoid meat food product intake" EXACT []
 synonym: "avoiding meat food product intake" EXACT []
 synonym: "meat food product consumption avoidance" EXACT []
-intersection_of: MAXO:0000056 ! nutrition intake avoidance
-intersection_of: MAXO:0001027 FOODON:00001006 ! avoided food
 property_value: http://purl.org/dc/elements/1.1/date 2020-01-13T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -11958,8 +12588,6 @@ def: "A medical requirement or recommendation of avoiding the consumption of nut
 synonym: "avoid nut food product intake" EXACT []
 synonym: "avoiding nut food product intake" EXACT []
 synonym: "nut food product consumption avoidance" EXACT []
-intersection_of: MAXO:0000056 ! nutrition intake avoidance
-intersection_of: MAXO:0001027 FOODON:00001172 ! avoided food
 property_value: http://purl.org/dc/elements/1.1/date 2020-01-13T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -11970,8 +12598,6 @@ def: "A medical requirement or recommendation of avoiding the consumption of saf
 synonym: "avoid saffron food product intake" EXACT []
 synonym: "avoiding saffron food product intake" EXACT []
 synonym: "saffron food product consumption avoidance" EXACT []
-intersection_of: MAXO:0000056 ! nutrition intake avoidance
-intersection_of: MAXO:0001027 FOODON:00003043 ! avoided food
 property_value: http://purl.org/dc/elements/1.1/date 2020-01-13T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -11982,8 +12608,6 @@ def: "A medical requirement or recommendation of avoiding the consumption of sea
 synonym: "avoid seafood product intake" EXACT []
 synonym: "avoiding seafood product intake" EXACT []
 synonym: "seafood product consumption avoidance" EXACT []
-intersection_of: MAXO:0000056 ! nutrition intake avoidance
-intersection_of: MAXO:0001027 FOODON:00001046 ! avoided food
 property_value: http://purl.org/dc/elements/1.1/date 2020-01-13T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -11994,8 +12618,6 @@ def: "A medical requirement or recommendation of avoiding the consumption of mus
 synonym: "avoid mussel food product intake" EXACT []
 synonym: "avoiding mussel food product intake" EXACT []
 synonym: "mussel food product consumption avoidance" EXACT []
-intersection_of: MAXO:0000056 ! nutrition intake avoidance
-intersection_of: MAXO:0001027 FOODON:00002051 ! avoided food
 property_value: http://purl.org/dc/elements/1.1/date 2020-01-13T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -12006,8 +12628,6 @@ def: "A medical requirement or recommendation of avoiding the consumption of clo
 synonym: "avoid clove food product intake" EXACT []
 synonym: "avoiding clove food product intake" EXACT []
 synonym: "clove food product consumption avoidance" EXACT []
-intersection_of: MAXO:0000056 ! nutrition intake avoidance
-intersection_of: MAXO:0001027 FOODON:00001745 ! avoided food
 property_value: http://purl.org/dc/elements/1.1/date 2020-01-13T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -12018,8 +12638,6 @@ def: "A medical requirement or recommendation of avoiding the consumption of dar
 synonym: "avoid dark chocolate intake" EXACT []
 synonym: "avoiding dark chocolate intake" EXACT []
 synonym: "dark chocolate consumption avoidance" EXACT []
-intersection_of: MAXO:0000056 ! nutrition intake avoidance
-intersection_of: MAXO:0001027 FOODON:03303588 ! avoided food
 property_value: http://purl.org/dc/elements/1.1/date 2020-01-13T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -12030,8 +12648,6 @@ def: "A medical requirement or recommendation of avoiding the consumption of pum
 synonym: "avoid pumpkin seed (shell off) intake" EXACT []
 synonym: "avoiding pumpkin seed (shell off) intake" EXACT []
 synonym: "pumpkin seed (shell off) consumption avoidance" EXACT []
-intersection_of: MAXO:0000056 ! nutrition intake avoidance
-intersection_of: MAXO:0001027 FOODON:03304870 ! avoided food
 property_value: http://purl.org/dc/elements/1.1/date 2020-01-13T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -12042,8 +12658,6 @@ def: "A medical requirement or recommendation of avoiding the consumption of ses
 synonym: "avoid sesame seed intake" EXACT []
 synonym: "avoiding sesame seed intake" EXACT []
 synonym: "sesame seed consumption avoidance" EXACT []
-intersection_of: MAXO:0000056 ! nutrition intake avoidance
-intersection_of: MAXO:0001027 FOODON:03310306 ! avoided food
 property_value: http://purl.org/dc/elements/1.1/date 2020-01-13T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -12054,8 +12668,6 @@ def: "A medical requirement or recommendation of avoiding the consumption of sun
 synonym: "avoid sunflower seed (whole kernel, raw) intake" EXACT []
 synonym: "avoiding sunflower seed (whole kernel, raw) intake" EXACT []
 synonym: "sunflower seed (whole kernel, raw) consumption avoidance" EXACT []
-intersection_of: MAXO:0000056 ! nutrition intake avoidance
-intersection_of: MAXO:0001027 FOODON:03304869 ! avoided food
 property_value: http://purl.org/dc/elements/1.1/date 2020-01-13T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -12066,8 +12678,6 @@ def: "A medical requirement or recommendation of avoiding the consumption of liv
 synonym: "avoid liver (whole, raw) intake" EXACT []
 synonym: "avoiding liver (whole, raw) intake" EXACT []
 synonym: "liver (whole, raw) consumption avoidance" EXACT []
-intersection_of: MAXO:0000056 ! nutrition intake avoidance
-intersection_of: MAXO:0001027 FOODON:03309772 ! avoided food
 property_value: http://purl.org/dc/elements/1.1/date 2020-05-12T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -12078,8 +12688,6 @@ def: "A medical requirement or recommendation of avoiding the consumption of egg
 synonym: "avoid egg or egg component intake" EXACT []
 synonym: "avoiding egg or egg component intake" EXACT []
 synonym: "egg or egg component consumption avoidance" EXACT []
-intersection_of: MAXO:0000056 ! nutrition intake avoidance
-intersection_of: MAXO:0001027 FOODON:03420194 ! avoided food
 property_value: http://purl.org/dc/elements/1.1/date 2020-05-12T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -12090,8 +12698,6 @@ def: "A medical requirement or recommendation of avoiding the consumption of kid
 synonym: "avoid kidney (whole, raw) intake" EXACT []
 synonym: "avoiding kidney (whole, raw) intake" EXACT []
 synonym: "kidney (whole, raw) consumption avoidance" EXACT []
-intersection_of: MAXO:0000056 ! nutrition intake avoidance
-intersection_of: MAXO:0001027 FOODON:03310898 ! avoided food
 property_value: http://purl.org/dc/elements/1.1/date 2020-05-12T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -12102,8 +12708,6 @@ def: "A medical requirement or recommendation of avoiding the consumption of pea
 synonym: "avoid peas (whole, rehydrated, canned) intake" EXACT []
 synonym: "avoiding peas (whole, rehydrated, canned) intake" EXACT []
 synonym: "peas (whole, rehydrated, canned) consumption avoidance" EXACT []
-intersection_of: MAXO:0000056 ! nutrition intake avoidance
-intersection_of: MAXO:0001027 FOODON:03306812 ! avoided food
 property_value: http://purl.org/dc/elements/1.1/date 2020-05-12T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -12114,8 +12718,6 @@ def: "A medical requirement or recommendation of avoiding the consumption of bea
 synonym: "avoid bean food product intake" EXACT []
 synonym: "avoiding bean food product intake" EXACT []
 synonym: "bean food product consumption avoidance" EXACT []
-intersection_of: MAXO:0000056 ! nutrition intake avoidance
-intersection_of: MAXO:0001027 FOODON:00001635 ! avoided food
 property_value: http://purl.org/dc/elements/1.1/date 2020-05-12T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -12126,8 +12728,6 @@ def: "A medical requirement or recommendation of avoiding the consumption of pea
 synonym: "avoid peanut (whole) intake" EXACT []
 synonym: "avoiding peanut (whole) intake" EXACT []
 synonym: "peanut (whole) consumption avoidance" EXACT []
-intersection_of: MAXO:0000056 ! nutrition intake avoidance
-intersection_of: MAXO:0001027 FOODON:00003206 ! avoided food
 property_value: http://purl.org/dc/elements/1.1/date 2020-05-12T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -12139,8 +12739,6 @@ synonym: "avoid soybean refined food product intake" EXACT []
 synonym: "avoiding soybean refined food product intake" EXACT []
 synonym: "soya intake avoiance" EXACT []
 synonym: "soybean refined food product consumption avoidance" EXACT []
-intersection_of: MAXO:0000056 ! nutrition intake avoidance
-intersection_of: MAXO:0001027 FOODON:00002264 ! avoided food
 property_value: http://purl.org/dc/elements/1.1/date 2020-05-12T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -12153,8 +12751,6 @@ synonym: "avoid 010  brassica (cole or cabbage) vegetables, head cabbage, flower
 synonym: "avoid brassicas intake" EXACT []
 synonym: "avoiding 010  brassica (cole or cabbage) vegetables, head cabbage, flowerhead brassicas (vb) (ccpr) intake" EXACT []
 synonym: "brassicas vegetable intake avoidance" EXACT []
-intersection_of: MAXO:0000056 ! nutrition intake avoidance
-intersection_of: MAXO:0001027 FOODON:03400675 ! avoided food
 property_value: http://purl.org/dc/elements/1.1/date 2020-05-12T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -12165,8 +12761,6 @@ def: "A medical requirement or recommendation of avoiding the consumption of bru
 synonym: "avoid brussels sprout food product intake" EXACT []
 synonym: "avoiding brussels sprout food product intake" EXACT []
 synonym: "brussels sprout food product consumption avoidance" EXACT []
-intersection_of: MAXO:0000056 ! nutrition intake avoidance
-intersection_of: MAXO:0001027 FOODON:00001670 ! avoided food
 property_value: http://purl.org/dc/elements/1.1/date 2020-05-12T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -12177,8 +12771,6 @@ def: "A medical requirement or recommendation of avoiding the consumption of bro
 synonym: "avoid broccoli food product intake" EXACT []
 synonym: "avoiding broccoli food product intake" EXACT []
 synonym: "broccoli food product consumption avoidance" EXACT []
-intersection_of: MAXO:0000056 ! nutrition intake avoidance
-intersection_of: MAXO:0001027 FOODON:00001666 ! avoided food
 property_value: http://purl.org/dc/elements/1.1/date 2020-05-12T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -12189,8 +12781,6 @@ def: "A medical requirement or recommendation of avoiding the consumption of cab
 synonym: "avoid cabbage head food product intake" EXACT []
 synonym: "avoiding cabbage head food product intake" EXACT []
 synonym: "cabbage head food product consumption avoidance" EXACT []
-intersection_of: MAXO:0000056 ! nutrition intake avoidance
-intersection_of: MAXO:0001027 FOODON:00001677 ! avoided food
 property_value: http://purl.org/dc/elements/1.1/date 2020-05-12T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -12201,8 +12791,6 @@ def: "A medical requirement or recommendation of avoiding the consumption of cau
 synonym: "avoid cauliflower food product intake" EXACT []
 synonym: "avoiding cauliflower food product intake" EXACT []
 synonym: "cauliflower food product consumption avoidance" EXACT []
-intersection_of: MAXO:0000056 ! nutrition intake avoidance
-intersection_of: MAXO:0001027 FOODON:00001703 ! avoided food
 property_value: http://purl.org/dc/elements/1.1/date 2020-05-12T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -12213,8 +12801,6 @@ def: "A medical requirement or recommendation of avoiding the consumption of rap
 synonym: "avoid rapeseed food product intake" EXACT []
 synonym: "avoiding rapeseed food product intake" EXACT []
 synonym: "rapeseed food product consumption avoidance" EXACT []
-intersection_of: MAXO:0000056 ! nutrition intake avoidance
-intersection_of: MAXO:0001027 FOODON:00002187 ! avoided food
 property_value: http://purl.org/dc/elements/1.1/date 2020-05-12T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -12225,8 +12811,6 @@ def: "A medical requirement or recommendation of avoiding the consumption of rap
 synonym: "avoid rapeseed oil intake" EXACT []
 synonym: "avoiding rapeseed oil intake" EXACT []
 synonym: "rapeseed oil consumption avoidance" EXACT []
-intersection_of: MAXO:0000056 ! nutrition intake avoidance
-intersection_of: MAXO:0001027 FOODON:03310482 ! avoided food
 property_value: http://purl.org/dc/elements/1.1/date 2020-05-12T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -12237,8 +12821,6 @@ def: "A medical requirement or recommendation of avoiding the consumption of rap
 synonym: "avoid rapeseed meal intake" EXACT []
 synonym: "avoiding rapeseed meal intake" EXACT []
 synonym: "rapeseed meal consumption avoidance" EXACT []
-intersection_of: MAXO:0000056 ! nutrition intake avoidance
-intersection_of: MAXO:0001027 FOODON:03310043 ! avoided food
 property_value: http://purl.org/dc/elements/1.1/date 2020-05-12T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -12249,8 +12831,6 @@ def: "A medical requirement or recommendation of avoiding the consumption of cep
 synonym: "avoid cephalopod intake" EXACT []
 synonym: "avoiding cephalopod intake" EXACT []
 synonym: "cephalopod consumption avoidance" EXACT []
-intersection_of: MAXO:0000056 ! nutrition intake avoidance
-intersection_of: MAXO:0001027 FOODON:03412116 ! avoided food
 property_value: http://purl.org/dc/elements/1.1/date 2020-05-12T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -12261,8 +12841,6 @@ def: "A medical requirement or recommendation of avoiding the consumption of cru
 synonym: "avoid crustacean intake" EXACT []
 synonym: "avoiding crustacean intake" EXACT []
 synonym: "crustacean consumption avoidance" EXACT []
-intersection_of: MAXO:0000056 ! nutrition intake avoidance
-intersection_of: MAXO:0001027 FOODON:03411374 ! avoided food
 property_value: http://purl.org/dc/elements/1.1/date 2020-05-12T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -12273,8 +12851,6 @@ def: "A medical requirement or recommendation of avoiding the consumption of bar
 synonym: "avoid barley malt beer beverage intake" EXACT []
 synonym: "avoiding barley malt beer beverage intake" EXACT []
 synonym: "barley malt beer beverage consumption avoidance" EXACT []
-intersection_of: MAXO:0000056 ! nutrition intake avoidance
-intersection_of: MAXO:0001027 FOODON:03301619 ! avoided food
 property_value: http://purl.org/dc/elements/1.1/date 2020-05-12T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -12285,8 +12861,6 @@ def: "A medical requirement or recommendation of avoiding the consumption of cor
 synonym: "avoid corn syrup (high fructose) intake" EXACT []
 synonym: "avoiding corn syrup (high fructose) intake" EXACT []
 synonym: "corn syrup (high fructose) consumption avoidance" EXACT []
-intersection_of: MAXO:0000056 ! nutrition intake avoidance
-intersection_of: MAXO:0001027 FOODON:03315149 ! avoided food
 property_value: http://purl.org/dc/elements/1.1/date 2020-05-12T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -12299,8 +12873,6 @@ synonym: "avoiding sorbitol syrup intake" EXACT []
 synonym: "dietary sorbitol intake avoidance" EXACT []
 synonym: "sorbitol intake avoidance" EXACT []
 synonym: "sorbitol syrup consumption avoidance" EXACT []
-intersection_of: MAXO:0000056 ! nutrition intake avoidance
-intersection_of: MAXO:0001027 FOODON:03413286 ! avoided food
 property_value: http://purl.org/dc/elements/1.1/date 2020-05-12T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -12311,8 +12883,6 @@ def: "A medical requirement or recommendation of avoiding the consumption of hum
 synonym: "avoid human milk based food product intake" EXACT []
 synonym: "avoiding human milk based food product intake" EXACT []
 synonym: "human milk based food product consumption avoidance" EXACT []
-intersection_of: MAXO:0000056 ! nutrition intake avoidance
-intersection_of: MAXO:0001027 FOODON:00001958 ! avoided food
 property_value: http://purl.org/dc/elements/1.1/date 2020-05-12T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -12324,8 +12894,6 @@ synonym: "avoid cow milk based food product intake" EXACT []
 synonym: "avoiding cow milk based food product intake" EXACT []
 synonym: "bovine milk intake avoidance" EXACT []
 synonym: "cow milk based food product consumption avoidance" EXACT []
-intersection_of: MAXO:0000056 ! nutrition intake avoidance
-intersection_of: MAXO:0001027 FOODON:00001771 ! avoided food
 property_value: http://purl.org/dc/elements/1.1/date 2020-05-12T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -12336,8 +12904,6 @@ def: "A medical requirement or recommendation of avoiding the consumption of fru
 synonym: "avoid fruit (whole, raw) intake" EXACT []
 synonym: "avoiding fruit (whole, raw) intake" EXACT []
 synonym: "fruit (whole, raw) consumption avoidance" EXACT []
-intersection_of: MAXO:0000056 ! nutrition intake avoidance
-intersection_of: MAXO:0001027 FOODON:03304644 ! avoided food
 property_value: http://purl.org/dc/elements/1.1/date 2020-05-12T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -12348,8 +12914,6 @@ def: "A medical requirement or recommendation of avoiding the consumption of hen
 synonym: "avoid hen egg (whole, shell off, raw) intake" EXACT []
 synonym: "avoiding hen egg (whole, shell off, raw) intake" EXACT []
 synonym: "hen egg (whole, shell off, raw) consumption avoidance" EXACT []
-intersection_of: MAXO:0000056 ! nutrition intake avoidance
-intersection_of: MAXO:0001027 FOODON:03301075 ! avoided food
 property_value: http://purl.org/dc/elements/1.1/date 2020-05-12T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -12360,8 +12924,6 @@ def: "A medical requirement or recommendation of avoiding the consumption of fru
 synonym: "avoid fruit juice food product intake" EXACT []
 synonym: "avoiding fruit juice food product intake" EXACT []
 synonym: "fruit juice food product consumption avoidance" EXACT []
-intersection_of: MAXO:0000056 ! nutrition intake avoidance
-intersection_of: MAXO:0001027 FOODON:00001140 ! avoided food
 property_value: http://purl.org/dc/elements/1.1/date 2020-05-12T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -12372,8 +12934,6 @@ def: "A medical requirement or recommendation of avoiding the consumption of sug
 synonym: "avoid sugar cane juice (pure) intake" EXACT []
 synonym: "avoiding sugar cane juice (pure) intake" EXACT []
 synonym: "sugar cane juice (pure) consumption avoidance" EXACT []
-intersection_of: MAXO:0000056 ! nutrition intake avoidance
-intersection_of: MAXO:0001027 FOODON:03305288 ! avoided food
 property_value: http://purl.org/dc/elements/1.1/date 2020-05-12T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -12384,8 +12944,6 @@ def: "A medical requirement or recommendation of avoiding the consumption of org
 synonym: "avoid organ meat intake" EXACT []
 synonym: "avoiding organ meat intake" EXACT []
 synonym: "organ meat consumption avoidance" EXACT []
-intersection_of: MAXO:0000056 ! nutrition intake avoidance
-intersection_of: MAXO:0001027 FOODON:03420218 ! avoided food
 property_value: http://purl.org/dc/elements/1.1/date 2020-05-12T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -12398,8 +12956,6 @@ synonym: "avoiding dietary isoleucine intake" EXACT []
 synonym: "isoleucine consumption avoidance" EXACT []
 synonym: "isoleucine restricted diet intake" EXACT []
 synonym: "isoleucine restriction" EXACT []
-intersection_of: MAXO:0000056 ! nutrition intake avoidance
-intersection_of: MAXO:0001027 CHEBI:24898 ! avoided food
 property_value: http://purl.org/dc/elements/1.1/date 2020-05-12T09:00:01Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -12412,8 +12968,6 @@ synonym: "arginine restricted diet intake" EXACT []
 synonym: "arginine restriction" EXACT []
 synonym: "avoid arginine intake" EXACT []
 synonym: "avoiding dietary arginine intake" EXACT []
-intersection_of: MAXO:0000056 ! nutrition intake avoidance
-intersection_of: MAXO:0001027 CHEBI:29016 ! avoided food
 property_value: http://purl.org/dc/elements/1.1/date 2020-05-12T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -12426,8 +12980,6 @@ synonym: "avoiding dietary lysine intake" EXACT []
 synonym: "lysine consumption avoidance" EXACT []
 synonym: "lysine restricted diet intake" EXACT []
 synonym: "lysine restriction" EXACT []
-intersection_of: MAXO:0000056 ! nutrition intake avoidance
-intersection_of: MAXO:0001027 CHEBI:25094 ! avoided food
 property_value: http://purl.org/dc/elements/1.1/date 2020-05-12T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -12440,8 +12992,6 @@ synonym: "avoiding dietary methionine intake" EXACT []
 synonym: "methionine consumption avoidance" EXACT []
 synonym: "methionine restricted diet intake" EXACT []
 synonym: "methionine restriction" EXACT []
-intersection_of: MAXO:0000056 ! nutrition intake avoidance
-intersection_of: MAXO:0001027 CHEBI:16811 ! avoided food
 property_value: http://purl.org/dc/elements/1.1/date 2020-05-12T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -12454,8 +13004,6 @@ synonym: "avoiding dietary glycine intake" EXACT []
 synonym: "glycine consumption avoidance" EXACT []
 synonym: "glycine restricted diet intake" EXACT []
 synonym: "glycine restriction" EXACT []
-intersection_of: MAXO:0000056 ! nutrition intake avoidance
-intersection_of: MAXO:0001027 CHEBI:15428 ! avoided food
 property_value: http://purl.org/dc/elements/1.1/date 2020-05-12T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -12468,8 +13016,6 @@ synonym: "avoiding dietary phenylalanine intake" EXACT []
 synonym: "phenylalanine consumption avoidance" EXACT []
 synonym: "phenylalanine restricted diet intake" EXACT []
 synonym: "phenylalanine restriction" EXACT []
-intersection_of: MAXO:0000056 ! nutrition intake avoidance
-intersection_of: MAXO:0001027 CHEBI:28044 ! avoided food
 property_value: http://purl.org/dc/elements/1.1/date 2020-05-12T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -12482,23 +13028,19 @@ synonym: "avoiding dietary tyrosine intake" EXACT []
 synonym: "tyrosine consumption avoidance" EXACT []
 synonym: "tyrosine restricted diet intake" EXACT []
 synonym: "tyrosine restriction" EXACT []
-intersection_of: MAXO:0000056 ! nutrition intake avoidance
-intersection_of: MAXO:0001027 CHEBI:18186 ! avoided food
 property_value: http://purl.org/dc/elements/1.1/date 2020-05-12T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
 [Term]
 id: MAXO:0010096
 name: dietary sodium intake avoidance
-def: "A medical requirement or recommendation of avoiding the consumption of sodium atomsodium." []
-synonym: "avoid sodium atomsodium intake" EXACT []
-synonym: "avoiding dietary sodium atomsodium intake" EXACT []
-synonym: "sodium atomsodium consumption avoidance" EXACT []
-synonym: "sodium atomsodium restricted diet intake" EXACT []
-synonym: "sodium atomsodium restriction" EXACT []
+def: "A medical requirement or recommendation of avoiding the consumption of sodiumsodium atom." []
+synonym: "avoid sodiumsodium atom intake" EXACT []
+synonym: "avoiding dietary sodiumsodium atom intake" EXACT []
 synonym: "sodium restriction" EXACT []
-intersection_of: MAXO:0000056 ! nutrition intake avoidance
-intersection_of: MAXO:0001027 CHEBI:26708 ! avoided food
+synonym: "sodiumsodium atom consumption avoidance" EXACT []
+synonym: "sodiumsodium atom restricted diet intake" EXACT []
+synonym: "sodiumsodium atom restriction" EXACT []
 property_value: http://purl.org/dc/elements/1.1/date 2020-05-12T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -12511,8 +13053,6 @@ synonym: "avoiding dietary galactose intake" EXACT []
 synonym: "galactose consumption avoidance" EXACT []
 synonym: "galactose restricted diet intake" EXACT []
 synonym: "galactose restriction" EXACT []
-intersection_of: MAXO:0000056 ! nutrition intake avoidance
-intersection_of: MAXO:0001027 CHEBI:28260 ! avoided food
 property_value: http://purl.org/dc/elements/1.1/date 2020-05-12T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -12530,8 +13070,6 @@ synonym: "avoiding dietary cholesterol intake" EXACT []
 synonym: "cholesterol consumption avoidance" EXACT []
 synonym: "cholesterol restricted diet intake" EXACT []
 synonym: "cholesterol restriction" EXACT []
-intersection_of: MAXO:0000056 ! nutrition intake avoidance
-intersection_of: MAXO:0001027 CHEBI:16113 ! avoided food
 property_value: http://purl.org/dc/elements/1.1/date 2020-05-12T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -12547,8 +13085,6 @@ synonym: "excessive iron consumption avoidance" EXACT []
 synonym: "iron atomiron consumption avoidance" EXACT []
 synonym: "iron atomiron restricted diet intake" EXACT []
 synonym: "iron atomiron restriction" EXACT []
-intersection_of: MAXO:0000056 ! nutrition intake avoidance
-intersection_of: MAXO:0001027 CHEBI:18248 ! avoided food
 property_value: http://purl.org/dc/elements/1.1/date 2020-05-12T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -12561,8 +13097,6 @@ synonym: "ascorbic acid restricted diet intake" EXACT []
 synonym: "ascorbic acid restriction" EXACT []
 synonym: "avoid ascorbic acid intake" EXACT []
 synonym: "avoiding dietary ascorbic acid intake" EXACT []
-intersection_of: MAXO:0000056 ! nutrition intake avoidance
-intersection_of: MAXO:0001027 CHEBI:22652 ! avoided food
 property_value: http://purl.org/dc/elements/1.1/date 2020-05-12T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -12581,8 +13115,6 @@ synonym: "branched-chain amino acid restricted diet intake" EXACT []
 synonym: "branched-chain amino acid restriction" EXACT []
 synonym: "low BCAA diet intake" EXACT []
 synonym: "low BCAA diet recommendation" EXACT []
-intersection_of: MAXO:0000056 ! nutrition intake avoidance
-intersection_of: MAXO:0001027 CHEBI:22918 ! avoided food
 property_value: http://purl.org/dc/elements/1.1/date 2020-05-12T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -12595,8 +13127,6 @@ synonym: "avoiding dietary trimethylamine intake" EXACT []
 synonym: "trimethylamine consumption avoidance" EXACT []
 synonym: "trimethylamine restricted diet intake" EXACT []
 synonym: "trimethylamine restriction" EXACT []
-intersection_of: MAXO:0000056 ! nutrition intake avoidance
-intersection_of: MAXO:0001027 CHEBI:18139 ! avoided food
 property_value: http://purl.org/dc/elements/1.1/date 2020-05-12T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -12609,8 +13139,6 @@ synonym: "avoiding dietary choline intake" EXACT []
 synonym: "choline consumption avoidance" EXACT []
 synonym: "choline restricted diet intake" EXACT []
 synonym: "choline restriction" EXACT []
-intersection_of: MAXO:0000056 ! nutrition intake avoidance
-intersection_of: MAXO:0001027 CHEBI:15354 ! avoided food
 property_value: http://purl.org/dc/elements/1.1/date 2020-05-12T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -12623,8 +13151,6 @@ synonym: "avoiding dietary trimethylamine N-oxide intake" EXACT []
 synonym: "trimethylamine N-oxide consumption avoidance" EXACT []
 synonym: "trimethylamine N-oxide restricted diet intake" EXACT []
 synonym: "trimethylamine N-oxide restriction" EXACT []
-intersection_of: MAXO:0000056 ! nutrition intake avoidance
-intersection_of: MAXO:0001027 CHEBI:15724 ! avoided food
 property_value: http://purl.org/dc/elements/1.1/date 2020-05-12T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -12637,8 +13163,6 @@ synonym: "avoiding dietary lecithin intake" EXACT []
 synonym: "lecithin consumption avoidance" EXACT []
 synonym: "lecithin restricted diet intake" EXACT []
 synonym: "lecithin restriction" EXACT []
-intersection_of: MAXO:0000056 ! nutrition intake avoidance
-intersection_of: MAXO:0001027 CHEBI:61995 ! avoided food
 property_value: http://purl.org/dc/elements/1.1/date 2020-05-12T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -12651,8 +13175,6 @@ synonym: "avoiding dietary sterol intake" EXACT []
 synonym: "sterol consumption avoidance" EXACT []
 synonym: "sterol restricted diet intake" EXACT []
 synonym: "sterol restriction" EXACT []
-intersection_of: MAXO:0000056 ! nutrition intake avoidance
-intersection_of: MAXO:0001027 CHEBI:15889 ! avoided food
 property_value: http://purl.org/dc/elements/1.1/date 2020-05-12T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -12665,8 +13187,6 @@ synonym: "avoiding dietary purine intake" EXACT []
 synonym: "purine consumption avoidance" EXACT []
 synonym: "purine restricted diet intake" EXACT []
 synonym: "purine restriction" EXACT []
-intersection_of: MAXO:0000056 ! nutrition intake avoidance
-intersection_of: MAXO:0001027 CHEBI:35584 ! avoided food
 property_value: http://purl.org/dc/elements/1.1/date 2020-05-12T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -12680,8 +13200,6 @@ synonym: "fructose consumption avoidance" EXACT []
 synonym: "fructose restricted diet intake" EXACT []
 synonym: "fructose restriction" EXACT []
 synonym: "low fructose diet intake" EXACT []
-intersection_of: MAXO:0000056 ! nutrition intake avoidance
-intersection_of: MAXO:0001027 CHEBI:28757 ! avoided food
 property_value: http://purl.org/dc/elements/1.1/date 2020-05-12T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -12694,8 +13212,6 @@ synonym: "avoiding dietary lactose intake" EXACT []
 synonym: "lactose consumption avoidance" EXACT []
 synonym: "lactose restricted diet intake" EXACT []
 synonym: "lactose restriction" EXACT []
-intersection_of: MAXO:0000056 ! nutrition intake avoidance
-intersection_of: MAXO:0001027 CHEBI:17716 ! avoided food
 property_value: http://purl.org/dc/elements/1.1/date 2020-05-12T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -12708,8 +13224,6 @@ synonym: "avoiding dietary leucine intake" EXACT []
 synonym: "leucine consumption avoidance" EXACT []
 synonym: "leucine restricted diet intake" EXACT []
 synonym: "leucine restriction" EXACT []
-intersection_of: MAXO:0000056 ! nutrition intake avoidance
-intersection_of: MAXO:0001027 CHEBI:25017 ! avoided food
 property_value: http://purl.org/dc/elements/1.1/date 2020-05-12T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -12722,8 +13236,6 @@ synonym: "avoiding dietary oxalate intake" EXACT []
 synonym: "oxalate consumption avoidance" EXACT []
 synonym: "oxalate restricted diet intake" EXACT []
 synonym: "oxalate restriction" EXACT []
-intersection_of: MAXO:0000056 ! nutrition intake avoidance
-intersection_of: MAXO:0001027 CHEBI:132952 ! avoided food
 property_value: http://purl.org/dc/elements/1.1/date 2020-05-12T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -12736,8 +13248,6 @@ synonym: "avoiding dietary phosphate intake" EXACT []
 synonym: "phosphate consumption avoidance" EXACT []
 synonym: "phosphate restricted diet intake" EXACT []
 synonym: "phosphate restriction" EXACT []
-intersection_of: MAXO:0000056 ! nutrition intake avoidance
-intersection_of: MAXO:0001027 CHEBI:26020 ! avoided food
 property_value: http://purl.org/dc/elements/1.1/date 2020-05-12T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -12750,8 +13260,6 @@ synonym: "avoiding dietary saturated fatty acid intake" EXACT []
 synonym: "saturated fatty acid consumption avoidance" EXACT []
 synonym: "saturated fatty acid restricted diet intake" EXACT []
 synonym: "saturated fatty acid restriction" EXACT []
-intersection_of: MAXO:0000056 ! nutrition intake avoidance
-intersection_of: MAXO:0001027 CHEBI:26607 ! avoided food
 property_value: http://purl.org/dc/elements/1.1/date 2020-05-12T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -12764,8 +13272,6 @@ synonym: "avoiding dietary calcium atomcalcium intake" EXACT []
 synonym: "calcium atomcalcium consumption avoidance" EXACT []
 synonym: "calcium atomcalcium restricted diet intake" EXACT []
 synonym: "calcium atomcalcium restriction" EXACT []
-intersection_of: MAXO:0000056 ! nutrition intake avoidance
-intersection_of: MAXO:0001027 CHEBI:22984 ! avoided food
 property_value: http://purl.org/dc/elements/1.1/date 2020-05-12T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -12778,8 +13284,6 @@ synonym: "avoiding dietary sucrose intake" EXACT []
 synonym: "sucrose consumption avoidance" EXACT []
 synonym: "sucrose restricted diet intake" EXACT []
 synonym: "sucrose restriction" EXACT []
-intersection_of: MAXO:0000056 ! nutrition intake avoidance
-intersection_of: MAXO:0001027 CHEBI:17992 ! avoided food
 property_value: http://purl.org/dc/elements/1.1/date 2020-05-12T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -12792,8 +13296,6 @@ synonym: "avoiding dietary triglyceride intake" EXACT []
 synonym: "triglyceride consumption avoidance" EXACT []
 synonym: "triglyceride restricted diet intake" EXACT []
 synonym: "triglyceride restriction" EXACT []
-intersection_of: MAXO:0000056 ! nutrition intake avoidance
-intersection_of: MAXO:0001027 CHEBI:17855 ! avoided food
 property_value: http://purl.org/dc/elements/1.1/date 2020-05-12T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -12808,8 +13310,6 @@ synonym: "riboflavinriboflavin (b2) consumption avoidance" EXACT []
 synonym: "riboflavinriboflavin (b2) restricted diet intake" EXACT []
 synonym: "riboflavinriboflavin (b2) restriction" EXACT []
 synonym: "vitamin B12 intake avoidance" EXACT []
-intersection_of: MAXO:0000056 ! nutrition intake avoidance
-intersection_of: MAXO:0001027 CHEBI:17015 ! avoided food
 property_value: http://purl.org/dc/elements/1.1/date 2020-05-12T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -12822,8 +13322,6 @@ synonym: "avoiding dietary phytanic acid intake" EXACT []
 synonym: "phytanic acid consumption avoidance" EXACT []
 synonym: "phytanic acid restricted diet intake" EXACT []
 synonym: "phytanic acid restriction" EXACT []
-intersection_of: MAXO:0000056 ! nutrition intake avoidance
-intersection_of: MAXO:0001027 CHEBI:16285 ! avoided food
 property_value: http://purl.org/dc/elements/1.1/date 2020-05-12T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -12890,6 +13388,7 @@ synonym: "heart ultrasound imaging procedure" EXACT []
 synonym: "heart ultrasound procedure" EXACT []
 synonym: "sonography of heart" EXACT []
 synonym: "ultrasonography of heart" EXACT []
+is_a: MAXO:0000493 ! cardiovascular diagnostic procedure
 property_value: http://purl.org/dc/elements/1.1/date 2020-01-24T20:39:14Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -13392,8 +13891,6 @@ name: avoid CT scans
 def: "Avoid the administration or use of computed tomography procedure." []
 synonym: "avoid computed tomography procedure" EXACT []
 synonym: "avoiding computed tomography procedure" EXACT []
-intersection_of: MAXO:0001014 ! medical action avoidance
-intersection_of: MAXO:0001015 MAXO:0000571 ! avoided medical action computed tomography procedure
 property_value: http://purl.org/dc/elements/1.1/date 2020-03-30T20:39:14Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -13403,8 +13900,6 @@ name: ketogenic diet intake avoidance
 def: "Avoid the administration or use of ketogenic diet intake." []
 synonym: "avoid ketogenic diet intake" EXACT []
 synonym: "avoiding ketogenic diet intake" EXACT []
-intersection_of: MAXO:0001014 ! medical action avoidance
-intersection_of: MAXO:0001015 MAXO:0030010 ! avoided medical action ketogenic diet intake
 property_value: http://purl.org/dc/elements/1.1/date 2020-05-12T20:39:14Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 

@@ -12,7 +12,7 @@ buildscript {
     }
 }
 
-version "1.7.12"
+version "1.7.13"
 group "hpo.angular.app"
 
 apply plugin:"eclipse"
@@ -47,9 +47,6 @@ dependencies {
   compile 'org.monarchinitiative.phenol:phenol-annotations:1.6.1'
   compile 'com.google.guava:guava:28.2-jre'
 
-  // Raw jar file with its dependencies. Remove when switch to maven
-  //compile name:'phenol-core-1.2.1'
-  //compile name:'phenol-io-1.2.1'
   // Raw jar file for loinc2hpo
   compile name:'Loinc2HpoLib'
 
@@ -95,8 +92,8 @@ dependencies {
 
   compile 'org.grails.plugins:swagger:1.0.1'
 
-  compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.11.2'
-  compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.11.2'
+  compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.17.0'
+  compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.17.0'
 
   runtime 'org.grails.plugins:grails-console:2.1.1'
   runtime "org.glassfish.web:el-impl:2.1.2-b03"
