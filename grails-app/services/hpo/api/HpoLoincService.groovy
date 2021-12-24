@@ -2,8 +2,8 @@ package hpo.api
 
 import grails.compiler.GrailsCompileStatic
 import hpo.api.util.Loinc2Hpo
-import org.monarchinitiative.loinc2hpo.loinc.LoincEntry
-import org.monarchinitiative.loinc2hpo.loinc.LoincId
+import org.monarchinitiative.loinc2hpocore.loinc.LoincEntry
+import org.monarchinitiative.loinc2hpocore.loinc.LoincId
 import org.monarchinitiative.phenol.ontology.data.TermId
 
 @GrailsCompileStatic
@@ -16,17 +16,15 @@ class HpoLoincService {
   Loinc2Hpo hpoLoinc
 
   Set<LoincEntry> searchByHpo(TermId query) {
-    Set<LoincId> loincIds = hpoLoinc.getReverseAnnotationMap().get(query)
-    Map<LoincId, LoincEntry> loincEntryMap = hpoLoinc.getLoincEntryMap()
+    Set<LoincId> loincIds = hpoLoinc.getHpoToLoincMap().get(query)
+    Map<LoincId, LoincEntry> loincEntryMap = hpoLoinc.getLoincCoreMap()
 
     Set<LoincEntry> result = new HashSet<>()
     if(loincIds != null){
       loincIds.each { LoincId loincId ->
-        LoincEntry loincEntry = loincEntryMap.get(loincId)
-        result.add(loincEntry)
+        result.add(loincEntryMap.get(loincId))
       }
     }
-
     return result
   }
 }

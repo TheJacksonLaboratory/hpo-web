@@ -1,8 +1,8 @@
 package hpo.api.util
 
 import org.grails.io.support.ClassPathResource
-import org.monarchinitiative.loinc2hpo.loinc.LoincEntry
-import org.monarchinitiative.loinc2hpo.loinc.LoincId
+import org.monarchinitiative.loinc2hpocore.loinc.LoincEntry
+import org.monarchinitiative.loinc2hpocore.loinc.LoincId
 import org.monarchinitiative.phenol.ontology.data.TermId
 import spock.lang.Shared
 import spock.lang.Specification
@@ -16,8 +16,8 @@ class Loinc2HpoFactorySpec extends Specification {
 
   void setupSpec() {
     factory = new Loinc2HpoFactory()
-    factory.setAnnotationPath(new ClassPathResource("annotations_test.tsv").file.absolutePath)
-    factory.setLoincEntryPath(new ClassPathResource("LoincTableCore_test.csv").file.absolutePath)
+    factory.setAnnotationPath(new ClassPathResource("loinc_annotations.tsv").file.absolutePath)
+    factory.setLoincCorePath(new ClassPathResource("LoincTableCore_test.csv").file.absolutePath)
   }
 
   def "Annotation map has correct size and keys"() {
@@ -28,6 +28,8 @@ class Loinc2HpoFactorySpec extends Specification {
     then:
       resultMap.size() == expectedSize
       resultMap.keySet().toString() == expectedKeys
+
+
 
     where:
     expectedSize | expectedKeys
@@ -62,13 +64,13 @@ class Loinc2HpoFactorySpec extends Specification {
     LoincEntry result = loincMap.get(new LoincId(inputTerm))
 
     then:
-    result*.getScale() == expectedScale
-    result*.getLongName() == expectedName;
+    result.getScale().shortName() == expectedScale
+    result.getLongName() == expectedName
 
     where:
     inputTerm     | expectedScale | expectedName                                | desc
-    "10040-4"     |   ["Qn"]      | ["S wave amplitude in lead V1"]             | "correct result"
-    "38230-9"     |   ["Qn"]      | ["Calcium.ionized [Mass/volume] in Blood"]  | "correct result1"
+    "10040-4"     |   "Qn"      | "S wave amplitude in lead V1"                | "correct result"
+    "38230-9"     |   "Qn"      | "Calcium.ionized [Mass/volume] in Blood"  | "correct result1"
 
   }
 }

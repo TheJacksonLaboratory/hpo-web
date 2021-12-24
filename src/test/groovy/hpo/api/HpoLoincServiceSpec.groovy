@@ -2,8 +2,8 @@ package hpo.api
 
 import grails.testing.services.ServiceUnitTest
 import hpo.api.util.Loinc2Hpo
-import org.monarchinitiative.loinc2hpo.loinc.LoincEntry
-import org.monarchinitiative.loinc2hpo.loinc.LoincId
+import org.monarchinitiative.loinc2hpocore.loinc.LoincEntry
+import org.monarchinitiative.loinc2hpocore.loinc.LoincId
 import org.monarchinitiative.phenol.ontology.data.TermId
 import spock.lang.Shared
 import spock.lang.Specification
@@ -27,13 +27,13 @@ class HpoLoincServiceSpec extends Specification implements ServiceUnitTest<HpoLo
       mockLoincEntryMap.put(buildMockLoincId("38230-9"), buildMockLoincEntry(getOneLoincLine()))
       mockReverseMap.put(TermId.of("HP:0004363"), new HashSet<LoincId>(Arrays.asList(new LoincId("38230-9"))))
       service.hpoLoinc = Mock(Loinc2Hpo)
-      service.hpoLoinc.getReverseAnnotationMap() >> mockReverseMap
-      service.hpoLoinc.getLoincEntryMap() >> mockLoincEntryMap
+      service.hpoLoinc.getHpoToLoincMap() >> mockReverseMap
+      service.hpoLoinc.getLoincCoreMap() >> mockLoincEntryMap
     when:
 
       Set<LoincEntry> result = service.searchByHpo(query)
-      service.hpoLoinc.getReverseAnnotationMap() == mockReverseMap
-      service.hpoLoinc.getLoincEntryMap() == mockLoincEntryMap
+      service.hpoLoinc.getHpoToLoincMap() == mockReverseMap
+      service.hpoLoinc.getLoincCoreMap() == mockLoincEntryMap
 
     then:
       result.size() == 1
@@ -46,7 +46,7 @@ class HpoLoincServiceSpec extends Specification implements ServiceUnitTest<HpoLo
   }
 
   def buildMockLoincEntry(String loincLine){
-    return new  LoincEntry(loincLine)
+    return LoincEntry.fromQuotedCsvLine(loincLine)
   }
 
   def getOneLoincLine(){
