@@ -1,0 +1,164 @@
+buildscript {
+  repositories {
+    gradlePluginPortal()
+    maven { url "https://repo.grails.org/grails/core" }
+  }
+  dependencies {
+    classpath "org.grails:grails-gradle-plugin:$grailsGradlePluginVersion"
+    classpath "org.grails.plugins:hibernate5:7.2.0"
+    classpath "org.grails.plugins:views-gradle:2.1.2"
+    classpath "gradle.plugin.com.github.erdi.webdriver-binaries:webdriver-binaries-gradle-plugin:2.7"
+    classpath "com.github.node-gradle:gradle-node-plugin:3.1.1"
+    classpath "com.dorongold.plugins:task-tree:2.1.0"
+  }
+}
+
+version "1.17.13"
+group "hpo.api"
+
+apply plugin:"idea"
+apply plugin: 'java'
+apply plugin:"war"
+apply plugin:"org.grails.grails-web"
+apply plugin:"org.grails.plugins.views-json"
+apply plugin:"com.github.erdi.webdriver-binaries"
+apply plugin: 'com.github.node-gradle.node'
+apply plugin: "com.dorongold.task-tree"
+
+sourceCompatibility = 1.11
+
+repositories {
+  maven { url "https://repo.grails.org/grails/core" }
+}
+
+configurations {
+  developmentOnly
+  runtimeClasspath {
+    extendsFrom developmentOnly
+  }
+}
+
+dependencies {
+  developmentOnly("org.springframework.boot:spring-boot-devtools")
+  compileOnly "io.micronaut:micronaut-inject-groovy"
+  console "org.grails:grails-console"
+  implementation "org.springframework.boot:spring-boot-starter-logging"
+  implementation "org.springframework.boot:spring-boot-starter-validation"
+  implementation "org.springframework.boot:spring-boot-autoconfigure"
+  implementation "org.grails:grails-core"
+  implementation "org.springframework.boot:spring-boot-starter-actuator"
+  implementation "org.springframework.boot:spring-boot-starter-tomcat"
+  implementation "org.grails:grails-plugin-url-mappings"
+  implementation "org.grails:grails-plugin-rest"
+  implementation "org.grails:grails-plugin-codecs"
+  implementation "org.grails:grails-plugin-interceptors"
+  implementation "org.grails:grails-plugin-services"
+  implementation "org.grails:grails-plugin-datasource"
+  implementation "org.grails:grails-plugin-databinding"
+  implementation "org.grails:grails-web-boot"
+  implementation "org.grails:grails-logging"
+  implementation "org.grails.plugins:cache"
+  implementation "org.grails.plugins:async"
+  implementation "org.grails.plugins:hibernate5"
+  implementation "org.grails.plugins:converters"
+  implementation "org.hibernate:hibernate-core:5.6.3.Final"
+  implementation "org.grails.plugins:views-json"
+  implementation "org.grails.plugins:views-json-templates"
+  implementation 'builders.dsl:spreadsheet-builder-poi:1.0.5'
+  implementation 'builders.dsl:spreadsheet-builder-groovy:1.0.5'
+  implementation 'org.grails.plugins:swagger:1.0.1'
+  // Raw jar file for loinc2hpo
+  implementation files('libs/loinc2hpo-core.jar')
+  implementation 'org.monarchinitiative.phenol:phenol-core:1.6.3'
+  implementation 'org.monarchinitiative.phenol:phenol-io:1.6.3'
+  implementation 'org.monarchinitiative.phenol:phenol-annotations:1.6.3'
+
+  profile "org.grails.profiles:angular"
+  runtimeOnly "org.glassfish.web:el-impl:2.2.1-b05"
+  runtimeOnly "com.h2database:h2"
+  runtimeOnly "org.apache.tomcat:tomcat-jdbc"
+  runtimeOnly "javax.xml.bind:jaxb-api:2.3.1"
+  testImplementation "io.micronaut:micronaut-inject-groovy"
+  testImplementation "org.grails:grails-gorm-testing-support"
+  testImplementation 'org.gebish:geb-core:5.1'
+  testImplementation 'org.gebish:geb-spock:5.1'
+  testImplementation "io.micronaut:micronaut-http-client"
+  testImplementation "org.grails:grails-web-testing-support"
+  testImplementation "org.grails:views-json-testing-support"
+  testImplementation "org.hibernate.validator:hibernate-validator:6.1.7.Final"
+
+  testRuntimeOnly 'net.sourceforge.htmlunit:htmlunit:2.35.0'
+  testImplementation "org.seleniumhq.selenium:htmlunit-driver:2.35.1"
+  testImplementation "org.seleniumhq.selenium:selenium-remote-driver:3.141.59"
+  testImplementation "org.seleniumhq.selenium:selenium-api:3.141.59"
+  testImplementation "org.seleniumhq.selenium:selenium-support:3.141.59"
+  testImplementation "org.seleniumhq.selenium:selenium-chrome-driver:3.141.59"
+}
+
+integrationTest {
+  systemProperties System.properties
+}
+
+bootRun {
+  ignoreExitValue true
+  jvmArgs(
+    '-Dspring.output.ansi.enabled=always',
+    '-noverify',
+    '-XX:TieredStopAtLevel=1',
+    '-Xmx1024m')
+  sourceResources sourceSets.main
+  String springProfilesActive = 'spring.profiles.active'
+  systemProperty springProfilesActive, System.getProperty(springProfilesActive)
+}
+
+tasks.withType(GroovyCompile) {
+  configure(groovyOptions) {
+    forkOptions.jvmArgs = ['-Xmx1024m']
+  }
+}
+
+tasks.withType(Test) {
+  useJUnitPlatform()
+}
+
+node {
+  nodeProjectDir = file("../client/")
+}
+
+task buildClientDevelopment(type: NpxTask, dependsOn: npmInstall) {
+  group = 'build'
+  description = 'Compile client side assets for development'
+  command = 'npm'
+  args = ['run', 'build']
+}
+
+task buildClientProduction(type: NpxTask, dependsOn: npmInstall){
+  group = 'build'
+  description = 'Compile client side assets for production'
+  command = 'npm'
+  args = ['run', 'buildProd']
+}
+
+task clientTest(type: NpxTask, dependsOn: npmInstall) {
+  group = 'verification'
+  description = 'Executes client side unit tests'
+  command = 'npm'
+  args = ['run', 'test']
+}
+
+task clientIntegrationTest(type: NpxTask, dependsOn: npmInstall) {
+  group = 'verification'
+  description = 'Executes client side integration tests'
+  command = 'npm'
+  args = ['run', 'e2e']
+}
+
+clean {
+  delete fileTree(dir: "server/src/main/webapp/app")
+}
+
+war {
+  archiveFileName = System.getProperty("warName")
+}
+
+war.dependsOn(buildClientProduction)
