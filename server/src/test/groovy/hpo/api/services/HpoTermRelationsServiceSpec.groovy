@@ -1,7 +1,8 @@
-package hpo.api
+package hpo.api.services
 
 import grails.testing.gorm.DataTest
 import grails.testing.services.ServiceUnitTest
+import hpo.api.HpoTermRelationsService
 import hpo.api.term.DbTerm
 import hpo.api.term.DbTermRelationship
 import org.monarchinitiative.phenol.ontology.algo.OntologyTerms

@@ -39,15 +39,16 @@ configurations {
 }
 
 dependencies {
+  profile "org.grails.profiles:angular"
   developmentOnly("org.springframework.boot:spring-boot-devtools")
   compileOnly "io.micronaut:micronaut-inject-groovy"
   console "org.grails:grails-console"
   implementation "org.springframework.boot:spring-boot-starter-logging"
   implementation "org.springframework.boot:spring-boot-starter-validation"
   implementation "org.springframework.boot:spring-boot-autoconfigure"
-  implementation "org.grails:grails-core"
   implementation "org.springframework.boot:spring-boot-starter-actuator"
   implementation "org.springframework.boot:spring-boot-starter-tomcat"
+  implementation "org.grails:grails-core"
   implementation "org.grails:grails-plugin-url-mappings"
   implementation "org.grails:grails-plugin-rest"
   implementation "org.grails:grails-plugin-codecs"
@@ -67,13 +68,12 @@ dependencies {
   implementation 'builders.dsl:spreadsheet-builder-poi:1.0.5'
   implementation 'builders.dsl:spreadsheet-builder-groovy:1.0.5'
   implementation 'org.grails.plugins:swagger:1.0.1'
+  implementation 'ch.qos.logback:logback-core:1.2.10'
   // Raw jar file for loinc2hpo
   implementation files('libs/loinc2hpo-core.jar')
   implementation 'org.monarchinitiative.phenol:phenol-core:1.6.3'
   implementation 'org.monarchinitiative.phenol:phenol-io:1.6.3'
   implementation 'org.monarchinitiative.phenol:phenol-annotations:1.6.3'
-
-  profile "org.grails.profiles:angular"
   runtimeOnly "org.glassfish.web:el-impl:2.2.1-b05"
   runtimeOnly "com.h2database:h2"
   runtimeOnly "org.apache.tomcat:tomcat-jdbc"
@@ -153,12 +153,18 @@ task clientIntegrationTest(type: NpxTask, dependsOn: npmInstall) {
   args = ['run', 'e2e']
 }
 
-clean {
-  delete fileTree(dir: "server/src/main/webapp/app")
-}
-
 war {
   archiveFileName = System.getProperty("warName")
 }
 
+bootRun.dependsOn(buildClientDevelopment)
+
 war.dependsOn(buildClientProduction)
+
+test.dependsOn(clientTest)
+
+//integrationTest.dependsOn(clientIntegrationTest)
+
+clean {
+  delete fileTree(dir: "src/main/webapp")
+}

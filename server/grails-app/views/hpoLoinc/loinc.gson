@@ -1,4 +1,4 @@
-import org.monarchinitiative.loinc2hpo.loinc.LoincEntry
+import org.monarchinitiative.loinc2hpocore.loinc.LoincEntry
 model {
   List<LoincEntry> entryList
 }

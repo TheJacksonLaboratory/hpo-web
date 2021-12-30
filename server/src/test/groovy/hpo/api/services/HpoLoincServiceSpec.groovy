@@ -1,6 +1,7 @@
-package hpo.api
+package hpo.api.services
 
 import grails.testing.services.ServiceUnitTest
+import hpo.api.HpoLoincService
 import hpo.api.util.Loinc2Hpo
 import org.monarchinitiative.loinc2hpocore.loinc.LoincEntry
 import org.monarchinitiative.loinc2hpocore.loinc.LoincId
@@ -41,15 +42,15 @@ class HpoLoincServiceSpec extends Specification implements ServiceUnitTest<HpoLo
 
   }
 
-  def buildMockLoincId(String id){
+  static def buildMockLoincId(String id){
     return new LoincId(id)
   }
 
-  def buildMockLoincEntry(String loincLine){
+  static def buildMockLoincEntry(String loincLine){
     return LoincEntry.fromQuotedCsvLine(loincLine)
   }
 
-  def getOneLoincLine(){
-    return '38230-9,Calcium.ionized,MCnc,Pt,Bld,Qn,,CHEM,1,Calcium.ionized [Mass/volume] in Blood,Ca-I Bld-mCnc,,ACTIVE,2.13,2.34'
+  static def getOneLoincLine(){
+    return '"38230-9","Calcium.ionized","MCnc","Pt","Bld","Qn","","CHEM","1","Calcium.ionized [Mass/volume] in Blood","Ca-I Bld-mCnc","","ACTIVE","2.13","2.70"'
   }
 }

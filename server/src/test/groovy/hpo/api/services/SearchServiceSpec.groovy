@@ -1,8 +1,9 @@
-package hpo.api
+package hpo.api.services
 
 import grails.testing.gorm.DataTest
 import grails.testing.services.ServiceUnitTest
 import groovy.sql.GroovyRowResult
+import hpo.api.SearchService
 import hpo.api.disease.DbDisease
 import hpo.api.gene.DbGene
 import hpo.api.model.MaxoSearchResult

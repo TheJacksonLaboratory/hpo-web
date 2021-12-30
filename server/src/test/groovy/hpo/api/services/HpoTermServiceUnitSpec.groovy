@@ -1,7 +1,8 @@
-package hpo.api
+package hpo.api.services
 
 import grails.testing.gorm.DataTest
 import grails.testing.services.ServiceUnitTest
+import hpo.api.HpoTermService
 import hpo.api.db.utils.SqlUtilsService
 import hpo.api.disease.DbDisease
 import hpo.api.gene.DbGene

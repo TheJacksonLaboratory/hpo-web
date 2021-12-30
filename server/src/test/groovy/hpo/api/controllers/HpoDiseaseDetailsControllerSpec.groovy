@@ -1,11 +1,12 @@
-package hpo.api
+package hpo.api.controllers
 
 import grails.testing.web.controllers.ControllerUnitTest
+import hpo.api.HpoDiseaseDetailsController
 import spock.lang.Ignore
 import spock.lang.Specification
 
 @Ignore(value = 'need to implement')
-class MaxoSearchControllerSpec extends Specification implements ControllerUnitTest<MaxoSearchController> {
+class HpoDiseaseDetailsControllerSpec extends Specification implements ControllerUnitTest<HpoDiseaseDetailsController> {
 
     def setup() {
     }
@@ -15,6 +16,6 @@ class MaxoSearchControllerSpec extends Specification implements ControllerUnitTe
 
     void "test something"() {
         expect:"fix me"
-            true == false
+        true == false
     }
 }

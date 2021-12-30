@@ -1,4 +1,5 @@
 grails:
+  profile: 'angular'
   mime:
     disable:
       accept:

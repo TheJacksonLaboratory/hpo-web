@@ -1,4 +1,4 @@
-package hpo.api
+package hpo.api.controllers
 
 import grails.testing.web.controllers.ControllerUnitTest
 import hpo.api.HpoGeneDetailsController

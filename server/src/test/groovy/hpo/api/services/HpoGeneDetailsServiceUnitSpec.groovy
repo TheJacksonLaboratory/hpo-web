@@ -1,4 +1,4 @@
-package hpo.api
+package hpo.api.services
 
 import org.monarchinitiative.phenol.ontology.data.Term
 
