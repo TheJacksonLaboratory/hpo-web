@@ -5,16 +5,9 @@ The following guide provides the steps for an out-of-the-box setup for the Human
 This guide uses the H2 database which is a grails out-of-the-box in-memory or file-base database for quick setup of small-low-volume projects.  
                     
 
-## Requirements For Running
+## Requirements
 
-+ Java 1.8
-* Git (Latest)
-
-## Requirements For Development
-
-+ AngularCLI (7.*) 
-+ Node (11+)
-+ Node Package Manager (6.4.1+)
++ Java 11
 
 ## Setup
 
@@ -26,7 +19,7 @@ This guide uses the H2 database which is a grails out-of-the-box in-memory or fi
         
   JAX Github 
         
-        git clone https://github.com/TheJacksonLaboratory/hpo-web.git
+        git clone git@github.com:TheJacksonLaboratory/hpo-web.git
         
 + Change directory to hpo-web
 
