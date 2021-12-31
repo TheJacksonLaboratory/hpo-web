@@ -74,6 +74,7 @@ dependencies {
   implementation 'org.monarchinitiative.phenol:phenol-core:1.6.3'
   implementation 'org.monarchinitiative.phenol:phenol-io:1.6.3'
   implementation 'org.monarchinitiative.phenol:phenol-annotations:1.6.3'
+  implementation 'com.bertramlabs.plugins:asset-pipeline-grails:3.3.1'
   runtimeOnly 'mysql:mysql-connector-java:5.1.29'
   runtimeOnly "org.glassfish.web:el-impl:2.2.1-b05"
   runtimeOnly "com.h2database:h2"
