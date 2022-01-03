@@ -6,21 +6,18 @@ buildscript {
   dependencies {
     classpath "org.grails:grails-gradle-plugin:$grailsGradlePluginVersion"
     classpath "org.grails.plugins:hibernate5:7.2.0"
-    classpath "org.grails.plugins:views-gradle:2.1.2"
     classpath "gradle.plugin.com.github.erdi.webdriver-binaries:webdriver-binaries-gradle-plugin:2.7"
     classpath "com.github.node-gradle:gradle-node-plugin:3.1.1"
     classpath "com.dorongold.plugins:task-tree:2.1.0"
   }
 }
 
-version "1.17.13"
+version "1.17.13-SNAPSHOT"
 group "hpo.api"
 
 apply plugin:"idea"
-apply plugin: 'java'
 apply plugin:"war"
 apply plugin:"org.grails.grails-web"
-apply plugin:"org.grails.plugins.views-json"
 apply plugin:"com.github.erdi.webdriver-binaries"
 apply plugin: 'com.github.node-gradle.node'
 apply plugin: "com.dorongold.task-tree"
@@ -43,12 +40,12 @@ dependencies {
   developmentOnly("org.springframework.boot:spring-boot-devtools")
   compileOnly "io.micronaut:micronaut-inject-groovy"
   console "org.grails:grails-console"
+  implementation "org.grails:grails-core"
   implementation "org.springframework.boot:spring-boot-starter-logging"
   implementation "org.springframework.boot:spring-boot-starter-validation"
   implementation "org.springframework.boot:spring-boot-autoconfigure"
   implementation "org.springframework.boot:spring-boot-starter-actuator"
   implementation "org.springframework.boot:spring-boot-starter-tomcat"
-  implementation "org.grails:grails-core"
   implementation "org.grails:grails-plugin-url-mappings"
   implementation "org.grails:grails-plugin-rest"
   implementation "org.grails:grails-plugin-codecs"
@@ -67,14 +64,13 @@ dependencies {
   implementation "org.grails.plugins:views-json-templates"
   implementation 'builders.dsl:spreadsheet-builder-poi:1.0.5'
   implementation 'builders.dsl:spreadsheet-builder-groovy:1.0.5'
-  implementation 'org.grails.plugins:swagger:1.0.1'
   implementation 'ch.qos.logback:logback-core:1.2.10'
   // Raw jar file for loinc2hpo
   implementation files('libs/loinc2hpo-core.jar')
   implementation 'org.monarchinitiative.phenol:phenol-core:1.6.3'
   implementation 'org.monarchinitiative.phenol:phenol-io:1.6.3'
   implementation 'org.monarchinitiative.phenol:phenol-annotations:1.6.3'
-  implementation 'com.bertramlabs.plugins:asset-pipeline-grails:3.3.1'
+  implementation 'com.bertramlabs.plugins:asset-pipeline-grails:3.3.4'
   runtimeOnly 'mysql:mysql-connector-java:5.1.29'
   runtimeOnly "org.glassfish.web:el-impl:2.2.1-b05"
   runtimeOnly "com.h2database:h2"
@@ -82,23 +78,19 @@ dependencies {
   runtimeOnly "javax.xml.bind:jaxb-api:2.3.1"
   testImplementation "io.micronaut:micronaut-inject-groovy"
   testImplementation "org.grails:grails-gorm-testing-support"
-  testImplementation 'org.gebish:geb-core:5.1'
-  testImplementation 'org.gebish:geb-spock:5.1'
+
+  testImplementation "org.grails.plugins:geb"
+  testImplementation 'org.gebish:geb-spock'
   testImplementation "io.micronaut:micronaut-http-client"
   testImplementation "org.grails:grails-web-testing-support"
   testImplementation "org.grails:views-json-testing-support"
   testImplementation "org.hibernate.validator:hibernate-validator:6.1.7.Final"
 
   testRuntimeOnly 'net.sourceforge.htmlunit:htmlunit:2.35.0'
-  testImplementation "org.seleniumhq.selenium:htmlunit-driver:2.35.1"
-  testImplementation "org.seleniumhq.selenium:selenium-remote-driver:3.141.59"
-  testImplementation "org.seleniumhq.selenium:selenium-api:3.141.59"
-  testImplementation "org.seleniumhq.selenium:selenium-support:3.141.59"
-  testImplementation "org.seleniumhq.selenium:selenium-chrome-driver:3.141.59"
-}
-
-integrationTest {
-  systemProperties System.properties
+  testImplementation "org.seleniumhq.selenium:selenium-chrome-driver:$seleniumVersion"
+  testImplementation "org.seleniumhq.selenium:selenium-remote-driver:$seleniumVersion"
+  testImplementation "org.seleniumhq.selenium:selenium-api:$seleniumVersion"
+  testImplementation "org.seleniumhq.selenium:selenium-support:$seleniumVersion"
 }
 
 bootRun {
@@ -121,6 +113,9 @@ tasks.withType(GroovyCompile) {
 
 tasks.withType(Test) {
   useJUnitPlatform()
+  systemProperty "geb.env", System.getProperty('geb.env')
+  systemProperty "geb.build.reportsDir", reporting.file("geb/integrationTest")
+  systemProperty "webdriver.chrome.driver", System.getProperty('webdriver.chrome.driver')
 }
 
 node {
@@ -156,16 +151,25 @@ task clientIntegrationTest(type: NpxTask, dependsOn: npmInstall) {
 }
 
 war {
-  archiveFileName = System.getProperty("warName")
+  archiveFileName = "hpo-web-${archiveVersion}.war_"
 }
 
-//bootRun.dependsOn(buildClientDevelopment)
+webdriverBinaries {
+  chromedriver "$chromeDriverVersion"
+}
 
 war.dependsOn(buildClientProduction)
 
-test.dependsOn(clientTest)
-
+//bootRun.dependsOn(buildClientDevelopment)
+//test.dependsOn(clientTest)
 //integrationTest.dependsOn(clientIntegrationTest)
+
+task test_all_headless(type: Test) {
+  systemProperty "geb.env", "chromeHeadless"
+  dependsOn(clientTest)
+  dependsOn(test)
+  dependsOn(integrationTest)
+}
 
 clean {
   delete fileTree(dir: "src/main/webapp")

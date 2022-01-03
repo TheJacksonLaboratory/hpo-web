@@ -1,5 +1,7 @@
 grails:
   profile: 'angular'
+  resources:
+    pattern: /**
   mime:
     disable:
       accept:
@@ -43,6 +45,11 @@ grails:
   #console
   #csrfProtection
   #enabled = false
+info:
+  app:
+    name: '@info.app.name@'
+    version: '@info.app.version@'
+    grailsVersion: '@info.app.grailsVersion@'
 
 spring:
     groovy:

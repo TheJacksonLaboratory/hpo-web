@@ -27,4 +27,4 @@ waiting {
 atCheckWaiting = true
 cacheDriverPerThread = true
 
-reportsDir = System.getProperty('reportsDir','build/reports/geb')
+reportsDir = System.getProperty('reportsDir','server/build/reports/geb')

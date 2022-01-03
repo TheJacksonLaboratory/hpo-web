@@ -1,4 +1,4 @@
-/*package hpo.api
+package hpo.api
 
 class RestInterceptor {
 
@@ -19,6 +19,6 @@ class RestInterceptor {
     boolean after() { true }
 
     void afterView() {
-         no-op
+        // no-op
     }
-}*/
+}
