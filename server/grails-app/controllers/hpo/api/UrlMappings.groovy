@@ -11,9 +11,7 @@ class UrlMappings {
     '/app/assets/*.png',
     '/app/assets/*.jpg',
     '/app/assets/*/*.png',
-    '/app/assets/*/*.jpg',
-    '/webjars/swagger-ui/3.20.9/swagger-ui-bundle.js',
-    '/webjars/swagger-ui/3.20.9/swagger-ui-standalone-preset.js'
+    '/app/assets/*/*.jpg'
   ]
 
   static mappings = {
@@ -53,7 +51,7 @@ class UrlMappings {
     "/api/hpo/download/gene"(controller: 'hpoExcel', action: 'downloadGeneAnnotation')
 
     "/api/maxo/search"(controller: "maxoSearch", action: 'searchMaxo')
-
+    "/api/hpo/docs"(uri:"/static/doc.html")
 
 
     "500"(view: '/error')

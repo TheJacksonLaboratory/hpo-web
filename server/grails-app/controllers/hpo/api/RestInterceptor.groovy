@@ -1,4 +1,4 @@
-package hpo.api
+/*package hpo.api
 
 class RestInterceptor {
 
@@ -13,12 +13,12 @@ class RestInterceptor {
         header( "X-XSS-Protection", "1" )
         header( "Content-Security-Policy", "script-src 'self' 'sha256-uGJV1INRCzRQ65HtahUNomtGV0G2E/dzVWsvQpazKHw=' https://www.googletagmanager.com/gtag/js https://www.google-analytics.com/analytics.js")
       }
-      true
+        true
     }
 
     boolean after() { true }
 
     void afterView() {
-        // no-op
+         no-op
     }
-}
+}*/

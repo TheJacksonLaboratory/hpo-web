@@ -1,4 +1,4 @@
-package hpo.api
+/*package hpo.api
 
 import grails.testing.web.interceptor.InterceptorUnitTest
 import spock.lang.Specification
@@ -45,4 +45,4 @@ class RestInterceptorSpec extends Specification implements InterceptorUnitTest<R
       response.getHeader("X-XSS-Protection") == "1"
       response.getHeader("Content-Security-Policy").contains("script-src 'self'")
     }
-}
+}*/
