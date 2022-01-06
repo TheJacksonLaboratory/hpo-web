@@ -15,7 +15,7 @@
   <div class="search-output mat-elevation-z4" [@searchState]="searchstate" fxFlexOffset.gt-sm="20" fxFlex="80">
     <div class="search-all" *ngIf="!notFoundFlag">
       <a routerLink="/browse/search" [queryParams]="{'q': queryText, 'navFilter': 'all'}">
-        <span fxHide.xs>Showing best results.</span> See all results for '{{queryText}}'
+        <span fxHide.lt-md>Showing best results.</span> See all results for '{{queryText}}'
       </a>
     </div>
     <mat-progress-bar mode="query" *ngIf="loadingSearchResults"></mat-progress-bar>
@@ -66,7 +66,7 @@
       <h3>Sorry no results have been found!</h3>
     </div>
   </div>
-  <p class="hint" fxFlex *ngIf="searchstate != 'active'">
+  <p class="hint" *ngIf="searchstate != 'active'">
     <strong>e.g. <a (click)="setQuery('Arachnodactyly')">Arachnodactyly</a> |
       <a (click)="setQuery('Marfan syndrome')">Marfan syndrome</a> |
       <a (click)="setQuery('FBN1')">FBN1</a></strong>

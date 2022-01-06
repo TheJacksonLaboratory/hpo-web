@@ -230,8 +230,6 @@ a .irdirc {
 
     & .material-icons {
       font-size: 40px;
-      float: right;
-      margin: 2rem 0 0 10.5rem;
     }
   }
 }
@@ -253,6 +251,11 @@ a .irdirc {
 
     & h2 {
       float: left;
+    }
+  }
+  @media screen and (max-width: 958px) {
+    & .monarch-logo {
+      margin: 0 auto;
     }
   }
 

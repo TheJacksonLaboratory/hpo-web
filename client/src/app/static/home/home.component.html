@@ -56,58 +56,66 @@
 <div class="home-highlight-menu" fxLayout="row wrap">
   <div routerLink="/tools/exomiser" class="home-item dark" fxFlex.gt-md="35" fxFlexOffset.gt-md="10"
        fxFlex="90" fxFlexOffset="5">
-    <img class="tool-icon" src="assets/highlight-images/exomiser.png"/>
-    <div class="home-body">
-      <h2 class="title">Exomiser</h2>
-      <p class="description"><i>Evaluate variants based on the predicted pathogenicity.</i></p>
+    <div fxFlex="row" fxLayoutAlign="space-between center">
+      <img class="tool-icon" src="assets/highlight-images/exomiser.png"/>
+      <div class="home-body">
+        <h2 class="title">Exomiser</h2>
+        <p class="description"><i>Evaluate variants based on the predicted pathogenicity.</i></p>
+      </div>
+      <i class="material-icons" fxShow fxHide.xs>
+        chevron_right
+      </i>
     </div>
-    <i class="material-icons" fxShow fxHide.xs>
-      chevron_right
-    </i>
   </div>
   <div routerLink="/tools/phenomizer" class="home-item light" fxFlex.gt-md="35" fxFlexOffset.gt-md="10"
        fxFlex="90" fxFlexOffset="5">
-    <img class="tool-icon" src="assets/highlight-images/phenomizer.png"/>
-    <div class="home-body">
-      <h2 class="title">Phenomizer</h2>
-      <p class="description"><i>Rank disease differential diagnosis by clinical features.</i></p>
+    <div fxFlex="row" fxLayoutAlign="space-between center">
+      <img class="tool-icon" src="assets/highlight-images/phenomizer.png"/>
+      <div class="home-body">
+        <h2 class="title">Phenomizer</h2>
+        <p class="description"><i>Rank disease differential diagnosis by clinical features.</i></p>
+      </div>
+      <i class="material-icons" fxShow fxHide.xs>
+        chevron_right
+      </i>
     </div>
-    <i class="material-icons" fxShow fxHide.xs>
-      chevron_right
-    </i>
   </div>
   <div routerLink="/tools/genomiser" class="home-item light" fxFlex.gt-md="35" fxFlexOffset.gt-md="10"
        fxFlex="90" fxFlexOffset="5">
-    <img class="tool-icon" src="assets/highlight-images/genomiser.png"/>
-    <div class="home-body">
-      <h2 class="title">Genomiser</h2>
-      <p class="description"><i>Analyze genome sequence data for non-coding variants.</i></p>
+    <div fxFlex="row" fxLayoutAlign="space-between center">
+      <img class="tool-icon" src="assets/highlight-images/genomiser.png"/>
+      <div class="home-body">
+        <h2 class="title">Genomiser</h2>
+        <p class="description"><i>Analyze genome sequence data for non-coding variants.</i></p>
+      </div>
+      <i class="material-icons" fxShow fxHide.xs>
+        chevron_right
+      </i>
     </div>
-    <i class="material-icons" fxShow fxHide.xs>
-      chevron_right
-    </i>
   </div>
   <div routerLink="/browse/profile-search" class="home-item dark" fxFlex.gt-md="35" fxFlexOffset.gt-md="10"
        fxFlex="90" fxFlexOffset="5">
-    <img class="tool-icon" src="assets/highlight-images/patientarchive.png"/>
-    <div class="home-body">
-      <h2 class="title">Profile Search</h2>
-      <p class="description"><i>Discover diseases with a phenotype profile.</i></p>
+    <div fxFlex="row" fxLayoutAlign="space-between center">
+      <img class="tool-icon" src="assets/highlight-images/patientarchive.png"/>
+      <div class="home-body">
+        <h2 class="title">Profile Search</h2>
+        <p class="description"><i>Discover diseases with a phenotype profile.</i></p>
+      </div>
+      <i class="material-icons" fxShow fxHide.xs>
+        chevron_right
+      </i>
     </div>
-    <i class="material-icons" fxShow fxHide.xs>
-      chevron_right
-    </i>
   </div>
 </div>
 <br><br>
-<div fxLayout="row">
+<div fxLayout="row" fxLayoutAlign="space-between center">
   <div class="monarch-banner mat-elevation-z1" fxFlex="90" fxFlexOffset="5">
-    <a href="https://monarchinitiative.org/" target="__blank">
+    <a class="monarch-logo" href="https://monarchinitiative.org/" target="__blank">
       <img class="logo" src="assets/monarch-logo.png"/>
     </a>
-    <div class="description" fxHide.xs>
+    <div class="description" fxHide.lt-md>
       <span class="text">Cross-species disease discovery and diagnosis.</span>
-      <a mat-raised-button href="https://monarchinitiative.org/" target="__blank" class="mat-btn button">Explore Monarch
+      <a mat-raised-button href="https://monarchinitiative.org/" target="__blank" class="mat-btn button" fxHide.lt-lg>Explore Monarch
         Initiative</a>
     </div>
   </div>
