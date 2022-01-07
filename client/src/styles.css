@@ -498,3 +498,15 @@ hr.underline-hr {
 .mat-stepper-horizontal, .mat-stepper-vertical {
   background-color: unset !important;
 }
+
+.mat-expanded .mat-expansion-panel-header {
+    background-color: rgba(41, 101, 124, 1);
+}
+
+.mat-expanded .mat-expansion-panel-header:hover, .mat-expanded .mat-expansion-panel-header:focus  {
+  background: rgba(41, 101, 124, 1) !important;
+}
+
+.mat-expanded .mat-expansion-panel-header-title {
+  color: white;
+}

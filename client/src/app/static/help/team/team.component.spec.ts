@@ -1,25 +1,25 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {ContributorsComponent} from './contributors.component';
+import {TeamComponent} from './team.component';
 import {GlobalMaterialModules} from "../../../shared/modules/global.module";
-import {ContributorsService} from "../../../shared/contributors/contributors.service";
+import {TeamService} from "../../../shared/team/team.service";
 import {HttpClientTestingModule} from "@angular/common/http/testing";
 
 describe('ContributorsComponent', () => {
-  let component: ContributorsComponent;
-  let fixture: ComponentFixture<ContributorsComponent>;
+  let component: TeamComponent;
+  let fixture: ComponentFixture<TeamComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      providers: [ContributorsService],
-      declarations: [ContributorsComponent],
+      providers: [TeamService],
+      declarations: [TeamComponent],
       imports: [GlobalMaterialModules, HttpClientTestingModule]
     })
       .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ContributorsComponent);
+    fixture = TestBed.createComponent(TeamComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

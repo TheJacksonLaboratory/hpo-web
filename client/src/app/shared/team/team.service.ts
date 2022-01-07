@@ -1,7 +1,7 @@
 import {map} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
-import {Contributors} from '../../browser/models/models';
-import {Observable} from "rxjs";
+import {TeamMember} from '../../browser/models/models';
+import {Observable} from 'rxjs';
 
 
 import {HttpClient} from '@angular/common/http';
@@ -9,14 +9,14 @@ import {environment} from '../../../environments/environment';
 
 
 @Injectable()
-export class ContributorsService {
+export class TeamService {
 
-  contributors: Contributors[] = [];
+  contributors: TeamMember[] = [];
 
   constructor(private http: HttpClient) {
   }
 
-  getContributors(): Observable<Contributors[]> {
+  getContributors(): Observable<TeamMember[]> {
     return this.http.get(environment.HPO_CONTRIBUTORS_URL, {responseType: 'text'}).pipe(map(res => {
       return this.buildContributors(res.split('\n'));
     }));

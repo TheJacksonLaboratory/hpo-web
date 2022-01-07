@@ -78,7 +78,7 @@ export interface News {
   monthYear?: string;
 }
 
-export interface Contributors {
+export interface TeamMember {
   lastName: string;
   firstName: string;
   location: string;

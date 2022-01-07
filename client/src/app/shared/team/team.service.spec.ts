@@ -1,5 +1,5 @@
 import {inject, TestBed} from '@angular/core/testing';
-import {ContributorsService} from './contributors.service';
+import {TeamService} from './team.service';
 import {HttpClientTestingModule, HttpTestingController} from "@angular/common/http/testing";
 import {environment} from "../../../environments/environment";
 
@@ -7,15 +7,15 @@ describe('ContributorsService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [ContributorsService]
+      providers: [TeamService]
     });
   });
 
-  it('should be created', inject([ContributorsService], (service: ContributorsService) => {
+  it('should be created', inject([TeamService], (service: TeamService) => {
     expect(service).toBeTruthy();
   }));
 
-  it('should return contributors', inject([ContributorsService, HttpTestingController], (service: ContributorsService, httpMock) => {
+  it('should return contributors', inject([TeamService, HttpTestingController], (service: TeamService, httpMock) => {
 
     service.contributors = [];
     service.getContributors().subscribe(contributors => {
