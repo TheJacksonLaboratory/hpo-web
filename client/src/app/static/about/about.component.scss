@@ -1,0 +1,85 @@
+.about-us {
+  .sub-title {
+    text-transform: uppercase;
+    color: darkslategray;
+    opacity:0.6;
+  }
+
+  p {
+    font-size: 16px;
+  }
+
+  .mat-flat-button.mat-primary {
+    background-color: #ec9736;
+    font-weight: bold;
+  }
+
+  .about-us-banner {
+    background-color: #29657c;
+    color: white;
+    padding: 8rem 0;
+    margin: 2.5rem 0;
+  }
+
+  .banner-card {
+    text-align: center;
+    opacity: 1;
+    cursor: pointer;
+    &:hover {
+      opacity: .85;
+    }
+
+    h3 {
+      margin: .5rem 0 0 0;
+      text-transform: uppercase;
+    }
+
+    .icon-wrapper {
+      text-align: center;
+      & .mat-icon {
+        width: 36px;
+        font-size: 36px;
+        height: 36px;
+      }
+    }
+  }
+
+  .history {
+    margin-top: 2.5rem;
+    margin-bottom: 4rem;
+  }
+
+  .contact-banner {
+    background-color: #29657c;
+    padding: 1rem 2rem 1rem 2rem;
+    color: white;
+
+    & .contact-banner-title-wrapper {
+      align-items:center;
+    }
+
+    & .contact-banner-title {
+      display: flex;
+      vertical-align: middle;
+    }
+
+    & .contact-icon {
+      font-size: 32px;
+      height: 32px;
+      width: 32px;
+      margin: 0 .5rem 0;
+    }
+
+    & .contact-banner-btn-wrapper {
+      & .contact-btn {
+        border-color: white;
+      }
+
+      & .contact-btn:last-child {
+        margin-left: 1rem;
+      }
+    }
+  }
+}
+
+

@@ -1,0 +1,99 @@
+<div class="about-us" fxLayout="row wrap">
+  <h1 class="center pageTitle">The Human Phenotype Ontology</h1>
+  <div fxFlex=70 fxFlexOffset="15">
+      <h3 class="sub-title">Who we are!</h3>
+      <p>
+        The Human Phenotype Ontology (HPO) project provides an ontology of medically relevant phenotypes,
+        disease-phenotype annotations, and the algorithms that operate on these. The HPO can be used to support
+        differential diagnostics, translational research, and a number of applications in computational biology by providing
+        the means to <em>compute</em> over the clinical phenotype. The HPO is being used for computational deep
+        phenotyping and precision medicine as well as integration of clinical data into translational research.
+        <a href="https://www.ncbi.nlm.nih.gov/pubmed/22504886" target="__blank">Deep phenotyping</a> can be defined as the
+        precise and comprehensive
+        analysis of phenotypic abnormalities in which the individual components of the phenotype are observed and described.
+        The HPO is being increasingly adopted as a standard for
+        phenotypic abnormalities by diverse groups such as international rare disease organizations, registries, clinical
+        labs, biomedical resources, and
+        clinical software tools and will thereby contribute toward nascent efforts at global data exchange for identifying
+        disease etiologies
+        (<a href="https://www.ncbi.nlm.nih.gov/pubmed/27899602" target="__blank">K&ouml;hler et al, 2017</a>).
+      </p>
+      <p>
+        The HPO currently contains over 13,000 terms arranged in a directed acyclic graph and are connected by is-a
+        (subclass-of) edges, such that a term represents
+        a more specific or limited instance of its parent term(s). All relationships in the HPO are is-a relationships,
+        i.e. simple class-subclass relationships. For instance, <a routerLink="/browse/term/HP:0000517"><em>Abnormal lens
+        morphology</em></a> is-a <a routerLink="/browse/term/HP:0012372"><em>Abnormal eye morphology</em></a>.
+        The relationships are transitive, meaning that they are inherited up all paths to the root.
+        <a routerLink="https://hpo.jax.org/app/browse/term/HP:0000118"><em>Phenotypic abnormality</em></a> is the main
+        subontology of the HPO and contains descriptions of clinical abnormalities.
+        Additional subontologies are provided to describe inheritance patterns, onset/clinical course and modifiers of
+        abnormalities.
+      </p>
+    <button mat-flat-button color="primary" routerLink="/browse/term/HP:0000001">
+      Explore Ontology
+      <mat-icon>keyboard_arrow_right</mat-icon>
+    </button>
+    &nbsp;
+    <a class="science-direct"
+       href="https://www.sciencedirect.com/topics/medicine-and-dentistry/human-phenotype-ontology"
+       mat-stroked-button target="_blank">HPO on Science Direct</a>
+  </div>
+  <div class="about-us-banner" fxFill fxFlex="row" fxLayoutAlign="space-evenly center">
+    <div class="banner-card" routerLink="/team">
+      <div class="icon-wrapper">
+        <mat-icon>groups</mat-icon>
+      </div>
+      <h3>Our Team</h3>
+    </div>
+    <div class="banner-card" routerLink="/funding">
+      <div class="icon-wrapper">
+        <mat-icon>menu_book</mat-icon>
+      </div>
+      <h3>Publications</h3>
+    </div>
+    <div class="banner-card">
+      <div class="icon-wrapper">
+        <mat-icon>history_edu</mat-icon>
+      </div>
+      <h3>Cite Us</h3>
+    </div>
+  </div>
+  <div class="history" fxFlex="70" fxFlexOffset="15">
+    <h3 class="sub-title">Where it started!</h3>
+    <p>The Human Phenotype Ontology was initially developed at the <a href="https://www.charite.de/" target="__blank">Charité University Hospital</a> in Berlin, Germany by
+      Peter N Robinson and Sebastian K&ouml;hler with support from Sandra Doelken and Sebastian Bauer. Very soon after the
+      <a href="https://www.ncbi.nlm.nih.gov/pubmed/18950739" target="__blank">initial publication</a>  of the
+      HPO in 2008, a collaboration was initiated with researchers from the <a href="http://www.lbl.gov/" target="__blank">Lawrence Berkeley National Laboratory</a>
+      (Chris Mungall, Suzi Lewis, and Nicole Washington), the <a href="https://www.cam.ac.uk/" target="__blank">University of Cambridge</a> (Michael Ashburner
+      Paul Schofield, George Gkoutos), and the <a href="https://uoregon.edu/" target="__blank">University of Oregon</a> (Melissa Haendel, Monte Westerfield).
+      These groups have developed a scheme for <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2774506/" target="__blank">Linking human diseases
+        to animal models using ontology-based phenotype annotation</a>. In parallel, the DECIPHER project at the
+      <a href="http://www.sanger.ac.uk/" target="__blank">Wellcome Trust Sanger Institute</a> led by Helen Firth and Matt Hurles, conducted clinical
+      workshops to extend the HPO and have provided an enormous amount of support and input in subsequent years.
+    </p>
+    <p>
+      The initially unfunded collaboration grew over the years, and has now become the <a href="https://monarchinitiative.org/" target="__blank">Monarch Initiative</a>, now an NIH-supported
+      project that aims to integrate biological information using semantics, and to use computational reasoning to
+      enable phenotype comparison both within and across species, with the ultimate goal of improving biomedical research.
+    </p>
+    <a class="mat-btn" mat-flat-button color="primary" href="https://monarchinitiative.org/about/monarch" target="_blank">
+      Learn more about the Monarch Initiative
+      <mat-icon>keyboard_arrow_right</mat-icon>
+    </a>
+  </div>
+  <div class="contact-banner" fxFlex="80" fxFlexOffset="10" fxLayout="row" fxLayout.lt-md="column"
+       fxLayoutAlign="center center">
+        <div class="contact-banner-title-wrapper" fxFlex fxLayout="row" fxLayoutAlign="center center">
+          <h2 class="contact-banner-title" fxFlex>
+            <mat-icon class="contact-icon">contact_support</mat-icon>
+            Still have some questions?
+          </h2>
+        </div>
+        <div class="contact-banner-btn-wrapper" fxFlex.lt-md="100" fxLayout="row"
+        fxLayoutAlign.gt-sm="end center" fxLayoutAlign="space-evenly center">
+          <button class="contact-btn" mat-stroked-button routerLink="/faq">Frequently Asked Questions</button>
+          <button class="contact-btn" mat-stroked-button routerLink="/contact">Contact us</button>
+        </div>
+  </div>
+</div>
