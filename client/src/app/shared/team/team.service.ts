@@ -1,6 +1,6 @@
 import {map} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
-import {TeamMember} from '../../browser/models/models';
+import {IndividualContributer, Organization} from '../../browser/models/models';
 import {Observable} from 'rxjs';
 
 
@@ -11,12 +11,12 @@ import {environment} from '../../../environments/environment';
 @Injectable()
 export class TeamService {
 
-  contributors: TeamMember[] = [];
+  contributors: IndividualContributer[] = [];
 
   constructor(private http: HttpClient) {
   }
 
-  getContributors(): Observable<TeamMember[]> {
+  getContributors(): Observable<IndividualContributer[]> {
     return this.http.get(environment.HPO_CONTRIBUTORS_URL, {responseType: 'text'}).pipe(map(res => {
       return this.buildContributors(res.split('\n'));
     }));
@@ -34,4 +34,9 @@ export class TeamService {
     }
     return this.contributors;
   }
+
+  getTeamOrganizations(): Observable<Organization[]> {
+    return this.http.get<Organization[]>(environment.HPO_TEAM_HPO_URL, {responseType: 'json'});
+  }
+
 }

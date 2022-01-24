@@ -1,5 +1,5 @@
-<div class="about-us" fxLayout="row wrap">
-  <h1 class="center pageTitle">The Human Phenotype Ontology</h1>
+<div class="about-us container" fxLayout="row wrap">
+  <h1 class="center pageTitle" fxFlexFill>The Human Phenotype Ontology</h1>
   <div fxFlex=70 fxFlexOffset="15">
       <h3 class="sub-title">Who we are!</h3>
       <p>
@@ -30,29 +30,29 @@
         Additional subontologies are provided to describe inheritance patterns, onset/clinical course and modifiers of
         abnormalities.
       </p>
-    <button mat-flat-button color="primary" routerLink="/browse/term/HP:0000001">
+      <button mat-flat-button color="primary" routerLink="/browse/term/HP:0000001">
       Explore Ontology
       <mat-icon>keyboard_arrow_right</mat-icon>
     </button>
-    &nbsp;
-    <a class="science-direct"
+      &nbsp;
+      <a class="science-direct"
        href="https://www.sciencedirect.com/topics/medicine-and-dentistry/human-phenotype-ontology"
        mat-stroked-button target="_blank">HPO on Science Direct</a>
   </div>
-  <div class="about-us-banner" fxFill fxFlex="row" fxLayoutAlign="space-evenly center">
+  <div class="about-us-banner" fxFlex="70" fxFlexOffset="15" fxLayout="row" fxLayoutAlign="space-evenly center">
     <div class="banner-card" routerLink="/team">
       <div class="icon-wrapper">
         <mat-icon>groups</mat-icon>
       </div>
       <h3>Our Team</h3>
     </div>
-    <div class="banner-card" routerLink="/funding">
+    <div class="banner-card" routerLink="/resources/publications">
       <div class="icon-wrapper">
         <mat-icon>menu_book</mat-icon>
       </div>
       <h3>Publications</h3>
     </div>
-    <div class="banner-card">
+    <div class="banner-card" routerLink="/citation">
       <div class="icon-wrapper">
         <mat-icon>history_edu</mat-icon>
       </div>
@@ -82,7 +82,7 @@
       <mat-icon>keyboard_arrow_right</mat-icon>
     </a>
   </div>
-  <div class="contact-banner" fxFlex="80" fxFlexOffset="10" fxLayout="row" fxLayout.lt-md="column"
+  <div class="contact-banner" fxFlex="70" fxFlexOffset="15" fxLayout="row" fxLayout.lt-md="column"
        fxLayoutAlign="center center">
         <div class="contact-banner-title-wrapper" fxFlex fxLayout="row" fxLayoutAlign="center center">
           <h2 class="contact-banner-title" fxFlex>

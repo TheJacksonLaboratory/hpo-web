@@ -1,8 +1,12 @@
 .faq {
 
+  & .faq-container {
+    width: 50%;
+    margin: 0 auto;
+  }
+
   & .mat-expansion-panel {
     margin-bottom: 5px;
-    width: 70%;
     border-radius: 0 !important;
   }
 

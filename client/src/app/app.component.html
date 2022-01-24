@@ -52,16 +52,10 @@
         <button mat-menu-item (click)="mobileNavigate('howToMenu')">How to..
           <mat-icon>arrow_right</mat-icon>
         </button>
-        <button mat-menu-item (click)="sidenav.close()" routerLink="help/layperson"> Layperson Synonyms</button>
-        <button mat-menu-item (click)="sidenav.close()" routerLink="help/translations"> Translations and Mapping
+        <button mat-menu-item (click)="sidenav.close()" routerLink="data/layperson"> Layperson Synonyms</button>
+        <button mat-menu-item (click)="sidenav.close()" routerLink="data/translations"> Translations and Mapping
         </button>
         <button mat-menu-item (click)="sidenav.close()" routerLink="faq"> FAQ</button>
-      </div>
-
-      <div *ngIf="mobileNavSection == 'howToMenu'">
-        <button mat-menu-item (click)="sidenav.close()" routerLink="help/annotations"> Use Annotations</button>
-        <button mat-menu-item (click)="sidenav.close()" routerLink="help/collaboration"> Contribute to HPO</button>
-        <button mat-menu-item (click)="sidenav.close()" routerLink="citation"> Cite HPO</button>
       </div>
 
       <div *ngIf="mobileNavSection == 'infoMenu'">
@@ -83,5 +77,5 @@
   <div class="main" fxLayout="column">
     <router-outlet></router-outlet>
   </div>
-  <footer-hpo class="mat-elevation-z4"></footer-hpo>
+  <hpo-footer class="mat-elevation-z4"></hpo-footer>
 </mat-sidenav-container>

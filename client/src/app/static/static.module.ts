@@ -1,41 +1,41 @@
-// Modules
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {StaticRoutingModule} from './static-routing.module';
-
-import {HelpModule} from './help/help.module';
 import {ToolsModule} from './tools/tools.module';
 import {SearchModule} from '../shared/search/search.module';
-// GlobalMaterialModules
 import {GlobalMaterialModules} from '../shared/modules/global.module';
-// Components
 import {HomeComponent} from './home/home.component';
-import {ContactComponent} from './help/contact/contact.component';
+import {ContactComponent} from './resources/contact/contact.component';
 import {CitationComponent} from './resources/citation/citation.component';
 import {LicenseComponent} from './resources/license/license.component';
-import {FaqComponent} from './resources/faq/faq.component';
-// Pipe
 import {SearchService} from '../shared/search/service/search.service';
 import {NewsComponent} from './news/news.component';
-import {OntologyComponent} from './downloads/ontology/ontology.component';
-import {AnnotationsDownloadComponent} from './downloads/annotations/annotations.component';
 import {DisclaimerComponent} from './resources/disclaimer/disclaimer.component';
 import {LoincComponent} from './tools/loinc/loinc.component';
+import {AboutComponent} from './about/about.component';
+import {TeamComponent} from './resources/team/team.component';
+import {CommunityComponent} from './community/community.component';
+import {FundingComponent} from './resources/funding/funding.component';
+import {TeamService} from '../shared/team/team.service';
+import {DataModule} from './data/data.module';
+import {ResourcesModule} from './resources/resources.module';
+
 
 @NgModule({
   imports: [
     CommonModule,
-    HelpModule,
+    DataModule,
     ToolsModule,
+    ResourcesModule,
     GlobalMaterialModules,
     SearchModule,
     StaticRoutingModule
   ],
   declarations: [HomeComponent,
-    ContactComponent, CitationComponent, LicenseComponent,
-    FaqComponent, NewsComponent, OntologyComponent, AnnotationsDownloadComponent, DisclaimerComponent, LoincComponent
+    ContactComponent, CitationComponent, LicenseComponent, NewsComponent, DisclaimerComponent,
+    LoincComponent, AboutComponent, TeamComponent, CommunityComponent, FundingComponent
   ],
-  providers: [SearchService]
+  providers: [SearchService, TeamService]
 })
 export class StaticModule {
 }

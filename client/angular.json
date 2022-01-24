@@ -22,7 +22,7 @@
               "src/favicon.ico"
             ],
             "styles": [
-              "src/styles.css",
+              "src/styles.scss",
               "src/assets/themes/jax-palette.scss"
             ],
             "scripts": []

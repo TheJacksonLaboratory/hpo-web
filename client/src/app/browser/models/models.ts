@@ -78,7 +78,7 @@ export interface News {
   monthYear?: string;
 }
 
-export interface TeamMember {
+export interface IndividualContributer {
   lastName: string;
   firstName: string;
   location: string;
@@ -114,4 +114,20 @@ export interface Publication {
   hpo: boolean;
   monarch: boolean;
   topicList: string[];
+}
+
+export interface Organization {
+  name: string;
+  description?: string;
+  image: string;
+  link?: string;
+  alumni?: boolean;
+  members: TeamMember[];
+}
+
+export interface TeamMember {
+  name: string;
+  role: string;
+  link?: string;
+  alumni?: boolean;
 }

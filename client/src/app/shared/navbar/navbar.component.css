@@ -92,12 +92,15 @@ button.mat-menu-item a {
 
   .navbar-search-wrapper {
     margin: 0;
-    padding: 0;
+    padding: 1rem;
     width: 100%;
   }
 
   .ontoversion {
     margin: 0;
+  }
+  .navbar {
+    height: auto !important;
   }
 }
 
