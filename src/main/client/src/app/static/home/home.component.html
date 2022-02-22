@@ -1,108 +1,114 @@
-<div class="container">
-    <div class="home-search col-lg-offset-2 col-lg-8">
-      <div class="search-container mat-elevation-z4">
-        <img class="main-logo" src="assets/hpo-logo-white.png"/>
+<div fxLayout="row">
+  <div class="home-search" fxFlex.gt-md="65" fxFlexOffset.gt-md="17" fxFlex="90" fxFlexOffset="5">
+    <div class="search-container mat-elevation-z4">
+      <img class="main-logo" src="assets/hpo-logo-white.png"/>
+      <div class="searchbar-container">
         <searchbar></searchbar>
       </div>
     </div>
+  </div>
 </div>
-<div class="empty-space"></div>
-<div class="container">
-    <div class="col-lg-offset-1 col-lg-6">
-      <h2>The Human Phenotype Ontology</h2>
-      <hr>
-      <div class="info-body">
-        <p>The Human Phenotype Ontology (HPO) provides a standardized vocabulary of phenotypic abnormalities encountered
-          in human disease. Each term in the HPO describes a phenotypic abnormality, such as
-          <a routerLink="/browse/term/HP:0001631">Atrial septal defect</a>. The HPO is currently being developed using
-          the medical literature, Orphanet, DECIPHER, and OMIM. HPO currently contains over 13,000 terms and over
-          156,000 annotations to hereditary diseases. The HPO project and others have developed software for
-          phenotype-driven differential diagnostics, genomic diagnostics, and translational research. The HPO is a
-          flagship product of the <a href="https://monarchinitiative.org/" target="__blank">Monarch Initiative</a>,
-          an NIH-supported international consortium dedicated
-          to semantic integration of biomedical and model organism data with the ultimate goal of improving biomedical
-          research. The HPO, as a part of the Monarch Initiative, is a central component of one of the
-          <a href="https://www.ga4gh.org/howwework/driver-projects.html" target="__blank">13 driver
-          projects</a> in the <a href=" https://www.ga4gh.org/" target="__blank">Global Alliance for Genomics and Health</a> (GA4GH) <a href="https://www.ga4gh.org/howwework/strategic-roadmap.html">strategic roadmap</a>.</p>
+<div class="info-section" fxLayout="row wrap" fxLayoutAlign="space-evenly">
+  <div fxFlex.gt-md="45" fxFlex="80">
+    <h2>The Human Phenotype Ontology</h2>
+    <hr>
+    <div class="info-body">
+      <p>The Human Phenotype Ontology (HPO) provides a standardized vocabulary of phenotypic abnormalities encountered
+        in human disease. Each term in the HPO describes a phenotypic abnormality, such as
+        <a routerLink="/browse/term/HP:0001631">Atrial septal defect</a>. The HPO is currently being developed using
+        the medical literature, Orphanet, DECIPHER, and OMIM. HPO currently contains over 13,000 terms and over
+        156,000 annotations to hereditary diseases. The HPO project and others have developed software for
+        phenotype-driven differential diagnostics, genomic diagnostics, and translational research. The HPO is a
+        flagship product of the <a href="https://monarchinitiative.org/" target="__blank">Monarch Initiative</a>,
+        an NIH-supported international consortium dedicated
+        to semantic integration of biomedical and model organism data with the ultimate goal of improving biomedical
+        research. The HPO, as a part of the Monarch Initiative, is a central component of one of the
+        <a href="https://www.ga4gh.org/howwework/driver-projects.html" target="__blank">13 driver
+          projects</a> in the <a href=" https://www.ga4gh.org/" target="__blank">Global Alliance for Genomics and
+          Health</a> (GA4GH) <a href="https://www.ga4gh.org/howwework/strategic-roadmap.html">strategic roadmap</a>.</p>
+      <div class="button-wrapper">
+        <a mat-raised-button routerLink="help/introduction" class="mat-btn">Learn More About HPO</a>
+      </div>
+    </div>
+  </div>
+  <div fxFlex.gt-md="25" fxFlex="80">
+    <h2>News & Updates</h2>
+    <hr>
+    <div class="info-body teaser">
+      <div *ngIf="teaserNews">
+        <mat-list class="list">
+          <mat-list-item *ngFor="let item of teaserNews">
+            <div class="teaser-title"><a routerLink="/news/{{item.monthYear}}">{{item.teaserTitle}}</a></div>
+            <span class="teaser-date">{{item.date}}</span>
+          </mat-list-item>
+        </mat-list>
         <div class="button-wrapper">
-          <a mat-raised-button routerLink="help/introduction" class="mat-btn">Learn More About HPO</a>
+          <a mat-raised-button routerLink="/news" class="mat-btn">View All News</a>
         </div>
       </div>
-    </div>
-    <div class="col-lg-4">
-      <h2>News & Updates</h2>
-      <hr>
-      <div class="info-body teaser">
-        <div *ngIf="teaserNews">
-          <mat-list class="list">
-            <mat-list-item *ngFor="let item of teaserNews">
-              <div class="teaser-title"><a routerLink="/news/{{item.monthYear}}">{{item.teaserTitle}}</a></div>
-              <span class="teaser-date">{{item.date}}</span>
-            </mat-list-item>
-          </mat-list>
-          <div class="button-wrapper">
-            <a mat-raised-button routerLink="/news" class="mat-btn">View All News</a>
-          </div>
-        </div>
-        <div *ngIf="newsError">
-          Temporarily Unavailable. Please <a routerLink="/contact">contact us </a> if this does not return soon.
-        </div>
+      <div *ngIf="newsError">
+        Temporarily Unavailable. Please <a routerLink="/contact">contact us </a> if this does not return soon.
       </div>
-    </div>
-</div>
-<div class="container">
-  <div class="home-highlight-menu">
-    <div routerLink="/tools/exomiser" class="home-item dark offset col-lg-5">
-      <img class="tool-icon" src="assets/highlight-images/exomiser.png" />
-      <div class="home-body">
-        <h2 class="title">Exomiser</h2>
-        <p class="description"><i>Evaluate variants based on the predicted pathogenicity.</i></p>
-      </div>
-      <i class="material-icons hidden-xs">
-        chevron_right
-      </i>
-    </div>
-    <div routerLink="/tools/phenomizer" class="home-item light col-lg-offset-1 col-lg-5">
-      <img class="tool-icon" src="assets/highlight-images/phenomizer.png" />
-      <div class="home-body">
-        <h2 class="title">Phenomizer</h2>
-        <p class="description"><i>Rank disease differential diagnosis by clinical features.</i></p>
-      </div>
-      <i class="material-icons hidden-xs">
-        chevron_right
-      </i>
-    </div>
-    <div routerLink="/tools/genomiser" class="home-item light offset col-lg-5">
-      <img class="tool-icon" src="assets/highlight-images/genomiser.png" />
-      <div class="home-body">
-        <h2 class="title">Genomiser</h2>
-        <p class="description"><i>Analyze genome sequence data for non-coding variants.</i></p>
-      </div>
-      <i class="material-icons hidden-xs">
-        chevron_right
-      </i>
-    </div>
-    <div routerLink="/browse/profile-search" class="home-item dark col-lg-offset-1 col-lg-5">
-      <img class="tool-icon" src="assets/highlight-images/patientarchive.png" />
-      <div class="home-body">
-        <h2 class="title">Profile Search</h2>
-        <p class="description"><i>Discover diseases with a phenotype profile.</i></p>
-      </div>
-      <i class="material-icons hidden-xs">
-        chevron_right
-      </i>
+      <mat-progress-bar mode="indeterminate" *ngIf="loadingNews"></mat-progress-bar>
     </div>
   </div>
 </div>
+<div class="home-highlight-menu" fxLayout="row wrap">
+  <div routerLink="/tools/exomiser" class="home-item dark" fxFlex.gt-md="35" fxFlexOffset.gt-md="10"
+       fxFlex="90" fxFlexOffset="5">
+    <img class="tool-icon" src="assets/highlight-images/exomiser.png"/>
+    <div class="home-body">
+      <h2 class="title">Exomiser</h2>
+      <p class="description"><i>Evaluate variants based on the predicted pathogenicity.</i></p>
+    </div>
+    <i class="material-icons" fxShow fxHide.xs>
+      chevron_right
+    </i>
+  </div>
+  <div routerLink="/tools/phenomizer" class="home-item light" fxFlex.gt-md="35" fxFlexOffset.gt-md="10"
+       fxFlex="90" fxFlexOffset="5">
+    <img class="tool-icon" src="assets/highlight-images/phenomizer.png"/>
+    <div class="home-body">
+      <h2 class="title">Phenomizer</h2>
+      <p class="description"><i>Rank disease differential diagnosis by clinical features.</i></p>
+    </div>
+    <i class="material-icons" fxShow fxHide.xs>
+      chevron_right
+    </i>
+  </div>
+  <div routerLink="/tools/genomiser" class="home-item light" fxFlex.gt-md="35" fxFlexOffset.gt-md="10"
+       fxFlex="90" fxFlexOffset="5">
+    <img class="tool-icon" src="assets/highlight-images/genomiser.png"/>
+    <div class="home-body">
+      <h2 class="title">Genomiser</h2>
+      <p class="description"><i>Analyze genome sequence data for non-coding variants.</i></p>
+    </div>
+    <i class="material-icons" fxShow fxHide.xs>
+      chevron_right
+    </i>
+  </div>
+  <div routerLink="/browse/profile-search" class="home-item dark" fxFlex.gt-md="35" fxFlexOffset.gt-md="10"
+       fxFlex="90" fxFlexOffset="5">
+    <img class="tool-icon" src="assets/highlight-images/patientarchive.png"/>
+    <div class="home-body">
+      <h2 class="title">Profile Search</h2>
+      <p class="description"><i>Discover diseases with a phenotype profile.</i></p>
+    </div>
+    <i class="material-icons" fxShow fxHide.xs>
+      chevron_right
+    </i>
+  </div>
+</div>
 <br><br>
-<div class="container">
-  <div class="monarch-banner col-lg-offset-1 col-lg-10 mat-elevation-z1">
+<div fxLayout="row">
+  <div class="monarch-banner mat-elevation-z1" fxFlex="90" fxFlexOffset="5">
     <a href="https://monarchinitiative.org/" target="__blank">
       <img class="logo" src="assets/monarch-logo.png"/>
     </a>
-    <div class="body">
+    <div class="description" fxHide.xs>
       <span class="text">Cross-species disease discovery and diagnosis.</span>
-      <a mat-raised-button href="https://monarchinitiative.org/" target="__blank" class="mat-btn button">Explore Monarch Initiative</a>
+      <a mat-raised-button href="https://monarchinitiative.org/" target="__blank" class="mat-btn button">Explore Monarch
+        Initiative</a>
     </div>
   </div>
 </div>
@@ -119,5 +125,6 @@
   </a>
 </div>
 
-<a href="http://www.irdirc.org/research/irdirc-recognized-resources/" target="__blank"><img class="irdirc" src="assets/irdirc-logo.jpg"/></a>
+<a href="http://www.irdirc.org/research/irdirc-recognized-resources/" target="__blank"><img class="irdirc"
+                                                                                            src="assets/irdirc-logo.jpg"/></a>
 

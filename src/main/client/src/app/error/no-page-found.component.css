@@ -3,7 +3,7 @@
 }
 
 .page-title i {
-  position:relative;
+  position: relative;
   top: calc(50% - 10px);
   font-size: 48px;
 }
@@ -17,7 +17,9 @@
 }
 
 
-a { cursor: pointer;}
+a {
+  cursor: pointer;
+}
 
 a.mat-btn {
   text-decoration: none;

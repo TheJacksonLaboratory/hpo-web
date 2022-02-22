@@ -56,7 +56,6 @@ class HpoHomeSearchSpec extends  GebReportingSpec {
     where:
     uri                                     | expectedContentType             | desc
     '/app/assets/hammer-time.min.js'        | 'text/javascript;charset=UTF-8' | 'java script file'
-    '/app/assets/bootstrap.min.css'         | 'text/css;charset=UTF-8'        | 'css file'
   }
 
 }

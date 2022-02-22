@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ProfileSearchComponent } from './profile-search.component';
+import {ProfileSearchComponent} from './profile-search.component';
 import {SearchService} from "../../../shared/search/service/search.service";
 import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {TermService} from "../../services/term/term.service";
@@ -13,11 +13,11 @@ describe('ProfileSearchComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProfileSearchComponent ],
-      providers: [ SearchService, TermService ],
-      imports: [ HttpClientTestingModule, GlobalMaterialModules, NoopAnimationsModule ]
+      declarations: [ProfileSearchComponent],
+      providers: [SearchService, TermService],
+      imports: [HttpClientTestingModule, GlobalMaterialModules, NoopAnimationsModule]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

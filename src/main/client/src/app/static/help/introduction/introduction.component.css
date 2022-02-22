@@ -1,8 +1,9 @@
 .float-left {
-	text-align:left;
+  text-align: left;
 }
-.table-spacer td, .table-spacer th{
-  padding:5px;
+
+.table-spacer td, .table-spacer th {
+  padding: 5px;
 }
 
 .science-direct {

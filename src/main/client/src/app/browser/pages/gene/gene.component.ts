@@ -1,13 +1,13 @@
-import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { GeneService } from '../../services/gene/gene.service';
-import { Gene, EntrezGene, Term, Disease } from '../../models/models';
-import { ActivatedRoute, Router } from '@angular/router';
-import { MatTableDataSource } from '@angular/material/table';
-import { MatSort } from '@angular/material/sort';
-import { MatPaginator } from '@angular/material/paginator';
+import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
+import {GeneService} from '../../services/gene/gene.service';
+import {Disease, EntrezGene, Gene, Term} from '../../models/models';
+import {ActivatedRoute, Router} from '@angular/router';
+import {MatTableDataSource} from '@angular/material/table';
+import {MatSort} from '@angular/material/sort';
+import {MatPaginator} from '@angular/material/paginator';
 import * as ProtVista from 'ProtVista';
-import { environment } from '../../../../environments/environment';
-import { DialogService } from '../../../shared/dialog-excel-download/dialog.service';
+import {environment} from '../../../../environments/environment';
+import {DialogService} from '../../../shared/dialog-excel-download/dialog.service';
 
 @Component({
   selector: 'app-gene',
@@ -33,11 +33,11 @@ export class GeneComponent implements OnInit {
   mobile = false;
   entrezError = false;
 
-  @ViewChild(MatSort, { static: true }) sort: MatSort;
-  @ViewChild('termPaginator', { static: true }) termPaginator: MatPaginator;
-  @ViewChild('diseasePaginator', { static: true }) diseasePaginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild('termPaginator', {static: true}) termPaginator: MatPaginator;
+  @ViewChild('diseasePaginator', {static: true}) diseasePaginator: MatPaginator;
 
-  constructor(private route: ActivatedRoute, private geneService: GeneService,  public dialogService: DialogService,
+  constructor(private route: ActivatedRoute, private geneService: GeneService, public dialogService: DialogService,
               private router: Router) {
 
   }
@@ -57,7 +57,7 @@ export class GeneComponent implements OnInit {
     this.geneService.searchGeneInfo(this.query)
       .subscribe((data) => {
         this.entrezGene = data.result[this.query];
-        this.entrezGene.aliases = this.entrezGene.otheraliases ? this.entrezGene.otheraliases.split(','): [];
+        this.entrezGene.aliases = this.entrezGene.otheraliases ? this.entrezGene.otheraliases.split(',') : [];
         this.entrezGene.summary = this.entrezGene.summary ? this.entrezGene.summary : 'No Entrez definition entry.';
       }, (error) => {
         this.entrezError = true;
@@ -81,7 +81,8 @@ export class GeneComponent implements OnInit {
         this.router.navigate(['/error'], {
           state: {
             description: errorString
-          }});
+          }
+        });
         console.log(error);
       });
 
@@ -120,10 +121,10 @@ export class GeneComponent implements OnInit {
    * Initialize tab components where needed
    */
   initTabs(event) {
-      // initialize uniProt widget
-      if (event.index === 0 && ! this.uniProtWidgetInitilized ){
-        this.uniprotWidgetInit();
-      }
+    // initialize uniProt widget
+    if (event.index === 0 && !this.uniProtWidgetInitilized) {
+      this.uniprotWidgetInit();
+    }
   }
 
   applyTermFilter(filterValue: string) {
@@ -139,7 +140,7 @@ export class GeneComponent implements OnInit {
   }
 
   downloadDialog() {
-    const counts =  {
+    const counts = {
       diseases: this.diseaseAssoc.length,
       terms: this.termAssoc.length
     };

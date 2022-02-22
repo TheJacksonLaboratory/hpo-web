@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-phenogramviz',
@@ -8,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 export class PhenogramVizComponent implements OnInit {
   pageTitle: string = "Tools / PhenoGramViz";
   pageIntro: String = "";
-  constructor() { }
+
+  constructor() {
+  }
 
   ngOnInit() {
   }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-definitions',
@@ -8,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 export class UsersComponent implements OnInit {
   pageTitle: String = "Help / Users";
   pageIntro: String = "Who else is using the Ontology?";
+
   constructor() {
 
-   }
+  }
+
   ngOnInit() {
   }
 

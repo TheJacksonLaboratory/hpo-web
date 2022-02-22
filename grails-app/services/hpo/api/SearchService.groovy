@@ -38,11 +38,11 @@ class SearchService {
         resultMap.put('terms', searchTermAll(inputTerms, offsetIn, maxIn))
       }
 
-      if(category == "genes" || !category){
+      if(category == "diseases" || !category){
         resultMap.put('diseases', searchDiseasesAll(inputTerms, offsetIn, maxIn))
       }
 
-      if(category == "diseases" || !category){
+      if(category == "genes" || !category){
         resultMap.put('genes', searchGenesAll(inputTerms, offsetIn, maxIn))
       }
     }

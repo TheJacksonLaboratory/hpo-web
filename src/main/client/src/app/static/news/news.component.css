@@ -1,19 +1,20 @@
-.news-title{
+.news-title {
   font-size: 20px;
   font-weight: 800;
 }
 
-.news-date{
+.news-date {
   font-size: 14px;
   font-style: italic;
-  font-weight:normal;
-  float:right;
+  font-weight: normal;
+  float: right;
 }
-.news-timeline h4{
+
+.news-timeline h4 {
   margin: 10px 0;
 }
 
-.news-section{
+.news-section {
   padding: 15px;
   margin-bottom: 25px;
 }
@@ -22,6 +23,7 @@
   border-right: solid 1px lightgray;
   line-height: 30px;
 }
+
 .news-timeline .news-dates p {
   cursor: pointer;
 }
@@ -30,7 +32,7 @@
   font-weight: bold;
 }
 
-.hr{
+.hr {
   width: fit-content !important;
 }
 

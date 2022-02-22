@@ -130,3 +130,4 @@ This guide uses the H2 database which is a grails out-of-the-box in-memory or fi
       ./gradlew clean build -DchromeHeadless=true
 
 + If you would like to use a local instance of mysql please read conf/application.groovy
+l

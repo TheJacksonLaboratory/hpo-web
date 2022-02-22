@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { IndigenousComponent } from './indigenous.component';
+import {IndigenousComponent} from './indigenous.component';
 
 describe('IndigenousComponent', () => {
   let component: IndigenousComponent;
@@ -8,9 +8,9 @@ describe('IndigenousComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ IndigenousComponent ]
+      declarations: [IndigenousComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

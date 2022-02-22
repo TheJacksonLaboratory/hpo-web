@@ -53,7 +53,7 @@ class SearchServiceIntegrationSpec extends Specification {
 
       where:
         query           | expected                                                                                                      | desc
-        'small skull'   | ['Microcephaly', "Small flat posterior fossa", "Progressive microcephaly", "Congenital microcephaly"]         | "synonym small skull"
+        'small skull'   | ['Microcephaly', "Small flat posterior fossa", "Progressive microcephaly", "Primary microcephaly"]         | "synonym small skull"
         'sore mouth'    | ['Oral ulcer', "Angular cheilitis"]                                                                           | "synonym sore mouth"
         'small nose'    | ['Short nose', "Hypoplastic nasal tip", "Hypoplastic nasal septum", "Hypoplastic nasal bridge"]               | "synonym small nose"
         'short fore'    | ['Forearm undergrowth', "Ventral shortening of foreskin", "Short forearm"]                                    | "synonym short fore"

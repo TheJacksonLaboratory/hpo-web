@@ -297,17 +297,17 @@ $jax-green: (
   )
 );
 
-$jax-white:(
+$jax-white: (
   400: #fffff,
   contrast:(
     50: #fffff
-)
+  )
 );
 
 @include mat-core();
-$primary: mat-palette($jax-lightblue,900);
-$accent:  mat-palette($jax-blue);
-$warn:    mat-palette($jax-red);
-$ghost:   mat-palette($jax-white);
+$primary: mat-palette($jax-lightblue, 900);
+$accent: mat-palette($jax-blue);
+$warn: mat-palette($jax-red);
+$ghost: mat-palette($jax-white);
 $theme: mat-light-theme($primary, $accent, $warn);
 @include angular-material-theme($theme);

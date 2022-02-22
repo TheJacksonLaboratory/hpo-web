@@ -1,7 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { DialogExcelDownloadComponent } from './dialog-excel-download.component';
-import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from "@angular/material/dialog";
-import {DialogData} from "../../browser/models/models";
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {DialogExcelDownloadComponent} from './dialog-excel-download.component';
+import {MAT_DIALOG_DATA, MatDialogModule, MatDialogRef} from "@angular/material/dialog";
 
 
 describe('DialogExcelDownloadComponent', () => {
@@ -10,12 +9,14 @@ describe('DialogExcelDownloadComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DialogExcelDownloadComponent ],
-      imports: [ MatDialogModule ],
-      providers: [{provide: MatDialogRef, useValue: {}}, {provide: MAT_DIALOG_DATA,
-        useValue: {'association': '', 'term': '', 'type': '', 'counts': {'genes': 0, 'diseases': 0, 'terms': 0}}}]
+      declarations: [DialogExcelDownloadComponent],
+      imports: [MatDialogModule],
+      providers: [{provide: MatDialogRef, useValue: {}}, {
+        provide: MAT_DIALOG_DATA,
+        useValue: {'association': '', 'term': '', 'type': '', 'counts': {'genes': 0, 'diseases': 0, 'terms': 0}}
+      }]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

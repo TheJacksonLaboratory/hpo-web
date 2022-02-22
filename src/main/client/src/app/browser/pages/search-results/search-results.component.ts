@@ -1,9 +1,9 @@
-import { Component, ViewChild } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
-import {Term, Gene, Disease} from '../../models/models';
+import {Component, ViewChild} from '@angular/core';
+import {MatTableDataSource} from '@angular/material/table';
+import {MatPaginator} from '@angular/material/paginator';
+import {Disease, Gene, Term} from '../../models/models';
 import {SearchService} from '../../../shared/search/service/search.service';
-import {ActivatedRoute } from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-search-results',
@@ -30,12 +30,12 @@ export class SearchResultsComponent {
   geneDisplayedColumns = ['entrezGeneId', 'entrezGeneSymbol', 'matching_string'];
   geneDataSource: MatTableDataSource<Gene>;
 
-  @ViewChild('termPaginator', { static: true }) termPaginator: MatPaginator;
-  @ViewChild('diseasePaginator', { static: true }) diseasePaginator: MatPaginator;
-  @ViewChild('genePaginator', { static: true }) genePaginator: MatPaginator;
+  @ViewChild('termPaginator', {static: true}) termPaginator: MatPaginator;
+  @ViewChild('diseasePaginator', {static: true}) diseasePaginator: MatPaginator;
+  @ViewChild('genePaginator', {static: true}) genePaginator: MatPaginator;
 
 
-  constructor(private route: ActivatedRoute, private searchService: SearchService ) {
+  constructor(private route: ActivatedRoute, private searchService: SearchService) {
     this.route.queryParams.subscribe((params) => {
       this.query = params['q'];
       this.navFilter = params['navFilter'];
@@ -56,7 +56,7 @@ export class SearchResultsComponent {
   }
 
   determineTab(filterItem: string) {
-    if (filterItem ===  'disease') {
+    if (filterItem === 'disease') {
       this.selectedTab = 1;
     } else if (filterItem === 'gene') {
       this.selectedTab = 2;
@@ -98,7 +98,7 @@ export class SearchResultsComponent {
   // the highlight pipe. Otherwise the term is the matching string.
   // This is needed for the way tables are built with angular material
   termMatchingStringBuilder(terms) {
-    terms.map( term => {
+    terms.map(term => {
       if (term.synonym != null) {
         term['matchingString'] = term.synonym;
       } else {
@@ -109,7 +109,7 @@ export class SearchResultsComponent {
   }
 
   diseaseMatchingStringBuilder(diseases) {
-    diseases.map( disease => {
+    diseases.map(disease => {
       if (disease.dbName) {
         disease['matchingString'] = disease.dbName;
       }
@@ -118,11 +118,11 @@ export class SearchResultsComponent {
   }
 
   genesMatchingStringBuilder(genes) {
-    genes.map( gene => {
+    genes.map(gene => {
       if (gene.entrezGeneSymbol) {
-          gene['matchingString'] = gene.entrezGeneSymbol;
-        }
-      });
+        gene['matchingString'] = gene.entrezGeneSymbol;
+      }
+    });
     return genes;
   }
 

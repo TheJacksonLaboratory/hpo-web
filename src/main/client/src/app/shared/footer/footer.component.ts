@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {environment} from '../../../environments/environment';
 
 @Component({
@@ -8,11 +8,11 @@ import {environment} from '../../../environments/environment';
 })
 export class FooterComponent implements OnInit {
   title: string;
-  version = `hpo-web@${environment.VERSION} - hpo-obo@2021-06-08`;
+  version = `hpo-web@${environment.VERSION} - hpo-obo@2022-02-14`;
 
   constructor() {
     this.title = 'Human Phenotype Ontology';
-   }
+  }
 
   ngOnInit() {
   }

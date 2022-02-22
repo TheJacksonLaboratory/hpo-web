@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-annotation',
@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AnnotationComponent implements OnInit {
   constructor() {
-   }
+  }
 
   ngOnInit() {
   }

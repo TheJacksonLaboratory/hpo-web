@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { PhenomizerComponent } from './phenomizer.component';
+import {PhenomizerComponent} from './phenomizer.component';
 
 describe('PhenomizerComponent', () => {
   let component: PhenomizerComponent;
@@ -8,9 +8,9 @@ describe('PhenomizerComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PhenomizerComponent ]
+      declarations: [PhenomizerComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

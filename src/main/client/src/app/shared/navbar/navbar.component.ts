@@ -1,14 +1,9 @@
 import {Component, EventEmitter, HostListener, OnInit, Output} from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
-import { SearchService} from '../search/service/search.service';
-import { Disease, Gene, Term } from '../../browser/models/models';
-import {
-  trigger,
-  state,
-  style,
-  animate,
-  transition, group
-} from '@angular/animations';
+import {NavigationEnd, Router} from '@angular/router';
+import {SearchService} from '../search/service/search.service';
+import {Disease, Gene, Term} from '../../browser/models/models';
+import {animate, state, style, transition, trigger} from '@angular/animations';
+
 @Component({
   selector: 'navbar-hpo',
   templateUrl: './navbar.component.html',
@@ -19,7 +14,7 @@ import {
         'height': 0,
         'overflow-y': 'hidden'
       })),
-      state('active',   style({
+      state('active', style({
         'height': '*',
         'overflow-y': 'hidden'
       })),
@@ -27,13 +22,13 @@ import {
         animate('500ms ease-in-out')),
       transition('active => inactive',
         animate('400ms ease-in-out'))
-      ])
+    ])
   ]
 })
 export class NavbarComponent implements OnInit {
   title = 'Human Phenotype Ontology';
   query = '';
-  showSearch =  false;
+  showSearch = false;
   navFilter = 'all';
   terms: Term[] = [];
   diseases: Disease[] = [];
@@ -44,7 +39,8 @@ export class NavbarComponent implements OnInit {
   navOpen() {
     this.navToggle.emit(true);
   }
-  constructor(private router: Router, private searchService: SearchService ) {
+
+  constructor(private router: Router, private searchService: SearchService) {
 
   }
 
@@ -73,23 +69,23 @@ export class NavbarComponent implements OnInit {
   }
 
   suggestContent(query: string): void {
-    if (query && query.length >= 3 ) {
-        this.query = query;
-        this.searchService.searchAll(query).subscribe((data) => {
-          this.searchstate = 'active';
-          this.terms = data.terms;
-          this.diseases = data.diseases;
-          this.genes = data.genes;
-        }, (error) => {
-          // TODO: Implement Better Error Handling
-          console.log(error);
-        });
-      } else {
-        this.searchstate = 'inactive';
-      }
+    if (query && query.length >= 3) {
+      this.query = query;
+      this.searchService.searchAll(query).subscribe((data) => {
+        this.searchstate = 'active';
+        this.terms = data.terms;
+        this.diseases = data.diseases;
+        this.genes = data.genes;
+      }, (error) => {
+        // TODO: Implement Better Error Handling
+        console.log(error);
+      });
+    } else {
+      this.searchstate = 'inactive';
+    }
   }
 
-  navigateToDocs(){
+  navigateToDocs() {
     window.open("/api/hpo/docs", "__blank");
   }
 }

@@ -1,5 +1,5 @@
 import {TermService} from './term.service';
-import {TestBed, inject} from '@angular/core/testing';
+import {inject, TestBed} from '@angular/core/testing';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import {environment} from '../../../../environments/environment';
 
@@ -8,7 +8,8 @@ describe('TermServiceSpec', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [TermService]});
+      providers: [TermService]
+    });
   });
   const query = 'HPO:00005';
 
@@ -19,10 +20,10 @@ describe('TermServiceSpec', () => {
     // expect them to have the proper data (filled in
     // using the mock below)
     termService.searchTerm(query).subscribe(termResponse => {
-        expect(termResponse).toBeDefined();
-        expect(termResponse.relations.termCount).toBe(2);
-        expect(termResponse.details.id).toEqual('HP:0009725');
-      });
+      expect(termResponse).toBeDefined();
+      expect(termResponse.relations.termCount).toBe(2);
+      expect(termResponse.details.id).toEqual('HP:0009725');
+    });
 
     // look up our request and access it
     const request = httpMock.expectOne(environment.HPO_API_TERM_SEARCH_URL + query);
@@ -36,8 +37,8 @@ describe('TermServiceSpec', () => {
         'details': {
           'name': 'Bladder neoplasm', 'id': 'HP:0009725', 'altTermIds': [],
           'definition': 'The presence of a neoplasm of the urinary bladder.', 'comment': null,
-          'synonyms': ['Bladder cancer', 'Bladder tumor'], 'isObsolete':false,
-          'xrefs': [ 'MSH:D001749', 'SNOMEDCT_US:126885006', 'UMLS:C0005695']
+          'synonyms': ['Bladder cancer', 'Bladder tumor'], 'isObsolete': false,
+          'xrefs': ['MSH:D001749', 'SNOMEDCT_US:126885006', 'UMLS:C0005695']
         },
         'relations': {
           'termCount': 2,
@@ -83,18 +84,23 @@ describe('TermServiceSpec', () => {
             'id': 9684, 'diseaseId': 'ORPHA:79501',
             'diseaseName': 'Punctate palmoplantar keratoderma type 1', 'dbId': '79501', 'db': 'ORPHA'
           }]
-        },
+      },
         {
           'entrezGeneId': 207, 'entrezGeneSymbol': 'AKT1',
           'dbDiseases': [
-            {'id': 1217, 'diseaseId': 'OMIM:167000',
-            'diseaseName': '#167000 OVARIAN CANCEROVARIAN CANCER, EPITHELIAL, INCLUDED', 'dbId': '167000', 'db': 'OMIM'},
+            {
+              'id': 1217,
+              'diseaseId': 'OMIM:167000',
+              'diseaseName': '#167000 OVARIAN CANCEROVARIAN CANCER, EPITHELIAL, INCLUDED',
+              'dbId': '167000',
+              'db': 'OMIM'
+            },
             {'id': 8053, 'diseaseId': 'ORPHA:201', 'diseaseName': 'Cowden syndrome', 'dbId': '201', 'db': 'ORPHA'},
             {'id': 284, 'diseaseId': 'OMIM:114500', 'diseaseName': 'COLORECTAL CANCER', 'dbId': '114500', 'db': 'OMIM'}]
-          }]
-         });
-          // make sure it actually got processed...
-          httpMock.verify()
+        }]
+    });
+    // make sure it actually got processed...
+    httpMock.verify()
   }));
 
   it('should handle searchDiseasesByTerm service method', inject([
@@ -119,11 +125,13 @@ describe('TermServiceSpec', () => {
     // triggering the test's subscribe method
     request.flush({
       'diseases': [
-        {'diseaseId': 'OMIM:218040',
+        {
+          'diseaseId': 'OMIM:218040',
           'dbGenes': [{'id': 1732, 'entrezGeneId': 3265, 'entrezGeneSymbol': 'HRAS'}],
           'diseaseName': '#218040 COSTELLO SYNDROME', 'dbId': '218040', 'db': 'OMIM'
         },
-        {'diseaseId': 'OMIM:304150', 'dbGenes': [{'id': 269, 'entrezGeneId': 538, 'entrezGeneSymbol': 'ATP7A'}],
+        {
+          'diseaseId': 'OMIM:304150', 'dbGenes': [{'id': 269, 'entrezGeneId': 538, 'entrezGeneSymbol': 'ATP7A'}],
           'diseaseName': '#304150 OCCIPITAL HORN SYNDROME', 'dbId': '304150', 'db': 'OMIM'
         }
       ]
@@ -131,7 +139,6 @@ describe('TermServiceSpec', () => {
     // make sure it actually got processed...
     httpMock.verify();
   }));
-
 
 
 });
