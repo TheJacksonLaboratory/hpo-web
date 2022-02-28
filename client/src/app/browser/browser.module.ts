@@ -22,22 +22,18 @@ import {ProfileSearchComponent} from './pages/profile-search/profile-search.comp
 
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    BrowserRoutingModule,
-    GlobalMaterialModules,
-    ExtrasModule
-
-  ],
-  providers: [SearchService, TermService, GeneService, DiseaseService, DialogService],
-  declarations: [TermComponent, DiseaseComponent,
-    GeneComponent,
-    SearchResultsComponent, DialogExcelDownloadComponent, ProfileSearchComponent],
-  entryComponents: [
-    DialogExcelDownloadComponent
-  ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        BrowserRoutingModule,
+        GlobalMaterialModules,
+        ExtrasModule
+    ],
+    providers: [SearchService, TermService, GeneService, DiseaseService, DialogService],
+    declarations: [TermComponent, DiseaseComponent,
+        GeneComponent,
+        SearchResultsComponent, DialogExcelDownloadComponent, ProfileSearchComponent]
 })
 export class BrowserHPOModule {
 }
