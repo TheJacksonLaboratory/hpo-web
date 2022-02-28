@@ -174,3 +174,6 @@ task test_all_headless(type: Test) {
 clean {
   delete fileTree(dir: "src/main/webapp")
 }
+
+runCommand { systemProperty "spring.devtools.restart.enabled", false }
+
