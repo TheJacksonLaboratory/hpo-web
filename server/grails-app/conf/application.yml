@@ -56,7 +56,7 @@ spring:
         template:
             check-template-location: false
     config:
-      import:  /Users/gargam/.grails/hpo_web/application.yml
+      import:  ${HOME}/.grails/hpo_web/application.yml
 
 management:
   endpoints:
