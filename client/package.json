@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --configuration=dev",
     "build": "ng build --aot --configuration=dev --base-href /app/",
     "buildProd": "ng build --aot --configuration=production --base-href /app/",
     "buildWatch": "ng build --aot --configuration=dev --watch=true --base-href /app/",

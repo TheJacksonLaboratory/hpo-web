@@ -174,24 +174,25 @@ export class TermComponent implements OnInit {
     this.reloadGeneAssociations('0', '-1');
   }
 
-  copyToClipboard(text) {
-    const txtArea = document.createElement('textarea');
-    txtArea.style.position = 'fixed';
-    txtArea.style.top = '0';
-    txtArea.style.left = '0';
-    txtArea.style.opacity = '0';
-    txtArea.value = text;
-    document.body.appendChild(txtArea);
-    txtArea.select();
-    try {
-      document.execCommand('copy');
-      document.body.removeChild(txtArea);
-    } catch (err) {
-      console.log('Unable to copy');
+  /*copyToClipboard(text) {
+    if(document){
+      const txtArea = document.createElement('textarea');
+      txtArea.style.position = 'fixed';
+      txtArea.style.top = '0';
+      txtArea.style.left = '0';
+      txtArea.style.opacity = '0';
+      txtArea.value = text;
+      document.body.appendChild(txtArea);
+      txtArea.select();
+      try {
+        document.execCommand('copy');
+        document.body.removeChild(txtArea);
+      } catch (err) {
+        console.log('Unable to copy');
+      }
+      return false;
     }
-    return false;
-
-  }
+  }*/
 
   applyDiseaseFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace

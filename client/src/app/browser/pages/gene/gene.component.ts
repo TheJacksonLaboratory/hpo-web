@@ -5,7 +5,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator';
-import * as ProtVista from 'ProtVista';
+//import * as ProtVista from 'ProtVista';
 import {environment} from '../../../../environments/environment';
 import {DialogService} from '../../../shared/dialog-excel-download/dialog.service';
 
@@ -87,35 +87,35 @@ export class GeneComponent implements OnInit {
       });
 
     if (!this.mobile) {
-      this.uniprotWidgetInit();
+      ///this.uniprotWidgetInit();
     }
   }
 
-  uniprotWidgetInit() {
-    this.uniProtLoading = true;
-    // Make service call for Mapping  EntrezId to UniProtKB Accession
-    this.geneService.searchUniprot(this.query).subscribe((uniprotId) => {
-      if (uniprotId != null) {
-        // UniprotVista Viewer if identifier found.
-        const protVistaDiv = document.getElementsByClassName('ProtVistaReference');
-        new ProtVista(
-          {
-            el: protVistaDiv[0],
-            uniprotacc: uniprotId,
-            categoryOrder: ['DOMAINS_AND_SITES', 'VARIATION', 'PTM', 'PROTEOMICS'],
-            exclusions: ['ANTIGEN', 'MOLECULE_PROCESSING']
-          });
-        this.uniprotId = uniprotId;
-      } else {
-        this.uniprotId = 'error';
-      }
-      this.uniProtLoading = false;
-    }, (error) => {
-      // TODO: Implement Better Error Handling
-      console.log(error);
-    });
-    this.uniProtWidgetInitilized = true;
-  }
+  // uniprotWidgetInit() {
+  //   this.uniProtLoading = true;
+  //   // Make service call for Mapping  EntrezId to UniProtKB Accession
+  //   this.geneService.searchUniprot(this.query).subscribe((uniprotId) => {
+  //     if (uniprotId != null) {
+  //       // UniprotVista Viewer if identifier found.
+  //       const protVistaDiv = document.getElementsByClassName('ProtVistaReference');
+  //       new ProtVista(
+  //         {
+  //           el: protVistaDiv[0],
+  //           uniprotacc: uniprotId,
+  //           categoryOrder: ['DOMAINS_AND_SITES', 'VARIATION', 'PTM', 'PROTEOMICS'],
+  //           exclusions: ['ANTIGEN', 'MOLECULE_PROCESSING']
+  //         });
+  //       this.uniprotId = uniprotId;
+  //     } else {
+  //       this.uniprotId = 'error';
+  //     }
+  //     this.uniProtLoading = false;
+  //   }, (error) => {
+  //     // TODO: Implement Better Error Handling
+  //     console.log(error);
+  //   });
+  //   this.uniProtWidgetInitilized = true;
+  // }
 
   /**
    * Initialize tab components where needed
@@ -123,7 +123,7 @@ export class GeneComponent implements OnInit {
   initTabs(event) {
     // initialize uniProt widget
     if (event.index === 0 && !this.uniProtWidgetInitilized) {
-      this.uniprotWidgetInit();
+      //this.uniprotWidgetInit();
     }
   }
 

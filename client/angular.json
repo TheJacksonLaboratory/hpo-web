@@ -22,8 +22,7 @@
               "src/favicon.ico"
             ],
             "styles": [
-              "src/styles.scss",
-              "src/assets/themes/jax-palette.scss"
+              "src/styles.scss"
             ],
             "scripts": []
           },
@@ -35,6 +34,7 @@
                   "maximumWarning": "6kb"
                 }
               ],
+              "sourceMap": true,
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
