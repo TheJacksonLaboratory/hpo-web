@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {environment} from '../../../environments/environment';
+import { UtilityService } from "../utility/utility.service";
 
 @Component({
   selector: 'hpo-footer',
@@ -7,14 +8,17 @@ import {environment} from '../../../environments/environment';
   styleUrls: ['./footer.component.css']
 })
 export class FooterComponent implements OnInit {
-  title: string;
-  version = `hpo-web@${environment.VERSION} - hpo-obo@2021-10-10`;
+  readonly  title: string;
+  version: string;
 
-  constructor() {
+  constructor(private utilityService: UtilityService) {
     this.title = 'Human Phenotype Ontology';
   }
 
   ngOnInit() {
+    this.utilityService.getMostRecentReleaseHPO().subscribe((date) => {
+        this.version = `hpo-web@${environment.VERSION} - hpo-obo@${date}`;
+    });
   }
 
 }

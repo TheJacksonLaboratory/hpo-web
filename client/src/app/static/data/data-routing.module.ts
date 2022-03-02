@@ -7,7 +7,7 @@ import {LaypersonComponent} from './layperson/layperson.component';
 import {TranslationComponent} from './translation/translation.component';
 import {AnnotationsDownloadComponent} from './annotations-download/annotations-download.component';
 import {IndigenousComponent} from './indigenous/indigenous.component';
-import {OntologyComponent} from './ontology/ontology.component';
+import {OntologyDownloadComponent} from './ontology-download/ontology-download.component';
 
 const dataRoutes: Routes = [
   {
@@ -15,7 +15,7 @@ const dataRoutes: Routes = [
     children: [
       {path: 'annotations', component: AnnotationsDownloadComponent},
       {path: 'annotation-format', component: AnnotationFormatComponent},
-      {path: 'ontology', component: OntologyComponent},
+      {path: 'ontology', component: OntologyDownloadComponent},
       {path: 'layperson', component: LaypersonComponent},
       {path: 'translations', component: TranslationComponent},
       {path: 'indigenous-languages', component: IndigenousComponent}

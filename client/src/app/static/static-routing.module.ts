@@ -10,7 +10,6 @@ import {FaqComponent} from './resources/faq/faq.component';
 import {NewsComponent} from './news/news.component';
 import {DisclaimerComponent} from './resources/disclaimer/disclaimer.component';
 import {AboutComponent} from './about/about.component';
-import {TeamComponent} from './resources/team/team.component';
 import {CommunityComponent} from './community/community.component';
 import {FundingComponent} from './resources/funding/funding.component';
 
@@ -24,7 +23,6 @@ const staticRoutes: Routes = [
   {path: 'faq/:id', component: FaqComponent},
   {path: 'news', component: NewsComponent},
   {path: 'news/:id', component: NewsComponent},
-  {path: 'team', component: TeamComponent},
   {path: 'community', component: CommunityComponent},
   {path: 'funding', component: FundingComponent},
   {path: 'data', loadChildren: () => import('./data/data.module').then(m => m.DataModule)},

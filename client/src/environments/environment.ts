@@ -36,6 +36,10 @@ export const environment = {
   // News
   HPO_NEWS_JSON_URL: 'https://raw.githubusercontent.com/monarch-initiative/hpo-web-config/master/news.json',
   // Publications
-  HPO_PUBLICATION_REST_URL: 'https://raw.githubusercontent.com/monarch-initiative/hpo-web-config/master/hpocitations.txt'
+  HPO_PUBLICATION_REST_URL: 'https://raw.githubusercontent.com/monarch-initiative/hpo-web-config/master/hpocitations.txt',
+  //HPOA
+  HPO_ANNOTATION_FILE_PURL: 'http://purl.obolibrary.org/obo/hp/hpoa/phenotype.hpoa',
+  HPO_GITHUB_REPO_URL:'https://api.github.com/repos/obophenotype/human-phenotype-ontology',
+  OBO_PURL_NO_EXT: 'http://purl.obolibrary.org/obo/hp'
 };
 

@@ -3,7 +3,7 @@ import {IndividualContributer, Organization} from '../../browser/models/models';
 import {TeamService} from '../../shared/team/team.service';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
-import {UtilityService} from '../../shared/utility.service';
+import {UtilityService} from '../../shared/utility/utility.service';
 
 
 @Component({

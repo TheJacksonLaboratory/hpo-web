@@ -8,7 +8,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {IndigenousComponent} from './indigenous/indigenous.component';
 import {DataRoutingModule} from './data-routing.module';
 import {AnnotationsDownloadComponent} from './annotations-download/annotations-download.component';
-import {OntologyComponent} from './ontology/ontology.component';
+import {OntologyDownloadComponent} from './ontology-download/ontology-download.component';
 
 
 @NgModule({
@@ -20,7 +20,7 @@ import {OntologyComponent} from './ontology/ontology.component';
     ReactiveFormsModule
   ],
   declarations: [AnnotationFormatComponent, AnnotationsDownloadComponent, TranslationComponent,
-    IndigenousComponent, LaypersonComponent, OntologyComponent
+    IndigenousComponent, LaypersonComponent, OntologyDownloadComponent
   ]
 })
 export class DataModule {
