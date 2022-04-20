@@ -1,5 +1,5 @@
 format-version: 1.2
-data-version: maxo/releases/2021-08-19/maxo-base.owl
+data-version: maxo/releases/2022-04-11/maxo-base.owl
 ontology: maxo/maxo-base
 property_value: http://purl.org/dc/elements/1.1/creator "Leigh Carmody" xsd:string
 property_value: http://purl.org/dc/elements/1.1/creator "Peter Robinson" xsd:string
@@ -7,7 +7,7 @@ property_value: http://purl.org/dc/elements/1.1/description "An ontology to repr
 property_value: http://purl.org/dc/elements/1.1/title "Medical Action Ontology" xsd:string
 property_value: http://purl.org/dc/elements/1.1/type IAO:8000001
 property_value: http://purl.org/dc/terms/license https://creativecommons.org/licenses/by/4.0/
-property_value: owl:versionInfo "2021-08-19" xsd:string
+property_value: owl:versionInfo "2022-04-11" xsd:string
 
 [Term]
 id: MAXO:0000001
@@ -97,6 +97,7 @@ created_by: http://orcid.org/0000-0001-7941-2961
 [Term]
 id: MAXO:0000008
 name: obsolete therapeutic intervention
+is_obsolete: true
 replaced_by: MAXO:0000002
 
 [Term]
@@ -281,21 +282,25 @@ created_by: http://orcid.org/0000-0001-7941-2961
 [Term]
 id: MAXO:0000032
 name: obsolete therapeutic avoidance of behavior
+is_obsolete: true
 replaced_by: MAXO:0000525
 
 [Term]
 id: MAXO:0000038
 name: obsolete therapeutic mental or psychological behavior avoidance
+is_obsolete: true
 replaced_by: MAXO:0000525
 
 [Term]
 id: MAXO:0000040
 name: obsolete stress avoidance
+is_obsolete: true
 replaced_by: MAXO:0002008
 
 [Term]
 id: MAXO:0000041
 name: obsolete smoking avoidance
+is_obsolete: true
 replaced_by: MAXO:0002002
 
 [Term]
@@ -320,6 +325,7 @@ created_by: http://orcid.org/0000-0001-7941-2961
 [Term]
 id: MAXO:0000044
 name: obsolete physiologic state
+is_obsolete: true
 replaced_by: MAXO:0001113
 
 [Term]
@@ -528,13 +534,14 @@ synonym: "transplantation surgical procedure" EXACT []
 xref: NCIT:C15342
 xref: NCIT:C15431
 xref: OBI:0000105
-is_a: MAXO:0000004 ! surgical procedure
+is_a: MAXO:0009026 ! introduction procedure
 property_value: http://purl.org/dc/elements/1.1/date 2019-01-15T19:15:04Z xsd:dateTime
 created_by: http://orcid.org/0000-0001-7941-2961
 
 [Term]
 id: MAXO:0000069
 name: obsolete lung transplantation surgical procedure
+is_obsolete: true
 replaced_by: MAXO:0010038
 
 [Term]
@@ -545,6 +552,7 @@ synonym: "liver grafting" EXACT []
 synonym: "liver transplantation" EXACT []
 synonym: "surgical transplantation of the liver" EXACT []
 xref: NCIT:C15271
+is_obsolete: true
 replaced_by: MAXO:0001175
 
 [Term]
@@ -574,6 +582,7 @@ created_by: http://orcid.org/0000-0001-7941-2961
 [Term]
 id: MAXO:0000073
 name: obsolete liver ultrasound procedure
+is_obsolete: true
 replaced_by: MAXO:0010204
 
 [Term]
@@ -744,6 +753,7 @@ created_by: http://orcid.org/0000-0001-7941-2961
 [Term]
 id: MAXO:0000091
 name: obsolete alcohol intake avoidance
+is_obsolete: true
 replaced_by: MAXO:0010050
 
 [Term]
@@ -766,6 +776,7 @@ created_by: http://orcid.org/0000-0001-7941-2961
 [Term]
 id: MAXO:0000095
 name: obsolete excessive iron consumption avoidance
+is_obsolete: true
 replaced_by: MAXO:0010100
 
 [Term]
@@ -801,36 +812,43 @@ created_by: http://orcid.org/0000-0001-7941-2961
 [Term]
 id: MAXO:0000099
 name: obsolete food consumption avoidance
+is_obsolete: true
 replaced_by: MAXO:0000056
 
 [Term]
 id: MAXO:0000100
 name: obsolete meat consumption avoidance
+is_obsolete: true
 replaced_by: MAXO:0010052
 
 [Term]
 id: MAXO:0000101
 name: obsolete nut consumption avoidance
+is_obsolete: true
 replaced_by: MAXO:0010053
 
 [Term]
 id: MAXO:0000102
 name: obsolete seafood consumption avoidance
+is_obsolete: true
 replaced_by: MAXO:0010055
 
 [Term]
 id: MAXO:0000103
 name: obsolete mussel consumption avoidance
+is_obsolete: true
 replaced_by: MAXO:0010056
 
 [Term]
 id: MAXO:0000104
 name: obsolete iron supplementation avoidance
+is_obsolete: true
 replaced_by: MAXO:0010100
 
 [Term]
 id: MAXO:0000105
 name: obsolete saffron consumption avoidance
+is_obsolete: true
 replaced_by: MAXO:0010054
 
 [Term]
@@ -859,13 +877,13 @@ created_by: http://orcid.org/0000-0001-7941-2961
 [Term]
 id: MAXO:0000108
 name: iron supplementation
-def: "Addition of iron atomiron to a the diet for complete nutrition support." []
+def: "Addition of iron atom to a the diet for complete nutrition support." []
 comment: Oral iron supplementation is an effective and well‐studied option to replenish iron stores. {xref="PMID:28328083"}
-synonym: "dietary supplementation of iron atomiron" EXACT []
-synonym: "iron atomiron supplemental intake" EXACT []
+synonym: "dietary supplementation of iron atom" EXACT []
+synonym: "iron atom supplemental intake" EXACT []
 synonym: "iron replacement therapy" NARROW []
 synonym: "oral iron supplementation" EXACT []
-synonym: "supplementation of iron atomiron" EXACT []
+synonym: "supplementation of iron atom" EXACT []
 property_value: http://purl.org/dc/elements/1.1/date 2019-01-19T21:09:25Z xsd:dateTime
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -892,6 +910,7 @@ created_by: http://orcid.org/0000-0001-7941-2961
 [Term]
 id: MAXO:0000111
 name: obsolete amino acid supplementation
+is_obsolete: true
 replaced_by: MAXO:0010020
 
 [Term]
@@ -1021,6 +1040,8 @@ created_by: http://orcid.org/0000-0001-7941-2961
 id: MAXO:0000125
 name: audiometric testing
 def: "Testing conducted utilizing a manual or microprocessor audiometer to test for hearing loss." [NCIT:C38036]
+comment: audiometry exam
+synonym: "audiometry test" EXACT []
 synonym: "hearing exam procedure" EXACT []
 synonym: "hearing testing procedure" EXACT []
 xref: NCIT:C38036
@@ -1031,11 +1052,15 @@ created_by: http://orcid.org/0000-0001-7941-2961
 [Term]
 id: MAXO:0000126
 name: cancer screening
+def: "The use of any device, marker, or other means for the purpose of detecting the presence Neoplasm, usually in asymptomatic individuals." []
 def: "The use of any device, marker, or other means for the purpose of detecting the presence of a tumor, usually before there are any symptoms." [NCIT:C15406]
+synonym: "Neoplasm screening" EXACT []
 xref: NCIT:C15406
 is_a: MAXO:0000124 ! disease screening
 property_value: http://purl.org/dc/elements/1.1/date 2019-01-20T00:45:24Z xsd:dateTime
+property_value: http://purl.org/dc/elements/1.1/date 2020-06-23T20:39:14Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
+created_by: http://orcid.org/0000-0001-7941-2965
 
 [Term]
 id: MAXO:0000127
@@ -1051,11 +1076,13 @@ created_by: http://orcid.org/0000-0001-7941-2961
 [Term]
 id: MAXO:0000128
 name: obsolete prenatal screening
+is_obsolete: true
 replaced_by: MAXO:0000528
 
 [Term]
 id: MAXO:0000129
 name: obsolete biopsy procedure
+is_obsolete: true
 replaced_by: OBI:0002650
 
 [Term]
@@ -1206,6 +1233,7 @@ created_by: http://orcid.org/0000-0001-7941-2961
 [Term]
 id: MAXO:0000145
 name: obsolete clinical pathology procedure
+is_obsolete: true
 
 [Term]
 id: MAXO:0000146
@@ -1281,6 +1309,7 @@ created_by: http://orcid.org/0000-0001-7941-2961
 [Term]
 id: MAXO:0000156
 name: obsolete antispastic agents
+is_obsolete: true
 replaced_by: MAXO:0000245
 
 [Term]
@@ -1305,6 +1334,7 @@ created_by: http://orcid.org/0000-0001-7941-2961
 [Term]
 id: MAXO:0000158
 name: antiparasitic agent therapy
+name: antiparasititic agent therapy
 def: "Use of a substance used to treat or prevent parasitic infections." []
 synonym: "antiparasitic agent therapy" EXACT []
 synonym: "antiparasitic drug therapy" EXACT []
@@ -1323,10 +1353,11 @@ created_by: http://orcid.org/0000-0001-7941-2961
 
 [Term]
 id: MAXO:0000159
-name: analgesic pharmacotherapeutic agent therapy
+name: analgesic therapy
 def: "A therapy capable of relieving pain without the loss of consciousness or without producing anaesthesia. In addition, analgesic is a role played by a compound which is exhibited by a capability to cause a reduction of pain symptoms." []
 synonym: "analgesic drug therapy" EXACT []
 synonym: "analgesic medication therapy" EXACT []
+synonym: "analgesic pharmacotherapeutic agent therapy" EXACT []
 synonym: "analgesic therapy" EXACT []
 synonym: "Analgesics therapy" EXACT []
 synonym: "treatment with analgesic" EXACT []
@@ -1386,7 +1417,6 @@ synonym: "anti-anxiety agent therapy" EXACT []
 synonym: "anti-anxiety drug treatment" EXACT []
 synonym: "anxiolytic agent drug treatment" EXACT []
 synonym: "anxiolytic drug therapy" EXACT []
-synonym: "anxiolytics drug therapies" EXACT []
 synonym: "minor tranquiliser therapy" EXACT []
 synonym: "minor tranquilizer treatment" EXACT []
 synonym: "minor tranquilizing agent treatment" EXACT []
@@ -1436,9 +1466,7 @@ name: diuretic agent therapy
 def: "Therapy using an agent that promotes the excretion of urine through its effects on kidney function" []
 synonym: "diuretic agent drug treatment therapy" EXACT []
 synonym: "diuretic drug therapy" EXACT []
-synonym: "diuretic drugs therapy" EXACT []
 synonym: "diuretic therapy" EXACT []
-synonym: "diuretics therapy" EXACT []
 synonym: "treatment with diuretic" EXACT []
 synonym: "treatment with diuretic agent" EXACT []
 synonym: "treatment with diuretic drug" EXACT []
@@ -1526,7 +1554,6 @@ def: "A therapy utilizing a substance which produces loss of feeling or sensatio
 synonym: "anaesthesia therapy" EXACT []
 synonym: "anaesthetic medication therapy" EXACT []
 synonym: "anaesthetic therapy" EXACT []
-synonym: "anaesthetics therapy" EXACT []
 synonym: "anesthesia therapy" EXACT []
 synonym: "anesthetic drug therapy" EXACT []
 synonym: "anesthetic medication therapy" EXACT []
@@ -1559,7 +1586,7 @@ created_by: http://orcid.org/0000-0001-7941-2961
 
 [Term]
 id: MAXO:0000173
-name: antiemetics agent therapy
+name: antiemetic therapy
 def: "Treatment with a drug used to prevent nausea or vomiting." []
 synonym: "anti-emetic agent therapy" EXACT []
 synonym: "anti-emetic drug therapy" EXACT []
@@ -1570,10 +1597,6 @@ synonym: "antiemetics medication treatment" EXACT []
 synonym: "medication for nausea treatment" EXACT []
 synonym: "medication for treatment of nausea" EXACT []
 synonym: "treatment with antiemetic" EXACT []
-synonym: "Treatment with antiemetics agent" EXACT []
-synonym: "Treatment with antiemetics drug" EXACT []
-synonym: "Treatment with antiemetics medication" EXACT []
-synonym: "Treatment with antiemetics therapy" EXACT []
 xref: CHEBI:50919
 xref: NCIT:C267
 property_value: http://purl.org/dc/elements/1.1/date 2019-01-22T18:01:53Z xsd:dateTime
@@ -1581,6 +1604,7 @@ created_by: http://orcid.org/0000-0001-7941-2961
 
 [Term]
 id: MAXO:0000174
+name: anti-fungal agent therapy
 name: antifungal agent therapy
 def: "Use of a drug to prevent or treat fungal infections in humans or animals." []
 synonym: "anti-fungal drug therapy" EXACT []
@@ -1661,7 +1685,7 @@ created_by: http://orcid.org/0000-0001-7941-2961
 
 [Term]
 id: MAXO:0000180
-name: platelet aggregation inhibitor agent therapy
+name: platelet aggregation inhibitor therapy
 def: "Use of a drug which antagonizes or impairs any mechanism leading to blood platelet aggregation, whether during the phases of activation and shape change or following the dense-granule release reaction and stimulation of the prostaglandin-thromboxane system." []
 synonym: "platelet aggregation inhibitor agent treatment" EXACT []
 synonym: "platelet aggregation inhibitor therapy" EXACT []
@@ -1698,7 +1722,7 @@ created_by: http://orcid.org/0000-0001-7941-2961
 
 [Term]
 id: MAXO:0000182
-name: alpha-adrenergic agent therapy
+name: alpha adrenergic agent therapy
 def: "Treatment with a drug that acts on an alpha-adrenergic receptor." []
 synonym: "a-adrenergic agent therapy" EXACT []
 synonym: "a-adrenergic drug therapy" EXACT []
@@ -1726,13 +1750,13 @@ synonym: "treatment with alpha-adrenergic receptor agent" EXACT []
 synonym: "treatment with alpha-adrenergic receptor drug" EXACT []
 synonym: "treatment with alpha-adrenergic receptor medication" EXACT []
 xref: CHEBI:48539
-is_a: MAXO:0001025 ! adrenergic agent therapy
+is_a: MAXO:0001025 ! adrenergic drug therapy
 property_value: http://purl.org/dc/elements/1.1/date 2019-01-22T18:14:42Z xsd:dateTime
 created_by: http://orcid.org/0000-0001-7941-2961
 
 [Term]
 id: MAXO:0000183
-name: alpha-adrenergic agonist agent therapy
+name: alpha adrenergic agonist therapy
 def: "Treatment with an agent that selectively binds to and activates alpha-adrenergic receptors." []
 synonym: "a-adrenergic agonist drug treatment" EXACT []
 synonym: "a-adrenergic agonist therapy" EXACT []
@@ -1750,13 +1774,13 @@ synonym: "alpha-adrenoceptor agonist drug therapy" EXACT []
 synonym: "alpha-adrenoceptor agonist therapy" EXACT []
 synonym: "treatment with alpha-adrenergic agonist" EXACT []
 xref: CHEBI:48539
-is_a: MAXO:0000182 ! alpha-adrenergic agent therapy
+is_a: MAXO:0000182 ! alpha adrenergic agent therapy
 property_value: http://purl.org/dc/elements/1.1/date 2019-01-22T18:15:26Z xsd:dateTime
 created_by: http://orcid.org/0000-0001-7941-2961
 
 [Term]
 id: MAXO:0000184
-name: alpha-adrenergic antagonist agent therapy
+name: alpha adrenergic antagonist therapy
 def: "Treatment with an agent that binds to but does not activate alpha-adrenergic receptors thereby blocking the actions of endogenous or exogenous alpha-adrenergic agonists." []
 synonym: "a-adrenergic antagonist agent therapy" EXACT []
 synonym: "a-adrenergic antagonist therapy" EXACT []
@@ -1780,13 +1804,13 @@ synonym: "treatment with alpha-adrenergic antagonist" EXACT []
 synonym: "treatment with alpha-adrenergic antagonist drug" EXACT []
 synonym: "treatment with alpha-adrenergic antagonist medication" EXACT []
 xref: CHEBI:37890
-is_a: MAXO:0000182 ! alpha-adrenergic agent therapy
+is_a: MAXO:0000182 ! alpha adrenergic agent therapy
 property_value: http://purl.org/dc/elements/1.1/date 2019-01-22T18:15:59Z xsd:dateTime
 created_by: http://orcid.org/0000-0001-7941-2961
 
 [Term]
 id: MAXO:0000185
-name: antiarrhythmic agent therapy
+name: antiarrythmic agent therapy
 def: "Treatment with a drug for prevention of cardiac arrhythmias. Anti-arrhythmia drugs may affect the polarisation-repolarisation phase of the action potential, its excitability or refractoriness, or impulse conduction or membrane responsiveness within cardiac fibres." []
 synonym: "anti-arrhythmia agent therapy" EXACT []
 synonym: "anti-arrhythmia drug therapy" EXACT []
@@ -1814,7 +1838,7 @@ created_by: http://orcid.org/0000-0001-7941-2961
 
 [Term]
 id: MAXO:0000186
-name: beta-adrenergic agent therapy
+name: beta adrenergic agent therapy
 def: "Treatment with a drug that acts on beta-adrenergic receptors." []
 synonym: "b-adrenergic drug treatment" EXACT []
 synonym: "beta adrenergic receptor agent treatment" EXACT []
@@ -1830,13 +1854,13 @@ synonym: "treatment with beta-adrenergic agent" EXACT []
 synonym: "treatment with beta-adrenergic drug" EXACT []
 synonym: "treatment with beta-adrenergic medication" EXACT []
 xref: CHEBI:48540
-is_a: MAXO:0001025 ! adrenergic agent therapy
+is_a: MAXO:0001025 ! adrenergic drug therapy
 property_value: http://purl.org/dc/elements/1.1/date 2019-01-22T18:17:27Z xsd:dateTime
 created_by: http://orcid.org/0000-0001-7941-2961
 
 [Term]
 id: MAXO:0000187
-name: beta-adrenergic antagonist agent therapy
+name: beta-adrenergic antagonist therapy
 def: "An agent that binds to but does not activate beta-adrenergic receptors thereby blocking the actions of endogenous or exogenous beta-adrenergic agonists." [CHEBI:35530]
 synonym: "b-adrenergic antagonist therapy" EXACT []
 synonym: "b-adrenergic receptor antagonist therapy" EXACT []
@@ -1860,13 +1884,14 @@ synonym: "treatment with beta-adrenergic antagonist agent" EXACT []
 synonym: "treatment with beta-adrenergic antagonist drug" EXACT []
 synonym: "treatment with beta-adrenergic antagonist medication" EXACT []
 xref: CHEBI:35530
-is_a: MAXO:0000186 ! beta-adrenergic agent therapy
+is_a: MAXO:0000186 ! beta adrenergic agent therapy
 property_value: http://purl.org/dc/elements/1.1/date 2019-01-22T18:17:55Z xsd:dateTime
 created_by: http://orcid.org/0000-0001-7941-2961
 
 [Term]
 id: MAXO:0000188
 name: obsolete calcium channel blocker agent therapy
+is_obsolete: true
 replaced_by: MAXO:0000434
 
 [Term]
@@ -1895,7 +1920,6 @@ synonym: "treatment with anti-lipidemic drug" EXACT []
 synonym: "treatment with anti-lipidemic medication" EXACT []
 synonym: "treatment with antilipemic drug" EXACT []
 synonym: "treatment with antilipidemic agent" EXACT []
-synonym: "treatment with antilipidemic drug" EXACT []
 synonym: "treatment with antilipidemic medication" EXACT []
 synonym: "treatment with dyslipidemic agent" EXACT []
 synonym: "treatment with dyslipidemic drug" EXACT []
@@ -1936,10 +1960,12 @@ created_by: http://orcid.org/0000-0001-7941-2961
 [Term]
 id: MAXO:0000192
 name: obsolete other cardiovascular agent therapy
+is_obsolete: true
 replaced_by: MAXO:0000181
 
 [Term]
 id: MAXO:0000193
+name: non-opioid analgesic therapy
 name: non-opioid analgesics agent therapy
 def: "Use of a drug that has principally analgesic, antipyretic and anti-inflammatory actions. Non-narcotic analgesics do not bind to opioid receptors." []
 synonym: "non-narcotic analgesic agent therapy" EXACT []
@@ -1953,12 +1979,13 @@ synonym: "non-opioid analgesics medication treatment" EXACT []
 synonym: "non-opioid analgesics therapy" EXACT []
 synonym: "treatment with non-narcotic analgesic" EXACT []
 xref: CHEBI:35481
-is_a: MAXO:0000159 ! analgesic pharmacotherapeutic agent therapy
+is_a: MAXO:0000159 ! analgesic therapy
 property_value: http://purl.org/dc/elements/1.1/date 2019-01-22T18:22:25Z xsd:dateTime
 created_by: http://orcid.org/0000-0001-7941-2961
 
 [Term]
 id: MAXO:0000194
+name: opioid analgesic therapy
 name: opioid analgesics agent therapy
 def: "Use of a narcotic or opioid substance, synthetic or semisynthetic agent producing profound analgesia, drowsiness, and changes in mood." []
 synonym: "narcotic analgesic medication therapy" EXACT []
@@ -1973,12 +2000,13 @@ synonym: "opioid analgesics" EXACT []
 synonym: "opioid therapy" EXACT []
 synonym: "treatment with opioid analgesic" EXACT []
 xref: CHEBI:35482
-is_a: MAXO:0000159 ! analgesic pharmacotherapeutic agent therapy
+is_a: MAXO:0000159 ! analgesic therapy
 property_value: http://purl.org/dc/elements/1.1/date 2019-01-22T18:22:42Z xsd:dateTime
 created_by: http://orcid.org/0000-0001-7941-2961
 
 [Term]
 id: MAXO:0000195
+name: local anesthesia treatment
 name: local anesthetic agent therapy
 def: "Treatment with any member of a group of drugs that reversibly inhibit the propagation of signals along nerves. Wide variations in potency, stability, toxicity, water-solubility and duration of action determine the route used for administration, e.g. topical, intravenous, epidural or spinal block." []
 synonym: "epidural therapy" NARROW []
@@ -2067,6 +2095,7 @@ created_by: http://orcid.org/0000-0001-7941-2961
 [Term]
 id: MAXO:0000199
 name: obsolete other beta-lactams
+is_obsolete: true
 replaced_by: MAXO:0000432
 
 [Term]
@@ -2160,6 +2189,7 @@ created_by: http://orcid.org/0000-0001-7941-2961
 [Term]
 id: MAXO:0000204
 name: obsolete other antibacterial agents
+is_obsolete: true
 replaced_by: MAXO:0000061
 
 [Term]
@@ -2179,7 +2209,7 @@ created_by: http://orcid.org/0000-0001-7941-2961
 
 [Term]
 id: MAXO:0000206
-name: gamma-aminobutyric acid augmenting agent therapy
+name: GABA augmenting agent therapy
 def: "Treatment with a substance, such as agonists, antagonists, degradation or uptake inhibitors, depleters, precursors, and modulators of receptor function, used for its pharmacological actions on GABAergic systems." []
 synonym: "GABA agent therapy" EXACT []
 synonym: "GABA augmenting agent therapy" EXACT []
@@ -2227,11 +2257,12 @@ created_by: http://orcid.org/0000-0001-7941-2961
 [Term]
 id: MAXO:0000209
 name: obsolete anticonvulsants, other
+is_obsolete: true
 replaced_by: MAXO:0000167
 
 [Term]
 id: MAXO:0000210
-name: cholinesterase inhibitor therapy
+name: cholinesteriase inhibitor therapy
 def: "They are a group of drugs that block the normal breakdown of acetylcholine (ACh) into acetate and choline and thereby increase both the levels and duration of actions of acetylcholine found in the central and peripheral nervous system." [PMID:31335056]
 comment: Neurogenerative diseases such as Alzheimer disease, Parkinson disease, and Lewy body dementia are indications for cholinesterase inhibitor therapy. {xref="PMID:31335056"}
 synonym: "cholinesterase inhibitor drug treatment" EXACT []
@@ -2260,11 +2291,12 @@ created_by: http://orcid.org/0000-0001-7941-2961
 [Term]
 id: MAXO:0000212
 name: obsolete antidementia agents, other
+is_obsolete: true
 replaced_by: MAXO:0000171
 
 [Term]
 id: MAXO:0000213
-name: monoamine oxidase inhibitor agent therapy
+name: monoamine oxidase inhibitor therapy
 def: "A drug that acts as an inhibitor that interferes with the action of monoamine oxidase (EC 1.4.3.4)." []
 comment: Any substance that inhibits monoamine oxidase (MAO), an enzyme that catalyzes the oxidative deamination of monoamines and plays a role in the inactivation of neurotransmitters. {xref="NCIT:C667"}
 synonym: "EC 1.4.3.4 (monoamine oxidase) inhibitor therapy" EXACT []
@@ -2314,6 +2346,7 @@ created_by: http://orcid.org/0000-0001-7941-2961
 [Term]
 id: MAXO:0000216
 name: obsolete antidepressants, other
+is_obsolete: true
 replaced_by: MAXO:0000160
 
 [Term]
@@ -2346,7 +2379,7 @@ created_by: http://orcid.org/0000-0001-7941-2961
 
 [Term]
 id: MAXO:0000220
-name: glucocorticoid agent therapy
+name: glucocorticicoid agent therapy
 def: "Treatment with a class of steroid hormones that regulate a variety of physiological processes, in particular control of the concentration of glucose in blood." [CHEBI:24261]
 synonym: "treatment with a glucocorticoid drug" EXACT []
 synonym: "treatment with a glucocorticoid medication" EXACT []
@@ -2363,6 +2396,7 @@ created_by: http://orcid.org/0000-0001-7941-2961
 [Term]
 id: MAXO:0000221
 name: nonsteroidal anti-inflammatory agent therapy
+name: NSAID therapy
 def: "Treatment with an anti-inflammatory drug that is not a steroid. In addition to anti-inflammatory actions, non-steroidal anti-inflammatory drugs have analgesic, antipyretic, and platelet-inhibitory actions. They act by blocking the synthesis of prostaglandins by inhibiting cyclooxygenase, which converts arachidonic acid to cyclic endoperoxides, precursors of prostaglandins." []
 synonym: "non-steroidal anti-inflammatory drug therapy" EXACT []
 synonym: "non-steroidal anti-inflammatory medication treatment" EXACT []
@@ -2569,13 +2603,14 @@ synonym: "treatment with antiangiogenic medication" EXACT []
 xref: CHEBI:48422
 xref: NCIT:C1742
 is_a: MAXO:0000062 ! antineoplastic agent therapy
-is_a: MAXO:0000628 ! angiogenesis modulating agent therapy
+is_a: MAXO:0000628 ! angiogenesic modulating agent therapy
 property_value: http://purl.org/dc/elements/1.1/date 2019-01-22T18:50:46Z xsd:dateTime
 created_by: http://orcid.org/0000-0001-7941-2961
 
 [Term]
 id: MAXO:0000232
 name: obsolete antiestrogen agent therapy
+is_obsolete: true
 replaced_by: MAXO:0000635
 
 [Term]
@@ -2687,7 +2722,7 @@ synonym: "antihelminthics" EXACT []
 synonym: "vermicide therapy" NARROW []
 synonym: "vermifuge therapy" EXACT []
 xref: CHEBI:35443
-is_a: MAXO:0000158 ! antiparasitic agent therapy
+is_a: MAXO:0000158 ! antiparasititic agent therapy
 property_value: http://purl.org/dc/elements/1.1/date 2019-01-22T18:57:26Z xsd:dateTime
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -2704,7 +2739,7 @@ synonym: "treatment with an antiprotozoal drug" EXACT []
 synonym: "treatment with an antiprotozoal medication" EXACT []
 synonym: "treatment with antiprotozoal drug" EXACT []
 xref: CHEBI:35820
-is_a: MAXO:0000158 ! antiparasitic agent therapy
+is_a: MAXO:0000158 ! antiparasititic agent therapy
 is_a: MAXO:0001021 ! antimicrobial agent therapy
 property_value: http://purl.org/dc/elements/1.1/date 2019-01-22T18:57:54Z xsd:dateTime
 created_by: http://orcid.org/0000-0001-7941-2961
@@ -2715,7 +2750,7 @@ name: ectoparasiticide agent therapy
 def: "An agent used to as a treament of ectoparasitic infestations." [http://orcid.org/0000-0001-7941-2961]
 synonym: "ectoparasiticide therapy" EXACT []
 xref: CHEBI:38956
-is_a: MAXO:0000158 ! antiparasitic agent therapy
+is_a: MAXO:0000158 ! antiparasititic agent therapy
 property_value: http://purl.org/dc/elements/1.1/date 2019-01-22T18:58:53Z xsd:dateTime
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -2741,9 +2776,7 @@ id: MAXO:0000243
 name: atypical antipsychotic agent therapy
 def: "Treatment with a drug which can have different modes of action but which tend to be less likely than first generation antipsychotics to cause extrapyramidal motor control disabilities such as body rigidity or Parkinson's disease-type movements." []
 synonym: "atypical antipsychotic agent treatment" EXACT []
-synonym: "atypical antipsychotic drug therapies" EXACT []
 synonym: "atypical antipsychotic drug treatment" EXACT []
-synonym: "atypical antipsychotic therapies" EXACT []
 synonym: "second generation antipsychotic agent therapy" EXACT []
 synonym: "second generation antipsychotic drug treatment" EXACT []
 synonym: "second generation antipsychotic therapy" EXACT []
@@ -2759,7 +2792,6 @@ id: MAXO:0000244
 name: conventional antipsychotic agent therapy
 def: "Treatment with a drug which can have different modes of action but which tend to be more likely than second generation antipsychotics to cause extrapyramidal motor control disabilities such as body rigidity or Parkinson's disease-type movements; such body movements can become permanent even after treatment has ceased." []
 synonym: "conventional antipsychotic drug treatment" EXACT []
-synonym: "conventional antipsychotic therapies" EXACT []
 synonym: "first generation antipsychotic agent treatment" EXACT []
 synonym: "first generation antipsychotic drug treatment" EXACT []
 synonym: "first generation antipsychotic therapy" EXACT []
@@ -2831,6 +2863,7 @@ created_by: http://orcid.org/0000-0001-7941-2961
 
 [Term]
 id: MAXO:0000248
+name: anti-HIV agent therapy
 name: anti-human immunodeficiency virus agent therapy
 def: "Treatment with an antiviral agent that destroys or inhibits the replication of the human immunodeficiency virus." []
 synonym: "anti-HIV agent therapy" EXACT []
@@ -2850,6 +2883,7 @@ created_by: http://orcid.org/0000-0001-7941-2961
 
 [Term]
 id: MAXO:0000249
+name: anti-HIV therapy, fusion inhibitor
 name: HIV fusion inhibitor therapy
 def: "Treatment with a drug which interferes with the binding, fusion and entry of an HIV virion to a human cell. By blocking this step in HIV's replication cycle, such agents slow the progression from HIV infection to AIDS." []
 synonym: "anti-HIV theraoym fusion inhibitor drug treatment" EXACT []
@@ -2930,6 +2964,7 @@ created_by: http://orcid.org/0000-0001-7941-2961
 [Term]
 id: MAXO:0000254
 name: obsolete anxiolytics, other
+is_obsolete: true
 replaced_by: MAXO:0000163
 
 [Term]
@@ -2946,9 +2981,7 @@ name: antimanic agent therapy
 def: "Treatment with used to treat bipolar disorders or mania associated with other affective disorders." []
 synonym: "antimanic agent drug treatment" EXACT []
 synonym: "antimanic agent treatment therapy" EXACT []
-synonym: "antimanic drug therapies" EXACT []
 synonym: "antimanic drug therapy" EXACT []
-synonym: "antimanics" EXACT []
 synonym: "bipolar agent drug therapy" EXACT []
 synonym: "bipolar agent drug treatment" EXACT []
 synonym: "bipolar disorder agent therapy" EXACT []
@@ -2991,7 +3024,7 @@ synonym: "insulin drug treatment" EXACT []
 synonym: "insulin therapy" EXACT []
 synonym: "therapeutic insulin preparations treatment" EXACT []
 xref: NCIT:C581
-is_a: MAXO:0000572 ! hypoglycemic agent therapy
+is_a: MAXO:0000572 ! hypoglycemic drug therapy
 property_value: http://purl.org/dc/elements/1.1/date 2019-01-22T20:33:51Z xsd:dateTime
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -3042,6 +3075,7 @@ created_by: http://orcid.org/0000-0001-7941-2961
 [Term]
 id: MAXO:0000263
 name: obsolete non-amphetamines, other
+is_obsolete: true
 replaced_by: MAXO:0000262
 
 [Term]
@@ -3072,6 +3106,7 @@ created_by: http://orcid.org/0000-0001-7941-2961
 [Term]
 id: MAXO:0000266
 name: obsolete enzyme replacements and modifier agent therapy
+is_obsolete: true
 replaced_by: MAXO:0000644
 
 [Term]
@@ -3156,6 +3191,7 @@ created_by: http://orcid.org/0000-0001-7941-2961
 [Term]
 id: MAXO:0000273
 name: obsolete gastrointestinal agents, other
+is_obsolete: true
 
 [Term]
 id: MAXO:0000274
@@ -3196,6 +3232,7 @@ created_by: http://orcid.org/0000-0001-7941-2961
 [Term]
 id: MAXO:0000278
 name: obsolete genitourinary agents, other
+is_obsolete: true
 replaced_by: MAXO:0000274
 
 [Term]
@@ -3338,7 +3375,7 @@ created_by: http://orcid.org/0000-0001-7941-2961
 
 [Term]
 id: MAXO:0000290
-name: parathyroid-suppressant hormonal agent therapy
+name: parathyroid-suppressant hormone therapy
 def: "Use of a drug to treat hyperparathyroidism by reducing the excessive production of parathyroid hormones." []
 synonym: "antiparathyroid agent therapy" EXACT []
 synonym: "antiparathyroid drug therapy" EXACT []
@@ -3364,7 +3401,7 @@ created_by: http://orcid.org/0000-0001-7941-2961
 
 [Term]
 id: MAXO:0000292
-name: androgen suppressant agent therapy
+name: androgen suppressant hormone agent therapy
 def: "Use of a compound which inhibits or antagonizes the biosynthesis or actions of androgens." []
 synonym: "androgen antagonist therapy" EXACT []
 synonym: "treatment with androgen antagonist" EXACT []
@@ -3579,6 +3616,7 @@ created_by: http://orcid.org/0000-0001-7941-2961
 [Term]
 id: MAXO:0000310
 name: obsolete ophthalmic agents, other
+is_obsolete: true
 replaced_by: MAXO:0000305
 
 [Term]
@@ -3650,7 +3688,7 @@ created_by: http://orcid.org/0000-0001-7941-2961
 
 [Term]
 id: MAXO:0000316
-name: bronchodilator agent therapy
+name: bronchodilator therapy
 def: "Use of an agent that causes an increase in the expansion of a bronchus or bronchial tubes." []
 synonym: "bronchodilator agent therapy" EXACT []
 synonym: "bronchodilator agent treatment" EXACT []
@@ -3669,7 +3707,7 @@ id: MAXO:0000317
 name: anticholinergic bronchodilator agent therapy
 def: "Treatment with an agent that blocks the effect of acetylcholine in airways and nasal passages to keep the airways from constricting during asthma and allergy-related brathing issues." []
 synonym: "anticholinergic bronchodilator drug treatment" EXACT []
-is_a: MAXO:0000316 ! bronchodilator agent therapy
+is_a: MAXO:0000316 ! bronchodilator therapy
 property_value: http://purl.org/dc/elements/1.1/date 2019-01-22T21:10:37Z xsd:dateTime
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -3678,7 +3716,7 @@ id: MAXO:0000318
 name: phosphodiesterase inhibitor bronchodilator agent therapy
 def: "Treatment with a phosphodiesterase (PDE) inhibitor that decreases mean pulmonary arterial pressure." []
 synonym: "phosphodiesterase inhibitor bronchodilator drug treatment" EXACT []
-is_a: MAXO:0000316 ! bronchodilator agent therapy
+is_a: MAXO:0000316 ! bronchodilator therapy
 is_a: MAXO:0000908 ! phosphodiesterase inhibitor therapy
 property_value: http://purl.org/dc/elements/1.1/date 2019-01-22T21:11:08Z xsd:dateTime
 created_by: http://orcid.org/0000-0001-7941-2961
@@ -3692,7 +3730,7 @@ synonym: "adrenergic bronchiodilator agent treatment" EXACT []
 synonym: "adrenergic bronchiodilator drug therapy" EXACT []
 synonym: "sympathomimetic bronchodilator drug therapy" EXACT []
 synonym: "treatment with adrenergic bronchiodilator agent" EXACT []
-is_a: MAXO:0000316 ! bronchodilator agent therapy
+is_a: MAXO:0000316 ! bronchodilator therapy
 property_value: http://purl.org/dc/elements/1.1/date 2019-01-22T21:11:37Z xsd:dateTime
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -3720,6 +3758,7 @@ created_by: http://orcid.org/0000-0001-7941-2961
 [Term]
 id: MAXO:0000322
 name: obsolete respiratory tract agents, other
+is_obsolete: true
 replaced_by: MAXO:0000312
 
 [Term]
@@ -3765,10 +3804,7 @@ id: MAXO:0000325
 name: anti-infective agent therapy
 def: "Use of a substance for the prophylaxis or therapy of infectious diseases." []
 synonym: "anti-infective drug therapy" EXACT []
-synonym: "anti-infectives" EXACT []
 synonym: "antiinfective agent therapy" EXACT []
-synonym: "antiinfective agents" EXACT []
-synonym: "antiinfective drug" EXACT []
 synonym: "treatment with anti-infective agent" EXACT []
 synonym: "treatment with anti-infective drug" EXACT []
 synonym: "treatment with anti-infective medication" EXACT []
@@ -4752,7 +4788,7 @@ created_by: http://orcid.org/0000-0001-7941-2961
 
 [Term]
 id: MAXO:0000439
-name: selective serotonin reuptake inhibitor agent therapy
+name: selective serotonin reuptake inhibitor therapy
 def: "Any agent that increases the extracellular level of the neurotransmitter serotonin (5-HT) by inhibiting its reuptake into the presynaptic cell. Increased level in the synaptic cleft prolongs the action of 5-HT on the postsynaptic receptor. This type of agent is typically used as an antidepressant and in the treatment of anxiety disorders and some personality disorders. They are also typically effective and used in treating some cases of insomnia." [NCIT:C94725]
 comment: Any agent that increases the extracellular level of the neurotransmitter serotonin (5-HT) by inhibiting its reuptake into the presynaptic cell. Increased level in the synaptic cleft prolongs the action of 5-HT on the postsynaptic receptor. This type of agent is typically used as an antidepressant and in the treatment of anxiety disorders and some personality disorders. They are also typically effective and used in treating some cases of insomnia. {xref="NCIT:C94725"}
 synonym: "selective serotonin reuptake inhibitor drug therapy" EXACT []
@@ -4833,6 +4869,7 @@ created_by: http://orcid.org/0000-0001-7941-2961
 [Term]
 id: MAXO:0000444
 name: erythropoietin inhibitor agent therapy
+name: erythropoietin inhibitor therapy
 def: "Use of a drug that inhibits erythropoietin, a glycoprotein hormone that controls erythropoiesis (red blood cell production)." []
 synonym: "EPO inhibitor agent therapy" EXACT ABBREVIATION []
 synonym: "EPO inhibitor drug treatment" EXACT ABBREVIATION []
@@ -4904,19 +4941,16 @@ created_by: http://orcid.org/0000-0001-7941-2961
 
 [Term]
 id: MAXO:0000450
-name: surgical enucleation
-def: "A surgical procedure by which tissue or an organ (usually containing a tumor) is removed without rupture from a specific anatomic site." [NCIT:C48601]
-synonym: "enucleation" EXACT []
-is_a: MAXO:0000447 ! surgical excision
-property_value: http://purl.org/dc/elements/1.1/date 2020-01-06T16:44:59Z xsd:dateTime
-created_by: http://orcid.org/0000-0001-7941-2961
+name: obsolete surgical enucleation
+is_obsolete: true
+replaced_by: MAXO:0009049
 
 [Term]
 id: MAXO:0000451
 name: implantation
 def: "A surgical procedure that places something in the human body." [NCIT:C51982]
 xref: NCIT:C51982
-is_a: MAXO:0000004 ! surgical procedure
+is_a: MAXO:0009026 ! introduction procedure
 property_value: http://purl.org/dc/elements/1.1/date 2020-01-06T18:21:08Z xsd:dateTime
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -5126,8 +5160,11 @@ id: MAXO:0000473
 name: medical device implantation
 def: "The implantation of a piece of mechanical or electronic equipment that is useful for prevention, diagnosis, monitoring, or treatment of disease or other conditions." []
 synonym: "implantation of a medical device" EXACT []
+synonym: "insertion of a medical device" EXACT []
+synonym: "insertion of a therapeutic device" EXACT []
 synonym: "medical instrument implantation" NARROW []
 synonym: "medical machine implantation" NARROW []
+synonym: "therapeutic device implantation" EXACT []
 xref: ERO:0001092
 xref: NCIT:C16830
 is_a: MAXO:0000451 ! implantation
@@ -5143,7 +5180,7 @@ synonym: "ICD placement" EXACT ABBREVIATION []
 synonym: "implantable cardioverter-defibrillator implantation" EXACT []
 xref: NCIt:C93238
 xref: UMLS_CUI:C0162589
-is_a: MAXO:0000473 ! medical device implantation
+is_a: MAXO:0009033 ! cardiac device implantation
 property_value: http://purl.org/dc/elements/1.1/date 2020-01-20T16:54:00Z xsd:dateTime
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -5206,6 +5243,7 @@ created_by: http://orcid.org/0000-0001-7941-2961
 [Term]
 id: MAXO:0000480
 name: obsolete orthopedic consultation
+is_obsolete: true
 replaced_by: MAXO:0000478
 
 [Term]
@@ -5542,6 +5580,7 @@ created_by: http://orcid.org/0000-0001-7941-2961
 [Term]
 id: MAXO:0000511
 name: obsolete bilevel positive airway pressure ventilation
+is_obsolete: true
 replaced_by: MAXO:0000956
 
 [Term]
@@ -5646,7 +5685,6 @@ created_by: http://orcid.org/0000-0001-7941-2961
 [Term]
 id: MAXO:0000526
 name: medical examination
-def: "An appraisal or evaluation of a patient's condition by a clinician that is based on a physical exam, medical history, and the patient's account of symptoms." [NCIT:C25305]
 def: "An appraisal or evaluation of a patient's condition by a clinician that is based on a physical exam, medical history, and the patient's account of symptoms." [NCIT:C25305, PMID:19567008]
 synonym: "clinical examination" EXACT []
 xref: NCIT:C25305
@@ -5707,13 +5745,8 @@ created_by: http://orcid.org/0000-0001-7941-2961
 
 [Term]
 id: MAXO:0000532
-name: prenatal molecular genetic testing
-def: "A diverse set of techniques used to identify the molecular basis of genetic disease prenatally. Examples of molecular genetic tests include: genotyping to detect specific pathogenic variants; sequencing of a gene to detect pathogenic variants; amplification or hybridization methods (e.g., qPCR, array CGH, MLPA) to detect copy number variants involving one or more genes; methylation-specific techniques to detect epigenetic changes that influence gene expression; and exome and genome sequencing." [GeneReviews:NBK5191]
-xref: GeneReviews:NBK5191
-is_a: MAXO:0000529 ! prenatal genetic testing
-is_a: MAXO:0000533 ! molecular genetic testing
-property_value: http://purl.org/dc/elements/1.1/date 2020-03-18T19:16:15Z xsd:dateTime
-created_by: http://orcid.org/0000-0001-7941-2961
+name: obsolete prenatal molecular genetic testing
+is_obsolete: true
 
 [Term]
 id: MAXO:0000533
@@ -5866,6 +5899,7 @@ created_by: http://orcid.org/0000-0001-7941-2961
 [Term]
 id: MAXO:0000548
 name: obsolete swab-based biospecimen collection
+is_obsolete: true
 replaced_by: OBI:0002600
 
 [Term]
@@ -6112,11 +6146,10 @@ created_by: http://orcid.org/0000-0001-7941-2961
 
 [Term]
 id: MAXO:0000572
-name: hypoglycemic agent therapy
+name: hypoglycemic drug therapy
 def: "Use of a drug that lower the level of glucose in the blood." []
 synonym: "hypoglycaemic drug therapy" EXACT []
 synonym: "hypoglycemic agent therapy" EXACT []
-synonym: "hypoglycemic drug therapy" EXACT []
 synonym: "treatment with hypoglycemic agent" EXACT []
 synonym: "treatment with hypoglycemic drug" EXACT []
 synonym: "treatment with hypoglycemic medication" EXACT []
@@ -6639,7 +6672,7 @@ def: "A thin catheter inserted into an artery to monitor blood pressure directly
 synonym: "a-line insertion" EXACT []
 synonym: "art-line placement" EXACT []
 synonym: "arterial line placement" EXACT []
-is_a: MAXO:0000473 ! medical device implantation
+is_a: MAXO:0009033 ! cardiac device implantation
 property_value: http://purl.org/dc/elements/1.1/date 2020-04-08T20:20:40Z xsd:dateTime
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -6699,6 +6732,7 @@ created_by: http://orcid.org/0000-0001-7941-2961
 [Term]
 id: MAXO:0000626
 name: intravenous anesthetic agent therapy
+name: intravenous anesthetic therapy
 def: "A therapy utilizing an intravenous substance that produces loss of consciousness." []
 synonym: "i.v. anesthetic agent therapy" EXACT []
 synonym: "i.v. anesthetic drug therapy" EXACT []
@@ -6719,6 +6753,7 @@ created_by: http://orcid.org/0000-0001-7941-2961
 [Term]
 id: MAXO:0000627
 name: topical anesthetic agent therapy
+name: topical anesthetic therapy
 def: "A superficial loss of sensation in conjunctiva, mucous membranes, or skin, produced by direct application of local anesthetic solutions, ointments, gels or sprays." [PMID:26702198]
 synonym: "topical anaesthetic agent therapy" EXACT []
 synonym: "topical anaesthetic drug treatment" EXACT []
@@ -6733,7 +6768,7 @@ created_by: http://orcid.org/0000-0001-7941-2961
 
 [Term]
 id: MAXO:0000628
-name: angiogenesis modulating agent therapy
+name: angiogenesic modulating agent therapy
 def: "Use of an agent that modulates the physiologic angiogenesis process." []
 synonym: "angiogenesis modulating agent therapy" EXACT []
 synonym: "angiogenesis modulating drug treatment" EXACT []
@@ -6753,7 +6788,7 @@ synonym: "angiogenesis inducing drug treatment" EXACT []
 synonym: "angiogenesis inducing medication therapy" EXACT []
 synonym: "treatment with angiogenesis inducing agent" EXACT []
 xref: CHEBI:50927
-is_a: MAXO:0000628 ! angiogenesis modulating agent therapy
+is_a: MAXO:0000628 ! angiogenesic modulating agent therapy
 property_value: http://purl.org/dc/elements/1.1/date 2020-05-26T19:05:59Z xsd:dateTime
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -6768,7 +6803,7 @@ synonym: "pro-angiogenic medication treatment" EXACT []
 synonym: "proangiogenic agent therapy" EXACT []
 synonym: "treatment with pro-angiogenic agent" EXACT []
 xref: CHEBI:72571
-is_a: MAXO:0000628 ! angiogenesis modulating agent therapy
+is_a: MAXO:0000628 ! angiogenesic modulating agent therapy
 property_value: http://purl.org/dc/elements/1.1/date 2020-05-26T19:22:45Z xsd:dateTime
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -6857,10 +6892,9 @@ created_by: http://orcid.org/0000-0001-7941-2961
 
 [Term]
 id: MAXO:0000636
-name: anti-dyskinesia agent therapy
+name: antidyskinesia agent therapy
 def: "Use of a compound which can be used to treat or alleviate the symptoms of dyskinesia." []
 synonym: "anti-dyskinesia agent therapy" EXACT []
-synonym: "anti-dyskinesia drug therapy" EXACT []
 synonym: "anti-dyskinesia medication therapy" EXACT []
 synonym: "anti-dyskinetic drug therapy" EXACT []
 synonym: "anti-dyskinetic medication therapy" EXACT []
@@ -6958,7 +6992,7 @@ created_by: http://orcid.org/0000-0001-7941-2961
 
 [Term]
 id: MAXO:0000642
-name: emetic agent therapy
+name: emetic therapy
 def: "Treatment to induce vomiting and nausea usually administered in emergency situations after ingestion of a toxin." []
 synonym: "emetic drug therapy" EXACT []
 synonym: "emetic medication therapy" EXACT []
@@ -7084,11 +7118,10 @@ created_by: http://orcid.org/0000-0001-7941-2961
 
 [Term]
 id: MAXO:0000650
-name: antiatherogenic agent therapy
+name: antiatherogenic drug therapy
 def: "Treatment with a cardiovascular drug that prevents atherogenesis, the accumulation of lipid-containing plaques on the innermost layers of the arteries." []
 synonym: "anti-atherogenic agent therapy" EXACT []
 synonym: "antiatherogenic agent therapy" EXACT []
-synonym: "antiatherogenic drug therapy" EXACT []
 synonym: "treatment with anti-atherogenic agent" EXACT []
 synonym: "treatment with anti-atherogenic drug" EXACT []
 synonym: "treatment with anti-atherogenic medication" EXACT []
@@ -7103,11 +7136,10 @@ created_by: http://orcid.org/0000-0001-7941-2961
 
 [Term]
 id: MAXO:0000651
-name: antiatherosclerotic agent therapy
+name: antiatherosclerotic drug therapy
 def: "Treatment with a cardiovascular drug that prevents atherosclerosis, a disease in which the inside of an artery narrows due to the build-up of plaque." []
 synonym: "anti-atherosclerotic agent therapy" EXACT []
 synonym: "antiatherosclerotic agent therapy" EXACT []
-synonym: "antiatherosclerotic drug therapy" EXACT []
 synonym: "treatment with anti-atherosclerosis drug" EXACT []
 synonym: "treatment with anti-atherosclerosis medication" EXACT []
 synonym: "treatment with anti-atherosclerosis therapy" EXACT []
@@ -7138,7 +7170,7 @@ created_by: http://orcid.org/0000-0001-7941-2961
 
 [Term]
 id: MAXO:0000653
-name: angiotensin-receptor blocker therapy
+name: angiotensin receptor blocker therapy
 def: "Treatment with a class of agents that act by selectively inhibiting angiotensin II receptor activation in the renin-angiotensin-aldosterone system." []
 comment: A pharmaceutical agent that selectively inhibits angiotensin II receptor activation in the renin-angiotensin-aldosterone system reducing production and secretion of aldosterone, amongst other actions. The combined effects result in reduction of blood pressure. It is primarily used for the reduction of proteinuria and the treatment of hypertension in cases where the patient is intolerant of ACE inhibitor therapy. {xref="NCIT:C66930"}
 comment: Angiotensin II receptor antagonists bind to and block the activation of angiotensin II type 1 (AT1) receptors, thereby reducing production and secretion of aldosterone, amongst other actions. The combined effects result in reduction of blood pressure. Although this class of agents is also used in diabetic nephropathy (kidney damage due to diabetes) and congestive heart failure, it is primarily used for the treatment of hypertension in cases where the patient is intolerant of ACE inhibitor therapy. {xref="NCIT:C66930"}
@@ -7164,7 +7196,7 @@ created_by: http://orcid.org/0000-0001-7941-2961
 
 [Term]
 id: MAXO:0000655
-name: ACE 1 inhibitor therapy
+name: ACE1 inhibitor therapy
 def: "Use of a drug that inhibits angiotensin-converting enzyme (ACE) 1, an enzyme that catalyzes the conversion of angiotensin I to angiotensin II." []
 synonym: "angiotensin-converting enzyme-1 inhibitor therapy" EXACT []
 synonym: "EC 3.4.15.1 (peptidyl-dipeptidase A) inhibitor therapy" EXACT []
@@ -7180,10 +7212,9 @@ created_by: http://orcid.org/0000-0001-7941-2961
 
 [Term]
 id: MAXO:0000656
-name: ACE 2 inhibitor therapy
+name: ACE2 inhibitor therapy
 def: "Use of a drug that inhibits angiotensin-converting enzyme (ACE) 2, an enzyme that catalyzes the conversion of angiotensin I to angiotensin II." []
 synonym: "angiotensin-converting enzyme-2 inhibitor therapy" EXACT []
-synonym: "angiotensin-converting enzyme2 inhibitor therapy" EXACT []
 synonym: "EC 3.4.17.23 (angiotensin-converting enzyme 2) inhibitor therapy" EXACT []
 synonym: "Treatment with ACE-2 inhibitor" EXACT []
 synonym: "treatment with EC 3.4.17.23 (angiotensin-converting enzyme 2) inhibitor" EXACT []
@@ -7249,7 +7280,6 @@ id: MAXO:0000662
 name: AMPA receptor agonist therapy
 def: "Use of a drug that selectively binds to and activates AMPA receptors." []
 synonym: "AMPA receptor agonist therapy" EXACT []
-synonym: "Treatment with AMPA receptor agonist" EXACT []
 synonym: "treatment with AMPA receptor agonist" EXACT []
 xref: CHEBI:64102
 is_a: MAXO:0000659 ! AMPA-targeting agent therapy
@@ -7261,10 +7291,9 @@ id: MAXO:0000663
 name: AMPA receptor antagonist therapy
 def: "Use of a drug that selectively binds to and inhibits AMPA receptors." []
 synonym: "AMPA receptor antagonist therapy" EXACT []
-synonym: "Treatment with AMPA receptor antagonist" EXACT []
 synonym: "treatment with AMPA receptor antagonist" EXACT []
-synonym: "Treatment with AMPA receptor blockade" EXACT []
-synonym: "Treatment with AMPA receptor blocker" EXACT []
+synonym: "treatment with AMPA receptor blockade" EXACT []
+synonym: "treatment with AMPA receptor blocker" EXACT []
 xref: CHEBI:71014
 is_a: MAXO:0000659 ! AMPA-targeting agent therapy
 property_value: http://purl.org/dc/elements/1.1/date 2020-06-09T13:52:48Z xsd:dateTime
@@ -8300,7 +8329,7 @@ synonym: "sulfonylurea antidiabetic agent therapy" EXACT []
 synonym: "treatment with sulfonylurea" EXACT []
 synonym: "treatment with sulfonylurea agent" EXACT []
 xref: NCIT:C97936
-is_a: MAXO:0000572 ! hypoglycemic agent therapy
+is_a: MAXO:0000572 ! hypoglycemic drug therapy
 property_value: http://purl.org/dc/elements/1.1/date 2020-11-18T16:22:03Z xsd:dateTime
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -8473,21 +8502,21 @@ created_by: http://orcid.org/0000-0001-7941-2961
 
 [Term]
 id: MAXO:0000760
-name: vitamin b12 supplementation
-def: "Addition of vitamin b12 to the diet for adequate and complete nutrition." []
-synonym: "dietary supplementation of vitamin b12" EXACT []
-synonym: "supplementation of vitamin b12" EXACT []
-synonym: "vitamin b12 supplemental intake" EXACT []
+name: vitamin B12 supplementation
+def: "Addition of vitamin B12 to the diet for adequate and complete nutrition." []
+synonym: "dietary supplementation of vitamin B12" EXACT []
+synonym: "supplementation of vitamin B12" EXACT []
+synonym: "vitamin B12 supplemental intake" EXACT []
 property_value: http://purl.org/dc/elements/1.1/date 2020-11-23T09:00:01Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
 [Term]
 id: MAXO:0000761
-name: B vitaminvitamin B supplementation
-def: "Addition of B vitaminvitamin B to the diet for adequate and complete nutrition." []
-synonym: "B vitaminvitamin B supplemental intake" EXACT []
-synonym: "dietary supplementation of B vitaminvitamin B" EXACT []
-synonym: "supplementation of B vitaminvitamin B" EXACT []
+name: B vitamin supplementation
+def: "Addition of B vitamin to the diet for adequate and complete nutrition." []
+synonym: "B vitamin supplemental intake" EXACT []
+synonym: "dietary supplementation of B vitamin" EXACT []
+synonym: "supplementation of B vitamin" EXACT []
 property_value: http://purl.org/dc/elements/1.1/date 2020-11-23T09:00:01Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -8817,16 +8846,8 @@ created_by: http://orcid.org/0000-0001-7941-2961
 
 [Term]
 id: MAXO:0000797
-name: fetal Doppler monitoring
-def: "A technique that utilizes a Doppler transducer to monitor fetal heart rate. The transducer is placed on the maternal abdomen and detects fetal cardiac motion using ultrasound." [NCIT:C114081]
-synonym: "EFM" EXACT ABBREVIATION []
-synonym: "external fetal heart rate monitoring" EXACT []
-synonym: "fetal Doppler ultrasound monitoring" EXACT []
-xref: NCIT:C114081
-is_a: MAXO:0000520 ! obstetric ultrasonography
-is_a: MAXO:0000796 ! fetal heart rate monitoring
-property_value: http://purl.org/dc/elements/1.1/date 2021-02-10T19:40:07Z xsd:dateTime
-created_by: http://orcid.org/0000-0001-7941-2961
+name: obsolete fetal Doppler monitoring
+is_obsolete: true
 
 [Term]
 id: MAXO:0000798
@@ -8906,6 +8927,7 @@ created_by: http://orcid.org/0000-0001-7941-2961
 [Term]
 id: MAXO:0000807
 name: obsolete urine protein assessment
+is_obsolete: true
 replaced_by: MAXO:0000851
 
 [Term]
@@ -9476,13 +9498,8 @@ created_by: http://orcid.org/0000-0001-7941-2961
 
 [Term]
 id: MAXO:0000862
-name: fetal Doppler velocimetry
-def: "An antenatal ultrasonographic method that measures blood flow velocity through either maternal or fetal vessels." [NCIT:C114080]
-synonym: "Doppler velocimetry" EXACT []
-xref: NCIT:C114080
-is_a: MAXO:0000520 ! obstetric ultrasonography
-property_value: http://purl.org/dc/elements/1.1/date 2021-02-18T15:13:50Z xsd:dateTime
-created_by: http://orcid.org/0000-0001-7941-2961
+name: obsolete fetal Doppler velocimetry
+is_obsolete: true
 
 [Term]
 id: MAXO:0000863
@@ -9766,18 +9783,16 @@ created_by: http://orcid.org/0000-0001-7941-2961
 
 [Term]
 id: MAXO:0000896
-name: ureteroscopy
-def: "Examination of the ureter using a specialized video camera (ureteroscope)." []
-is_a: MAXO:0000131 ! location specific endoscopy
-property_value: http://purl.org/dc/elements/1.1/date 2021-08-09T18:21:21Z xsd:dateTime
-created_by: http://orcid.org/0000-0001-7941-2961
+name: obsolete ureteroscopy
+is_obsolete: true
+replaced_by: MAXO:0001194
 
 [Term]
 id: MAXO:0000897
 name: ureteroscopic stone removal
 def: "A ureteroscope is inserted into the ureter and a wire basket inserted through the tube to remove the stone(s). In addition, a laser or other mechanical device can be used to break up the stone(s)." []
 is_a: MAXO:0000890 ! calculi removal
-is_a: MAXO:0000896 ! ureteroscopy
+is_a: MAXO:0001194 ! ureteroscopy
 property_value: http://purl.org/dc/elements/1.1/date 2021-08-09T18:26:36Z xsd:dateTime
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -9808,7 +9823,7 @@ name: aspirin therapy
 def: "Treatment with acetylsalicylic acid. It is often a treatment for pain, fever, inflammation or to reduce risk of heart attack." []
 synonym: "acetylsalicylic acid therapy" EXACT []
 synonym: "treatment with aspirin" EXACT []
-is_a: MAXO:0000221 ! nonsteroidal anti-inflammatory agent therapy
+is_a: MAXO:0000221 ! NSAID therapy
 property_value: http://purl.org/dc/elements/1.1/date 2021-08-10T14:35:53Z xsd:dateTime
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -9922,11 +9937,9 @@ created_by: http://orcid.org/0000-0001-7941-2961
 
 [Term]
 id: MAXO:0000916
-name: airway endoscopy
-def: "An instrument is inserted into the air passage of a patient while the patient is breathing spontaneously or is under controlled ventilation. The airway is illuminated, enabling the surgeon to look for any abnormality under magnification and to perform any procedure both in the upper and lower air passages." [PMID:26862286]
-is_a: MAXO:0000131 ! location specific endoscopy
-property_value: http://purl.org/dc/elements/1.1/date 2021-08-11T15:32:04Z xsd:dateTime
-created_by: http://orcid.org/0000-0001-7941-2961
+name: obsolete airway endoscopy
+is_obsolete: true
+replaced_by: MAXO:0001183
 
 [Term]
 id: MAXO:0000917
@@ -10414,8 +10427,6 @@ name: medical action avoidance
 def: "A recommendation of abstaining or avoiding any medical action that might normally be clinically prescribed." []
 synonym: "avoid medical action recommendation" EXACT []
 synonym: "avoidance of a medical action" EXACT []
-intersection_of: MAXO:0000001 ! medical action
-intersection_of: MAXO:0001015 MAXO:0000001 ! avoided medical action medical action
 property_value: http://purl.org/dc/elements/1.1/date 2019-06-12T14:22:47Z xsd:dateTime
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -10533,15 +10544,7 @@ created_by: http://orcid.org/0000-0001-7941-2961
 id: MAXO:0001023
 name: tranquilizing agent therapy
 def: "Treatment with a traditional grouping of drugs said to have a soothing or calming effect on mood, thought or behavior." []
-synonym: "ataractic agents" EXACT []
-synonym: "tranquilisers" EXACT []
-synonym: "tranquilising agents" EXACT []
-synonym: "tranquilising drug" EXACT []
-synonym: "tranquilizers" EXACT []
-synonym: "tranquilizing agent" EXACT []
-synonym: "tranquilizing drug" EXACT []
 synonym: "tranquilizing drug therapy" EXACT []
-synonym: "tranquilizing drugs" EXACT []
 synonym: "treatment with tranquilizing drug" EXACT []
 xref: CHEBI:35473
 is_a: MAXO:0001022 ! psychotropic agent therapy
@@ -10550,11 +10553,10 @@ created_by: http://orcid.org/0000-0001-7941-2961
 
 [Term]
 id: MAXO:0001025
-name: adrenergic agent therapy
+name: adrenergic drug therapy
 def: "Therapy using any agent that acts on an adrenergic receptor or affects adrenergic signal transduction." []
 synonym: "adrenergic agent drug treatment" EXACT []
 synonym: "adrenergic agent therapy" EXACT []
-synonym: "adrenergic drug therapy" EXACT []
 synonym: "treatment with adrenergic agent" EXACT []
 synonym: "treatment with adrenergic drug" EXACT []
 synonym: "treatment with adrenergic medication" EXACT []
@@ -10566,7 +10568,7 @@ created_by: http://orcid.org/0000-0001-7941-2961
 
 [Term]
 id: MAXO:0001026
-name: beta-adrenergic agonist agent therapy
+name: beta-adrenergic agonist therapy
 def: "Treatment with an agent that selectively binds to and activates beta-adrenergic receptors." []
 synonym: "b-adrenergic agonist" EXACT []
 synonym: "b-adrenergic receptor agonist" EXACT []
@@ -10584,7 +10586,7 @@ synonym: "treatment with beta-adrenergic agonist agent" EXACT []
 synonym: "treatment with beta-adrenergic agonist drug" EXACT []
 synonym: "treatment with beta-adrenergic agonist medication" EXACT []
 xref: CHEBI:35522
-is_a: MAXO:0000186 ! beta-adrenergic agent therapy
+is_a: MAXO:0000186 ! beta adrenergic agent therapy
 property_value: http://purl.org/dc/elements/1.1/date 2019-07-25T14:42:00Z xsd:dateTime
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -10797,6 +10799,7 @@ name: duodenectomy
 def: "The surgical removal (cutting out) of part or all of duodenum." []
 synonym: "duodenum surgical removal" EXACT []
 synonym: "enterectomy" EXACT []
+synonym: "pancreas-sparing duodenectomy" EXACT []
 synonym: "small bowel resection" EXACT []
 property_value: http://purl.org/dc/elements/1.1/date 2020-06-23T20:39:14Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
@@ -11316,12 +11319,13 @@ id: MAXO:0001111
 name: adenectomy
 def: "The surgical removal (cutting out) of part or all of gland." []
 synonym: "gland surgical removal" EXACT []
-property_value: http://purl.org/dc/elements/1.1/date 2020-06-23T20:39:14Z xsd:string
+property_value: http://purl.org/dc/elements/1.1/date 2022-03-23T20:39:14Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
 [Term]
 id: MAXO:0001112
 name: obsolete kidney ct
+is_obsolete: true
 
 [Term]
 id: MAXO:0001113
@@ -11424,12 +11428,12 @@ created_by: http://orcid.org/0000-0001-7941-3010
 [Term]
 id: MAXO:0001123
 name: potassium supplementation
-def: "Addition of potassiumpotassium atom to a the diet for complete nutrition support." []
+def: "Addition of potassium atom to a the diet for complete nutrition support." []
 synonym: "dietary supplementation of potassium" EXACT []
-synonym: "dietary supplementation of potassiumpotassium atom" EXACT []
-synonym: "potassiumpotassium atom supplemental intake" EXACT []
+synonym: "dietary supplementation of potassium atom" EXACT []
+synonym: "potassium atom supplemental intake" EXACT []
 synonym: "supplementation of potassium" EXACT []
-synonym: "supplementation of potassiumpotassium atom" EXACT []
+synonym: "supplementation of potassium atom" EXACT []
 property_value: http://purl.org/dc/elements/1.1/date 2020-11-17T02:36:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -11474,49 +11478,50 @@ created_by: http://orcid.org/0000-0001-7941-2961
 
 [Term]
 id: MAXO:0001128
-name: folic acidb9 folate supplementation
-def: "Addition of folic acidb9 folate to a the diet for complete nutrition support." []
-synonym: "dietary supplementation of folic acidb9 folate" EXACT []
-synonym: "folic acidb9 folate supplemental intake" EXACT []
-synonym: "supplementation of folic acidb9 folate" EXACT []
+name: folic acid supplementation
+def: "Addition of folic acid to a the diet for complete nutrition support." []
+synonym: "dietary supplementation of folic acid" EXACT []
+synonym: "folic acid supplemental intake" EXACT []
+synonym: "supplementation of folic acid" EXACT []
 property_value: http://purl.org/dc/elements/1.1/date 2020-11-23T09:00:01Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
 [Term]
 id: MAXO:0001129
 name: vitamin supplementation
-def: "Addition of Vitamin to the diet for adequate and complete nutrition." []
-synonym: "dietary supplementation of Vitamin" EXACT []
-synonym: "supplementation of Vitamin" EXACT []
+def: "Addition of vitamin to the diet for adequate and complete nutrition." []
+synonym: "dietary supplementation of vitamin" EXACT []
+synonym: "supplementation of vitamin" EXACT []
 synonym: "supplementation with vitamin" EXACT []
-synonym: "Vitamin supplemental intake" EXACT []
+synonym: "vitamin supplemental intake" EXACT []
 property_value: http://purl.org/dc/elements/1.1/date 2020-11-23T09:00:01Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
 [Term]
 id: MAXO:0001130
-name: nicotinic acidniacin (b3) supplementation
-def: "Addition of nicotinic acidniacin (b3) to a the diet for complete nutrition support." []
-synonym: "dietary supplementation of nicotinic acidniacin (b3)" EXACT []
+name: nicotinic acid supplementation
+def: "Addition of nicotinic acid to a the diet for complete nutrition support." []
+synonym: "dietary supplementation of nicotinic acid" EXACT []
 synonym: "niacin supplementation" EXACT []
-synonym: "nicotinic acidniacin (b3) supplemental intake" EXACT []
-synonym: "supplementation of nicotinic acidniacin (b3)" EXACT []
+synonym: "nicotinic acid supplemental intake" EXACT []
+synonym: "supplementation of nicotinic acid" EXACT []
 property_value: http://purl.org/dc/elements/1.1/date 2020-11-23T09:00:01Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
 [Term]
 id: MAXO:0001131
-name: pyridoxine (b6)pyridoxine supplementation
-def: "Addition of pyridoxine (b6)pyridoxine to a the diet for complete nutrition support." []
-synonym: "dietary supplementation of pyridoxine (b6)pyridoxine" EXACT []
-synonym: "pyridoxine (b6)pyridoxine supplemental intake" EXACT []
-synonym: "supplementation of pyridoxine (b6)pyridoxine" EXACT []
+name: pyridoxine supplementation
+def: "Addition of pyridoxine to a the diet for complete nutrition support." []
+synonym: "dietary supplementation of pyridoxine" EXACT []
+synonym: "pyridoxine supplemental intake" EXACT []
+synonym: "supplementation of pyridoxine" EXACT []
 property_value: http://purl.org/dc/elements/1.1/date 2020-11-23T09:00:01Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
 [Term]
 id: MAXO:0001132
 name: obsolete dietary purine intake avoidance
+is_obsolete: true
 replaced_by: MAXO:0010108
 
 [Term]
@@ -11541,13 +11546,13 @@ created_by: http://orcid.org/0000-0001-7941-2961
 
 [Term]
 id: MAXO:0001135
-name: fat-soluble vitaminfat soluble vitamin supplementation
-def: "Addition of fat-soluble vitaminfat soluble vitamin to a the diet for complete nutrition support." []
-synonym: "dietary supplementation of fat-soluble vitaminfat soluble vitamin" EXACT []
+name: fat soluble vitamin supplementation
+def: "Addition of fat-soluble vitamin (role) to a the diet for complete nutrition support." []
+synonym: "dietary supplementation of fat-soluble vitamin (role)" EXACT []
 synonym: "essential fat soluble vitamin supplementation" EXACT []
-synonym: "fat-soluble vitaminfat soluble vitamin supplemental intake" EXACT []
+synonym: "fat-soluble vitamin (role) supplemental intake" EXACT []
 synonym: "supplementation of essential fat soluble vitamin" EXACT []
-synonym: "supplementation of fat-soluble vitaminfat soluble vitamin" EXACT []
+synonym: "supplementation of fat-soluble vitamin (role)" EXACT []
 property_value: http://purl.org/dc/elements/1.1/date 2020-11-23T09:00:01Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -11585,10 +11590,10 @@ created_by: http://orcid.org/0000-0001-7941-2961
 [Term]
 id: MAXO:0001139
 name: calcium supplementation
-def: "Addition of calcium atomcalcium to a the diet for complete nutrition support." []
-synonym: "calcium atomcalcium supplemental intake" EXACT []
-synonym: "dietary supplementation of calcium atomcalcium" EXACT []
-synonym: "supplementation of calcium atomcalcium" EXACT []
+def: "Addition of calcium atom to a the diet for complete nutrition support." []
+synonym: "calcium atom supplemental intake" EXACT []
+synonym: "dietary supplementation of calcium atom" EXACT []
+synonym: "supplementation of calcium atom" EXACT []
 synonym: "supplementation with calcium" EXACT []
 property_value: http://purl.org/dc/elements/1.1/date 2020-11-23T09:00:01Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
@@ -11627,12 +11632,13 @@ created_by: http://orcid.org/0000-0001-7941-2961
 
 [Term]
 id: MAXO:0001143
-name: omega-3 fatty acidomega-3-fatty acid supplementation
-def: "Addition of omega-3 fatty acidomega-3-fatty acid to a the diet for complete nutrition support." []
-synonym: "dietary supplementation of omega-3 fatty acidomega-3-fatty acid" EXACT []
+name: omega-3 fatty acid supplementation
+def: "Addition of omega-3 fatty acid to the diet for complete nutrition." []
+synonym: "dietary supplementation of omega-3 fatty acidω−3 fatty acid" EXACT []
 synonym: "eicosapentaenoic acid supplementation" EXACT []
-synonym: "omega-3 fatty acidomega-3-fatty acid supplemental intake" EXACT []
-synonym: "supplementation of omega-3 fatty acidomega-3-fatty acid" EXACT []
+synonym: "omega-3 fatty acid supplemental intake" EXACT []
+synonym: "omega-3 fatty acidω−3 fatty acid supplemental intake" EXACT []
+synonym: "supplementation of omega-3 fatty acidω−3 fatty acid" EXACT []
 property_value: http://purl.org/dc/elements/1.1/date 2020-11-23T09:00:01Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -11690,12 +11696,12 @@ created_by: http://orcid.org/0000-0001-7941-2961
 [Term]
 id: MAXO:0001149
 name: magnesium supplementation
-def: "Addition of magnesiummagnesium atom to a the diet for complete nutrition support." []
-synonym: "dietary supplementation of magnesiummagnesium atom" EXACT []
+def: "Addition of magnesium atom to a the diet for complete nutrition support." []
+synonym: "dietary supplementation of magnesium atom" EXACT []
+synonym: "magnesium atom supplemental intake" EXACT []
 synonym: "magnesium supplemental intake" EXACT []
-synonym: "magnesiummagnesium atom supplemental intake" EXACT []
 synonym: "supplementation of magnesium" EXACT []
-synonym: "supplementation of magnesiummagnesium atom" EXACT []
+synonym: "supplementation of magnesium atom" EXACT []
 property_value: http://purl.org/dc/elements/1.1/date 2020-11-30T09:00:01Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -12030,6 +12036,394 @@ property_value: http://purl.org/dc/elements/1.1/date 2021-08-12T15:25:01Z xsd:st
 created_by: http://orcid.org/0000-0001-7941-2961
 
 [Term]
+id: MAXO:0001182
+name: arthroscopy
+def: "Inspection of skeletal joint using an endoscope." []
+synonym: "endoscopy of skeletal joint" EXACT []
+synonym: "skeletal joint endoscope" EXACT []
+property_value: http://purl.org/dc/elements/1.1/date 2022-03-16T20:39:14Z xsd:string
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0001183
+name: bronchoscopy
+def: "Inspection of lung using an endoscope." []
+synonym: "airway endoscopy" EXACT []
+synonym: "endoscopy of lung" EXACT []
+synonym: "lung endoscope" EXACT []
+property_value: http://purl.org/dc/elements/1.1/date 2022-03-16T20:39:14Z xsd:string
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0001184
+name: colonoscopy
+def: "Inspection of colon using an endoscope." []
+synonym: "colon endoscope" EXACT []
+synonym: "endoscopy of colon" EXACT []
+property_value: http://purl.org/dc/elements/1.1/date 2022-03-16T20:39:14Z xsd:string
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0001185
+name: cystoscopy
+def: "Inspection of urinary bladder using an endoscope." []
+synonym: "endoscopy of urinary bladder" EXACT []
+synonym: "urinary bladder endoscope" EXACT []
+property_value: http://purl.org/dc/elements/1.1/date 2022-03-16T20:39:14Z xsd:string
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0001186
+name: enterosccopy
+def: "Inspection of small intestine using an endoscope." []
+synonym: "endoscopy of small intestine" EXACT []
+synonym: "small intestine endoscope" EXACT []
+property_value: http://purl.org/dc/elements/1.1/date 2022-03-16T20:39:14Z xsd:string
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0001187
+name: hysteroscopy
+def: "Inspection of uterus using an endoscope." []
+synonym: "endoscopy of uterus" EXACT []
+synonym: "uterus endoscope" EXACT []
+property_value: http://purl.org/dc/elements/1.1/date 2022-03-16T20:39:14Z xsd:string
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0001188
+name: laparoscopy
+def: "Inspection of abdomen using an endoscope." []
+synonym: "abdomen endoscope" EXACT []
+synonym: "endoscopy of abdomen" EXACT []
+property_value: http://purl.org/dc/elements/1.1/date 2022-03-16T20:39:14Z xsd:string
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0001189
+name: laryngoscopy
+def: "Inspection of larynx using an endoscope." []
+synonym: "endoscopy of larynx" EXACT []
+synonym: "larynx endoscope" EXACT []
+property_value: http://purl.org/dc/elements/1.1/date 2022-03-16T20:39:14Z xsd:string
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0001190
+name: mediastinoscopy
+def: "Inspection of mediastinum using an endoscope." []
+synonym: "endoscopy of mediastinum" EXACT []
+synonym: "mediastinum endoscope" EXACT []
+property_value: http://purl.org/dc/elements/1.1/date 2022-03-16T20:39:14Z xsd:string
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0001191
+name: sigmoidoscopy
+def: "Inspection of sigmoid colon using an endoscope." []
+synonym: "endoscopy of sigmoid colon" EXACT []
+synonym: "sigmoid colon endoscope" EXACT []
+property_value: http://purl.org/dc/elements/1.1/date 2022-03-16T20:39:14Z xsd:string
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0001192
+name: thoracoscopy
+def: "Inspection of pleural cavity using an endoscope." []
+synonym: "endoscopy of pleural cavity" EXACT []
+synonym: "pleural cavity endoscope" EXACT []
+property_value: http://purl.org/dc/elements/1.1/date 2022-03-16T20:39:14Z xsd:string
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0001193
+name: esophagogastroduodenoscopy
+def: "Inspection of upper digestive tract using an endoscope." []
+synonym: "EGD" EXACT []
+synonym: "endoscopy of upper digestive tract" EXACT []
+synonym: "gastroscopy" EXACT []
+synonym: "oesophagogastroduodenoscopy" EXACT []
+synonym: "OGD" EXACT []
+synonym: "upper digestive tract endoscope" EXACT []
+synonym: "upper endoscopy" EXACT []
+synonym: "upper gastrointestinal endoscopy" EXACT []
+synonym: "upper GI endoscopy" EXACT []
+property_value: http://purl.org/dc/elements/1.1/date 2022-03-16T20:39:14Z xsd:string
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0001194
+name: ureteroscopy
+def: "Inspection of ureter using an endoscope." []
+synonym: "endoscopy of ureter" EXACT []
+synonym: "ureter endoscope" EXACT []
+property_value: http://purl.org/dc/elements/1.1/date 2022-03-16T20:39:14Z xsd:string
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0001195
+name: proctoscopy
+def: "Inspection of lower digestive tract using an endoscope." []
+synonym: "endoscopy of lower digestive tract" EXACT []
+synonym: "lower digestive tract endoscope" EXACT []
+property_value: http://purl.org/dc/elements/1.1/date 2022-03-16T20:39:14Z xsd:string
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0001196
+name: rectoscopy
+def: "Inspection of rectum using an endoscope." []
+synonym: "endoscopy of rectum" EXACT []
+synonym: "rectum endoscope" EXACT []
+property_value: http://purl.org/dc/elements/1.1/date 2022-03-16T20:39:14Z xsd:string
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0001197
+name: anoscopy
+def: "Inspection of anus using an endoscope." []
+synonym: "anus endoscope" EXACT []
+synonym: "endoscopy of anus" EXACT []
+property_value: http://purl.org/dc/elements/1.1/date 2022-03-16T20:39:14Z xsd:string
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0001198
+name: otoscopy
+def: "Inspection of ear using an endoscope." []
+synonym: "ear endoscope" EXACT []
+synonym: "endoscopy of ear" EXACT []
+property_value: http://purl.org/dc/elements/1.1/date 2022-03-16T20:39:14Z xsd:string
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0001199
+name: falloscopy
+def: "Inspection of fallopian tube using an endoscope." []
+synonym: "endoscopy of fallopian tube" EXACT []
+synonym: "fallopian tube endoscope" EXACT []
+property_value: http://purl.org/dc/elements/1.1/date 2022-03-16T20:39:14Z xsd:string
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0001200
+name: esophagoscopy
+def: "Inspection of esophagus using an endoscope." []
+synonym: "endoscopy of esophagus" EXACT []
+synonym: "esophagus endoscope" EXACT []
+synonym: "oesophagoscopy" EXACT []
+property_value: http://purl.org/dc/elements/1.1/date 2022-03-16T20:39:14Z xsd:string
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0001201
+name: neuroendoscopy
+def: "Inspection of brain using an endoscope." []
+synonym: "brain endoscope" EXACT []
+synonym: "endoscopy of brain" EXACT []
+property_value: http://purl.org/dc/elements/1.1/date 2022-03-16T20:39:14Z xsd:string
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0001202
+name: tracheobronchoscopy
+def: "Inspection of tracheobronchial tree using an endoscope." []
+synonym: "endoscopy of tracheobronchial tree" EXACT []
+synonym: "tracheobronchial tree endoscope" EXACT []
+property_value: http://purl.org/dc/elements/1.1/date 2022-03-16T20:39:14Z xsd:string
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0001203
+name: screening for breast cancer
+def: "The use of any device, marker, or other means for the purpose of detecting the presence Neoplasm of the breast, usually in asymptomatic individuals." []
+synonym: "Neoplasm of the breast screening" EXACT []
+property_value: http://purl.org/dc/elements/1.1/date 2020-06-23T20:39:14Z xsd:string
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0001204
+name: screening for venous thrombosis
+def: "The use of any device, marker, or other means for the purpose of detecting the presence Venous thrombosis, usually in asymptomatic individuals." []
+synonym: "Venous thrombosis screening" EXACT []
+property_value: http://purl.org/dc/elements/1.1/date 2020-06-23T20:39:14Z xsd:string
+created_by: http://orcid.org/0000-0001-7941-2963
+
+[Term]
+id: MAXO:0001205
+name: screening for colorectal polyps
+def: "The use of any device, marker, or other means for the purpose of detecting the presence Colorectal polyposis, usually in asymptomatic individuals." []
+synonym: "Colorectal polyposis screening" EXACT []
+property_value: http://purl.org/dc/elements/1.1/date 2022-03-24T20:39:14Z xsd:string
+created_by: http://orcid.org/0000-0001-7941-2965
+
+[Term]
+id: MAXO:0001206
+name: screening for intestinal polyps
+def: "The use of any device, marker, or other means for the purpose of detecting the presence Intestinal polyp, usually in asymptomatic individuals." []
+synonym: "Intestinal polyp screening" EXACT []
+property_value: http://purl.org/dc/elements/1.1/date 2022-03-24T20:39:14Z xsd:string
+created_by: http://orcid.org/0000-0001-7941-2965
+
+[Term]
+id: MAXO:0001207
+name: screening for uterine polyps
+def: "The use of any device, marker, or other means for the purpose of detecting the presence Ureteral polyp, usually in asymptomatic individuals." []
+synonym: "Ureteral polyp screening" EXACT []
+property_value: http://purl.org/dc/elements/1.1/date 2022-03-24T20:39:14Z xsd:string
+created_by: http://orcid.org/0000-0001-7941-2965
+
+[Term]
+id: MAXO:0001208
+name: screening for cervical polyps
+def: "The use of any device, marker, or other means for the purpose of detecting the presence Cervical polyp, usually in asymptomatic individuals." []
+synonym: "Cervical polyp screening" EXACT []
+property_value: http://purl.org/dc/elements/1.1/date 2022-03-24T20:39:14Z xsd:string
+created_by: http://orcid.org/0000-0001-7941-2965
+
+[Term]
+id: MAXO:0001209
+name: screening for small intestinal polyps
+def: "The use of any device, marker, or other means for the purpose of detecting the presence Small intestinal polyp, usually in asymptomatic individuals." []
+synonym: "Small intestinal polyp screening" EXACT []
+property_value: http://purl.org/dc/elements/1.1/date 2022-03-24T20:39:14Z xsd:string
+created_by: http://orcid.org/0000-0001-7941-2965
+
+[Term]
+id: MAXO:0001210
+name: screening for gastric polyps
+def: "The use of any device, marker, or other means for the purpose of detecting the presence Multiple gastric polyps, usually in asymptomatic individuals." []
+synonym: "Multiple gastric polyps screening" EXACT []
+property_value: http://purl.org/dc/elements/1.1/date 2022-03-24T20:39:14Z xsd:string
+created_by: http://orcid.org/0000-0001-7941-2965
+
+[Term]
+id: MAXO:0001211
+name: screening for hepatoblastoma
+def: "The use of any device, marker, or other means for the purpose of detecting the presence Hepatoblastoma, usually in asymptomatic individuals." []
+synonym: "Hepatoblastoma screening" EXACT []
+property_value: http://purl.org/dc/elements/1.1/date 2022-03-24T20:39:14Z xsd:string
+created_by: http://orcid.org/0000-0001-7941-2965
+
+[Term]
+id: MAXO:0001213
+name: colorectal polypectomy
+def: "The surgical removal (cutting out) of part or all of colorectal polyps." []
+synonym: "colonic polypectomy" EXACT []
+synonym: "Colorectal polyposis surgical removal" EXACT []
+property_value: http://purl.org/dc/elements/1.1/date 2022-03-24T20:39:14Z xsd:string
+created_by: http://orcid.org/0000-0001-7941-2965
+
+[Term]
+id: MAXO:0001214
+name: intestinal polypectomy
+def: "The surgical removal (cutting out) of part or all of Intestinal polyp." []
+synonym: "Intestinal polyp surgical removal" EXACT []
+property_value: http://purl.org/dc/elements/1.1/date 2022-03-24T20:39:14Z xsd:string
+created_by: http://orcid.org/0000-0001-7941-2965
+
+[Term]
+id: MAXO:0001215
+name: ureterine polypectomy
+def: "The surgical removal (cutting out) of part or all of Ureteral polyp." []
+synonym: "Ureteral polyp surgical removal" EXACT []
+property_value: http://purl.org/dc/elements/1.1/date 2022-03-24T20:39:14Z xsd:string
+created_by: http://orcid.org/0000-0001-7941-2965
+
+[Term]
+id: MAXO:0001216
+name: cervical polypectomy
+def: "The surgical removal (cutting out) of part or all of Cervical polyp." []
+synonym: "Cervical polyp surgical removal" EXACT []
+property_value: http://purl.org/dc/elements/1.1/date 2022-03-24T20:39:14Z xsd:string
+created_by: http://orcid.org/0000-0001-7941-2965
+
+[Term]
+id: MAXO:0001217
+name: small intestinal polypectomy
+def: "The surgical removal (cutting out) of part or all of Small intestinal polyp." []
+synonym: "Small intestinal polyp surgical removal" EXACT []
+property_value: http://purl.org/dc/elements/1.1/date 2022-03-24T20:39:14Z xsd:string
+created_by: http://orcid.org/0000-0001-7941-2965
+
+[Term]
+id: MAXO:0001218
+name: surgical removal of Osteoma
+def: "The surgical removal (cutting out) of part or all of Osteoma." []
+synonym: "Osteoma surgical removal" EXACT []
+property_value: http://purl.org/dc/elements/1.1/date 2022-03-24T20:39:14Z xsd:string
+created_by: http://orcid.org/0000-0001-7941-2965
+
+[Term]
+id: MAXO:0001219
+name: gastric polypectomy
+def: "The surgical removal (cutting out) of part or all of Multiple gastric polyps." []
+synonym: "Multiple gastric polyps surgical removal" EXACT []
+property_value: http://purl.org/dc/elements/1.1/date 2022-03-24T20:39:14Z xsd:string
+created_by: http://orcid.org/0000-0001-7941-2965
+
+[Term]
+id: MAXO:0001220
+name: removal of lens
+def: "The surgical removal (cutting out) of part or all of lens of camera-type eye." []
+synonym: "lens of camera-type eye surgical removal" EXACT []
+property_value: http://purl.org/dc/elements/1.1/date 2020-06-23T20:39:14Z xsd:string
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0001221
+name: proctocolectomy
+def: "The surgical removal (cutting out) of part or all of colorectum." []
+synonym: "colorectum surgical removal" EXACT []
+property_value: http://purl.org/dc/elements/1.1/date 2020-06-23T20:39:14Z xsd:string
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0001222
+name: serum alpha-fetoprotein measurement
+def: "The determination of the amount of alpha-fetoprotein present in blood serum." []
+synonym: "alpha-fetoprotein (human) blood serum assessment" EXACT []
+synonym: "alpha-fetoprotein serum measurement" EXACT []
+synonym: "blood serum alpha-fetoprotein (human) test" EXACT []
+synonym: "serum alpha-fetoprotein test" EXACT []
+property_value: http://purl.org/dc/elements/1.1/date 2022-03-28T15:25:01Z xsd:string
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0001223
+name: chelator agent therapy
+def: "Use of a chemical compound that binds tightly to metal ions. Often used to remove toxic metals from the body." []
+synonym: "chelator therapy" EXACT []
+synonym: "treatment with chelator" EXACT []
+property_value: http://purl.org/dc/elements/1.1/date 2022-3-30T11:00:00Z xsd:string
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0001224
+name: copper chelator agent therapy
+synonym: "copper chelator therapy" EXACT []
+synonym: "treatment with copper chelator" EXACT []
+property_value: http://purl.org/dc/elements/1.1/date 2022-3-30T11:00:00Z xsd:string
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0001225
+name: iron chelator agent therapy
+def: "Use of a compound which binds tightly to iron molecules." []
+synonym: "iron chelator therapy" EXACT []
+synonym: "treatment with iron chelator" EXACT []
+property_value: http://purl.org/dc/elements/1.1/date 2022-3-30T11:00:00Z xsd:string
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0001226
+name: sequestrant agent therapy
+synonym: "sequestrant therapy" EXACT []
+synonym: "treatment with sequestrant" EXACT []
+property_value: http://purl.org/dc/elements/1.1/date 2022-3-30T11:00:00Z xsd:string
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
 id: MAXO:0002000
 name: cannabis consumption avoidance
 def: "A medical requirement or recommendation of avoiding cannabis consumption." []
@@ -12106,6 +12500,486 @@ property_value: http://purl.org/dc/elements/1.1/date 2020-01-28T11:00:00Z xsd:st
 created_by: http://orcid.org/0000-0001-7941-2961
 
 [Term]
+id: MAXO:0009003
+name: preimplantation genetic testing
+def: "Genetic testing of one or more cells removed from early embryos conceived by in vitro fertilization and transferring to the mother's uterus only those embryos determined not to have the pathogenic variant(s)/chromosome anomaly(ies) of concern." [GeneReviews:NBK5191]
+synonym: "PGD" EXACT ABBREVIATION []
+synonym: "PGS" EXACT ABBREVIATION []
+synonym: "PGT" EXACT ABBREVIATION []
+synonym: "preimplantation genetic screening" EXACT []
+synonym: "preimplation genetic diagnosis" EXACT []
+is_a: MAXO:0000529 ! prenatal genetic testing
+is_a: MAXO:0000533 ! molecular genetic testing
+property_value: http://purl.org/dc/elements/1.1/date 2022-03-21T14:25:49Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0009004
+name: clinical whole-exome sequencing
+def: "A procedure that can determine the DNA sequence for all of the exons (protein coding region) in an individual." []
+comment: Clinical Exome Sequencing is a test for identifying disease-causing DNA variants within the 1% of the genome which codes for proteins (exons) or flanks the regions which code for proteins (splice junctions). {xref="https://www.uclahealth.org/"}
+comment: Sequence analysis of the exons of protein-coding genes in the genome typically performed by target enrichment or capture of exons followed by next-generation sequencing. {xref="GeneReviews:NBK5191"}
+synonym: "exome sequencing" EXACT []
+synonym: "WES" EXACT ABBREVIATION []
+synonym: "whole exome sequencing" EXACT []
+synonym: "WXS" EXACT ABBREVIATION []
+xref: NCIT:C101295
+is_a: MAXO:0000533 ! molecular genetic testing
+property_value: http://purl.org/dc/elements/1.1/date 2022-03-21T18:25:01Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0009005
+name: proctocolectomy with ileal pouch anal anastomosis
+def: "The removal of the large intestine and rectum followed by making a pouch of the last part of the small intestine for solid material storage. The pouch is then sewn to the anus." []
+synonym: "proctocolectomy with IPAA" EXACT []
+synonym: "restorative proctocolectomy with ileal pouch-anal anastomosis" EXACT []
+synonym: "RPC-IPAA" EXACT ABBREVIATION []
+is_a: MAXO:0001221 ! proctocolectomy
+property_value: http://purl.org/dc/elements/1.1/date 2022-03-28T15:44:07Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0009006
+name: clinical whole genome sequencing
+def: "A procedure that can determine the DNA sequence for coding and non-coding regions in an individual." []
+comment: Sequence analysis of the genome including coding and noncoding regions typically performed by next-generation sequencing (NGS) of sheared genomic DNA. {xref="GeneReviews:NBK5191"}
+synonym: "genome sequencing" EXACT []
+synonym: "WGS" EXACT ABBREVIATION []
+synonym: "whole genome sequncing" EXACT []
+is_a: MAXO:0000533 ! molecular genetic testing
+property_value: http://purl.org/dc/elements/1.1/date 2022-03-22T17:16:58Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0009007
+name: fetal echocardiography
+def: "Fetal echocardiography is a test that uses sound waves (ultrasound) to evaluate the structure and function of the fetus's heart." []
+synonym: "fetal echo procedure" EXACT []
+synonym: "fetal echocardiogram procedure" EXACT []
+synonym: "prenatal echo procedure" EXACT []
+synonym: "prenatal echocardiagraphy" EXACT []
+is_a: MAXO:0000520 ! obstetric ultrasonography
+is_a: MAXO:0010203 ! echocardiography
+property_value: http://purl.org/dc/elements/1.1/date 2022-03-22T18:19:25Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0009008
+name: Doppler ultrasonography
+def: "An application of diagnostic ultrasound used to detect moving blood cells or other moving structures and measure their direction and speed of movement. The Doppler effect is used to evaluate movement by measuring changes in frequency of the echoes reflected from moving structures." []
+is_a: MAXO:0000072 ! ultrasonography procedure
+property_value: http://purl.org/dc/elements/1.1/date 2022-03-23T15:43:36Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0009009
+name: prenatal renal ultrasonography
+def: "The use of ultrasound on a pregnant person to produce images of structures in the kidney of the fetus." []
+synonym: "fetal kidney ultrsonography" EXACT []
+synonym: "fetal renal ultrasonography" EXACT []
+synonym: "prenatal kidney ultrasonography" EXACT []
+synonym: "prenatal renal sonography" EXACT []
+is_a: MAXO:0010217 ! renal ultrasonography
+property_value: http://purl.org/dc/elements/1.1/date 2022-03-23T16:10:42Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0009010
+name: colectomy with ileorectal anastomosis
+def: "A surgical procedure where the whole colon is removed and the ileum is joined directly to the rectum." []
+synonym: "colectomy with IRA" EXACT []
+is_a: MAXO:0001042 ! colectomy
+property_value: http://purl.org/dc/elements/1.1/date 2022-03-28T17:29:48Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0009011
+name: pancreaticoduodenectomy
+def: "Surgical removal of part of the pancreas, duodenum, and distal part of the bile duct. Sometimes, the lower portion of the stomach and the gallbladder are also removed. This procedure is performed for pancreatic, ampullary, duodenal and distal bile duct cancers." [NCIT:C15356]
+synonym: "Kausch-Whipple procedure" EXACT []
+synonym: "Whipple procedure" EXACT []
+xref: NCIT:C15356
+is_a: MAXO:0000447 ! surgical excision
+property_value: http://purl.org/dc/elements/1.1/date 2022-03-28T17:35:35Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0009012
+name: intrauterine fetal transfusion
+def: "Infusion of red blood cells into a fetus through the umbilical code." [PMID:24903741]
+synonym: "fetal transfusion" EXACT []
+synonym: "Foetal transfusion" EXACT []
+synonym: "intrauterine transfusion" EXACT []
+synonym: "IUT" EXACT ABBREVIATION []
+synonym: "percutaneous fetal transfusion" EXACT []
+synonym: "percutaneous foetal transfusion" EXACT []
+is_a: MAXO:0000756 ! blood transfusion
+property_value: http://purl.org/dc/elements/1.1/date 2022-03-28T19:32:20Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0009013
+name: neuromuscular blocking agent therapy
+synonym: "Use of a drug or therapy that block neuromuscular transmission, causing paralysis of the affected skeletal muscles." EXACT []
+is_a: MAXO:0000058 ! pharmacotherapy
+property_value: http://purl.org/dc/elements/1.1/date 2022-03-28T21:04:52Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0009014
+name: botulinum toxin type B therapy
+synonym: "botulinum toxin type B injection" EXACT []
+is_a: MAXO:0009015 ! botulinum toxin therapy
+property_value: http://purl.org/dc/elements/1.1/date 2022-03-28T21:07:53Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0009015
+name: botulinum toxin therapy
+def: "Botulinum toxin, is a neurotoxic protein which blocks release of acetylcholine at neuromuscular junctions causing muscle paralysis. This therapy has many therapeutic uses including chronic migraine, spastic disorders, cervical dystonia, and detrusor hyperactivity." [PMID:32491319]
+synonym: "botox injection" BROAD []
+synonym: "botox therapy" BROAD []
+synonym: "botulinum toxin injection" EXACT []
+is_a: MAXO:0000015 ! biologic therapy
+is_a: MAXO:0009013 ! neuromuscular blocking agent therapy
+property_value: http://purl.org/dc/elements/1.1/date 2022-03-29T16:24:35Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0009016
+name: botulinum toxin type A therapy
+synonym: "botulinum toxin type A injection" EXACT []
+is_a: MAXO:0009015 ! botulinum toxin therapy
+property_value: http://purl.org/dc/elements/1.1/date 2022-03-29T16:32:49Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0009017
+name: cognitive assessment
+def: "A set of tests or assessments to determine congnitive abilities of a patient." []
+synonym: "cognitive tests" EXACT []
+is_a: MAXO:0000487 ! clinical assessment
+property_value: http://purl.org/dc/elements/1.1/date 2022-03-30T14:02:52Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0009018
+name: neuropsychological assessment
+def: "Evaluation for cognitive impairment by assessing the neuropsychological domains." [PMID:32310509]
+is_a: MAXO:0009017 ! cognitive assessment
+property_value: http://purl.org/dc/elements/1.1/date 2022-03-30T14:05:42Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0009019
+name: language assessment
+def: "Evaluation of patient's cominucation involving naming, reading, writing, and repeating words." [PMID:32310509]
+is_a: MAXO:0009017 ! cognitive assessment
+property_value: http://purl.org/dc/elements/1.1/date 2022-03-30T14:07:13Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0009020
+name: executive function assessment
+def: "Evaluation of organizing and planning ability, as well as working memory, mental flexibility, list-making, and execution of tasks." [PMID:32310509]
+is_a: MAXO:0009017 ! cognitive assessment
+property_value: http://purl.org/dc/elements/1.1/date 2022-03-30T14:08:50Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0009021
+name: abstract reasoning assessment
+def: "Evaluation of a patient's ability to analyze information, detect patterns, detect relationships, or problem solveing abilities on an intangible  level." [PMID:32310509]
+is_a: MAXO:0009017 ! cognitive assessment
+property_value: http://purl.org/dc/elements/1.1/date 2022-03-30T14:10:53Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0009022
+name: memory assessement
+def: "Evaluation of short-term and long-term emory in a patient." [PMID:32310509]
+is_a: MAXO:0009017 ! cognitive assessment
+property_value: http://purl.org/dc/elements/1.1/date 2022-03-30T14:12:36Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0009023
+name: attention and concentration assessment
+def: "Evaluation of a patient's concentration or attention to a prompt or test." []
+is_a: MAXO:0009017 ! cognitive assessment
+property_value: http://purl.org/dc/elements/1.1/date 2022-03-30T14:14:33Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0009024
+name: visuospatial skill assessment
+def: "Evaluation of a person’s ability to conceptualize and manipulate two- and three-dimensional objects." [PMID:32310509]
+is_a: MAXO:0009017 ! cognitive assessment
+property_value: http://purl.org/dc/elements/1.1/date 2022-03-30T14:20:27Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0009025
+name: cochlear device implantation
+def: "Surgical implantation of a device for the treatment of severe to profound sensorineural hearing loss. It works by transducing acoustic energy into an electrical signal, which is used to stimulate surviving spiral ganglion cells of the auditory nerve." [PMID:30931225]
+synonym: "implantation of cochlear device" EXACT []
+synonym: "implantation of cochlear prosthesis" EXACT []
+synonym: "surgical introduction of cochlear implant" EXACT []
+is_a: MAXO:0000473 ! medical device implantation
+property_value: http://purl.org/dc/elements/1.1/date 2022-03-31T20:40:42Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0009026
+name: introduction procedure
+def: "A procedure where a substance or object is inserted into the body." []
+is_a: MAXO:0000004 ! surgical procedure
+property_value: http://purl.org/dc/elements/1.1/date 2022-04-01T16:56:14Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0009027
+name: electrode implantation
+def: "A procedure to place an electrode in some part of the body for therapeutic purposes." []
+synonym: "implantation of an electrode" EXACT []
+is_a: MAXO:0000473 ! medical device implantation
+property_value: http://purl.org/dc/elements/1.1/date 2022-04-01T17:01:07Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0009028
+name: auditory brainstem implantation
+def: "The surgical implantation of a central neural auditory prosthesis for treatment of profound sensorinerual hearing loss in patients who are not cochlear implant candidates due to a lack of anatomically intact cochlear nerves or implantable cochleae." [PMID:30931229]
+synonym: "ABI" EXACT ABBREVIATION []
+is_a: MAXO:0000473 ! medical device implantation
+property_value: http://purl.org/dc/elements/1.1/date 2022-04-01T18:27:27Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0009029
+name: hearing therapy
+def: "Treatment to improve hearing." []
+synonym: "auditory enhancement" EXACT []
+is_a: MAXO:0000002 ! therapeutic procedure
+property_value: http://purl.org/dc/elements/1.1/date 2022-04-01T18:42:23Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0009030
+name: hearing aid usage
+def: "Use of hearing aids to improve hearing." []
+is_a: MAXO:0009029 ! hearing therapy
+property_value: http://purl.org/dc/elements/1.1/date 2022-04-01T18:54:14Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0009031
+name: auditory rehabilitation
+def: "Assessment and management of hearing loss." []
+synonym: "adult audiologic rehabilitation" EXACT []
+synonym: "aural rehab" EXACT []
+synonym: "aural rehabilitation" EXACT []
+is_a: MAXO:0009029 ! hearing therapy
+property_value: http://purl.org/dc/elements/1.1/date 2022-04-01T18:57:13Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0009032
+name: child audiologic habilitation
+def: "Hearing therapy to help children born with hearing loss that have not learned to listen and talk." []
+synonym: "child aural rehabilitation" EXACT []
+synonym: "child hearing habilitation" EXACT []
+is_a: MAXO:0009029 ! hearing therapy
+property_value: http://purl.org/dc/elements/1.1/date 2022-04-04T17:01:13Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0009033
+name: cardiac device implantation
+def: "A medical device inserted into the body to help control or monitor the heart and/or cardiovascular system." []
+synonym: "cardiac implantable electronic device insertion" EXACT []
+synonym: "CIED implantation" EXACT []
+synonym: "implantation of a cardiac device" EXACT []
+is_a: MAXO:0000473 ! medical device implantation
+property_value: http://purl.org/dc/elements/1.1/date 2022-04-04T18:50:47Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0009034
+name: pacemaker implantation
+def: "Surgical insertion of an adjustable artificial electrical pulse generators into the body to interrogate and control the he pacing rate, the pulse width, and the voltage in order to a person's heart function." [PMID:30252257]
+is_a: MAXO:0009033 ! cardiac device implantation
+property_value: http://purl.org/dc/elements/1.1/date 2022-04-04T18:56:11Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0009035
+name: single chamber pacemaker implantation
+def: "Insertion of a pacemaker that attaches one lead to the upper or lower heart chamber." [PMID:32310471]
+synonym: "implantation of a single chamber pacemaker" EXACT []
+is_a: MAXO:0009034 ! pacemaker implantation
+property_value: http://purl.org/dc/elements/1.1/date 2022-04-04T19:14:01Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0009036
+name: dual-chamber pacemaker implantation
+def: "The implantation of a pacemaker that uses two leads, one for the upper and one for lower chamber of the heart." [PMID:32310471]
+synonym: "implantation of a dual-chamber pacemaker" EXACT []
+is_a: MAXO:0009034 ! pacemaker implantation
+property_value: http://purl.org/dc/elements/1.1/date 2022-04-04T19:17:56Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0009037
+name: biventricular pacemaker implantion
+def: "Surgical insertion of a pacemaker that is used in cardiac resynchronization therapy." [PMID:32310471]
+synonym: "implantation of biventricular pacemaker" EXACT []
+is_a: MAXO:0009034 ! pacemaker implantation
+property_value: http://purl.org/dc/elements/1.1/date 2022-04-04T19:23:18Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0009038
+name: coronary stent insertion
+def: "Expandable tubular metallic devices inserted into coronary arteries." []
+synonym: "coronary angioplasty with stent placement" EXACT []
+synonym: "PCI" EXACT ABBREVIATION []
+synonym: "percutaneous coronary intervention" EXACT []
+is_a: MAXO:0000917 ! placement of a stent
+is_a: MAXO:0009033 ! cardiac device implantation
+property_value: http://purl.org/dc/elements/1.1/date 2022-04-04T19:41:08Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0009039
+name: infusion pump implantation
+def: "Insertion of a medical device that delivers fluids, such as nutrients and medications, into a patient's body in controlled amounts." []
+synonym: "implantation of a fusion pump" EXACT []
+synonym: "insertion of an infusion pump" EXACT []
+is_a: MAXO:0000473 ! medical device implantation
+property_value: http://purl.org/dc/elements/1.1/date 2022-04-04T20:03:04Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0009040
+name: insulin pump implantation
+def: "Insertion of a continuous subcutaneous insulin infusion to regulate insulin levels in a patient." []
+synonym: "continuous subcutaneous insulin infusion pump implantation" EXACT []
+is_a: MAXO:0009039 ! infusion pump implantation
+property_value: http://purl.org/dc/elements/1.1/date 2022-04-05T15:10:49Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0009041
+name: continuous subcutaneous insulin infusion therapy
+def: "A therapy used in patients with type 1 diabetes mellitus (T1DM) to improve glucose control and/or reduce the risk of hypoglycaemia." [PMID:23760696]
+synonym: "CSII therapy" EXACT [] {hasSynonym="ABBREVIATION"}
+synonym: "insulin pump infusion therapy" EXACT []
+synonym: "insulin pump therapy" EXACT []
+is_a: MAXO:0009042 ! infusion pump therapy
+property_value: http://purl.org/dc/elements/1.1/date 2022-04-05T15:31:40Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0009042
+name: infusion pump therapy
+def: "Use of a medical device that delivers fluids, such as nutrients and medications, into a patient's body in controlled amounts." []
+is_a: MAXO:0000757 ! infusion procedure
+property_value: http://purl.org/dc/elements/1.1/date 2022-04-05T16:48:06Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0009043
+name: cataract extraction with intraocular lens insertion
+def: "Surgical removal of the opacified lens and implantation of an artificial intraocular lens (IOL)." []
+synonym: "cataract extraction with IOL implantation" EXACT []
+synonym: "cataract removal with intraocular lens insertion" EXACT []
+synonym: "cataract surgery with artificial intraocular lens insertion" EXACT []
+is_a: MAXO:0000473 ! medical device implantation
+property_value: http://purl.org/dc/elements/1.1/date 2022-04-05T18:10:41Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0009044
+name: myringotomy and insertion of tympanic ventilation tube
+def: "Surgical incision into the eardrum to relieve pressure or drain fluid with placement of tympanostomy tubes to allow fluid to pass through the ear canal into the middle ear." []
+synonym: "insertion of ear tubes" BROAD []
+synonym: "myringotomy and insertion of tympanic ventilation tube" EXACT []
+synonym: "myringotomy and tube placement" BROAD []
+synonym: "myringotomy with placement of tympanostomy tube" EXACT []
+is_a: MAXO:0000473 ! medical device implantation
+property_value: http://purl.org/dc/elements/1.1/date 2022-04-05T18:39:00Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0009045
+name: implantation of joint prosthesis
+def: "Surgical placement of a prosthetic device to replace a joint." []
+synonym: "prosthetic arthoplasty" EXACT []
+is_a: MAXO:0000473 ! medical device implantation
+property_value: http://purl.org/dc/elements/1.1/date 2022-04-05T19:13:44Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0009046
+name: total knee replacement
+def: "Surgical procedure to replace the weight-bearing surfaces of the knee joint." []
+synonym: "total knee arthoplasty" EXACT []
+is_a: MAXO:0009045 ! implantation of joint prosthesis
+property_value: http://purl.org/dc/elements/1.1/date 2022-04-05T19:15:51Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0009047
+name: hip replacement
+def: "A reconstructive proceder that surgically replaces the hip joint with an artificial prosthesis." [PMID:7725707]
+synonym: "hip arthroplasty" EXACT []
+synonym: "total hip replacement" EXACT []
+is_a: MAXO:0009045 ! implantation of joint prosthesis
+property_value: http://purl.org/dc/elements/1.1/date 2022-04-05T19:19:25Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0009048
+name: insertion of intrauterine contraceptive device
+def: "Placement of a intrauterine contraceptive device that prevents pregnancy." []
+synonym: "insertion of IUD" EXACT ABBREVIATION []
+synonym: "IUD implantation" EXACT []
+is_a: MAXO:0000473 ! medical device implantation
+property_value: http://purl.org/dc/elements/1.1/date 2022-04-05T19:30:10Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0009049
+name: enucleation
+def: "Surgical removal of a mass without cutting into or dissecting it." []
+synonym: "surgical enucleation" EXACT []
+is_a: MAXO:0000447 ! surgical excision
+property_value: http://purl.org/dc/elements/1.1/date 2022-04-11T16:22:02Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0009050
+name: enucleation of the eye
+def: "Surgical procedure that involves removal of the entire globe and its intraocular contents, with preservation of all other periorbital and orbital structures." []
+synonym: "orbital enucleation" EXACT []
+synonym: "removal of the eye" BROAD []
+is_a: MAXO:0009049 ! enucleation
+property_value: http://purl.org/dc/elements/1.1/date 2022-04-11T16:28:25Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
+id: MAXO:0009051
+name: enucleation of a tumor
+def: "Surgical removal of tumor cells without removing surrounding tissue or organs." []
+synonym: "tumor enucleation" EXACT []
+is_a: MAXO:0009049 ! enucleation
+property_value: http://purl.org/dc/elements/1.1/date 2022-04-11T16:30:19Z xsd:dateTime
+created_by: http://orcid.org/0000-0001-7941-2961
+
+[Term]
 id: MAXO:0010000
 name: gluten intake avoidance
 def: "A medical requirement or recommendation of avoiding the consumption of gluten." []
@@ -12120,11 +12994,11 @@ created_by: http://orcid.org/0000-0001-7941-2961
 
 [Term]
 id: MAXO:0010001
-name: liquid intake avoidance
-def: "A medical requirement or recommendation of avoiding the consumption of liquid." []
-synonym: "avoid liquid intake" EXACT []
-synonym: "avoiding liquid intake" EXACT []
-synonym: "liquid consumption avoidance" EXACT []
+name: liquid chemical food component intake avoidance
+def: "A medical requirement or recommendation of avoiding the consumption of liquid chemical food component." []
+synonym: "avoid liquid chemical food component intake" EXACT []
+synonym: "avoiding liquid chemical food component intake" EXACT []
+synonym: "liquid chemical food component consumption avoidance" EXACT []
 property_value: http://purl.org/dc/elements/1.1/date 2019-07-11T09:00:01Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -12275,11 +13149,11 @@ created_by: http://orcid.org/0000-0001-7941-2961
 
 [Term]
 id: MAXO:0010016
-name: riboflavinriboflavin (b2) supplementation
-def: "Addition of riboflavinriboflavin (b2) to a the diet for complete nutrition support." []
-synonym: "dietary supplementation of riboflavinriboflavin (b2)" EXACT []
-synonym: "riboflavinriboflavin (b2) supplemental intake" EXACT []
-synonym: "supplementation of riboflavinriboflavin (b2)" EXACT []
+name: riboflavin supplementation
+def: "Addition of riboflavin to a the diet for complete nutrition support." []
+synonym: "dietary supplementation of riboflavin" EXACT []
+synonym: "riboflavin supplemental intake" EXACT []
+synonym: "supplementation of riboflavin" EXACT []
 property_value: http://purl.org/dc/elements/1.1/date 2019-11-13T04:45:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -12305,11 +13179,11 @@ created_by: http://orcid.org/0000-0001-7941-2961
 
 [Term]
 id: MAXO:0010019
-name: thiaminethiamine (b1)vitamin B1 supplementation
-def: "Addition of thiaminethiamine (b1)vitamin B1 to a the diet for complete nutrition support." []
-synonym: "dietary supplementation of thiaminethiamine (b1)vitamin B1" EXACT []
-synonym: "supplementation of thiaminethiamine (b1)vitamin B1" EXACT []
-synonym: "thiaminethiamine (b1)vitamin B1 supplemental intake" EXACT []
+name: vitamin B1 supplementation
+def: "Addition of vitamin B1 to a the diet for complete nutrition support." []
+synonym: "dietary supplementation of vitamin B1" EXACT []
+synonym: "supplementation of vitamin B1" EXACT []
+synonym: "vitamin B1 supplemental intake" EXACT []
 property_value: http://purl.org/dc/elements/1.1/date 2019-11-13T04:45:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -12377,11 +13251,15 @@ created_by: http://orcid.org/0000-0001-7941-2961
 
 [Term]
 id: MAXO:0010026
-name: elemental zinc supplementation
+name: zinc supplementation
 def: "Addition of elemental zinc to a the diet for complete nutrition support." []
+comment: Addition of zinc to a the diet for complete nutrition support.
 synonym: "dietary supplementation of elemental zinc" EXACT []
+synonym: "dietary supplementation of zin" EXACT []
 synonym: "elemental zinc supplemental intake" EXACT []
 synonym: "supplementation of elemental zinc" EXACT []
+synonym: "supplementation of zinc" EXACT []
+synonym: "zinc supplemental intake" EXACT []
 property_value: http://purl.org/dc/elements/1.1/date 2019-11-13T04:45:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -12398,10 +13276,10 @@ created_by: http://orcid.org/0000-0001-7941-2961
 [Term]
 id: MAXO:0010028
 name: cyanocobalamin supplementation
-def: "Addition of cyanocobalamin (b12)cyanocob(III)alamin to a the diet for complete nutrition support." []
-synonym: "cyanocobalamin (b12)cyanocob(III)alamin supplemental intake" EXACT []
-synonym: "dietary supplementation of cyanocobalamin (b12)cyanocob(III)alamin" EXACT []
-synonym: "supplementation of cyanocobalamin (b12)cyanocob(III)alamin" EXACT []
+def: "Addition of cyanocob(III)alamin to a the diet for complete nutrition support." []
+synonym: "cyanocob(III)alamin supplemental intake" EXACT []
+synonym: "dietary supplementation of cyanocob(III)alamin" EXACT []
+synonym: "supplementation of cyanocob(III)alamin" EXACT []
 property_value: http://purl.org/dc/elements/1.1/date 2019-11-13T04:45:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -12412,7 +13290,7 @@ def: "Addition of methylcobalamin to a the diet for complete nutrition support."
 synonym: "dietary supplementation of methylcobalamin" EXACT []
 synonym: "methylcobalamin supplemental intake" EXACT []
 synonym: "supplementation of methylcobalamin" EXACT []
-is_a: MAXO:0000760 ! vitamin b12 supplementation
+is_a: MAXO:0000760 ! vitamin B12 supplementation
 property_value: http://purl.org/dc/elements/1.1/date 2019-11-13T04:45:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -12771,6 +13649,7 @@ def: "A medical requirement or recommendation of avoiding the consumption of bro
 synonym: "avoid broccoli food product intake" EXACT []
 synonym: "avoiding broccoli food product intake" EXACT []
 synonym: "broccoli food product consumption avoidance" EXACT []
+is_a: MAXO:0010069 ! brassicas intake avoidance
 property_value: http://purl.org/dc/elements/1.1/date 2020-05-12T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -13034,13 +13913,13 @@ created_by: http://orcid.org/0000-0001-7941-2961
 [Term]
 id: MAXO:0010096
 name: dietary sodium intake avoidance
-def: "A medical requirement or recommendation of avoiding the consumption of sodiumsodium atom." []
-synonym: "avoid sodiumsodium atom intake" EXACT []
-synonym: "avoiding dietary sodiumsodium atom intake" EXACT []
+def: "A medical requirement or recommendation of avoiding the consumption of sodium atom." []
+synonym: "avoid sodium atom intake" EXACT []
+synonym: "avoiding dietary sodium atom intake" EXACT []
+synonym: "sodium atom consumption avoidance" EXACT []
+synonym: "sodium atom restricted diet intake" EXACT []
+synonym: "sodium atom restriction" EXACT []
 synonym: "sodium restriction" EXACT []
-synonym: "sodiumsodium atom consumption avoidance" EXACT []
-synonym: "sodiumsodium atom restricted diet intake" EXACT []
-synonym: "sodiumsodium atom restriction" EXACT []
 property_value: http://purl.org/dc/elements/1.1/date 2020-05-12T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -13059,6 +13938,7 @@ created_by: http://orcid.org/0000-0001-7941-2961
 [Term]
 id: MAXO:0010098
 name: obsolete cholesterol intake avoidance
+is_obsolete: true
 replaced_by: MAXO:0010099
 
 [Term]
@@ -13076,15 +13956,15 @@ created_by: http://orcid.org/0000-0001-7941-2961
 [Term]
 id: MAXO:0010100
 name: dietary iron intake avoidance
-def: "A medical requirement or recommendation of avoiding the consumption of iron atomiron." []
-synonym: "avoid iron atomiron intake" EXACT []
-synonym: "avoiding dietary iron atomiron intake" EXACT []
+def: "A medical requirement or recommendation of avoiding the consumption of iron atom." []
+synonym: "avoid iron atom intake" EXACT []
+synonym: "avoiding dietary iron atom intake" EXACT []
 synonym: "dietary iron restriction" EXACT []
 synonym: "dietary iron supplementation avoidance" EXACT []
 synonym: "excessive iron consumption avoidance" EXACT []
-synonym: "iron atomiron consumption avoidance" EXACT []
-synonym: "iron atomiron restricted diet intake" EXACT []
-synonym: "iron atomiron restriction" EXACT []
+synonym: "iron atom consumption avoidance" EXACT []
+synonym: "iron atom restricted diet intake" EXACT []
+synonym: "iron atom restriction" EXACT []
 property_value: http://purl.org/dc/elements/1.1/date 2020-05-12T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -13266,12 +14146,12 @@ created_by: http://orcid.org/0000-0001-7941-2961
 [Term]
 id: MAXO:0010115
 name: dietary calcium avoidance
-def: "A medical requirement or recommendation of avoiding the consumption of calcium atomcalcium." []
-synonym: "avoid calcium atomcalcium intake" EXACT []
-synonym: "avoiding dietary calcium atomcalcium intake" EXACT []
-synonym: "calcium atomcalcium consumption avoidance" EXACT []
-synonym: "calcium atomcalcium restricted diet intake" EXACT []
-synonym: "calcium atomcalcium restriction" EXACT []
+def: "A medical requirement or recommendation of avoiding the consumption of calcium atom." []
+synonym: "avoid calcium atom intake" EXACT []
+synonym: "avoiding dietary calcium atom intake" EXACT []
+synonym: "calcium atom consumption avoidance" EXACT []
+synonym: "calcium atom restricted diet intake" EXACT []
+synonym: "calcium atom restriction" EXACT []
 property_value: http://purl.org/dc/elements/1.1/date 2020-05-12T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
 
@@ -13301,14 +14181,14 @@ created_by: http://orcid.org/0000-0001-7941-2961
 
 [Term]
 id: MAXO:0010118
-name: dietary riboflavinriboflavin (b2) intake avoidance
-def: "A medical requirement or recommendation of avoiding the consumption of riboflavinriboflavin (b2)." []
-synonym: "avoid riboflavinriboflavin (b2) intake" EXACT []
-synonym: "avoiding dietary riboflavinriboflavin (b2) intake" EXACT []
+name: dietary riboflavin intake avoidance
+def: "A medical requirement or recommendation of avoiding the consumption of riboflavin." []
+synonym: "avoid riboflavin intake" EXACT []
+synonym: "avoiding dietary riboflavin intake" EXACT []
 synonym: "B12 restriction" EXACT []
-synonym: "riboflavinriboflavin (b2) consumption avoidance" EXACT []
-synonym: "riboflavinriboflavin (b2) restricted diet intake" EXACT []
-synonym: "riboflavinriboflavin (b2) restriction" EXACT []
+synonym: "riboflavin consumption avoidance" EXACT []
+synonym: "riboflavin restricted diet intake" EXACT []
+synonym: "riboflavin restriction" EXACT []
 synonym: "vitamin B12 intake avoidance" EXACT []
 property_value: http://purl.org/dc/elements/1.1/date 2020-05-12T11:00:00Z xsd:string
 created_by: http://orcid.org/0000-0001-7941-2961
@@ -13380,6 +14260,9 @@ created_by: http://orcid.org/0000-0001-7941-2961
 id: MAXO:0010203
 name: echocardiography
 def: "The use of ultrasound to produce images of structures in the heart." []
+synonym: "cardiac echo procedure" EXACT []
+synonym: "echo procedure" EXACT []
+synonym: "echocardiogram procedure" EXACT []
 synonym: "heart diagnostic sonography" EXACT []
 synonym: "heart medical ultrasound" EXACT []
 synonym: "heart sonography" EXACT []
@@ -13653,6 +14536,7 @@ created_by: http://orcid.org/0000-0001-7941-3010
 [Term]
 id: MAXO:0010221
 name: obsolete testicular ultrasonography
+is_obsolete: true
 replaced_by: MAXO:0001171
 
 [Term]
@@ -14134,6 +15018,7 @@ created_by: http://orcid.org/0000-0002-7463-6306
 [Term]
 id: MAXO:0030012
 name: obsolete phenylalanine restricted diet intake
+is_obsolete: true
 replaced_by: MAXO:0010094
 
 [Term]
