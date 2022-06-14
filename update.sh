@@ -43,5 +43,3 @@ if [ -f src/main/resources/phenotype.hpoa ]; then
 fi
 wget -O src/main/resources/phenotype.hpoa http://purl.obolibrary.org/obo/hp/hpoa/phenotype.hpoa
 
-# EXIT
-exit 0;
