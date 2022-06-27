@@ -1,26 +1,23 @@
 package hpo.api.db
 
-import grails.compiler.GrailsCompileStatic
 import grails.gorm.transactions.Transactional
 import groovy.sql.BatchingPreparedStatementWrapper
 import groovy.sql.Sql
 import hpo.api.db.utils.SqlUtilsService
 import hpo.api.gene.DbGene
 import hpo.api.term.DbTerm
-import org.apache.commons.lang.time.StopWatch
+import hpo.api.util.HpoAssociationFactory
+import org.apache.commons.lang3.time.StopWatch
 import org.hibernate.Session
 import hpo.api.db.utils.DomainUtilService
-import org.monarchinitiative.phenol.annotations.assoc.HpoAssociationParser
-import org.monarchinitiative.phenol.annotations.formats.hpo.HpoGeneAnnotation
-import org.monarchinitiative.phenol.ontology.data.TermId
+import org.monarchinitiative.phenol.annotations.formats.GeneIdentifiers
 
 @Transactional
-@GrailsCompileStatic
 class DbGeneAdminService {
 
   final static String INSERT_INTO_DB_TERM_DB_GENES = "INSERT INTO db_term_db_genes (db_gene_id, db_term_id) VALUES(?,?)"
 
-  HpoAssociationParser hpoAssociation
+  HpoAssociationFactory hpoAssociationFactory
   SqlUtilsService sqlUtilsService
   DomainUtilService domainUtilService
 
@@ -34,23 +31,29 @@ class DbGeneAdminService {
 
   void executeGeneSchemaLoad() throws Exception {
     try{
-      loadEntrezGenes();
+      loadGenes();
       joinGenesAndTermsWithSql()
     }catch (Exception e){
       log.error(e.toString())
     }
   }
 
-  void loadEntrezGenes() {
+  void loadGenes() {
     log.info("*** Loading Genes ***")
     StopWatch stopWatch = new StopWatch()
     stopWatch.start()
-    Map<TermId, String> geneMap = hpoAssociation.getGeneIdToSymbolMap();
+    int geneCount = 0
+    GeneIdentifiers geneIdentifiers = hpoAssociationFactory.hpoAssociationData().getGeneIdentifiers()
     try{
       DbGene.withSession { Session session ->
-        geneMap.each { gene ->
-              DbGene dbGene = new DbGene(entrezGeneId: gene.getKey().getId().toInteger(), entrezGeneSymbol: gene.getValue())
-              dbGene.save()
+        hpoAssociationFactory.hpoAssociationData().associations().geneIdToDiseaseIds().keySet().each { it ->
+              def gene = geneIdentifiers.geneIdById(it)
+              if(gene.isPresent()){
+                gene = gene.get()
+                DbGene dbGene = new DbGene(geneId: gene.id().id.toInteger(), geneSymbol: gene.symbol())
+                dbGene.save()
+                geneCount++
+              }
             }
         session.flush()
         session.clear()
@@ -58,7 +61,7 @@ class DbGeneAdminService {
     }catch (Exception ex){
       log.error(ex.toString())
     }
-    log.info("*** Loading Genes Finished (${geneMap.size()}) - duration: ${stopWatch} time: ${new Date()} ***")
+    log.info("*** Loading Genes Finished (${geneCount}) - duration: ${stopWatch} time: ${new Date()} ***")
   }
 
   void joinGenesAndTermsWithSql() {
@@ -70,19 +73,18 @@ class DbGeneAdminService {
 
     final Map<Integer, DbGene> entrezIdToDbGeneMap = domainUtilService.loadDbGenes()
     final Map<String, DbTerm> hpoIdToDbTermMap = domainUtilService.loadHpoIdToDbTermMap()
-    List<HpoGeneAnnotation> phenotypeToGene =  hpoAssociation.getPhenotypeToGene()
 
     try{
       DbGene.withSession { Session session ->
         final Sql sql = sqlUtilsService.getSql()
         sql.withBatch(500, INSERT_INTO_DB_TERM_DB_GENES) { BatchingPreparedStatementWrapper ps ->
-          phenotypeToGene.each { HpoGeneAnnotation gene ->
-            final DbTerm dbTerm = hpoIdToDbTermMap.get(gene.getTermId().toString())
-            final DbGene dbGene = entrezIdToDbGeneMap.get(gene.getEntrezGeneId())
+          hpoAssociationFactory.hpoAssociationData().hpoToGeneAnnotations().asList().each {  hpoGeneAnnotation ->
+            final DbTerm dbTerm = hpoIdToDbTermMap.get(hpoGeneAnnotation.id().toString())
+            final DbGene dbGene = entrezIdToDbGeneMap.get(hpoGeneAnnotation.getEntrezGeneId())
             if (dbTerm == null) {
-              hpoIdWithPrefixNotFoundSet.add(gene.getTermId().toString())
+              hpoIdWithPrefixNotFoundSet.add(hpoGeneAnnotation.id().toString())
             } else if (dbGene == null) {
-              entrezIdNotFoundSet.add(gene.getEntrezGeneId())
+              entrezIdNotFoundSet.add(hpoGeneAnnotation.getEntrezGeneId())
             } else {
               ps.addBatch([
                 dbGene.id as Object,

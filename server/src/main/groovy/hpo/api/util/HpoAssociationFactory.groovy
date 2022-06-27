@@ -1,63 +1,33 @@
 package hpo.api.util
 
-import com.google.common.collect.ArrayListMultimap
-import com.google.common.collect.Multimap
 import org.grails.io.support.ClassPathResource
-import org.monarchinitiative.phenol.annotations.assoc.HpoAssociationParser
-import org.monarchinitiative.phenol.annotations.formats.hpo.HpoDisease
-import org.monarchinitiative.phenol.annotations.obo.hpo.HpoDiseaseAnnotationParser
+import org.monarchinitiative.phenol.annotations.assoc.GeneInfoGeneType
+import org.monarchinitiative.phenol.annotations.formats.hpo.HpoAssociationData
+import org.monarchinitiative.phenol.annotations.formats.hpo.HpoDiseases
+import org.monarchinitiative.phenol.annotations.io.hpo.HpoDiseaseLoaderOptions
+import org.monarchinitiative.phenol.annotations.io.hpo.HpoDiseaseLoaders
 import org.monarchinitiative.phenol.ontology.data.Ontology
-import org.monarchinitiative.phenol.ontology.data.TermId
 
 class HpoAssociationFactory {
 
-  private File geneInfoPath
-  private File omimToGenePath;
-  private File orphaToGenePath;
-  private File diseaseFilePath
-  private HpoAssociationParser assocParser
-  private Map<TermId, HpoDisease> diseaseMap
-  private Multimap<TermId, TermId> termToDisease
+  private HpoAssociationData hpoAssociationData
+  private HpoDiseases hpoDiseases
 
   HpoAssociationFactory(Ontology hpoOntology){
-    this.geneInfoPath = new ClassPathResource('Homo_sapiens.gene_info.gz').file
-    this.omimToGenePath = new ClassPathResource('mim2gene_medgen.txt').file
-    this.diseaseFilePath =  new ClassPathResource('phenotype.hpoa').file
-    this.orphaToGenePath = new ClassPathResource('orphanet_disease2gene.xml').file
-    this.diseaseMap =  HpoDiseaseAnnotationParser.loadDiseaseMap(this.diseaseFilePath.toString(), hpoOntology)
-    this.assocParser = new HpoAssociationParser(this.geneInfoPath, this.omimToGenePath, this.orphaToGenePath, this.diseaseFilePath, hpoOntology)
-    this.termToDisease = buildTermToDisease()
-    this.assocParser.setTermToGene(termToDisease)
+    final geneInfoPath = new ClassPathResource('Homo_sapiens.gene_info.gz').file.toPath()
+    final omimToGenePath = new ClassPathResource('mim2gene_medgen.txt').file.toPath()
+    final hpoFilePath =  new ClassPathResource('phenotype.hpoa').file.toPath()
+    final orphaToGenePath = new ClassPathResource('orphanet_disease2gene.xml').file.toPath()
+    this.hpoDiseases = HpoDiseaseLoaders.aggregated(hpoOntology, HpoDiseaseLoaderOptions.defaultOptions()).load(hpoFilePath)
+    this.hpoAssociationData = HpoAssociationData.builder(hpoOntology).orphaToGenePath(orphaToGenePath)
+      .hpoDiseases(hpoDiseases).homoSapiensGeneInfo(geneInfoPath, GeneInfoGeneType.DEFAULT).mim2GeneMedgen(omimToGenePath).build()
   }
 
-
-  Multimap<TermId, TermId> buildTermToDisease(){
-    Multimap<TermId, TermId> termToDisease = ArrayListMultimap.create()
-    this.diseaseMap.each { k, v ->
-      v.getPhenotypicAbnormalityTermIdList().each { termId ->
-        termToDisease.put(termId, k)
-      }
-
-      v.getModesOfInheritance().each { termId ->
-        termToDisease.put(termId, k)
-      }
-    }
-    return termToDisease
+  HpoAssociationData hpoAssociationData(){
+    return this.hpoAssociationData;
   }
 
-  HpoAssociationParser getInstance(){
-    return this.assocParser
-  }
-
-  Map<TermId, HpoDisease> getDiseaseMap(){
-    return this.diseaseMap
-  }
-
-  Multimap<TermId, TermId> getTermToDisease(){
-    return this.termToDisease
-  }
-
-  HpoDisease findDisease(String diseaseId){
-    return this.diseaseMap.get(TermId.of(diseaseId));
+  HpoDiseases hpoDiseases(){
+    return this.hpoDiseases
   }
 }

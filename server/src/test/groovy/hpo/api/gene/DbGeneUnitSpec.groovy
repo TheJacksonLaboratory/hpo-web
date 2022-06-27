@@ -17,10 +17,10 @@ class DbGeneUnitSpec extends Specification implements DomainUnitTest<DbGene> {
     when: 'we search for a gene'
     def c = DbGene.createCriteria()
     List<DbGene> geneList = c.list(){
-      like('entrezGeneId', query)
+      like('geneId', query)
     }
     then: "we find the term"
-    geneList*.entrezGeneSymbol == expected
+    geneList*.geneSymbol == expected
 
     where:
     dbGeneIds       | query | expected  | desc
@@ -38,11 +38,11 @@ class DbGeneUnitSpec extends Specification implements DomainUnitTest<DbGene> {
 
     then:
     verifyAll {
-      dbGene.entrezGeneId  == geneAnnotation.entrezGeneId
-      dbGene.entrezGeneSymbol == geneAnnotation.entrezGeneSymbol
+      dbGene.geneId  == geneAnnotation.entrezGeneId
+      dbGene.geneSymbol == geneAnnotation.entrezGeneSymbol
     }
   }
   private static DbGene buildDbGene(String entrezGeneSymbol, Integer entrezGeneId) {
-    new DbGene(entrezGeneSymbol: entrezGeneSymbol, entrezGeneId: entrezGeneId).save(failOnError: true)
+    new DbGene(geneSymbol: entrezGeneSymbol, geneId: entrezGeneId).save(failOnError: true)
   }
 }

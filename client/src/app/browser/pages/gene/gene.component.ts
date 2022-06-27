@@ -144,7 +144,7 @@ export class GeneComponent implements OnInit {
       diseases: this.diseaseAssoc.length,
       terms: this.termAssoc.length
     };
-    this.dialogService.openDownloadDialog(this.gene.entrezGeneId.toString(), 'gene', counts);
+    this.dialogService.openDownloadDialog(this.gene.geneId.toString(), 'gene', counts);
   }
 
 }

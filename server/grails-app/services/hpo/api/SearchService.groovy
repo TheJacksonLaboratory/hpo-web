@@ -11,7 +11,7 @@ import hpo.api.term.DbMaxo
 import hpo.api.term.DbMaxoSynonym
 import hpo.api.term.DbTerm
 import hpo.api.util.HpoUtilities
-import org.apache.commons.lang.StringUtils
+import org.apache.commons.lang3.StringUtils
 import org.grails.datastore.mapping.query.api.BuildableCriteria
 import hpo.api.model.SearchTermResult
 import org.monarchinitiative.phenol.ontology.data.Ontology
@@ -269,16 +269,16 @@ class SearchService {
     Map params = [:]
     params.max = maxIn // if -1, all results are returned
     params.offset = offsetIn
-    params.sort = 'entrezGeneSymbol'
+    params.sort = 'geneSymbol'
     params.order = 'asc'
 
     BuildableCriteria c = DbGene.createCriteria()
     def results = c.list(max: params.max, offset: params.offset) {
       if(terms.size() == 1 && terms[0].isInteger()){
-        eq('entrezGeneId', terms[0].toInteger())
+        eq('geneId', terms[0].toInteger())
       }else{
         for (term in terms) {
-          ilike('entrezGeneSymbol', '%' + term + '%')
+          ilike('geneSymbol', '%' + term + '%')
         }
       }
       order(params.sort, params.order)

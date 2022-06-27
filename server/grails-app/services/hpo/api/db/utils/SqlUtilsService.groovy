@@ -1,10 +1,9 @@
 package hpo.api.db.utils
 
 import grails.gorm.transactions.Transactional
-import groovy.sql.GroovyResultSet
 import groovy.sql.GroovyRowResult
 import groovy.sql.Sql
-import org.apache.commons.lang.time.StopWatch
+import org.apache.commons.lang3.time.StopWatch
 import org.hibernate.SessionFactory
 import org.hibernate.internal.SessionImpl
 

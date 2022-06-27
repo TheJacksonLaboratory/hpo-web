@@ -51,7 +51,7 @@ class ViewSpec extends Specification implements JsonViewTest,DataTest {
     def result = render(view: "/hpoGeneDetails/searchGenesByTerm", model:[resultMap:[genes:geneList , geneCount:2, offset:0, max:20]]).json
 
     then:"The json is correct"
-    result.genes.entrezGeneSymbol == expectedSymbols
+    result.genes.geneSymbol == expectedSymbols
 
     where:
     expectedSymbols = ["TP53","BRAF"]
@@ -111,7 +111,7 @@ class ViewSpec extends Specification implements JsonViewTest,DataTest {
   }
 
   private static DbGene buildMockGene(String symbol, Integer id){
-    DbGene dbGene = new DbGene(entrezGeneSymbol:symbol, entrezGeneId:id)
+    DbGene dbGene = new DbGene(geneSymbol:symbol, geneId:id)
     dbGene
   }
 }

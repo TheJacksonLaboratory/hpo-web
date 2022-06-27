@@ -2,7 +2,7 @@ package hpo.api
 
 import grails.gorm.transactions.Transactional
 import hpo.api.term.DbTerm
-import org.apache.commons.lang.StringUtils
+import org.apache.commons.lang3.StringUtils
 import org.monarchinitiative.phenol.ontology.algo.OntologyTerms
 import org.monarchinitiative.phenol.ontology.data.Ontology
 import org.monarchinitiative.phenol.ontology.data.TermId

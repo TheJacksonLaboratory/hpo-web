@@ -9,17 +9,17 @@ import org.monarchinitiative.phenol.annotations.formats.hpo.HpoGeneAnnotation
 @GrailsCompileStatic(TypeCheckingMode.SKIP)
 class DbGene {
 
-  Integer entrezGeneId
-  String  entrezGeneSymbol
+  Integer geneId
+  String geneSymbol
 
   static constraints = {
-    entrezGeneId(unique: true)
-    entrezGeneSymbol(unique:true)
+    geneId(unique: true)
+    geneSymbol(unique:true)
   }
 
   static mapping = {
-    entrezGeneId()
-    entrezGeneSymbol()
+    geneId()
+    geneSymbol()
     version false
   }
 
@@ -32,7 +32,7 @@ class DbGene {
   DbGene() {}
 
   DbGene(HpoGeneAnnotation hpoGeneAnnotation) {
-    entrezGeneId = hpoGeneAnnotation.entrezGeneId
-    entrezGeneSymbol = hpoGeneAnnotation.entrezGeneSymbol
+    geneId = hpoGeneAnnotation.entrezGeneId
+    geneSymbol = hpoGeneAnnotation.entrezGeneSymbol
   }
 }

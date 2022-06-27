@@ -4,6 +4,6 @@ model {
   DbGene geneLite
 }
 json {
-  entrezGeneId geneLite.entrezGeneId
-  entrezGeneSymbol geneLite.entrezGeneSymbol
+  geneId geneLite.geneId
+  geneSymbol geneLite.geneSymbol
 }

@@ -134,8 +134,8 @@
                         <mat-header-cell *matHeaderCellDef>Associated Genes</mat-header-cell>
                         <mat-cell *matCellDef="let row">
                                       <span *ngFor="let gene of row.dbGenes">
-                                        {{gene.entrezGeneSymbol}}
-                                        <a routerLink="/browse/gene/{{gene.entrezGeneId}}">[{{gene.entrezGeneId}}
+                                        {{gene.geneSymbol}}
+                                        <a routerLink="/browse/gene/{{gene.geneId}}">[{{gene.geneId}}
                                           ]</a><br>
                                       </span>
                         </mat-cell>
@@ -185,11 +185,11 @@
                     <mat-table [dataSource]="geneSource">
                       <mat-header-row *matHeaderRowDef="geneColumns; sticky: true"></mat-header-row>
                       <mat-row *matRowDef="let row; columns: geneColumns;"></mat-row>
-                      <ng-container matColumnDef="entrezGeneId">
+                      <ng-container matColumnDef="geneId">
                         <mat-header-cell *matHeaderCellDef> Gene Symbol</mat-header-cell>
                         <mat-cell *matCellDef="let row">
-                          {{row.entrezGeneSymbol}}&nbsp;
-                          <a routerLink="/browse/gene/{{row.entrezGeneId}}">[{{row.entrezGeneId}}]</a>
+                          {{row.geneSymbol}}&nbsp;
+                          <a routerLink="/browse/gene/{{row.geneId}}">[{{row.geneId}}]</a>
                         </mat-cell>
                       </ng-container>
                       <ng-container matColumnDef="dbDiseases">

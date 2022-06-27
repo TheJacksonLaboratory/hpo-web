@@ -5,7 +5,7 @@ import groovy.transform.CompileStatic
 import hpo.api.disease.DbDisease
 import hpo.api.gene.DbGene
 import hpo.api.term.DbTerm
-import org.apache.commons.lang.time.StopWatch
+import org.apache.commons.lang3.time.StopWatch
 
 /**
  * Created by gargam on 11/13/17.
@@ -38,7 +38,7 @@ class DomainUtilService {
     StopWatch stopWatch = new StopWatch()
     stopWatch.start()
     DbGene.list().each { DbGene dbGene ->
-      mapToReturn.put(dbGene.entrezGeneId, dbGene)
+      mapToReturn.put(dbGene.geneId, dbGene)
     }
     mapToReturn
   }

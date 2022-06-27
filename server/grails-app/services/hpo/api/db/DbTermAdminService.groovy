@@ -3,6 +3,7 @@ package hpo.api.db
 
 import grails.gorm.transactions.Transactional
 import groovy.sql.BatchingPreparedStatementWrapper
+import groovy.util.logging.Slf4j
 import hpo.api.term.DbMaxo
 import org.monarchinitiative.phenol.ontology.algo.OntologyTerms
 import org.monarchinitiative.phenol.ontology.data.Ontology
@@ -12,7 +13,7 @@ import hpo.api.db.utils.SqlUtilsService
 import hpo.api.term.DbTerm
 import hpo.api.term.DbTermRelationship
 import hpo.api.util.AncestorPathsBuilder
-import org.apache.commons.lang.time.StopWatch
+import org.apache.commons.lang3.time.StopWatch
 import org.hibernate.Session
 import org.hibernate.SessionFactory
 import org.hibernate.Transaction
@@ -54,37 +55,38 @@ class DbTermAdminService {
     sqlUtilsService.executeDelete("TRUNCATE TABLE db_term_synonym")
   }
 
-  void loadDbTerms(List<Term> terms = hpoOntology.termMap.values()) {
+  void loadDbTerms() {
     StopWatch stopWatch = new StopWatch()
     stopWatch.start()
     Set<String> ontologyIdSet = [] as Set<String>
     Map<Term, DbTerm> termToDbTermMap = [:]
-    for (Term term in terms) {
-      if (ontologyIdSet.contains(term.id.toString())) {
-        // do nothing
-      } else {
-        ontologyIdSet.add(term.id.toString())
+    int count = 0
+    for (Term term in hpoOntology.getTerms()) {
+      if (!ontologyIdSet.contains(term.id().toString())) {
+        ontologyIdSet.add(term.id().toString())
         DbTerm dbTerm = new DbTerm(term as Term)
-        dbTerm.numberOfChildren = OntologyTerms.childrenOf(term.id, hpoOntology).size() - 1 //-1 exclude the current term
+        dbTerm.numberOfChildren = OntologyTerms.childrenOf(term.id(), hpoOntology).size() - 1 //-1 exclude the current term
         dbTerm.save()
         loadHpoSynonyms(dbTerm, term)
         termToDbTermMap.put(term, dbTerm)
         getParents(term, dbTerm)
+        count++
       }
     }
     DbTerm.withSession { Session session -> session.flush()}
-    log.info("flushed ${terms.size()} DbTerms duration: ${stopWatch} time: ${new Date()}")
+    log.info("flushed ${count} DbTerms duration: ${stopWatch} time: ${new Date()}")
     saveAncestorPaths(termToDbTermMap)
     saveTermParents()
   }
 
-  void loadDbMaxo(List<Term> terms = maxoOntology.termMap.values()) {
+  void loadDbMaxo() {
     StopWatch stopWatch = new StopWatch()
     stopWatch.start()
     Set<String> ontologyIdSet = [] as Set<String>
-    for (Term term in terms) {
-      if (!ontologyIdSet.contains(term.id.toString())) {
-        ontologyIdSet.add(term.id.toString())
+    for (Term term in maxoOntology.termMap.values()) {
+      final String id = term.id().toString()
+      if (!ontologyIdSet.contains(id)){
+        ontologyIdSet.add(id)
         DbMaxo dbMaxo = new DbMaxo(term as Term)
         dbMaxo.save()
         loadMaxoSynonyms(dbMaxo, term)
@@ -152,7 +154,7 @@ class DbTermAdminService {
    */
   private List<List<Term>> getAncestorPaths(Term term) {
     final List<List<Term>> paths = []
-    Set<TermId> parentTermIds = hpoOntology.getParentTermIds(term.id)
+    Set<TermId> parentTermIds = hpoOntology.getParentTermIds(term.id())
     if (parentTermIds.isEmpty()) {
       paths.add([term])  // no parent so add a list with current term
     } else {
@@ -177,7 +179,7 @@ class DbTermAdminService {
 
     Set<TermId> parentTermIds = hpoOntology.getParentTermIds(term.id)
     List<Term> parents = []
-    if (! parentTermIds.isEmpty()) {
+    if (!parentTermIds.isEmpty()) {
       for (TermId parentId in parentTermIds) {
         Term parent = hpoOntology.getTermMap().get(parentId)
         parents.add(parent)

@@ -20,7 +20,8 @@ class HpoGeneDetailsService {
     }
     return resultMap
   }
+
   DbGene getGene(Integer query) {
-    DbGene.findByEntrezGeneId(query)
+    DbGene.findByGeneId(query)
   }
 }

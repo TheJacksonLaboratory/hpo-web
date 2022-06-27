@@ -2,7 +2,7 @@ package hpo.api
 
 
 import grails.dev.commands.*
-import org.apache.commons.lang.time.StopWatch
+import org.apache.commons.lang3.time.StopWatch
 
 class LoadHpoDbCommand implements GrailsApplicationCommand {
 

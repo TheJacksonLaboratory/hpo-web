@@ -23,7 +23,7 @@ export class TermComponent implements OnInit {
     'id': '', 'name': '', 'definition': '', 'altTermIds': [], 'comment': '', 'synonyms': [],
     'isObsolete': true, 'xrefs': [], 'pubmedXrefs': [], 'purl': ''
   };
-  geneColumns = ['entrezGeneId', 'dbDiseases'];
+  geneColumns = ['geneId', 'dbDiseases'];
   geneSource: MatTableDataSource<Gene>;
   geneAssocCount: number;
   geneAssocMax: number;

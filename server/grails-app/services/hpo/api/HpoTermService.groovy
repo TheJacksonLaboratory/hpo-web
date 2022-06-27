@@ -13,7 +13,7 @@ import hpo.api.db.utils.SqlUtilsService
 import hpo.api.disease.DbDisease
 import hpo.api.gene.DbGene
 import hpo.api.term.DbTerm
-import org.apache.commons.lang.time.StopWatch
+import org.apache.commons.lang3.time.StopWatch
 
 @GrailsCompileStatic(TypeCheckingMode.SKIP)
 class HpoTermService {
@@ -204,7 +204,7 @@ class HpoTermService {
    * @param terms
    * @param offset -- for paging
    * @param max -- for paging
-   * @return Map with list of DbGenes sorted by entrezGeneSymbol asc and total gene count
+   * @return Map with list of DbGenes sorted by geneSymbol asc and total gene count
    */
   private Map<String, Object> findDbGenes(List<DbTerm> terms, Integer offset, Integer max) {
     final StopWatch stopWatch = new StopWatch()
@@ -213,7 +213,7 @@ class HpoTermService {
     final List<Long> geneIdList = getGeneListForAssociatedTerms(terms)
     List<DbGene> geneList = []
     if (geneIdList) {
-      geneList = DbGene.findAllByIdInList(geneIdList, [offset:offset, max:max, sort: 'entrezGeneSymbol', order: 'asc'])
+      geneList = DbGene.findAllByIdInList(geneIdList, [offset:offset, max:max, sort: 'geneSymbol', order: 'asc'])
       resultMap.geneCount = geneIdList.size()
     }
 

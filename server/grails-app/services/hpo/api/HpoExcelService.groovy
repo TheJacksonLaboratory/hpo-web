@@ -29,8 +29,8 @@ class HpoExcelService {
         }
         genes.each { gene ->
           s.row { r ->
-            r.cell(gene.getEntrezGeneId())
-            r.cell(gene.getEntrezGeneSymbol())
+            r.cell(gene.getGeneId())
+            r.cell(gene.getGeneSymbol())
             r.cell(String.join(",", gene.dbDiseases.diseaseId))
           }
         }
@@ -66,8 +66,8 @@ class HpoExcelService {
         }
         genes.each { gene ->
           s.row { r ->
-            r.cell(gene.getEntrezGeneId())
-            r.cell(gene.getEntrezGeneSymbol())
+            r.cell(gene.getGeneId())
+            r.cell(gene.getGeneSymbol())
           }
         }
       }

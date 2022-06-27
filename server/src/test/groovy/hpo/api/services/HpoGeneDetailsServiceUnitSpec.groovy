@@ -65,7 +65,7 @@ class HpoGeneDetailsServiceUnitSpec extends Specification implements ServiceUnit
 
     }
     private static DbGene buildMockGene(Integer id, String symbol){
-      new DbGene(["entrezGeneId":id,"entrezGeneSymbol":symbol])
+      new DbGene(["geneId":id, "geneSymbol":symbol])
     }
     private static List<Term> buildMockTerms(){
     [

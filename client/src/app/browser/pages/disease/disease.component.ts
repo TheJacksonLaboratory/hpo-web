@@ -19,7 +19,7 @@ export class DiseaseComponent {
   geneAssoc: Gene[] = [];
   termColumns = ['ontologyId', 'name', 'onset', 'frequency', 'sources'];
   hasTerms = false;
-  geneColumns = ['entrezGeneId', 'entrezGeneSymbol'];
+  geneColumns = ['geneId', 'geneSymbol'];
   termDataSource: MatTableDataSource<Term>;
   geneDataSource: MatTableDataSource<Gene>;
   isLoading = true;

@@ -233,22 +233,22 @@ class SearchServiceSpec extends Specification implements ServiceUnitTest<SearchS
     void "test searchAll genes #desc"() {
 
       setup:
-        new DbGene(entrezGeneId: 1, entrezGeneSymbol: 'BRAF').save()
-        new DbGene(entrezGeneId: 2, entrezGeneSymbol: 'BRAT1').save()
-        new DbGene(entrezGeneId: 3, entrezGeneSymbol: 'BRCA2').save()
-        new DbGene(entrezGeneId: 4, entrezGeneSymbol: 'BRCA1').save()
+        new DbGene(geneId: 1, geneSymbol: 'BRAF').save()
+        new DbGene(geneId: 2, geneSymbol: 'BRAT1').save()
+        new DbGene(geneId: 3, geneSymbol: 'BRCA2').save()
+        new DbGene(geneId: 4, geneSymbol: 'BRCA1').save()
 
       when:
         query = service.trimAndSplit(query)
         final Map resultMap = service.searchGenesAll(query, 0, 10)
 
       then:
-      resultMap.data*.entrezGeneSymbol == expected
+      resultMap.data*.geneSymbol == expected
 
       where:
       query    | expected                            | desc
       'BRA'    | ['BRAF', 'BRAT1']                   | 'partial 1'
-      'BR'     | ['BRAF', 'BRAT1', 'BRCA1', 'BRCA2'] | 'sort asc by entrezGeneSymbol'
+      'BR'     | ['BRAF', 'BRAT1', 'BRCA1', 'BRCA2'] | 'sort asc by geneSymbol'
       'brca'   | ['BRCA1', 'BRCA2']                  | 'ignore case'
       'BRAF'   | ['BRAF']                            | 'exact match'
 

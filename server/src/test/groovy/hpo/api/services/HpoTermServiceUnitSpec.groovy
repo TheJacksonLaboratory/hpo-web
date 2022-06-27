@@ -46,9 +46,9 @@ class HpoTermServiceUnitSpec extends Specification implements ServiceUnitTest<Hp
       DbTerm dbTerm1 = new DbTerm(term1).save()
       DbTerm dbTerm2 = new DbTerm(term2).save()
 
-      List<Map> genes = [["id": 1, "entrezGeneId": 7157, "entrezGeneSymbol":"TP53"], ["id": 2, "entrezGeneId": 3265, "entrezGeneSymbol":"HRAS"]]
+      List<Map> genes = [["id": 1, "geneId": 7157, "geneSymbol":"TP53"], ["id": 2, "geneId": 3265, "geneSymbol":"HRAS"]]
       genes.each{
-        dbTerm1.addToDbGenes(new DbGene(entrezGeneSymbol: it.entrezGeneSymbol, entrezGeneId: it.entrezGeneId))
+        dbTerm1.addToDbGenes(new DbGene(geneSymbol: it.geneSymbol, geneId: it.geneId))
       }
       dbTerm1.save()
 
@@ -57,7 +57,7 @@ class HpoTermServiceUnitSpec extends Specification implements ServiceUnitTest<Hp
 
       then:
       (0..1) * sqlUtilsService.executeQuery(_,_) >> mockQueryResponse
-      genesResult.genes*.entrezGeneId == expected
+      genesResult.genes*.geneId == expected
 
       where:
       query         |  expected      | mockQueryResponse                     | desc
@@ -79,7 +79,7 @@ class HpoTermServiceUnitSpec extends Specification implements ServiceUnitTest<Hp
         ["id": 1, "db": "OMIM", "dbId": "7","diseaseName":"Bladder Carcinoma", "diseaseId": "OMIM:7"],
         ["id": 2, "db": "ORPHA", "dbId": "227","diseaseName":"Bladder Failure", "diseaseId": "ORPHA:227"]]
       diseases.each{
-        new DbAnnotation(dbTerm1, new DbDisease(db: it.db, dbId:it.dbId, diseaseName: it.diseaseName, diseaseId: it.diseaseId), "", "", "").save()
+        new DbAnnotation(dbTerm1, new DbDisease(db: it.db, dbId:it.dbId, diseaseName: it.diseaseName, diseaseId: it.diseaseId), 0f, 0, "", []).save()
       }
       dbTerm1.save()
 
@@ -134,13 +134,13 @@ class HpoTermServiceUnitSpec extends Specification implements ServiceUnitTest<Hp
 
     DbTerm dbTerm1 = new DbTerm(term1).save()
 
-    List<Map> genes = [["id": 1, "entrezGeneId": 7157, "entrezGeneSymbol":"TP53"],
-                       ["id": 2, "entrezGeneId": 3265, "entrezGeneSymbol":"HRAS"],
-                       ["id": 3, "entrezGeneId": 1232, "entrezGeneSymbol":"ABCD"],
-                       ["id": 4, "entrezGeneId": 2342, "entrezGeneSymbol":"EFFF"],
-                       ["id": 5, "entrezGeneId": 4564, "entrezGeneSymbol":"DDFD"]]
+    List<Map> genes = [["id": 1, "geneId": 7157, "geneSymbol":"TP53"],
+                       ["id": 2, "geneId": 3265, "geneSymbol":"HRAS"],
+                       ["id": 3, "geneId": 1232, "geneSymbol":"ABCD"],
+                       ["id": 4, "geneId": 2342, "geneSymbol":"EFFF"],
+                       ["id": 5, "geneId": 4564, "geneSymbol":"DDFD"]]
     genes.each{
-      dbTerm1.addToDbGenes(new DbGene(entrezGeneSymbol: it.entrezGeneSymbol, entrezGeneId: it.entrezGeneId))
+      dbTerm1.addToDbGenes(new DbGene(geneSymbol: it.geneSymbol, geneId: it.geneId))
     }
     dbTerm1.save()
 
@@ -149,7 +149,7 @@ class HpoTermServiceUnitSpec extends Specification implements ServiceUnitTest<Hp
 
     then:
     (0..1) * sqlUtilsService.executeQuery(_,_) >> mockQueryMethodResponse
-    serviceResult.genes*.entrezGeneId == rGenes
+    serviceResult.genes*.geneId == rGenes
     serviceResult.geneCount == rCount
     serviceResult.offset == rOffset
     serviceResult.max == rMax
@@ -180,7 +180,7 @@ class HpoTermServiceUnitSpec extends Specification implements ServiceUnitTest<Hp
       ["id": 4, "db": "OMIM", "dbId": "4","diseaseName":"Bladder Carcinoma", "diseaseId": "OM:4"],
       ["id": 5, "db": "OMIM", "dbId": "5","diseaseName":"Bladder Carcinoma", "diseaseId": "OM:5"]]
     diseases.each{
-      new DbAnnotation(dbTerm1, new DbDisease(db: it.db, dbId:it.dbId, diseaseName: it.diseaseName, diseaseId: it.diseaseId), "", "", "").save()
+      new DbAnnotation(dbTerm1, new DbDisease(db: it.db, dbId:it.dbId, diseaseName: it.diseaseName, diseaseId: it.diseaseId), 0f, 0, "", []).save()
     }
 
     when: "we query for a term"

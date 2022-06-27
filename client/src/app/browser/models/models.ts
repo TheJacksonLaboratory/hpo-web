@@ -1,6 +1,6 @@
 export interface Gene {
-  entrezGeneSymbol: string;
-  entrezGeneId: number;
+  geneSymbol: string;
+  geneId: number;
   dbDiseases?: Disease[];
   hpoTermName?: Array<string>;
   hpoTermId?: object;
