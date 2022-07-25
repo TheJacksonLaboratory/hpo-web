@@ -3,7 +3,6 @@ package hpo.api.db
 
 import grails.gorm.transactions.Transactional
 import groovy.sql.BatchingPreparedStatementWrapper
-import groovy.util.logging.Slf4j
 import hpo.api.term.DbMaxo
 import org.monarchinitiative.phenol.ontology.algo.OntologyTerms
 import org.monarchinitiative.phenol.ontology.data.Ontology

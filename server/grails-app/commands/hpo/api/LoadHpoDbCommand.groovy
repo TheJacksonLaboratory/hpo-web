@@ -31,11 +31,11 @@ class LoadHpoDbCommand implements GrailsApplicationCommand {
         appCtx.dbDiseaseAdminService.executeDiseaseSchemaLoad() 	 		     // Load Diseases
       }catch(Exception e){
         println(e.toString());
-        println("FAILED refreshing database duration: ${stopWatch} time: ${new Date()}")
+        println("FAILED generating database schema [${stopWatch}] at: ${new Date()}")
         return false
       }
 
-      println("Finished refreshing database duration: ${stopWatch} time: ${new Date()}")
+        println("Finished generating database schema [${stopWatch}] at: ${new Date()}")
         return true
     }
 }

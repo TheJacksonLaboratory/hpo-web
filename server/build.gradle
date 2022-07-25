@@ -9,22 +9,29 @@ buildscript {
     classpath "gradle.plugin.com.github.erdi.webdriver-binaries:webdriver-binaries-gradle-plugin:2.7"
     classpath "com.github.node-gradle:gradle-node-plugin:3.1.1"
     classpath "com.dorongold.plugins:task-tree:2.1.0"
+    classpath "org.springframework.boot:spring-boot-gradle-plugin:2.7.1"
+    classpath "com.bmuschko:gradle-docker-plugin:7.4.0"
+    classpath "org.grails.plugins:hibernate:4.3.8.0"
   }
 }
 
-version "1.17.13-SNAPSHOT"
+version "1.17.13"
 group "hpo.api"
 
-apply plugin:"idea"
-apply plugin:"war"
-apply plugin:"org.grails.grails-web"
-apply plugin:"com.github.erdi.webdriver-binaries"
-apply plugin: 'com.github.node-gradle.node'
+apply plugin: "idea"
+apply plugin: "war"
+apply plugin: "java"
+apply plugin: "org.grails.grails-web"
+apply plugin: "com.github.erdi.webdriver-binaries"
+apply plugin: "com.github.node-gradle.node"
 apply plugin: "com.dorongold.task-tree"
+apply plugin: "org.springframework.boot"
+apply plugin: "com.bmuschko.docker-spring-boot-application"
 
 sourceCompatibility = 1.11
 
 repositories {
+  mavenLocal()
   maven { url "https://repo.grails.org/grails/core" }
 }
 
@@ -64,16 +71,15 @@ dependencies {
   implementation "org.grails.plugins:views-json-templates"
   implementation 'builders.dsl:spreadsheet-builder-poi:1.0.5'
   implementation 'builders.dsl:spreadsheet-builder-groovy:1.0.5'
-  implementation 'ch.qos.logback:logback-core:1.2.10'
   // Raw jar file for loinc2hpo
   implementation files('libs/loinc2hpo-core.jar')
   implementation 'org.monarchinitiative.phenol:phenol-core:2.0.0-RC4-SNAPSHOT'
   implementation 'org.monarchinitiative.phenol:phenol-io:2.0.0-RC4-SNAPSHOT'
   implementation 'org.monarchinitiative.phenol:phenol-annotations:2.0.0-RC4-SNAPSHOT'
   implementation 'com.bertramlabs.plugins:asset-pipeline-grails:3.3.4'
-  runtimeOnly 'mysql:mysql-connector-java:5.1.29'
+  runtimeOnly 'mysql:mysql-connector-java:8.0.29'
+  runtimeOnly 'com.google.cloud.sql:mysql-socket-factory-connector-j-8:1.6.2'
   runtimeOnly "org.glassfish.web:el-impl:2.2.1-b05"
-  runtimeOnly "com.h2database:h2"
   runtimeOnly "org.apache.tomcat:tomcat-jdbc"
   runtimeOnly "javax.xml.bind:jaxb-api:2.3.1"
   testImplementation "io.micronaut:micronaut-inject-groovy"
@@ -151,7 +157,12 @@ task clientIntegrationTest(type: NpxTask, dependsOn: npmInstall) {
 }
 
 war {
-  archiveFileName = "hpo-web-${archiveVersion}.war_"
+  def springProfile = System.getProperty("spring.profiles.active")
+  if (springProfile != 'production'){
+    archiveFileName = "hpo-web-${archiveVersion}-SNAPSHOT.war_"
+  } else {
+    archiveFileName = "hpo-web-${archiveVersion}.war_"
+  }
 }
 
 webdriverBinaries {
@@ -175,5 +186,12 @@ clean {
   delete fileTree(dir: "src/main/webapp")
 }
 
-runCommand { systemProperty "spring.devtools.restart.enabled", false }
+docker {
+  springBootApplication {
+    baseImage = 'hpo-web-${archiveVersion}'
+  }
+}
 
+runCommand {
+  systemProperty "spring.devtools.restart.enabled", false
+}

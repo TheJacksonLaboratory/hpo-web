@@ -16,5 +16,4 @@ beans = {
     hpoLoincFactory(Loinc2HpoFactory)
     hpoLoinc(hpoLoincFactory: "getInstance")
     hpoUtilities(HpoUtilities, hpoOntology)
-    groovySql(Sql, ref('dataSource'))
 }

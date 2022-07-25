@@ -19,8 +19,8 @@ class DbTermPath {
     pathLength()
   }
   static mapping = {
-    pathNames(type: 'text', index: 'pathNames_index')
-    pathIds(type: 'text', index: 'pathIds_index')
+    pathNames(type: 'text')
+    pathIds(type: 'text')
     version false
   }
   static belongsTo = [dbTerm: DbTerm]
