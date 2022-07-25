@@ -1,0 +1,44 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Cloud Sql Deploy
+
+# Controls when the workflow will run
+on: workflow_dispatch
+
+jobs:
+  load:
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:5.7
+        env:
+          MYSQL_DATABASE: hpo_web
+          MYSQL_HOST: 127.0.0.1
+          MYSQL_ROOT_PASSWORD: password
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=10
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+
+
+      - name: Load our database with the new data
+        run: ./gradlew runCommand -Dgrails.env="gcp" -Pargs="load-hpo-db"
+
+      # TODO: Get version from release being run
+      - name: Export our database to a sql file
+        run: |
+          echo "[mysqldump]\npassword=password" > mysql.cnf
+          mysqldump --defaults-extra-file=mysql.cnf -u root --opt hpo_web > hpo_web.sql
+
+      - name: Copy sql file to gcp bucket
+        uses: actions-hub/gcloud@master
+        env:
+          PROJECT_ID: test
+          APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+        with:
+          args: cp hpo_web.sql gs://jax-robinson-hpo-01-project-data/
+          cli: gsutil
