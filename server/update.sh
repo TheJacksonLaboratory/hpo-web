@@ -7,41 +7,23 @@ trap 'last_command=$current_command; current_command=$BASH_COMMAND' DEBUG
 trap 'echo "\"${last_command}\" command filed with exit code $?."' EXIT
 
 # OMIM 2 GENE
-if [ -f src/main/resources/mim2gene_medgen.txt ]; then
-	mv src/main/resources/mim2gene_medgen.txt src/main/resources/mim2gene_medgen.txt.old
-fi
-wget -O src/main/resources/mim2gene_medgen.txt ftp://ftp.ncbi.nlm.nih.gov/gene/DATA/mim2gene_medgen
+wget -P server/src/main/resources/ -N ftp://ftp.ncbi.nlm.nih.gov/gene/DATA/mim2gene_medgen
 
 # HPO OBO
-if [ -f src/main/resources/hp_mostrecent.obo ]; then
-	mv src/main/resources/hp_mostrecent.obo src/main/resources/hp_mostrecent.obo.old
-fi
-wget -O src/main/resources/hp_mostrecent.obo http://purl.obolibrary.org/obo/hp.obo
+wget -P server/src/main/resources/ -N http://purl.obolibrary.org/obo/hp.json
 
 # MAXO OBO
-if [ -f src/main/resources/maxo_mostrecent.obo ]; then
-	mv src/main/resources/maxo_mostrecent.obo src/main/resources/maxo_mostrecent.obo.old
-fi
-wget -O src/main/resources/maxo_mostrecent.obo https://raw.githubusercontent.com/monarch-initiative/MAxO/master/maxo-base.obo
+wget -P server/src/main/resources/ -N https://raw.githubusercontent.com/monarch-initiative/MAxO/master/maxo.json
 
 
 # ORPHANET 2 GENE
-if [ -f src/main/resources/orphanet_disease2gene.xml ]; then
-	mv src/main/resources/orphanet_disease2gene.xml src/main/resources/orphanet_disease2gene.xml.old
-fi
-wget -O src/main/resources/orphanet_disease2gene.xml http://www.orphadata.org/data/xml/en_product6.xml
+wget -P server/src/main/resources/ -N http://www.orphadata.org/data/xml/en_product6.xml
 
-# GENE INFO 
-if [ -f src/main/resources/Homo_sapiens.gene_info.gz ]; then
-        mv src/main/resources/Homo_sapiens.gene_info.gz src/main/resources/Homo_sapiens.gene_info.gz.old
-fi
-wget -O src/main/resources/Homo_sapiens.gene_info.gz ftp://ftp.ncbi.nih.gov/gene/DATA/GENE_INFO/Mammalia/Homo_sapiens.gene_info.gz
+# GENE INFO
+wget -P server/src/main/resources/ -N http://ftp.ebi.ac.uk/pub/databases/genenames/hgnc/tsv/hgnc_complete_set.txt
 
 # PHENOTYPE HPOA
-if [ -f src/main/resources/phenotype.hpoa ]; then
-        mv src/main/resources/phenotype.hpoa src/main/resources/phenotype.hpoa.old
-fi
-wget -O src/main/resources/phenotype.hpoa http://purl.obolibrary.org/obo/hp/hpoa/phenotype.hpoa
+wget -P server/src/main/resources/ -N https://github.com/obophenotype/human-phenotype-ontology/releases/latest/download/phenotype.hpoa
 
 # EXIT
 exit 0;

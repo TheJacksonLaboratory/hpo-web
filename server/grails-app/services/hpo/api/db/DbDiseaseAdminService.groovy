@@ -9,12 +9,11 @@ import hpo.api.term.DbTerm
 import hpo.api.util.HpoAssociationFactory
 import hpo.api.db.utils.DomainUtilService
 import org.apache.commons.lang3.time.StopWatch
-import org.monarchinitiative.phenol.annotations.base.temporal.Age
 import org.monarchinitiative.phenol.annotations.formats.AnnotationReference
 import org.monarchinitiative.phenol.annotations.formats.hpo.GeneToAssociation
-import org.monarchinitiative.phenol.annotations.formats.hpo.HpoDisease
-import org.monarchinitiative.phenol.annotations.formats.hpo.HpoDiseaseAnnotation
 import org.monarchinitiative.phenol.annotations.formats.hpo.HpoOnset
+import org.monarchinitiative.phenol.annotations.io.hpo.HpoAnnotationLine
+import org.monarchinitiative.phenol.annotations.io.hpo.HpoaDiseaseData
 import org.monarchinitiative.phenol.ontology.data.TermId
 
 import java.sql.SQLException
@@ -27,7 +26,7 @@ class DbDiseaseAdminService {
   SqlUtilsService sqlUtilsService
   DomainUtilService domainUtilService
 
-  final static String INSERT_INTO_DB_ANNOTATION = "INSERT INTO db_annotation(db_disease_id, db_term_id, onset, frequency, sample_size, sources) VALUES(?,?, ?, ?, ?, ?)"
+  final static String INSERT_INTO_DB_ANNOTATION = "INSERT INTO db_annotation(db_disease_id, db_term_id, onset, frequency, sources) VALUES(?,?, ?, ?, ?)"
   final static String INSERT_INTO_DB_GENE_DB_DISEASES = "INSERT INTO db_gene_db_diseases( db_gene_id, db_disease_id) VALUES(?,?)"
 
   void truncateDbDiseases() {
@@ -47,7 +46,7 @@ class DbDiseaseAdminService {
       joinTermToDisease()
       joinDiseasesToGenesWithSql()
     }catch (Exception e){
-      log.error(e.toString())
+      log.error(e.getStackTrace().toString())
       System.exit(2)
     }
   }
@@ -56,12 +55,13 @@ class DbDiseaseAdminService {
     StopWatch stopWatch = new StopWatch()
     stopWatch.start()
     int diseaseCount = 0
-    hpoAssociationFactory.hpoDiseases().hpoDiseases().each { disease ->
+    hpoAssociationFactory.hpoDiseases().each { disease ->
         try{
-          new DbDisease(disease).save()
+          String[] idPieces = disease.id().toString().split(":")
+          new DbDisease(idPieces[0], idPieces[1], disease.name(), disease.id().toString()).save(flush: true)
           diseaseCount++
         }catch (SQLException e){
-          throw e;
+          throw e
         }
       }
     log.info(" *** Loading Diseases ${diseaseCount} -  duration: ${stopWatch} time: ${new Date()} ] ***")
@@ -72,63 +72,44 @@ class DbDiseaseAdminService {
 
     StopWatch stopWatch = new StopWatch()
     stopWatch.start()
-    Set<String> hpoIdWithPrefixNotFoundSet = [] as Set
-    Set<String> diseaseIdNotFoundSet = [] as Set
 
     final Map<String, DbDisease> diseaseIdMap = domainUtilService.loadDbDiseases()
     final Map<String, DbTerm> hpoIdToDbTermMap = domainUtilService.loadHpoIdToDbTermMap()
-    Map<TermId, HpoDisease> hpoDiseases = hpoAssociationFactory.hpoDiseases().diseaseById()
-    Map<TermId, HashSet<TermId>> termToDisease = new HashMap<TermId, HashSet<TermId>>()
+    Integer count = 0;
+    for (HpoaDiseaseData disease: hpoAssociationFactory.hpoDiseases()) {
+        final DbDisease dbDisease = diseaseIdMap.get(disease.id().toString())
+        sqlUtilsService.sql.withBatch(disease.annotations().size(), INSERT_INTO_DB_ANNOTATION ) { BatchingPreparedStatementWrapper ps ->
+        for (HpoAnnotationLine hpoAnnotationLine: (disease.annotations() as List<HpoAnnotationLine>)) {
+          final TermId hpoId = hpoAnnotationLine.id()
+          final DbTerm dbTerm = hpoIdToDbTermMap.get(hpoId.toString())
+          count++
 
-    for (HpoDisease disease: hpoDiseases.values()) {
-      for (HpoDiseaseAnnotation hpoDiseaseAnnotation: disease.annotations()) {
-        TermId hpoId = hpoDiseaseAnnotation.id()
-        termToDisease.computeIfAbsent(hpoId, k -> new HashSet<>()).add(disease.id())
+          ps.addBatch(
+            dbDisease.id as Object,
+            dbTerm.id as Object,
+            hpoAnnotationLine.onset().map(HpoOnset::id).map(TermId::toString).orElse(null),
+            formatFrequencyString(hpoAnnotationLine.frequency(), hpoIdToDbTermMap),
+            formatSources(hpoAnnotationLine.annotationReferences())
+          )
+        }
+        ps.executeBatch()
       }
     }
-
-    Integer count = 0;
-    sqlUtilsService.sql.withBatch(500, INSERT_INTO_DB_ANNOTATION ) { BatchingPreparedStatementWrapper ps ->
-         termToDisease.each((k,vSet) -> {
-           vSet.each((v) -> {
-             final DbTerm dbTerm = hpoIdToDbTermMap.get(k.toString())
-             final DbDisease dbDisease = diseaseIdMap.get(v.toString())
-             if (dbTerm == null) {
-               hpoIdWithPrefixNotFoundSet.add(k.toString())
-             } else if (dbDisease == null) {
-               diseaseIdNotFoundSet.add(v.toString())
-             } else {
-                 count++
-                 HpoDisease hpoDisease = hpoDiseases.get(v)
-                 Optional<HpoDiseaseAnnotation> annotation = hpoDisease.getAnnotation(k)
-                 if(annotation.isPresent()) {
-                   Age ageOfOnset = annotation.get().latestOnset().orElse(null)
-                   HpoOnset onset = null
-                   if (ageOfOnset != null) {
-                     onset = HpoOnset.fromAge(ageOfOnset).orElse(null)
-                   }
-                   ps.addBatch([
-                     dbDisease.id as Object,
-                     dbTerm.id as Object,
-                     onset.toString(),
-                     annotation.get().ratio().frequency(),
-                     annotation.get().ratio().denominator(),
-                     formatSources(annotation.get().references())
-                   ])
-                 }
-               }
-           })
-         })
-          ps.executeBatch()
-        }
-        log.info("hpoIdWithPrefixNotFoundSet.size() : ${hpoIdWithPrefixNotFoundSet.size()} ${new Date()}")
-        log.info("entrezIdNotFoundSet.size() : ${diseaseIdNotFoundSet.size()} ${new Date()}")
-        log.info("**** Joined Disease And Terms - ${count} - duration: ${stopWatch} time: ${new Date()} ****")
+    log.info("**** Finished joining Disease And Terms - ${count} - duration: ${stopWatch} time: ${new Date()} ****")
   }
 
   static String formatSources(List<AnnotationReference> sources){
     final String joinedSources = sources.stream().map(AnnotationReference::id).map(TermId::toString).collect(Collectors.joining(','))
     return  joinedSources.length() > 1 ? joinedSources : "UNKNOWN"
+  }
+
+  static String formatFrequencyString(String frequency, Map<String, DbTerm> termMap){
+    if(frequency.startsWith("HP:")){
+      return termMap.get(frequency).getName()
+    } else if(frequency == "n/a" || frequency == "") {
+      return ""
+    }
+    return frequency
   }
 
   /** Joining Disease and Gene with genes_to_diseases.txt
@@ -168,7 +149,7 @@ class DbDiseaseAdminService {
             }
         }
       }
-      log.info("*** Disease To Gene inserted: ${count} ****");
+      log.info("*** Finish joining Disease To Gene inserted: ${count} ****");
     }
   }
 }

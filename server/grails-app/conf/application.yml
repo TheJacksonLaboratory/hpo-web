@@ -50,8 +50,11 @@ spring:
     groovy:
         template:
             check-template-location: false
-    config:
-      import:  ${HOME}/.grails/hpo_web/application.yml
+#    config:
+#      import:  ${HOME}/.grails/hpo_web/application.yml
+    devtools:
+      restart:
+        enabled: false
 
 management:
   endpoints:
@@ -67,3 +70,59 @@ logging:
   level:
     root: ERROR
     hpo: INFO
+
+dataSource:
+  pooled: true
+  dbCreate: "update"
+  url: "jdbc:mysql://localhost:3306/hpo_web?autoReconnect=true"
+  driverClassName: "com.mysql.jdbc.Driver"
+  username: "root"
+  password: "password"
+  initialSize: 5
+  maxActive: 50
+  minIdle: 5
+  maxIdle: 25
+  maxWait: 10000
+  maxAge: 10 * 60000
+  timeBetweenEvictionRunsMillis: 5000
+  minEvictableIdleTimeMillis: 60000
+  validationQuery: "SELECT 1"
+  validationQueryTimeout: 3
+  validationInterval: 15000
+  testOnBorrow: true
+  testWhileIdle: true
+  testOnReturn: false
+
+environments:
+  gcp:
+    dataSource:
+      dbCreate: "update"
+      url: "jdbc:mysql://localhost:3306/hpo_web"
+      driverClassName: "com.mysql.jdbc.Driver"
+      username: "root"
+      password: "password"
+  production:
+    dataSource:
+     pooled: true
+     dbCreate: "update"
+     url: "jdbc:mysql://localhost:3306/hpo_web?autoReconnect=true"
+     driverClassName: "com.mysql.jdbc.Driver"
+     username: ${HPO_MYSQL_USERNAME}
+     password: ${HPO_MYSQL_PASSWORD}
+     initialSize: 5
+     maxActive: 50
+     minIdle: 5
+     maxIdle: 25
+     maxWait: 10000
+     maxAge: 10 * 60000
+     timeBetweenEvictionRunsMillis: 5000
+     minEvictableIdleTimeMillis: 60000
+     validationQuery: "SELECT 1"
+     validationQueryTimeout: 3
+     validationInterval: 15000
+     testOnBorrow: true
+     testWhileIdle: true
+     testOnReturn: false
+
+
+

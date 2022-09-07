@@ -111,15 +111,15 @@
                       <mat-table [dataSource]="geneDataSource" matSort>
                         <mat-header-row *matHeaderRowDef="geneColumns; sticky: true"></mat-header-row>
                         <mat-row *matRowDef="let row; columns: geneColumns;"></mat-row>
-                        <ng-container matColumnDef="entrezGeneId">
+                        <ng-container matColumnDef="geneId">
                           <mat-header-cell *matHeaderCellDef>Gene Identifier</mat-header-cell>
                           <mat-cell *matCellDef="let row">
-                            <a routerLink="/browse/gene/{{row.entrezGeneId}}">{{row.entrezGeneId}}</a>
+                            <a routerLink="/browse/gene/{{row.geneId}}">{{row.geneId}}</a>
                           </mat-cell>
                         </ng-container>
-                        <ng-container matColumnDef="entrezGeneSymbol">
+                        <ng-container matColumnDef="geneSymbol">
                           <mat-header-cell *matHeaderCellDef>Gene Symbol</mat-header-cell>
-                          <mat-cell *matCellDef="let row">{{row.entrezGeneSymbol}}</mat-cell>
+                          <mat-cell *matCellDef="let row">{{row.geneSymbol}}</mat-cell>
                         </ng-container>
                       </mat-table>
 

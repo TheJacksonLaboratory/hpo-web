@@ -11,13 +11,11 @@ import org.monarchinitiative.phenol.annotations.formats.hpo.category.HpoCategory
 import org.monarchinitiative.phenol.annotations.formats.hpo.category.HpoCategoryMap
 import org.monarchinitiative.phenol.ontology.data.Ontology
 import org.monarchinitiative.phenol.ontology.data.TermId
-import org.monarchinitiative.phenol.ontology.data.Term
 
 @GrailsCompileStatic(TypeCheckingMode.SKIP)
 class HpoDiseaseDetailsService {
 
   Ontology hpoOntology
-  HpoAssociationFactory hpoAssociationFactory
 
   Map searchDisease(String query) {
     Map resultMap = ["disease": '', "termAssoc": [], "geneAssoc": [], "catTerms":[]]
@@ -55,7 +53,7 @@ class HpoDiseaseDetailsService {
 
     HpoCategoryMap hpoCatMap = new HpoCategoryMap()
 
-    Set<DbTerm> dbTermList  = getTermsAssociatedByDisease(disease)
+    def dbTermList  = getTermsAssociatedByDisease(disease)
     dbTermList.each {dbTerm ->
       final TermId termId = TermId.of(dbTerm.getOntologyId())
       hpoCatMap.addAnnotatedTerm(termId, hpoOntology)
@@ -64,13 +62,14 @@ class HpoDiseaseDetailsService {
     final List<HpoCategory> hpoCatList = hpoCatMap.getActiveCategoryList()
     final List<Map> catList = hpoCatList.collect { cat ->
       Map categoryTermMap = [:]
-      cat.getNumberOfAnnotations()
       List<AnnotationResult> catAnnotationResult = []
       List<TermId> termIdList = cat.getAnnotatingTermIds()
 
-      termIdList.each { tId ->
-        Term term = hpoOntology.getTermMap().get(tId)
-        catAnnotationResult << buildAnnotationResult(disease, term)
+
+      termIdList.unique().each { termId ->
+        dbTermList.find(it -> it.ontologyId == termId.toString()).each { dbTerm ->
+          catAnnotationResult.addAll(buildAnnotationResult(disease, dbTerm))
+        }
       }
 
       categoryTermMap.put("catLabel", cat.getLabel())
@@ -81,14 +80,19 @@ class HpoDiseaseDetailsService {
     return catList
   }
 
-  AnnotationResult buildAnnotationResult(DbDisease disease, Term term){
-    DbTerm dbTerm = DbTerm.findByOntologyId(term.getId().toString())
-    DbAnnotation annotation = DbAnnotation.findWhere(dbTerm: dbTerm, dbDisease: disease)
-    if(annotation == null){
-      // Mode of Inheritance Term.
-      return new AnnotationResult(dbTerm, "-", "-", disease.getDiseaseId())
+  List<AnnotationResult> buildAnnotationResult(DbDisease disease, DbTerm dbTerm){
+    List<DbAnnotation> annotation = DbAnnotation.findAllWhere(dbTerm: dbTerm, dbDisease: disease)
+    return annotation.collect {
+      new AnnotationResult(it.getDbTerm(), getOnsetLabel(it.getOnset()), it.getFrequency(), it.getSources())
     }
-    return new AnnotationResult(annotation.getDbTerm(), annotation.getOnset(), annotation.getFrequency(), annotation.getSources())
+  }
+
+  def getOnsetLabel(String onset){
+    if(onset == null || onset == ""){
+      return ""
+    }
+
+    return hpoOntology.getTermLabel(TermId.of(onset)).get()
   }
 
 }

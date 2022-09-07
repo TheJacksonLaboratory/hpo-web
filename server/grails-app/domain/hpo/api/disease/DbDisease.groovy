@@ -4,14 +4,16 @@ import grails.compiler.GrailsCompileStatic
 import groovy.transform.TypeCheckingMode
 import hpo.api.gene.DbGene
 import org.monarchinitiative.phenol.annotations.formats.hpo.HpoDisease
+import org.monarchinitiative.phenol.ontology.data.TermId
 
 @GrailsCompileStatic(TypeCheckingMode.SKIP)
 class DbDisease {
 
   String db
   String dbId
-  String diseaseName
   String diseaseId
+  String diseaseName
+
 
   static constraints = {
     db()
@@ -30,11 +32,11 @@ class DbDisease {
 
   DbDisease() {}
 
-  DbDisease(HpoDisease disease) {
-    db = disease.id().getPrefix()
-    dbId = disease.id().getId()
-    diseaseName = disease.diseaseName()
-    diseaseId = disease.id().toString()
+  DbDisease(db, dbId, String diseaseName, String diseaseId) {
+    this.db = db
+    this.dbId = dbId
+    this.diseaseName = diseaseName
+    this.diseaseId = diseaseId
   }
 
 }

@@ -7,8 +7,7 @@ class DbAnnotation {
 
     DbTerm dbTerm
     DbDisease dbDisease
-    float frequency
-    int sampleSize
+    String frequency
     String onset
     String sources
 
@@ -17,7 +16,6 @@ class DbAnnotation {
       dbDisease()
       onset(nullable:true)
       frequency()
-      sampleSize()
       sources()
     }
 
@@ -27,11 +25,10 @@ class DbAnnotation {
 
     static hasMany = [dbTerm: DbTerm, dbDisease: DbDisease]
 
-    DbAnnotation(term, disease, frequency, sampleSize, onset, sources){
+    DbAnnotation(term, disease, frequency, onset, sources){
       this.dbTerm = term
       this.dbDisease = disease
       this.frequency = frequency
-      this.sampleSize = sampleSize
       this.onset = onset
       this.sources = sources
     }
