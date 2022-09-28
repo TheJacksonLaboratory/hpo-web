@@ -8,7 +8,6 @@ class DbMaxoSynonym {
     synonym()
   }
   static mapping = {
-    synonym(type: 'text')
     dbMaxo fetch: 'join'
     version false
   }
