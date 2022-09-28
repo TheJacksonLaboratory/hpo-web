@@ -32,7 +32,7 @@ jobs:
       - name: Export our database to a sql file
         run: |
           echo "[mysqldump]\npassword=password" > mysql.cnf
-          mysqldump --defaults-extra-file=mysql.cnf -u root --opt hpo_web > hpo_web.sql
+          mysqldump -h 127.0.0.1 --defaults-extra-file=mysql.cnf -u root --opt hpo_web > hpo_web.sql
 
       - name: Copy sql file to gcp bucket
         uses: actions-hub/gcloud@master
