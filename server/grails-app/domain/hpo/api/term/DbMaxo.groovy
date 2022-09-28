@@ -27,7 +27,7 @@ class DbMaxo {
     name = term.name
     definition = term.definition
     comment = term.comment
-    ontologyId = term.id.toString().replace('OBO:', '')
+    ontologyId = term.id().toString().replace('OBO:', '')
     isObsolete = term.isObsolete()
   }
 }

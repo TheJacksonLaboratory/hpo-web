@@ -97,7 +97,7 @@ environments:
   gcp:
     dataSource:
       dbCreate: "update"
-      url: "jdbc:mysql://localhost:3306/hpo_web?useUnicode=true&characterEncoding=UTF-8"
+      url: "jdbc:mysql://localhost:3306/hpo_web"
       driverClassName: "com.mysql.jdbc.Driver"
       username: "root"
       password: "password"
