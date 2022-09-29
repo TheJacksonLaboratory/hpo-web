@@ -44,7 +44,7 @@ jobs:
           PROJECT_ID: jax-robinson-hpo-01
           APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
         with:
-          args: cp hpo_web.sql gs://jax-robinson-hpo-01-project-data/
+          args: cp $HPO_RELEASE_SQL_FILENAME gs://jax-robinson-hpo-01-project-data/
           cli: gsutil
       - name: gcloud import cloud sql database
         uses: actions-hub/gcloud@master
