@@ -23,6 +23,10 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
+      
+      - name: "Set flag from Commit"
+        run: |
+            grep "version" server/build.gradle | tr '"' ' ' | sed -n -e 's/version  //p' >> $HPO_RELEASE_VERSION
 
 
       - name: Load our database with the new data
@@ -31,7 +35,7 @@ jobs:
       # TODO: Get version from release being run
       - name: Export our database to a sql file
         run: |
-          mysqldump --column-statistics=0 -h 127.0.0.1 -u root --password=password --opt hpo_web > hpo_web.sql
+          mysqldump --column-statistics=0 -h 127.0.0.1 -u root --password=password --opt hpo_web > hpo_web-$HPO_RELEASE_VERSION.sql
 
       - name: Copy sql file to gcp bucket
         uses: actions-hub/gcloud@master
@@ -41,3 +45,11 @@ jobs:
         with:
           args: cp hpo_web.sql gs://jax-robinson-hpo-01-project-data/
           cli: gsutil
+      - name: gcloud import cloud sql database
+        uses: actions-hub/gcloud@master
+        env:
+          PROJECT_ID: jax-robinson-hpo-01
+          APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+        with:
+          args: sql import sql hpo-web gs://jax-robinson-hpo-01-project-data/hpo_web-$HPO_RELEASE_VERSION.sql --database=hpo
+          cli: gcloud
