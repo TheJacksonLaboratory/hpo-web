@@ -24,18 +24,19 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
       
-      - name: "Set flag from Commit"
-        run: |
-            echo "HPO_RELEASE_VERSION=$(grep "version" server/build.gradle | tr '"' ' ' | sed -n -e 's/version  //p')" >> $GITHUB_ENV
-
-
+      - name: "Set hpo release version"
+        run: echo "HPO_RELEASE_VERSION=$(grep "version" server/build.gradle | tr '"' ' ' | sed -n -e 's/version  //p')" >> $GITHUB_ENV
+      - name: "Set hpo sql file name"
+        run: echo "HPO_RELEASE_SQL_FILENAME=hpo_web-$HPO_RELEASE_VERSION.sql" >> $GITHUB_ENV
+      - name: "Set gcp sql location"
+        run: echo "HPO_RELEASE_SQL_GCP_LOCATION=gs://jax-robinson-hpo-01-project-data/$HPO_RELEASE_SQL_FILENAME" >> $GITHUB_ENV
       - name: Load our database with the new data
         run: ./gradlew runCommand -Dgrails.env="gcp" -Pargs="load-hpo-db"
 
       # TODO: Get version from release being run
       - name: Export our database to a sql file
         run: |
-          mysqldump --column-statistics=0 -h 127.0.0.1 -u root --password=password --opt hpo_web > hpo_web-$HPO_RELEASE_VERSION.sql
+          mysqldump --column-statistics=0 -h 127.0.0.1 -u root --password=password --opt hpo_web > $HPO_RELEASE_SQL_FILENAME
 
       - name: Copy sql file to gcp bucket
         uses: actions-hub/gcloud@master
@@ -51,5 +52,5 @@ jobs:
           PROJECT_ID: jax-robinson-hpo-01
           APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
         with:
-          args: sql import sql hpo-web gs://jax-robinson-hpo-01-project-data/hpo_web-$HPO_RELEASE_VERSION.sql --database=hpo
+          args: sql import sql hpo-web $HPO_RELEASE_SQL_GCP_LOCATION --database=hpo
           cli: gcloud
