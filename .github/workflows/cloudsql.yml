@@ -26,7 +26,7 @@ jobs:
       
       - name: "Set flag from Commit"
         run: |
-            echo "HPO_RELEASE_VERSION=$(grep "version" server/build.gradle | tr '"' ' ' | sed -n -e 's/version  //p')" >> $$GITHUB_ENV
+            echo "HPO_RELEASE_VERSION=$(grep "version" server/build.gradle | tr '"' ' ' | sed -n -e 's/version  //p')" >> $GITHUB_ENV
 
 
       - name: Load our database with the new data
