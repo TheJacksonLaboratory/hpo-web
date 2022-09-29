@@ -25,7 +25,7 @@ jobs:
       - uses: actions/checkout@v3
       
       - name: "Set hpo release version"
-        run: echo "HPO_RELEASE_VERSION=$(grep "version" server/build.gradle | tr '"' ' ' | sed -n -e 's/version  //p')" >> $GITHUB_ENV
+        run: echo "HPO_RELEASE_VERSION=$(grep "version" server/build.gradle | tr '"' ' ' | sed -n -e 's/version  //p' | xargs)" >> $GITHUB_ENV
       - name: "Set hpo sql file name"
         run: echo "HPO_RELEASE_SQL_FILENAME=hpo_web-$HPO_RELEASE_VERSION.sql" >> $GITHUB_ENV
       - name: "Set gcp sql location"
