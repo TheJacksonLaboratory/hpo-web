@@ -31,7 +31,7 @@ jobs:
       # TODO: Get version from release being run
       - name: Export our database to a sql file
         run: |
-          mysqldump -h 127.0.0.1 -u root --password=password --opt hpo_web > hpo_web.sql
+          mysqldump --column-statistics=0 -h 127.0.0.1 -u root --password=password --opt hpo_web > hpo_web.sql
 
       - name: Copy sql file to gcp bucket
         uses: actions-hub/gcloud@master
