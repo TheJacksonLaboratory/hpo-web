@@ -2,11 +2,6 @@ package hpo.api.disease
 
 
 import grails.testing.gorm.DomainUnitTest
-import org.apache.commons.lang.NullArgumentException
-import org.monarchinitiative.phenol.annotations.formats.hpo.HpoAnnotation
-import org.monarchinitiative.phenol.annotations.formats.hpo.HpoDisease
-import org.monarchinitiative.phenol.annotations.formats.hpo.HpoOnset;
-import org.monarchinitiative.phenol.ontology.data.TermId
 import spock.lang.Specification
 import spock.lang.Unroll
 

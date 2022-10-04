@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CommunityComponent } from './community.component';
+import { TeamService } from '../../shared/team/team.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('CommunityComponent', () => {
   let component: CommunityComponent;
@@ -8,7 +10,9 @@ describe('CommunityComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CommunityComponent ]
+      imports: [HttpClientTestingModule],
+      declarations: [ CommunityComponent ],
+      providers: [TeamService]
     })
     .compileComponents();
   });

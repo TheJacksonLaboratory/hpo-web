@@ -48,9 +48,9 @@ class HpoDiseaseDetailsServiceUnitSpec extends Specification implements ServiceU
     Ontology hpoOntology = new OntologyFactory().getHpoOntology()
     service.hpoOntology = hpoOntology
     DbDisease dbDisease = buildMockDisease()
-    List<Term> terms = buildMockTerms(["HP:0001597","HP:0000982"])
+    List<Term> terms = buildMockTerms(["HP:0001868","HP:0030447"])
     terms.each{
-      new DbAnnotation(new DbTerm(it), dbDisease, 0f, 0, "NA", []).save()
+      new DbAnnotation(new DbTerm(it), dbDisease, "", "", []).save()
     }
     dbDisease.save()
 
@@ -63,7 +63,7 @@ class HpoDiseaseDetailsServiceUnitSpec extends Specification implements ServiceU
     where:
     query           | expected                      | desc
     null            | []                            | 'nothing'
-    "ORPHA:79501"   | ["HP:0001597","HP:0000982"]   | 'disease by id'
+    "ORPHA:79501"   | ["HP:0001868","HP:0030447"]   | 'disease by id'
     "XXXXXXXXXXX"   | []                            | 'invalid by id'
 
   }
@@ -75,10 +75,10 @@ class HpoDiseaseDetailsServiceUnitSpec extends Specification implements ServiceU
     service.hpoOntology = hpoOntology
     DbDisease dbDisease1 = buildMockDisease()
 
-    List<Term> terms = buildMockTerms(["HP:0001597","HP:0000982"])
+    List<Term> terms = buildMockTerms(["HP:0001868","HP:0030447"])
     List<AnnotationResult> annotationResultList = []
     terms.each {
-      new DbAnnotation(new DbTerm(it), dbDisease1, 0f, 0, "NA", []).save()
+      new DbAnnotation(new DbTerm(it), dbDisease1, "0", "", []).save()
     }
     dbDisease1.save()
 
@@ -92,7 +92,7 @@ class HpoDiseaseDetailsServiceUnitSpec extends Specification implements ServiceU
     where:
     query           | expectedLabels            | expectedTermLength      | desc
     null            | []                      | 0                    | 'nothing'
-    "ORPHA:79501"   | ['Limbs', 'Skin, Hair, and Nails' ] | 2                       | 'disease by id'
+    "ORPHA:79501"   | ['Limbs', 'Neoplasm' ] | 2                       | 'disease by id'
     "XXXXXXXXXXX"   | []                       | 0                    | 'invalid by id'
 
   }

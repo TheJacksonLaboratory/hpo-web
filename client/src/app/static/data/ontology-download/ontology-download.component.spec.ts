@@ -1,17 +1,19 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {OntologyDownloadComponent} from './ontology-download.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('OntologyComponent', () => {
   let component: OntologyDownloadComponent;
   let fixture: ComponentFixture<OntologyDownloadComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(( ) => {
     TestBed.configureTestingModule({
-      declarations: [OntologyDownloadComponent]
+      declarations: [OntologyDownloadComponent],
+      imports: [HttpClientTestingModule]
     })
       .compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(OntologyDownloadComponent);

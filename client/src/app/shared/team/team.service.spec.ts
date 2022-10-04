@@ -3,19 +3,28 @@ import {TeamService} from './team.service';
 import {HttpClientTestingModule, HttpTestingController} from "@angular/common/http/testing";
 import {environment} from "../../../environments/environment";
 
-describe('ContributorsService', () => {
+describe('TeamService', () => {
+  let httpTestingController: HttpTestingController;
+  let service: TeamService;
   beforeEach(() => {
+
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
       providers: [TeamService]
     });
+    httpTestingController = TestBed.inject(HttpTestingController);
+    service = TestBed.inject(TeamService);
   });
 
-  it('should be created', inject([TeamService], (service: TeamService) => {
-    expect(service).toBeTruthy();
-  }));
+  afterEach(() => {
+    httpTestingController.verify();
+  });
 
-  it('should return contributors', inject([TeamService, HttpTestingController], (service: TeamService, httpMock) => {
+  it('should be created', () => {
+    expect(service).toBeTruthy();
+  });
+
+  it('should return contributors', () => {
 
     service.contributors = [];
     service.getContributors().subscribe(contributors => {
@@ -25,7 +34,7 @@ describe('ContributorsService', () => {
       expect(contributors[5].location).toEqual("Testing Desk 6");
     });
 
-    const request = httpMock.expectOne(environment.HPO_CONTRIBUTORS_URL);
+    const request = httpTestingController.expectOne(environment.HPO_CONTRIBUTORS_URL);
     expect(request.request.method).toEqual('GET');
     let fakeResponse =
       "Tester,One,Testing Desk 1\n" +
@@ -35,7 +44,6 @@ describe('ContributorsService', () => {
       "Tester,Five,Testing Desk 5\n" +
       "Tester,Six,Testing Desk 6";
     request.flush(fakeResponse);
-    httpMock.verify();
-  }));
+  });
 
 });

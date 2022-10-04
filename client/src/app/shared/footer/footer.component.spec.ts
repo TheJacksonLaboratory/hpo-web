@@ -1,17 +1,20 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import {FooterComponent} from './footer.component';
+import { FooterComponent } from './footer.component';
+import { UtilityService } from '../utility/utility.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('FooterComponent', () => {
   let component: FooterComponent;
   let fixture: ComponentFixture<FooterComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [FooterComponent]
-    })
-      .compileComponents();
-  }));
+      declarations: [FooterComponent],
+      imports: [HttpClientTestingModule],
+      providers: [UtilityService]
+    });
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(FooterComponent);

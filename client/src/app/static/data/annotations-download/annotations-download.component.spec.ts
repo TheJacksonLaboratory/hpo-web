@@ -1,6 +1,7 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {AnnotationsDownloadComponent} from './annotations-download.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('AnnotationsComponent', () => {
   let component: AnnotationsDownloadComponent;
@@ -8,6 +9,7 @@ describe('AnnotationsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
       declarations: [AnnotationsDownloadComponent]
     })
       .compileComponents();

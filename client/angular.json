@@ -102,8 +102,7 @@
             "tsConfig": "src/tsconfig.spec.json",
             "scripts": [],
             "styles": [
-              "src/styles.css",
-              "src/assets/themes/jax-palette.scss"
+              "src/styles.scss"
             ],
             "assets": [
               "src/assets",
