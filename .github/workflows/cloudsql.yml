@@ -49,7 +49,7 @@ jobs:
         uses: actions-hub/gcloud@master
         env:
           PROJECT_ID: jax-robinson-hpo-01
-          APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_CLOUD_SQL_SERVICE_CREDENTIALS }}
+          APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
         with:
           args: sql import sql hpo-web $HPO_RELEASE_SQL_GCP_LOCATION --database=hpo -q
           cli: gcloud
