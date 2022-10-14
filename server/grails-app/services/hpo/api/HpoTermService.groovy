@@ -1,13 +1,12 @@
 package hpo.api
 
-import groovy.transform.TypeCheckingMode
+
 import hpo.api.util.HpoUtilities
 import org.monarchinitiative.phenol.ontology.algo.OntologyTerms
 import org.monarchinitiative.phenol.ontology.data.Ontology
 import org.monarchinitiative.phenol.ontology.data.Term
 import org.monarchinitiative.phenol.ontology.data.TermId
 
-import grails.compiler.GrailsCompileStatic
 import groovy.sql.GroovyRowResult
 import hpo.api.db.utils.SqlUtilsService
 import hpo.api.disease.DbDisease
@@ -15,7 +14,6 @@ import hpo.api.gene.DbGene
 import hpo.api.term.DbTerm
 import org.apache.commons.lang3.time.StopWatch
 
-@GrailsCompileStatic(TypeCheckingMode.SKIP)
 class HpoTermService {
 
   Ontology hpoOntology

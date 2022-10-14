@@ -26,7 +26,7 @@ class LoadHpoDbCommand implements GrailsApplicationCommand {
 
       try{
         appCtx.dbTermAdminService.loadDbTerms() 			// Load Terms Table
-        //appCtx.dbTermAdminService.loadDbMaxo()        // Load Maxo Table
+        appCtx.dbTermAdminService.loadDbMaxo()        // Load Maxo Table
         appCtx.dbGeneAdminService.executeGeneSchemaLoad() 			// Load Genes Table
         appCtx.dbDiseaseAdminService.executeDiseaseSchemaLoad() 	 		     // Load Diseases
       }catch(Exception e){

@@ -13,14 +13,9 @@ class DbTermPath {
   String pathIds
   Integer pathLength
 
-  static constraints = {
-    pathNames()
-    pathIds()
-    pathLength()
-  }
   static mapping = {
-    pathNames(type: 'text')
-    pathIds(type: 'text')
+    pathNames type: 'text'
+    pathIds type: 'text'
     version false
   }
   static belongsTo = [dbTerm: DbTerm]

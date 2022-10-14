@@ -22,20 +22,14 @@ class DbTerm {
 
 
   static constraints = {
-    ontologyId()
-    name()
-    isObsolete()
-    definition(nullable: true)
-    comment(nullable: true)
-    numberOfChildren(nullable: true)
+    definition nullable: true
+    comment nullable: true
+    numberOfChildren nullable: true
   }
   static mapping = {
-    ontologyId()
-    name(index: 'name_index')
-    isObsolete()
-    definition(type: 'text')
-    comment(type: 'text')
-    numberOfChildren()
+    name index: 'name_index'
+    definition type: 'text'
+    comment type: 'text'
     version false
   }
 
@@ -58,7 +52,7 @@ class DbTerm {
     name = term.name
     definition = term.definition
     comment = term.comment
-    ontologyId = term.id.toString()
+    ontologyId = term.id().toString()
     isObsolete = term.isObsolete()
   }
 

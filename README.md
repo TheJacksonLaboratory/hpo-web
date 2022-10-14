@@ -1,9 +1,6 @@
 # Human Phenotype Ontology (HPO) Web App
 
 The following guide provides the steps for an out-of-the-box setup for the Human Phenotype Ontology (HPO) Web application with minimum requirements for a local development environment. 
-                    
-This guide uses the H2 database which is a grails out-of-the-box in-memory or file-base database for quick setup of small-low-volume projects.  
-                    
 
 ## Requirements
 
@@ -34,7 +31,7 @@ This guide uses the H2 database which is a grails out-of-the-box in-memory or fi
 
 + Build the application with a gradle task.
 
-        ./gradlew build -Dgrails.env="test" -DchromeHeadless=true
+        ./gradlew build -DchromeHeadless=true
         
         E.g.
         ...
@@ -51,7 +48,7 @@ This guide uses the H2 database which is a grails out-of-the-box in-memory or fi
   
 + War creation with a gradle task.
 
-      ./gradlew clean war -DwarName="hpo-web-someversion.war"
+      ./gradlew clean war -Dgrails.env=[stage, gcp, prod]>
        
       Will output a war to ./build/libs/
 
@@ -98,20 +95,4 @@ This guide uses the H2 database which is a grails out-of-the-box in-memory or fi
 + To execute functional testing with chrome headless browser, run
   
       ./gradlew integrationTest -DchromeHeadless
-    
-## Other
-+ To see possible gradle tasks, execute:
-  
-      ./gradlew tasks
-      
-+ To delete the previous build, execute:
 
-      ./gradlew clean
-      
-
-+ To build with chrome headless for functional tests, execute:
-
-      ./gradlew clean build -DchromeHeadless=true
-
-+ If you would like to use a local instance of mysql please read conf/application.groovy
-l

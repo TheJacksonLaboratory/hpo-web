@@ -1,18 +1,16 @@
 package hpo.api
 
-import grails.compiler.GrailsCompileStatic
-import groovy.transform.TypeCheckingMode
+import groovy.transform.CompileDynamic
 import hpo.api.annotation.DbAnnotation
 import hpo.api.disease.DbDisease
 import hpo.api.model.AnnotationResult
 import hpo.api.term.DbTerm
-import hpo.api.util.HpoAssociationFactory
 import org.monarchinitiative.phenol.annotations.formats.hpo.category.HpoCategory
 import org.monarchinitiative.phenol.annotations.formats.hpo.category.HpoCategoryMap
 import org.monarchinitiative.phenol.ontology.data.Ontology
 import org.monarchinitiative.phenol.ontology.data.TermId
 
-@GrailsCompileStatic(TypeCheckingMode.SKIP)
+@CompileDynamic
 class HpoDiseaseDetailsService {
 
   Ontology hpoOntology
@@ -48,7 +46,7 @@ class HpoDiseaseDetailsService {
    *
    * TODO: Rework, simplify into using just a map
    */
-  @GrailsCompileStatic(TypeCheckingMode.SKIP)
+
   private List<Map> getDiseaseCategoriesWithTerms(DbDisease disease){
 
     HpoCategoryMap hpoCatMap = new HpoCategoryMap()

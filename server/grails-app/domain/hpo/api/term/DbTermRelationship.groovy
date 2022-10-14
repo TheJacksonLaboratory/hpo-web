@@ -10,11 +10,6 @@ class DbTermRelationship implements Serializable{
 
     static belongsTo = DbTerm
 
-    static constraints = {
-      termParent()
-      termChild()
-    }
-
     static mapping = {
       version false
     }

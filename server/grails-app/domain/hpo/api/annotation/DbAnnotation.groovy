@@ -12,11 +12,7 @@ class DbAnnotation {
     String sources
 
     static constraints = {
-      dbTerm()
-      dbDisease()
-      onset(nullable:true)
-      frequency()
-      sources()
+      onset nullable:true
     }
 
     static mapping = {

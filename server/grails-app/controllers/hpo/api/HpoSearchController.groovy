@@ -10,7 +10,7 @@ class HpoSearchController {
   def searchAll(String q, Integer offset, Integer max, String category){
     if (!offset) offset = 0
     if (!max)  max = 10
-    render(view: 'searchAll', model: [resultMap: searchService.searchAll(q, offset, max, category)])
+    render(view: '/hpoSearch/searchAll', model: [resultMap: searchService.searchAll(q, offset, max, category)])
   }
 
   def descendantSearch(String s, String q){

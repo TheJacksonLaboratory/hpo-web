@@ -11,8 +11,8 @@ class DbMaxo {
     boolean isObsolete
 
     static constraints = {
-      definition(nullable:  true)
-      comment(nullable: true)
+      definition nullable:  true
+      comment nullable: true
     }
 
     static mapping = {

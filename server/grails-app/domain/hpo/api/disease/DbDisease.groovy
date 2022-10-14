@@ -1,12 +1,9 @@
 package hpo.api.disease
 
-import grails.compiler.GrailsCompileStatic
-import groovy.transform.TypeCheckingMode
+import groovy.transform.CompileDynamic
 import hpo.api.gene.DbGene
-import org.monarchinitiative.phenol.annotations.formats.hpo.HpoDisease
-import org.monarchinitiative.phenol.ontology.data.TermId
 
-@GrailsCompileStatic(TypeCheckingMode.SKIP)
+@CompileDynamic
 class DbDisease {
 
   String db
@@ -16,17 +13,13 @@ class DbDisease {
 
 
   static constraints = {
-    db()
-    dbId()
-    diseaseName()
-    diseaseId(unique: true)
+    diseaseId unique: true
   }
   static mapping = {
-    diseaseName(type: 'text')
+    diseaseName type: 'text'
     version false
   }
 
-  Set<DbGene> dbGenes = [] as Set<DbGene>
   static hasMany = [dbGenes: DbGene]
   static belongsTo = [DbGene]
 

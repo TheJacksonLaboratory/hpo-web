@@ -4,9 +4,7 @@ class DbMaxoSynonym {
 
   DbMaxo dbMaxo
   String synonym
-  static constraints = {
-    synonym()
-  }
+
   static mapping = {
     dbMaxo fetch: 'join'
     version false

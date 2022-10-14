@@ -1,8 +1,7 @@
 package hpo.api
 
-import grails.compiler.GrailsCompileStatic
+
 import groovy.sql.GroovyRowResult
-import groovy.transform.TypeCheckingMode
 import hpo.api.db.utils.SqlUtilsService
 import hpo.api.disease.DbDisease
 import hpo.api.gene.DbGene
@@ -16,7 +15,7 @@ import org.grails.datastore.mapping.query.api.BuildableCriteria
 import hpo.api.model.SearchTermResult
 import org.monarchinitiative.phenol.ontology.data.Ontology
 
-@GrailsCompileStatic
+
 class SearchService {
 
   SqlUtilsService sqlUtilsService
@@ -68,7 +67,6 @@ class SearchService {
    * @param maxIn
    * @return Map (total count, data<result set list>, offset)
    */
-  @GrailsCompileStatic(TypeCheckingMode.SKIP)
   private Map searchDiseasesAll(List<String> terms , int offsetIn = 0, int maxIn = 10) {
 
     final List<DbDisease> diseaseResults = []
@@ -139,7 +137,6 @@ class SearchService {
    * @param maxIn
    * @return Map (total count, data<result set list>, offset)
    */
-  @GrailsCompileStatic(TypeCheckingMode.SKIP)
   Map searchTermAll(List<String> terms, int offsetIn = 0, int maxIn = 10) {
 
 
@@ -189,7 +186,6 @@ class SearchService {
    * @param limit
    */
 
-  @GrailsCompileStatic(TypeCheckingMode.SKIP)
   static protected filterAndUnique(List results, int limit){
     def uniqueMap = [:]
     def totalCount = 0
@@ -224,7 +220,6 @@ class SearchService {
    * @param params
    * @return Sql
    */
-  @GrailsCompileStatic(TypeCheckingMode.SKIP)
   static protected buildSearchTermsAndSynonymsPS(List<String> terms, termMap, params){
     String synonymLikeSQL = ""
     String termLikeSQL = ""
@@ -261,7 +256,6 @@ class SearchService {
    * @param maxIn
    * @return Map (total count, data<result set list>, offset)
    */
-  @GrailsCompileStatic(TypeCheckingMode.SKIP)
   private Map searchGenesAll(List<String> terms, int offsetIn = 0, int maxIn = 10) {
 
     final List<DbTerm> geneResults = []
@@ -327,7 +321,6 @@ class SearchService {
     }
   }
 
-  @GrailsCompileStatic
   private boolean isMaxoId(String maxoId){
     if ( maxoId.startsWith("MAXO:") || maxoId.startsWith("MAXO_") || maxoId.isNumber()){
       return true
@@ -335,7 +328,6 @@ class SearchService {
     return false
   }
 
-  @GrailsCompileStatic
   private String convergeMaxoId(String maxoId){
     return maxoId.replace("_", ":")
   }

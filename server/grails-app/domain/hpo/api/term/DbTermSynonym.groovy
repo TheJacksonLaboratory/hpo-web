@@ -5,9 +5,6 @@ class DbTermSynonym {
   DbTerm dbTerm
   String synonym
 
-  static constraints = {
-    synonym()
-  }
   static mapping = {
     version false
   }
