@@ -63,7 +63,6 @@ class HpoTermService {
       }
     }
 
-    log.info("Associated gene count = " + resultMap.geneCount  + " for term " + trimmedQ)
     return resultMap
   }
   /**
@@ -89,8 +88,6 @@ class HpoTermService {
         resultMap.diseaseCount = queryResults.diseaseCount
       }
     }
-
-    log.info("Associated disease count = " + resultMap.diseaseCount  + " for term " + trimmedQ)
     return resultMap
   }
 
@@ -111,7 +108,6 @@ class HpoTermService {
       descendantTerms = DbTerm.findAllByOntologyIdInList(termIdList)
     }
 
-    log.info("Find term descendant duration = " + stopWatch)
     descendantTerms
   }
 
@@ -137,7 +133,6 @@ class HpoTermService {
     }
     resultMap.diseaseList = diseaseList
 
-    log.info("Find associated diseases duration = " + stopWatch)
     return resultMap
   }
 
@@ -216,7 +211,6 @@ class HpoTermService {
     }
 
     resultMap.geneList = geneList
-    log.info("Find associated genes duration = " + stopWatch)
     resultMap
   }
 

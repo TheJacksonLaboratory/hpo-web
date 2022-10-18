@@ -32,12 +32,6 @@ grails:
       rss: 'application/rss+xml'
       text: 'text/plain'
       all: '*/*'
-
-
-  urlmapping:
-    cache:
-      maxsize: 1000
-
   cors:
     enabled: true
 info:
@@ -57,8 +51,7 @@ spring:
         enabled: false
 
 management:
-  endpoints:
-    enabled-by-default: true
+  enabled-by-default: true
 
 hibernate:
     cache:
@@ -69,15 +62,9 @@ hibernate:
 logging:
   level:
     root: ERROR
-    hpo: INFO
+    hpo: DEBUG
 
 dataSource:
-  pooled: true
-  dbCreate: "update"
-  url: "jdbc:mysql://localhost:3306/hpo_web?autoReconnect=true"
-  driverClassName: "com.mysql.jdbc.Driver"
-  username: "root"
-  password: "password"
   initialSize: 5
   maxActive: 50
   minIdle: 5
@@ -92,13 +79,28 @@ dataSource:
   testOnBorrow: true
   testWhileIdle: true
   testOnReturn: false
+  driverClassName: "com.mysql.jdbc.Driver"
 
 environments:
+  development:
+    dataSource:
+      pooled: true
+      dbCreate: "update"
+      url: "jdbc:mysql://localhost:3306/hpo_web?autoReconnect=true"
+      username: "root"
+      password: "password"
+  stage:
+    dataSource:
+      pooled: true
+      dbCreate: "update"
+      url: "jdbc:mysql://localhost:3306/hpo_web?autoReconnect=true"
+      username: "root"
+      password: "password"
+
   gcp:
     dataSource:
       dbCreate: "update"
       url: "jdbc:mysql://localhost:3306/hpo_web"
-      driverClassName: "com.mysql.jdbc.Driver"
       username: "root"
       password: "password"
   production:
@@ -106,23 +108,8 @@ environments:
      pooled: true
      dbCreate: "update"
      url: "jdbc:mysql://localhost:3306/hpo_web?autoReconnect=true"
-     driverClassName: "com.mysql.jdbc.Driver"
      username: ${HPO_MYSQL_USERNAME}
      password: ${HPO_MYSQL_PASSWORD}
-     initialSize: 5
-     maxActive: 50
-     minIdle: 5
-     maxIdle: 25
-     maxWait: 10000
-     maxAge: 10 * 60000
-     timeBetweenEvictionRunsMillis: 5000
-     minEvictableIdleTimeMillis: 60000
-     validationQuery: "SELECT 1"
-     validationQueryTimeout: 3
-     validationInterval: 15000
-     testOnBorrow: true
-     testWhileIdle: true
-     testOnReturn: false
 
 
 

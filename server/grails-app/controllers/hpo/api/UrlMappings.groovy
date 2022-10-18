@@ -18,6 +18,7 @@ class UrlMappings {
 
     "/"(uri: '/app/index.html')
     "/app/"(uri: '/app/index.html')
+    "/app/**"(uri: '/app/index.html')
     "/app/*.js"(controller: 'contentTypeAsset', action:'setCharEncoding') {
      contentType = 'text/javascript; charset=UTF-8'
     }
@@ -34,8 +35,6 @@ class UrlMappings {
      contentType = 'text/css; charset=UTF-8'
    }
 
-    "/app/**"(uri: '/app/index.html')
-
     "/api/hpo/search"(controller: 'hpoSearch', action: 'searchAll')
     "/api/hpo/search/descendants"(controller: 'hpoSearch', action: 'descendantSearch')
     "/api/hpo/term/$id"(controller: 'hpoTerm', action: 'searchTerm')
@@ -51,7 +50,7 @@ class UrlMappings {
     "/api/hpo/download/gene"(controller: 'hpoExcel', action: 'downloadGeneAnnotation')
 
     "/api/maxo/search"(controller: "maxoSearch", action: 'searchMaxo')
-    "/api/hpo/docs"(uri:"/static/doc.html")
+    "/api/hpo/docs"(uri:"/doc.html")
 
 
     "500"(view: '/error')
