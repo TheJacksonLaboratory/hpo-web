@@ -60,7 +60,7 @@
                          selectedIndex="0">
 
             <!-- Widget tab -->
-            <mat-tab label="UniProt Viewer" *ngIf="!mobile">
+           <!-- <mat-tab label="UniProt Viewer" *ngIf="!mobile">
               <mat-progress-bar *ngIf="uniProtLoading" class="loading-protvista" color="primary" mode="indeterminate">
               </mat-progress-bar>
 
@@ -73,7 +73,7 @@
                   </div>
                 </div>
               </div>
-            </mat-tab>
+            </mat-tab>-->
 
             <!-- Term association tab -->
             <mat-tab label="HPO Associations">
@@ -111,7 +111,7 @@
                   </mat-table>
 
                   <!-- paging component -->
-                  <mat-paginator #termPaginator [pageSizeOptions]="[50, 100, 500]"></mat-paginator>
+                  <mat-paginator #termPaginator [pageSizeOptions]="[5, 10, 50, 100, 500]"></mat-paginator>
                 </div>
               </div>
 
@@ -152,7 +152,7 @@
                   </mat-table>
 
                   <!-- paging component -->
-                  <mat-paginator #diseasePaginator [pageSizeOptions]="[50, 100, 500]"></mat-paginator>
+                  <mat-paginator #diseasePaginator [pageSizeOptions]="[5, 10, 50, 100, 500]"></mat-paginator>
                 </div>
               </div>
 

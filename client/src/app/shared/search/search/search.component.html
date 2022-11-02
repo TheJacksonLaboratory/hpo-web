@@ -53,10 +53,10 @@
         Genes - {{genes.length}} of {{genesCount}} displayed
       </div>
       <div class="result-list">
-        <div class="result" (click)="closeDropDown()" routerLink="/browse/gene/{{item.entrezGeneId}}"
+        <div class="result" (click)="closeDropDown()" routerLink="/browse/gene/{{item.geneId}}"
              *ngFor="let item of genes;">
-          <div class="id">{{item.entrezGeneId}}</div>
-          <div class="name" [innerHtml]="{name: item.entrezGeneSymbol } | highlight: queryText"></div>
+          <div class="id">{{item.geneId}}</div>
+          <div class="name" [innerHtml]="{name: item.geneSymbol } | highlight: queryText"></div>
           <br>
         </div>
       </div>
