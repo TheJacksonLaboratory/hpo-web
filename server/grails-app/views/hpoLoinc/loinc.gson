@@ -1,0 +1,7 @@
+import org.monarchinitiative.loinc2hpocore.loinc.LoincEntry
+model {
+  List<LoincEntry> entryList
+}
+json {
+  loincEntries tmpl.loincEntry(entryList ?: [])
+}

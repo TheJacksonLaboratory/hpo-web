@@ -1,0 +1,18 @@
+<div class="container ontology-download" fxLayout="row wrap">
+  <h1 class="pageTitle center" fxFlex="100">Download Ontology</h1>
+  <div class="ontology-download-wrapper" fxLayout="column" fxLayoutAlign="space-evenly center" fxFlex>
+      <h2>v{{version}}</h2>
+      <div class="download-banner-wrapper mat-elevation-z4" fxLayout="row" (click)="utilityService.openExternalUrl(oboUrl)">
+        <mat-icon>download</mat-icon>
+        <h3 class="download-banner-title">Download hp.obo</h3>
+      </div>
+      <div class="download-banner-wrapper mat-elevation-z4" fxLayout="row" (click)="utilityService.openExternalUrl(owlUrl)">
+        <mat-icon>download</mat-icon>
+        <h3 class="download-banner-title">Download hp.owl</h3>
+      </div>
+      <div class="download-banner-wrapper mat-elevation-z4" fxLayout="row" (click)="utilityService.openExternalUrl(jsonUrl)">
+        <mat-icon>download</mat-icon>
+        <h3 class="download-banner-title">Download hp.json</h3>
+      </div>
+  </div>
+</div>

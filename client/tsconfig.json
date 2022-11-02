@@ -1,0 +1,32 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "lib": [
+      "es7",
+      "dom"
+    ],
+    "module": "esnext",
+    "baseUrl": "./",
+    "paths": {
+      "rxjs/internal/Observable": [
+        "../node_modules/rxjs/_esm5/internal/Observable"
+      ],
+      "jszip": [
+        "../node_modules/jszip/dist/jszip.min.js"
+      ]
+    }
+  }
+}

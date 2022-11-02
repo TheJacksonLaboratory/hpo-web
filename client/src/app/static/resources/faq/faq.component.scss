@@ -1,0 +1,39 @@
+.faq {
+
+  & .faq-container {
+    width: 50%;
+    margin: 0 auto;
+  }
+
+  & .mat-expansion-panel {
+    margin-bottom: 5px;
+    border-radius: 0 !important;
+  }
+
+  & .mat-expanded {
+
+    & .mat-expansion-panel-header {
+      background-color: rgba(41, 101, 124, 1)
+    }
+
+    & .mat-expansion-panel-header-title {
+      color: white;
+    }
+
+  }
+
+}
+
+.faq-btn {
+  border-radius: 0;
+  background-color: #b84448;
+  color: white !important;
+  text-decoration: none;
+
+  &:hover {
+    opacity: .8;
+  }
+
+}
+
+

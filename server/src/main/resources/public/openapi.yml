@@ -1,0 +1,267 @@
+openapi: 3.0.1
+info:
+  title: Human Phenotype Ontology API
+  description: This is restful server for [Human Phenotype Ontology](https://hpo.jax.org).
+    Please do not hesistate to [contact us](https://hpo.jax.org/app/contact) for features
+    or submit bug reports on our [github](https://github.com/TheJacksonLaboratory/hpo-web).
+  contact:
+    email: michael.gargano@jax.org
+  license:
+    name: JAX License
+    url: https://github.com/TheJacksonLaboratory/hpo-web/blob/master/LICENSE.md
+  version: 1.7.13
+servers:
+  - url: https://hpo.jax.org/api/
+  - url: http://hpo.jax.org/api/
+tags:
+  - name: Term
+    description: Access to HPO Terms
+  - name: Gene
+    description: Access to Genes
+  - name: Disease
+    description: Access to Diseases
+  - name: Search
+    description: Broad searching our data
+paths:
+  /hpo/term/{hpoId}:
+    get:
+      tags:
+        - Term
+      summary: Get term details by hpo identifier
+      operationId: getTerm
+      parameters:
+        - name: hpoId
+          in: path
+          description: A valid human phenotype ontology identifier
+          required: true
+          schema:
+            type: string
+            example: HP:0001166
+      responses:
+        200:
+          description: Successful Operation
+        404:
+          description: Not Found
+          content: {}
+        500:
+          description: Sever Failure
+          content: {}
+  /hpo/term/{hpoId}/genes:
+    get:
+      tags:
+        - Term
+      summary: Get genes associated with hpo identifier
+      operationId: getTermGenes
+      parameters:
+        - name: hpoId
+          in: path
+          description: A valid human phenotype ontology identifier
+          required: true
+          schema:
+            type: string
+            example: HP:0001166
+      responses:
+        200:
+          description: Successful Operation
+        404:
+          description: Not Found
+          content: {}
+        500:
+          description: Sever Failure
+          content: {}
+  /hpo/term/{hpoId}/diseases:
+    get:
+      tags:
+        - Term
+      summary: Get diseases associated with hpo identifier
+      operationId: getTermDiseases
+      parameters:
+        - name: hpoId
+          in: path
+          description: A valid human phenotype ontology identifier
+          required: true
+          schema:
+            type: string
+            example: HP:0001166
+      responses:
+        200:
+          description: Successful Operation
+        404:
+          description: Not Found
+          content: {}
+        500:
+          description: Sever Failure
+          content: {}
+  /hpo/term/intersecting:
+    get:
+      tags:
+        - Term
+      summary: Get diseases by intersecting hpo identifiers
+      operationId: getIntersectingTermsByDiseases
+      parameters:
+        - name: q
+          in: query
+          description: A list of valid human phenotype ontology identifier
+          required: true
+          style: form
+          explode: false
+          schema:
+            type: array
+            items:
+              type: string
+              format: string
+            example: [HP:0000365,HP:0006385]
+      responses:
+        200:
+          description: Successful Operation
+        404:
+          description: Not Found
+          content: {}
+        500:
+          description: Sever Failure
+          content: {}
+  /hpo/search:
+    get:
+      tags:
+        - Search
+      summary: Search terms, diseases or genes
+      description: Use this to find anything in our data.
+      operationId: findTermsDiseasesGenes
+      parameters:
+        - name: q
+          in: query
+          description: Could be one of identifier (HPO, OMIM, ORPHA), an entrez id, or text.
+          required: true
+          style: form
+          schema:
+            type: string
+            example: arach
+        - name: max
+          in: query
+          description: an upper limit for docs to return. [-1 for all]
+          required: false
+          schema:
+            type: integer
+            example: -1
+        - name: offset
+          in: query
+          description: a page offset when max value is set
+          required: false
+          schema:
+            type: integer
+        - name: category
+          in: query
+          description: filter search down to a category
+          schema:
+            type: string
+            enum: [terms, genes, diseases]
+            example: terms
+      responses:
+        200:
+          description: successful operation
+        404:
+          description: Not Found
+          content: {}
+        500:
+          description: Sever Failure
+          content: {}
+  /hpo/search/descendants/:
+    get:
+      tags:
+        - Search
+      summary: Anchor descendant search starting from the given hpo term id
+      description: Use this to allow a search of the top level terms like modifier or onset. Works well with autocomplete
+      operationId: findTermDescendants
+      parameters:
+        - name: s
+          in: query
+          description: A valid human phenotype ontology identifier
+          required: true
+          style: form
+          schema:
+            type: string
+            example: "HP:0003674"
+        - name: q
+          in: query
+          description: a search string to look for [empty string returns everything under anchor]
+          required: true
+          schema:
+            type: string
+            example: juvenile
+      responses:
+        200:
+          description: successful operation
+        404:
+          description: Not Found
+          content: {}
+        500:
+          description: Sever Failure
+          content: {}
+  /maxo/search/:
+    get:
+      tags:
+        - Search
+      summary: Search Medical Action Ontology
+      operationId: findMedicalActionOntologyTerms
+      parameters:
+        - name: q
+          in: query
+          description: A valid Medical Action Ontology identifer or search term.
+          required: true
+          schema:
+            type: string
+            example: therapy
+      responses:
+        200:
+          description: Successful Operation
+        404:
+          description: Not Found
+          content: {}
+        500:
+          description: Sever Failure
+  /hpo/gene/{entrezId}:
+    get:
+      tags:
+        - Gene
+      summary: Get gene details by entrez id
+      operationId: getGene
+      parameters:
+        - name: entrezId
+          in: path
+          description: A valid entrez id with no prefix
+          required: true
+          schema:
+            type: string
+            example: 1629
+      responses:
+        200:
+          description: Successful Operation
+        404:
+          description: Not Found
+          content: {}
+        500:
+          description: Sever Failure
+          content: {}
+  /hpo/disease/{diseaseId}:
+    get:
+      tags:
+        - Disease
+      summary: Get disease details by OMIM or ORPHA ids
+      operationId: getDisease
+      parameters:
+        - name: diseaseId
+          in: path
+          description: A valid OMIM or ORHPA identifier with prefix.
+          required: true
+          schema:
+            type: string
+            example: OMIM:248600
+      responses:
+        200:
+          description: Successful Operation
+        404:
+          description: Not Found
+          content: {}
+        500:
+          description: Sever Failure
+          content: {}
