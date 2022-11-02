@@ -1,0 +1,4 @@
+"LOINC_NUM","COMPONENT","PROPERTY","TIME_ASPCT","SYSTEM","SCALE_TYP","METHOD_TYP","CLASS","CLASSTYPE","LONG_COMMON_NAME","SHORTNAME","EXTERNAL_COPYRIGHT_NOTICE","STATUS","VersionFirstReleased","VersionLastChanged"
+"10040-4","S wave amplitude.lead V1","Elpot","Pt","Heart","Qn","EKG","EKG.MEAS","2","S wave amplitude in lead V1","S wave Amp L-V1","","ACTIVE","1.0i","2.48"
+"1004-1","Direct antiglobulin test.complement specific reagent","PrThr","Pt","RBC","Ord","","BLDBK","1","Direct antiglobulin test.complement specific reagent [Presence] on Red Blood Cells","DAT Comp-Sp Reag RBC Ql","","ACTIVE","1.0","2.56"
+"38230-9","Calcium.ionized","MCnc","Pt","Bld","Qn","","CHEM","1","Calcium.ionized [Mass/volume] in Blood","Ca-I Bld-mCnc","","ACTIVE","2.13","2.70"

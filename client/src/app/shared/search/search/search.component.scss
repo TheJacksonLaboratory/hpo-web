@@ -1,0 +1,221 @@
+$blue-searchall-color: #007cc3;
+$category-label-green: rgba(41, 101, 124, 1);
+$orange-hover: rgba(236, 151, 54, 0.8);
+
+.search-wrapper {
+  z-index: 2;
+
+  & .searchbar {
+    background-color: white;
+    border-style: none;
+    outline: none;
+    height: 45px;
+    font-size: 14px;
+    padding: 5px 0 5px 10px;
+    margin-top: 0;
+  }
+
+  @media(max-width: 767px) {
+    & .searchbar {
+      font-size: 12px;
+    }
+    & .search-filter {
+      font-size: 12px;
+    }
+  }
+
+  & .mat-select {
+    background-color: #eaeaea;
+    float: left;
+    border-right: solid 1px lightgray;
+    outline: none;
+  }
+
+  & .search-filter {
+    font-size: 14px;
+    height: 45px;
+  }
+
+  & .search-output {
+    font-size: 14px;
+    overflow-x: hidden;
+    background-color: white;
+    position: relative;
+    z-index: 999;
+
+    & .search-all {
+      padding: 0 10px 0 10px;
+      margin: 0 0 10px 0;
+      font-weight: 900;
+      background-color: $blue-searchall-color;
+      text-align: center;
+      height: 20px;
+
+      & i {
+        color: white;
+        font-size: 18px;
+        padding: 0 0 0 20px;
+        position: relative;
+        top: 4px;
+      }
+
+      &:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        border-right: 15px solid white;
+        border-top: 20px solid $blue-searchall-color;
+        width: 0;
+      }
+
+      &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        border-left: 15px solid white;
+        border-top: 20px solid $blue-searchall-color;
+        width: 0;
+      }
+
+      @media(max-width: 991px) {
+        &:after {
+          border-top: 21px solid $blue-searchall-color;
+        }
+
+        &:before {
+          border-top: 21px solid $blue-searchall-color;
+        }
+      }
+
+      &:hover {
+        opacity: .8;
+      }
+
+      & a {
+        margin: 0 0 0 5px;
+        font-weight: bold;
+        font-size: 14px;
+        text-decoration: none;
+        color: white !important;
+      }
+    }
+
+    & .result-title {
+      font-weight: bold;
+      margin: 5px 0 0 0;
+      padding: 0 0 0 10px;
+      width: 60%;
+      background-color: $category-label-green;
+      color: white;
+      cursor: default;
+
+      &:after {
+        content: '';
+        position: absolute;
+        right: 40%;
+        border-right: 15px solid white;
+        border-top: 20px solid $category-label-green;
+        width: 0;
+      }
+
+      @media(max-width: 767px) {
+        width: 100%;
+        &:after {
+          display: none;
+        }
+      }
+    }
+
+    & .result-list {
+      cursor: pointer;
+      text-decoration: none;
+      color: black !important;
+
+      & .result {
+        padding: 5px 10px 0 25px;
+        height: 25px;
+        outline: none;
+
+        &:first-child {
+          margin-top: 5px;
+        }
+
+        &:hover {
+          background-color: $orange-hover;
+          font-size: 16px;
+        }
+
+        & .name {
+          font-size: 14px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
+        & .id {
+          font-size: 12px;
+          color: grey;
+          margin: 0 15px 0 0;
+        }
+      }
+    }
+
+    & .term-result {
+      & .result-list {
+        & .result .id {
+          display: block;
+          float: left;
+          width: 60px;
+        }
+      }
+    }
+
+    & .disease-result {
+      & .result-list {
+        & .result .id {
+          display: block;
+          float: left;
+          width: 50px;
+        }
+      }
+    }
+
+    & .gene-result {
+      & .result-list {
+        & .result .id {
+          display: block;
+          float: left;
+          width: 35px;
+        }
+      }
+    }
+  }
+}
+
+.no-result {
+  text-align: center;
+}
+
+
+p {
+  &.hint {
+    margin-top: .5rem;
+    color: white;
+    text-align: center;
+
+    & a {
+      color: #ec9736 !important;
+      cursor: pointer;
+    }
+  }
+
+}
+
+@media (max-width: 767px) {
+  p.hint {
+    margin: 15px 0;
+    font-size: 12px;
+  }
+}

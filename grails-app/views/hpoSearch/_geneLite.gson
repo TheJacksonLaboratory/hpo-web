@@ -1,9 +1,0 @@
-import hpo.api.gene.DbGene
-
-model {
-  DbGene geneLite
-}
-json {
-  entrezGeneId geneLite.entrezGeneId
-  entrezGeneSymbol geneLite.entrezGeneSymbol
-}
