@@ -20,7 +20,7 @@
 .sidenav .mat-menu-item {
   padding: 0 0 0 15px;
   border-bottom: 1px solid #d3d3d370;
-  color: white;
+  color: white !important;
 }
 
 .sidenav .mat-menu-item .mat-icon {

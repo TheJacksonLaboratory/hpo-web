@@ -178,7 +178,7 @@ a .irdirc {
 
 
 .home-highlight-menu {
-  margin: 50px 0 5px 25px;
+  margin: 50px auto 5px;
   @media screen and (max-width: 640px) {
     margin: 50px 0 5px 0;
   }
@@ -235,7 +235,7 @@ a .irdirc {
 }
 
 
-.monarch-banner {
+.phenopacket-banner {
   height: 200px;
   padding: 25px;
   display: flex;
@@ -243,27 +243,29 @@ a .irdirc {
   margin-left: 25px;
   cursor: pointer;
 
+  &:hover{
+    opacity: 0.75;
+  }
+
   & .description {
     flex: 1 auto;
-    margin: 5rem 0 0 1rem;
+    margin: 3rem 0 0 3rem;
     font-size: 2rem;
-    text-align: center;
 
-    & h2 {
-      float: left;
+    & h4 {
+      margin: 0.5rem 0 0.5rem 0;
     }
+  }
+
+  a {
+    display: inherit;
+    color: unset !important;
+    text-decoration: none;
   }
   @media screen and (max-width: 958px) {
-    & .monarch-logo {
+    & a, .phenopacket-logo {
       margin: 0 auto;
     }
-  }
-
-  & .logo {
-    width: 250px;
-    float: left;
-    padding: 40px 0;
-    margin: 0 auto;
   }
 
   & .button {
