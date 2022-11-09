@@ -12,17 +12,20 @@
       </div>
       <div *ngIf="mobileNavSection == 'home'">
         <button mat-menu-item routerLink="/">Home</button>
+        <button mat-menu-item (click)="sidenav.close()" routerLink="about"> About</button>
+        <button mat-menu-item (click)="mobileNavigate('dataMenu')"> Data
+          <mat-icon>arrow_right</mat-icon>
+        </button>
         <button mat-menu-item (click)="mobileNavigate('toolsMenu')"> Tools
           <mat-icon>arrow_right</mat-icon>
         </button>
-        <button mat-menu-item (click)="mobileNavigate('downloadsMenu')"> Downloads
+        <button mat-menu-item (click)="mobileNavigate('resourcesMenu')"> Resources
           <mat-icon>arrow_right</mat-icon>
         </button>
-        <button mat-menu-item (click)="mobileNavigate('helpMenu')"> Help
-          <mat-icon>arrow_right</mat-icon>
-        </button>
+        <button mat-menu-item (click)="sidenav.close()" routerLink="community"> Community</button>
       </div>
       <div *ngIf="mobileNavSection == 'toolsMenu'">
+        <button mat-menu-item routerLink="browse/profile-search"> Profile Search</button>
         <button mat-menu-item (click)="mobileNavigate('genomicTools')">Genomic Tools
           <mat-icon>arrow_right</mat-icon>
         </button>
@@ -31,7 +34,6 @@
         </button>
         <button mat-menu-item (click)="sidenav.close()" routerLink="tools/hpo-browser"> Other HPO Browsers</button>
         <button mat-menu-item (click)="sidenav.close()" routerLink="tools/workbench"> HPO Workbench</button>
-        <button mat-menu-item (click)="sidenav.close()" routerLink="tools/external"> External Tools</button>
       </div>
 
       <div *ngIf="mobileNavSection == 'genomicTools'">
@@ -42,34 +44,27 @@
       <div *ngIf="mobileNavSection == 'phenomicTools'">
         <button mat-menu-item (click)="sidenav.close()" routerLink="tools/phenomizer"> Phenomizer</button>
         <button mat-menu-item (click)="sidenav.close()" routerLink="tools/phenogramviz"> PhenoGramViz</button>
+        <button mat-menu-item routerLink="tools/loinc2hpo"> LOINC2HPO</button>
       </div>
 
-      <div *ngIf="mobileNavSection == 'helpMenu'">
-        <button mat-menu-item (click)="mobileNavigate('infoMenu')">Information
+      <div *ngIf="mobileNavSection == 'resourcesMenu'">
+        <button mat-menu-item (click)="sidenav.close()" routerLink="faq"> FAQ</button>
+        <button mat-menu-item routerLink="resources/clinician-guide"> Clinicians Guide</button>
+        <button mat-menu-item routerLink="resources/contributing"> Contributing</button>
+      </div>
+      <div *ngIf="mobileNavSection == 'dataMenu'">
+        <button mat-menu-item (click)="sidenav.close()" routerLink="download/ontology"> Ontology</button>
+        <button mat-menu-item (click)="sidenav.close()" routerLink="download/annotation"> Annotations</button>
+        <button mat-menu-item (click)="mobileNavigate('translationMenu')">Translation
           <mat-icon>arrow_right</mat-icon>
         </button>
-        <button mat-menu-item (click)="sidenav.close()" routerLink="help/clinician-guide"> Clinicians Guide</button>
-        <button mat-menu-item (click)="mobileNavigate('howToMenu')">How to..
-          <mat-icon>arrow_right</mat-icon>
-        </button>
+        <a mat-menu-item href="/api/hpo/docs"> API</a>
+      </div>
+
+      <div *ngIF="mobileNavSection == 'translationMenu'">
         <button mat-menu-item (click)="sidenav.close()" routerLink="data/layperson"> Layperson Synonyms</button>
         <button mat-menu-item (click)="sidenav.close()" routerLink="data/translations"> Translations and Mapping
         </button>
-        <button mat-menu-item (click)="sidenav.close()" routerLink="faq"> FAQ</button>
-      </div>
-
-      <div *ngIf="mobileNavSection == 'infoMenu'">
-        <button mat-menu-item (click)="sidenav.close()" routerLink="help/introduction"> Introduction</button>
-        <button mat-menu-item (click)="sidenav.close()" routerLink="help/team"> Team</button>
-        <button mat-menu-item (click)="sidenav.close()" routerLink="help/funding"> Funding</button>
-        <button mat-menu-item (click)="sidenav.close()" routerLink="help/users"> Users</button>
-        <button mat-menu-item (click)="sidenav.close()" routerLink="help/publications"> Publications</button>
-      </div>
-
-      <div *ngIf="mobileNavSection == 'downloadsMenu'">
-        <button mat-menu-item (click)="sidenav.close()" routerLink="download/ontology"> Ontology</button>
-        <button mat-menu-item (click)="sidenav.close()" routerLink="download/annotation"> Annotations</button>
-        <a mat-menu-item href="/api/hpo/docs"> API</a>
       </div>
 
     </mat-nav-list>
