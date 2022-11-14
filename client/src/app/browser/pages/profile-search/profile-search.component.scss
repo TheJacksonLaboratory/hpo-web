@@ -1,0 +1,62 @@
+.discover-form {
+  text-align: center;
+}
+
+.discover-search {
+  width: 60%;
+}
+
+.remove-term-icon {
+  cursor: pointer;
+  height: 24px;
+  width: 24px;
+  float: right;
+
+  &:hover {
+    opacity: 0.75;
+  }
+}
+
+.phenotype-list {
+  text-transform: uppercase;
+  background-color: rgba(39, 86, 105, 0.65);
+  margin-bottom: .25rem;
+}
+
+
+.phenotype-list-item {
+  width: 100%;
+  color: white;
+  font-weight: bold;
+}
+
+.submit-btn {
+  color: white;
+  margin-top: 25px;
+  background-color: #0054a9;
+
+  & .mat-button-wrapper {
+    vertical-align: middle;
+    font-weight: bold;
+  }
+}
+
+.back-btn {
+  margin-top: 1rem;
+}
+
+.intersecting-table {
+  margin-top: 0.5rem;
+}
+
+
+.query-chip {
+  color: white;
+  font-size: 12px;
+  background-color: rgba(39, 86, 105, 0.65);
+}
+
+
+.not-found {
+  text-align: center;
+}

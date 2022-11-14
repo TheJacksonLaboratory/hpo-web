@@ -1,0 +1,43 @@
+.main {
+  flex: auto;
+}
+
+.sidenav {
+  width: 50%;
+  background: rgba(41, 101, 124, 1);
+  background: -moz-linear-gradient(left, rgba(41, 101, 124, 1) 0%, rgba(39, 86, 105, 1) 46%, rgba(39, 84, 103, 1) 51%, rgba(43, 63, 78, 1) 88%, rgba(46, 56, 68, 1) 100%);
+  background: -webkit-gradient(linear, left top, right top, color-stop(0%, rgba(41, 101, 124, 1)), color-stop(46%, rgba(39, 86, 105, 1)), color-stop(51%, rgba(39, 84, 103, 1)), color-stop(88%, rgba(43, 63, 78, 1)), color-stop(100%, rgba(46, 56, 68, 1)));
+  background: -webkit-linear-gradient(left, rgba(41, 101, 124, 1) 0%, rgba(39, 86, 105, 1) 46%, rgba(39, 84, 103, 1) 51%, rgba(43, 63, 78, 1) 88%, rgba(46, 56, 68, 1) 100%);
+  background: -o-linear-gradient(left, rgba(41, 101, 124, 1) 0%, rgba(39, 86, 105, 1) 46%, rgba(39, 84, 103, 1) 51%, rgba(43, 63, 78, 1) 88%, rgba(46, 56, 68, 1) 100%);
+  background: -ms-linear-gradient(left, rgba(41, 101, 124, 1) 0%, rgba(39, 86, 105, 1) 46%, rgba(39, 84, 103, 1) 51%, rgba(43, 63, 78, 1) 88%, rgba(46, 56, 68, 1) 100%);
+  background: linear-gradient(to bottom right, rgba(41, 101, 124, 1) 0%, rgba(39, 86, 105, 1) 46%, rgba(39, 84, 103, 1) 51%, rgba(43, 63, 78, 1) 88%, rgba(46, 56, 68, 1) 100%);
+}
+
+.sidenav .menuTitle {
+  color: white;
+}
+
+.sidenav .mat-menu-item {
+  padding: 0 0 0 15px;
+  border-bottom: 1px solid #d3d3d370;
+  color: white !important;
+}
+
+.sidenav .mat-menu-item .mat-icon {
+  margin: 12px 5px;
+  float: right;
+  color: white;
+}
+
+.sidenav hr {
+  margin-bottom: 0;
+}
+
+.sidenav .mat-menu-item.backButton {
+  background-color: #d3d3d370;
+  padding-left: 0;
+}
+
+.sidenav .mat-menu-item.backButton .mat-icon {
+  float: left;
+}

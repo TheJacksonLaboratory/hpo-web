@@ -1,0 +1,55 @@
+<div class="container publications">
+  <h1 class="center pageTitle">Publications</h1>
+  <div class="table">
+    <div class="filters">
+      <mat-form-field class="categories">
+        <mat-label>Categories</mat-label>
+        <mat-select (selectionChange)="applyPublicationsFilter()" [(value)]="category">
+          <mat-option value="all">All</mat-option>
+          <mat-option value="us">By Us</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="topics">
+        <mat-label>Topics</mat-label>
+        <mat-select (selectionChange)="applyPublicationsFilter()" panelClass="topics-panel"
+                    [formControl]="topics" multiple>
+          <mat-option *ngFor="let topic of topicList" [value]="topic">{{topic}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <p class="count" *ngIf="publications">Displaying {{publications.filteredData.length}} of
+        {{publications.data.length}} Publications</p>
+    </div>
+    <mat-table [dataSource]="publications" class="mat-elevation-z8" matSort>
+      <!-- Year Column -->
+      <ng-container matColumnDef="year">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Year</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.year}} </mat-cell>
+      </ng-container>
+
+      <!-- Title Column -->
+      <ng-container matColumnDef="title">
+        <mat-header-cell *matHeaderCellDef> Title</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.title}} </mat-cell>
+      </ng-container>
+
+      <!-- Authors Column -->
+      <ng-container matColumnDef="authors">
+        <mat-header-cell *matHeaderCellDef> Authors</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.authors}} </mat-cell>
+      </ng-container>
+
+      <!-- Journal Column -->
+      <ng-container matColumnDef="journal">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Journal</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.journal}} </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </div>
+  <br>
+  <a mat-raised-button routerLink="/citation" class="mat-btn">View HPO Citation</a>
+</div>
+

@@ -1,0 +1,33 @@
+<div class="container" fxLayout="row wrap">
+  <h1 class="pageTitle center" fxFlexFill>Download Annotations</h1>
+  <div class="download-banner-wrapper mat-elevation-z4" fxFlex=40 (click)="utilityService.openExternalUrl(hpoaUrl)">
+    <mat-icon>download</mat-icon>
+    <h3 class="download-banner-title">Download HPO annotations ({{version}})</h3>
+  </div>
+  <div fxFlex="100">
+    <h3>Current format</h3>
+    <p>The HPO project has transitioned to a new annotation format in 2019 that is described in <a
+      href="https://www.ncbi.nlm.nih.gov/pubmed/30476213" target="_blank">K&ouml;hler et al (2019) Nucleic Acids Res</a>.
+      A detailed format
+      description is available <a
+        href="https://hpo-annotation-qc.readthedocs.io/en/latest/annotationFormat.html#phenotype-hpoa-format"
+        target="_blank">here</a>.</p>
+
+    <ul>
+      <li><a href="http://purl.obolibrary.org/obo/hp/hpoa/phenotype.hpoa" target="__blank">http://purl.obolibrary.org/obo/hp/hpoa/phenotype.hpoa</a>
+      </li>
+    </ul>
+    <h3>Additional resources</h3>
+    <p>We provide files that link genes and phenotypes in different ways.</p>
+    <a href="http://purl.obolibrary.org/obo/hp/hpoa/genes_to_phenotype.txt"
+       target="__blank">http://purl.obolibrary.org/obo/hp/hpoa/genes_to_phenotype.txt</a> provides a link between genes
+    and HPO terms. All phenotype terms associated with any disease that is
+    associated with variants in a gene are assigned to that gene in this file. Other files are available on our Jenkins
+    server that filter terms according to provenance of the
+    annotation and frequency of the features in the disease.<br>
+    <hr class="reduce-margin">
+    <a href="http://purl.obolibrary.org/obo/hp/hpoa/phenotype_to_genes.txt"
+       target="__blank">http://purl.obolibrary.org/obo/hp/hpoa/phenotype_to_genes.txt</a> is analogous, but instead
+    provides links from HPO terms to genes.
+  </div>
+</div>

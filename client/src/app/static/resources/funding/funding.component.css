@@ -1,0 +1,18 @@
+
+.funding ul {
+  list-style-type: none;
+  line-height: 25px;
+}
+
+.funding .funding-thumbnails img {
+  max-height: 150px;
+  max-width: 150px;
+}
+
+.funding .funding-thumbnails .row {
+  margin-bottom: 15px;
+}
+
+.funding .funding-thumbnails img:hover {
+  opacity: .6;
+}

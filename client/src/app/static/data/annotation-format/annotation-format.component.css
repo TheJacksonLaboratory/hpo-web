@@ -1,0 +1,7 @@
+.float-left {
+  text-align: left;
+}
+
+.table-spacer td, .table-spacer th {
+  padding: 5px;
+}

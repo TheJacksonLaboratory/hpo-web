@@ -1,0 +1,29 @@
+.contact-card {
+  margin: 1rem;
+  & .contact-img {
+    width: 80px;
+    height: 80px;
+    flex-shrink: 0;
+    border-radius: 999px;
+    overflow: hidden;
+
+    & img {
+      width: 100%;
+      height: 100%;
+      -o-object-fit: cover;
+      object-fit: cover;
+    }
+  }
+
+  & .contact-bio {
+    margin: 0 0 0 1rem;
+
+    h3, h4 {
+      margin: .5rem .5rem .5rem 0;
+    }
+
+    .mat-icon {
+      cursor: pointer;
+    }
+  }
+}

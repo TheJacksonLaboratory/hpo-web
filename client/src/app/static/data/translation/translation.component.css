@@ -1,0 +1,18 @@
+.translation {
+  margin-top: 0;
+  list-style: none;
+  padding-inline-start: 10px;
+}
+
+
+.lyfe-language-btn {
+  text-decoration: none;
+}
+
+.lyfe-language-btn:hover {
+  color: white !important;
+}
+
+.indigenous {
+  width: 300px;
+}

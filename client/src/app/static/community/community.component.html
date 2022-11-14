@@ -1,0 +1,214 @@
+<div class="container community">
+  <h1 class="center pageTitle">Our Community</h1>
+
+  <div class="quick-links">
+    <mat-tab-group mat-align-tabs="start">
+      <mat-tab label="Organizational Contributors" fxLayout="row wrap" fxLayoutAlign="center center">
+        <div class="org-navigation" fxLayout="row wrap" fxLayoutAlign="center center">
+          <button mat-stroked-button color="primary" *ngFor="let org of organizations;"
+          (click)="scrollToView(org.name)">{{org.name}}</button>
+        </div>
+        <div class="organization-wrapper" *ngFor="let org of organizations;" [id]="org.name.toLowerCase()">
+          <div class="organization" fxLayout="row wrap" fxFlex="100">
+            <h2 class="organization-name" fxFlex="100">{{org.name}}</h2>
+            <p class="organization-description" fxFlex="50" fxFlexOffset="25" fxFlex.lt-md="100" fxFlexOffset.lt-md="0"
+               *ngIf="org.description">{{org.description}}</p>
+            <span fxFlex="25" *ngIf="org.description"></span>
+            <div fxFlex="25" class="member" (click)="navigate(member)" *ngFor="let member of org.members">
+              <div class="member-icon-wrapper">
+                <mat-icon>person</mat-icon>
+              </div>
+
+              <h3 class="member-name">
+                {{member.name}}
+                <mat-icon *ngIf="member.alumni"
+                          matTooltip="Alumni"
+                          matTooltipPosition="above"
+                          matTooltipHideDelay="100000">hourglass_empty</mat-icon>
+              </h3>
+              <span class="member-role">{{member.role}}</span>
+            </div>
+          </div>
+          <hr/>
+        </div>
+      </mat-tab>
+      <mat-tab label="Individual Contributors">
+        <div class="contributors-table">
+
+        </div>
+        <mat-table #table [dataSource]="contributorsSource" *ngIf="contributorsSource">
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+          <ng-container matColumnDef="lastName">
+            <mat-header-cell *matHeaderCellDef> Last Name</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.lastName}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="firstName">
+            <mat-header-cell *matHeaderCellDef> First Name</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.firstName}} </mat-cell>
+          </ng-container>
+
+
+          <ng-container matColumnDef="location">
+            <mat-header-cell *matHeaderCellDef> Location</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.location}} </mat-cell>
+          </ng-container>
+        </mat-table>
+        <mat-paginator [pageSizeOptions]="[10, 20]"
+                       showFirstLastButtons
+                       aria-label="Select page of periodic elements">
+        </mat-paginator>
+      </mat-tab>
+      <mat-tab label="Workshops">
+        <p>
+          This is a partial list of workshops (“hackathons”) conducted over the last decade to add content to the HPO for
+          specific areas of medicine. Please <a routerLink="/contact">contact</a> the HPO team if you would like to work
+          with us on HPO terms for an area of medicine.
+        </p>
+        <ul>
+          <li>2017: Workshop on Ophthalmology phenotypes and rare diseases of the <a href="https://www.ern-eye.eu/"
+                                                                                     target="__blank">European Reference
+            Network for Rare Eye Diseases</a></li>
+          <li>2017: Workshop on cardiology at Stanford University coordinated by <a
+            href="https://stanfordhealthcare.org/doctors/w/matthew-wheeler.html" target="__blank">Matthew Wheeler</a></li>
+          <li>2017: Workshop on Immunology terms at the <a target="__blank" href="https://www.niaid.nih.gov/">National
+            Institute for Allergy and Infectious Diseases</a> coordinated by Morgan Similuk
+          </li>
+          <li>2015: Workshop with the UK's National Institute for Health Research (NIHR) Rare Disease initiatives on
+            projects such as NIHR RD-TRC (Rare Disease—Translational Research Collaboration, http://rd.trc.nihr.ac.uk)
+            coordinated by Patrick Chinnery, Mareike Veltman and Roger James.
+          </li>
+          <li>2013: Workshop on epilepsy phenotypes and EEG abnormalities led by Prof. Ingo Helbig (currently Children’s
+            Hospital of Philadelphia, University of Pennsylvania)
+          </li>
+          <li>2012-2016: Work on bleeding phenotypes with contributions from multiple members of a team led by Prof. Willem
+            Ouwehand of the University of Cambridge (see <a target="__blank"
+                                                            href="https://www.ncbi.nlm.nih.gov/pubmed/25949529">https://www.ncbi.nlm.nih.gov/pubmed/25949529</a>)
+          </li>
+          <li>2012: 2-day workshop in Berlin, Germany, to extend dental terminology in the HPO led by Prof. Isabelle
+            Bailleul-Forestier (Paul Sabatier University - Toulouse, France)
+          </li>
+          <li>2009: 5-day workshop at the Sanger Institute with UK clinicians involved with the DECIPHER project</li>
+        </ul>
+      </mat-tab>
+      <mat-tab label="Users">
+        <p>	The following list provides an overview of the groups who are currently using HPO. If you notice an omission, please contact us.
+        </p>
+        <ul>
+          <li><a href="https://www.genome.gov/27544402/the-undiagnosed-diseases-program/" target="__blank">NIH Undiagnosed disease program (UDP)</a>. See also this paper that describes
+            the UDP and its use of HPO: <a href="https://www.ncbi.nlm.nih.gov/pubmed/28603714" target="__blank">Gall T, et al (2017) Defining Disease, Diagnosis, and
+              Translational Medicine within a Homeostatic Perturbation Paradigm: The National
+              Institutes of Health Undiagnosed Diseases Program Experience. <i>Front Med (Lausanne)</i> <b>4</b>:62</a>.</li>
+          <li><a href="http://www.orpha.net/consor/cgi-bin/index.php" target="__blank">Orphanet</a>. See
+            <a href="https://www.ncbi.nlm.nih.gov/pubmed/29425702" target="__blank">HIPBI-RD (Harmonising phenomics information for a better interoperability in the rare disease field)</a> for information
+            about work to integrate ORDO (the Orphanet Rare Disease Ontology), HPO (the Human Phenotype Ontology) as well as PhenoTips software for the capture and sharing of structured phenotypic
+            data for RD patients.</li>
+          <li><a href="https://www.genomecanada.ca/" target="__blank">Genome Canada</a>. </li>
+          <li><a href="http://www.informatics.jax.org/" target="__blank">Mouse Genome Informatics (MGI)</a></li>
+          <li><a href="https://www.genomicsengland.co.uk/" target="__blank">Genomics England; 100,000 Genomes Project</a></li>
+          <li><a href="http://ecaruca.radboudumc.nl:8080/ecaruca/" target="__blank">ECARUCA</a></li>
+          <li><a href="https://decipher.sanger.ac.uk/" target="__blank">DECIPHER</a></li>
+          <li><a href="https://www.ddduk.org/" target="__blank">Deciphering Developmental Disorders (DDD)</a></li>
+          <li><a href="https://www.gwascentral.org/" target="__blank">GWAS Central</a></li>
+          <li><a href="http://jjwanglab.org/gwasdb" target="__blank">GWASdb</a></li>
+          <li><a href="http://www.irdirc.org/" target="__blank">International Rare Diseases Research Consortium (IRDiRC)</a></li>
+          <li><a href="https://www.clinicalgenome.org/" target="__blank">ClinGen</a></li>
+          <li><a href="https://www.ncbi.nlm.nih.gov/gtr/" target="__blank">NCBI Genetic Testing Registry</a></li>
+          <li><a href="http://rd-connect.eu/" target="__blank">RD-Connect</a>. See this <a href="https://www.ncbi.nlm.nih.gov/pubmed/25029978" target="__blank">description</a> of RD-CONNECT.</li>
+          <li><a href="http://geno2mp.gs.washington.edu/Geno2MP/#/" target="__blank">Geno2MP</a>.</li>
+          <li><a href="http://www.genomes2people.org/the-medseq-project/" target="__blank">MedSeq</a>.</li>
+          <li><a href="https://www.ncbi.nlm.nih.gov/clinvar/intro/" target="__blank">NCBI ClinVar</a></li>
+          <li><a href="http://www.sequenceontology.org/" target="__blank">Sequence Ontology (SO)</a>. See this <a href="http://www.sequenceontology.org/so_wiki/index.php/Using_Phenotype_Ontologies_in_Human_GVF" target="__blank">description</a>
+            of the use of phenotype ontologies in human GVF files.</li>
+          <li><a href="https://esid.org/Working-Parties/Registry-Working-Party/Diagnosis-criteria" target="__blank">European Society for Immunodeficiencies</a></li>
+        </ul>
+
+      </mat-tab>
+      <mat-tab label="Other Tools">
+        <p>The HPO project welcomes other groups to use the HPO resources to develop tools and
+          algorithms. This page has a list of academic and commercial tools that use the HPO. We invite feedback
+          about omissions or errors in this list.</p>
+        <br>
+        <h3>Commerical entitites</h3>
+        <div class="row">
+          <ul>
+            <li><a href="https://www.fdna.com/" target="_blank">FDNA</a>: Face2Gene.</li>
+            <li><a href="https://cartagenia.com/" target="_blank">Cartagenia BENCH</a></li>
+            <li><a href="http://gepado.de/en/" target="_blank">GEPADO – Software Solutions for Genetics - GmbH</a></li>
+            <li><a href="http://www.biodiscovery.com/nxclinical/" target="_blank">BioDiscovery’s NxClinical</a></li>
+            <li>Diploid: Diagnosing rare diseases: <a href="http://www.diploid.com/moon" target="__blank"> Moon</a></li>
+            <li><a href="https://www.centogene.com/" target="__blank">Centogene</a></li>
+            <li><a href="http://simulconsult.com/index.html" target="__blank">SimulConsult</a>
+              <ul>
+                <li>Michael M. Segal</li>
+                <li>Ayman W. El-Hattab</li>
+                <li>Nicole Nadeau</li>
+                <li>Kristina Brumme</li>
+                <li>Robert Sundel</li>
+              </ul>
+            </li>
+            <li><a href="https://www.fabricgenomics.com/" target="_blank">Fabric Genomics</a></li>
+            <li><a href="http://resources.qiagenbioinformatics.com/white-papers/IVA_white_paper_FINAL.pdf">Qiagen</a></li>
+            <li><a href="https://track.health/">Track.Health</a></li>
+            <li><a href="https://pryzm.health/">Pryzm.Health</a></li>
+          </ul>
+        </div>
+        <hr>
+        <h2>Phenotype-driven diagnostics</h2>
+        <ul>
+          <li><a href="http://extasy.esat.kuleuven.be/" target="_blank">eXtasy</a></li>
+          <li><a href="http://phen-gen.org/" target="_blank">Phen-Gen</a></li>
+          <li><a href="http://phenovar-dev.udes.genap.ca/" target="_blank">PhenoVar</a></li>
+          <li><a href="http://www.yandell-lab.org/software/phevor.html" target="_blank">Phevor</a></li>
+        </ul>
+        <h3>Patient Engagement and Self Phenotyping (ePRO, PROM, eConsent, eCRF)</h3>
+        <ul>
+          <li><a href="https://track.health/" target="_blank">Track.Health</a></li>
+        </ul>
+        <hr>
+        <h3>Platforms for phenotype-driven analysis</h3>
+        <ul>
+          <li><a href="https://decipher.sanger.ac.uk/" target="_blank">DECIPHER</a>: Mapping the clinical genome.</li>
+          <li><a href="https://phenopolis.org/" target="_blank">Phenopolis</a>: An Open Platform for Harmonization & Analysis
+            of Sequencing & Phenotype Data.
+          </li>
+          <li><a href="https://www.ddduk.org/" target="_blank">DDD</a> Deciphering Developmental Disorders.</li>
+          <li><a href="https://phenomecentral.org/" target="_blank">PhenomeCentral</a>: A repository for clinicians and
+            scientists to find additional cases of the same rare disorder.
+          </li>
+          <li><a href="http://omimexplorer.research.bcm.edu" target="_blank">OMIM Explorer</a></li>
+        </ul>
+        <hr>
+        <h3>Phenotype entry and databasing</h3>
+        <ul>
+          <li><a href="https://phenotips.org/" target="_blank">Phenotips</a>: a software tool for collecting and analyzing
+            phenotypic information of patients with genetic disorders.
+          </li>
+        </ul>
+        <hr>
+        <h3>Network analysis</h3>
+        <ul>
+          <li><a href="http://www.webgestalt.org/option.php" target="_blank">WebGestalt</a>: WEB-based GEne SeT AnaLysis
+            Toolkit.
+          </li>
+          <li><a href="http://www.inetbio.org/morphin/" target="_blank">MORPHIN (Model Organisms Projected on a Human
+            Integrated Gene Network)</a></li>
+          <li><a href="http://great.stanford.edu/public/html/" target="_blank">GREAT</a></li>
+          <li><a href="https://toppgene.cchmc.org/" target="_blank">ToppGene</a></li>
+          <li><a href="http://supfam.org/SUPERFAMILY/" target="_blank">Superfamily Structural classification of protein</a>
+          </li>
+        </ul>
+        <hr>
+        <h3>Terminology servers</h3>
+        <ul>
+          <li><a href="http://www.hetop.eu/hetop/" target="_blank">HeTOP</a></li>
+        </ul>
+
+
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+import hpo.api.term.DbMaxo
+
+model {
+  DbMaxo dbMaxo
+}
+
+json {
+  ontologyId dbMaxo.ontologyId
+  name dbMaxo.name
+  definition dbMaxo.definition
+  synonyms dbMaxo.dbMaxoSynonym*.synonym
+  comment dbMaxo.comment
+}

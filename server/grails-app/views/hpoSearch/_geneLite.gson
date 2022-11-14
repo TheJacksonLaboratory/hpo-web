@@ -1,0 +1,9 @@
+import hpo.api.gene.DbGene
+
+model {
+  DbGene geneLite
+}
+json {
+  geneId geneLite.geneId
+  geneSymbol geneLite.geneSymbol
+}

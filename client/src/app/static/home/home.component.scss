@@ -1,0 +1,276 @@
+
+.container.container-main .container-title {
+  font-size: 20px;
+  margin-top: 0;
+  font-weight: bold;
+
+}
+
+.container.container-main .container-body {
+  font-size: 16px;
+  text-align: justify;
+}
+
+.container.container-main .container-body a.btn {
+  border-radius: 0;
+}
+
+.empty-space {
+  height: 25px;
+  width: 100%;
+}
+
+.quick-links-card mat-list-item {
+  background-color: #D0D3D4;
+  opacity: 0.7;
+  margin-bottom: 5px;
+}
+
+.quick-links-card a:hover {
+  text-decoration: none;
+}
+
+.quick-links-card mat-list-item:hover {
+  background-color: #D0D3D4;
+  opacity: 0.9;
+}
+
+.quick-links-card mat-card-title h3 {
+  margin: 0;
+}
+
+a.mat-btn {
+  text-decoration: none;
+  background-color: #ec9736;
+}
+
+.quick-links-card a[mat-list-item] {
+  background-color: #D0D3D4;
+  opacity: 0.7;
+  margin-bottom: 5px;
+}
+
+.quick-links-card a:hover {
+  text-decoration: none;
+}
+
+.quick-links-card a[mat-list-item]:hover {
+  background-color: #D0D3D4;
+  opacity: 0.9;
+}
+
+.news-updates {
+  margin-top: 5px;
+}
+
+.home-search .search-container {
+  margin: 0 auto;
+  max-height: 100%;
+  height: 250px;
+  background-color: rgba(41, 101, 124, 1);
+  border: solid 2px #325364;
+
+  & .main-logo {
+    margin: 1rem auto 1rem auto;
+    height: 100px;
+    display: block;
+  }
+
+  @media screen and (min-width: 767px) {
+    & .searchbar-container {
+      width: 50%;
+      margin: 0 auto;
+    }
+  }
+  @media screen and (max-width: 767px) {
+    & .main-logo {
+      height: 75px;
+    }
+  }
+}
+
+.info-section {
+  margin-top: 25px;
+
+  > div {
+    margin: 1rem;
+  }
+}
+
+.info-body p, .info-body .list {
+  min-height: 150px;
+}
+
+.info-body .list {
+  -webkit-margin-before: 1em;
+  -webkit-margin-after: 1em;
+  -webkit-margin-start: 0;
+  -webkit-margin-end: 0;
+  -moz-margin-start: 0;
+  padding: 0;
+}
+
+.teaser-title {
+  font-weight: bold;
+  font-size: 16px;
+  font-style: italic;
+}
+
+.teaser-date {
+  justify-content: flex-end;
+  margin: 0 0 0 auto;
+}
+
+.mailing-list {
+  width: 300px;
+  background-color: #ec9736;
+  padding: 15px;
+  color: white;
+  position: absolute;
+  box-shadow: 1px 1px 8px darkgrey;
+}
+
+.mailing-list-wrapper a, .mailing-list-wrapper a:hover, .mailing-list-wrapper a:active, .mailing-list-wrapper a:visited,
+.mailing-list-wrapper a:focus {
+  text-decoration: none;
+}
+
+.mailing-list-body {
+  margin: 0 0 0 50px;
+  font-weight: bold;
+}
+
+.mailing-list-body h4 {
+  margin: 0;
+}
+
+.mailing-list .material-icons {
+  font-size: 40px;
+  margin: 10px 0;
+  float: left;
+}
+
+
+a .irdirc {
+  height: 100px;
+  float: right;
+  box-shadow: 1px 1px 8px darkgrey;
+}
+
+
+@media (max-width: 767px) {
+
+  .mailing-list {
+    position: unset;
+  }
+
+  a .irdirc {
+    height: 100px;
+    float: left;
+    box-shadow: 1px 1px 8px darkgrey;
+  }
+
+  .home-highlight-menu {
+    margin: 50px 0 0 0;
+  }
+
+}
+
+
+.home-highlight-menu {
+  margin: 50px auto 5px;
+  @media screen and (max-width: 640px) {
+    margin: 50px 0 5px 0;
+  }
+
+  & .home-item {
+    height: 100px;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    padding-right: 15px;
+    padding-left: 15px;
+    @media screen and (max-width: 640px) {
+      margin-bottom: 5px;
+    }
+
+    &.dark {
+      background: rgba(39, 84, 103, 1);
+    }
+
+    &.light {
+      background: rgba(41, 101, 124, 1);
+    }
+
+    & .tool-icon {
+      height: 100px;
+      width: 100px;
+      padding: 0 0 0 5px;
+      float: left;
+      display: inline-block;
+    }
+
+    &:hover {
+      opacity: 0.8;
+    }
+
+    & .home-body {
+      float: left;
+      margin: 0 0 0 25px;
+      flex: 1;
+    }
+
+    & .title {
+      margin: 15px 0 0 0;
+    }
+
+    & .description {
+      margin-top: 0;
+    }
+
+    & .material-icons {
+      font-size: 40px;
+    }
+  }
+}
+
+
+.phenopacket-banner {
+  height: 200px;
+  padding: 25px;
+  display: flex;
+  flex: 0;
+  margin-left: 25px;
+  cursor: pointer;
+
+  &:hover{
+    opacity: 0.75;
+  }
+
+  & .description {
+    flex: 1 auto;
+    margin: 3rem 0 0 3rem;
+    font-size: 2rem;
+
+    & h4 {
+      margin: 0.5rem 0 0.5rem 0;
+    }
+  }
+
+  a {
+    display: inherit;
+    color: unset !important;
+    text-decoration: none;
+  }
+  @media screen and (max-width: 958px) {
+    & a, .phenopacket-logo {
+      margin: 0 auto;
+    }
+  }
+
+  & .button {
+    height: 36px;
+    float: right;
+    margin: 0 10rem 0 0;
+  }
+}
