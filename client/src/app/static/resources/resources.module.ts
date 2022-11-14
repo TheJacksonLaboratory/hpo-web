@@ -8,6 +8,7 @@ import {ContributingComponent} from './collaboration/contributing.component';
 import {FaqComponent} from './faq/faq.component';
 import {PublicationsService} from './publications/publications.service';
 import {PublicationsComponent} from './publications/publications.component';
+import { PhenopacketComponent } from './phenopacket/phenopacket.component';
 
 
 @NgModule({
@@ -19,7 +20,7 @@ import {PublicationsComponent} from './publications/publications.component';
     ReactiveFormsModule
   ],
   declarations: [
-    ClinicianGuideComponent, ContributingComponent, FaqComponent, PublicationsComponent
+    ClinicianGuideComponent, ContributingComponent, FaqComponent, PublicationsComponent, PhenopacketComponent
   ],
   providers: [PublicationsService]
 })

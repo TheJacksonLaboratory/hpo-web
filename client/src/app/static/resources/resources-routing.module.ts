@@ -4,6 +4,7 @@ import {ClinicianGuideComponent} from './clinician-guide/clinician-guide.compone
 import {ContributingComponent} from './collaboration/contributing.component';
 import {FaqComponent} from './faq/faq.component';
 import {PublicationsComponent} from './publications/publications.component';
+import { PhenopacketComponent } from './phenopacket/phenopacket.component';
 
 
 const resourcesRoutes: Routes = [
@@ -13,7 +14,8 @@ const resourcesRoutes: Routes = [
       {path: 'clinician-guide', component: ClinicianGuideComponent},
       {path: 'contributing', component: ContributingComponent},
       {path: 'faq', component: FaqComponent},
-      {path: 'publications', component: PublicationsComponent}
+      {path: 'publications', component: PublicationsComponent},
+      {path: 'phenopacket', component: PhenopacketComponent}
     ]
   },
 ];
