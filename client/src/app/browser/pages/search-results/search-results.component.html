@@ -151,14 +151,14 @@
                     <ng-container matColumnDef="entrezGeneId">
                       <mat-header-cell *matHeaderCellDef> Gene Identifier</mat-header-cell>
                       <mat-cell *matCellDef="let row">
-                        <a routerLink="/browse/gene/{{row.entrezGeneId}}">{{row.entrezGeneId}}</a>
+                        <a routerLink="/browse/gene/{{row.geneId}}">{{row.geneId}}</a>
                       </mat-cell>
                     </ng-container>
 
                     <!-- gene entrez Symbol -->
                     <ng-container matColumnDef="entrezGeneSymbol">
                       <mat-header-cell *matHeaderCellDef> Gene Symbol</mat-header-cell>
-                      <mat-cell *matCellDef="let row"> {{row.entrezGeneSymbol}} </mat-cell>
+                      <mat-cell *matCellDef="let row"> {{row.geneSymbol}} </mat-cell>
                     </ng-container>
 
                     <!-- Matching String -->
