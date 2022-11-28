@@ -23,7 +23,7 @@ wget -P src/main/resources/ -N http://www.orphadata.org/data/xml/en_product6.xml
 wget -P src/main/resources/ -N http://ftp.ebi.ac.uk/pub/databases/genenames/hgnc/tsv/hgnc_complete_set.txt
 
 # PHENOTYPE HPOA
-wget -P src/main/resources/ -N https://github.com/obophenotype/human-phenotype-ontology/releases/latest/download/phenotype.hpoa
+wget https://github.com/obophenotype/human-phenotype-ontology/releases/latest/download/phenotype.hpoa -O src/main/resources/phenotype.hpoa
 
 # EXIT
 exit 0;
