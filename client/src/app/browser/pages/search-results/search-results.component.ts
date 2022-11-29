@@ -119,8 +119,8 @@ export class SearchResultsComponent {
 
   genesMatchingStringBuilder(genes) {
     genes.map(gene => {
-      if (gene.entrezGeneSymbol) {
-        gene['matchingString'] = gene.entrezGeneSymbol;
+      if (gene.geneSymbol) {
+        gene['matchingString'] = gene.geneSymbol;
       }
     });
     return genes;
