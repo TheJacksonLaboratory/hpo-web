@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {Observable} from "rxjs";
-import {FormControl} from "@angular/forms";
+import {UntypedFormControl} from "@angular/forms";
 import {catchError, filter, map} from "rxjs/operators";
 import {TermService} from "../../services/term/term.service";
 import {switchMap} from "rxjs/internal/operators/switchMap";
@@ -22,7 +22,7 @@ export class ProfileSearchComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  myControl = new FormControl();
+  myControl = new UntypedFormControl();
   filteredOptions: Observable<[]>;
   selectedTerms: Term[] = [];
   submittedTerms = false;

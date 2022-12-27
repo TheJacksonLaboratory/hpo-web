@@ -127,7 +127,6 @@
       }
     }
   },
-  "defaultProject": "hpo",
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "app",
