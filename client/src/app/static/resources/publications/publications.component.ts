@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {PublicationsService} from './publications.service';
 import {Publication} from '../../../browser/models/models';
-import {FormControl} from '@angular/forms';
+import {UntypedFormControl} from '@angular/forms';
 import {from} from 'rxjs';
 import {distinct, flatMap, map, toArray} from 'rxjs/operators';
 import {MatTableDataSource} from '@angular/material/table';
@@ -22,7 +22,7 @@ export class PublicationsComponent implements OnInit {
 
   displayedColumns: string[] = ['authors', 'year', 'title', 'journal'];
   category = 'all';
-  topics = new FormControl();
+  topics = new UntypedFormControl();
   topicList = [];
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
