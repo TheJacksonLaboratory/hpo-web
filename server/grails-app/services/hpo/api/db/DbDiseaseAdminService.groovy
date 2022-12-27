@@ -46,7 +46,7 @@ class DbDiseaseAdminService {
       joinTermToDisease()
       joinDiseasesToGenesWithSql()
     }catch (Exception e){
-      log.error(e.getStackTrace().toString())
+      log.error(e.getCause().toString())
       System.exit(2)
     }
   }
