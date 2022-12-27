@@ -36,7 +36,7 @@ export class TeamService {
   }
 
   getTeamOrganizations(): Observable<Organization[]> {
-    return this.http.get<Organization[]>(environment.HPO_TEAM_HPO_URL, {responseType: 'json'});
+    return this.http.get<Organization[]>(environment.HPO_TEAM_HPO_URL);
   }
 
 }
