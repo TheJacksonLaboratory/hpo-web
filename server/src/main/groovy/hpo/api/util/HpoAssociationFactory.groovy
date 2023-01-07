@@ -15,11 +15,11 @@ class HpoAssociationFactory {
   HpoAssociationFactory(Ontology hpoOntology){
     final hgncPath = new ClassPathResource('hgnc_complete_set.txt').file.toPath()
     final omimToGenePath = new ClassPathResource('mim2gene_medgen').file.toPath()
-    final hpoaFilePath =  new ClassPathResource('phenotype.hpoa').file.toPath()
+    final hpoaFilePath =  new ClassPathResource('phenotype.hpoa').getInputStream()
     final orphaToGenePath = new ClassPathResource('en_product6.xml').file.toPath()
     this.hpoaDiseases = HpoaDiseaseDataLoader.of(["OMIM", "ORPHA"] as Set<String>).loadDiseaseData(hpoaFilePath)
     this.hpoAssociationData = HpoAssociationData.builder(hpoOntology).orphaToGenePath(orphaToGenePath)
-      .hpoDiseases(hpoaDiseases).mim2GeneMedgen(omimToGenePath).hgncCompleteSetArchive(hgncPath).build()
+      .hpoDiseases(hpoaDiseases).mim2GeneMgedgen(omimToGenePath).hgncCompleteSetArchive(hgncPath).build()
   }
 
   HpoAssociationData hpoAssociationData(){

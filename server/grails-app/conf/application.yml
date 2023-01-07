@@ -89,7 +89,7 @@ environments:
       url: "jdbc:mysql://localhost:3306/hpo_web?autoReconnect=true"
       username: "root"
       password: "password"
-  stage:
+  test:
     dataSource:
       pooled: true
       dbCreate: "update"
