@@ -27,7 +27,7 @@
             "scripts": []
           },
           "configurations": {
-            "dev": {
+            "development": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -79,8 +79,8 @@
             "browserTarget": "hpo:build"
           },
           "configurations": {
-            "dev": {
-              "browserTarget": "hpo:build:dev"
+            "development": {
+              "browserTarget": "hpo:build:development"
             },
             "production": {
               "browserTarget": "hpo:build:production"
