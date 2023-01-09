@@ -7,10 +7,9 @@ buildscript {
     classpath "org.grails:grails-gradle-plugin:$grailsGradlePluginVersion"
     classpath "org.grails.plugins:hibernate5:7.2.0"
     classpath "gradle.plugin.com.github.erdi.webdriver-binaries:webdriver-binaries-gradle-plugin:2.7"
-    classpath "com.github.node-gradle:gradle-node-plugin:3.1.1"
     classpath "com.dorongold.plugins:task-tree:2.1.0"
     classpath "org.springframework.boot:spring-boot-gradle-plugin:2.7.1"
-    classpath "com.bmuschko:gradle-docker-plugin:7.4.0"
+    classpath "com.bmuschko:gradle-docker-plugin:9.1.0"
     classpath "org.grails.plugins:hibernate:4.3.8.0"
     classpath "org.grails.plugins:views-gradle:2.2.1"
   }
@@ -18,16 +17,13 @@ buildscript {
 
 version "1.17.19"
 group "hpo.api"
-
+System.setProperty("grails.env", "development")
 apply plugin: "idea"
-apply plugin: "war"
+//apply plugin: "war"
 apply plugin: "java"
 apply plugin: "org.grails.grails-web"
 apply plugin: "com.github.erdi.webdriver-binaries"
-apply plugin: "com.github.node-gradle.node"
 apply plugin: "com.dorongold.task-tree"
-apply plugin: "org.springframework.boot"
-apply plugin: "com.bmuschko.docker-spring-boot-application"
 apply plugin:"org.grails.plugins.views-json"
 
 sourceCompatibility = 1.11
@@ -117,6 +113,12 @@ tasks.withType(GroovyCompile) {
   }
 }
 
+task test_all_headless(type: Test) {
+  systemProperty "geb.env", "chromeHeadless"
+  dependsOn(test)
+  dependsOn(integrationTest)
+}
+
 tasks.withType(Test) {
   useJUnitPlatform()
   systemProperty "geb.env", System.getProperty('geb.env')
@@ -124,72 +126,34 @@ tasks.withType(Test) {
   systemProperty "webdriver.chrome.driver", System.getProperty('webdriver.chrome.driver')
 }
 
-node {
-  nodeProjectDir = file("../client/")
-}
+//assemble.dependsOn(test_all_headless)
 
-task buildClientDevelopment(type: NpxTask, dependsOn: npmInstall) {
-  group = 'build'
-  description = 'Compile client side assets for development'
-  command = 'npm'
-  args = ['run', 'build']
-}
-
-task buildClientProduction(type: NpxTask, dependsOn: npmInstall){
-  group = 'build'
-  description = 'Compile client side assets for production'
-  command = 'npm'
-  args = ['run', 'buildProd']
-}
-
-task clientTest(type: NpxTask, dependsOn: npmInstall) {
-  group = 'verification'
-  description = 'Executes client side unit tests'
-  command = 'npm'
-  args = ['run', 'test']
-}
-
-task clientIntegrationTest(type: NpxTask, dependsOn: npmInstall) {
-  group = 'verification'
-  description = 'Executes client side integration tests'
-  command = 'npm'
-  args = ['run', 'e2e']
-}
-
-war {
+tasks.withType(Jar) {
+  archiveBaseName = 'hpo-api'
   def env = System.getProperty("grails.env")
   if (env != 'production'){
-    archiveFileName = "hpo-web-${project.version}-SNAPSHOT.war_"
-  } else {
-    archiveFileName = "hpo-web-${project.version}.war_"
+    archiveVersion = "${project.version}-SNAPSHOT"
   }
+
+  duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+ext {
+  dockerTag = "${project.jar.getArchiveBaseName()}:${project.jar.getArchiveVersion()}".toLowerCase()
+  dockerBuildDir = mkdir("${buildDir}/docker")
+}
+
+task prepareDocker(type: Copy, dependsOn: bootJar) {
+  description = 'Copy files from src/main/docker and application jar to Docker temporal build directory'
+  group = 'Docker'
+
+  from 'src/main/docker'
+  from project.bootJar
+
+  into dockerBuildDir
 }
 
 webdriverBinaries {
   chromedriver "$chromeDriverVersion"
-}
-
-war.dependsOn(buildClientProduction)
-
-//bootRun.dependsOn(buildClientDevelopment)
-//test.dependsOn(clientTest)
-integrationTest.dependsOn(buildClientDevelopment)
-
-task test_all_headless(type: Test) {
-  systemProperty "geb.env", "chromeHeadless"
-  dependsOn(clientTest)
-  dependsOn(test)
-  dependsOn(integrationTest)
-}
-
-clean {
-  delete fileTree(dir: "src/main/webapp")
-}
-
-docker {
-  springBootApplication {
-    baseImage = 'hpo-web-${project.version}'
-  }
 }
 
 runCommand {
