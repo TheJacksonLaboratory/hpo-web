@@ -220,8 +220,7 @@
 105850	283	gene	-	-	-
 106050	-	phenotype	-	C1970130	-
 106070	-	phenotype	-	C1275084	-
-106100	710	phenotype	 GeneMap	C2717906	-
-106100	710	phenotype	 NCBI curation	C2717906	-
+106100	710	phenotype	 GeneMap; NCBI curation	C2717906	-
 106150	183	gene	-	-	-
 106165	185	gene	-	-	-
 106180	1636	gene	-	-	-
@@ -427,7 +426,7 @@
 110700	2532	phenotype	 GeneMap	C0013278	nondisease
 110720	-	phenotype	-	C1862238	-
 110750	2995	gene	-	-	-
-110800	2651	phenotype	 GeneMap	C0020717	-
+110800	2651	phenotype	 GeneMap	C0020717	nondisease
 110900	3792	phenotype	 GeneMap	C0022546	nondisease
 111000	6563	phenotype	 GeneMap	C0022645	nondisease
 111100	2525	gene	-	-	-
@@ -1934,7 +1933,7 @@
 143460	3349	gene	-	-	-
 143465	1815	phenotype	 GeneMap	C1263846	susceptibility
 143465	1816	phenotype	 GeneMap	C1263846	susceptibility
-143470	1071	phenotype	 GeneMap	C3149462	-
+143470	1071	phenotype	 GeneMap	C3149462	nondisease; QTL 2
 143500	54658	phenotype	 GeneMap	C0017551	nondisease
 143850	-	phenotype	-	C1840438	-
 143860	771	phenotype	 GeneMap	C1840437	-
@@ -2269,8 +2268,6 @@
 149500	-	phenotype	-	C0263382	-
 149600	-	phenotype	-	C1835613	-
 149700	3321	phenotype	 GeneMap	C1835612	question
-149730	2255	phenotype	 GeneMap	C0265269	-
-149730	2261	phenotype	 GeneMap	C0265269	-
 149730	2263	phenotype	 GeneMap	C0265269	-
 149750	3906	gene	-	-	-
 150000	3939	gene	-	-	-
@@ -3472,7 +3469,7 @@
 179250	-	phenotype	-	C1867397	-
 179270	-	phenotype	-	C2931464	-
 179280	-	phenotype	-	C1867396	-
-179300	-	phenotype	-	C0158761	-
+179300	4091	phenotype	 GeneMap	C5241445	susceptibility
 179400	-	phenotype	-	C1867395	-
 179410	5962	gene	-	-	-
 179450	-	phenotype	-	C1867394	-
@@ -3794,7 +3791,7 @@
 183020	-	phenotype	-	C1866774	-
 183050	-	phenotype	-	C1866770	-
 183086	773	phenotype	 GeneMap	C0752124	-
-183090	6311	phenotype	 GeneMap; GeneReviews	C0752121	susceptibility
+183090	6311	phenotype	 GeneMap; GeneReviews	C0752121	-
 183100	-	phenotype	-	C1866746	-
 183300	-	phenotype	-	C1866745	-
 183350	-	phenotype	-	C1866744	-
@@ -3995,7 +3992,7 @@
 188050	2162	phenotype	 GeneMap	C3160733	susceptibility
 188050	3026	phenotype	 GeneMap	C3160733	susceptibility
 188050	4524	phenotype	 GeneMap	C3160733	susceptibility
-188055	2153	phenotype	 GeneMap	C1861171	-
+188055	2153	phenotype	 GeneMap	C1861171	susceptibility
 188060	7057	gene	-	-	-
 188061	7058	gene	-	-	-
 188062	7059	gene	-	-	-
@@ -4292,7 +4289,7 @@
 193190	7448	gene	-	-	-
 193200	-	phenotype	-	C3277701	-
 193210	3685	gene	-	-	-
-193220	7439	phenotype	 GeneMap	C3888099	-
+193220	7439	phenotype	 GeneMap	C3888099	question
 193230	3769	phenotype	 GeneMap	C1860405	-
 193235	726	phenotype	 GeneMap	C0242852	-
 193240	-	phenotype	-	C1860403	-
@@ -4875,7 +4872,7 @@
 223800	54808	phenotype	 GeneMap	C0265286	-
 223900	8518	phenotype	 GeneMap	C0013364	-
 224000	-	phenotype	-	C1857153	-
-224050	7436	phenotype	 GeneReviews	C4551552	-
+224050	7436	phenotype	 GeneMap; GeneReviews	C4551552	-
 224100	10483	phenotype	 GeneMap	C1306589	-
 224120	146059	phenotype	 GeneMap	C5574667	-
 224230	55505	phenotype	 GeneMap; GeneReviews	C1857144	-
@@ -5614,7 +5611,7 @@
 259500	5925	phenotype	 GeneMap	C0585442	-
 259500	7157	phenotype	 GeneMap	C0585442	susceptibility
 259550	-	phenotype	-	C0029441	-
-259600	4313	phenotype	 GeneMap	C1850155	-
+259600	4313	phenotype	 GeneMap	CN322832	-
 259610	-	phenotype	-	C1850143	-
 259650	-	phenotype	-	C1850142	-
 259680	-	phenotype	-	C0410422	-
@@ -5671,7 +5668,7 @@
 261560	-	phenotype	-	C1849929	-
 261575	-	phenotype	-	C1849928	-
 261590	-	phenotype	-	C1849927	-
-261600	5053	phenotype	 GeneMap	C0031485	-
+261600	5053	phenotype	 GeneMap	C0031485	nondisease
 261630	5860	phenotype	 GeneMap	C0268465	-
 261640	5805	phenotype	 GeneMap	C0878676	-
 261650	5106	phenotype	 GeneMap	C1849821	-
@@ -7079,7 +7076,12 @@
 301086	158747	gene	-	-	-
 301087	100129662	gene	-	-	-
 301088	100272147	gene	-	-	-
+301089	55841	gene	-	-	-
 301091	2556	phenotype	 GeneMap	CN322486	-
+301092	407049	gene	-	-	-
+301093	340527	gene	-	-	-
+301094	-	phenotype	-	NULL	-
+301095	2258	phenotype	 GeneMap	CN322943	-
 301200	265	phenotype	 GeneMap	C1845053	-
 301201	-	phenotype	-	C1845051	-
 301220	5422	phenotype	 GeneMap	C1845050	-
@@ -8226,7 +8228,6 @@
 600759	5664	gene	-	-	-
 600760	6338	gene	-	-	-
 600761	6340	gene	-	-	-
-600762	3262	gene	-	-	-
 600763	7178	gene	-	-	-
 600764	3140	gene	-	-	-
 600767	2665	gene	-	-	-
@@ -9077,17 +9078,6 @@
 601662	214	gene	-	-	-
 601663	2100	gene	-	-	-
 601664	23020	gene	-	-	-
-601665	154	phenotype	 GeneMap	C0028754	susceptibility
-601665	155	phenotype	 GeneMap	C0028754	susceptibility
-601665	181	phenotype	 GeneMap	C0028754	susceptibility
-601665	5167	phenotype	 GeneMap	C0028754	susceptibility
-601665	51738	phenotype	 GeneMap	C0028754	susceptibility
-601665	5443	phenotype	 GeneMap	C0028754	susceptibility
-601665	5468	phenotype	 GeneMap	C0028754	-
-601665	7352	phenotype	 GeneMap	C0028754	susceptibility
-601665	8431	phenotype	 GeneMap	C0028754	-
-601665	9607	phenotype	 GeneMap	C0028754	susceptibility; question
-601665	9672	phenotype	 GeneMap	C0028754	susceptibility
 601666	-	phenotype	-	C1866519	-
 601667	284	gene	-	-	-
 601668	-	phenotype	-	C1866507	-
@@ -10454,7 +10444,7 @@
 603113	5519	gene	-	-	-
 603114	6282	gene	-	-	-
 603115	1660	gene	-	-	-
-603116	-	phenotype	-	C1864186	-
+603116	267010	phenotype	 GeneMap	C1864186	-
 603117	-	phenotype	-	C1864185	-
 603118	1014	gene	-	-	-
 603119	-	phenotype	-	C1864184	-
@@ -14320,7 +14310,7 @@
 607151	57674	phenotype	 GeneMap	C1846689	susceptibility
 607152	-	phenotype	-	C1846685	-
 607153	9270	gene	-	-	-
-607154	3596	phenotype	 GeneMap	C2607914	susceptibility
+607154	3596	phenotype	 GeneMap	C4017540	susceptibility
 607155	79147	phenotype	 GeneMap	C1846672	-
 607156	10402	gene	-	-	-
 607157	114132	gene	-	-	-
@@ -16579,6 +16569,7 @@
 609419	406980	gene	-	-	-
 609420	406982	gene	-	-	-
 609422	407048	gene	-	-	-
+609423	1234	phenotype	 GeneMap	C1836230	susceptibility
 609423	1524	phenotype	 GeneMap	C1836230	susceptibility
 609423	30835	phenotype	 GeneMap	C1836230	susceptibility
 609423	3107	phenotype	 GeneMap	C1836230	susceptibility
@@ -16594,6 +16585,7 @@
 609423	6356	phenotype	 GeneMap	C1836230	susceptibility
 609423	6387	phenotype	 GeneMap	C1836230	susceptibility
 609423	7098	phenotype	 GeneMap	C1836230	susceptibility
+609423	729230	phenotype	 GeneMap	C1836230	susceptibility
 609424	149041	gene	-	-	-
 609425	-	phenotype	-	C2674949	-
 609426	50488	gene	-	-	-
@@ -19462,7 +19454,7 @@
 612334	222236	gene	-	-	-
 612335	-	phenotype	-	C2676732	-
 612336	5627	phenotype	 GeneMap	C3278211	-
-612337	10472	phenotype	 GeneMap	NULL	-
+612337	10472	phenotype	 GeneMap	CN029689	-
 612338	92086	gene	-	-	-
 612339	91227	gene	-	-	-
 612340	728226	gene	-	-	-
@@ -19480,7 +19472,6 @@
 612352	57559	gene	-	-	-
 612353	-	phenotype	-	C2676508	-
 612354	-	phenotype	-	C2676507	-
-612355	84953	gene	-	-	-
 612356	3053	phenotype	 GeneMap	C0398626	-
 612357	-	phenotype	-	C2700439	-
 612358	3827	gene	-	-	-
@@ -20128,7 +20119,7 @@
 613010	55312	gene	-	-	-
 613011	3702	phenotype	 GeneMap	C3552634	-
 613012	131669	gene	-	-	-
-613013	8929	phenotype	 GeneMap	C2751682	susceptibility
+613013	8929	phenotype	 GeneMap	C2751682	-
 613014	238	phenotype	 GeneMap; GeneReviews	C2751681	susceptibility
 613015	-	phenotype	-	C2751680	-
 613016	-	phenotype	-	C2751679	-
@@ -20249,7 +20240,7 @@
 613132	693123	gene	-	-	-
 613133	10100	gene	-	-	-
 613134	10099	gene	-	-	-
-613135	6531	phenotype	 GeneMap	NULL	-
+613135	6531	phenotype	 GeneMap	CN035598	-
 613136	10098	gene	-	-	-
 613137	10867	gene	-	-	-
 613138	23554	gene	-	-	-
@@ -20792,7 +20783,7 @@
 613668	9440	phenotype	 GeneMap	C3150921	-
 613669	55149	gene	-	-	-
 613670	27086	phenotype	 GeneMap	C4013764	-
-613671	55084	phenotype	 GeneMap	C3150924	-
+613671	55084	phenotype	 GeneMap	C3150924	question
 613672	55149	phenotype	 GeneMap	C3150925	question
 613673	10661	phenotype	 GeneMap	C3150926	-
 613674	64321	phenotype	 GeneMap	C3150927	-
@@ -20857,7 +20848,7 @@
 613731	6010	phenotype	 GeneMap	C3151001	-
 613733	4221	gene	-	-	-
 613734	84317	gene	-	-	-
-613735	4774	phenotype	 GeneMap	C4478940	-
+613735	4774	phenotype	 GeneMap	CN322312	-
 613736	55851	phenotype	 GeneMap	C3151037	-
 613737	5663	phenotype	 GeneMap	C3151038	question
 613738	392636	gene	-	-	-
@@ -23900,7 +23891,7 @@
 616808	55337	gene	-	-	-
 616809	84992	phenotype	 GeneMap	C4225201	-
 616810	57722	gene	-	-	-
-616811	25828	phenotype	 GeneMap	NULL	question
+616811	25828	phenotype	 GeneMap	C5567607	question
 616812	11149	phenotype	 GeneMap	C5568138	-
 616813	116988	gene	-	-	-
 616814	79816	phenotype	 GeneMap	C4225197	-
@@ -23983,7 +23974,8 @@
 616891	100507537	gene	-	-	-
 616892	9688	phenotype	 GeneMap	C4225166	-
 616893	23165	phenotype	 GeneMap	C4225165	question
-616894	1857	phenotype	 GeneMap; GeneReviews; NCBI curation	C4225164	-
+616894	1857	phenotype	 GeneMap	C4225164	-
+616894	1857	phenotype	 GeneReviews; NCBI curation	C4225164	-
 616895	101927152	gene	-	-	-
 616896	4976	phenotype	 GeneMap	C4225163	question
 616897	202018	phenotype	 GeneMap	C4225162	-
@@ -24010,7 +24002,7 @@
 616918	54872	gene	-	-	-
 616919	22844	gene	-	-	-
 616920	56006	phenotype	 GeneMap	C4310793	-
-616921	10846	phenotype	 GeneMap	NULL	-
+616921	10846	phenotype	 GeneMap	C5567464	-
 616922	10846	phenotype	 GeneMap	C4310791	-
 616923	388591	gene	-	-	-
 616924	4744	phenotype	 GeneMap	C4310790	-
@@ -24116,7 +24108,7 @@
 617027	8912	phenotype	 GeneMap	C4310756	-
 617028	23043	phenotype	 GeneMap	C4310755	-
 617029	10509	gene	-	-	-
-617030	122622	phenotype	 GeneMap	NULL	-
+617030	122622	phenotype	 GeneMap	C5567521	-
 617031	84950	gene	-	-	-
 617032	80162	gene	-	-	-
 617033	729438	gene	-	-	-
@@ -25955,7 +25947,7 @@
 618871	27237	gene	-	-	-
 618872	116931	phenotype	 GeneMap	C5394350	-
 618873	387119	phenotype	 GeneMap	C5394354	-
-618874	-	phenotype	-	NULL	-
+618874	-	phenotype	-	C3495679	-
 618875	375387	phenotype	 GeneMap	C5394359	-
 618876	10501	phenotype	 GeneMap	C5394362	-
 618877	5610	phenotype	 GeneMap	C5394367	-
@@ -27182,32 +27174,115 @@
 620102	84839	phenotype	 GeneMap	CN322361	-
 620103	8468	phenotype	 GeneMap	CN322363	-
 620104	80320	phenotype	 GeneMap	CN322364	-
+620105	165530	gene	-	-	-
 620106	3839	phenotype	 GeneMap	CN322373	-
 620107	79005	phenotype	 GeneMap	CN322366	-
+620108	256472	gene	-	-	-
 620109	90379	gene	-	-	-
+620110	80014	gene	-	-	-
 620111	3710	phenotype	 GeneMap	CN322377	-
+620112	104326055	gene	-	-	-
 620113	118924	phenotype	 GeneMap	CN322432	-
 620114	8911	phenotype	 GeneMap	CN322434	-
 620115	23031	phenotype	 GeneMap	CN322463	-
 620116	345275	phenotype	 GeneMap	CN322482	susceptibility
+620117	100126347	gene	-	-	-
+620118	57474	gene	-	-	-
+620120	27147	gene	-	-	-
 620121	654	phenotype	 GeneMap	CN322493	susceptibility
+620122	57189	gene	-	-	-
+620123	57666	gene	-	-	-
+620124	57615	gene	-	-	-
 620125	6338	phenotype	 GeneMap	CN322488	-
 620126	6340	phenotype	 GeneMap	CN322489	-
+620127	442893	gene	-	-	-
+620128	56884	gene	-	-	-
+620129	57523	gene	-	-	-
+620130	57489	gene	-	-	-
+620131	81623	gene	-	-	-
+620132	57643	gene	-	-	-
 620133	64858	phenotype	 GeneMap	CN322494	-
+620134	57480	gene	-	-	-
 620135	4713	phenotype	 GeneMap	CN322490	question
+620136	134492	gene	-	-	-
 620137	7388	phenotype	 GeneMap	CN322495	question
 620138	90523	phenotype	 GeneMap	CN322496	-
 620139	132001	phenotype	 GeneMap	CN322492	-
+620140	342898	gene	-	-	-
 620141	10093	phenotype	 GeneMap	CN322497	-
+620142	338657	gene	-	-	-
+620143	642987	gene	-	-	-
+620144	57685	gene	-	-	-
 620145	51343	phenotype	 GeneMap	CN322562	-
+620146	131544	gene	-	-	-
+620147	166863	gene	-	-	-
 620148	3848	phenotype	 GeneMap	CN322561	-
 620149	781	phenotype	 GeneMap	CN322563	-
 620152	58528	phenotype	 GeneMap	CN322565	-
-620153	-	phenotype	-	CN322564	-
+620153	338657	phenotype	 GeneMap	CN322564	question
 620154	678	phenotype	 GeneMap	CN322566	-
 620155	29072	phenotype	 GeneMap	CN322640	-
 620156	26153	phenotype	 GeneMap	CN322567	-
 620157	29072	phenotype	 GeneMap	CN322641	-
-620158	-	phenotype	-	NULL	-
-620170	-	phenotype	-	CN322644	-
-620173	-	phenotype	-	NULL	-
+620158	4884	phenotype	 GeneMap	CN322654	-
+620159	57469	gene	-	-	-
+620160	80726	gene	-	-	-
+620161	7125	phenotype	 GeneMap	CN322668	-
+620162	57573	gene	-	-	-
+620163	57677	gene	-	-	-
+620164	57684	gene	-	-	-
+620165	4034	gene	-	-	-
+620166	9570	phenotype	 GeneMap	CN322669	-
+620167	54675	phenotype	 GeneMap	CN322762	-
+620168	56204	gene	-	-	-
+620169	80256	gene	-	-	-
+620170	80726	phenotype	 GeneMap	CN322644	-
+620171	57224	gene	-	-	-
+620172	57495	gene	-	-	-
+620173	54084	phenotype	 GeneMap	CN322655	-
+620174	2259	phenotype	 GeneMap	CN322670	-
+620175	80183	gene	-	-	-
+620176	57696	gene	-	-	-
+620177	79669	phenotype	 GeneMap	CN322667	-
+620178	57655	gene	-	-	-
+620179	57476	gene	-	-	-
+620180	54762	gene	-	-	-
+620181	196996	gene	-	-	-
+620182	65983	gene	-	-	-
+620183	699	phenotype	 GeneMap	CN322671	-
+620184	55719	phenotype	 GeneMap	CN322767	-
+620185	23137	phenotype	 GeneMap	CN322768	-
+620186	8085	phenotype	 GeneMap	CN322761	-
+620187	85452	gene	-	-	-
+620188	79613	gene	-	-	-
+620189	8379	phenotype	 GeneMap	CN322838	-
+620190	140701	gene	-	-	-
+620191	283209	phenotype	 GeneMap	CN322830	-
+620192	2261	phenotype	 GeneMap	CN322764	-
+620193	2255	phenotype	 GeneMap	CN322763	-
+620194	79759	phenotype	 GeneMap	CN322770	-
+620195	-	phenotype	-	CN322831	-
+620196	157855	phenotype	 GeneMap	CN322769	-
+620197	85452	phenotype	 GeneMap	CN322839	-
+620198	7234	phenotype	 GeneMap	CN322771	-
+620199	84946	phenotype	 GeneMap	CN322829	-
+620200	51608	phenotype	 GeneMap	CN322950	question
+620201	819	phenotype	 GeneMap	CN322951	question
+620202	57687	gene	-	-	-
+620203	439	phenotype	 GeneMap	CN322941	question
+620204	267010	gene	-	-	-
+620205	85450	gene	-	-	-
+620206	90378	gene	-	-	-
+620207	-	phenotype	-	CN322953	-
+620208	267010	phenotype	 GeneMap	CN322942	question
+620209	283450	gene	-	-	-
+620212	388228	gene	-	-	-
+620213	84542	gene	-	-	-
+620214	79802	gene	-	-	-
+620215	100127206	gene	-	-	-
+620216	200010	gene	-	-	-
+620217	80817	gene	-	-	-
+620218	348378	gene	-	-	-
+620219	100132916	gene	-	-	-
+620220	85352	gene	-	-	-
+620222	-	phenotype	-	NULL	-
