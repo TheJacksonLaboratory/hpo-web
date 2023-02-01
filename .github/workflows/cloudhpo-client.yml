@@ -38,4 +38,4 @@ jobs:
           gsutil cp -r dist/* $HPO_CLIENT_BACKUP_GCP_LOCATION/
           # Update our public site with the most recent version
           gsutil -m rm $HPO_RELEASE_PUBLIC_GCP_LOCATION/* 2> /dev/null || true
-          gsutil cp -r HPO_CLIENT_BACKUP_GCP_LOCATION/* $HPO_RELEASE_PUBLIC_GCP_LOCATION/
+          gsutil cp -r $HPO_CLIENT_BACKUP_GCP_LOCATION/* $HPO_RELEASE_PUBLIC_GCP_LOCATION/
