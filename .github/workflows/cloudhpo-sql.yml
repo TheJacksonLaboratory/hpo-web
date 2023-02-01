@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Cloud Sql Deploy
+name: Cloud hpo-web sql deploy
 
 # Controls when the workflow will run
 on: workflow_dispatch
@@ -23,7 +23,7 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
-      
+
       - name: "Set hpo release version"
         run: echo "HPO_RELEASE_VERSION=$(grep "version" server/build.gradle | tr '"' ' ' | sed -n -e 's/version  //p' | xargs)" >> $GITHUB_ENV
       - name: "Set hpo sql file name"
