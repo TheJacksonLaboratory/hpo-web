@@ -16,7 +16,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+      - uses: 'google-github-actions/setup-gcloud@v1'
         with:
           service_account_key: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
           project_id: ${{ secrets.GOOGLE_PROJECT_ID }}
