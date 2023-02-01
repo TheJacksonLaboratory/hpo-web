@@ -28,7 +28,7 @@ jobs:
           PROJECT_ID: jax-robinson-hpo-01
           APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
         with:
-          args: builds submit build/docker/Dockerfile --region=us-east1 --tag us-east1-docker.pkg.dev/jax-robinson-hpo-01/hpo-docker-repo/hpo-api:$HPO_RELEASE_VERSION
+          args: builds submit server/build/docker/Dockerfile --region=us-east1 --tag us-east1-docker.pkg.dev/jax-robinson-hpo-01/hpo-docker-repo/hpo-api:$HPO_RELEASE_VERSION
           cli: gcloud
       - name: "Generate our client sources"
         run: |
