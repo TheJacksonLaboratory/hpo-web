@@ -23,7 +23,7 @@ jobs:
       - name: 'Setup gcloud'
         uses: 'google-github-actions/setup-gcloud@v1'
       - name: "Set hpo release version"
-        run: echo "HPO_RELEASE_VERSION=$(cat ./package.json | grep -m 1 version | sed 's/[^0-9.]//g')" >> $GITHUB_ENV
+        run: echo "HPO_RELEASE_VERSION=$(cat ./client/package.json | grep -m 1 version | sed 's/[^0-9.]//g')" >> $GITHUB_ENV
       - name: "Set gcp public bucket location"
         run: echo "HPO_RELEASE_PUBLIC_GCP_LOCATION=gs://jax-robinson-hpo-01-public-bucket" >> $GITHUB_ENV
       - name: "Set gcp client backup location"
