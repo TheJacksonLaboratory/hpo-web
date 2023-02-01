@@ -1,0 +1,41 @@
+name: Cloud hpo-web client deploy
+
+# Controls when the workflow will run
+on: workflow_dispatch
+
+jobs:
+  load:
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: "Checking out repository"
+        uses: actions/checkout@v3
+      - name: "Seting up node"
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v1'
+        with:
+          credentials_json: '${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}'
+      - name: 'Setup gcloud'
+        uses: 'google-github-actions/setup-gcloud@v1'
+      - name: "Set hpo release version"
+        run: echo "HPO_RELEASE_VERSION=$(grep "version" server/build.gradle | tr '"' ' ' | sed -n -e 's/version  //p' | xargs)" >> $GITHUB_ENV
+      - name: "Set gcp public bucket location"
+        run: echo "HPO_RELEASE_PUBLIC_GCP_LOCATION=gs://jax-robinson-hpo-01-public-bucket/" >> $GITHUB_ENV
+      - name: "Generate our client sources"
+        run: |
+          cd client
+          npm install
+          npm run buildProd
+      - name: "Copy sources file to gcp bucket"
+        uses: actions-hub/gcloud@master
+        env:
+          PROJECT_ID: jax-robinson-hpo-01
+          APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+        with:
+          args: cp -r dist/ gs://jax-robinson-hpo-01-public-bucket
+          cli: gsutil
