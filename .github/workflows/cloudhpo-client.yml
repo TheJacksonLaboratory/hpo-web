@@ -23,17 +23,19 @@ jobs:
       - name: 'Setup gcloud'
         uses: 'google-github-actions/setup-gcloud@v1'
       - name: "Set hpo release version"
-        run: echo "HPO_RELEASE_VERSION=$(grep "version" server/build.gradle | tr '"' ' ' | sed -n -e 's/version  //p' | xargs)" >> $GITHUB_ENV
+        run: echo "HPO_RELEASE_VERSION=$(cat ./package.json | grep -m 1 version | sed 's/[^0-9.]//g')" >> $GITHUB_ENV
       - name: "Set gcp public bucket location"
-        run: echo "HPO_RELEASE_PUBLIC_GCP_LOCATION=gs://jax-robinson-hpo-01-public-bucket/" >> $GITHUB_ENV
+        run: echo "HPO_RELEASE_PUBLIC_GCP_LOCATION=gs://jax-robinson-hpo-01-public-bucket" >> $GITHUB_ENV
+      - name: "Set gcp client backup location"
+        run: echo "HPO_CLIENT_BACKUP_GCP_LOCATION=gs://jax-robinson-hpo-01-project-data/client-backup/$HPO_RELEASE_VERSION" >> $GITHUB_ENV
       - name: "Generate and upload our client sources"
         run: |
           cd client
           npm install
           npm run buildProd
           # Force update our backup file and copy to new backup
-          gsutil -m rm gs://jax-robinson-hpo-01-project-data/client-backup/$HPO_RELEASE_VERSION/* 2> /dev/null || true
-          gsutil cp -r dist/* gs://jax-robinson-hpo-01-project-data/client-backup/$HPO_RELEASE_VERSION/
+          gsutil -m rm $HPO_CLIENT_BACKUP_GCP_LOCATION/* 2> /dev/null || true
+          gsutil cp -r dist/* $HPO_CLIENT_BACKUP_GCP_LOCATION/
           # Update our public site with the most recent version
-          gsutil -m rm gs://jax-robinson-hpo-01-public-bucket/* 2> /dev/null || true
-          gsutil cp -r gs://jax-robinson-hpo-01-project-data/client-backup/$HPO_RELEASE_VERSION/* gs://jax-robinson-hpo-01-public-bucket/
+          gsutil -m rm $HPO_RELEASE_PUBLIC_GCP_LOCATION/* 2> /dev/null || true
+          gsutil cp -r HPO_CLIENT_BACKUP_GCP_LOCATION/* $HPO_RELEASE_PUBLIC_GCP_LOCATION/

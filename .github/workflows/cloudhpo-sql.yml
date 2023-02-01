@@ -29,7 +29,7 @@ jobs:
       - name: "Set hpo sql file name"
         run: echo "HPO_RELEASE_SQL_FILENAME=hpo_web-$HPO_RELEASE_VERSION.sql" >> $GITHUB_ENV
       - name: "Set gcp sql location"
-        run: echo "HPO_RELEASE_SQL_GCP_LOCATION=gs://jax-robinson-hpo-01-project-data/$HPO_RELEASE_SQL_FILENAME" >> $GITHUB_ENV
+        run: echo "HPO_RELEASE_SQL_GCP_LOCATION=gs://jax-robinson-hpo-01-project-data/mysql/$HPO_RELEASE_SQL_FILENAME" >> $GITHUB_ENV
       - name: Load our database with the new data
         run: ./gradlew runCommand -Dgrails.env="gcp" -Pargs="load-hpo-db"
 
@@ -43,7 +43,7 @@ jobs:
           PROJECT_ID: jax-robinson-hpo-01
           APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
         with:
-          args: cp $HPO_RELEASE_SQL_FILENAME gs://jax-robinson-hpo-01-project-data/
+          args: cp $HPO_RELEASE_SQL_FILENAME gs://jax-robinson-hpo-01-project-data/mysql/
           cli: gsutil
       - name: gcloud import cloud sql database
         uses: actions-hub/gcloud@master
