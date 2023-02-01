@@ -26,16 +26,14 @@ jobs:
         run: echo "HPO_RELEASE_VERSION=$(grep "version" server/build.gradle | tr '"' ' ' | sed -n -e 's/version  //p' | xargs)" >> $GITHUB_ENV
       - name: "Set gcp public bucket location"
         run: echo "HPO_RELEASE_PUBLIC_GCP_LOCATION=gs://jax-robinson-hpo-01-public-bucket/" >> $GITHUB_ENV
-      - name: "Generate our client sources"
+      - name: "Generate and upload our client sources"
         run: |
           cd client
           npm install
           npm run buildProd
-      - name: "Copy sources file to gcp bucket"
-        uses: actions-hub/gcloud@master
-        env:
-          PROJECT_ID: jax-robinson-hpo-01
-          APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
-        with:
-          args: cp -r dist/ gs://jax-robinson-hpo-01-public-bucket
-          cli: gsutil
+          # Force update our backup file and copy to new backup
+          gsutil -m rm gs://jax-robinson-hpo-01-project-data/client-backup/$HPO_RELEASE_VERSION/* 2> /dev/null || true
+          gsutil cp -r dist/* gs://jax-robinson-hpo-01-project-data/client-backup/$HPO_RELEASE_VERSION/
+          # Update our public site with the most recent version
+          gsutil -m rm gs://jax-robinson-hpo-01-public-bucket/* 2> /dev/null || true
+          gsutil cp -r gs://jax-robinson-hpo-01-project-data/client-backup/$HPO_RELEASE_VERSION/* gs://jax-robinson-hpo-01-public-bucket/
