@@ -15,11 +15,9 @@ buildscript {
   }
 }
 
-version "1.17.19"
+version "1.17.20-rc.1"
 group "hpo.api"
-System.setProperty("grails.env", "development")
 apply plugin: "idea"
-//apply plugin: "war"
 apply plugin: "java"
 apply plugin: "org.grails.grails-web"
 apply plugin: "com.github.erdi.webdriver-binaries"

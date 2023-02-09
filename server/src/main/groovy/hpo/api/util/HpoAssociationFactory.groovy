@@ -19,7 +19,7 @@ class HpoAssociationFactory {
     final orphaToGenePath = new ClassPathResource('en_product6.xml').file.toPath()
     this.hpoaDiseases = HpoaDiseaseDataLoader.of(["OMIM", "ORPHA"] as Set<String>).loadDiseaseData(hpoaFilePath)
     this.hpoAssociationData = HpoAssociationData.builder(hpoOntology).orphaToGenePath(orphaToGenePath)
-      .hpoDiseases(hpoaDiseases).mim2GeneMgedgen(omimToGenePath).hgncCompleteSetArchive(hgncPath).build()
+      .hpoDiseases(hpoaDiseases).mim2GeneMedgen(omimToGenePath).hgncCompleteSetArchive(hgncPath).build()
   }
 
   HpoAssociationData hpoAssociationData(){

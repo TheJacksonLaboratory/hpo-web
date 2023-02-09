@@ -44,12 +44,13 @@ spring:
     groovy:
         template:
             check-template-location: false
-#    config:
-#      import:  ${HOME}/.grails/hpo_web/application.yml
     devtools:
       restart:
         enabled: false
-
+    cloud:
+      gcp:
+        sql:
+          enabled: false
 management:
   enabled-by-default: true
 
@@ -80,8 +81,15 @@ dataSource:
   testWhileIdle: true
   testOnReturn: false
   driverClassName: "com.mysql.jdbc.Driver"
+  username: ${HPO_MYSQL_USERNAME}
+  password: ${HPO_MYSQL_PASSWORD}
 
 environments:
+  ingest:
+    dataSource:
+      pooled: true
+      dbCreate: "update"
+      url: "jdbc:mysql://localhost:3306/hpo_web?autoReconnect=true"
   development:
     dataSource:
       pooled: true
@@ -94,22 +102,15 @@ environments:
       pooled: true
       dbCreate: "update"
       url: "jdbc:mysql://localhost:3306/hpo_web?autoReconnect=true"
-      username: ${HPO_MYSQL_USERNAME}
-      password: ${HPO_MYSQL_PASSWORD}
-
-  gcp:
-    dataSource:
-      dbCreate: "update"
-      url: "jdbc:mysql://localhost:3306/hpo_web"
       username: "root"
       password: "password"
   production:
     dataSource:
-     pooled: true
-     dbCreate: "update"
-     url: "jdbc:mysql://localhost:3306/hpo_web?autoReconnect=true"
-     username: ${HPO_MYSQL_USERNAME}
-     password: ${HPO_MYSQL_PASSWORD}
+      dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+      dbCreate: "update"
+      url: "jdbc:mysql://google/hpo?socketFactory=com.google.cloud.sql.mysql.SocketFactory&cloudSqlInstance=jax-robinson-hpo-01:us-central1:hpo-web"
+      username: ${HPO_CLOUD_SQL_USERNAME}
+      password: ${HPO_CLOUD_SQL_PASSWORD}
 
 
 

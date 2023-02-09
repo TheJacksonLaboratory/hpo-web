@@ -8,9 +8,6 @@ import org.monarchinitiative.loinc2hpocore.loinc.LoincEntry
 import org.monarchinitiative.loinc2hpocore.loinc.LoincId
 import org.monarchinitiative.phenol.ontology.data.TermId
 
-import java.util.stream.Collectors
-
-
 class Loinc2HpoFactory {
 
   String annotationPath = new ClassPathResource('loinc2hpo-annotations.tsv').file.absolutePath
@@ -48,4 +45,6 @@ class Loinc2HpoFactory {
   Map<LoincId, LoincEntry> loincEntryMap() {
     return LoincTableCoreParser.load(loincCorePath)
   }
+
+
 }

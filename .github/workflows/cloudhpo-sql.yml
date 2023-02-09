@@ -31,11 +31,11 @@ jobs:
       - name: "Set gcp sql location"
         run: echo "HPO_RELEASE_SQL_GCP_LOCATION=gs://jax-robinson-hpo-01-project-data/mysql/$HPO_RELEASE_SQL_FILENAME" >> $GITHUB_ENV
       - name: Load our database with the new data
-        run: ./gradlew runCommand -Dgrails.env="gcp" -Pargs="load-hpo-db"
+        run: ./gradlew runCommand -Dgrails.env="ingest" -Pargs="load-hpo-db"
 
       - name: Export our database to a sql file
         run: |
-          mysqldump --column-statistics=0 -h 127.0.0.1 -u root --password=password --opt hpo_web > $HPO_RELEASE_SQL_FILENAME
+          mysqldump --column-statistics=0 -h 127.0.0.1 -u ${HPO_MYSQL_USERNAME} --password=${HPO_MYSQL_USERNAME} --opt hpo_web > $HPO_RELEASE_SQL_FILENAME
 
       - name: Copy sql file to gcp bucket
         uses: actions-hub/gcloud@master

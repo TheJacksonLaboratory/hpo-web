@@ -10,10 +10,10 @@ beans = {
   hpoOntology(ontologyFactory: "getHpoOntology")
   maxoOntology(ontologyFactory: "getMaxoOntology")
   hpoUtilities(HpoUtilities, hpoOntology)
-  switch(Environment.current) {
-    case Environment.DEVELOPMENT:
-      hpoAssociationFactory(HpoAssociationFactory, hpoOntology)
-      hpoLoincFactory(Loinc2HpoFactory, loincAnnotations, loincCore)
-      hpoLoinc(hpoLoincFactory: "getInstance")
+  hpoLoincFactory(Loinc2HpoFactory)
+  hpoLoinc(hpoLoincFactory: "getInstance")
+  if(Environment.current.name == "ingest"){
+    // Only need for ingest
+    hpoAssociationFactory(HpoAssociationFactory, hpoOntology)
   }
 }

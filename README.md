@@ -17,7 +17,7 @@ The following guide provides the steps for an out-of-the-box setup for the Human
 
 + Initialize the mysql database and load the HPO ontology data. Run the following command in the command window inside the hpo-web directory. This step will take approximate 3+ minutes to complete
          
-        ./gradlew server:runCommand -Pargs="load-hpo-db"
+        ./gradlew server:runCommand -Dgrails.env=ingest -Pargs="load-hpo-db"
         
         E.g. when complete the output in the command window should look like this:
         ...
@@ -62,10 +62,6 @@ The following guide provides the steps for an out-of-the-box setup for the Human
 + To open the application site launch the browser and go to
  
         http://<host>:8080/app/index.html
-
-+ If client (Angular App) hot reload is desired open a new shell and execute
-
-        ./gradlew buildClientWatch
 
 + Optionally to open the client (Angular app) via Cli
 
