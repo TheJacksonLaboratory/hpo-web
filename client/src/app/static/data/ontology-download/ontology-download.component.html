@@ -1,18 +1,21 @@
 <div class="container ontology-download" fxLayout="row wrap">
   <h1 class="pageTitle center" fxFlex="100">Download Ontology</h1>
   <div class="ontology-download-wrapper" fxLayout="column" fxLayoutAlign="space-evenly center" fxFlex>
-      <h2>v{{version}}</h2>
-      <div class="download-banner-wrapper mat-elevation-z4" fxLayout="row" (click)="utilityService.openExternalUrl(oboUrl)">
-        <mat-icon>download</mat-icon>
-        <h3 class="download-banner-title">Download hp.obo</h3>
+      <div class="version-title">
+        <h2>{{version}}</h2>
+        <a [href]="otherReleases" target="_blank">Older Versions</a>
       </div>
-      <div class="download-banner-wrapper mat-elevation-z4" fxLayout="row" (click)="utilityService.openExternalUrl(owlUrl)">
+      <div class="download-banner-wrapper mat-elevation-z4" fxLayout="row" (click)="utilityService.downloadFile(oboUrl)">
         <mat-icon>download</mat-icon>
-        <h3 class="download-banner-title">Download hp.owl</h3>
+        <h3 class="download-banner-title">Download latest hp.obo</h3>
       </div>
-      <div class="download-banner-wrapper mat-elevation-z4" fxLayout="row" (click)="utilityService.openExternalUrl(jsonUrl)">
+      <div class="download-banner-wrapper mat-elevation-z4" fxLayout="row" (click)="utilityService.downloadFile(owlUrl)">
         <mat-icon>download</mat-icon>
-        <h3 class="download-banner-title">Download hp.json</h3>
+        <h3 class="download-banner-title">Download latest hp.owl</h3>
+      </div>
+      <div class="download-banner-wrapper mat-elevation-z4" fxLayout="row" (click)="utilityService.downloadFile(jsonUrl)">
+        <mat-icon>download</mat-icon>
+        <h3 class="download-banner-title">Download latest hp.json</h3>
       </div>
   </div>
 </div>

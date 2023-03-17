@@ -10,8 +10,13 @@ export class UtilityService {
 
   constructor(private http: HttpClient) { }
 
-  openExternalUrl(url: string) {
-    window.open(url, '_blank').focus();
+  downloadFile(url: string) {
+    const link = document.createElement('a');
+    link.setAttribute('target', '_blank');
+    link.setAttribute('href', url);
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
   }
 
   getMostRecentReleaseHPO() {

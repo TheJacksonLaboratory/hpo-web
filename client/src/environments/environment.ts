@@ -40,6 +40,7 @@ export const environment = {
   //HPOA
   HPO_ANNOTATION_FILE_PURL: 'http://purl.obolibrary.org/obo/hp/hpoa/phenotype.hpoa',
   HPO_GITHUB_REPO_URL:'https://api.github.com/repos/obophenotype/human-phenotype-ontology',
-  OBO_PURL_NO_EXT: 'http://purl.obolibrary.org/obo/hp'
+  OBO_PURL_NO_EXT: 'http://purl.obolibrary.org/obo/hp',
+  HPO_RELEASES: 'https://github.com/obophenotype/human-phenotype-ontology/releases'
 };
 
