@@ -11,7 +11,8 @@ class UrlMappings {
     '/app/assets/*.png',
     '/app/assets/*.jpg',
     '/app/assets/*/*.png',
-    '/app/assets/*/*.jpg'
+    '/app/assets/*/*.jpg',
+    '/app/assets/team.json'
   ]
 
   static mappings = {
