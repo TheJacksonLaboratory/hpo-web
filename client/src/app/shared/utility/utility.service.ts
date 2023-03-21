@@ -10,6 +10,11 @@ export class UtilityService {
 
   constructor(private http: HttpClient) { }
 
+
+  openExternalUrl(url: string) {
+    window.open(url, '_blank').focus();
+  }
+
   downloadFile(url: string) {
     const link = document.createElement('a');
     link.setAttribute('target', '_blank');

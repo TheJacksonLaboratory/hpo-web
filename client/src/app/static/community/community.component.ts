@@ -39,7 +39,7 @@ export class CommunityComponent implements OnInit {
 
   navigate(member) {
     if (!member.alumni) {
-      this.utilityService.downloadFile(member.link);
+      this.utilityService.openExternalUrl(member.link);
     }
   }
 
