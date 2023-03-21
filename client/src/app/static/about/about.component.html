@@ -90,10 +90,13 @@
             Still have some questions?
           </h2>
         </div>
-        <div class="contact-banner-btn-wrapper" fxFlex.lt-md="100" fxLayout="row"
+        <div class="contact-banner-btn-wrapper" fxFlex.lt-md="120" fxLayout="row"
         fxLayoutAlign.gt-sm="end center" fxLayoutAlign="space-evenly center">
           <button class="contact-btn" mat-stroked-button routerLink="/faq">Frequently Asked Questions</button>
           <button class="contact-btn" mat-stroked-button routerLink="/contact">Contact us</button>
+          <button class="contact-btn" mat-stroked-button (click)="utilityService.openExternalUrl('https://github.com/obophenotype/human-phenotype-ontology/issues/new/choose')">
+            Contribute
+          </button>
         </div>
   </div>
 </div>

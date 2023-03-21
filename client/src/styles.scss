@@ -355,7 +355,12 @@ a.mat-btn .mat-button-wrapper {
 
 .item-id {
   font-size: 14px;
-  color: darkslategray;
+  color: darkslategray !important;
+
+  & .mat-icon {
+    font-size: 16px;
+    padding-top: 0.25rem;
+  }
 }
 
 .item-summary {
