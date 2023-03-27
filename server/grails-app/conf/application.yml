@@ -96,7 +96,6 @@ environments:
       url: "jdbc:mysql://localhost:3306/hpo_web?autoReconnect=true"
       username: ${HPO_MYSQL_USERNAME}
       password: ${HPO_MYSQL_PASSWORD}
-
   gcp:
     dataSource:
       dbCreate: "update"
