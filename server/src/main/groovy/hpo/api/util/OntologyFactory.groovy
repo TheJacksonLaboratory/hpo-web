@@ -14,7 +14,7 @@ import org.grails.io.support.ClassPathResource
 @CompileStatic
 class OntologyFactory {
     Ontology getHpoOntology() {
-        final InputStream stream = new ClassPathResource('hp.json').getInputStream()
+        final InputStream stream = new ClassPathResource('hp-simple-non-classified.json').getInputStream()
         return OntologyLoader.loadOntology(stream)
     }
 

@@ -10,10 +10,11 @@ beans = {
   hpoOntology(ontologyFactory: "getHpoOntology")
   maxoOntology(ontologyFactory: "getMaxoOntology")
   hpoUtilities(HpoUtilities, hpoOntology)
+
+  hpoLoincFactory(Loinc2HpoFactory)
+  hpoLoinc(hpoLoincFactory: "getInstance")
   switch(Environment.current) {
     case Environment.DEVELOPMENT:
       hpoAssociationFactory(HpoAssociationFactory, hpoOntology)
-      hpoLoincFactory(Loinc2HpoFactory, loincAnnotations, loincCore)
-      hpoLoinc(hpoLoincFactory: "getInstance")
   }
 }

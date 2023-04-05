@@ -22,7 +22,7 @@
         <button mat-menu-item (click)="mobileNavigate('resourcesMenu')"> Resources
           <mat-icon>arrow_right</mat-icon>
         </button>
-        <button mat-menu-item (click)="sidenav.close()" routerLink="community"> Community</button>
+        <button mat-menu-item (click)="sidenav.close()" routerLink="/community"> Community</button>
       </div>
       <div *ngIf="mobileNavSection == 'toolsMenu'">
         <button mat-menu-item routerLink="browse/profile-search"> Profile Search</button>
@@ -48,20 +48,21 @@
       </div>
 
       <div *ngIf="mobileNavSection == 'resourcesMenu'">
-        <button mat-menu-item (click)="sidenav.close()" routerLink="faq"> FAQ</button>
+        <button mat-menu-item (click)="sidenav.close()" routerLink="resources/faq"> FAQ</button>
+        <button mat-menu-item routerLink="contact/"> Contact Us</button>
         <button mat-menu-item routerLink="resources/clinician-guide"> Clinicians Guide</button>
         <button mat-menu-item routerLink="resources/contributing"> Contributing</button>
       </div>
       <div *ngIf="mobileNavSection == 'dataMenu'">
-        <button mat-menu-item (click)="sidenav.close()" routerLink="download/ontology"> Ontology</button>
-        <button mat-menu-item (click)="sidenav.close()" routerLink="download/annotation"> Annotations</button>
+        <button mat-menu-item (click)="sidenav.close()" routerLink="data/ontology"> Ontology</button>
+        <button mat-menu-item (click)="sidenav.close()" routerLink="data/annotations"> Annotations</button>
         <button mat-menu-item (click)="mobileNavigate('translationMenu')">Translation
           <mat-icon>arrow_right</mat-icon>
         </button>
         <a mat-menu-item href="/api/hpo/docs"> API</a>
       </div>
 
-      <div *ngIF="mobileNavSection == 'translationMenu'">
+      <div *ngIf="mobileNavSection == 'translationMenu'">
         <button mat-menu-item (click)="sidenav.close()" routerLink="data/layperson"> Layperson Synonyms</button>
         <button mat-menu-item (click)="sidenav.close()" routerLink="data/translations"> Translations and Mapping
         </button>
