@@ -241,6 +241,13 @@ a.mat-btn .mat-button-wrapper {
   margin: 0 5rem;
 }
 
+@media screen and (max-width: 767px) {
+  .container {
+    padding: 1.5rem;
+    margin: 0 2.5rem;
+  }
+}
+
 .container-custom {
   margin: 0;
   padding: 0 15px;
