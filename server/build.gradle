@@ -75,9 +75,9 @@ dependencies {
   implementation 'builders.dsl:spreadsheet-builder-groovy:1.0.5'
   // Raw jar file for loinc2hpo
   implementation files('libs/loinc2hpo-core.jar')
-  implementation 'org.monarchinitiative.phenol:phenol-core:2.0.0-RC5'
-  implementation 'org.monarchinitiative.phenol:phenol-io:2.0.0-RC5'
-  implementation 'org.monarchinitiative.phenol:phenol-annotations:2.0.0-RC5'
+  implementation 'org.monarchinitiative.phenol:phenol-core:2.0.0'
+  implementation 'org.monarchinitiative.phenol:phenol-io:2.0.0'
+  implementation 'org.monarchinitiative.phenol:phenol-annotations:2.0.0'
   implementation 'com.bertramlabs.plugins:asset-pipeline-grails:3.3.4'
   runtimeOnly 'mysql:mysql-connector-java:8.0.29'
   runtimeOnly 'com.google.cloud.sql:mysql-socket-factory-connector-j-8:1.6.2'

@@ -2,6 +2,7 @@ package hpo.api.util
 
 import org.grails.io.support.ClassPathResource
 import org.monarchinitiative.phenol.annotations.formats.hpo.HpoAssociationData
+import org.monarchinitiative.phenol.annotations.io.hpo.DiseaseDatabase
 import org.monarchinitiative.phenol.annotations.io.hpo.HpoaDiseaseData
 import org.monarchinitiative.phenol.annotations.io.hpo.HpoaDiseaseDataContainer
 import org.monarchinitiative.phenol.annotations.io.hpo.HpoaDiseaseDataLoader
@@ -17,7 +18,7 @@ class HpoAssociationFactory {
     final omimToGenePath = new ClassPathResource('mim2gene_medgen').file.toPath()
     final hpoaFilePath =  new ClassPathResource('phenotype.hpoa').getInputStream()
     final orphaToGenePath = new ClassPathResource('en_product6.xml').file.toPath()
-    this.hpoaDiseases = HpoaDiseaseDataLoader.of(["OMIM", "ORPHA"] as Set<String>).loadDiseaseData(hpoaFilePath)
+    this.hpoaDiseases = HpoaDiseaseDataLoader.of([DiseaseDatabase.OMIM, DiseaseDatabase.ORPHANET] as Set<DiseaseDatabase>).loadDiseaseData(hpoaFilePath)
     this.hpoAssociationData = HpoAssociationData.builder(hpoOntology).orphaToGenePath(orphaToGenePath).mim2GeneMedgen(omimToGenePath)
       .hpoDiseases(hpoaDiseases).hgncCompleteSetArchive(hgncPath).build()
   }
