@@ -1,6 +1,6 @@
 <div class="about-us container" fxLayout="row wrap">
   <h1 class="center pageTitle" fxFlexFill>The Human Phenotype Ontology</h1>
-  <div fxFlex=70 fxFlexOffset="15">
+  <div fxFlex="100" fxFlex.gt-sm=70 fxFlexOffset.gt-sm="15">
       <h3 class="sub-title">Who we are!</h3>
       <p>
         The Human Phenotype Ontology (HPO) project provides an ontology of medically relevant phenotypes,
@@ -39,7 +39,7 @@
        href="https://www.sciencedirect.com/topics/medicine-and-dentistry/human-phenotype-ontology"
        mat-stroked-button target="_blank">HPO on Science Direct</a>
   </div>
-  <div class="about-us-banner" fxFlex="70" fxFlexOffset="15" fxLayout="row" fxLayoutAlign="space-evenly center">
+  <div class="about-us-banner" fxFlex="100" fxFlex.gt-sm=70 fxFlexOffset.gt-sm="15" fxLayout="column" fxLayout.gt-sm="row"  fxLayoutAlign="space-evenly center">
     <div class="banner-card" routerLink="/community">
       <div class="icon-wrapper">
         <mat-icon>groups</mat-icon>
@@ -59,7 +59,7 @@
       <h3>Cite Us</h3>
     </div>
   </div>
-  <div class="history" fxFlex="70" fxFlexOffset="15">
+  <div class="history" fxFlex="100" fxFlex.gt-sm=70 fxFlexOffset.gt-sm="15">
     <h3 class="sub-title">Where it started!</h3>
     <p>The Human Phenotype Ontology was initially developed at the <a href="https://www.charite.de/" target="__blank">Charité University Hospital</a> in Berlin, Germany by
       Peter N Robinson and Sebastian K&ouml;hler with support from Sandra Doelken and Sebastian Bauer. Very soon after the
@@ -82,7 +82,7 @@
       <mat-icon>keyboard_arrow_right</mat-icon>
     </a>
   </div>
-  <div class="contact-banner" fxFlex="70" fxFlexOffset="15" fxLayout="row" fxLayout.lt-md="column"
+  <div class="contact-banner" fxFlex="100" fxFlex.gt-sm=70 fxFlexOffset.gt-sm="15" fxLayout="column" fxLayout.gt-sm="row"
        fxLayoutAlign="center center">
         <div class="contact-banner-title-wrapper" fxFlex fxLayout="row" fxLayoutAlign="center center">
           <h2 class="contact-banner-title" fxFlex>
@@ -90,10 +90,13 @@
             Still have some questions?
           </h2>
         </div>
-        <div class="contact-banner-btn-wrapper" fxFlex.lt-md="100" fxLayout="row"
+        <div class="contact-banner-btn-wrapper" fxFlex.lt-md="120" fxLayout="column" fxLayout.gt-sm="row"
         fxLayoutAlign.gt-sm="end center" fxLayoutAlign="space-evenly center">
           <button class="contact-btn" mat-stroked-button routerLink="/faq">Frequently Asked Questions</button>
           <button class="contact-btn" mat-stroked-button routerLink="/contact">Contact us</button>
+          <button class="contact-btn" mat-stroked-button (click)="utilityService.openExternalUrl('https://github.com/obophenotype/human-phenotype-ontology/issues/new/choose')">
+            Contribute
+          </button>
         </div>
   </div>
 </div>

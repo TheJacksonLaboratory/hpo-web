@@ -14,7 +14,7 @@ import {DialogService} from '../../../shared/dialog-excel-download/dialog.servic
 })
 export class DiseaseComponent {
   query: string;
-  disease: Disease = {'db': '', 'dbObjectId': '0', 'dbName': '', 'dbReference': ''};
+  disease: Disease = {};
   termAssoc: Term[] = [];
   geneAssoc: Gene[] = [];
   termColumns = ['ontologyId', 'name', 'onset', 'frequency', 'sources'];
@@ -49,6 +49,7 @@ export class DiseaseComponent {
         this.diseaseService.searchMonarch(this.query)
           .subscribe((mData) => {
             this.disease.description = mData.description;
+            this.disease.mondoId = mData.id;
           });
         this.isLoading = false;
       }, (error) => {
@@ -95,35 +96,29 @@ export class DiseaseComponent {
     });
   }
 
-  isPubmed(source: string) {
-    return source.startsWith('PMID:');
-  }
-
-  getPubmedUrl(source: string) {
-    return 'https://www.ncbi.nlm.nih.gov/pubmed/' + source.split(':')[1];
-  }
-
-  getExternalDiseaseUrl(source: string) {
-    const sourceParts = source.split(':');
-    if (sourceParts[0].startsWith('OMIM')) {
-      return 'https://omim.org/entry/' + sourceParts[1];
-    } else if (sourceParts[0].startsWith('ORPHA')) {
-      return 'https://www.orpha.net/consor/cgi-bin/OC_Exp.php?Lng=EN&Expert=' + sourceParts[1];
+  getExternalTermIdUrlFromId(termId?: string) {
+    if(!termId){
+      return '';
+    }
+    const sourceParts = termId.split(':');
+    if (this.isTermIdExpected(termId, "OMIM")) {
+      return `https://omim.org/entry/${sourceParts[1]}`;
+    } else if (this.isTermIdExpected(termId, "ORPHA")) {
+      return `https://www.orpha.net/consor/cgi-bin/OC_Exp.php?Lng=EN&Expert=${sourceParts[1]}`
+    } else if (this.isTermIdExpected(termId, "MONDO")){
+      return `https://monarchinitiative.org/disease/${termId}`;
+    } else if(this.isTermIdExpected(termId, "PMID")){
+      return `https://www.ncbi.nlm.nih.gov/pubmed/${sourceParts[1]}`;
     }
   }
 
-  isSourceOrpha(source: string) {
-    const sourceParts = source.split(':');
-    if (sourceParts[0].startsWith('ORPHA')) {
-      return true;
-    }
+  isTermIdExpected(diseaseId: string, expected: string) {
+    return diseaseId != "" && diseaseId != null && expected != "" && expected != null
+      ? diseaseId.toUpperCase().includes(expected) : false;
   }
 
-  isSourceOmim(source: string) {
-    const sourceParts = source.split(':');
-    if (sourceParts[0].startsWith('OMIM')) {
-      return true;
-    }
+  getDiseaseDatabaseName(diseaseId){
+    return diseaseId != "" && diseaseId != null ? diseaseId.split(':')[0] : '';
   }
 
   applyGeneFilter(filterValue: string) {

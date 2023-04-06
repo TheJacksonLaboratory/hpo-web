@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { HttpClient, HttpContext, HttpHeaders, HttpParams } from '@angular/common/http';
 import {environment} from '../../../../environments/environment';
 import {Observable} from 'rxjs';
 
 @Injectable()
 export class DiseaseService {
-  options = {
+  options: any = {
     headers: new HttpHeaders({
       'Accept': 'application/json'
     })
@@ -20,6 +20,9 @@ export class DiseaseService {
   }
 
   searchMonarch(query: string): Observable<any> {
+    const monarch_options = this.options;
+    monarch_options.params = new HttpParams().set("fetch_objects", false).set("unselect_evidence", true)
+      .set("exclude_automatic_assertions", false).set("get_association_counts", false).set("rows", 1);
     return this.http
       .get(environment.HPO_MONARCH_DISEASE_URL + query, this.options);
   }

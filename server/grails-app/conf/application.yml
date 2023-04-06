@@ -65,38 +65,38 @@ logging:
     hpo: DEBUG
 
 dataSource:
-  initialSize: 5
-  maxActive: 50
-  minIdle: 5
-  maxIdle: 25
-  maxWait: 10000
-  maxAge: 10 * 60000
-  timeBetweenEvictionRunsMillis: 5000
-  minEvictableIdleTimeMillis: 60000
-  validationQuery: "SELECT 1"
-  validationQueryTimeout: 3
-  validationInterval: 15000
-  testOnBorrow: true
-  testWhileIdle: true
-  testOnReturn: false
-  driverClassName: "com.mysql.jdbc.Driver"
+  properties:
+    initialSize: 5
+    maxActive: 50
+    minIdle: 5
+    maxIdle: 25
+    maxWait: 10000
+    maxAge: 10 * 60000
+    timeBetweenEvictionRunsMillis: 5000
+    minEvictableIdleTimeMillis: 60000
+    validationQuery: "SELECT 1"
+    validationQueryTimeout: 3
+    validationInterval: 15000
+    testOnBorrow: true
+    testWhileIdle: true
+    testOnReturn: false
+    driverClassName: "com.mysql.jdbc.Driver"
 
 environments:
   development:
     dataSource:
       pooled: true
       dbCreate: "update"
-      url: "jdbc:mysql://localhost:3306/hpo_web?autoReconnect=true"
+      url: "jdbc:mysql://localhost:3306/hpo_web?autoReconnect=TRUE&useSSL=false"
       username: "root"
       password: "password"
-  stage:
+  test:
     dataSource:
       pooled: true
       dbCreate: "update"
-      url: "jdbc:mysql://localhost:3306/hpo_web?autoReconnect=true"
+      url: "jdbc:mysql://localhost:3306/hpo_web?autoReconnect=TRUE&useSSL=false"
       username: ${HPO_MYSQL_USERNAME}
       password: ${HPO_MYSQL_PASSWORD}
-
   gcp:
     dataSource:
       dbCreate: "update"

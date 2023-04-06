@@ -14,13 +14,13 @@ import org.grails.io.support.ClassPathResource
 @CompileStatic
 class OntologyFactory {
     Ontology getHpoOntology() {
-        final File file = new ClassPathResource('hp.json').file
-        return OntologyLoader.loadOntology(file)
+        final InputStream stream = new ClassPathResource('hp-simple-non-classified.json').getInputStream()
+        return OntologyLoader.loadOntology(stream)
     }
 
    Ontology getMaxoOntology() {
-      final File file = new ClassPathResource('maxo.json').file
+      final InputStream stream = new ClassPathResource('maxo.json').getInputStream()
       CurieUtil curieUtil = CurieUtilBuilder.withDefaultsAnd(['APOLLO_SV':'http://purl.obolibrary.org/obo/APOLLO_SV_'])
-      return OntologyLoader.loadOntology(file, curieUtil, "MAXO")
+      return OntologyLoader.loadOntology(stream, curieUtil, "MAXO")
     }
 }

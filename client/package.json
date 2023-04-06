@@ -1,14 +1,13 @@
 {
   "name": "hpo-web",
-  "version": "1.8.5",
+  "version": "1.8.7",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --configuration=dev",
-    "build": "ng build --aot --configuration=dev --base-href /app/",
-    "buildProd": "ng build --aot --configuration=production --base-href /app/",
-    "buildWatch": "ng build --aot --configuration=dev --watch=true --base-href /app/",
-    "test": "ng test --watch false --progress=false",
+    "start": "ng serve --configuration=development",
+    "build": "ng build --configuration=development --base-href /app/",
+    "buildProd": "ng build --configuration=production --base-href /app/",
+    "test": "ng test --watch=false --progress=false",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { environment } from "../../../../environments/environment";
 import { UtilityService } from '../../../shared/utility/utility.service';
 
 @Component({
@@ -8,7 +9,7 @@ import { UtilityService } from '../../../shared/utility/utility.service';
 })
 export class AnnotationsDownloadComponent implements OnInit {
 
-  readonly hpoaUrl = 'http://purl.obolibrary.org/obo/hp/hpoa/phenotype.hpoa';
+  readonly hpoaUrl = `${environment.HPO_ANNOTATION_FILE_PURL}`;
   version: string;
   constructor(public utilityService: UtilityService) {}
 

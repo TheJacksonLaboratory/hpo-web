@@ -241,6 +241,13 @@ a.mat-btn .mat-button-wrapper {
   margin: 0 5rem;
 }
 
+@media screen and (max-width: 767px) {
+  .container {
+    padding: 1.5rem;
+    margin: 0 2.5rem;
+  }
+}
+
 .container-custom {
   margin: 0;
   padding: 0 15px;
@@ -355,7 +362,12 @@ a.mat-btn .mat-button-wrapper {
 
 .item-id {
   font-size: 14px;
-  color: darkslategray;
+  color: darkslategray !important;
+
+  & .mat-icon {
+    font-size: 16px;
+    padding-top: 0.25rem;
+  }
 }
 
 .item-summary {

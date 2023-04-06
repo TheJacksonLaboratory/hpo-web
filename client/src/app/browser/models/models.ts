@@ -11,6 +11,8 @@ export interface Disease {
   db?: string;
   dbId?: string;
   diseaseId?: string;
+
+  mondoId?: string;
   diseaseName?: string;
   dbGenes?: Gene[];
   dbObjectId?: string;

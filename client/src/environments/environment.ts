@@ -38,8 +38,9 @@ export const environment = {
   // Publications
   HPO_PUBLICATION_REST_URL: 'https://raw.githubusercontent.com/monarch-initiative/hpo-web-config/master/hpocitations.txt',
   //HPOA
-  HPO_ANNOTATION_FILE_PURL: 'http://purl.obolibrary.org/obo/hp/hpoa/phenotype.hpoa',
+  HPO_ANNOTATION_FILE_PURL: 'https://github.com/obophenotype/human-phenotype-ontology/releases/latest/download/phenotype.hpoa',
   HPO_GITHUB_REPO_URL:'https://api.github.com/repos/obophenotype/human-phenotype-ontology',
-  OBO_PURL_NO_EXT: 'http://purl.obolibrary.org/obo/hp'
+  ONTO_RELEASE_NO_EXT: 'https://github.com/obophenotype/human-phenotype-ontology/releases/latest/download/hp',
+  HPO_RELEASES: 'https://github.com/obophenotype/human-phenotype-ontology/releases'
 };
 
