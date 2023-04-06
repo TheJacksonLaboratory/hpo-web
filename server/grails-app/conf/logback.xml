@@ -10,9 +10,7 @@
 <!--  </logger>-->
 <!--  <logger name="com.hibernate.sql" level="ERROR">-->
 <!--  </logger>-->
-  <logger name="org.monarchinitiative.phenol" level="INFO">
-  </logger>
-  <root>
+  <root level="debug">
     <appender-ref ref="STDOUT" />
   </root>
 </configuration>

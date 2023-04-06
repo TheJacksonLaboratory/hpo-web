@@ -9,9 +9,9 @@ import {environment} from "../../../../environments/environment";
 })
 export class OntologyDownloadComponent implements OnInit {
 
-  readonly oboUrl = `${environment.OBO_PURL_NO_EXT}.obo`;
-  readonly owlUrl = `${environment.OBO_PURL_NO_EXT}.owl`;
-  readonly jsonUrl = `${environment.OBO_PURL_NO_EXT}.json`;
+  readonly oboUrl = `${environment.ONTO_RELEASE_NO_EXT}.obo`;
+  readonly owlUrl = `${environment.ONTO_RELEASE_NO_EXT}.owl`;
+  readonly jsonUrl = `${environment.ONTO_RELEASE_NO_EXT}.json`;
   readonly otherReleases = environment.HPO_RELEASES;
   version: string;
   constructor(public utilityService: UtilityService) {}
