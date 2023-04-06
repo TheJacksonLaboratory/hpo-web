@@ -87,14 +87,14 @@ environments:
     dataSource:
       pooled: true
       dbCreate: "update"
-      url: "jdbc:mysql://localhost:3306/hpo_web?autoReconnect=trueuseSSL=false"
+      url: "jdbc:mysql://localhost:3306/hpo_web?autoReconnect=TRUE&useSSL=false"
       username: "root"
       password: "password"
   test:
     dataSource:
       pooled: true
       dbCreate: "update"
-      url: "jdbc:mysql://localhost:3306/hpo_web?autoReconnect=true&useSSL=false"
+      url: "jdbc:mysql://localhost:3306/hpo_web?autoReconnect=TRUE&useSSL=false"
       username: ${HPO_MYSQL_USERNAME}
       password: ${HPO_MYSQL_PASSWORD}
   gcp:
