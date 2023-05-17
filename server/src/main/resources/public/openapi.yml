@@ -111,6 +111,13 @@ paths:
               type: string
               format: string
             example: [HP:0000365,HP:0006385]
+        - name: max
+          in: query
+          description: an upper limit for docs to return. [-1 for all]
+          required: false
+          schema:
+            type: integer
+            example: -1
       responses:
         200:
           description: Successful Operation

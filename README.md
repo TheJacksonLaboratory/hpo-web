@@ -48,7 +48,7 @@ The following guide provides the steps for an out-of-the-box setup for the Human
   
 + War creation with a gradle task.
 
-      ./gradlew clean war -Dgrails.env=[stage, gcp, production]>
+      ./gradlew clean war -Dgrails.env=[test, gcp, production]>
        
       Will output a war to ./build/libs/
 
