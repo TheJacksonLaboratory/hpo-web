@@ -46,7 +46,7 @@
   <mat-menu [overlapTrigger]="false" #downloadsMenu="matMenu">
     <button mat-menu-item routerLink="data/ontology"> Ontology</button>
     <button mat-menu-item routerLink="data/annotations"> Annotations</button>
-    <button mat-menu-item routerLink="translations" [matMenuTriggerFor]="otherMenu"> Translation</button>
+    <button mat-menu-item [matMenuTriggerFor]="otherMenu"> Translation</button>
     <button mat-menu-item (click)="navigateToDocs()"> API</button>
   </mat-menu>
   <mat-menu #otherMenu="matMenu">
