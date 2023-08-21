@@ -223,3 +223,8 @@
   color: lightgray;
   display: inline-block;
 }
+
+.translation-chip {
+  background-color: #f1f0f0;
+  border-radius: 5px;
+}

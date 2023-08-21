@@ -550,3 +550,16 @@ a.mat-button-base {
 .filter-container .mat-form-field {
   width: 100%;
 }
+
+.translation-chips .mat-chip-list-wrapper {
+  padding: 1rem 0 1rem 0;
+}
+
+.mat-chip.mat-standard-chip.mat-chip-selected.mat-primary {
+  background: #ec9736;
+}
+
+ .mat-standard-chip:focus::after {
+   opacity: unset;
+   background: unset;
+ }

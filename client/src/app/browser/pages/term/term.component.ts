@@ -3,12 +3,13 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
-import {forkJoin as observableForkJoin} from 'rxjs';
+import {forkJoin, forkJoin as observableForkJoin} from 'rxjs';
 import {switchMap} from 'rxjs/operators';
+import { LanguageService } from '../../services/language/language.service';
 import {TermService} from '../../services/term/term.service';
-import {Disease, Gene, LoincEntry, Term, TermTree} from '../../models/models';
+import {Disease, Gene, Language, LoincEntry, Term, TermTree, Translation} from '../../models/models';
 import {DialogService} from '../../../shared/dialog-excel-download/dialog.service';
-
+import {OntologyService} from "../../services/ontology/ontology.service";
 
 @Component({
   selector: 'app-term',
@@ -19,10 +20,7 @@ export class TermComponent implements OnInit {
   termTitle: string;
   query: string;
   paramId: string;
-  term: Term = {
-    'id': '', 'name': '', 'definition': '', 'altTermIds': [], 'comment': '', 'synonyms': [],
-    'isObsolete': true, 'xrefs': [], 'pubmedXrefs': [], 'purl': ''
-  };
+  term: Term;
   geneColumns = ['geneId', 'dbDiseases'];
   geneSource: MatTableDataSource<Gene>;
   geneAssocCount: number;
@@ -48,13 +46,15 @@ export class TermComponent implements OnInit {
   overlay = false;
   displayAllDiseaseAssc = false;
   displayAllGeneAssc = false;
+  languages: Language[];
+  selectedLanguage: Language = {language: "en", language_long: "English"}
 
   @ViewChild('diseasePaginator', {static: true}) diseasePaginator: MatPaginator;
   @ViewChild('genePaginator', {static: true}) genePaginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private route: ActivatedRoute, private termService: TermService, private dialogService: DialogService,
-              private router: Router) {
+  constructor(private route: ActivatedRoute, private termService: TermService, private ontologyService: OntologyService,
+              private dialogService: DialogService, private languageService: LanguageService, private router: Router) {
   }
 
   ngOnInit() {
@@ -100,26 +100,26 @@ export class TermComponent implements OnInit {
   }
 
   refreshData(query: string) {
-    this.termService.searchTerm(query)
-      .subscribe((data) => {
-        this.setDefaults(data.details);
-        const maxTermWidth = 100;
-        this.treeData = data.relations;
-        this.treeData.maxTermWidth = maxTermWidth;
-        const termCount = this.treeData.termCount;
-        this.treeData.children.sort((a, b) => a.childrenCount > b.childrenCount ? (-1) : 1);
-        this.treeData.children.map(term => {
-          const percent = term.childrenCount / termCount;
-          const newWidth = Math.ceil(maxTermWidth * percent);
-          const newMargin = -115 + ((maxTermWidth - newWidth) - 5);
-          term.treeCountWidth = newWidth;
-          term.treeMargin = newMargin;
-        });
-        this.termTitle = this.term.name;
-      }, (error) => {
-        // Error bubbles up
-        console.log(error);
+    forkJoin( {
+      hpo: this.termService.searchTerm(query),
+      translation: this.ontologyService.translations(query)
+    }).subscribe(({hpo, translation}) => {
+      this.setDefaults(hpo.details, translation);
+      const maxTermWidth = 100;
+      this.treeData = hpo.relations;
+      this.treeData.maxTermWidth = maxTermWidth;
+      const termCount = this.treeData.termCount;
+      this.treeData.children.sort((a, b) => a.childrenCount > b.childrenCount ? (-1) : 1);
+      this.treeData.children.map(term => {
+        const percent = term.childrenCount / termCount;
+        const newWidth = Math.ceil(maxTermWidth * percent);
+        const newMargin = -115 + ((maxTermWidth - newWidth) - 5);
+        term.treeCountWidth = newWidth;
+        term.treeMargin = newMargin;
       });
+      this.termTitle = this.term.name;
+
+    });
   }
 
   reloadDiseaseAssociations(offset: string, max: string) {
@@ -150,7 +150,7 @@ export class TermComponent implements OnInit {
       });
   }
 
-  setDefaults(term: Term) {
+  setDefaults(term: Term, translations: Translation[]) {
     if (term) {
       this.term = term;
       this.term.comment = (term.comment != null) ? term.comment : '';
@@ -161,6 +161,24 @@ export class TermComponent implements OnInit {
       this.term.pubmedXrefs = (term.pubmedXrefs != null) ? term.pubmedXrefs.map(pmid => {
         return {whole: pmid, id: pmid.split(':')[1]};
       }) : [];
+    }
+
+    if (translations.length > 0){
+      this.term.translations = translations;
+      this.languages = [...new Set(translations.map((t) => {
+        return {language: t.language, language_long: t.language_long}
+      }))];
+
+      this.languageService.active$.subscribe((language) => {
+        const exist = this.languages.includes(language);
+        if (exist && language != this.selectedLanguage){
+          this.selectedLanguage = language;
+        } else if (this.languageService.default != language) {
+          this.languageService.change(this.languageService.default);
+        } else {
+          this.selectedLanguage = language;
+        }
+      });
     }
   }
 
@@ -216,6 +234,10 @@ export class TermComponent implements OnInit {
 
   setTreeStyles(child: Term): any {
     return {'width': child.treeCountWidth + 'px', 'margin-left': child.treeMargin + 'px', 'margin-right': '20px'};
+  }
+
+  changeLanguage(language){
+    this.languageService.change(language);
   }
 }
 

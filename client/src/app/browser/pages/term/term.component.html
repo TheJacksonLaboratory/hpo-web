@@ -49,20 +49,29 @@
               <mat-progress-bar class="loading-result-details" color="primary" mode="indeterminate">
               </mat-progress-bar>
             </div>
-            <div *ngIf="treeData">
+            <div *ngIf="treeData && term">
               <div>
-                <span class="item-title">{{termTitle}}&nbsp;</span>
+                <span class="item-title">{{termTitle | translate: term.translations: selectedLanguage.language}}&nbsp;</span>
                 <span class="item-id" *ngIf="paramId != term.id">
-                      <span class="crossout">{{paramId}}
-                      </span><i class="material-icons obsolete-arrow">arrow_right_alt</i>
-                    </span>
+                <span class="crossout">{{paramId}}</span>
+                <i class="material-icons obsolete-arrow">arrow_right_alt</i></span>
                 <span class="item-id">{{term.id}}</span>
                 <!-- <i matTooltip="Copy purl to clipboard!" matTooltipPosition="above"
                     (click)="copyToClipboard(term.purl)" class="material-icons copyToClipboard">content_copy</i>-->
+                <mat-chip-list class="translation-chips" aria-label="Language Selection" multiple="false">
+                <mat-chip class="translation-chip" *ngFor="let lang of languages" color="primary"
+                          (click)="changeLanguage(lang)" [selected]="selectedLanguage === lang" [disableRipple]="true">
+                  <img matChipAvatar src="https://unpkg.com/language-icons@0.3.0/icons/{{lang.language}}.svg" alt="{{lang.language}}"/>
+                  {{lang.language_long}}
+                </mat-chip>
+              </mat-chip-list>
               </div>
-
               <hr class="underline-hr">
-              <p><br><i>{{term.definition}}</i></p>
+              <div>
+                <p>
+                  <i>{{term.definition != "" ? term.definition : "No definition found."}}</i>
+                </p>
+              </div>
               <mat-list>
                 <mat-divider></mat-divider>
                 <mat-list-item>
@@ -96,7 +105,7 @@
         </mat-card>
 
         <!-- TABS -->
-        <div class="hpo-group-tab">
+        <div class="hpo-group-tab" *ngIf="term">
           <mat-tab-group selectedIndex="0" class="term-details-tab-group mat-elevation-z6">
             <!-- Disease association -->
             <mat-tab label="Disease Associations">

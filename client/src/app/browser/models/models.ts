@@ -63,6 +63,7 @@ export interface Term {
   treeCountWidth?: number;
   treeMargin?: number;
   pubmedXrefs: Array<any>;
+  translations: Translation[];
 }
 
 export interface TermTree {
@@ -132,4 +133,15 @@ export interface TeamMember {
   role: string;
   link?: string;
   alumni?: boolean;
+}
+
+
+export interface Translation extends Language {
+  name: string;
+  status: string;
+}
+
+export interface Language {
+  language: string;
+  language_long: string;
 }
