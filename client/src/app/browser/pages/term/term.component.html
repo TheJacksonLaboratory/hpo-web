@@ -18,20 +18,20 @@
                         <span class="tree-counts" [ngStyle]="{'margin-left': '-100px', 'margin-right': '5px'}"
                               matTooltip="{{parent.childrenCount}}" *ngIf="parent.childrenCount != 0"
                               matTooltipPosition="above"> </span>
-                <a class="link" routerLink="../{{parent.ontologyId}}">{{parent.name}}</a>
+                <a class="link" routerLink="../{{parent.ontologyId}}">{{parent.name | translate: parent.translations: selectedLanguage.language}}</a>
               </li>
               <li>
                 <div class="term">
                           <span class="tree-counts" [ngStyle]="{'margin-left': '-115px'}"
                                 *ngIf="treeData.termCount != 0" matTooltip="{{treeData.termCount}}"
                                 matTooltipPosition="above"> </span>
-                  <strong>{{term.name}}</strong>
+                  <strong>{{term.name | translate: term.translations: selectedLanguage.language}}</strong>
                 </div>
                 <ul>
                   <li *ngFor="let child of treeData.children" class="children">
                             <span class="tree-counts" [ngStyle]="setTreeStyles(child)" *ngIf="child.childrenCount != 0"
                                   matTooltip="{{child.childrenCount}}" matTooltipPosition="above"> </span>
-                    <a class="link" routerLink="../{{child.ontologyId}}">{{child.name}}</a>
+                    <a class="link" routerLink="../{{child.ontologyId}}">{{child.name | translate: child.translations: selectedLanguage.language}}</a>
                   </li>
                 </ul>
               </li>

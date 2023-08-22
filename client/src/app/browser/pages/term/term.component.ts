@@ -102,10 +102,13 @@ export class TermComponent implements OnInit {
   refreshData(query: string) {
     forkJoin( {
       hpo: this.termService.searchTerm(query),
-      translation: this.ontologyService.translations(query)
-    }).subscribe(({hpo, translation}) => {
+      translation: this.ontologyService.translations(query),
+      parents: this.ontologyService.parents(query),
+      children: this.ontologyService.children(query)
+    }).subscribe(({hpo, translation, parents, children}) => {
       this.setDefaults(hpo.details, translation);
       const maxTermWidth = 100;
+      hpo.relations = this.joinTranslation(hpo.relations, parents, children);
       this.treeData = hpo.relations;
       this.treeData.maxTermWidth = maxTermWidth;
       const termCount = this.treeData.termCount;
@@ -183,6 +186,25 @@ export class TermComponent implements OnInit {
         }
       });
     }
+  }
+
+  joinTranslation(relations, parents, children){
+    relations.children.map((child) => {
+      children.map((childT) => {
+        if(child.ontologyId == childT.id){
+          child.translations = childT.translations
+        }
+      });
+    });
+
+    relations.parents.map((parent) => {
+      parents.map((parentT) => {
+        if(parent.ontologyId == parentT.id){
+          parent.translations = parentT.translations
+        }
+      });
+    });
+    return relations;
   }
 
   showAllDiseases(event) {
