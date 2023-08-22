@@ -166,7 +166,7 @@ export class TermComponent implements OnInit {
       }) : [];
     }
 
-    if (translations.length > 0){
+    if (translations != undefined && translations.length > 0){
       this.term.translations = translations;
       // Get unique set of languages
       this.languages = [...new Set(translations.map((t) => {

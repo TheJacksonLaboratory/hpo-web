@@ -58,6 +58,7 @@
                 <span class="item-id">{{term.id}}</span>
                 <!-- <i matTooltip="Copy purl to clipboard!" matTooltipPosition="above"
                     (click)="copyToClipboard(term.purl)" class="material-icons copyToClipboard">content_copy</i>-->
+                <br>
                 <mat-chip-list class="translation-chips" aria-label="Language Selection" multiple="false">
                 <mat-chip class="translation-chip" *ngFor="let lang of languages" color="primary"
                           (click)="changeLanguage(lang)" [selected]="selectedLanguage.language === lang.language" [disableRipple]="true">
@@ -69,7 +70,7 @@
               <hr class="underline-hr">
               <div>
                 <p>
-                  <i>{{term.definition != "" ? term.definition : "No definition found."}}</i>
+                  {{term.definition != "" ? term.definition : "No definition found."}}
                 </p>
               </div>
               <mat-list>
@@ -100,6 +101,9 @@
                       [disabled]="this.diseaseAssocCount == 0 && this.geneAssocCount == 0"
                       (click)="downloadDialog()"><span class="material-icons">get_app</span> Export Associations
               </button>
+              <a class="translate-btn" href="https://obophenotype.github.io/hpo-translations/" mat-stroked-button color="primary" target="_blank">
+                <span class="material-icons">open_in_new</span> Translate your language
+              </a>
             </div>
           </mat-card-content>
         </mat-card>

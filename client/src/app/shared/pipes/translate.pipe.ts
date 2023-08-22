@@ -8,13 +8,14 @@ export class TranslatePipe implements PipeTransform {
   }
 
   transform(original: string, t: Translation[], language: string): string {
-    if (language === "en") {
+    if (!t){
       return original;
     }
-    for (var i = 0; i < t.length; i++) {
+    for (let i = 0; i < t.length; i++) {
       if (t[i].language == language) {
         return t[i].name;
       }
     }
+    return original;
   }
 }
