@@ -60,7 +60,7 @@
                     (click)="copyToClipboard(term.purl)" class="material-icons copyToClipboard">content_copy</i>-->
                 <mat-chip-list class="translation-chips" aria-label="Language Selection" multiple="false">
                 <mat-chip class="translation-chip" *ngFor="let lang of languages" color="primary"
-                          (click)="changeLanguage(lang)" [selected]="selectedLanguage === lang" [disableRipple]="true">
+                          (click)="changeLanguage(lang)" [selected]="selectedLanguage.language === lang.language" [disableRipple]="true">
                   <img matChipAvatar src="https://unpkg.com/language-icons@0.3.0/icons/{{lang.language}}.svg" alt="{{lang.language}}"/>
                   {{lang.language_long}}
                 </mat-chip>

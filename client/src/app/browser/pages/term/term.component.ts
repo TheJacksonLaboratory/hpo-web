@@ -165,18 +165,21 @@ export class TermComponent implements OnInit {
 
     if (translations.length > 0){
       this.term.translations = translations;
+      // Get unique set of languages
       this.languages = [...new Set(translations.map((t) => {
         return {language: t.language, language_long: t.language_long}
       }))];
 
-      this.languageService.active$.subscribe((language) => {
-        const exist = this.languages.includes(language);
-        if (exist && language != this.selectedLanguage){
-          this.selectedLanguage = language;
-        } else if (this.languageService.default != language) {
-          this.languageService.change(this.languageService.default);
+      // Add english default
+      this.languages.unshift(this.languageService.default);
+
+      // If the active language is updated set it.
+      this.languageService.active$.subscribe((active) => {
+        const exist = this.languages.some(li => li.language == active.language);
+        if (exist) {
+          this.selectedLanguage = active;
         } else {
-          this.selectedLanguage = language;
+          this.languageService.change(this.languageService.default);
         }
       });
     }

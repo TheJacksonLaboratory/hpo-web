@@ -4,7 +4,7 @@ import { Language } from '../../models/models';
 
 @Injectable()
 export class LanguageService {
-  default = {language: "en", language_long: "English"};
+  default: Language = {language: "en", language_long: "English"};
   languageSubject = new BehaviorSubject<Language>(this.default);
   active$ = this.languageSubject.asObservable();
   constructor() {
