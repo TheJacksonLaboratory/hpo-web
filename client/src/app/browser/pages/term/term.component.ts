@@ -4,7 +4,8 @@ import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {forkJoin, forkJoin as observableForkJoin} from 'rxjs';
-import {switchMap} from 'rxjs/operators';
+import { of } from 'rxjs/internal/observable/of';
+import { catchError, switchMap } from 'rxjs/operators';
 import { LanguageService } from '../../services/language/language.service';
 import {TermService} from '../../services/term/term.service';
 import {Disease, Gene, Language, LoincEntry, Term, TermTree, Translation} from '../../models/models';
@@ -102,11 +103,11 @@ export class TermComponent implements OnInit {
   refreshData(query: string) {
     forkJoin( {
       hpo: this.termService.searchTerm(query),
-      translation: this.ontologyService.translations(query),
-      parents: this.ontologyService.parents(query),
-      children: this.ontologyService.children(query)
-    }).subscribe(({hpo, translation, parents, children}) => {
-      this.setDefaults(hpo.details, translation);
+      term: this.ontologyService.term(query).pipe(catchError(e => of(undefined))),
+      parents: this.ontologyService.parents(query).pipe(catchError(e => of([]))),
+      children: this.ontologyService.children(query).pipe(catchError(e => of([])))
+    }).subscribe(({hpo, term, parents, children}) => {
+      this.setDefaults(term);
       const maxTermWidth = 100;
       hpo.relations = this.joinTranslation(hpo.relations, parents, children);
       this.treeData = hpo.relations;
@@ -121,7 +122,6 @@ export class TermComponent implements OnInit {
         term.treeMargin = newMargin;
       });
       this.termTitle = this.term.name;
-
     });
   }
 
@@ -153,7 +153,7 @@ export class TermComponent implements OnInit {
       });
   }
 
-  setDefaults(term: Term, translations: Translation[]) {
+  setDefaults(term: Term) {
     if (term) {
       this.term = term;
       this.term.comment = (term.comment != null) ? term.comment : '';
@@ -161,30 +161,26 @@ export class TermComponent implements OnInit {
       this.term.definition = (term.definition != null) ? term.definition : 'Sorry this term has no definition.';
       this.term.purl = 'http://purl.obolibrary.org/obo/' + term.id.replace(':', '_');
       this.term.xrefs = (term.xrefs != null) ? term.xrefs : [];
-      this.term.pubmedXrefs = (term.pubmedXrefs != null) ? term.pubmedXrefs.map(pmid => {
-        return {whole: pmid, id: pmid.split(':')[1]};
-      }) : [];
-    }
 
-    if (translations != undefined && translations.length > 0){
-      this.term.translations = translations;
-      // Get unique set of languages
-      this.languages = [...new Set(translations.map((t) => {
-        return {language: t.language, language_long: t.language_long}
-      }))];
+      if (term.translations != undefined && term.translations.length > 0){
+        // Get unique set of languages
+        this.languages = [...new Set(term.translations.map((t) => {
+          return {language: t.language, language_long: t.language_long}
+        }))];
 
-      // Add english default
-      this.languages.unshift(this.languageService.default);
+        // Add english default
+        this.languages.unshift(this.languageService.default);
 
-      // If the active language is updated set it.
-      this.languageService.active$.subscribe((active) => {
-        const exist = this.languages.some(li => li.language == active.language);
-        if (exist) {
-          this.selectedLanguage = active;
-        } else {
-          this.languageService.change(this.languageService.default);
-        }
-      });
+        // If the active language is updated set it.
+        this.languageService.active$.subscribe((active) => {
+          const exist = this.languages.some(li => li.language == active.language);
+          if (exist) {
+            this.selectedLanguage = active;
+          } else {
+            this.languageService.change(this.languageService.default);
+          }
+        });
+      }
     }
   }
 

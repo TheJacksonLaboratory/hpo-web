@@ -11,7 +11,7 @@ export class OntologyService {
 
   constructor(private httpClient: HttpClient, private languageService: LanguageService) {}
 
-  translations(id: string): Observable<Translation[]>  {
+  term(id: string): Observable<Term>  {
     return this.httpClient.get<Term>(environment.ONTOLOGY_API_HP_TERMS + id)
     .pipe(
       map((data) => {
@@ -20,7 +20,7 @@ export class OntologyService {
         language.language_long = this.languageService.languageLookup[language.language];
       });
       data.translations?.sort((a: Language, b: Language) => a.language_long.localeCompare(b.language_long));
-      return data.translations;
+      return data;
     }));
   }
 

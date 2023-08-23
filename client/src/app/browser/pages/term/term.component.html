@@ -76,21 +76,21 @@
               <mat-list>
                 <mat-divider></mat-divider>
                 <mat-list-item>
-                  <strong>Synonyms:</strong> &nbsp;&nbsp; <i
-                  *ngFor="let item of term.synonyms; let isLast=last">{{item}}{{isLast ? '' : ', '}}</i>
+                  <strong>Synonyms:</strong> &nbsp;&nbsp;
+                  <i *ngFor="let item of term.synonyms; let isLast=last">{{item}}{{isLast ? '' : "\t-\t"}}</i>
                 </mat-list-item>
                 <mat-divider></mat-divider>
                 <mat-list-item *ngIf="term.comment">
                   <strong>Comment:</strong> &nbsp;&nbsp; {{term.comment}}
                 </mat-list-item>
                 <mat-divider></mat-divider>
-                <mat-list-item *ngIf="term.pubmedXrefs.length > 0">
-                  <strong>Pubmed References:</strong> &nbsp;&nbsp;
-                  <span *ngFor="let item of term.pubmedXrefs; let isLast=last">
-                        <a href="https://www.ncbi.nlm.nih.gov/pubmed/{{item.id}}" target="_blank"><i> {{item.whole}}</i></a>
-                    {{isLast ? '' : ', '}}
-                      </span>
-                </mat-list-item>
+<!--                <mat-list-item *ngIf="term.pubmedXrefs.length > 0">-->
+<!--                  <strong>Pubmed References:</strong> &nbsp;&nbsp;-->
+<!--                  <span *ngFor="let item of term.pubmedXrefs; let isLast=last">-->
+<!--                        <a href="https://www.ncbi.nlm.nih.gov/pubmed/{{item.id}}" target="_blank"><i> {{item.whole}}</i></a>-->
+<!--                    {{isLast ? '' : ', '}}-->
+<!--                      </span>-->
+<!--                </mat-list-item>-->
                 <mat-list-item *ngIf="term.xrefs.length > 0">
                   <strong>Cross References:</strong> &nbsp;&nbsp;
                   <i *ngFor="let item of term.xrefs; let isLast=last">{{item}}{{isLast ? '' : ', '}}</i>
