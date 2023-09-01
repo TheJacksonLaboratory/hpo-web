@@ -5,11 +5,6 @@
         <h2>{{version}}</h2>
         <a [href]="otherReleases" target="_blank">Older Versions</a>
       </div>
-      <div>
-        We are currently moving our API's to <a href="https://ontology.jax.org">https://ontology.jax.org</a> and expect to fully
-        switch by September 31, 2023. Please make sure you update your links in time. The new API url scheme will be different from
-        the current one so please consult the documentation.
-      </div>
       <div class="download-banner-wrapper mat-elevation-z4" fxLayout="row" (click)="utilityService.downloadFile(oboUrl)">
         <mat-icon>download</mat-icon>
         <h3 class="download-banner-title">Download latest hp.obo</h3>
@@ -23,4 +18,10 @@
         <h3 class="download-banner-title">Download latest hp.json</h3>
       </div>
   </div>
+   <div class="center">
+    <h4>  We are currently moving our API's to <a href="https://ontology.jax.org">https://ontology.jax.org</a> and expect to fully
+        switch by September 31, 2023. Please make sure you update your links in time. The new API url scheme will be different from
+        the current one so please consult the documentation.</h4>
+
+   </div>
 </div>
