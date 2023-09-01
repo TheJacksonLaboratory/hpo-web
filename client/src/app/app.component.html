@@ -1,4 +1,8 @@
 <mat-sidenav-container>
+  <mat-toolbar class="banner" color="warn">
+    <mat-icon>warning</mat-icon>
+     <p>The API for this application is moving. <strong><a [routerLink]="['/data/ontology']">See the changes here.</a></strong></p>
+  </mat-toolbar>
   <navbar-hpo (navToggle)="sidenav.open(); mobileNavSection = 'home'"></navbar-hpo>
   <mat-sidenav #sidenav class="sidenav">
     <mat-nav-list>
@@ -56,6 +60,7 @@
       <div *ngIf="mobileNavSection == 'dataMenu'">
         <button mat-menu-item (click)="sidenav.close()" routerLink="data/ontology"> Ontology</button>
         <button mat-menu-item (click)="sidenav.close()" routerLink="data/annotations"> Annotations</button>
+        <button mat-menu-item (click)="sidenav.close()" routerLink="resources/phenopacket"> Annotations</button>
         <button mat-menu-item (click)="mobileNavigate('translationMenu')">Translation
           <mat-icon>arrow_right</mat-icon>
         </button>
