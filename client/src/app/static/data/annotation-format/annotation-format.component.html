@@ -1,48 +1,38 @@
 <div class="container">
-  <h1 class="center pageTitle">Annotation & File Format</h1>
+  <h1 class="center pageTitle">Annotations & Supplemental File Format</h1>
   <p>
-    In addition to an ontology of phenotypic abnormalities, the HPO project provides
-    a large set of phenotype annotations, i.e. statements that link a particular term
-    from the HPO to specific diseases or genes. These annotations are made for the most appropriate (specific) term of
-    the HPO, as all of the ancestor terms are implicitly annotated as well.
-    This means that if a patient has <em>Aculeiform cataract</em> (HP:0010926), the patient can also be said to have the
-    parent term of Aculeiform cataract, viz.,
-    <em>Nuclear cataract</em> (HP:0100018) as well as the "grandmother" and "great-grandmother" terms <em>Zonular
-    cataract</em> (HP:0010920) and
-    <em>Cataract</em> (HP:0000518). This is a necessary consequence of the way the HPO-based algorithms were developed,
-    but it also reflects the "fuzziness" that
-    is frequently encountered in clinical medicine. For instance, a general practitioner might make the diagnosis of
-    Cataract and refer a patient to an ophthalmologist who would
-    make the more precise diagnosis of Aculeiform cataract.
+    The HPO annotation files are created by editing one file per disease entries (which we will call “small” files here
+    for brevity). These files were merged into a single file that has been called <i>phenotype_annotation.tab</i>. Starting in
+    2018, the HPO team is migrating to a new big file format called <i>phenotype.hpoa</i>. In this document, we will describe
+    the format of phenotype.hpoa.
   </p>
-  <p>Users of HPO-based software such as Phenomizer and Exomiser will see the disease annotations displayed in various
-    contexts. This page describes the format of the file
-    provided by the HPO project for download and will mainly be of interest to bioinformaticians or computer scientists
-    who want to use the file for their own analysis.
+  <p>
+    The main HPO annotation file, phenotype.hpoa, contains disease-phenotype annotations. The HPO project also offers
+    two files genes_to_ that link HPO annotations to the disease-associated genes. For instance, the HPO term
+    Arachnodactyly is a
+    feature of the disease Marfan syndrome, which is caused by mutation in the FBN1 gene. Therefore, these files link
+    Arachnodactyly to FBN1.
   </p>
-  <p>We represent clinical annotations using a simple tab-delimited format. This document describes the process of
-    assigning HPO terms to disease entities.
-    Each line in the annotation file represents a link between a disease entity such as <i>Noonan syndrome</i> and one
-    of the clinical features characteristically seen in that disease. Each of the features of a disease is to be listed
-    on a separate line.
-    Note that this file (and format) is intended to be used
-    for the annotation of disease entities (e.g.<i>Noonan syndrome</i>) and not individuals (such as a person who has
-    been diagnosed with <i>Noonan syndrome</i>).
-    We recommend looking at <a href="https://phenotips.org/" target="__blank">PhenoTips</a> or <a
-      href="http://www.patientarchive.org/#/home" target="__blank">Patient Archive</a>
-    if you are aiming at annotating clinical findings of individuals with hereditary diseases.</p>
 
-  <h3>Current Annotation File format (2019 onwards)</h3>
-  The HPO transitioned to a new annotation file format in 2019 (Details in <a
-  href="https://www.ncbi.nlm.nih.gov/pubmed/30476213" target="_blank"> K&ouml;hler et al, 2019</a>).
-
-
-  <table align="center" class="table-spacer">
+  <h2 #hpoa>phenotype.hpoa format</h2>
+  <p>The first few lines present metadata (comments) preceeded by hash signs (#) at the beginning of the lines. The very
+    next line is a header with the names of the columns.</p>
+  <div class="code-wrapper">
+    <div class="code">
+      #description: HPO annotations for rare diseases [7377: OMIM; 47: DECIPHER; 3300 ORPHANET]<br>
+      #date: 2019-01-03<br>
+      #tracker: https://github.com/obophenotype/human-phenotype-ontology<br>
+      #HPO-version: http://purl.obolibrary.org/obo/hp/releases/2018-12-21/hp.owl<br>
+      DatabaseID&emsp;DiseaseName&emsp;Qualifier&emsp;HPO_ID&emsp;Reference&emsp;Evidence&emsp;Onset&emsp;Frequency&emsp;Sex&emsp;Modifier&emsp;Aspect&emsp;Biocuration
+    </div>
+  </div>
+  <br>
+  <table class="margin-auto table-spacer">
     <thead>
     <tr>
-      <th>Column</th>
+      <th>Column Number</th>
       <th>Content</th>
-      <th>Required</th>
+      <th>Required Value</th>
       <th>Example</th>
     </tr>
     </thead>
@@ -51,7 +41,7 @@
       <td>1</td>
       <td>DatabaseId</td>
       <td>required</td>
-      <td>MIM:154700</td>
+      <td>OMIM:154700</td>
     </tr>
     <tr>
       <td>2</td>
@@ -79,13 +69,13 @@
     </tr>
     <tr>
       <td>6</td>
-      <td>Evidence_Code</td>
+      <td>Evidence</td>
       <td>required</td>
       <td>IEA</td>
     </tr>
     <tr>
       <td>7</td>
-      <td>Onset modifier</td>
+      <td>Onset</td>
       <td>optional</td>
       <td>HP:0003577</td>
     </tr>
@@ -121,7 +111,7 @@
     </tr>
     </tbody>
   </table>
-
+  <br>
   <ol class="no-indent-list">
     <li>
       <strong>DatabaseId</strong>
@@ -228,232 +218,224 @@
 
   <p>See the <a href="https://hpo-annotation-qc.readthedocs.io/en/latest/annotationFormat.html#phenotype-hpoa-format"
                 target="_blank">online documentation</a> for more information about this format.</p>
-
-
-  <h3>2009-2018 Annotation file format</h3>
-  <p>We will maintain the previous annotation format for the foreseeable future as a service to our users but ask users
-    to update their pipelines to the new format.</p>
-
-
+  <h2 #g2p>genes_to_phenotype.txt format</h2>
   <p>
-    <i>The flat file format comprises 14 tab-delimited fields. Please note there are several differences compared with
-      our previous annotation file format that was in use
-      from 2009 to March, 2018.</i>
+    In the genes_to_phenotypes.txt file, we list for each gene the most specific HPO-classes (and not all the
+    ancestors). The following table shows an excerpt from the file. The table provides the NCBI Gene identifier, the
+    gene symbol, the HPO identifier and term name. If available, the frequency is shown. For instance, mutation in the
+    AARS1 gene cause Leukoencephalopathy, hereditary diffuse, with spheroids 2. The frequency of the HPO term Sensory
+    ataxia was annotated to be 1 in 2 because of information in Sundal C, et al., PMID:31775912 (See entry in table
+    below). The HPO resource offers annotations made by the HPO team (using disease identifiers from OMIM) as well as
+    annotations provided by the Orphanet team (using ORPHA disease identifiers). In this case, gene to phenotype
+    annotations are shown separately.
   </p>
-  <table align="center" class="table-spacer">
+  <br>
+  <table class="margin-auto table-spacer">
     <thead>
     <tr>
-      <th>Column</th>
-      <th>Content</th>
-      <th>Required</th>
-      <th>Example</th>
+      <th>ncbi_gene_id</th>
+      <th>gene_symbol</th>
+      <th>hpo_id</th>
+      <th>hpo_name</th>
+      <th>frequency</th>
+      <th>disease_id</th>
     </tr>
     </thead>
     <tbody>
     <tr>
-      <td>1</td>
-      <td>DB</td>
-      <td>required</td>
-      <td>OMIM, ORPHA, DECIPHER, MONDO</td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td>DB_Object_ID</td>
-      <td>required</td>
-      <td>154700</td>
-    </tr>
-    <tr>
-      <td>3</td>
-      <td>DB_Name</td>
-      <td>required</td>
-      <td>Achondrogenesis, type IB</td>
-    </tr>
-    <tr>
-      <td>4</td>
-      <td>Qualifier</td>
-      <td>optional</td>
-      <td>NOT</td>
-    </tr>
-    <tr>
-      <td>5</td>
-      <td>HPO_ID</td>
-      <td>required</td>
-      <td>HP:0002487</td>
-    </tr>
-    <tr>
-      <td>6</td>
-      <td>DB_Reference</td>
-      <td>required</td>
-      <td>OMIM:154700 or PMID:15517394</td>
-    </tr>
-    <tr>
-      <td>7</td>
-      <td>Evidence_Code</td>
-      <td>required</td>
-      <td>IEA</td>
-    </tr>
-    <tr>
-      <td>8</td>
-      <td>Onset modifier</td>
-      <td>optional</td>
-      <td>HP:0003577</td>
-    </tr>
-    <tr>
-      <td>9</td>
-      <td>Frequency</td>
-      <td>optional</td>
-      <td><a routerLink="/browse/term/HP:0003577">HP:0003577</a> or 12/45 or 22%</td>
+      <td>10</td>
+      <td>NAT2</td>
+      <td>HP:0000007</td>
+      <td>Autosomal recessive inheritance</td>
+      <td>-</td>
+      <td>OMIM:243400</td>
     </tr>
     <tr>
       <td>10</td>
-      <td>Sex</td>
-      <td>optional</td>
-      <td>MALE or FEMALE</td>
+      <td>NAT2</td>
+      <td>HP:0001939</td>
+      <td>Abnormality of metabolism/homeostasis</td>
+      <td>-</td>
+      <td>OMIM:243400</td>
     </tr>
     <tr>
-      <td>11</td>
-      <td>Modifier</td>
-      <td>optional</td>
-      <td><a routerLink="/browse/term/HP:0025257">HP:0025257</a>(“;”-separated list)</td>
+      <td>16</td>
+      <td>AARS1</td>
+      <td>HP:0002460</td>
+      <td>Distal muscle weakness</td>
+      <td>15/15</td>
+      <td>OMIM:613287</td>
+    </tr>
+
+    <tr>
+      <td>16</td>
+      <td>AARS1</td>
+      <td>HP:0002451</td>
+      <td>Limb dystonia</td>
+      <td>3/3</td>
+      <td>OMIM:616339</td>
     </tr>
     <tr>
-      <td>12</td>
-      <td>Aspect</td>
-      <td>required</td>
-      <td>P, C, or I</td>
+      <td>16</td>
+      <td>AARS1</td>
+      <td>HP:0010871</td>
+      <td>Sensory ataxia</td>
+      <td>1/2</td>
+      <td>OMIM:619661</td>
     </tr>
     <tr>
-      <td>13</td>
-      <td>Date_Created</td>
-      <td>required</td>
-      <td>YYYY-MM-DD</td>
+      <td>16</td>
+      <td>AARS1</td>
+      <td>HP:0009886</td>
+      <td>Trichorrhexis nodosa</td>
+      <td>1/2</td>
+      <td>OMIM:619691</td>
     </tr>
     <tr>
-      <td>14</td>
-      <td>Assigned_By</td>
-      <td>required</td>
-      <td>HPO</td>
+      <td>16</td>
+      <td>AARS1</td>
+      <td>HP:0002421</td>
+      <td>Poor head control</td>
+      <td>HP:0040283</td>
+      <td>ORPHA:442835</td>
+    </tr>
+    <tr>
+      <td>16</td>
+      <td>AARS1</td>
+      <td>HP:0001298</td>
+      <td>Encephalopathy</td>
+      <td>HP:0040281</td>
+      <td>ORPHA:442835</td>
+    </tr>
+    <tr>
+      <td>16</td>
+      <td>AARS1</td>
+      <td>HP:0001290</td>
+      <td>Generalized hypotonia</td>
+      <td>HP:0040282</td>
+      <td>ORPHA:442835</td>
+    </tr>
+    <tr>
+      <td>16</td>
+      <td>AARS1</td>
+      <td>HP:0001273</td>
+      <td>Abnormal corpus callosum morphology</td>
+      <td>HP:0040283</td>
+      <td>ORPHA:442835</td>
     </tr>
     </tbody>
   </table>
-  <ol class="no-indent-list">
-    <li>
-      <strong>DB:</strong>
-      <p>This field refers to the database from which the identifier in DB_Object_ID (column 2) is drawn. Annotations
-        from
-        <a href="https://omim.org/" target="__blank">OMIM</a>,
-        <a href="http://www.orpha.net/consor/cgi-bin/index.php" target="__blank">Orphanet</a>,
-        <a href="https://decipher.sanger.ac.uk/" target="__blank">DECIPHER</a> are currently available. Annotations to
-        diseases in
-        <a href="https://www.ebi.ac.uk/ols/ontologies/mondo" target="__blank">Monarch Disease Ontology (MONDO)</a> will
-        soon be available.
-      </p>
-    </li>
-    <li>
-      <strong>DB_Object_ID:</strong>
-      <p>This is the identifier of the annotated disease within the database indicated in column 1. Note that for OMIM
-        identifiers,
-        the symbol preceding the MIM number is omitted (*,#,+,%).</p>
-    </li>
-    <li>
-      <strong>DB_Name:</strong>
-      <p>This is the name of the disease associated with the DB_Object_ID in the database. Only the accepted name should
-        be used, synonyms should not be listed here.</p>
-    </li>
-    <li>
-      <strong>Qualifer:</strong>
-      <p>This optional field can be used to qualify the annotation shown in field 5. The only allowed values of this
-        field are NOT and (empty string).
-        <em>NOT</em>: The disorder being annotated is NOT characterized by the feature associated with HPO_ID in column
-        5. Note that annotations with the NOT modifier are moved to separate file!</p>
-    </li>
-    <li>
-      <strong>HPO_ID:</strong>
-      <p>This field is for the HPO identifier for the term attributed to the DB_Object_ID. This field is mandatory,
-        cardinality 1.</p>
-    </li>
-    <li>
-      <strong>DB_Reference:</strong>
-      <p>This required field indicates the source of the information used for the annotation. This may be the clinical
-        experience of the annotator or may be taken from
-        an article as indicated by a PubMed id. Each collaborating center of the Human Phenotype Ontology consortium is
-        assigned a HPO:Ref id.
-        In addition, if appropriate, a PubMed id for an article describing the clinical abnormality may be used.</p>
-    </li>
-    <li>
-      <strong>Evidence:</strong>
-      <p>This required field indicates the level of evidence supporting the annotation. Annotations that have been
-        extracted by parsing the
-        Clinical Features sections of the omim.txt file are assigned the evidence code <strong>IEA</strong> (inferred
-        from electronic annotation). Please note that you need to
-        contact OMIM in order to reuse these annotations in other software products.
-        Other codes include <strong>PCS</strong> for published clinical study. This should be used for information
-        extracted from articles in the medical literature.
-        Generally, annotations of this type will include the PubMed id of the published study in the DB_Reference field.
-        <strong>ICE</strong> can be used for annotations based on individual clinical experience.
-        This may be appropriate for disorders with a limited amount of published data. This must be accompanied by an
-        entry in
-        the DB:Reference field denoting the individual or center performing the annotation together with an identifier.
-        For instance, GH:007 might be used to refer to
-        the seventh such annotation made by a specialist from Gotham Hospital
-        (assuming the prefix GH has been registered with the HPO). Finally we have <strong>TAS</strong>, which stands
-        for “traceable author statement”, usually
-        reviews or disease entries (e.g. OMIM) that only refers to the original publication.</p>
-    </li>
-    <li>
-      <strong>Onset</strong>
-      <p>A term-id from the HPO-sub-ontology below the term <a routerLink="/browse/term/HP:0003674">Age of onset</a>.
-      </p>
-    </li>
-    <li>
-      <strong>Frequency</strong>
-      <p>A term-id from the HPO-sub-ontology below the term <a routerLink="/browse/term/HP:0040279">Frequency</a>.</p>
-      There are three allowed options for this field.
-      <ol>
-        <li>
-          A term-id from the HPO-sub-ontology below the term <a routerLink="/browse/term/HP:0040279">Frequency</a>.
-        </li>
-        <li>
-          A count of patients affected within a cohort. For instance, 7/13 would indicate that 7 of the 13 patients with
-          the
-          specified disease were found to have the phenotypic abnormality referred to by the HPO term in question in the
-          study
-          referred to by the DB_Reference
-        </li>
-        <li>
-          A percentage value such as 17%, again referring to the percentage of patients found to have the phenotypic
-          abnormality referred to by the HPO term in question in the study
-          referred to by the DB_Reference. If possible, the 7/13 format is preferred over the percentage format if the
-          exact data is available.
-        </li>
-      </ol>
-    </li>
+  <h2 #p2g>phenotype_to_genes.txt format</h2>
+  The phenotype_to_genes.txt file displays the HPO identifier and term name, the NCBI Gene identifier, the gene symbol,
+  and the disease identifier. This file shows each HPO term that has at least one gene associated with it. In contrast
+  to the genes_to_phenotypes.txt file, this file includes the ancestor classes of each associated phenotype. For example
+  given that:
+  <ul>
+    <li>HP_1 subclass_of HP_3</li>
+    <li>HP_1 subclass_of HP_3</li>
+  </ul>
+  then genes_to_phenotypes.txt
+  <ul>
+    <li><strong>geneA</strong> annotated to HP_1</li>
+    <li><strong>geneB</strong> annotated to HP_2</li>
+  </ul>
+  then phenotype_to_genes.txt contains:
+  <ul>
+    <li>HP_3 annotates <strong>geneA</strong> and <strong>geneB</strong></li>
+  </ul>
+  <table class="margin-auto table-spacer">
+    <thead>
+    <tr>
+      <th>hpo_id</th>
+      <th>hpo_name</th>
+      <th>ncbi_gene_id</th>
+      <th>gene_symbol</th>
+      <th>disease_id</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>HP:0003300</td>
+      <td>Ovoid vertebral bodies</td>
+      <td>1280</td>
+      <td>COL2A1</td>
+      <td>OMIM:184255</td>
+    </tr>
+    <tr>
+      <td>HP:0003300</td>
+      <td>Ovoid vertebral bodies</td>
+      <td>1280</td>
+      <td>COL2A1</td>
+      <td>OMIM:271700</td>
+    </tr>
 
-    <li>
-      <strong>Sex:</strong>
-      <p>This field contains the strings MALE or FEMALE if the annotation in question is limited to
-        males or females. This field refers to the phenotypic (and not the chromosomal) sex, and does not intend to
-        capture
-        the further complexities of sex determination. If a phenotype is limited to one or the other sex, then the
-        corresponding
-        term from the <a routerLink="/browse/term/HP:0012823">Clinical modifier</a> subontology should also be used in
-        the Modifier field.</p>
-    </li>
-    <li><strong>Modifier:</strong>
-      <p>A term from the <a routerLink="/browse/term/HP:0012823">Clinical modifier</a> subontology</p>
-    </li>
-    <li>
-      <strong>Aspect:</strong>
-      <p>one of P (Phenotypic abnormality), I (inheritance), C (onset and clinical course). This field is mandatory;
-        cardinality 1</p>
-    </li>
-    <li>
-      <strong>Date_Created:</strong>
-      <p>Date on which the annotation was made; format is YYYY-MM-DD this field is mandatory, cardinality 1</p>
-    </li>
-    <li>
-      <strong>Assigned_By:</strong>
-      <p>This refers to the center or user making the annotation.</p>
-    </li>
-  </ol>
+    <tr>
+      <td>HP:0003300</td>
+      <td>Ovoid vertebral bodies</td>
+      <td>1280</td>
+      <td>COL2A1</td>
+      <td>OMIM:151210</td>
+    </tr>
+
+    <tr>
+      <td>HP:0003300</td>
+      <td>Ovoid vertebral bodies</td>
+      <td>1280</td>
+      <td>COL2A1</td>
+      <td>ORPHA:93315</td>
+    </tr>
+
+    <tr>
+      <td>HP:0003300</td>
+      <td>Ovoid vertebral bodies</td>
+      <td>1280</td>
+      <td>COL2A1</td>
+      <td>OMIM:183900</td>
+    </tr>
+
+    <tr>HP:0003300
+      <td>Ovoid vertebral bodies</td>
+      <td>1280</td>
+      <td>COL2A1</td>
+      <td>ORPHA:1856</td>
+    </tr>
+
+    <tr>
+      <td>HP:0003300</td>
+      <td>Ovoid vertebral bodies</td>
+      <td>2335</td>
+      <td>FN1</td>
+      <td>OMIM:184255</td>
+    </tr>
+
+    <tr>
+      <td>HP:0003300</td>
+      <td>Ovoid vertebral bodies</td>
+      <td>2335</td>
+      <td>FN1</td>
+      <td>ORPHA:93315</td>
+    </tr>
+    <tr>
+      <td>HP:0003300</td>
+      <td>Ovoid vertebral bodies</td>
+      <td>126792</td>
+      <td>B3GALT6</td>
+      <td>ORPHA:536467</td>
+    </tr>
+    <tr>
+      <td>HP:0003300</td>
+      <td>Ovoid vertebral bodies</td>
+      <td>126792</td>
+      <td>B3GALT6</td>
+      <td>OMIM:271640</td>
+    </tr>
+    <tr>
+      <td>HP:0003300</td>
+      <td>Ovoid vertebral bodies</td>
+      <td>4882</td>
+      <td>NPR2</td>
+      <td>OMIM:602875</td>
+    </tr>
+    </tbody>
+  </table>
 </div>

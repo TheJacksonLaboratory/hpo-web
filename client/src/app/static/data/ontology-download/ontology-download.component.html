@@ -1,6 +1,6 @@
 <div class="container ontology-download" fxLayout="row wrap">
   <h1 class="pageTitle center" fxFlex="100">Download Ontology</h1>
-  <div class="ontology-download-wrapper" fxLayout="column" fxLayoutAlign="space-evenly center" fxFlex>
+  <div class="ontology-download-wrapper" fxLayout="column" fxLayoutAlign="space-evenly center" fxFlex="100">
       <div class="version-title">
         <h2>{{version}}</h2>
         <a [href]="otherReleases" target="_blank">Older Versions</a>
@@ -17,5 +17,10 @@
         <mat-icon>download</mat-icon>
         <h3 class="download-banner-title">Download latest hp.json</h3>
       </div>
+  </div>
+  <div class="center" fxFlex="50" fxFlexOffset="25">
+      <h4>  We are currently moving our ontology API to <a href="https://ontology.jax.org">https://ontology.jax.org</a> and expect to fully
+            switch by September 31, 2023. the API public release for this new location is set for the first week of September.
+      </h4>
   </div>
 </div>

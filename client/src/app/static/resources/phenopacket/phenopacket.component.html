@@ -1,24 +1,104 @@
 <div class="container phenopacket">
   <h1 class="center pageTitle">Global Alliance for Genomic Health Phenopacket</h1>
-
-  <p>The Monarch Initiative, the consortium that includes the HPO team, has led the development of the
-    the <a target="__blank" href="https://phenopacket-schema.readthedocs.io/en/latest/">Phenopacket Schema</a>
-    for the <a target="__blank" href="https://www.ga4gh.org/">Global Alliance for Genomics and Health (GA4GH)</a>.
-    The Phenopacket Schema was approved by the GA4GH in 2022 and additional certified by the International Standards
-    Organization (ISO) as <a href="https://www.iso.org/standard/79991.html"  target="__blank">ISO 4454:2022
-      Genomics informatics — Phenopackets: A format for phenotypic data exchange</a>.</p>
-
-  <p>More information is available in <a href="https://pubmed.ncbi.nlm.nih.gov/35705716/"  target="__blank">Jacobsen JOB, et al. The GA4GH Phenopacket schema defines a computable representation of clinical data. Nat Biotechnol. 2022 Jun;40(6):817-820.</a>.
-
-  <p>A Phenopacket characterizes an individual person or biosample, linking that individual to detailed phenotypic descriptions, genetic information, diagnoses, and treatments. The Phenopacket schema supports the FAIR principles (findable, accessible, interoperable, and reusable), and computability. Specifically, Phenopackets are designed to be both human and machine-interpretable, enabling computing operations and validation on the basis of defined relationships between diagnoses, lab measurements, and genotypic information.</p>
-
-  <p>The Phenopacket schema enables comparison of sets of phenotypic attributes from individual patients. Such comparisons can aid in diagnosis and facilitate patient classification and stratification for identifying new diseases and treatments. The Phenopacket schema is designed to support interoperability between people, organizations, and systems that comprise the worldwide effort to understand human disease. The structure of the information in a phenopacket was designed for integration within clinical laboratories, journals, data repositories, patient registries, electronic health records (EHRs), and knowledge bases. Increasing the volume of computable data across a diversity of systems will support global disease analysis by integrating genotype, phenotype, and other multi-modal data for precision health applications.</p>
-    <figure class="phenopacket-figure">
-      <img alt="GA4GH Phenopacket" src="https://onlinelibrary.wiley.com/cms/asset/1cc0a141-da65-45a3-b7b0-6316b7b02069/ggn2202200016-fig-0002-m.jpg"/>
-      <figcaption class="phenopacket-figure-caption">Phenopacket Schema overview. The GA4GH Phenopacket Schema is a hierarchical structure that consists of two required fields, ID and MetaData, as well as eight optional fields, Individual, Disease, Interpretation, Biosample, PhenotypicFeature, Measurement, MedicalAction, and files.</figcaption>
-    </figure>
   <p>
-    The Phenopacket provides a standardized way of reporting HPO terms and providing additional context. A detailed introduction in how to represent clinical data as a phenopacket is provided in <a target="__blank" href="https://onlinelibrary.wiley.com/doi/full/10.1002/ggn2.202200016">Ladewig et al., GA4GH Phenopackets: A Practical Introduction, Advanced Genetics 2022</a>.
+    The <a target="__blank" href="https://www.ga4gh.org/">Global Alliance for Genomics and Health (GA4GH)</a> is a
+    standards-setting organization that is developing a suite of
+    coordinated standards for genomics. The GA4GH Phenopacket Schema is a standard for sharing disease and phenotype
+    information that characterizes an individual person or biosample (<a
+    href="https://pubmed.ncbi.nlm.nih.gov/35705716/" target="_blank">Jacobsen et al., 2022</a>).</p>
+
+  <h2>Introduction</h2>
+
+  <p>The Phenopacket Schema is flexible and can represent clinical data for any kind of human disease including rare
+    disease, complex disease, and cancer. It also allows consortia or databases to apply additional constraints to
+    ensure uniform data collection for specific goals.</p>
+  <figure class="phenopacket-figure">
+    <img alt="GA4GH Phenopacket"
+         src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9363006/bin/nihms-1823217-f0001.jpg"/>
+    <figcaption class="phenopacket-figure-caption">Phenopacket Schema overview. The GA4GH Phenopacket Schema is a
+      hierarchical structure that consists of two required fields, ID and MetaData, as well as eight optional fields,
+      Individual, Disease, Interpretation, Biosample, PhenotypicFeature, Measurement, MedicalAction, and files.
+    </figcaption>
+  </figure>
+  <br>
+
+  We have published a detailed example and tutorial for how to encode the clinical data of an individual with a
+  Mendelian rare disease (retinoblastoma) in <a href="https://pubmed.ncbi.nlm.nih.gov/36910590/" target="_blank">Ladewig
+  et al. 2022</a>.
+  The schema is available on <a href="https://github.com/phenopackets/phenopacket-schema" target="_blank">GitHub</a> in
+  addition to <a href="https://phenopacket-schema.readthedocs.io/en/latest/" target="_blank">detailed documentation</a>.
+
+  <h3>
+    Phenopackets and HPO
+  </h3>
+  The GA4GH Phenopacket Schema allows more context to be provided for phenotypic abnormalities than a list of HPO terms
+  without additional data. For instance, we can specify the age of onset, the severity, the resolution (abatement, or
+  “offset”) of a feature, other modifiers from the HPO’s <a href="https://hpo.jax.org/app/browse/term/HP:0012823">Clinical
+  Modifier (HP:0012823)</a> subontology, and also provides a
+  standard syntax for reporting that a particular feature was explicitly excluded by clinical examination.
+
+  <figure class="phenopacket-figure">
+    <img alt="Phenopacket Overview"
+         src="assets/phenopacket-overview.png"/>
+    <figcaption class="phenopacket-figure-caption">Overview of the PhenotypicFeature element of the GA4GH Phenopacket
+      Schema. See Figure 4 of <a href="https://pubmed.ncbi.nlm.nih.gov/36910590/" target="_blank">Ladewig et al. (2022)</a> for an example of how PhenotypicFeature elements are encoded using
+      YAML.
+    </figcaption>
+  </figure>
+
+  <p>We have provided recommendations of how to encode clinical data with HPO terms that can be used as a guide to
+    creating phenopackets for individuals with rare disease (<a href="https://pubmed.ncbi.nlm.nih.gov/31479590/"
+                                                                target="_blank">Oien
+      et al., 2019</a>).</p>
+  <h3>
+    Creating Phenopackets: PhenopacketLab
+  </h3>
+  <p>
+    PhenopacketLab is an Angular/Springboot web application for the loading, editing, saving of data that follows the
+    Phenopacket Schema.
+    PhenopacketLab is available on <a href="https://github.com/TheJacksonLaboratory/PhenopacketLab" target="_blank">GitHub</a>.
+  </p>
+  <h3>
+    Creating Phenopackets: Developers
+  </h3>
+  <p>
+    Phenopacket-tools is an open-source Java library and command-line application for construction, conversion, and
+    validation of phenopackets. Phenopacket-tools simplifies construction of phenopackets by providing concise builders,
+    programmatic shortcuts, and predefined building blocks (ontology classes) for concepts such as anatomical organs,
+    age of onset, biospecimen type, and clinical modifiers.
+    The phenopacket-tools library is freely available on <a href="https://github.com/phenopackets/phenopacket-tools"
+                                                            target="_blank">GitHub</a>. An article describing
+    phenopacket-tools was published (<a href="https://pubmed.ncbi.nlm.nih.gov/37196000/" target="_blank">Danis
+    et al., 2023</a>).
+    A python package for working with phenopackets is generated directly from the Protobuf framework and is available on
+    PyPI:
+    <a href="https://pypi.org/project/phenopackets/" target="_blank">phenopackets</a>. A Rust crate is also available to
+    build from the
+    <a href="https://github.com/phenopackets/phenopacket-schema/tree/rust-build" target="_blank">rust-build</a> branch
+    of the schema repository.
+
+    The library <a href="https://github.com/monarch-initiative/pyphetools" target="_blank">pyphetools</a> is intended to
+    simplify the creation of phenopackets from tabular data or relational databases by providing a number of convenience
+    functions and quality control measures.
+  </p>
+  <h3>
+    Phenopackets on FHIR
+  </h3>
+  <p>
+    A <a href="https://www.hl7.org/fhir/" target="_blank">Fast Healthcare Interoperability Resources</a> (FHIR)
+    Implementation Guide (IG) is being developed as a way of working with phenopackets in electronic health record (EHR)
+    settings: <a href="https://github.com/phenopackets/core-ig" target="_blank">core-ig</a>. The IG is being developed
+    under the aegis of the <a href="https://confluence.hl7.org/display/VA" target="_blank">HL7 Vulcan Accelerator
+    program</a>.
+  </p>
+  <h3>
+    Phenopackets for Genomic Diagnostics
+  </h3>
+  <p>
+    <a href="https://github.com/exomiser/Exomiser" target="_blank">Exomiser</a> and <a
+    href="https://github.com/TheJacksonLaboratory/LIRICAL" target="_blank">LIRICAL</a> are software packages for
+    prioritizing variants and genes in the genomic diagnostics of rare
+    Mendelian disease. Both packages have adopted the GA4GH Phenopacket Schema as an input format.
   </p>
 </div>
 
