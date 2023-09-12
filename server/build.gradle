@@ -16,7 +16,7 @@ buildscript {
   }
 }
 
-version "1.17.25"
+version "1.17.26"
 group "hpo.api"
 
 apply plugin: "idea"

@@ -41,3 +41,15 @@
 .sidenav .mat-menu-item.backButton .mat-icon {
   float: left;
 }
+
+.banner {
+  height: 30px;
+}
+
+.banner p {
+  margin: 0 0 0 2.5rem;
+}
+
+.banner p a {
+  color: white !important;
+}
