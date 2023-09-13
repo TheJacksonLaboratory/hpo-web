@@ -103,7 +103,7 @@ export class TermComponent implements OnInit {
   refreshData(query: string) {
     forkJoin( {
       hpo: this.termService.searchTerm(query),
-      term: this.ontologyService.term(query).pipe(catchError(e => of(undefined))),
+      term: this.ontologyService.term(query).pipe(catchError(e => { console.error(e); return of(undefined)})),
       parents: this.ontologyService.parents(query).pipe(catchError(e => of([]))),
       children: this.ontologyService.children(query).pipe(catchError(e => of([])))
     }).subscribe(({hpo, term, parents, children}) => {

@@ -33,7 +33,7 @@ import {ProfileSearchComponent} from './pages/profile-search/profile-search.comp
         GlobalMaterialModules,
         ExtrasModule
     ],
-    providers: [SearchService, TermService, GeneService, DiseaseService, DialogService, OntologyService, LanguageService],
+    providers: [SearchService, TermService, GeneService, DiseaseService, DialogService, OntologyService],
     declarations: [TermComponent, DiseaseComponent,
         GeneComponent,
         SearchResultsComponent, DialogExcelDownloadComponent, ProfileSearchComponent, TranslatePipe]
