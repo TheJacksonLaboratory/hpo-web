@@ -10,6 +10,7 @@ class UrlMappings {
     '/app/*.ico',
     '/app/assets/*.png',
     '/app/assets/*.jpg',
+    '/app/assets/*.txt',
     '/app/assets/*/*.png',
     '/app/assets/*/*.jpg',
     '/app/assets/team.json'
@@ -23,6 +24,11 @@ class UrlMappings {
     "/app/*.js"(controller: 'contentTypeAsset', action:'setCharEncoding') {
      contentType = 'text/javascript; charset=UTF-8'
     }
+
+    "/app/assets/*.txt"(controller: 'contentTypeAsset', action:'setCharEncoding') {
+      contentType = 'text/plain; charset=UTF-8'
+    }
+
    "/app/*.map"(controller: 'contentTypeAsset', action:'setCharEncoding') {
      contentType = 'application/json; charset=UTF-8'
    }

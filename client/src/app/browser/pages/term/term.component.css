@@ -223,3 +223,30 @@
   color: lightgray;
   display: inline-block;
 }
+
+.translation-chip {
+  background-color: #f1f0f0;
+  border-radius: 5px;
+}
+
+img.mat-chip-avatar::before {
+  width: 24px;
+  background: #4f8aa2;
+  height: 24px;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  overflow: hidden;
+  object-fit: cover;
+  content: ' ';
+}
+
+.translate-btn {
+  color: white;
+  margin: 0 0 0 .5rem;
+}
+
+.translate-btn .material-icons {
+  font-size: 18px;
+}

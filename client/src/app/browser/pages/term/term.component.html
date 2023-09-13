@@ -18,20 +18,20 @@
                         <span class="tree-counts" [ngStyle]="{'margin-left': '-100px', 'margin-right': '5px'}"
                               matTooltip="{{parent.childrenCount}}" *ngIf="parent.childrenCount != 0"
                               matTooltipPosition="above"> </span>
-                <a class="link" routerLink="../{{parent.ontologyId}}">{{parent.name}}</a>
+                <a class="link" routerLink="../{{parent.ontologyId}}">{{parent.name | translate: parent.translations: selectedLanguage.language}}</a>
               </li>
               <li>
                 <div class="term">
                           <span class="tree-counts" [ngStyle]="{'margin-left': '-115px'}"
                                 *ngIf="treeData.termCount != 0" matTooltip="{{treeData.termCount}}"
                                 matTooltipPosition="above"> </span>
-                  <strong>{{term.name}}</strong>
+                  <strong>{{term.name | translate: term.translations: selectedLanguage.language}}</strong>
                 </div>
                 <ul>
                   <li *ngFor="let child of treeData.children" class="children">
                             <span class="tree-counts" [ngStyle]="setTreeStyles(child)" *ngIf="child.childrenCount != 0"
                                   matTooltip="{{child.childrenCount}}" matTooltipPosition="above"> </span>
-                    <a class="link" routerLink="../{{child.ontologyId}}">{{child.name}}</a>
+                    <a class="link" routerLink="../{{child.ontologyId}}">{{child.name | translate: child.translations: selectedLanguage.language}}</a>
                   </li>
                 </ul>
               </li>
@@ -49,38 +49,48 @@
               <mat-progress-bar class="loading-result-details" color="primary" mode="indeterminate">
               </mat-progress-bar>
             </div>
-            <div *ngIf="treeData">
+            <div *ngIf="treeData && term">
               <div>
-                <span class="item-title">{{termTitle}}&nbsp;</span>
+                <span class="item-title">{{termTitle | translate: term.translations: selectedLanguage.language}}&nbsp;</span>
                 <span class="item-id" *ngIf="paramId != term.id">
-                      <span class="crossout">{{paramId}}
-                      </span><i class="material-icons obsolete-arrow">arrow_right_alt</i>
-                    </span>
+                <span class="crossout">{{paramId}}</span>
+                <i class="material-icons obsolete-arrow">arrow_right_alt</i></span>
                 <span class="item-id">{{term.id}}</span>
                 <!-- <i matTooltip="Copy purl to clipboard!" matTooltipPosition="above"
                     (click)="copyToClipboard(term.purl)" class="material-icons copyToClipboard">content_copy</i>-->
+                <br>
+                <mat-chip-list class="translation-chips" aria-label="Language Selection" multiple="false">
+                <mat-chip class="translation-chip" *ngFor="let lang of languages" color="primary"
+                          (click)="changeLanguage(lang)" [selected]="selectedLanguage.language === lang.language" [disableRipple]="true">
+                  <img matChipAvatar src="https://unpkg.com/language-icons@0.3.0/icons/{{lang.language}}.svg" alt="{{lang.language}}"/>
+                  {{lang.language_long}}
+                </mat-chip>
+              </mat-chip-list>
               </div>
-
               <hr class="underline-hr">
-              <p><br><i>{{term.definition}}</i></p>
+              <div>
+                <p>
+                  {{term.definition != "" ? term.definition : "No definition found."}}
+                </p>
+              </div>
               <mat-list>
                 <mat-divider></mat-divider>
                 <mat-list-item>
-                  <strong>Synonyms:</strong> &nbsp;&nbsp; <i
-                  *ngFor="let item of term.synonyms; let isLast=last">{{item}}{{isLast ? '' : ', '}}</i>
+                  <strong>Synonyms:</strong> &nbsp;&nbsp;
+                  <i *ngFor="let item of term.synonyms; let isLast=last">{{item}}{{isLast ? '' : "\t-\t"}}</i>
                 </mat-list-item>
                 <mat-divider></mat-divider>
                 <mat-list-item *ngIf="term.comment">
                   <strong>Comment:</strong> &nbsp;&nbsp; {{term.comment}}
                 </mat-list-item>
                 <mat-divider></mat-divider>
-                <mat-list-item *ngIf="term.pubmedXrefs.length > 0">
-                  <strong>Pubmed References:</strong> &nbsp;&nbsp;
-                  <span *ngFor="let item of term.pubmedXrefs; let isLast=last">
-                        <a href="https://www.ncbi.nlm.nih.gov/pubmed/{{item.id}}" target="_blank"><i> {{item.whole}}</i></a>
-                    {{isLast ? '' : ', '}}
-                      </span>
-                </mat-list-item>
+<!--                <mat-list-item *ngIf="term.pubmedXrefs.length > 0">-->
+<!--                  <strong>Pubmed References:</strong> &nbsp;&nbsp;-->
+<!--                  <span *ngFor="let item of term.pubmedXrefs; let isLast=last">-->
+<!--                        <a href="https://www.ncbi.nlm.nih.gov/pubmed/{{item.id}}" target="_blank"><i> {{item.whole}}</i></a>-->
+<!--                    {{isLast ? '' : ', '}}-->
+<!--                      </span>-->
+<!--                </mat-list-item>-->
                 <mat-list-item *ngIf="term.xrefs.length > 0">
                   <strong>Cross References:</strong> &nbsp;&nbsp;
                   <i *ngFor="let item of term.xrefs; let isLast=last">{{item}}{{isLast ? '' : ', '}}</i>
@@ -91,12 +101,15 @@
                       [disabled]="this.diseaseAssocCount == 0 && this.geneAssocCount == 0"
                       (click)="downloadDialog()"><span class="material-icons">get_app</span> Export Associations
               </button>
+              <a class="translate-btn" href="https://obophenotype.github.io/hpo-translations/" mat-stroked-button color="primary" target="_blank">
+                <span class="material-icons">open_in_new</span> Translate your language
+              </a>
             </div>
           </mat-card-content>
         </mat-card>
 
         <!-- TABS -->
-        <div class="hpo-group-tab">
+        <div class="hpo-group-tab" *ngIf="term">
           <mat-tab-group selectedIndex="0" class="term-details-tab-group mat-elevation-z6">
             <!-- Disease association -->
             <mat-tab label="Disease Associations">
