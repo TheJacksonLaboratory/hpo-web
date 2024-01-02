@@ -1,9 +1,0 @@
-model {
-  Map<String, Object> resultMap
-}
-json{
-  genes tmpl.genesByTerm( resultMap.genes )
-  geneCount resultMap.geneCount
-  offset resultMap.offset
-  max resultMap.max
-}

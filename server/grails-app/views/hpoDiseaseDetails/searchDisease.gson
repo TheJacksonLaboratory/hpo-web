@@ -1,8 +1,0 @@
-model {
-  Map resultMap
-}
-json{
-  disease tmpl.disease( resultMap.disease)
-  geneAssoc tmpl.gene(resultMap.geneAssoc)
-  catTermsMap tmpl.catTermsMap (resultMap.catTerms)
-}

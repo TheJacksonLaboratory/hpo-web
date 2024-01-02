@@ -1,5 +1,0 @@
-import hpo.api.term.DbTerm
-model {
-  DbTerm descendant
-}
-json g.render(descendant, [includes: ['name','ontologyId']])

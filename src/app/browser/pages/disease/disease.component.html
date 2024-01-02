@@ -1,0 +1,145 @@
+<div class="disease-component">
+  <div class="container-custom">
+    <div class="item-header">
+      <span [hidden]="!isLoading">
+          <mat-progress-bar class="loading-result-details" color="primary" mode="indeterminate">
+          </mat-progress-bar>
+      </span>
+    </div>
+    <div [hidden]="isLoading">
+      <div fxLayout="row" fxLayoutAlign="center">
+        <div fxFlex.gt-sm="80" fxFlex>
+          <!-- Disease Banner -->
+          <mat-card class="item-summary mat-elevation-z6">
+            <mat-card-content>
+              <span class="item-title">{{disease.diseaseName}}&nbsp;</span>
+              <a class="item-id" [href]="getExternalTermIdUrlFromId(disease.diseaseId)" target="_blank">
+                {{disease.diseaseId}}
+                <mat-icon>open_in_new</mat-icon>
+              </a>
+              <a *ngIf="disease.mondoId" class="item-id" [href]="getExternalTermIdUrlFromId(disease.mondoId)" target="_blank">
+                {{disease.mondoId}}
+                <mat-icon>open_in_new</mat-icon>
+              </a>
+              <hr class="underline-hr">
+              <mat-list>
+                <mat-list-item>{{disease.description}}</mat-list-item>
+              </mat-list>
+              <button mat-raised-button class="download-associations"
+                      [disabled]="!this.hasTerms && this.geneDataSource?.data.length == 0"
+                      (click)="downloadDialog()"><span class="material-icons">get_app</span> Export Associations
+              </button>
+              <button mat-raised-button class="report-issue"
+                      (click)="reportIssue()"><span class="material-icons">bug_report</span> Report Entry Issue
+              </button>
+            </mat-card-content>
+          </mat-card>
+
+          <!--TABS -->
+          <div class="hpo-group-tab">
+            <mat-tab-group selectedIndex="0" class="disease-details-tab-group mat-elevation-z6">
+
+              <!--Term associations tab -->
+              <mat-tab label="HPO Associations">
+                <div class="tab-content">
+                  <div class="associations term-association">
+                    <div *ngFor="let catTermSource of catTermSources ">
+                      <h3 class="category-title">{{catTermSource.catLabel}}
+                        <span *ngIf="catTermSource.annotationCount > 1">[ {{catTermSource.annotationCount}} annotations ]</span>
+                        <span *ngIf="catTermSource.annotationCount == 1">[ {{catTermSource.annotationCount}} annotation ]</span>
+                      </h3>
+                      <mat-table [dataSource]="catTermSource.termSource" matSort>
+                        <mat-header-row *matHeaderRowDef="termColumns; sticky: true"></mat-header-row>
+                        <mat-row *matRowDef="let row; columns: termColumns;"></mat-row>
+                        <ng-container matColumnDef="id">
+                          <mat-header-cell *matHeaderCellDef> Term Identifier</mat-header-cell>
+                          <mat-cell *matCellDef="let row">
+                            <a routerLink="/browse/term/{{row.id}}">{{row.id}}</a><br>
+                          </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="name">
+                          <mat-header-cell *matHeaderCellDef>Term Name</mat-header-cell>
+                          <mat-cell *matCellDef="let row">{{row.name}}</mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="metadata.onset">
+                          <mat-header-cell *matHeaderCellDef>Onset</mat-header-cell>
+                          <mat-cell *matCellDef="let row">{{row.metadata.onset}}</mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="metadata.frequency">
+                          <mat-header-cell *matHeaderCellDef>Frequency</mat-header-cell>
+                          <mat-cell *matCellDef="let row">{{row.metadata.frequency}}</mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="metadata.sources">
+                          <mat-header-cell *matHeaderCellDef>Source(s)</mat-header-cell>
+                          <mat-cell [ngClass]="{'source-cell': row.metadata.sources.length > 1}" *matCellDef="let row">
+                            <ng-container *ngFor="let source of row.metadata.sources">
+                              <div class="source" *ngIf="isTermIdExpected(source,'PMID')">
+                                <a [href]="getExternalTermIdUrlFromId(source)" target="_blank">
+                                  PubMed <i class="material-icons-outlined">library_books</i>
+                                </a>
+                              </div>
+                              <div class="source" *ngIf="!isTermIdExpected(source, 'PMID')">
+                                <a [href]="getExternalTermIdUrlFromId(source)" target="_blank">
+                                  <span>{{getDiseaseDatabaseName(source)}} &nbsp;</span>
+                                  <i class="material-icons">open_in_new</i>
+                                </a>
+                              </div>
+                            </ng-container>
+                          </mat-cell>
+                        </ng-container>
+                      </mat-table>
+                    </div>
+                  </div>
+                </div>
+              </mat-tab>
+
+              <!-- Gene associations tab -->
+              <mat-tab label="Gene Associations">
+                <!--<div class="tab-content">-->
+                <div [hidden]="geneDataSource?.data.length == 0">
+                  <div class="tab-output-container">
+
+                    <!-- filter -->
+                    <div class="filter-container">
+                      <div class="filter-header">
+                        <mat-form-field>
+                          <input id="geneFilterInput" matInput (keyup)="applyGeneFilter($event.target.value)"
+                                 placeholder="Filter">
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <!-- Gene Association Table -->
+                    <div class="associations gene-association">
+                      <mat-table [dataSource]="geneDataSource" matSort>
+                        <mat-header-row *matHeaderRowDef="geneColumns; sticky: true"></mat-header-row>
+                        <mat-row *matRowDef="let row; columns: geneColumns;"></mat-row>
+                        <ng-container matColumnDef="id">
+                          <mat-header-cell *matHeaderCellDef>Gene Identifier</mat-header-cell>
+                          <mat-cell *matCellDef="let row">
+                            <a routerLink="/browse/gene/{{row.id}}">{{row.id}}</a>
+                          </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="name">
+                          <mat-header-cell *matHeaderCellDef>Gene Symbol</mat-header-cell>
+                          <mat-cell *matCellDef="let row">{{row.name}}</mat-cell>
+                        </ng-container>
+                      </mat-table>
+
+                      <mat-paginator #genePaginator [pageSizeOptions]="[50, 100, 500]"></mat-paginator>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- no results found -->
+                <div class="container center" [hidden]="geneDataSource?.data.length !== 0">
+                  <h4>No gene results found for "{{query}}"</h4>
+                </div>
+
+              </mat-tab>
+            </mat-tab-group>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

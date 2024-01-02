@@ -1,8 +1,0 @@
-import org.monarchinitiative.loinc2hpocore.loinc.LoincEntry
-model {
-  LoincEntry loincEntry
-}
-json {
-  longName loincEntry.getLongName()
-  id loincEntry.getLoincId().toString()
-}

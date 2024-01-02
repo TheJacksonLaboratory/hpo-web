@@ -1,5 +1,0 @@
-import hpo.api.term.DbTerm
-model {
-  List<DbTerm> descendantList
-}
-json tmpl.descendant(descendantList ?: [])

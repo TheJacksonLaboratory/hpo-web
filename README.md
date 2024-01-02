@@ -1,98 +1,28 @@
-# Human Phenotype Ontology (HPO) Web App
+# Hpo
 
-The following guide provides the steps for an out-of-the-box setup for the Human Phenotype Ontology (HPO) Web application with minimum requirements for a local development environment. 
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.2.6.
 
-## Requirements
+## Development server
 
-+ Java@11
-+ mysql@5.7
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Setup
+## Code scaffolding
 
-+ Clone the repo:
- 
-  JAX Github 
-        
-        git clone git@github.com:TheJacksonLaboratory/hpo-web.git
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|module`.
 
-+ Initialize the mysql database and load the HPO ontology data. Run the following command in the command window inside the hpo-web directory. This step will take approximate 3+ minutes to complete
-         
-        ./gradlew server:runCommand -Pargs="load-hpo-db"
-        
-        E.g. when complete the output in the command window should look like this:
-        ...
-        finished refreshing database duration: 0:03:49.391 time: Thu Jan 11 11:28:56 EST 2018
-         
-        BUILD SUCCESSFUL
-        
-        Note:
-        If you desire to re-initialize the application and the database, execute the command again.
-        
+## Build
 
-+ Build the application with a gradle task.
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
 
-        ./gradlew build -DchromeHeadless=true
-        
-        E.g.
-        ...
-        :processTestResources
-        :testClasses
-        :test
-        :check
-        :build
-         
-        BUILD SUCCESSFUL
-         
-        Total time: 1 mins 29.306 secs
+## Running unit tests
 
-  
-+ War creation with a gradle task.
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-      ./gradlew clean war -Dgrails.env=[test, gcp, production]>
-       
-      Will output a war to ./build/libs/
+## Running end-to-end tests
 
-## Usage
+Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+Before running the tests make sure you are serving the app via `ng serve`.
 
-+ Run the hpo-web application. This step will launch the application in the local web container and make it available through the web browser
+## Further help
 
-        ./gradlew bootRun
-        * if you are looking to use the grails console provide argument `-Dgrails.console=true`
-
-+ To open the application site launch the browser and go to
- 
-        http://<host>:8080/app/index.html
-
-+ If client (Angular App) hot reload is desired open a new shell and execute
-
-        ./gradlew buildClientWatch
-
-+ Optionally to open the client (Angular app) via Cli
-
-  * Change directory to hpo-web/src/main/client
-  
-        cd hpo-web/src/main/client  
-  * Execute
-  
-        ng serve --open (will open application in the browser using port 4200)
-  
-## Unit Testing
-
-+ To execute the client (Angular app) unit tests, run
-  
-      ./gradlew clientTest
-
-+ To execute backend and client unit tests, run
-  
-      ./gradlew test
-      
-## Functional Testing
-
-+ To execute functional testing with chrome browser, run
-  
-      ./gradlew integrationTest
-
-+ To execute functional testing with chrome headless browser, run
-  
-      ./gradlew integrationTest -DchromeHeadless
-
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).

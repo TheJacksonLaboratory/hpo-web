@@ -1,7 +1,0 @@
-model {
-    Map<String,Object> result
-}
-json{
-    details tmpl.term( result.TERM )
-    relations tmpl.termRelations(result.DBTERM)
-}

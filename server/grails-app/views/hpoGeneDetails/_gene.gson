@@ -1,6 +1,0 @@
-import hpo.api.gene.DbGene
-
-model {
-  DbGene gene
-}
-json g.render(gene,[excludes: ['dbTerms', 'id', 'dbDiseases']])

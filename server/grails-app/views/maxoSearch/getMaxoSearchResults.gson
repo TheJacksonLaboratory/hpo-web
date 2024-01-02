@@ -1,9 +1,0 @@
-import hpo.api.model.MaxoSearchResult
-
-model {
-  List<MaxoSearchResult> maxoSearchResultList
-}
-
-json{
-  terms tmpl.maxoSearchResult(maxoSearchResultList)
-}
