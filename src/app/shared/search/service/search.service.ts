@@ -16,18 +16,20 @@ export class SearchService {
     })
   };
 
-  constructor(private http: HttpClient, private ontologyService: OntologyService, private annotationService: AnnotationService) {
+  constructor(private ontologyService: OntologyService, private annotationService: AnnotationService) {
   }
 
   searchFetchAll(query: string): Observable<any> {
-    return this.http
-      .get(environment.HPO_API_SEARCH_URL + '?q=' + query + '&max=-1', this.options);
+      return forkJoin( {
+          terms: this.ontologyService.search(query, -1).pipe(catchError(e => { console.error(e); return of([])})),
+          genes: this.annotationService.searchGene(query, -1).pipe(catchError( e => {console.error(e); return of([])})),
+          diseases: this.annotationService.searchDisease(query, -1).pipe(catchError(e => of([])))})
   }
 
   searchAll(query: string): Observable<any> {
    return forkJoin( {
-      terms: this.ontologyService.search(query).pipe(catchError(e => { console.error(e); return of([])})),
-      genes: this.annotationService.searchGene(query).pipe(catchError( e => {console.error(e); return of([])})),
-      diseases: this.annotationService.searchDisease(query).pipe(catchError(e => of([])))})
+      terms: this.ontologyService.search(query, 10).pipe(catchError(e => { console.error(e); return of([])})),
+      genes: this.annotationService.searchGene(query, 10).pipe(catchError( e => {console.error(e); return of([])})),
+      diseases: this.annotationService.searchDisease(query, 10).pipe(catchError(e => of([])))})
   }
 }

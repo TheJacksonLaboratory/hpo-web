@@ -11,9 +11,10 @@ export class OntologyService {
 
   constructor(private httpClient: HttpClient, private languageService: LanguageService) {}
 
-  search(query: string): Observable<Term>{
-    return this.httpClient.get<Term>(`${environment.ONTOLOGY_API_HP_SEARCH}?q=${query}`);
+  search(query: string, limit: number): Observable<Term>{
+    return this.httpClient.get<Term>(`${environment.ONTOLOGY_API_HP_SEARCH}?q=${query}&limit=${limit}`);
   }
+
   term(id: string): Observable<Term>  {
     return this.httpClient.get<Term>(environment.ONTOLOGY_API_HP_TERMS + id)
     .pipe(

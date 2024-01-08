@@ -19,9 +19,8 @@ export class SearchResultsComponent {
   isLoading = true;
   navFilter = 'term';
   selectedTab = 0;
-  counts = {term: 0, disease: 0, gene: 0};
 
-  termDisplayedColumns = ['ontologyId', 'name', 'matching_string', 'childrenCount'];
+  termDisplayedColumns = ['ontologyId', 'name', 'matching_string', 'synonym_match'];
   termDataSource: MatTableDataSource<Term>;
 
   diseaseDisplayedColumns = ['diseaseId', 'dbName', 'matching_string'];
@@ -48,7 +47,8 @@ export class SearchResultsComponent {
     // Filter should have precedence
     // then if the filter is as is default to the most counts
     if (this.navFilter === 'all') {
-      const maxTab = Object.keys(this.counts).reduce((a, b) => this.counts[a] > this.counts[b] ? a : b);
+      const counts = {'term': this.termDataSource.data.length, 'gene': this.geneDataSource.data.length, 'disease': this.diseaseDataSource.data.length};
+      const maxTab = Object.keys(counts).reduce((a, b) => counts[a] > counts[b] ? a : b);
       this.determineTab(maxTab);
     } else {
       this.determineTab(this.navFilter);
@@ -69,13 +69,9 @@ export class SearchResultsComponent {
     this.isLoading = true;
 
     this.searchService.searchFetchAll(this.query).subscribe((data) => {
-      this.terms = this.termMatchingStringBuilder(data.terms);
-      this.diseases = this.diseaseMatchingStringBuilder(data.diseases);
-      this.genes = this.genesMatchingStringBuilder(data.genes);
-
-      this.counts['term'] = data.termsTotalCount;
-      this.counts['disease'] = data.diseasesTotalCount;
-      this.counts['gene'] = data.genesTotalCount;
+      this.terms = this.termMatchingStringBuilder(this.query, data.terms);
+      this.diseases = this.responseMatchingStringBuilder(data.diseases);
+      this.genes = this.responseMatchingStringBuilder(data.genes);
 
       this.termDataSource = new MatTableDataSource(this.terms);
       this.diseaseDataSource = new MatTableDataSource(this.diseases);
@@ -98,33 +94,28 @@ export class SearchResultsComponent {
   // If synonym exists, it's the matching string apply
   // the highlight pipe. Otherwise the term is the matching string.
   // This is needed for the way tables are built with angular material
-  termMatchingStringBuilder(terms) {
-    terms.map(term => {
-      if (term.synonym != null) {
-        term['matchingString'] = term.synonym;
-      } else {
+  termMatchingStringBuilder(query, termResponse) {
+    termResponse.terms.map(term => {
+      term.synonyms.map(syn => {
+        if (syn.toLowerCase().includes(query.toLowerCase())){
+          term['matchingString'] = syn;
+          return;
+        }
+      });
+      if (term['matchingString'] === null) {
         term['matchingString'] = term.name;
       }
     });
-    return terms;
+    return termResponse.terms;
   }
 
-  diseaseMatchingStringBuilder(diseases) {
-    diseases.map(disease => {
-      if (disease.dbName) {
-        disease['matchingString'] = disease.dbName;
+  responseMatchingStringBuilder(response) {
+    response.results.map(result => {
+      if (result.name) {
+        result['matchingString'] = result.name;
       }
     });
-    return diseases;
-  }
-
-  genesMatchingStringBuilder(genes) {
-    genes.map(gene => {
-      if (gene.geneSymbol) {
-        gene['matchingString'] = gene.geneSymbol;
-      }
-    });
-    return genes;
+    return response.results;
   }
 
   applyTermFilter(filterValue: string) {

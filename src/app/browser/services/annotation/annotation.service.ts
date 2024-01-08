@@ -21,11 +21,11 @@ export class AnnotationService {
     return this.httpClient.get<GeneAssociation>(environment.ONTOLOGY_NETWORK_ANNOTATION_API + id);
   }
 
-  searchGene(query: string): Observable<SimpleTerm> {
-    return this.httpClient.get<SimpleTerm>(`${environment.ONTOLOGY_NETWORK_SEARCH_API}gene?q=${query}`);
+  searchGene(query: string, limit: number): Observable<SimpleTerm> {
+    return this.httpClient.get<SimpleTerm>(`${environment.ONTOLOGY_NETWORK_SEARCH_API}gene?q=${query}&limit=${limit}`);
   }
 
-  searchDisease(query: string): Observable<SimpleTerm> {
-    return this.httpClient.get<SimpleTerm>(`${environment.ONTOLOGY_NETWORK_SEARCH_API}disease?q=${query}`);
+  searchDisease(query: string, limit: number): Observable<SimpleTerm> {
+    return this.httpClient.get<SimpleTerm>(`${environment.ONTOLOGY_NETWORK_SEARCH_API}disease?q=${query}&limit=${limit}`);
   }
 }

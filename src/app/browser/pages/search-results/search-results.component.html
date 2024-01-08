@@ -23,7 +23,7 @@
                          [(selectedIndex)]="selectedTab">
 
             <!-- Term results tab -->
-            <mat-tab label="Term Results [{{counts.term}}]" [hidden]="!termDataSource">
+            <mat-tab label="Term Results [{{termDataSource?.data.length}}]" [hidden]="!termDataSource">
 
               <mat-progress-bar *ngIf="isLoading" class="loading-result-details" color="primary" mode="buffer">
               </mat-progress-bar>
@@ -45,7 +45,7 @@
                     <ng-container matColumnDef="ontologyId">
                       <mat-header-cell *matHeaderCellDef> Term Identifier</mat-header-cell>
                       <mat-cell *matCellDef="let row">
-                        <a routerLink="/browse/term/{{row.ontologyId}}">{{row.ontologyId}}</a>
+                        <a routerLink="/browse/term/{{row.id}}">{{row.id}}</a>
                       </mat-cell>
                     </ng-container>
 
@@ -63,9 +63,12 @@
                     </ng-container>
 
                     <!-- Weight Column -->
-                    <ng-container matColumnDef="childrenCount">
-                      <mat-header-cell *matHeaderCellDef> No. Descendants</mat-header-cell>
-                      <mat-cell *matCellDef="let row"> {{row.childrenCount}} </mat-cell>
+                    <ng-container matColumnDef="synonym_match">
+                      <mat-header-cell *matHeaderCellDef>Synonym Match</mat-header-cell>
+                      <mat-cell *matCellDef="let row">
+                        <span *ngIf="row.matchingString == row.name">No</span>
+                        <span *ngIf="row.matchingString != row.name">Yes</span>
+                      </mat-cell>
                     </ng-container>
                   </mat-table>
                   <mat-paginator #termPaginator [pageSizeOptions]="[50, 100, 500]"></mat-paginator>
@@ -77,7 +80,7 @@
             </mat-tab>
 
             <!-- Disease results tab -->
-            <mat-tab label="Disease Results [{{counts.disease}}]" [hidden]="!diseaseDataSource">
+            <mat-tab label="Disease Results [{{this.diseaseDataSource?.data.length}}]" [hidden]="!diseaseDataSource">
 
               <mat-progress-bar *ngIf="isLoading" class="loading-result-details" color="primary" mode="buffer">
               </mat-progress-bar>
@@ -103,14 +106,14 @@
                     <ng-container matColumnDef="diseaseId">
                       <mat-header-cell *matHeaderCellDef> Disease Identifier</mat-header-cell>
                       <mat-cell *matCellDef="let row">
-                        <a routerLink="/browse/disease/{{row.diseaseId}}">{{row.diseaseId}}</a>
+                        <a routerLink="/browse/disease/{{row.id}}">{{row.id}}</a>
                       </mat-cell>
                     </ng-container>
 
                     <!-- Disease DB Name -->
                     <ng-container matColumnDef="dbName">
                       <mat-header-cell *matHeaderCellDef> Disease Name</mat-header-cell>
-                      <mat-cell *matCellDef="let row"> {{row.dbName}} </mat-cell>
+                      <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
                     </ng-container>
 
                     <!-- Matching String -->
@@ -133,7 +136,7 @@
 
 
             <!-- Gene results tab -->
-            <mat-tab label="Gene Results [{{counts.gene}}]">
+            <mat-tab label="Gene Results [{{this.geneDataSource?.data.length}}]">
               <mat-progress-bar *ngIf="isLoading" class="loading-result-details" color="primary" mode="buffer">
               </mat-progress-bar>
               <div [hidden]="genes.length == 0">
@@ -156,14 +159,14 @@
                     <ng-container matColumnDef="entrezGeneId">
                       <mat-header-cell *matHeaderCellDef> Gene Identifier</mat-header-cell>
                       <mat-cell *matCellDef="let row">
-                        <a routerLink="/browse/gene/{{row.geneId}}">{{row.geneId}}</a>
+                        <a routerLink="/browse/gene/{{row.id}}">{{row.id}}</a>
                       </mat-cell>
                     </ng-container>
 
                     <!-- gene entrez Symbol -->
                     <ng-container matColumnDef="entrezGeneSymbol">
                       <mat-header-cell *matHeaderCellDef> Gene Symbol</mat-header-cell>
-                      <mat-cell *matCellDef="let row"> {{row.geneSymbol}} </mat-cell>
+                      <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
                     </ng-container>
 
                     <!-- Matching String -->
