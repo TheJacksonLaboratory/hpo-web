@@ -194,26 +194,27 @@ class DbTermAdminService {
   private saveTermParents(){
     StopWatch stopWatch = new StopWatch()
     stopWatch.start()
-    termParentsMap.each { term, parents ->
+      termParentsMap.each { term, parents ->
 
-      //construct a list of DbTerms for all Term parents from the ontology
-      List<DbTerm> parentTerms = parents.collect(){it = DbTerm.findByOntologyId("HP:" + it.getId()?.id)}
+        //construct a list of DbTerms for all Term parents from the ontology
+        List<DbTerm> parentTerms = parents.collect(){it = DbTerm.findByOntologyId(it.id().getValue())}
 
-      //persist child-parent relations via DB session
-      Session session = sessionFactory.openSession()
-      Transaction tx = session.beginTransaction()
-      parentTerms.eachWithIndex{ parent, counter ->
-        DbTermRelationship tr = new DbTermRelationship(termParent: parent, termChild: term)
-        session.save(tr)
-        if(counter.mod(100)==0) {
-          //clear session and save records after every 100 records
-          session.flush()
-          session.clear()
+        //persist child-parent relations via DB session
+        Session session = sessionFactory.openSession()
+        Transaction tx = session.beginTransaction()
+        try {
+          parentTerms.eachWithIndex { parent, counter ->
+              DbTermRelationship tr = new DbTermRelationship(termParent: parent, termChild: term)
+              session.save(tr)
+            }
+          } catch (Exception e) {
+          System.println(e);
         }
+
+        tx.commit()
+        session.close()
       }
-      tx.commit()
-      session.close()
-    }
+
 
     log.info("Save Parents size: ${termParentsMap.size()} duration: ${stopWatch} time: ${new Date()}")
   }
