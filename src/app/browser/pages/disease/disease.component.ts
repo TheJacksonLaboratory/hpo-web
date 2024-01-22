@@ -15,7 +15,7 @@ import {DialogService} from '../../../shared/dialog-excel-download/dialog.servic
 })
 export class DiseaseComponent {
   query: string;
-  disease: Disease = {};
+  disease: Disease;
   termAssoc: Term[] = [];
   termColumns = ['id', 'name', 'metadata.onset', 'metadata.frequency', 'metadata.sources'];
   hasTerms = false;
@@ -40,16 +40,11 @@ export class DiseaseComponent {
   refreshData() {
     this.annotationService.fromDisease(this.query)
       .subscribe((data) => {
-        this.disease = {diseaseId: "", diseaseName: ""};
+        this.disease = data.disease;
         this.catTermSources = [];
         this.setCatTermsDBSource(data.categories);
         this.geneDataSource = new MatTableDataSource(data.genes);
         this.geneDataSource.paginator = this.genePaginator;
-        this.diseaseService.searchMonarch(this.query)
-          .subscribe((mData) => {
-            this.disease.description = mData.description;
-            this.disease.mondoId = mData.id;
-          });
         this.isLoading = false;
       }, (error) => {
         const errorString = 'Could not find requested disease id.';
@@ -130,11 +125,11 @@ export class DiseaseComponent {
       genes: this.geneDataSource.data.length,
       terms: this.termAssoc.length
     };
-    this.dialogService.openDownloadDialog(this.disease.diseaseId, 'disease', counts);
+    this.dialogService.openDownloadDialog(this.disease.id, 'disease', counts);
   }
 
   reportIssue() {
-    if (this.disease.db.toUpperCase().includes("ORPHA")) {
+    if (this.disease.id.toUpperCase().includes("ORPHA")) {
       window.open("https://www.orpha.net/consor/cgi-bin/Directory_Contact.php?lng=EN", "_blank");
     } else
       window.open("https://github.com/obophenotype/human-phenotype-ontology/issues", "_blank");

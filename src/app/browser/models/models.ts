@@ -11,27 +11,9 @@ export interface Gene {
   matchingString?: string;
 }
 
-export interface Disease {
-  db?: string;
-  dbId?: string;
-  diseaseId?: string;
-
+export interface Disease extends SimpleTerm {
   mondoId?: string;
-  diseaseName?: string;
-  dbGenes?: Gene[];
-  dbObjectId?: string;
-  dbName?: string;
-  qualifier?: string;
-  hpoId?: string;
-  dbReference?: string;
-  evidenceDescription?: string;
-  onsetModifier?: string;
-  frequencyModifier?: string;
-  with?: string;
-  aspect?: string;
   synonym?: string;
-  date?: string;
-  assignedBy?: string;
   description?: string;
   matchingString?: string;
 }
@@ -50,7 +32,7 @@ export class EntrezGene {
   }
 }
 
-export interface Term extends SimpleTerm{
+export interface Term extends SimpleTerm {
   definition?: string;
   altTermIds?: Array<string>;
   comment?: string;
@@ -66,7 +48,6 @@ export interface Term extends SimpleTerm{
   pubmedXrefs: Array<any>;
   translations?: Translation[];
 }
-
 
 
 export interface TermTree {
@@ -162,6 +143,7 @@ export interface GeneAssociation {
 }
 
 export interface DiseaseAssociation {
+  disease: Disease;
   categories: {};
   genes: any[];
 }

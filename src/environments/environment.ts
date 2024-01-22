@@ -2,26 +2,24 @@
 // The build system defaults to the dev environment which uses `environment.ts`, but if you do
 // `ng build --env=prod` then `environment.prod.ts` will be used instead.
 // The list of which env maps to which file can be found in `.angular-cli.json`.
-const HPO_API_BASE_URL = 'http://localhost:8080/api/hp/';
-const ONTOLOGY_SERVICE_API_HP = HPO_API_BASE_URL + 'hp/';
+const ONTOLOGY_API_BASE_URL = 'https://ontology.jax.org/api/';
+const ONTOLOGY_API_ANNOTATION_BASE_URL = ONTOLOGY_API_BASE_URL;
+const ONTOLOGY_SERVICE_API_HP = ONTOLOGY_API_BASE_URL + 'hp/';
 export const environment = {
   production: false,
 
   VERSION: require('../../package.json').version,
-  // HPO MIGRATE SEARCH
-  HPO_API_SEARCH_URL: HPO_API_BASE_URL + 'search',
   HPO_API_DOWNLOAD_EXCEL_TERM_PATH: 'download/term',
   HPO_API_DOWNLOAD_EXCEL_DISEASE_PATH: 'download/disease',
   HPO_API_DOWNLOAD_EXCEL_GENE_PATH: 'download/gene',
+  ONTOLOGY_API_HP_TERMS: ONTOLOGY_SERVICE_API_HP + 'terms/',
+  ONTOLOGY_API_HP_SEARCH: ONTOLOGY_SERVICE_API_HP + 'search',
+  ONTOLOGY_NETWORK_ANNOTATION_API: ONTOLOGY_API_ANNOTATION_BASE_URL + 'network/annotation/',
+  ONTOLOGY_NETWORK_SEARCH_API: ONTOLOGY_API_ANNOTATION_BASE_URL + 'network/search/',
+  // Analytics
   HPO_GOOGLE_ANALYTICS_TRACKING_ID: '',
   HPO_GOOGLE_ANALYTICS_TEST_TRACKING_ID: 'UA-119669503-2',
   HPO_ENABLE_GA_TEST: false,
-
-  // NEW ONTOLOGY API
-  ONTOLOGY_API_HP_TERMS: ONTOLOGY_SERVICE_API_HP + 'terms/',
-  ONTOLOGY_API_HP_SEARCH: ONTOLOGY_SERVICE_API_HP + 'search',
-  ONTOLOGY_NETWORK_ANNOTATION_API: HPO_API_BASE_URL + 'network/annotation/',
-  ONTOLOGY_NETWORK_SEARCH_API: HPO_API_BASE_URL + 'network/search/',
 
   // Monarch external disease definition URL
   HPO_MONARCH_DISEASE_URL: 'https://api.monarchinitiative.org/api/bioentity/disease/',

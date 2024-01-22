@@ -122,4 +122,8 @@ export class SearchComponent implements OnInit {
   closeDropDown() {
     this.searchstate = 'inactive';
   }
+
+  dbOnly(id: string) {
+    return id.split(":")[0];
+  }
 }

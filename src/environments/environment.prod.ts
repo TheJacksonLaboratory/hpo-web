@@ -1,25 +1,22 @@
-const HPO_API_BASE_URL = '../api/hpo/';
-const ONTOLOGY_API = 'https://ontology.jax.org/api/';
-const ONTOLOGY_API_HP = ONTOLOGY_API + 'hp/';
+const ONTOLOGY_API_BASE_URL = 'https://ontology.jax.org/api/';
+const ONTOLOGY_API_ANNOTATION_BASE_URL = ONTOLOGY_API_BASE_URL;
+const ONTOLOGY_SERVICE_API_HP = ONTOLOGY_API_BASE_URL + 'hp/';
+
 export const environment = {
   production: true,
 
   VERSION: require('../../package.json').version,
-  // HPO API environment variables
-  HPO_API_SEARCH_URL: HPO_API_BASE_URL + 'search',
-  HPO_API_TERM_SEARCH_URL: HPO_API_BASE_URL + 'term/',
-  HPO_API_TERM_TREE_URL: HPO_API_BASE_URL + 'term/relations',
-  HPO_API_GENE_SEARCH_URL: HPO_API_BASE_URL + 'gene/',
-  HPO_API_DISEASE_SEARCH_URL: HPO_API_BASE_URL + 'disease/',
-  HPO_API_DOWNLOAD_EXCEL_TERM_URL: HPO_API_BASE_URL + 'download/term',
-  HPO_API_DOWNLOAD_EXCEL_DISEASE_URL: HPO_API_BASE_URL + 'download/disease',
-  HPO_API_DOWNLOAD_EXCEL_GENE_URL: HPO_API_BASE_URL + 'download/gene',
+  HPO_API_DOWNLOAD_EXCEL_TERM_PATH: 'download/term',
+  HPO_API_DOWNLOAD_EXCEL_DISEASE_PATH: 'download/disease',
+  HPO_API_DOWNLOAD_EXCEL_GENE_PATH: 'download/gene',
+  ONTOLOGY_API_HP_TERMS: ONTOLOGY_SERVICE_API_HP + 'terms/',
+  ONTOLOGY_API_HP_SEARCH: ONTOLOGY_SERVICE_API_HP + 'search',
+  ONTOLOGY_NETWORK_ANNOTATION_API: ONTOLOGY_API_ANNOTATION_BASE_URL + 'network/annotation/',
+  ONTOLOGY_NETWORK_SEARCH_API: ONTOLOGY_API_ANNOTATION_BASE_URL + 'network/search/',
+  // Analytics
   HPO_GOOGLE_ANALYTICS_TRACKING_ID: 'UA-119669503-1',
   HPO_GOOGLE_ANALYTICS_TEST_TRACKING_ID: '',
   HPO_ENABLE_GA_TEST: false,
-
-  // NEW ONTOLOGY API
-  ONTOLOGY_API_HP_TERMS: ONTOLOGY_API_HP + 'terms/',
 
   // Monarch external disease definition URL
   HPO_MONARCH_DISEASE_URL: 'https://api.monarchinitiative.org/api/bioentity/disease/',
