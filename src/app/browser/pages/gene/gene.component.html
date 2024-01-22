@@ -74,89 +74,92 @@
                 </div>
               </div>
             </mat-tab>-->
+              <!-- Term association tab -->
+              <mat-tab label="HPO Associations">
 
-            <!-- Term association tab -->
-            <mat-tab label="HPO Associations">
-
-              <div [hidden]="termAssoc.length == 0">
-                <div class="tab-output-container">
-                  <!-- filter -->
-                  <div class="filter-container">
-                    <div class="filter-header">
-                      <mat-form-field>
-                        <input id="termFilterInput" matInput (keyup)="applyTermFilter($event.target.value)"
-                               placeholder="Filter">
-                      </mat-form-field>
+                <div [hidden]="termAssoc.length == 0">
+                  <div class="tab-output-container">
+                    <!-- filter -->
+                    <div class="filter-container">
+                      <div class="filter-header">
+                        <mat-form-field>
+                          <input id="termFilterInput" matInput (keyup)="applyTermFilter($event.target.value)"
+                                 placeholder="Filter">
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <div class="associations">
+                      <!-- term table -->
+                      <mat-table [dataSource]="termDataSource" matSort>
+                        <mat-header-row *matHeaderRowDef="termColumns; sticky: true"></mat-header-row>
+                        <mat-row *matRowDef="let row; columns: termColumns;"></mat-row>
+                        <ng-container matColumnDef="id">
+                          <mat-header-cell *matHeaderCellDef> Term Identifier</mat-header-cell>
+                          <mat-cell *matCellDef="let row">
+                            <a routerLink="/browse/term/{{row.id}}">{{row.id}}</a>
+                          </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="name">
+                          <mat-header-cell *matHeaderCellDef>Term Name</mat-header-cell>
+                          <mat-cell *matCellDef="let row">{{row.name}}</mat-cell>
+                        </ng-container>
+                      </mat-table>
+                      <div class="associationsPaging">
+                        <p>{{termAssoc.length}} term associations.
+                        </p>
+                      </div>
                     </div>
                   </div>
-
-                  <!-- term table -->
-                  <mat-table [dataSource]="termDataSource" matSort>
-                    <mat-header-row *matHeaderRowDef="termColumns; sticky: true"></mat-header-row>
-                    <mat-row *matRowDef="let row; columns: termColumns;"></mat-row>
-                    <ng-container matColumnDef="id">
-                      <mat-header-cell *matHeaderCellDef> Term Identifier</mat-header-cell>
-                      <mat-cell *matCellDef="let row">
-                        <a routerLink="/browse/term/{{row.id}}">{{row.id}}</a>
-                      </mat-cell>
-                    </ng-container>
-                    <ng-container matColumnDef="name">
-                      <mat-header-cell *matHeaderCellDef>Term Name</mat-header-cell>
-                      <mat-cell *matCellDef="let row">{{row.name}}</mat-cell>
-                    </ng-container>
-                  </mat-table>
-
-                  <!-- paging component -->
-                  <mat-paginator #termPaginator [pageSizeOptions]="[5, 10, 50, 100, 500]"></mat-paginator>
                 </div>
-              </div>
 
-              <!-- no results found -->
-              <div class="container center" [hidden]="termAssoc.length != 0">
-                <h4>No term results found for "{{query}}"</h4>
-              </div>
-            </mat-tab>
+                <!-- no results found -->
+                <div class="container center" [hidden]="termAssoc.length != 0">
+                  <h4>No term results found for "{{query}}"</h4>
+                </div>
+              </mat-tab>
+              <!-- Disease association tab -->
+              <mat-tab label="Disease Associations">
 
-            <!-- Disease association tab -->
-            <mat-tab label="Disease Associations">
-
-              <div [hidden]="diseaseAssoc.length == 0">
-                <div class="tab-output-container mat-elevation-z8">
-                  <!-- filter -->
-                  <div class="filter-container">
-                    <div class="filter-header">
-                      <mat-form-field>
-                        <input id="diseaseFilterInput" matInput (keyup)="applyDiseaseFilter($event.target.value)"
-                               placeholder="Filter">
-                      </mat-form-field>
+                <div [hidden]="diseaseAssoc.length == 0">
+                  <div class="tab-output-container mat-elevation-z8">
+                    <!-- filter -->
+                    <div class="filter-container">
+                      <div class="filter-header">
+                        <mat-form-field>
+                          <input id="diseaseFilterInput" matInput (keyup)="applyDiseaseFilter($event.target.value)"
+                                 placeholder="Filter">
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <div class="associations">
+                      <!-- Disease Association Table -->
+                      <mat-table [dataSource]="diseaseDataSource" matSort>
+                        <mat-header-row *matHeaderRowDef="diseaseColumns; sticky: true"></mat-header-row>
+                        <mat-row *matRowDef="let row; columns: diseaseColumns;"></mat-row>
+                        <ng-container matColumnDef="id">
+                          <mat-header-cell *matHeaderCellDef>Disease Identifier</mat-header-cell>
+                          <mat-cell *matCellDef="let row">
+                            <a routerLink="/browse/disease/{{row.id}}">{{row.id}}</a>
+                          </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="name">
+                          <mat-header-cell *matHeaderCellDef>Disease Name</mat-header-cell>
+                          <mat-cell *matCellDef="let row">{{row.name}}</mat-cell>
+                        </ng-container>
+                      </mat-table>
+                      <div class="associationsPaging">
+                        <p>{{diseaseAssoc.length}} disease associations.
+                        </p>
+                      </div>
                     </div>
                   </div>
-                  <!-- Disease Association Table -->
-                  <mat-table [dataSource]="diseaseDataSource" matSort>
-                    <mat-header-row *matHeaderRowDef="diseaseColumns; sticky: true"></mat-header-row>
-                    <mat-row *matRowDef="let row; columns: diseaseColumns;"></mat-row>
-                    <ng-container matColumnDef="id">
-                      <mat-header-cell *matHeaderCellDef>Disease Identifier</mat-header-cell>
-                      <mat-cell *matCellDef="let row">
-                        <a routerLink="/browse/disease/{{row.id}}">{{row.id}}</a>
-                      </mat-cell>
-                    </ng-container>
-                    <ng-container matColumnDef="name">
-                      <mat-header-cell *matHeaderCellDef>Disease Name</mat-header-cell>
-                      <mat-cell *matCellDef="let row">{{row.name}}</mat-cell>
-                    </ng-container>
-                  </mat-table>
-
-                  <!-- paging component -->
-                  <mat-paginator #diseasePaginator [pageSizeOptions]="[5, 10, 50, 100, 500]"></mat-paginator>
                 </div>
-              </div>
 
-              <!-- no results found -->
-              <div class="container center" [hidden]="diseaseAssoc.length != 0">
-                <h4>No disease results found for "{{query}}"</h4>
-              </div>
-            </mat-tab>
+                <!-- no results found -->
+                <div class="container center" [hidden]="diseaseAssoc.length != 0">
+                  <h4>No disease results found for "{{query}}"</h4>
+                </div>
+              </mat-tab>
           </mat-tab-group>
         </div>
       </div>

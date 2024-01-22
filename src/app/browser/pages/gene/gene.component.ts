@@ -70,7 +70,6 @@ export class GeneComponent implements OnInit {
 
     this.annotationService.fromGene(this.query)
       .subscribe((data) => {
-        this.gene = {geneId: 0, geneSymbol: "al"};
         this.termAssoc = data.phenotypes;
         this.diseaseAssoc = data.diseases;
 

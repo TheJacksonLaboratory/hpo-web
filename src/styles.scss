@@ -563,3 +563,20 @@ a.mat-button-base {
    opacity: unset;
    background: unset;
  }
+
+.associationsPaging {
+  text-align: right;
+  padding: 10px 25px 0 0;
+  margin-bottom: 1px;
+  margin-top: 1px;
+}
+
+.associationsPaging p {
+  margin-bottom: 1px;
+  margin-top: 1px;
+  font-size: 14px;
+}
+
+.associationsPaging a {
+  cursor: pointer;
+}

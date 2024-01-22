@@ -41,7 +41,7 @@
       <div class="result-list">
         <div class="result" (click)="closeDropDown()" routerLink="/browse/disease/{{item.id}}"
              *ngFor="let item of diseases;">
-          <div class="id">{{item.mondoId == "" ? dbOnly(item.id) : "MONDO"}}</div>
+          <div class="id">{{dbOnly(item.id)}}</div>
           <div class="name" [innerHtml]="{name: item.name } | highlight: queryText"></div>
           <br>
         </div>

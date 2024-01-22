@@ -103,8 +103,7 @@ export interface Publication {
   topicList: string[];
 }
 
-export interface Organization {
-  name: string;
+export interface Organization extends SimpleTerm {
   description?: string;
   image: string;
   link?: string;
@@ -120,8 +119,7 @@ export interface TeamMember {
 }
 
 
-export interface Translation extends Language {
-  id?: string;
+export interface Translation extends Language, SimpleTerm {
   name: string;
   status: string;
 }

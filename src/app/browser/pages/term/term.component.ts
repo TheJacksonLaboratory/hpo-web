@@ -45,8 +45,6 @@ export class TermComponent implements OnInit {
 
   assocLoading = true;
   overlay = false;
-  displayAllDiseaseAssc = false;
-  displayAllGeneAssc = false;
   languages: Language[];
   selectedLanguage: Language = {language: "en", language_long: "English"}
 
@@ -75,7 +73,6 @@ export class TermComponent implements OnInit {
       this.geneAssocMax = 10000; // fix
       this.geneAssocOffset = 0; // fix
       this.geneDisplayCount = (this.geneAssocCount < this.geneAssocMax) ? this.geneAssocCount :  this.geneAssocMax;
-      this.displayAllGeneAssc = false;
 
       this.diseaseSource = new MatTableDataSource(associations.diseases);
       this.diseaseAssocCount = associations.diseases.length;
@@ -83,7 +80,6 @@ export class TermComponent implements OnInit {
       this.diseaseAssocOffset = 0; // fix
       this.diseaseDisplayCount = (this.diseaseAssocCount < this.diseaseAssocMax) ? this.diseaseAssocCount : this.diseaseAssocMax;
       this.assocLoading = false;
-      this.displayAllDiseaseAssc = false;
       this.loincSource = new MatTableDataSource(associations.assays);
       this.loincSource.sort = this.sort;
       this.loincDisplayCount = associations.assays.length;

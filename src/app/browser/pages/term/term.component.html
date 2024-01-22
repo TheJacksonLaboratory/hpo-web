@@ -114,20 +114,20 @@
             <!-- Disease association -->
             <mat-tab label="Disease Associations">
               <div [hidden]="diseaseAssocCount == 0">
-                <mat-progress-bar *ngIf="assocLoading" class="loading-result-details" color="primary"
-                                  mode="indeterminate">
-                </mat-progress-bar>
                 <div class="tab-output-container">
 
                   <!-- filter. Display when all results are loaded -->
                   <div class="filter-container">
-                    <div id="diseaseFilter" *ngIf="displayAllDiseaseAssc" class="filter-header">
+                    <div id="diseaseFilter" class="filter-header">
                       <mat-form-field>
                         <input id="diseaseFilterInput" matInput (keyup)="applyDiseaseFilter($event.target.value)"
                                placeholder="Filter by disease">
                       </mat-form-field>
                     </div>
                   </div>
+                  <mat-progress-bar *ngIf="assocLoading" class="loading-result-details" color="primary"
+                                    mode="indeterminate">
+                  </mat-progress-bar>
 
                   <div [hidden]="assocLoading" class="associations disease-association">
                     <mat-table [dataSource]="diseaseSource">
@@ -155,14 +155,10 @@
                       </ng-container>
                     </mat-table>
 
-                    <div [hidden]="!displayAllDiseaseAssc">
-                      <mat-paginator #diseasePaginator [pageSizeOptions]="[50, 100, 500]"></mat-paginator>
-                    </div>
-
                     <!-- paging: associations subset count -->
-                    <div id="assocDiseasePagingSubset" *ngIf="!assocLoading && !displayAllDiseaseAssc"
+                    <div id="assocDiseasePagingSubset" *ngIf="!assocLoading"
                          class="associationsPaging">
-                      <p>Displaying {{diseaseDisplayCount}} out of {{diseaseAssocCount}}.
+                      <p>{{diseaseAssocCount}} disease associations.
                       </p>
                     </div>
                   </div>
@@ -176,20 +172,18 @@
             <!-- Gene Association -->
             <mat-tab label="Gene Associations">
               <div [hidden]="geneAssocCount == 0">
-                <mat-progress-bar *ngIf="assocLoading" class="loading-result-details" color="primary"
-                                  mode="indeterminate">
-                </mat-progress-bar>
-
                 <div class="tab-output-container">
                   <div class="filter-container">
-                    <!-- filter. Display when all results are loaded -->
-                    <div id="geneFilter" *ngIf="displayAllGeneAssc" class="filter-header">
+                    <div id="geneFilter" class="filter-header">
                       <mat-form-field>
                         <input id="geneFilterInput" matInput (keyup)="applyGeneFilter($event.target.value)"
                                placeholder="Filter by gene">
                       </mat-form-field>
                     </div>
                   </div>
+                  <mat-progress-bar *ngIf="assocLoading" class="loading-result-details" color="primary"
+                                    mode="indeterminate">
+                  </mat-progress-bar>
 
                   <div [hidden]="assocLoading" class="associations gene-association">
                     <mat-table [dataSource]="geneSource">
@@ -209,14 +203,9 @@
                       </ng-container>
                     </mat-table>
 
-                    <div [hidden]="!displayAllGeneAssc">
-                      <mat-paginator #genePaginator [pageSizeOptions]="[50, 100, 500]"></mat-paginator>
-                    </div>
-
                     <!-- paging: associations subset count -->
-                    <div id="assocGenePagingSubset" *ngIf="!assocLoading && !displayAllGeneAssc"
-                         class="associationsPaging">
-                      <p>Displaying {{geneDisplayCount}} out of {{geneAssocCount}}.
+                    <div id="assocGenePagingSubset" *ngIf="!assocLoading" class="associationsPaging">
+                      <p>{{geneAssocCount}} gene associations.
                       </p>
                     </div>
                   </div>
@@ -254,7 +243,7 @@
                       </mat-table>
                       <!-- paging: associations subset count -->
                       <div *ngIf="!assocLoading" class="associationsPaging">
-                        <p>Displaying {{loincDisplayCount}} LOINC associations.</p>
+                        <p>{{loincDisplayCount}} LOINC associations.</p>
                       </div>
                       <div *ngIf="!assocLoading" class="loinc-license">
                         <sup>**</sup>This material contains content from LOINC® (
