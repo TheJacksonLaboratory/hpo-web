@@ -66,7 +66,7 @@ export class SearchComponent implements OnInit {
           this.termsCount = terms.totalCount;
           this.diseasesCount = diseases.totalCount;
           this.genesCount = genes.totalCount;
-          this.notFoundFlag = (this.termsCount === 0 && this.diseasesCount === 0 && this.genesCount === 0);
+          this.notFoundFlag = (this.terms.length === 0 && this.diseases.length === 0 && this.genes.length === 0);
           this.searchstate = 'active';
         }, (error) => {
           console.log(error);

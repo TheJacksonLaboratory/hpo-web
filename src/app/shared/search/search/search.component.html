@@ -19,7 +19,7 @@
       </a>
     </div>
     <mat-progress-bar mode="query" *ngIf="loadingSearchResults"></mat-progress-bar>
-    <div class="term-result" *ngIf="isCorrectCategory('term') && terms.length > 0">
+    <div class="term-result" *ngIf="isCorrectCategory('term') && terms?.length > 0">
       <div class="result-title">
         Phenotypes - {{terms.length}} of {{termsCount}} displayed
       </div>
@@ -34,7 +34,7 @@
       </div>
     </div>
 
-    <div class="disease-result" *ngIf="isCorrectCategory('disease') && diseases.length > 0">
+    <div class="disease-result" *ngIf="isCorrectCategory('disease') && diseases?.length > 0">
       <div class="result-title">
         Diseases - {{diseases.length}} of {{diseasesCount}} displayed
       </div>
@@ -48,7 +48,7 @@
       </div>
     </div>
 
-    <div class="gene-result" *ngIf="isCorrectCategory('gene') && genes.length > 0">
+    <div class="gene-result" *ngIf="isCorrectCategory('gene') && genes?.length > 0">
       <div class="result-title">
         Genes - {{genes.length}} of {{genesCount}} displayed
       </div>
