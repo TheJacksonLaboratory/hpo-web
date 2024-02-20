@@ -6,11 +6,8 @@ import { UtilityService } from "../../shared/utility/utility.service";
   templateUrl: './about.component.html',
   styleUrls: ['./about.component.scss']
 })
-export class AboutComponent implements OnInit {
+export class AboutComponent {
 
   constructor(public utilityService: UtilityService) { }
-
-  ngOnInit(): void {
-  }
 
 }

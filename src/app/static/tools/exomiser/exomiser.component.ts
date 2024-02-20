@@ -5,14 +5,10 @@ import {Component, OnInit} from '@angular/core';
   templateUrl: './exomiser.component.html',
   styleUrls: ['./exomiser.component.css']
 })
-export class ExomiserComponent implements OnInit {
+export class ExomiserComponent {
   pageTitle: string = "Tools / Exomiser";
   pageIntro: String = "";
 
   constructor() {
   }
-
-  ngOnInit() {
-  }
-
 }

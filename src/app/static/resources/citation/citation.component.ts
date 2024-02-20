@@ -5,11 +5,8 @@ import {Component, OnInit} from '@angular/core';
   templateUrl: './citation.component.html',
   styleUrls: ['./citation.component.css']
 })
-export class CitationComponent implements OnInit {
+export class CitationComponent {
   constructor() {
-  }
-
-  ngOnInit() {
   }
 
 }

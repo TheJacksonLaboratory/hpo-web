@@ -5,11 +5,8 @@ import {Component, OnInit} from '@angular/core';
   templateUrl: './license.component.html',
   styleUrls: ['./license.component.css']
 })
-export class LicenseComponent implements OnInit {
+export class LicenseComponent {
   constructor() {
-  }
-
-  ngOnInit() {
   }
 
 }

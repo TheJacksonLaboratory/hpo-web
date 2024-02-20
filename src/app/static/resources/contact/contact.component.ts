@@ -19,7 +19,5 @@ export class ContactComponent {
     {name: 'Michael Gargano', affiliation: 'The Jackson Laboratory for Genomic Medicine',
       email: 'michael.gargano@jax.org', src: 'assets/contact-images/michael-gargano.jpg'}
   ];
-  constructor() {
-
-  }
+  constructor() {}
 }

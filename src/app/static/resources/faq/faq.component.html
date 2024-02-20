@@ -11,7 +11,7 @@
         Ontology
       </h3>
       <mat-accordion>
-        <mat-expansion-panel [expanded]="openPanel == 1" id="hpo-relation">
+        <mat-expansion-panel [expanded]="openPanel === 1" id="hpo-relation">
           <mat-expansion-panel-header>
             <mat-panel-title>
               <strong>How is HPO related to the Monarch Initiative?</strong>
@@ -25,7 +25,7 @@
             pathways, which
             may be of especial interest to translational researchers.</p>
         </mat-expansion-panel>
-        <mat-expansion-panel [expanded]="openPanel == 2" id="content-change">
+        <mat-expansion-panel [expanded]="openPanel === 2" id="content-change">
           <mat-expansion-panel-header>
             <mat-panel-title>
               <strong>Am I allowed to change the contents of HPO?</strong>
@@ -35,7 +35,7 @@
             target="__blank" href="https://github.com/obophenotype/human-phenotype-ontology/issues">GitHub tracker</a> so
             that they will be of use to all users of the HPO. </p>
         </mat-expansion-panel>
-        <mat-expansion-panel [expanded]="openPanel == 3" id="collaboration">
+        <mat-expansion-panel [expanded]="openPanel === 3" id="collaboration">
           <mat-expansion-panel-header>
             <mat-panel-title>
               <strong>How to collaborate with the HPO ?</strong>
@@ -87,7 +87,7 @@
             on common-disease annotations was published in 2015.
           </p>
         </mat-expansion-panel>
-        <mat-expansion-panel [expanded]="openPanel == 4" id="ontology">
+        <mat-expansion-panel [expanded]="openPanel === 4" id="ontology">
           <mat-expansion-panel-header>
             <mat-panel-title>
               <strong>What is an ontology?</strong>
@@ -103,7 +103,7 @@
             HPO typically enable sophisticated computational algorithms that exploit the semantic relations between terms.
           </p>
         </mat-expansion-panel>
-        <mat-expansion-panel [expanded]="openPanel == 5" id="susceptibility">
+        <mat-expansion-panel [expanded]="openPanel === 5" id="susceptibility">
           <mat-expansion-panel-header>
             <mat-panel-title>
               <strong>How does the HPO project model susceptibility?</strong>
@@ -147,7 +147,7 @@
             </li>
           </ol>
         </mat-expansion-panel>
-        <mat-expansion-panel [expanded]="openPanel == 5" id="ontology-structure">
+        <mat-expansion-panel [expanded]="openPanel === 6" id="ontology-structure">
           <mat-expansion-panel-header>
             <mat-panel-title>
               <strong>How are the ontology terms structured?</strong>
@@ -179,7 +179,7 @@
             junction of the cornea and sclera (limbal epibullar dermoid). The source of the definition must be indicated.
             Many terms have synonyms. For instance, Epibulbar dermoids is taken to be a synonym of Epibulbar dermoids.</p>
         </mat-expansion-panel>
-        <mat-expansion-panel [expanded]="openPanel == 6" id="ontology-research">
+        <mat-expansion-panel [expanded]="openPanel === 7" id="ontology-research">
           <mat-expansion-panel-header>
             <mat-panel-title>
               <strong>What is an ontology and how is it used for medical genetics research?</strong>
@@ -204,7 +204,7 @@
         Annotation
       </h3>
       <mat-accordion>
-        <mat-expansion-panel [expanded]="openPanel == 6" id="annotation-use">
+        <mat-expansion-panel [expanded]="openPanel === 8" id="annotation-use">
           <mat-expansion-panel-header>
             <mat-panel-title>
               <strong>How do I use HPO Annotations?</strong>
@@ -217,7 +217,7 @@
             for <a routerLink="/browse/term/HP:0002827">Hip dislocation</a>, <a routerLink="/browse/term/HP:0001371">Flexion
               contracture</a> and many more.</p>
         </mat-expansion-panel>
-        <mat-expansion-panel [expanded]="openPanel == 7" id="genes-phenotypes">
+        <mat-expansion-panel [expanded]="openPanel === 9" id="genes-phenotypes">
           <mat-expansion-panel-header>
             <mat-panel-title>
             <span fxHide fxShow.gt-sm>
@@ -252,7 +252,7 @@
             <li>HP_3 annotates <strong>geneA</strong> and <strong>geneB</strong></li>
           </ul>
         </mat-expansion-panel>
-        <mat-expansion-panel [expanded]="openPanel == 8" id="frequencies">
+        <mat-expansion-panel [expanded]="openPanel === 10" id="frequencies">
           <mat-expansion-panel-header>
             <mat-panel-title>
             <span fxHide fxShow.gt-sm>
@@ -267,7 +267,7 @@
             feature. “ALL_FREQUENCIES” denotes that we do not use any filter.
             “FREQUENT_FEATURES” means that we exclude all features seen in less than 50% of the patients.</p>
         </mat-expansion-panel>
-        <mat-expansion-panel [expanded]="openPanel == 9" id="association-rules">
+        <mat-expansion-panel [expanded]="openPanel === 11" id="association-rules">
           <mat-expansion-panel-header>
             <mat-panel-title>
             <span fxHide fxShow.gt-sm>

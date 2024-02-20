@@ -3,7 +3,7 @@ import {environment} from '../../../environments/environment';
 import { UtilityService } from "../utility/utility.service";
 
 @Component({
-  selector: 'hpo-footer',
+  selector: 'app-footer',
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.css']
 })

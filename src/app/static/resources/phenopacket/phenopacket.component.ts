@@ -6,7 +6,6 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './phenopacket.component.html',
   styleUrls: ['./phenopacket.component.scss']
 })
-export class PhenopacketComponent implements OnInit {
+export class PhenopacketComponent {
   constructor() { }
-  ngOnInit() { }
 }

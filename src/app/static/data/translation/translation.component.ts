@@ -5,12 +5,8 @@ import {Component, OnInit} from '@angular/core';
   templateUrl: './translation.component.html',
   styleUrls: ['./translation.component.css']
 })
-export class TranslationComponent implements OnInit {
+export class TranslationComponent {
   constructor() {
 
   }
-
-  ngOnInit() {
-  }
-
 }

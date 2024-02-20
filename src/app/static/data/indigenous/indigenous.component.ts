@@ -5,12 +5,8 @@ import {Component, OnInit} from '@angular/core';
   templateUrl: './indigenous.component.html',
   styleUrls: ['./indigenous.component.css']
 })
-export class IndigenousComponent implements OnInit {
+export class IndigenousComponent {
 
   constructor() {
   }
-
-  ngOnInit(): void {
-  }
-
 }

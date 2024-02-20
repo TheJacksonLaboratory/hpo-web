@@ -5,11 +5,7 @@ import {Component, OnInit} from '@angular/core';
   templateUrl: './external.component.html',
   styleUrls: ['./external.component.css']
 })
-export class ExternalToolsComponent implements OnInit {
+export class ExternalToolsComponent {
   constructor() {
   }
-
-  ngOnInit() {
-  }
-
 }

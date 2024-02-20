@@ -1,5 +1,5 @@
 <mat-sidenav-container>
-  <navbar-hpo (navToggle)="sidenav.open(); mobileNavSection = 'home'"></navbar-hpo>
+  <app-navbar-hpo (navToggle)="sidenav.open(); mobileNavSection = 'home'"></app-navbar-hpo>
   <mat-sidenav #sidenav class="sidenav">
     <mat-nav-list>
       <h3 class="center menuTitle">Menu</h3>
@@ -74,5 +74,5 @@
   <div class="main" fxLayout="column">
     <router-outlet></router-outlet>
   </div>
-  <hpo-footer class="mat-elevation-z4"></hpo-footer>
+  <app-footer class="mat-elevation-z4"></app-footer>
 </mat-sidenav-container>
