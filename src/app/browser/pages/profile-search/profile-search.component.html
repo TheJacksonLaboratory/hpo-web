@@ -80,7 +80,7 @@
                 <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
                 <mat-paginator [length]="resultsLength" [pageSize]="30"></mat-paginator>
               </mat-table>
-              <p class="not-found" *ngIf="resultsLength == 0"><strong>No intersecting diseases for found your
+              <p class="not-found" *ngIf="resultsLength === 0"><strong>No intersecting diseases for found your
                 phenotypes.</strong></p>
               <button class="back-btn" mat-raised-button (click)="resetStepper()">Reset</button>
             </div>

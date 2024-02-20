@@ -27,7 +27,7 @@
                 <mat-list-item>{{disease.description}}</mat-list-item>
               </mat-list>
               <button mat-raised-button class="download-associations"
-                      [disabled]="!this.hasTerms && this.geneDataSource?.data.length == 0"
+                      [disabled]="!this.hasTerms && this.geneDataSource?.data.length === 0"
                       (click)="downloadDialog()"><span class="material-icons">get_app</span> Export Associations
               </button>
               <button mat-raised-button class="report-issue"
@@ -47,7 +47,7 @@
                     <div *ngFor="let catTermSource of catTermSources ">
                       <h3 class="category-title">{{catTermSource.catLabel}}
                         <span *ngIf="catTermSource.annotationCount > 1">[ {{catTermSource.annotationCount}} annotations ]</span>
-                        <span *ngIf="catTermSource.annotationCount == 1">[ {{catTermSource.annotationCount}} annotation ]</span>
+                        <span *ngIf="catTermSource.annotationCount === 1">[ {{catTermSource.annotationCount}} annotation ]</span>
                       </h3>
                       <mat-table [dataSource]="catTermSource.termSource" matSort>
                         <mat-header-row *matHeaderRowDef="termColumns; sticky: true"></mat-header-row>
@@ -97,7 +97,7 @@
               <!-- Gene associations tab -->
               <mat-tab label="Gene Associations">
                 <!--<div class="tab-content">-->
-                <div [hidden]="geneDataSource?.data.length == 0">
+                <div [hidden]="geneDataSource?.data.length === 0">
                   <div class="tab-output-container">
 
                     <!-- filter -->

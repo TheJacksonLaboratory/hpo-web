@@ -48,7 +48,7 @@
             </mat-list>
             <br>
             <button mat-raised-button class="download-associations"
-                    [disabled]="this.termAssoc.length == 0 && this.diseaseAssoc.length == 0"
+                    [disabled]="this.termAssoc.length === 0 && this.diseaseAssoc.length === 0"
                     (click)="downloadDialog()"><span class="material-icons">get_app</span> Export Associations
             </button>
           </mat-card-content>
@@ -77,7 +77,7 @@
               <!-- Term association tab -->
               <mat-tab label="HPO Associations">
 
-                <div [hidden]="termAssoc.length == 0">
+                <div [hidden]="termAssoc.length === 0">
                   <div class="tab-output-container">
                     <!-- filter -->
                     <div class="filter-container">
@@ -113,14 +113,14 @@
                 </div>
 
                 <!-- no results found -->
-                <div class="container center" [hidden]="termAssoc.length != 0">
+                <div class="container center" [hidden]="termAssoc.length !== 0">
                   <h4>No term results found for "{{query}}"</h4>
                 </div>
               </mat-tab>
               <!-- Disease association tab -->
               <mat-tab label="Disease Associations">
 
-                <div [hidden]="diseaseAssoc.length == 0">
+                <div [hidden]="diseaseAssoc.length === 0">
                   <div class="tab-output-container mat-elevation-z8">
                     <!-- filter -->
                     <div class="filter-container">
@@ -156,7 +156,7 @@
                 </div>
 
                 <!-- no results found -->
-                <div class="container center" [hidden]="diseaseAssoc.length != 0">
+                <div class="container center" [hidden]="diseaseAssoc.length !== 0">
                   <h4>No disease results found for "{{query}}"</h4>
                 </div>
               </mat-tab>
