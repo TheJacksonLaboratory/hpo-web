@@ -5,7 +5,7 @@ name: HPO-WEB Static Deployment
 # Controls when the workflow will run
 on: workflow_dispatch
 env:
-  GCLOUD_BUCKET: ${{ secrets.GCLOUD_PUBLIC_BUCKET }}
+  GCLOUD_BUCKET: gs://jax-robinson-hpo-01-public-bucket
 
 jobs:
   load:
@@ -39,6 +39,6 @@ jobs:
 
     - name: Deploy to GCS
       run: |
-        gsutil -m cp dist/* "$GCLOUD_BUCKET/hpo-web-$PROJECT_VERSION-$GIT_HASH/"
+        gsutil -m cp -r dist/* "$GCLOUD_BUCKET/hpo-web-$PROJECT_VERSION-$GIT_HASH/"
         gsutil -m rm "$GCLOUD_BUCKET/**"
-        gsutil -m cp "$GCLOUD_BUCKET/hpo-web-$PROJECT_VERSION-$GIT_HASH/*"  "$GCLOUD_BUCKET/"
+        gsutil -m cp  -r "$GCLOUD_BUCKET/hpo-web-$PROJECT_VERSION-$GIT_HASH/*"  "$GCLOUD_BUCKET/"
