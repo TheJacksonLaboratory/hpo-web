@@ -43,6 +43,6 @@ jobs:
     - name: Deploy to GCS
       run: |
         gsutil -m cp -r dist/* "$GCLOUD_BUCKET/hpo-web-$PROJECT_VERSION-$GIT_HASH/"
-        gsutil -m rm -f "$GCLOUD_BUCKET/*"
-        gsutil -m rm -rf "$GCLOUD_BUCKET/assets/"
+        gsutil -m rm -f "$GCLOUD_BUCKET/*" || true
+        gsutil -m rm -rf "$GCLOUD_BUCKET/assets/" || true
         gsutil -m cp -r "$GCLOUD_BUCKET/hpo-web-$PROJECT_VERSION-$GIT_HASH/*"  "$GCLOUD_BUCKET/"
