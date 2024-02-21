@@ -18,6 +18,9 @@ jobs:
       with:
         credentials_json: '${{ secrets.GCLOUD_SA_KEY }}'
 
+    - name: Setup Google Cloud CLI
+      uses: 'google-github-actions/setup-gcloud@v1'
+
     - name: Configure Node
       uses: actions/setup-node@v3
       with:
