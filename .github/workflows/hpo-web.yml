@@ -24,12 +24,12 @@ jobs:
         node-version: 16.10.0
         cache: 'npm'
 
-#    - name: Lint, Test, Build
-#      run: |
-#        npm install
-#        npm run lint
-#        npm run testci
-#        npm run buildProd --if-present
+    - name: Lint, Test, Build
+      run: |
+        npm install
+        npm run lint
+        npm run testci
+        npm run buildProd --if-present
 
     - name: Set Project Version
       run: echo "PROJECT_VERSION=$(cat package.json | jq -r '.version')" >> "$GITHUB_ENV"
@@ -39,5 +39,6 @@ jobs:
 
     - name: Deploy to GCS
       run: |
-        echo "$PROJECT_VERSION $GIT_HASH"
-
+        gsutil -m cp dist/* "$GCLOUD_BUCKET/hpo-web-$PROJECT_VERSION-$GIT_HASH/"
+        gsutil -m rm "$GCLOUD_BUCKET/**"
+        gsutil -m cp "$GCLOUD_BUCKET/hpo-web-$PROJECT_VERSION-$GIT_HASH/*"  "$GCLOUD_BUCKET/"
