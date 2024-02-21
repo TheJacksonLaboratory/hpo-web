@@ -16,11 +16,6 @@ export class GeneService {
   constructor(private http: HttpClient) {
   }
 
-  // searchGene(query: string): Observable<any> {
-  //   return this.http
-  //     .get(environment.HPO_API_GENE_SEARCH_URL + query, this.options);
-  // }
-
   searchGeneInfo(query: string): Observable<any> {
     return this.http
       .get(environment.HPO_ENTREZ_SEARCH_URL + '?db=gene&id=' + query + '&retmode=json');

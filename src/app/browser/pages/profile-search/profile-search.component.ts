@@ -1,15 +1,13 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {Observable} from "rxjs";
 import {UntypedFormControl} from "@angular/forms";
-import {catchError, filter, map} from "rxjs/operators";
+import {filter, map, switchMap} from "rxjs/operators";
 import {TermService} from "../../services/term/term.service";
-import {switchMap} from "rxjs/internal/operators/switchMap";
 import {SearchService} from "../../../shared/search/service/search.service";
 import {MatStepper} from "@angular/material/stepper";
 import {MatSort} from "@angular/material/sort";
 import {MatPaginator} from "@angular/material/paginator";
 import {Term} from "../../models/models";
-import {of} from "rxjs/internal/observable/of";
 
 @Component({
   selector: 'app-custom',

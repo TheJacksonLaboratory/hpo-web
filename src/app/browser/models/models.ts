@@ -129,6 +129,10 @@ export interface Language {
   language_long: string;
 }
 
+export interface OntologySearchResponse {
+  terms: Term[];
+}
+
 export interface PhenotypeAssociation {
     diseases: any[];
     genes: any[];

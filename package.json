@@ -5,9 +5,10 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --configuration=development",
-    "build": "ng build --configuration=development --base-href /app/",
-    "buildProd": "ng build --configuration=production --base-href /app/",
-    "test": "ng test --watch=false --progress=false",
+    "build": "ng build --configuration=development",
+    "buildProd": "ng build --configuration=production",
+    "test": "ng test --watch",
+    "testci": "ng test --watch=false --progress=false",
     "lint": "ng lint",
     "fixlint": "ng lint --fix",
     "e2e": "ng e2e"
