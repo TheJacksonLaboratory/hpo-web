@@ -8,7 +8,7 @@ import {Subject} from 'rxjs';
 import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
 
 @Component({
-  selector: 'searchbar',
+  selector: 'app-search-bar',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss'],
   animations: [

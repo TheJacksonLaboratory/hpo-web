@@ -5,14 +5,11 @@ import {Component, OnInit} from '@angular/core';
   templateUrl: './phenogramviz.component.html',
   styleUrls: ['./phenogramviz.component.css']
 })
-export class PhenogramVizComponent implements OnInit {
+export class PhenogramVizComponent {
   pageTitle: string = "Tools / PhenoGramViz";
   pageIntro: String = "";
 
   constructor() {
-  }
-
-  ngOnInit() {
   }
 
 }

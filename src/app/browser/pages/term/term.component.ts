@@ -3,12 +3,11 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
-import { forkJoin } from 'rxjs';
-import { of } from 'rxjs/internal/observable/of';
+import { forkJoin, of } from 'rxjs';
 import { catchError, switchMap } from 'rxjs/operators';
 import { AnnotationService } from '../../services/annotation/annotation.service';
 import { LanguageService } from '../../services/language/language.service';
-import { Disease, Gene, Language, LoincEntry, SimpleTerm, Term, TermTree } from '../../models/models';
+import { Language, SimpleTerm, Term, TermTree } from '../../models/models';
 import { DialogService } from '../../../shared/dialog-excel-download/dialog.service';
 import { OntologyService } from "../../services/ontology/ontology.service";
 

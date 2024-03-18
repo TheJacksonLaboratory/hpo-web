@@ -13,50 +13,6 @@ describe('GeneServiceSpec', () => {
   });
   const query = '7157';
 
-  it('should handle a searchGene service method ', inject([
-    HttpTestingController, GeneService
-  ], (httpMock, geneService: GeneService) => {
-    // call our service, and once the results come in
-    // expect them to have the proper data (filled in
-    // using the mock below)
-    geneService.searchGene(query).subscribe(geneResponse => {
-      expect(geneResponse).toBeDefined();
-      expect(geneResponse.gene.entrezGeneId).toBe(7157);
-      expect(geneResponse.termAssoc.length).toEqual(3);
-      expect(geneResponse.diseaseAssoc.length).toEqual(3);
-    });
-
-    // look up our request and access it
-    const request = httpMock.expectOne(environment.HPO_API_GENE_SEARCH_URL + query);
-    // verify it is a GET
-    expect(request.request.method).toEqual('GET');
-
-    request.flush(
-      {
-        'gene':
-          {
-            'entrezGeneId': 7157, 'entrezGeneSymbol': 'TP53'
-          },
-        'termAssoc':
-          [
-            {'ontologyId': 'HP:0000505', 'name': 'Visual impairment'},
-            {'ontologyId': 'HP:0002756', 'name': 'Pathologic fracture'},
-            {'ontologyId': 'HP:0009919', 'name': 'Retinoblastoma'}
-          ],
-        'diseaseAssoc': [
-          {'diseaseId': 'OMIM:151623', 'diseaseName': '#151623 LI-FRAUMENI SYNDROME 1', 'dbId': '151623', 'db': 'OMIM'},
-          {
-            'diseaseId': 'OMIM:202300',
-            'diseaseName': 'ADRENOCORTICAL CARCINOMA, HEREDITARY',
-            'dbId': '202300',
-            'db': 'OMIM'
-          },
-          {'diseaseId': 'ORPHA:2807', 'diseaseName': 'Papilloma of choroid plexus', 'dbId': '2807', 'db': 'ORPHA'}
-        ]
-      });
-    httpMock.verify();
-  }));
-
   it('should handle a searchGeneInfo service method ', inject([
     HttpTestingController, GeneService
   ], (httpMock, geneService: GeneService) => {

@@ -5,11 +5,7 @@ import {Component, OnInit} from '@angular/core';
   templateUrl: './annotation-format.component.html',
   styleUrls: ['./annotation-format.component.css']
 })
-export class AnnotationFormatComponent implements OnInit {
+export class AnnotationFormatComponent {
   constructor() {
   }
-
-  ngOnInit() {
-  }
-
 }

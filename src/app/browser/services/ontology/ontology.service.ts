@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from '../../../../environments/environment';
-import { Language, Term } from '../../models/models';
+import { Language, OntologySearchResponse, Term } from '../../models/models';
 import { LanguageService } from '../language/language.service';
 
 @Injectable({providedIn: 'root'})
@@ -11,8 +11,8 @@ export class OntologyService {
 
   constructor(private httpClient: HttpClient, private languageService: LanguageService) {}
 
-  search(query: string, limit: number): Observable<Term>{
-    return this.httpClient.get<Term>(`${environment.ONTOLOGY_API_HP_SEARCH}?q=${query}&limit=${limit}`);
+  search(query: string, limit: number): Observable<OntologySearchResponse>{
+    return this.httpClient.get<OntologySearchResponse>(`${environment.ONTOLOGY_API_HP_SEARCH}?q=${query}&limit=${limit}`);
   }
 
   term(id: string): Observable<Term>  {

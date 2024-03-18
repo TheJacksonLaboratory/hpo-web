@@ -5,12 +5,9 @@ import {Component, OnInit} from '@angular/core';
   templateUrl: './hpobrowser.component.html',
   styleUrls: ['./hpobrowser.component.css']
 })
-export class HpobrowserComponent implements OnInit {
+export class HpobrowserComponent {
 
   constructor() {
-  }
-
-  ngOnInit() {
   }
 
 }

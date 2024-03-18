@@ -9,7 +9,7 @@
     <mat-sidenav #sidenav [mode]="mobileQuery.matches ? 'over' : 'side'"
                  [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
       <mat-nav-list>
-        <mat-list-item *ngFor="let date of dates" [ngClass]="{'active': currentSelected == date}"
+        <mat-list-item *ngFor="let date of dates" [ngClass]="{'active': currentSelected === date}"
                        (click)="setCurrentDate(date)">
           <div class="news-dates">
             {{date}}

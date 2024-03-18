@@ -5,12 +5,9 @@ import {Component, OnInit} from '@angular/core';
   templateUrl: './disclaimer.component.html',
   styleUrls: ['./disclaimer.component.css']
 })
-export class DisclaimerComponent implements OnInit {
+export class DisclaimerComponent {
 
   constructor() {
-  }
-
-  ngOnInit() {
   }
 
 }

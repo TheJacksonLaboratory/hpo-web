@@ -16,20 +16,20 @@
             <ul class="tree" *ngIf="treeData">
               <li *ngFor="let parent of treeData.parents">
                         <span class="tree-counts" [ngStyle]="{'margin-left': '-100px', 'margin-right': '5px'}"
-                              matTooltip="{{parent.descendantCount}}" *ngIf="parent.descendantCount != 0"
+                              matTooltip="{{parent.descendantCount}}" *ngIf="parent.descendantCount !== 0"
                               matTooltipPosition="above"> </span>
                 <a class="link" routerLink="../{{parent.id}}">{{parent.name | translate: parent.translations: selectedLanguage.language}}</a>
               </li>
               <li>
                 <div class="term">
                           <span class="tree-counts" [ngStyle]="{'margin-left': '-115px'}"
-                                *ngIf="treeData.descendantCount != 0" matTooltip="{{treeData.descendantCount}}"
+                                *ngIf="treeData.descendantCount !== 0" matTooltip="{{treeData.descendantCount}}"
                                 matTooltipPosition="above"> </span>
                   <strong>{{term.name | translate: term.translations: selectedLanguage.language}}</strong>
                 </div>
                 <ul>
                   <li *ngFor="let child of treeData.children" class="children">
-                            <span class="tree-counts" [ngStyle]="setTreeStyles(child)" *ngIf="child.descendantCount != 0"
+                            <span class="tree-counts" [ngStyle]="setTreeStyles(child)" *ngIf="child.descendantCount !== 0"
                                   matTooltip="{{child.descendantCount}}" matTooltipPosition="above"> </span>
                     <a class="link" routerLink="../{{child.id}}">{{child.name | translate: child.translations: selectedLanguage.language}}</a>
                   </li>
@@ -52,7 +52,7 @@
             <div *ngIf="treeData && term">
               <div>
                 <span class="item-title">{{termTitle | translate: term.translations: selectedLanguage.language}}&nbsp;</span>
-                <span class="item-id" *ngIf="paramId != term.id">
+                <span class="item-id" *ngIf="paramId !== term.id">
                 <span class="crossout">{{paramId}}</span>
                 <i class="material-icons obsolete-arrow">arrow_right_alt</i></span>
                 <span class="item-id">{{term.id}}</span>
@@ -70,7 +70,7 @@
               <hr class="underline-hr">
               <div>
                 <p>
-                  {{term.definition != "" ? term.definition : "No definition found."}}
+                  {{term.definition !== "" ? term.definition : "No definition found."}}
                 </p>
               </div>
               <mat-list>
@@ -113,7 +113,7 @@
           <mat-tab-group selectedIndex="0" class="term-details-tab-group mat-elevation-z6">
             <!-- Disease association -->
             <mat-tab label="Disease Associations">
-              <div [hidden]="diseaseAssocCount == 0">
+              <div [hidden]="diseaseAssocCount === 0">
                 <div class="tab-output-container">
 
                   <!-- filter. Display when all results are loaded -->
@@ -164,14 +164,14 @@
                   </div>
                 </div>
               </div>
-              <div class="container center" [hidden]="diseaseAssocCount != 0">
+              <div class="container center" [hidden]="diseaseAssocCount !== 0">
                 <h4>No disease associations found for <strong>{{term.id}}</strong></h4>
               </div>
             </mat-tab>
 
             <!-- Gene Association -->
             <mat-tab label="Gene Associations">
-              <div [hidden]="geneAssocCount == 0">
+              <div [hidden]="geneAssocCount === 0">
                 <div class="tab-output-container">
                   <div class="filter-container">
                     <div id="geneFilter" class="filter-header">
@@ -211,15 +211,15 @@
                   </div>
                 </div>
               </div>
-              <div class="container center" [hidden]="geneAssocCount != 0">
+              <div class="container center" [hidden]="geneAssocCount !== 0">
                 <h4>No gene associations found for <strong>{{term.id}}</strong></h4>
               </div>
             </mat-tab>
 
             <!-- Loinc Association -->
-            <div *ngIf="loincDisplayCount != 0">
+            <div *ngIf="loincDisplayCount !== 0">
               <mat-tab label="LOINC Associations">
-                <div [hidden]="loincDisplayCount == 0">
+                <div [hidden]="loincDisplayCount === 0">
                   <mat-progress-bar *ngIf="assocLoading" class="loading-result-details" color="primary"
                                     mode="indeterminate">
                   </mat-progress-bar>

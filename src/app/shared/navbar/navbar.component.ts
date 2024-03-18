@@ -5,7 +5,7 @@ import {Disease, Gene, Term} from '../../browser/models/models';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 
 @Component({
-  selector: 'navbar-hpo',
+  selector: 'app-navbar-hpo',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css'],
   animations: [

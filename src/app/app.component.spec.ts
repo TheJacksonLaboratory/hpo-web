@@ -1,4 +1,4 @@
-import {async, TestBed} from '@angular/core/testing';
+import { TestBed, waitForAsync } from '@angular/core/testing';
 import {NavbarComponent} from './shared/navbar/navbar.component';
 import {FooterComponent} from './shared/footer/footer.component';
 import {AppComponent} from './app.component';
@@ -15,7 +15,7 @@ import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 
 
 describe('AppComponent', () => {
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [RouterTestingModule,
         GlobalMaterialModules,
@@ -34,7 +34,7 @@ describe('AppComponent', () => {
     }).compileComponents();
   }));
 
-  it('should create the app', async(() => {
+  it('should create the app', waitForAsync(() => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
@@ -43,7 +43,7 @@ describe('AppComponent', () => {
   it('it should check that search url environment variable is set', () => {
 
     //Check an example of one of the evironment variables
-    let searchUrl = environment.HPO_API_SEARCH_URL;
-    expect(searchUrl).toContain('hpo/search');
+    let searchUrl = environment.ONTOLOGY_API_HP_SEARCH;
+    expect(searchUrl).toContain('hp/search');
   });
 });

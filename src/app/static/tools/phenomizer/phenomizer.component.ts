@@ -5,11 +5,7 @@ import {Component, OnInit} from '@angular/core';
   templateUrl: './phenomizer.component.html',
   styleUrls: ['./phenomizer.component.css']
 })
-export class PhenomizerComponent implements OnInit {
+export class PhenomizerComponent {
   constructor() {
   }
-
-  ngOnInit() {
-  }
-
 }

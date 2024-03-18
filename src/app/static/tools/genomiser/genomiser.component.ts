@@ -5,11 +5,7 @@ import {Component, OnInit} from '@angular/core';
   templateUrl: './genomiser.component.html',
   styleUrls: ['./genomiser.component.css']
 })
-export class GenomiserComponent implements OnInit {
+export class GenomiserComponent {
   constructor() {
   }
-
-  ngOnInit() {
-  }
-
 }

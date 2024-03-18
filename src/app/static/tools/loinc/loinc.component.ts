@@ -5,12 +5,9 @@ import {Component, OnInit} from '@angular/core';
   templateUrl: './loinc.component.html',
   styleUrls: ['./loinc.component.css']
 })
-export class LoincComponent implements OnInit {
+export class LoincComponent {
 
   constructor() {
-  }
-
-  ngOnInit() {
   }
 
 }
