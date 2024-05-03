@@ -69,6 +69,6 @@ export class NavbarComponent implements OnInit {
   }
 
   navigateToDocs() {
-    window.open("/api/hpo/docs", "__blank");
+    window.open("https://ontology.jax.org/", "__blank");
   }
 }
