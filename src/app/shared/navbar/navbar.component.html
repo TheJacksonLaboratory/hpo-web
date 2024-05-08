@@ -5,10 +5,13 @@
   <!-- Main Desktop Navbar -->
   <div class="nav-components" fxHide fxShow.gt-sm>
     <button mat-button routerLink="about">About</button>
-    <button mat-button [matMenuTriggerFor]="downloadsMenu">Data
+    <button mat-button [matMenuTriggerFor]="downloadsMenu">Data<div class="mat-badge mat-badge-above mat-badge-after mat-badge-small">
+        <span class="mat-badge-content notification mat-badge-active">&nbsp;</span>
+      </div>
       <mat-icon>arrow_drop_down</mat-icon>
     </button>
-    <button mat-button [matMenuTriggerFor]="toolsMenu">Tools
+    <button mat-button [matMenuTriggerFor]="toolsMenu">
+      Tools
       <mat-icon>arrow_drop_down</mat-icon>
     </button>
     <button mat-button [matMenuTriggerFor]="resourcesMenu">Resources
@@ -46,9 +49,11 @@
   <mat-menu [overlapTrigger]="false" #downloadsMenu="matMenu">
     <button mat-menu-item routerLink="data/ontology"> Ontology</button>
     <button mat-menu-item routerLink="data/annotations"> Annotations</button>
+    <button mat-menu-item routerLink="data/api">
+      API <span class="new-badge">new</span>
+    </button>
     <button mat-menu-item routerLink="resources/phenopacket"> Phenopacket</button>
     <button mat-menu-item [matMenuTriggerFor]="otherMenu"> Translation</button>
-    <button mat-menu-item (click)="navigateToDocs()"> API</button>
   </mat-menu>
   <mat-menu #otherMenu="matMenu">
     <button mat-menu-item routerLink="data/translations"> Translations and Mapping</button>

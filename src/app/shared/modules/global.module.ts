@@ -1,4 +1,5 @@
 import {NgModule} from '@angular/core';
+import { MatBadgeModule } from '@angular/material/badge';
 import {MatButtonModule} from '@angular/material/button';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatIconModule} from '@angular/material/icon';
@@ -47,6 +48,7 @@ import {FlexLayoutModule} from "@angular/flex-layout";
     MatAutocompleteModule,
     MatButtonToggleModule,
     MatChipsModule,
+    MatBadgeModule,
     FlexLayoutModule
   ],
   exports: [MatButtonModule,
@@ -71,6 +73,7 @@ import {FlexLayoutModule} from "@angular/flex-layout";
     MatStepperModule,
     MatButtonToggleModule,
     MatChipsModule,
+    MatBadgeModule,
     FlexLayoutModule
   ],
 })

@@ -1,0 +1,56 @@
+<div class="container api" fxLayout="row wrap" fxLayoutAlign="center center">
+  <h1 class="pageTitle center" fxFlexFill>RESTful API</h1>
+  <div class="api-cards" fxLayout="row wrap" fxLayoutAlign="start center">
+      <mat-card class="deprecated-card" fxFlex="25">
+        <mat-card-header>
+          <mat-card-title>Human Phenotype Ontology API</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>
+            This API [ https://hpo.jax.org/api ] was deprecated in the 2.0.0 Release.
+            <i>Do not use this anymore.</i>
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <div class="actions" fxFlex="75">
+            <button mat-button disabled>DOCUMENTATION</button>
+            <button mat-button disabled>GITHUB</button>
+          </div>
+        </mat-card-actions>
+      </mat-card>
+      <mat-card class="active-card" fxFlex="25">
+        <mat-card-header>
+          <mat-card-title>Ontology Service</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>
+            This Human Phenotype Ontology API is an instance of an <a href="https://ontology.jax.org/Ontologies/">Ontology Service</a>.
+            <i>Use this API if you need to locate your term and traverse the ontology.</i>
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <div class="actions" fxFlex="75">
+            <a mat-stroked-button href="https://ontology.jax.org/api/hp/docs" target="_blank">DOCUMENTATION</a>
+            <a mat-stroked-button href="https://github.com/TheJacksonLaboratory/ontology-service" target="_blank">GITHUB</a>
+          </div>
+        </mat-card-actions>
+      </mat-card>
+      <mat-card class="new-card" fxFlex="25">
+        <mat-card-header>
+          <mat-card-title>Ontology Annotation Network</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>
+            This API is our graph instance of ontology annotations. Our goal is to expand on annotation relations
+            to the HPO. <i>Use this API if you need the annotations</i>
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <div class="actions" fxFlex="75">
+            <a mat-stroked-button href="https://ontology.jax.org/api/network/docs" target="_blank">DOCUMENTATION</a>
+            <a mat-stroked-button href="https://github.com/TheJacksonLaboratory/ontology-annotation-network" target="_blank">GITHUB</a>
+          </div>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+</div>

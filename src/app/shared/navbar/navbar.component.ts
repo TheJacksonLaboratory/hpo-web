@@ -7,7 +7,7 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 @Component({
   selector: 'app-navbar-hpo',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css'],
+  styleUrls: ['./navbar.component.scss'],
   animations: [
     trigger('searchState', [
       state('inactive', style({

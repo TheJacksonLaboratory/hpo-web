@@ -3,6 +3,7 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 // Components
 import {AnnotationFormatComponent} from './annotation-format/annotation-format.component';
+import { ApiDocComponent } from './api-doc/api-doc.component';
 import {LaypersonComponent} from './layperson/layperson.component';
 import {TranslationComponent} from './translation/translation.component';
 import {AnnotationsDownloadComponent} from './annotations-download/annotations-download.component';
@@ -15,6 +16,7 @@ const dataRoutes: Routes = [
     children: [
       {path: 'annotations', component: AnnotationsDownloadComponent},
       {path: 'annotation-format', component: AnnotationFormatComponent},
+      {path: 'api', component: ApiDocComponent},
       {path: 'ontology', component: OntologyDownloadComponent},
       {path: 'layperson', component: LaypersonComponent},
       {path: 'translations', component: TranslationComponent},

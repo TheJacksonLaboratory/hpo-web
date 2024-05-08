@@ -50,6 +50,36 @@
   color: white;
 }
 
+.new-badge {
+  width: 9ex;
+  display: inline-block;
+  height: 13px;
+  line-height: 13px;
+  background-color: #ff4081;
+  border-radius: 3px;
+  font-size: 7px;
+  font-family: Verdana, sans-serif;
+  color: white;
+  text-transform: uppercase;
+  text-align: center;
+  font-weight: bold;
+  vertical-align: super;
+}
+
+.mat-badge {
+  position: unset;
+  display: inline-block;
+  .notification {
+    background-color: #ff4081;
+    position: unset;
+    vertical-align: super;
+    margin: 2px;
+    width: 8px;
+    height: 8px;
+    line-height: 10px;
+  }
+}
+
 .navbar-search-wrapper {
   line-height: 20px;
   padding: 10px 0 0 15px;

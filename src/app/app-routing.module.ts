@@ -6,6 +6,7 @@ import {NoPageFoundComponent} from './error/no-page-found.component';
 
 export const appRoutes: Routes = [
   {path: '', pathMatch: 'prefix', loadChildren: () => import('./static/static.module').then(m => m.StaticModule)},
+  {path: 'app', pathMatch: 'prefix', redirectTo: '' },
   {path: 'browse', loadChildren: () => import('./browser/browser.module').then(m => m.BrowserHPOModule)},
   {path: '**', component: NoPageFoundComponent}
 
