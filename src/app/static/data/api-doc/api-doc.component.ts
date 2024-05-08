@@ -1,5 +1,4 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-api-doc',
@@ -7,13 +6,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
   styleUrls: ['./api-doc.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class ApiDocComponent implements OnInit {
+export class ApiDocComponent {
 
-  constructor(http: HttpClient) { }
-
-  ngOnInit(): void {
-  }
-
-
-
+  constructor() { }
 }
