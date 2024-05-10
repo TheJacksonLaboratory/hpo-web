@@ -9,9 +9,6 @@ export const environment = {
   production: false,
 
   VERSION: require('../../package.json').version,
-  HPO_API_DOWNLOAD_EXCEL_TERM_PATH: 'download/term',
-  HPO_API_DOWNLOAD_EXCEL_DISEASE_PATH: 'download/disease',
-  HPO_API_DOWNLOAD_EXCEL_GENE_PATH: 'download/gene',
   ONTOLOGY_API_HP_TERMS: ONTOLOGY_SERVICE_API_HP + 'terms/',
   ONTOLOGY_API_HP_SEARCH: ONTOLOGY_SERVICE_API_HP + 'search',
   ONTOLOGY_NETWORK_ANNOTATION_API: ONTOLOGY_API_ANNOTATION_BASE_URL + 'network/annotation/',

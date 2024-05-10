@@ -1,6 +1,6 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {DialogData} from '../../browser/models/models';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { DialogData, EntityType } from '../../browser/models/models';
 
 @Component({
   selector: 'app-dialog-excel-download',
@@ -9,22 +9,24 @@ import {DialogData} from '../../browser/models/models';
 })
 export class DialogExcelDownloadComponent implements OnInit {
 
-  buttonText = {first: '', second: ''};
+  supported = {first: "", second: ""};
 
   constructor(public dialogRef: MatDialogRef<DialogExcelDownloadComponent>,
               @Inject(MAT_DIALOG_DATA) public data: DialogData) {
   }
 
   ngOnInit() {
-    if (this.data.type === 'term') {
-      this.buttonText.first = 'Diseases';
-      this.buttonText.second = 'Genes';
-    } else if (this.data.type === 'disease') {
-      this.buttonText.first = 'Terms';
-      this.buttonText.second = 'Genes';
-    } else {
-      this.buttonText.first = 'Diseases';
-      this.buttonText.second = 'Terms';
+      this.supported.first = this.getEntityDisplay(this.data.supported_download[0]);
+      this.supported.second = this.getEntityDisplay(this.data.supported_download[1]);
+  }
+
+  getEntityDisplay(type: EntityType): string {
+    if (type === EntityType.PHENOTYPE){
+      return "Phenotype";
+    } else if (type === EntityType.DISEASE){
+      return "Diseases";
+    } else if (type === EntityType.GENE){
+      return "Genes";
     }
   }
 
@@ -32,4 +34,5 @@ export class DialogExcelDownloadComponent implements OnInit {
     this.dialogRef.close();
   }
 
+  protected readonly EntityType = EntityType;
 }

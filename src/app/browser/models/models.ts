@@ -79,9 +79,9 @@ export interface TermCategory {
 
 export interface DialogData {
   association: string;
-  term: string;
-  type: string;
-  counts: { genes?: number, diseases?: number, terms?: number };
+  id: string;
+  supported_download: EntityType[];
+  counts: { genes?: number, diseases?: number, phenotypes?: number };
 }
 
 export interface LoincEntry {
@@ -150,3 +150,8 @@ export interface DiseaseAssociation {
   genes: any[];
 }
 
+export enum EntityType {
+  PHENOTYPE,
+  DISEASE,
+  GENE
+}

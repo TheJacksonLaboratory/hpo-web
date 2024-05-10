@@ -226,8 +226,8 @@ img.mat-chip-avatar::before {
 }
 
 .translate-btn {
-  color: white;
-  margin: 0 0 0 .5rem;
+  margin: .5rem 0 0 .5rem;
+  border-radius: 0;
 }
 
 .translate-btn .material-icons {

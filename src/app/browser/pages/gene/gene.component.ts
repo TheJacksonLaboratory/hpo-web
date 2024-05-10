@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import { AnnotationService } from '../../services/annotation/annotation.service';
 import {GeneService} from '../../services/gene/gene.service';
-import {Disease, EntrezGene, Gene, Term} from '../../models/models';
+import { Disease, EntrezGene, Gene, SimpleTerm, Term } from '../../models/models';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
@@ -18,7 +18,7 @@ import {DialogService} from '../../../shared/dialog-excel-download/dialog.servic
 })
 export class GeneComponent implements OnInit {
   entrezGene: EntrezGene = new EntrezGene();
-  gene: Gene;
+  gene: string;
   query: string;
   uniprotId = '';
   termAssoc: Term[] = [];
@@ -51,13 +51,13 @@ export class GeneComponent implements OnInit {
     }
 
     this.route.params.subscribe((params) => {
-      this.query = params.id;
+      this.gene = params.id;
       this.reloadGeneData();
     });
   }
 
   reloadGeneData() {
-    const id = this.query.split(":")[1];
+    const id = this.gene.split(":")[1];
     this.geneService.searchGeneInfo(id)
       .subscribe((data) => {
         this.entrezGene = data.result[id];
@@ -68,7 +68,7 @@ export class GeneComponent implements OnInit {
         console.log(error);
       });
 
-    this.annotationService.fromGene(this.query)
+    this.annotationService.fromGene(this.gene)
       .subscribe((data) => {
         this.termAssoc = data.phenotypes;
         this.diseaseAssoc = data.diseases;
@@ -81,7 +81,7 @@ export class GeneComponent implements OnInit {
 
         this.isLoading = false;
       }, (error) => {
-        const errorString = 'Could not find requested entrez id ' + this.query + '.';
+        const errorString = 'Could not find requested entrez id ' + this.gene + '.';
         this.router.navigate(['/error'], {
           state: {
             description: errorString
@@ -148,7 +148,7 @@ export class GeneComponent implements OnInit {
       diseases: this.diseaseAssoc.length,
       terms: this.termAssoc.length
     };
-    this.dialogService.openDownloadDialog(this.gene.geneId.toString(), 'gene', counts);
+    this.dialogService.openDownloadDialog(this.gene, counts);
   }
 
 }

@@ -125,7 +125,7 @@ export class DiseaseComponent {
       genes: this.geneDataSource.data.length,
       terms: this.termAssoc.length
     };
-    this.dialogService.openDownloadDialog(this.disease.id, 'disease', counts);
+    this.dialogService.openDownloadDialog(this.disease.id, counts);
   }
 
   reportIssue() {

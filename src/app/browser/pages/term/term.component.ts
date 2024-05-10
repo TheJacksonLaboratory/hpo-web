@@ -7,7 +7,7 @@ import { forkJoin, of } from 'rxjs';
 import { catchError, switchMap } from 'rxjs/operators';
 import { AnnotationService } from '../../services/annotation/annotation.service';
 import { LanguageService } from '../../services/language/language.service';
-import { Language, SimpleTerm, Term, TermTree } from '../../models/models';
+import { EntityType, Language, SimpleTerm, Term, TermTree } from '../../models/models';
 import { DialogService } from '../../../shared/dialog-excel-download/dialog.service';
 import { OntologyService } from "../../services/ontology/ontology.service";
 
@@ -45,7 +45,7 @@ export class TermComponent implements OnInit {
   assocLoading = true;
   overlay = false;
   languages: Language[];
-  selectedLanguage: Language = {language: "en", language_long: "English"}
+  selectedLanguage: Language = {language: "en", language_long: "English"};
 
   @ViewChild('diseasePaginator', {static: true}) diseasePaginator: MatPaginator;
   @ViewChild('genePaginator', {static: true}) genePaginator: MatPaginator;
@@ -164,7 +164,7 @@ export class TermComponent implements OnInit {
       genes: this.geneAssocCount,
       diseases: this.diseaseAssocCount
     };
-    this.dialogService.openDownloadDialog(this.term.id, 'term', counts);
+    this.dialogService.openDownloadDialog(this.term.id, counts);
   }
 
   setTreeStyles(child: Term): any {
