@@ -98,7 +98,7 @@
                 <mat-divider></mat-divider>
               </mat-list>
               <button mat-raised-button class="download-associations"
-                      [disabled]="this.diseaseAssocCount == 0 && this.geneAssocCount == 0"
+                      [disabled]="this.diseaseAssocCount === 0 && this.geneAssocCount === 0"
                       (click)="downloadDialog()"><span class="material-icons">get_app</span> Export Associations
               </button>
               <a *ngIf="languages && languages.length > 0" class="translate-btn" href="https://obophenotype.github.io/hpo-translations/" mat-stroked-button color="primary" target="_blank">
