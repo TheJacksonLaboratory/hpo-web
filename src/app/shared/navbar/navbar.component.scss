@@ -66,6 +66,22 @@
   vertical-align: super;
 }
 
+.update-badge {
+  width: 9ex;
+  display: inline-block;
+  height: 13px;
+  line-height: 13px;
+  background-color: #939393;
+  border-radius: 3px;
+  font-size: 7px;
+  font-family: Verdana, sans-serif;
+  color: white;
+  text-transform: uppercase;
+  text-align: center;
+  font-weight: bold;
+  vertical-align: super;
+}
+
 .mat-badge {
   position: unset;
   display: inline-block;
