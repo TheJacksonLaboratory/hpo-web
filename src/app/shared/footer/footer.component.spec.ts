@@ -11,8 +11,7 @@ describe('FooterComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [FooterComponent],
-      imports: [HttpClientTestingModule],
-      providers: [UtilityService]
+      imports: [HttpClientTestingModule]
     });
   });
 
