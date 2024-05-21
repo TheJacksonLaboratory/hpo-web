@@ -3,9 +3,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator';
-import { Disease, Gene, SimpleTerm, Term, TermCategory } from '../../models/models';
+import { Disease, SimpleTerm, Term, TermCategory } from '../../models/models';
 import { AnnotationService } from '../../services/annotation/annotation.service';
-import {DiseaseService} from '../../services/disease/disease.service';
 import {DialogService} from '../../../shared/dialog-excel-download/dialog.service';
 
 @Component({
@@ -28,7 +27,7 @@ export class DiseaseComponent {
 
   @ViewChild('genePaginator', {static: true}) genePaginator: MatPaginator;
 
-  constructor(private route: ActivatedRoute, private diseaseService: DiseaseService,
+  constructor(private route: ActivatedRoute,
               public dialogService: DialogService, public annotationService: AnnotationService,
               private router: Router) {
     this.route.params.subscribe((params) => {

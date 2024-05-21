@@ -11,7 +11,6 @@ import {SearchService} from '../shared/search/service/search.service';
 import { AnnotationService } from './services/annotation/annotation.service';
 import {TermService} from './services/term/term.service';
 import {GeneService} from './services/gene/gene.service';
-import {DiseaseService} from './services/disease/disease.service';
 import {OntologyService} from './services/ontology/ontology.service';
 // Components
 import {TermComponent} from './pages/term/term.component';
@@ -33,7 +32,7 @@ import {ProfileSearchComponent} from './pages/profile-search/profile-search.comp
         GlobalMaterialModules,
         ExtrasModule
     ],
-    providers: [SearchService, TermService, GeneService, DiseaseService, DialogService,
+    providers: [SearchService, TermService, GeneService, DialogService,
         OntologyService, AnnotationService],
     declarations: [TermComponent, DiseaseComponent,
         GeneComponent,

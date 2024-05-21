@@ -1,13 +1,14 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {Observable} from "rxjs";
+import { MatTableDataSource } from '@angular/material/table';
+import { Observable, of } from 'rxjs';
 import {UntypedFormControl} from "@angular/forms";
-import {filter, map, switchMap} from "rxjs/operators";
-import {TermService} from "../../services/term/term.service";
-import {SearchService} from "../../../shared/search/service/search.service";
+import { catchError, debounceTime, distinctUntilChanged, filter, map, switchMap } from 'rxjs/operators';
+import { AnnotationService } from '../../services/annotation/annotation.service';
+import { OntologyService } from '../../services/ontology/ontology.service';
 import {MatStepper} from "@angular/material/stepper";
 import {MatSort} from "@angular/material/sort";
 import {MatPaginator} from "@angular/material/paginator";
-import {Term} from "../../models/models";
+import { SimpleTerm, Term } from '../../models/models';
 
 @Component({
   selector: 'app-custom',
@@ -17,28 +18,28 @@ import {Term} from "../../models/models";
 export class ProfileSearchComponent implements OnInit {
 
   @ViewChild('stepper') stepper: MatStepper;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   myControl = new UntypedFormControl();
-  filteredOptions: Observable<[]>;
-  selectedTerms: Term[] = [];
+  filteredOptions: Observable<SimpleTerm[]>;
+  selectedTerms: SimpleTerm[] = [];
   submittedTerms = false;
+  dataSource: MatTableDataSource<SimpleTerm>;
   associationData;
   loadingIntersectingAssociations = true;
   intersectingAssocationError = false;
   displayedColumns: string[] = ['diseaseId', 'diseaseName'];
   resultsLength = 0;
 
-  constructor(private searchService: SearchService, private termService: TermService) {
+  constructor(private ontologyService: OntologyService,  private annotationService: AnnotationService) {
   }
 
   ngOnInit(): void {
     this.filteredOptions = this.myControl.valueChanges
       .pipe(
-        filter(x => x != null && x != ''),
+        filter(x => x != null && x != '' && x.length >= 3),
         switchMap(val =>
-          this.searchService.searchAll(val)
+          this.ontologyService.search(val, 10)
         ),
         map(response => response.terms)
       );
@@ -59,19 +60,28 @@ export class ProfileSearchComponent implements OnInit {
     this.submittedTerms = true;
     this.loadingIntersectingAssociations = true;
     let termIds = this.selectedTerms.map(term => term.id);
-    // this.termService.searchIntersectingAnnotations(termIds).pipe(
-    //   map(data => {
-    //     // Flip flag to show that loading has finished.
-    //     this.loadingIntersectingAssociations = false;
-    //     this.resultsLength = data.associations.length;
-    //     return data.associations;
-    //   }),
-    //   catchError(() => {
-    //     this.intersectingAssocationError = true;
-    //     this.loadingIntersectingAssociations = false;
-    //     return of([]);
-    //   })
-    // ).subscribe(data => this.associationData = data);
+    this.annotationService.searchProfile(termIds.join(",")).pipe(
+      debounceTime(1000),
+      distinctUntilChanged(),
+      map(data => {
+        this.loadingIntersectingAssociations = false;
+        this.resultsLength = data.length;
+        return data;
+      }),
+      catchError(() => {
+        this.intersectingAssocationError = true;
+        this.loadingIntersectingAssociations = false;
+        return of([]);
+      })
+    ).subscribe(data =>
+      this.dataSource = new MatTableDataSource(data)
+    );
+  }
+
+  applyTermFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    this.dataSource.filter = filterValue;
   }
 
   resetStepper() {

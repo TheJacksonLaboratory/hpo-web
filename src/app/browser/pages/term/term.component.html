@@ -18,20 +18,20 @@
                         <span class="tree-counts" [ngStyle]="{'margin-left': '-100px', 'margin-right': '5px'}"
                               matTooltip="{{parent.descendantCount}}" *ngIf="parent.descendantCount !== 0"
                               matTooltipPosition="above"> </span>
-                <a class="link" routerLink="../{{parent.id}}">{{parent.name | translate: parent.translations: selectedLanguage.language}}</a>
+                <a class="link" routerLink="../{{parent.id}}">{{parent.name | translate: parent.translations: selectedLanguage.language: "name"}}</a>
               </li>
               <li>
                 <div class="term">
                           <span class="tree-counts" [ngStyle]="{'margin-left': '-115px'}"
                                 *ngIf="treeData.descendantCount !== 0" matTooltip="{{treeData.descendantCount}}"
                                 matTooltipPosition="above"> </span>
-                  <strong>{{term.name | translate: term.translations: selectedLanguage.language}}</strong>
+                  <strong>{{term.name | translate: term.translations: selectedLanguage.language: "name"}}</strong>
                 </div>
                 <ul>
                   <li *ngFor="let child of treeData.children" class="children">
                             <span class="tree-counts" [ngStyle]="setTreeStyles(child)" *ngIf="child.descendantCount !== 0"
                                   matTooltip="{{child.descendantCount}}" matTooltipPosition="above"> </span>
-                    <a class="link" routerLink="../{{child.id}}">{{child.name | translate: child.translations: selectedLanguage.language}}</a>
+                    <a class="link" routerLink="../{{child.id}}">{{child.name | translate: child.translations: selectedLanguage.language: "name"}}</a>
                   </li>
                 </ul>
               </li>
@@ -51,7 +51,7 @@
             </div>
             <div *ngIf="treeData && term">
               <div>
-                <span class="item-title">{{termTitle | translate: term.translations: selectedLanguage.language}}&nbsp;</span>
+                <span class="item-title">{{termTitle | translate: term.translations: selectedLanguage.language: "name"}}&nbsp;</span>
                 <span class="item-id" *ngIf="paramId !== term.id">
                 <span class="crossout">{{paramId}}</span>
                 <i class="material-icons obsolete-arrow">arrow_right_alt</i></span>
@@ -70,7 +70,7 @@
               <hr class="underline-hr">
               <div>
                 <p>
-                  {{term.definition !== "" ? term.definition : "No definition found."}}
+                  {{term.definition !== "" ? (term.definition | translate: term.translations: selectedLanguage.language: "definition") : "No definition found."}}
                 </p>
               </div>
               <mat-list>

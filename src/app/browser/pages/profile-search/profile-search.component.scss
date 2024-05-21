@@ -45,11 +45,6 @@
   margin-top: 1rem;
 }
 
-.intersecting-table {
-  margin-top: 0.5rem;
-}
-
-
 .query-chip {
   color: white;
   font-size: 12px;
@@ -59,4 +54,35 @@
 
 .not-found {
   text-align: center;
+}
+
+.tab-output-container {
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+}
+
+.filter-container {
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+}
+
+.filter-header {
+  min-height: 64px;
+  padding: 8px 24px 0;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+.profile-container {
+  margin: 0 10%;
+}
+
+.tab-output-container {
+  margin: 1rem 0 0 0;
+  background-color: white;
 }

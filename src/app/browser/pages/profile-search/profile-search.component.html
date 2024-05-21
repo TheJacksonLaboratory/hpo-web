@@ -1,4 +1,4 @@
-<div class="news container">
+<div class="container profile-container">
   <h1 class="center">Profile Search</h1>
   <h4 class="center">This tool will find diseases that share your profile of phenotypes. Similarly, there is a
     <a href="https://monarchinitiative.org/analyze/phenotypes" target="_blank">tool</a> that
@@ -59,29 +59,41 @@
                   {{term.id}} - {{term.name}}
                 </mat-chip>
               </mat-chip-list>
-              <mat-table class="intersecting-table mat-elevation-z6" [dataSource]="associationData"
-                         matSort matSortActive="created" matSortDisableClear matSortDirection="desc">
-                <!-- Number Column -->
-                <ng-container matColumnDef="diseaseId">
-                  <mat-header-cell *matHeaderCellDef>Disease Identifier</mat-header-cell>
-                  <mat-cell *matCellDef="let row">
-                    <a routerLink="/browse/disease/{{row.diseaseId}}">{{row.diseaseId}}</a>
-                  </mat-cell>
-                </ng-container>
-                <!-- Created Column -->
-                <ng-container matColumnDef="diseaseName">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
-                    Disease Name
-                  </mat-header-cell>
-                  <mat-cell *matCellDef="let row">{{row.diseaseName}}</mat-cell>
-                </ng-container>
+              <div class="tab-output-container mat-elevation-z6">
+                <div class="filter-container">
+                  <div class="filter-header">
+                    <mat-form-field>
+                      <input id="termFilterInput" matInput (keyup)="applyTermFilter($event.target.value)"
+                             placeholder="Filter">
+                    </mat-form-field>
+                  </div>
+                </div>
+                <mat-table class="intersecting-table" [dataSource]="dataSource"
+                           matSort matSortActive="created" matSortDisableClear matSortDirection="desc">
+                  <!-- Number Column -->
+                  <ng-container matColumnDef="diseaseId">
+                    <mat-header-cell *matHeaderCellDef>Disease Identifier</mat-header-cell>
+                    <mat-cell *matCellDef="let row">
+                      <a routerLink="/browse/disease/{{row.id}}">{{row.id}}</a>
+                    </mat-cell>
+                  </ng-container>
+                  <!-- Created Column -->
+                  <ng-container matColumnDef="diseaseName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+                      Disease Name
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let row">{{row.name}}</mat-cell>
+                  </ng-container>
 
-                <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
-                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-                <mat-paginator [length]="resultsLength" [pageSize]="30"></mat-paginator>
-              </mat-table>
-              <p class="not-found" *ngIf="resultsLength === 0"><strong>No intersecting diseases for found your
-                phenotypes.</strong></p>
+                  <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+                  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                </mat-table>
+                <div class="associationsPaging">
+                  <p>{{resultsLength}} diseases found.</p>
+                </div>
+                <p class="not-found" *ngIf="resultsLength === 0"><strong>No intersecting diseases for found your
+                  phenotypes.</strong></p>
+              </div>
               <button class="back-btn" mat-raised-button (click)="resetStepper()">Reset</button>
             </div>
           </div>

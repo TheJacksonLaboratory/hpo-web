@@ -7,13 +7,14 @@ export class TranslatePipe implements PipeTransform {
   constructor() {
   }
 
-  transform(original: string, t: Translation[], language: string): string {
+  transform(original: string, t: Translation[], language: string, target: string): string {
     if (!t){
       return original;
     }
     for (let i = 0; i < t.length; i++) {
       if (t[i].language == language) {
-        return t[i].name;
+        const translated =  t[i][target];
+        return translated === "" ? original : translated;
       }
     }
     return original;
