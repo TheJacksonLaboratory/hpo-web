@@ -79,7 +79,12 @@
                                   PubMed <i class="material-icons-outlined">library_books</i>
                                 </a>
                               </div>
-                              <div class="source" *ngIf="!isTermIdExpected(source, 'PMID')">
+                              <div class="source" *ngIf="isTermIdExpected(source, 'BOOKSHELF')">
+                                <a [href]="source" target="_blank">
+                                  Gene Review <i class="material-icons-outlined">library_books</i>
+                                </a>
+                              </div>
+                              <div class="source" *ngIf="!isTermIdExpected(source, 'PMID') && !isTermIdExpected(source, 'BOOKSHELF')">
                                 <a [href]="getExternalTermIdUrlFromId(source)" target="_blank">
                                   <span>{{getDiseaseDatabaseName(source)}} &nbsp;</span>
                                   <i class="material-icons">open_in_new</i>
