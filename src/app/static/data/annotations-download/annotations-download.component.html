@@ -9,6 +9,12 @@
   <span fxFlexFill></span>
   <h2 class="center" fxFlexFill>Additional resources</h2>
   <div class="download-banner-wrapper additional-resources mat-elevation-z4" fxFlex=100 fxFlex.gt-md=20
+       (click)="utilityService.openExternalUrl(maxoUrl)">
+    <mat-icon fxHide fxShow.gt-sm>download</mat-icon>
+    <h3 class="download-banner-title">MAxO Annotations</h3>
+  </div>
+  <span fxFlexFill></span>
+  <div class="download-banner-wrapper additional-resources mat-elevation-z4" fxFlex=100 fxFlex.gt-md=20
        (click)="utilityService.openExternalUrl('https://purl.obolibrary.org/obo/hp/hpoa/genes_to_phenotype.txt')">
     <mat-icon fxHide fxShow.gt-sm>download</mat-icon>
     <h3 class="download-banner-title">Genes To Phenotype</h3>

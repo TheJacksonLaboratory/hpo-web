@@ -10,6 +10,7 @@ import { UtilityService } from '../../../shared/utility/utility.service';
 export class AnnotationsDownloadComponent implements OnInit {
 
   readonly hpoaUrl = `${environment.HPO_ANNOTATION_FILE_PURL}`;
+  readonly maxoUrl = `${environment.MAXO_ANNOTATION_FILE_PURL}`;
   version: string;
   constructor(public utilityService: UtilityService) {}
 
