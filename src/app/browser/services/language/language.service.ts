@@ -29,5 +29,5 @@ export class LanguageService {
   change(language: Language): void {
     this.languageSubject.next(language);
   }
-  
+
 }
