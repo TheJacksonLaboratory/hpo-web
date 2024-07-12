@@ -265,8 +265,11 @@
                     </div>
                   </div>
                 </div>
-                <div class="container center" [hidden]="loincDisplayCount != 0">
+                <div class="container center" [hidden]="loincDisplayCount != 0 || this.networkError">
                   <h4>No LOINC associations found for <strong>{{term.id}}</strong></h4>
+                </div>
+                <div class="container center" [hidden]="!this.networkError">
+                  <h4>Ontology Annotation Network Error. <a href="https://github.com/TheJacksonLaboratory/ontology-annotation-network/issues/new" target="_blank">Please report this issue.</a></h4>
                 </div>
               </mat-tab>
             </div>
