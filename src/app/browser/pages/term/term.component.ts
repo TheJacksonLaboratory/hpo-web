@@ -88,32 +88,47 @@ export class TermComponent implements OnInit {
   }
 
   refreshData(query: string) {
-    forkJoin( {
-      term: this.ontologyService.term(query).pipe(catchError(e => { console.error(e); return of(undefined)})),
-      parents: this.ontologyService.parents(query).pipe(catchError(() => of([]))),
-      children: this.ontologyService.children(query).pipe(catchError(() => of([])))
-    }).subscribe(({term, parents, children}) => {
-      this.setDefaults(term);
-      const maxTermWidth = 100;
-      this.treeData = {parents: parents, children: children, descendantCount: term.descendantCount};
-      this.treeData.maxTermWidth = maxTermWidth;
-      this.treeData.children.sort((a, b) => a.descendantCount > b.descendantCount ? (-1) : 1);
-      this.treeData.children.map(term => {
-        const percent = term.descendantCount / this.treeData.descendantCount;
-        const newWidth = Math.ceil(maxTermWidth * percent);
-        const newMargin = -115 + ((maxTermWidth - newWidth) - 5);
-        term.treeCountWidth = newWidth;
-        term.treeMargin = newMargin;
-      });
-      this.termTitle = this.term.name;
-    }, err => {
+    this.ontologyService.term(query).pipe(
+      catchError(e => {
+        console.error(e);
+        return of(undefined)
+      })
+    ).subscribe((term) => {
+      if (term) {
+        forkJoin({
+          parents: this.ontologyService.parents(term.id).pipe(catchError(() => of([]))),
+          children: this.ontologyService.children(term.id).pipe(catchError(() => of([])))
+        }).subscribe(({parents, children}) => {
+          this.setDefaults(term);
+          const maxTermWidth = 100;
+          this.treeData = {parents: parents, children: children, descendantCount: term.descendantCount};
+          this.treeData.maxTermWidth = maxTermWidth;
+          this.treeData.children.sort((a, b) => a.descendantCount > b.descendantCount ? (-1) : 1);
+          this.treeData.children.map(term => {
+            const percent = term.descendantCount / this.treeData.descendantCount;
+            const newWidth = Math.ceil(maxTermWidth * percent);
+            const newMargin = -115 + ((maxTermWidth - newWidth) - 5);
+            term.treeCountWidth = newWidth;
+            term.treeMargin = newMargin;
+          });
+          this.termTitle = this.term.name;
+        }, err => {
+          const errorString = 'Could not find requested ' + this.paramId + '.';
+          this.router.navigate(['/error'], {
+            state: {
+              description: errorString
+            }
+          });
+          console.log(err);
+        });
+      } else {
         const errorString = 'Could not find requested ' + this.paramId + '.';
         this.router.navigate(['/error'], {
           state: {
             description: errorString
           }
         });
-        console.log(err);
+      }
     });
   }
 
