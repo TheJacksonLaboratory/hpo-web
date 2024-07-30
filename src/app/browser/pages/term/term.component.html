@@ -112,7 +112,7 @@
         <!-- TABS -->
         <div class="hpo-group-tab" *ngIf="term">
           <mat-tab-group selectedIndex="0" class="term-details-tab-group mat-elevation-z6">
-            <!-- Disease association -->
+            <!-- Disease Association -->
             <mat-tab label="Disease Associations">
               <div [hidden]="diseaseAssocCount === 0">
                 <div class="tab-output-container">
@@ -220,6 +220,45 @@
               </div>
               <div class="container center" [hidden]="!this.networkError">
                 <h4>Ontology Annotation Network Error. <a href="https://github.com/TheJacksonLaboratory/ontology-annotation-network/issues/new" target="_blank">Please report this issue.</a></h4>
+              </div>
+            </mat-tab>
+
+            <!-- Medical Action Association -->
+            <mat-tab label="Medical Actions">
+              <div [hidden]="medicalActionDisplayCount === 0">
+                <div class="tab-output-container">
+                  <mat-progress-bar *ngIf="assocLoading" class="loading-result-details" color="primary"
+                                    mode="indeterminate">
+                  </mat-progress-bar>
+
+                  <div [hidden]="assocLoading" class="associations medical-actions-association">
+                    <mat-table [dataSource]="medicalActionSource">
+                      <mat-header-row *matHeaderRowDef="medicalActionColumns; sticky: true"></mat-header-row>
+                      <mat-row *matRowDef="let row; columns: medicalActionColumns;"></mat-row>
+                      <ng-container matColumnDef="id">
+                        <mat-header-cell *matHeaderCellDef>MaXo Id</mat-header-cell>
+                        <mat-cell *matCellDef="let row">
+                          <a routerLink="/browse/gene/{{row.id}}">{{row.id}}</a>
+                        </mat-cell>
+                      </ng-container>
+                      <ng-container matColumnDef="name">
+                        <mat-header-cell *matHeaderCellDef> Medical Action Name</mat-header-cell>
+                        <mat-cell *matCellDef="let row">
+                          {{row.name}}
+                        </mat-cell>
+                      </ng-container>
+                    </mat-table>
+
+                    <!-- paging: associations subset count -->
+                    <div *ngIf="!assocLoading" class="associationsPaging">
+                      <p>{{medicalActionDisplayCount}} medical actions.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="container center" [hidden]="medicalActionDisplayCount !== 0">
+                <h4>No medical actions found for <strong>{{term.id}}</strong></h4>
               </div>
             </mat-tab>
 

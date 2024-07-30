@@ -39,6 +39,10 @@ export class TermComponent implements OnInit {
   loincColumns = ['id', 'name'];
   loincDisplayCount: number;
 
+  medicalActionSource: MatTableDataSource<SimpleTerm>;
+  medicalActionColumns = ['id', 'name'];
+  medicalActionDisplayCount: number
+
   treeData: TermTree;
 
   assocLoading = true;
@@ -82,8 +86,11 @@ export class TermComponent implements OnInit {
       this.loincSource = new MatTableDataSource(associations.assays);
       this.loincSource.sort = this.sort;
       this.loincDisplayCount = associations.assays.length;
+      this.medicalActionSource = new MatTableDataSource(associations.medicalActions);
+      this.medicalActionDisplayCount = associations.medicalActions.length;
+      this.medicalActionSource.sort = this.sort;
     }, () => {
-        this.networkError = true;
+      this.networkError = true;
     });
   }
 

@@ -137,6 +137,7 @@ export interface PhenotypeAssociation {
     diseases: any[];
     genes: any[];
     assays: any[];
+    medicalActions: any[];
 }
 
 export interface GeneAssociation {
