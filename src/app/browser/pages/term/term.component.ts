@@ -7,7 +7,7 @@ import { forkJoin, of } from 'rxjs';
 import { catchError, switchMap } from 'rxjs/operators';
 import { AnnotationService } from '../../services/annotation/annotation.service';
 import { LanguageService } from '../../services/language/language.service';
-import { EntityType, Language, SimpleTerm, Term, TermTree } from '../../models/models';
+import { Language, SimpleTerm, Term, TermTree } from '../../models/models';
 import { DialogService } from '../../../shared/dialog-excel-download/dialog.service';
 import { OntologyService } from "../../services/ontology/ontology.service";
 
@@ -40,12 +40,12 @@ export class TermComponent implements OnInit {
   loincDisplayCount: number;
 
   treeData: TermTree;
-  termTreeMainWidth: number;
 
   assocLoading = true;
   overlay = false;
   languages: Language[];
   selectedLanguage: Language = {language: "en", language_long: "English"};
+  networkError = false;
 
   @ViewChild('diseasePaginator', {static: true}) diseasePaginator: MatPaginator;
   @ViewChild('genePaginator', {static: true}) genePaginator: MatPaginator;
@@ -82,15 +82,8 @@ export class TermComponent implements OnInit {
       this.loincSource = new MatTableDataSource(associations.assays);
       this.loincSource.sort = this.sort;
       this.loincDisplayCount = associations.assays.length;
-    }, err => {
-      // TODO: Implement Better Handling Here
-      const errorString = 'Could not find requested ' + this.paramId + '.';
-      this.router.navigate(['/error'], {
-        state: {
-          description: errorString
-        }
-      });
-      console.log(err);
+    }, () => {
+        this.networkError = true;
     });
   }
 
@@ -145,7 +138,7 @@ export class TermComponent implements OnInit {
       this.term.comment = (term.comment != null) ? term.comment : '';
       this.term.synonyms = (term.synonyms.length !== 0) ? term.synonyms : ['No synonyms found for this term.'];
       this.term.definition = (term.definition != null) ? term.definition : 'Sorry this term has no definition.';
-      this.term.purl = 'http://purl.obolibrary.org/obo/' + term.id.replace(':', '_');
+      this.term.purl = 'https://purl.obolibrary.org/obo/' + term.id.replace(':', '_');
       this.term.xrefs = (term.xrefs != null) ? term.xrefs : [];
 
       if (term.translations != undefined && term.translations.length > 0){
@@ -194,7 +187,7 @@ export class TermComponent implements OnInit {
     return {'width': child.treeCountWidth + 'px', 'margin-left': child.treeMargin + 'px', 'margin-right': '20px'};
   }
 
-  changeLanguage(language){
+  changeLanguage(language: Language){
     this.languageService.change(language);
   }
 }
