@@ -3,7 +3,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator';
-import { Disease, SimpleTerm, Term, TermCategory } from '../../models/models';
+import { UtilityService } from '../../../shared/utility/utility.service';
+import { Disease, MedicalActionSourceExtended, SimpleTerm, Term, TermCategory } from '../../models/models';
 import { AnnotationService } from '../../services/annotation/annotation.service';
 import {DialogService} from '../../../shared/dialog-excel-download/dialog.service';
 
@@ -19,8 +20,10 @@ export class DiseaseComponent {
   termColumns = ['id', 'name', 'metadata.onset', 'metadata.frequency', 'metadata.sources'];
   hasTerms = false;
   geneColumns = ['id', 'name'];
-  termDataSource: MatTableDataSource<Term>;
+  medicalActionColumns = ['id', 'name', 'relations', 'targets']
+  medicalActionsDataSource: MatTableDataSource<MedicalActionSourceExtended>;
   geneDataSource: MatTableDataSource<SimpleTerm>;
+
   isLoading = true;
   catTermSources: TermCategory[] = [];
   @ViewChild(MatSort) sort: MatSort;
@@ -29,6 +32,7 @@ export class DiseaseComponent {
 
   constructor(private route: ActivatedRoute,
               public dialogService: DialogService, public annotationService: AnnotationService,
+              public utilityService: UtilityService,
               private router: Router) {
     this.route.params.subscribe((params) => {
       this.query = params.id;
@@ -44,6 +48,7 @@ export class DiseaseComponent {
         this.setCatTermsDBSource(data.categories);
         this.geneDataSource = new MatTableDataSource(data.genes);
         this.geneDataSource.paginator = this.genePaginator;
+        this.medicalActionsDataSource = new MatTableDataSource(data.medicalActions);
         this.isLoading = false;
       }, (error) => {
         const errorString = 'Could not find requested disease id.';
@@ -86,31 +91,6 @@ export class DiseaseComponent {
     this.catTermSources.sort(function (a, b) {
       return sort_categories.indexOf(a.catLabel) - sort_categories.indexOf(b.catLabel);
     });
-  }
-
-  getExternalTermIdUrlFromId(termId?: string) {
-    if(!termId){
-      return '';
-    }
-    const sourceParts = termId.split(':');
-    if (this.isTermIdExpected(termId, "OMIM")) {
-      return `https://omim.org/entry/${sourceParts[1]}`;
-    } else if (this.isTermIdExpected(termId, "ORPHA")) {
-      return `https://www.orpha.net/consor/cgi-bin/OC_Exp.php?Lng=EN&Expert=${sourceParts[1]}`
-    } else if (this.isTermIdExpected(termId, "MONDO")){
-      return `https://monarchinitiative.org/disease/${termId}`;
-    } else if(this.isTermIdExpected(termId, "PMID")){
-      return `https://www.ncbi.nlm.nih.gov/pubmed/${sourceParts[1]}`;
-    }
-  }
-
-  isTermIdExpected(diseaseId: string, expected: string) {
-    return diseaseId != "" && diseaseId != null && expected != "" && expected != null
-      ? diseaseId.toUpperCase().includes(expected) : false;
-  }
-
-  getDiseaseDatabaseName(diseaseId){
-    return diseaseId != "" && diseaseId != null ? diseaseId.split(':')[0] : '';
   }
 
   applyGeneFilter(filterValue: string) {

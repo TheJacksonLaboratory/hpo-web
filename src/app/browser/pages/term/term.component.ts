@@ -5,9 +5,10 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import { forkJoin, of } from 'rxjs';
 import { catchError, switchMap } from 'rxjs/operators';
+import { UtilityService } from '../../../shared/utility/utility.service';
 import { AnnotationService } from '../../services/annotation/annotation.service';
 import { LanguageService } from '../../services/language/language.service';
-import { Language, SimpleTerm, Term, TermTree } from '../../models/models';
+import { Language, MedicalActionSourceExtended, SimpleTerm, Term, TermTree } from '../../models/models';
 import { DialogService } from '../../../shared/dialog-excel-download/dialog.service';
 import { OntologyService } from "../../services/ontology/ontology.service";
 
@@ -39,8 +40,8 @@ export class TermComponent implements OnInit {
   loincColumns = ['id', 'name'];
   loincDisplayCount: number;
 
-  medicalActionSource: MatTableDataSource<SimpleTerm>;
-  medicalActionColumns = ['id', 'name'];
+  medicalActionSource: MatTableDataSource<MedicalActionSourceExtended>;
+  medicalActionColumns = ['id', 'name', 'relation', 'source'];
   medicalActionDisplayCount: number
 
   treeData: TermTree;
@@ -58,7 +59,7 @@ export class TermComponent implements OnInit {
   constructor(private route: ActivatedRoute, private ontologyService: OntologyService,
               private annotationService: AnnotationService,
               private dialogService: DialogService,
-              private languageService: LanguageService, private router: Router) {
+              private languageService: LanguageService, public utilityService: UtilityService, private router: Router) {
   }
 
   ngOnInit() {
@@ -86,9 +87,7 @@ export class TermComponent implements OnInit {
       this.loincSource = new MatTableDataSource(associations.assays);
       this.loincSource.sort = this.sort;
       this.loincDisplayCount = associations.assays.length;
-      this.medicalActionSource = new MatTableDataSource(associations.medicalActions);
-      this.medicalActionDisplayCount = associations.medicalActions.length;
-      this.medicalActionSource.sort = this.sort;
+      this.configureMedicalActions(associations.medicalActions);
     }, () => {
       this.networkError = true;
     });
@@ -197,6 +196,15 @@ export class TermComponent implements OnInit {
   changeLanguage(language: Language){
     this.languageService.change(language);
   }
+
+  // If all the relations are the same for a medical action, just show one or show the uniq set?
+  configureMedicalActions(actions: MedicalActionSourceExtended[]) {
+    this.medicalActionSource = new MatTableDataSource(actions);
+    this.medicalActionDisplayCount = actions.length;
+    this.medicalActionSource.sort = this.sort;
+  }
+
+  protected readonly Array = Array;
 }
 
 

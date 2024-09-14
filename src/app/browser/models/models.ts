@@ -149,10 +149,21 @@ export interface DiseaseAssociation {
   disease: Disease;
   categories: {};
   genes: any[];
+  medicalActions: MedicalActionSourceExtended[];
 }
 
 export enum EntityType {
   PHENOTYPE,
   DISEASE,
   GENE
+}
+
+export interface MedicalActionSourceExtended extends SimpleTerm{
+  relations: string[];
+  sources: string[];
+}
+
+export interface MedicalActionTargetExtended extends SimpleTerm {
+  targets: string[];
+  sources: string[];
 }

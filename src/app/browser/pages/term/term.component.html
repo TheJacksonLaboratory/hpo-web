@@ -174,7 +174,7 @@
             </mat-tab>
 
             <!-- Gene Association -->
-            <mat-tab label="Gene Associations">
+            <mat-tab label="Gene Associations [Inferred]">
               <div [hidden]="geneAssocCount === 0">
                 <div class="tab-output-container">
                   <div class="filter-container">
@@ -238,13 +238,37 @@
                       <ng-container matColumnDef="id">
                         <mat-header-cell *matHeaderCellDef>MaXo Id</mat-header-cell>
                         <mat-cell *matCellDef="let row">
-                          <a routerLink="/browse/gene/{{row.id}}">{{row.id}}</a>
+                          {{row.id}}
                         </mat-cell>
                       </ng-container>
                       <ng-container matColumnDef="name">
-                        <mat-header-cell *matHeaderCellDef> Medical Action Name</mat-header-cell>
+                        <mat-header-cell *matHeaderCellDef> MaXo Name</mat-header-cell>
                         <mat-cell *matCellDef="let row">
                           {{row.name}}
+                        </mat-cell>
+                      </ng-container>
+                      <ng-container matColumnDef="relation">
+                        <mat-header-cell *matHeaderCellDef> Relation</mat-header-cell>
+                        <mat-cell *matCellDef="let row">
+                          <ng-container *ngIf="row.relations.length == 1">
+                            {{row.relations[0]}}
+                          </ng-container>
+                          <ng-container *ngIf="row.relations.length > 1">
+                            {{row.relations.join(" and ")}}
+                          </ng-container>
+                        </mat-cell>
+                      </ng-container>
+                      <ng-container matColumnDef="source">
+                        <mat-header-cell *matHeaderCellDef> Sources</mat-header-cell>
+                        <mat-cell *matCellDef="let row">
+                            <div class="source" *ngIf="utilityService.isTermIdExpected(row.sources[0],'PMID')">
+                              <a [href]="utilityService.getExternalTermIdUrlFromId(row.sources[0])" target="_blank">
+                                PubMed <i class="material-icons-outlined">library_books</i>
+                              </a>
+                              <span *ngIf="row.sources.length > 1">
+                                ({{row.sources.length}} more sources.)
+                              </span>
+                            </div>
                         </mat-cell>
                       </ng-container>
                     </mat-table>

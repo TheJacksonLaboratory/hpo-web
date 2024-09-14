@@ -40,4 +40,29 @@ export class UtilityService {
       refCount()
     );
   }
+
+  getExternalTermIdUrlFromId(termId?: string) {
+    if(!termId){
+      return '';
+    }
+    const sourceParts = termId.split(':');
+    if (this.isTermIdExpected(termId, "OMIM")) {
+      return `https://omim.org/entry/${sourceParts[1]}`;
+    } else if (this.isTermIdExpected(termId, "ORPHA")) {
+      return `https://www.orpha.net/consor/cgi-bin/OC_Exp.php?Lng=EN&Expert=${sourceParts[1]}`
+    } else if (this.isTermIdExpected(termId, "MONDO")){
+      return `https://monarchinitiative.org/disease/${termId}`;
+    } else if(this.isTermIdExpected(termId, "PMID")){
+      return `https://www.ncbi.nlm.nih.gov/pubmed/${sourceParts[1]}`;
+    }
+  }
+
+  isTermIdExpected(diseaseId: string, expected: string) {
+    return diseaseId != "" && diseaseId != null && expected != "" && expected != null
+      ? diseaseId.toUpperCase().includes(expected) : false;
+  }
+
+  getDiseaseDatabaseName(diseaseId){
+    return diseaseId != "" && diseaseId != null ? diseaseId.split(':')[0] : '';
+  }
 }
