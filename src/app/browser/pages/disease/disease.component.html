@@ -178,12 +178,14 @@
                         <ng-container matColumnDef="targets">
                           <mat-header-cell *matHeaderCellDef>Target</mat-header-cell>
                           <mat-cell *matCellDef="let row">
-                            <ng-container *ngIf="row.targets.length == 1">
-                              <a routerLink="/browse/term/{{row.targets[0].id}}">{{row.targets[0].id}}</a>
-                            </ng-container>
-                            <ng-container *ngIf="row.targets.length > 1">
+                            <ng-container *ngIf="row.targets.length > 0">
                               <div *ngFor="let target of row.targets">
-                                <a routerLink="/browse/term/{{target.id}}">{{target.id}}</a>
+                                <div *ngIf="utilityService.isTermIdExpected(target.id,'HP')">
+                                  <a routerLink="/browse/term/{{target.id}}">{{target.id}}</a>
+                                </div>
+                                <div *ngIf="utilityService.isTermIdExpected(target.id,'OMIM')">
+                                  {{target.id}}
+                                </div>
                               </div>
                             </ng-container>
                           </mat-cell>
