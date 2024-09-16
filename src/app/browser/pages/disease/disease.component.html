@@ -130,15 +130,17 @@
                           <mat-cell *matCellDef="let row">{{row.name}}</mat-cell>
                         </ng-container>
                       </mat-table>
-
-                      <mat-paginator #genePaginator [pageSizeOptions]="[50, 100, 500]"></mat-paginator>
+                      <div class="associationsPaging">
+                        <p>{{geneDataSource.data.length}} gene associations.
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
 
                 <!-- no results found -->
                 <div class="container center" [hidden]="geneDataSource?.data.length !== 0">
-                  <h4>No gene results found for "{{query}}"</h4>
+                  <h4>No gene results found for {{query}}</h4>
                 </div>
 
               </mat-tab>
@@ -177,25 +179,27 @@
                           <mat-header-cell *matHeaderCellDef>Target</mat-header-cell>
                           <mat-cell *matCellDef="let row">
                             <ng-container *ngIf="row.targets.length == 1">
-                              {{row.targets[0].id}}
+                              <a routerLink="/browse/term/{{row.targets[0].id}}">{{row.targets[0].id}}</a>
                             </ng-container>
                             <ng-container *ngIf="row.targets.length > 1">
                               <div *ngFor="let target of row.targets">
-                                {{target.id}}
+                                <a routerLink="/browse/term/{{target.id}}">{{target.id}}</a>
                               </div>
                             </ng-container>
                           </mat-cell>
                         </ng-container>
                       </mat-table>
-
-                      <mat-paginator #genePaginator [pageSizeOptions]="[50, 100, 500]"></mat-paginator>
+                      <div class="associationsPaging">
+                        <p>{{medicalActionsDataSource.data.length}} medical actions.
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
 
                 <!-- no results found -->
-                <div class="container center" [hidden]="geneDataSource?.data.length !== 0">
-                  <h4>No gene results found for "{{query}}"</h4>
+                <div class="container center" [hidden]="medicalActionsDataSource?.data.length !== 0">
+                  <h4>No medical action results found for {{query}}</h4>
                 </div>
 
               </mat-tab>

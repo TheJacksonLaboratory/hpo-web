@@ -233,3 +233,7 @@ img.mat-chip-avatar::before {
 .translate-btn .material-icons {
   font-size: 18px;
 }
+
+.source-hover {
+  text-decoration: none;
+}

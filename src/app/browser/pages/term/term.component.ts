@@ -42,7 +42,7 @@ export class TermComponent implements OnInit {
 
   medicalActionSource: MatTableDataSource<MedicalActionSourceExtended>;
   medicalActionColumns = ['id', 'name', 'relation', 'source'];
-  medicalActionDisplayCount: number
+  medicalActionDisplayCount: number;
 
   treeData: TermTree;
 
@@ -203,8 +203,6 @@ export class TermComponent implements OnInit {
     this.medicalActionDisplayCount = actions.length;
     this.medicalActionSource.sort = this.sort;
   }
-
-  protected readonly Array = Array;
 }
 
 

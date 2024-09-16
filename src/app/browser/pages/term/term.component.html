@@ -260,15 +260,17 @@
                       </ng-container>
                       <ng-container matColumnDef="source">
                         <mat-header-cell *matHeaderCellDef> Sources</mat-header-cell>
-                        <mat-cell *matCellDef="let row">
-                            <div class="source" *ngIf="utilityService.isTermIdExpected(row.sources[0],'PMID')">
-                              <a [href]="utilityService.getExternalTermIdUrlFromId(row.sources[0])" target="_blank">
-                                PubMed <i class="material-icons-outlined">library_books</i>
+                        <mat-cell *matCellDef="let row; let i = index">
+                          <div *ngFor="let source of row.sources">
+                            <div class="source" *ngIf="utilityService.isTermIdExpected(source,'PMID')">
+                              <a class="source-hover" [href]="utilityService.getExternalTermIdUrlFromId(source)" target="_blank">
+                                PubMed <i class="material-icons-outlined">library_books</i>&nbsp;&nbsp;
                               </a>
-                              <span *ngIf="row.sources.length > 1">
-                                ({{row.sources.length}} more sources.)
-                              </span>
+                              <a *ngIf="row.sources.length > 4">
+                                ({{row.sources.length - 4}} more).
+                              </a>
                             </div>
+                          </div>
                         </mat-cell>
                       </ng-container>
                     </mat-table>
