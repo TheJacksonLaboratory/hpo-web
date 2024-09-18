@@ -3,7 +3,6 @@ import { async, ComponentFixture, TestBed, waitForAsync } from '@angular/core/te
 import {ProfileSearchComponent} from './profile-search.component';
 import {SearchService} from "../../../shared/search/service/search.service";
 import {HttpClientTestingModule} from "@angular/common/http/testing";
-import {TermService} from "../../services/term/term.service";
 import {GlobalMaterialModules} from "../../../shared/modules/global.module";
 import {NoopAnimationsModule} from "@angular/platform-browser/animations";
 

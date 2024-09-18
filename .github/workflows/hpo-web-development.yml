@@ -1,0 +1,24 @@
+# This is a basic workflow to help you get started with Actions
+
+name: HPO-WEB Lint & Test PR
+
+# Controls when the workflow will run
+on: pull_request
+
+jobs:
+  load:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Configure Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.10.0
+          cache: 'npm'
+
+      - name: Lint, Test, Build
+        run: |
+          npm install
+          npm run lint
+          npm run testci
