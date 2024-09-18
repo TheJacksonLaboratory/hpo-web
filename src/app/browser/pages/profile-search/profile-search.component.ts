@@ -7,8 +7,7 @@ import { AnnotationService } from '../../services/annotation/annotation.service'
 import { OntologyService } from '../../services/ontology/ontology.service';
 import {MatStepper} from "@angular/material/stepper";
 import {MatSort} from "@angular/material/sort";
-import {MatPaginator} from "@angular/material/paginator";
-import { SimpleTerm, Term } from '../../models/models';
+import { SimpleTerm } from '../../models/models';
 
 @Component({
   selector: 'app-custom',
