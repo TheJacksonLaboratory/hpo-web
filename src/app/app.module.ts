@@ -1,5 +1,6 @@
 // Modules
 import {NgModule} from '@angular/core';
+import { MAT_TABS_CONFIG } from '@angular/material/tabs';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {RoutingModule} from './app-routing.module';
@@ -36,7 +37,7 @@ import {SafeHtmlPipe} from './shared/pipes/sanitize.pipe';
     RoutingModule,
     SearchModule
   ],
-  providers: [SearchService, NewsService],
+  providers: [SearchService, NewsService, { provide: MAT_TABS_CONFIG, useValue: { animationDuration: '0ms' } }],
   bootstrap: [AppComponent]
 })
 export class AppModule {

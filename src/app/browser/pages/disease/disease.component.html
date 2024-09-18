@@ -13,11 +13,11 @@
           <mat-card class="item-summary mat-elevation-z6">
             <mat-card-content>
               <span class="item-title">{{disease.name}}&nbsp;</span>
-              <a *ngIf="disease.mondoId" class="item-id" [href]="getExternalTermIdUrlFromId(disease.mondoId)" target="_blank">
+              <a *ngIf="disease.mondoId" class="item-id" [href]="utilityService.getExternalTermIdUrlFromId(disease.mondoId)" target="_blank">
                 {{disease.mondoId}}
                 <mat-icon>open_in_new</mat-icon>
               </a>
-              <a class="item-id" [href]="getExternalTermIdUrlFromId(disease.id)" target="_blank">
+              <a class="item-id" [href]="utilityService.getExternalTermIdUrlFromId(disease.id)" target="_blank">
                 {{disease.id}}
                 <mat-icon>open_in_new</mat-icon>
               </a>
@@ -74,19 +74,19 @@
                           <mat-header-cell *matHeaderCellDef>Source(s)</mat-header-cell>
                           <mat-cell [ngClass]="{'source-cell': row.metadata.sources.length > 1}" *matCellDef="let row">
                             <ng-container *ngFor="let source of row.metadata.sources">
-                              <div class="source" *ngIf="isTermIdExpected(source,'PMID')">
-                                <a [href]="getExternalTermIdUrlFromId(source)" target="_blank">
+                              <div class="source" *ngIf="utilityService.isTermIdExpected(source,'PMID')">
+                                <a [href]="utilityService.getExternalTermIdUrlFromId(source)" target="_blank">
                                   PubMed <i class="material-icons-outlined">library_books</i>
                                 </a>
                               </div>
-                              <div class="source" *ngIf="isTermIdExpected(source, 'BOOKSHELF')">
+                              <div class="source" *ngIf="utilityService.isTermIdExpected(source, 'BOOKSHELF')">
                                 <a [href]="source" target="_blank">
                                   Gene Review <i class="material-icons-outlined">library_books</i>
                                 </a>
                               </div>
-                              <div class="source" *ngIf="!isTermIdExpected(source, 'PMID') && !isTermIdExpected(source, 'BOOKSHELF')">
-                                <a [href]="getExternalTermIdUrlFromId(source)" target="_blank">
-                                  <span>{{getDiseaseDatabaseName(source)}} &nbsp;</span>
+                              <div class="source" *ngIf="!utilityService.isTermIdExpected(source, 'PMID') && !utilityService.isTermIdExpected(source, 'BOOKSHELF')">
+                                <a [href]="utilityService.getExternalTermIdUrlFromId(source)" target="_blank">
+                                  <span>{{utilityService.getDiseaseDatabaseName(source)}} &nbsp;</span>
                                   <i class="material-icons">open_in_new</i>
                                 </a>
                               </div>
@@ -130,15 +130,78 @@
                           <mat-cell *matCellDef="let row">{{row.name}}</mat-cell>
                         </ng-container>
                       </mat-table>
-
-                      <mat-paginator #genePaginator [pageSizeOptions]="[50, 100, 500]"></mat-paginator>
+                      <div class="associationsPaging">
+                        <p>{{geneDataSource.data.length}} gene associations.
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
 
                 <!-- no results found -->
                 <div class="container center" [hidden]="geneDataSource?.data.length !== 0">
-                  <h4>No gene results found for "{{query}}"</h4>
+                  <h4>No gene results found for {{query}}</h4>
+                </div>
+
+              </mat-tab>
+              <!-- Medical Actions Tab -->
+              <mat-tab label="Medical Actions">
+                <!--<div class="tab-content">-->
+                <div [hidden]="medicalActionsDataSource?.data.length === 0">
+                  <div class="tab-output-container">
+                    <!-- Gene Association Table -->
+                    <div class="associations gene-association">
+                      <mat-table [dataSource]="medicalActionsDataSource" matSort>
+                        <mat-header-row *matHeaderRowDef="medicalActionColumns; sticky: true"></mat-header-row>
+                        <mat-row *matRowDef="let row; columns: medicalActionColumns;"></mat-row>
+                        <ng-container matColumnDef="id">
+                          <mat-header-cell *matHeaderCellDef>MaXo Id</mat-header-cell>
+                          <mat-cell *matCellDef="let row">
+                           {{row.id}}
+                          </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="name">
+                          <mat-header-cell *matHeaderCellDef>MaXo Name</mat-header-cell>
+                          <mat-cell *matCellDef="let row">{{row.name}}</mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="relations">
+                          <mat-header-cell *matHeaderCellDef>Relation</mat-header-cell>
+                          <mat-cell *matCellDef="let row">
+                            <ng-container *ngIf="row.relations.length == 1">
+                              {{row.relations[0]}}
+                            </ng-container>
+                            <ng-container *ngIf="row.relations.length > 1">
+                              {{row.relations.join(" and ")}}
+                            </ng-container>
+                          </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="targets">
+                          <mat-header-cell *matHeaderCellDef>Target</mat-header-cell>
+                          <mat-cell *matCellDef="let row">
+                            <ng-container *ngIf="row.targets.length > 0">
+                              <div *ngFor="let target of row.targets">
+                                <div *ngIf="utilityService.isTermIdExpected(target.id,'HP')">
+                                  <a routerLink="/browse/term/{{target.id}}">{{target.id}}</a>
+                                </div>
+                                <div *ngIf="utilityService.isTermIdExpected(target.id,'OMIM')">
+                                  {{target.id}}
+                                </div>
+                              </div>
+                            </ng-container>
+                          </mat-cell>
+                        </ng-container>
+                      </mat-table>
+                      <div class="associationsPaging">
+                        <p>{{medicalActionsDataSource.data.length}} medical actions.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- no results found -->
+                <div class="container center" [hidden]="medicalActionsDataSource?.data.length !== 0">
+                  <h4>No medical action results found for {{query}}</h4>
                 </div>
 
               </mat-tab>
