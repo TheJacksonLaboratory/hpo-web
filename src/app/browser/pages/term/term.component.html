@@ -250,7 +250,7 @@
                       <ng-container matColumnDef="relation">
                         <mat-header-cell *matHeaderCellDef> Relation</mat-header-cell>
                         <mat-cell *matCellDef="let row">
-                          <ng-container *ngIf="row.relations.length == 1">
+                          <ng-container *ngIf="row.relations.length === 1">
                             {{row.relations[0]}}
                           </ng-container>
                           <ng-container *ngIf="row.relations.length > 1">
