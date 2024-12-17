@@ -21,7 +21,8 @@ export class LanguageService {
     "ja": "Japanese",
     "es": "Spanish",
     "de": "German",
-    "it": "Italian"
+    "it": "Italian",
+    "pt": "Portuguese"
   };
   constructor() {
   }
