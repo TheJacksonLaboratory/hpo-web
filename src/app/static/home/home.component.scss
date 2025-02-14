@@ -212,7 +212,19 @@ a .irdirc {
       display: inline-block;
     }
 
+    &.cursor-not-allowed {
+      opacity: 1;
+      cursor: no-drop !important;
+      & .text-red {
+        color: red;
+      }
+    }
+
     &:hover {
+      &.cursor-not-allowed {
+        opacity: 1;
+      }
+
       opacity: 0.8;
     }
 
