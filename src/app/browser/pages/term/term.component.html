@@ -112,7 +112,7 @@
         <!-- TABS -->
         <div class="hpo-group-tab" *ngIf="term">
           <mat-tab-group selectedIndex="0" class="term-details-tab-group mat-elevation-z6">
-            <!-- Disease association -->
+            <!-- Disease Association -->
             <mat-tab label="Disease Associations">
               <div [hidden]="diseaseAssocCount === 0">
                 <div class="tab-output-container">
@@ -174,7 +174,7 @@
             </mat-tab>
 
             <!-- Gene Association -->
-            <mat-tab label="Gene Associations">
+            <mat-tab label="Gene Associations [Inferred]">
               <div [hidden]="geneAssocCount === 0">
                 <div class="tab-output-container">
                   <div class="filter-container">
@@ -223,6 +223,71 @@
               </div>
             </mat-tab>
 
+            <!-- Medical Action Association -->
+            <mat-tab label="Medical Actions">
+              <div [hidden]="medicalActionDisplayCount === 0">
+                <div class="tab-output-container">
+                  <mat-progress-bar *ngIf="assocLoading" class="loading-result-details" color="primary"
+                                    mode="indeterminate">
+                  </mat-progress-bar>
+
+                  <div [hidden]="assocLoading" class="associations medical-actions-association">
+                    <mat-table [dataSource]="medicalActionSource">
+                      <mat-header-row *matHeaderRowDef="medicalActionColumns; sticky: true"></mat-header-row>
+                      <mat-row *matRowDef="let row; columns: medicalActionColumns;"></mat-row>
+                      <ng-container matColumnDef="id">
+                        <mat-header-cell *matHeaderCellDef>MaXo Id</mat-header-cell>
+                        <mat-cell *matCellDef="let row">
+                          {{row.id}}
+                        </mat-cell>
+                      </ng-container>
+                      <ng-container matColumnDef="name">
+                        <mat-header-cell *matHeaderCellDef> MaXo Name</mat-header-cell>
+                        <mat-cell *matCellDef="let row">
+                          {{row.name}}
+                        </mat-cell>
+                      </ng-container>
+                      <ng-container matColumnDef="relation">
+                        <mat-header-cell *matHeaderCellDef> Relation</mat-header-cell>
+                        <mat-cell *matCellDef="let row">
+                          <ng-container *ngIf="row.relations.length === 1">
+                            {{row.relations[0]}}
+                          </ng-container>
+                          <ng-container *ngIf="row.relations.length > 1">
+                            {{row.relations.join(" and ")}}
+                          </ng-container>
+                        </mat-cell>
+                      </ng-container>
+                      <ng-container matColumnDef="source">
+                        <mat-header-cell *matHeaderCellDef> Sources</mat-header-cell>
+                        <mat-cell *matCellDef="let row; let i = index">
+                          <div *ngFor="let source of row.sources">
+                            <div class="source" *ngIf="utilityService.isTermIdExpected(source,'PMID')">
+                              <a class="source-hover" [href]="utilityService.getExternalTermIdUrlFromId(source)" target="_blank">
+                                PubMed <i class="material-icons-outlined">library_books</i>&nbsp;&nbsp;
+                              </a>
+                              <a *ngIf="row.sources.length > 4">
+                                ({{row.sources.length - 4}} more).
+                              </a>
+                            </div>
+                          </div>
+                        </mat-cell>
+                      </ng-container>
+                    </mat-table>
+
+                    <!-- paging: associations subset count -->
+                    <div *ngIf="!assocLoading" class="associationsPaging">
+                      <p>{{medicalActionDisplayCount}} medical actions.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="container center" [hidden]="medicalActionDisplayCount !== 0">
+                <h4>No medical actions found for <strong>{{term.id}}</strong></h4>
+              </div>
+            </mat-tab>
+
             <!-- Loinc Association -->
             <div>
               <mat-tab label="LOINC Associations">
@@ -266,7 +331,12 @@
                   </div>
                 </div>
                 <div class="container center" [hidden]="loincDisplayCount != 0">
+                <div class="container center" [hidden]="loincDisplayCount !== 0 || this.networkError">
                   <h4>No LOINC associations found for <strong>{{term.id}}</strong></h4>
+                </div>
+                </div>
+                <div class="container center" [hidden]="!this.networkError">
+                  <h4>Ontology Annotation Network Error. <a href="https://github.com/TheJacksonLaboratory/ontology-annotation-network/issues/new" target="_blank">Please report this issue.</a></h4>
                 </div>
               </mat-tab>
             </div>

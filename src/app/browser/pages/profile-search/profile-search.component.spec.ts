@@ -1,9 +1,8 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import {ProfileSearchComponent} from './profile-search.component';
 import {SearchService} from "../../../shared/search/service/search.service";
 import {HttpClientTestingModule} from "@angular/common/http/testing";
-import {TermService} from "../../services/term/term.service";
 import {GlobalMaterialModules} from "../../../shared/modules/global.module";
 import {NoopAnimationsModule} from "@angular/platform-browser/animations";
 
@@ -11,10 +10,10 @@ describe('ProfileSearchComponent', () => {
   let component: ProfileSearchComponent;
   let fixture: ComponentFixture<ProfileSearchComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ProfileSearchComponent],
-      providers: [SearchService, TermService],
+      providers: [SearchService],
       imports: [HttpClientTestingModule, GlobalMaterialModules, NoopAnimationsModule]
     })
       .compileComponents();
