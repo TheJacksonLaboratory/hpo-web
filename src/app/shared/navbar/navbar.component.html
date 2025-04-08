@@ -8,14 +8,12 @@
     <button mat-button [matMenuTriggerFor]="downloadsMenu">Data
       <mat-icon>arrow_drop_down</mat-icon>
     </button>
+    <a mat-button href="https://obophenotype.github.io/human-phenotype-ontology/" target="_blank">Documentation
+      <mat-icon class="small-icon">open_in_new</mat-icon>
+    </a>
     <button mat-button [matMenuTriggerFor]="toolsMenu">
       Tools
       <mat-icon>arrow_drop_down</mat-icon>
-    </button>
-    <button mat-button [matMenuTriggerFor]="resourcesMenu">Resources
-      <mat-icon>arrow_drop_down</mat-icon>
-    </button>
-    <button mat-button routerLink="/community">Community
     </button>
   </div>
   <!-- Tools Menu and SubMenus -->
@@ -35,22 +33,12 @@
     <button mat-menu-item routerLink="tools/phenogramviz"> PhenoGramViz: Evaluation of CNV's</button>
     <button mat-menu-item routerLink="tools/loinc2hpo"> LOINC2HPO: Integration of Laboratory Tests</button>
   </mat-menu>
-
-  <!-- Help Menu and SubMenus -->
-  <mat-menu [overlapTrigger]="false" #resourcesMenu="matMenu">
-    <button mat-menu-item routerLink="resources/faq"> FAQ</button>
-    <button mat-menu-item routerLink="contact/"> Contact Us</button>
-    <button mat-menu-item routerLink="resources/clinician-guide"> Clinicians Guide</button>
-    <button mat-menu-item routerLink="resources/contributing"> Contributing</button>
-
-  </mat-menu>
   <mat-menu [overlapTrigger]="false" #downloadsMenu="matMenu">
     <button mat-menu-item routerLink="data/ontology"> Ontology</button>
     <button mat-menu-item routerLink="data/annotations"> Annotations</button>
     <button mat-menu-item routerLink="data/api">
       API <span class="new-badge">new</span>
     </button>
-    <button mat-menu-item routerLink="resources/phenopacket"> Phenopacket</button>
     <button mat-menu-item [matMenuTriggerFor]="otherMenu"> Translation</button>
   </mat-menu>
   <mat-menu #otherMenu="matMenu">

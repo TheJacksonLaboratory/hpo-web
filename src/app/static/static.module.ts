@@ -13,7 +13,6 @@ import {NewsComponent} from './news/news.component';
 import {DisclaimerComponent} from './resources/disclaimer/disclaimer.component';
 import {LoincComponent} from './tools/loinc/loinc.component';
 import {AboutComponent} from './about/about.component';
-import {CommunityComponent} from './community/community.component';
 import {FundingComponent} from './resources/funding/funding.component';
 import {TeamService} from '../shared/team/team.service';
 import {DataModule} from './data/data.module';
@@ -32,7 +31,7 @@ import {ResourcesModule} from './resources/resources.module';
   ],
   declarations: [HomeComponent,
     ContactComponent, CitationComponent, LicenseComponent, NewsComponent, DisclaimerComponent,
-    LoincComponent, AboutComponent, CommunityComponent, FundingComponent
+    LoincComponent, AboutComponent, FundingComponent
   ],
   providers: [SearchService, TeamService]
 })
