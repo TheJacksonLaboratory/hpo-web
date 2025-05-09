@@ -76,21 +76,21 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "hpo:build"
+            "buildTarget": "hpo:build"
           },
           "configurations": {
             "development": {
-              "browserTarget": "hpo:build:development"
+              "buildTarget": "hpo:build:development"
             },
             "production": {
-              "browserTarget": "hpo:build:production"
+              "buildTarget": "hpo:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "hpo:build"
+            "buildTarget": "hpo:build"
           }
         },
         "test": {
