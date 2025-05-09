@@ -7,7 +7,6 @@ import {ExternalToolsComponent} from './external/external.component';
 import {PhenogramVizComponent} from './phenogramviz/phenogramviz.component';
 import {ExomiserComponent} from './exomiser/exomiser.component';
 import {GenomiserComponent} from './genomiser/genomiser.component';
-import {WorkbenchComponent} from './workbench/workbench.component';
 import {HpobrowserComponent} from './hpobrowser/hpobrowser.component';
 import {LoincComponent} from './loinc/loinc.component';
 
@@ -20,7 +19,6 @@ const toolsRoutes: Routes = [
       {path: 'exomiser', component: ExomiserComponent},
       {path: 'genomiser', component: GenomiserComponent},
       {path: 'external', component: ExternalToolsComponent},
-      {path: 'workbench', component: WorkbenchComponent},
       {path: 'hpo-browser', component: HpobrowserComponent},
       {path: 'loinc2hpo', component: LoincComponent}
     ]

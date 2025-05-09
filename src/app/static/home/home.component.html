@@ -109,7 +109,7 @@
 </div>
 <br><br>
 <div fxLayout="row" fxLayoutAlign="space-between center">
-  <div class="phenopacket-banner mat-elevation-z1" fxFlex="80" fxFlexOffset="10" routerLink="resources/phenopacket">
+  <div class="phenopacket-banner mat-elevation-z1" fxFlex="80" fxFlexOffset="10" (click)="this.utilityService.openExternalUrl('https://www.ga4gh.org/product/phenopackets/')">
     <img class="phenopacket-logo" src="assets/phenopackets.png"/>
     <div class="description" fxHide.lt-sm>
       <h4>Phenopackets</h4>

@@ -8,8 +8,8 @@
     <button mat-button [matMenuTriggerFor]="downloadsMenu">Data
       <mat-icon>arrow_drop_down</mat-icon>
     </button>
-    <a mat-button href="https://obophenotype.github.io/human-phenotype-ontology/" target="_blank">Documentation
-      <mat-icon class="small-icon">open_in_new</mat-icon>
+    <a class="nav-hover" mat-button href="https://obophenotype.github.io/human-phenotype-ontology/" target="_blank">Documentation
+      <mat-icon class="medium-icon anchor-bottom">open_in_new</mat-icon>
     </a>
     <button mat-button [matMenuTriggerFor]="toolsMenu">
       Tools
@@ -22,7 +22,6 @@
     <button mat-menu-item [matMenuTriggerFor]="genomicMenu">Genomic Tools</button>
     <button mat-menu-item [matMenuTriggerFor]="phenomicMenu">Phenomic Tools</button>
     <button mat-menu-item routerLink="tools/hpo-browser"> Other HPO Browsers</button>
-    <button mat-menu-item routerLink="tools/workbench"> HPO Workbench</button>
   </mat-menu>
   <mat-menu class="hpo-menus" #genomicMenu="matMenu">
     <button mat-menu-item routerLink="tools/genomiser"> Genomiser: Analyze non-coding variants</button>

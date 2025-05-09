@@ -8,7 +8,6 @@ import {ExternalToolsComponent} from './external/external.component';
 import {PhenogramVizComponent} from './phenogramviz/phenogramviz.component';
 import {ExomiserComponent} from './exomiser/exomiser.component';
 import {GenomiserComponent} from './genomiser/genomiser.component';
-import {WorkbenchComponent} from './workbench/workbench.component';
 import {HpobrowserComponent} from './hpobrowser/hpobrowser.component';
 import {GlobalMaterialModules} from "../../shared/modules/global.module";
 
@@ -20,7 +19,7 @@ import {GlobalMaterialModules} from "../../shared/modules/global.module";
     GlobalMaterialModules
   ],
   declarations: [PhenomizerComponent, ExternalToolsComponent, PhenogramVizComponent,
-    ExomiserComponent, GenomiserComponent, WorkbenchComponent, HpobrowserComponent]
+    ExomiserComponent, GenomiserComponent, HpobrowserComponent]
 })
 export class ToolsModule {
 }

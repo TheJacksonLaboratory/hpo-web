@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {NewsService} from '../../shared/news/news.service';
 import {News} from '../../browser/models/models';
+import { UtilityService } from '../../shared/utility/utility.service';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +15,7 @@ export class HomeComponent implements OnInit {
   newsError: boolean;
   loadingNews: boolean = false;
 
-  constructor(private newsService: NewsService) {
+  constructor(private newsService: NewsService, public utilityService: UtilityService) {
   }
 
   ngOnInit() {
