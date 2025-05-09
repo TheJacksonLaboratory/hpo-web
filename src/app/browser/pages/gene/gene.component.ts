@@ -3,9 +3,9 @@ import { AnnotationService } from '../../services/annotation/annotation.service'
 import {GeneService} from '../../services/gene/gene.service';
 import { Disease, EntrezGene, Gene, SimpleTerm, Term } from '../../models/models';
 import {ActivatedRoute, Router} from '@angular/router';
-import {MatTableDataSource} from '@angular/material/table';
+import {MatLegacyTableDataSource as MatTableDataSource} from '@angular/material/legacy-table';
 import {MatSort} from '@angular/material/sort';
-import {MatPaginator} from '@angular/material/paginator';
+import {MatLegacyPaginator as MatPaginator} from '@angular/material/legacy-paginator';
 //import * as ProtVista from 'ProtVista';
 import {environment} from '../../../../environments/environment';
 import {DialogService} from '../../../shared/dialog-excel-download/dialog.service';

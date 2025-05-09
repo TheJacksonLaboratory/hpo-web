@@ -1,6 +1,6 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {PublicationsComponent} from './publications.component';
-import {MatTableModule} from '@angular/material/table';
+import {MatLegacyTableModule as MatTableModule} from '@angular/material/legacy-table';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {GlobalMaterialModules} from '../../../shared/modules/global.module';
 import {HttpClientModule} from '@angular/common/http';

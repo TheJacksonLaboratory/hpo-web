@@ -4,7 +4,7 @@ import {Publication} from '../../../browser/models/models';
 import {UntypedFormControl} from '@angular/forms';
 import {from} from 'rxjs';
 import {distinct, flatMap, map, toArray} from 'rxjs/operators';
-import {MatTableDataSource} from '@angular/material/table';
+import {MatLegacyTableDataSource as MatTableDataSource} from '@angular/material/legacy-table';
 import {MatSort} from '@angular/material/sort';
 
 

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 import { environment } from '../../../environments/environment';
 import { EntityType } from '../../browser/models/models';
 import { DialogExcelDownloadComponent } from './dialog-excel-download.component';
