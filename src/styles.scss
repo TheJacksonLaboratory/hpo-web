@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
-@import url("https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css");
-@import '@angular/material/prebuilt-themes/indigo-pink.css';
-
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 html {
   line-height: 1.15;
   font-size: 10px;

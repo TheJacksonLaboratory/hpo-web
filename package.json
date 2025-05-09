@@ -26,8 +26,11 @@
     "@angular/platform-browser": "^18.2.13",
     "@angular/platform-browser-dynamic": "^18.2.13",
     "@angular/router": "^18.2.13",
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.3",
     "ProtVista": "^2.0.13",
     "rxjs": "^6.5.4",
+    "tailwindcss": "^3.4.17",
     "tslib": "^1.11.0",
     "zone.js": "~0.14.10"
   },
