@@ -1,6 +1,6 @@
 import {TestBed} from '@angular/core/testing';
 import {DialogService} from './dialog.service';
-import {MatLegacyDialogModule as MatDialogModule} from '@angular/material/legacy-dialog';
+import {MatDialogModule} from '@angular/material/dialog';
 
 describe('DialogService', () => {
   beforeEach(() => TestBed.configureTestingModule({

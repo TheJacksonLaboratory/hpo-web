@@ -1,6 +1,6 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import {PublicationsComponent} from './publications.component';
-import {MatLegacyTableModule as MatTableModule} from '@angular/material/legacy-table';
+import {MatTableModule} from '@angular/material/table';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {GlobalMaterialModules} from '../../../shared/modules/global.module';
 import {HttpClientModule} from '@angular/common/http';
@@ -10,7 +10,7 @@ describe('PublicationsComponent', () => {
   let component: PublicationsComponent;
   let fixture: ComponentFixture<PublicationsComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [MatTableModule, FormsModule,
         ReactiveFormsModule, GlobalMaterialModules, HttpClientModule, NoopAnimationsModule],
