@@ -289,8 +289,7 @@
             </mat-tab>
 
             <!-- Loinc Association -->
-            <div>
-              <mat-tab label="LOINC Associations">
+            <mat-tab label="LOINC Associations">
                 <div [hidden]="loincDisplayCount === 0">
                   <mat-progress-bar *ngIf="assocLoading && !this.networkError" class="loading-result-details" color="primary"
                                     mode="indeterminate">
@@ -339,7 +338,6 @@
                   <h4>Ontology Annotation Network Error. <a href="https://github.com/TheJacksonLaboratory/ontology-annotation-network/issues/new" target="_blank">Please report this issue.</a></h4>
                 </div>
               </mat-tab>
-            </div>
           </mat-tab-group>
         </div>
       </div>
