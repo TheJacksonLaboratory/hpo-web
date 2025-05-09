@@ -1,6 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
-import {MatLegacyTableDataSource as MatTableDataSource} from '@angular/material/legacy-table';
-import {MatLegacyPaginator as MatPaginator} from '@angular/material/legacy-paginator';
+import {MatTableDataSource} from '@angular/material/table';
+import {MatPaginator} from '@angular/material/paginator';
 import {Disease, Gene, Term} from '../../models/models';
 import {SearchService} from '../../../shared/search/service/search.service';
 import {ActivatedRoute} from '@angular/router';
@@ -21,10 +21,10 @@ export class SearchResultsComponent {
   selectedTab = 0;
 
   termDisplayedColumns = ['ontologyId', 'name', 'matching_string', 'synonym_match'];
-  termDataSource: MatTableDataSource<Term>;
+  termDataSource
 
   diseaseDisplayedColumns = ['diseaseId', 'dbName', 'matching_string'];
-  diseaseDataSource: MatTableDataSource<Disease>;
+  diseaseDataSource;
 
   geneDisplayedColumns = ['entrezGeneId', 'entrezGeneSymbol', 'matching_string'];
   geneDataSource: MatTableDataSource<Gene>;

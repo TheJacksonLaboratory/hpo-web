@@ -3,8 +3,8 @@ import {PublicationsService} from './publications.service';
 import {Publication} from '../../../browser/models/models';
 import {UntypedFormControl} from '@angular/forms';
 import {from} from 'rxjs';
-import {distinct, flatMap, map, toArray} from 'rxjs/operators';
-import {MatLegacyTableDataSource as MatTableDataSource} from '@angular/material/legacy-table';
+import {distinct, mergeMap, map, toArray} from 'rxjs/operators';
+import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
 
 
@@ -38,7 +38,7 @@ export class PublicationsComponent implements OnInit {
   findUniquePublicationTopics(pbs: Publication[]) {
     const topics$ = from(pbs);
     topics$.pipe(
-      flatMap(pb => pb.topicList),
+      mergeMap(pb => pb.topicList),
       distinct(),
       map(pb => pb.toUpperCase()),
       toArray()

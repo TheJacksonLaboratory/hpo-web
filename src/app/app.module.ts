@@ -1,6 +1,6 @@
 // Modules
 import {NgModule} from '@angular/core';
-import { MAT_LEGACY_TABS_CONFIG as MAT_TABS_CONFIG } from '@angular/material/legacy-tabs';
+import { MAT_TABS_CONFIG } from '@angular/material/tabs';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {RoutingModule} from './app-routing.module';
