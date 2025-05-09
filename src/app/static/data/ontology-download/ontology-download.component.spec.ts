@@ -1,7 +1,8 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {OntologyDownloadComponent} from './ontology-download.component';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('OntologyComponent', () => {
   let component: OntologyDownloadComponent;
@@ -9,9 +10,10 @@ describe('OntologyComponent', () => {
 
   beforeEach(( ) => {
     TestBed.configureTestingModule({
-      declarations: [OntologyDownloadComponent],
-      imports: [HttpClientTestingModule]
-    })
+    declarations: [OntologyDownloadComponent],
+    imports: [],
+    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+})
       .compileComponents();
   });
 

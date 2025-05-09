@@ -3,7 +3,7 @@ import {PublicationsComponent} from './publications.component';
 import {MatTableModule} from '@angular/material/table';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {GlobalMaterialModules} from '../../../shared/modules/global.module';
-import {HttpClientModule} from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 
 describe('PublicationsComponent', () => {
@@ -12,10 +12,11 @@ describe('PublicationsComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [MatTableModule, FormsModule,
-        ReactiveFormsModule, GlobalMaterialModules, HttpClientModule, NoopAnimationsModule],
-      declarations: [PublicationsComponent]
-    })
+    declarations: [PublicationsComponent],
+    imports: [MatTableModule, FormsModule,
+        ReactiveFormsModule, GlobalMaterialModules, NoopAnimationsModule],
+    providers: [provideHttpClient(withInterceptorsFromDi())]
+})
       .compileComponents();
   }));
 

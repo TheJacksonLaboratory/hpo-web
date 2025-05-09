@@ -1,12 +1,13 @@
 import {TestBed} from '@angular/core/testing';
 import {PublicationsService} from './publications.service';
-import {HttpClientTestingModule} from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('PublicationsService', () => {
   beforeEach(() => TestBed.configureTestingModule({
-    imports: [HttpClientTestingModule],
-    providers: [PublicationsService]
-  }));
+    imports: [],
+    providers: [PublicationsService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+}));
 
   it('should be created', () => {
     const service: PublicationsService = TestBed.get(PublicationsService);

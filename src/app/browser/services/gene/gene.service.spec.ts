@@ -1,15 +1,16 @@
 import {GeneService} from './gene.service';
 import {inject, TestBed} from '@angular/core/testing';
-import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import {environment} from '../../../../environments/environment';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('GeneServiceSpec', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [GeneService]
-    });
+    imports: [],
+    providers: [GeneService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
   });
   const query = '7157';
 

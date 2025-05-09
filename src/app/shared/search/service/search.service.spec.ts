@@ -1,13 +1,14 @@
 import {SearchService} from './search.service';
 import {TestBed} from '@angular/core/testing';
-import {HttpClientTestingModule} from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('SearchServiceSpec', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [SearchService]
-    })
+    imports: [],
+    providers: [SearchService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+})
   });
 });

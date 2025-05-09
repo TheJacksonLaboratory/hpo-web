@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import { catchError } from 'rxjs/operators';
-import {HttpHeaders} from '@angular/common/http';
+import { HttpHeaders } from '@angular/common/http';
 import { forkJoin, Observable, of } from 'rxjs';
 import { AnnotationService } from '../../../browser/services/annotation/annotation.service';
 import { OntologyService } from '../../../browser/services/ontology/ontology.service';

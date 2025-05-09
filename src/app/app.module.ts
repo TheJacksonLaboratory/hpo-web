@@ -4,7 +4,7 @@ import { MAT_TABS_CONFIG } from '@angular/material/tabs';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {RoutingModule} from './app-routing.module';
-import {HttpClientModule} from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 // Service
 import {SearchService} from './shared/search/service/search.service';
 // Global Material Modules
@@ -20,25 +20,18 @@ import {SearchModule} from './shared/search/search.module';
 import {NewsService} from './shared/news/news.service';
 import {SafeHtmlPipe} from './shared/pipes/sanitize.pipe';
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    NavbarComponent,
-    FooterComponent,
-    NoPageFoundComponent,
-    SafeHtmlPipe
-  ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    GlobalMaterialModules,
-    ExtrasModule,
-    RoutingModule,
-    SearchModule
-  ],
-  providers: [SearchService, NewsService, { provide: MAT_TABS_CONFIG, useValue: { animationDuration: '0ms' } }],
-  bootstrap: [AppComponent]
-})
+@NgModule({ declarations: [
+        AppComponent,
+        NavbarComponent,
+        FooterComponent,
+        NoPageFoundComponent,
+        SafeHtmlPipe
+    ],
+    bootstrap: [AppComponent], imports: [BrowserModule,
+        BrowserAnimationsModule,
+        GlobalMaterialModules,
+        ExtrasModule,
+        RoutingModule,
+        SearchModule], providers: [SearchService, NewsService, { provide: MAT_TABS_CONFIG, useValue: { animationDuration: '0ms' } }, provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule {
 }

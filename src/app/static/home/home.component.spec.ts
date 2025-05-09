@@ -5,8 +5,9 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatListModule} from "@angular/material/list";
 import {SearchModule} from "../../shared/search/search.module";
 import {NoopAnimationsModule} from "@angular/platform-browser/animations";
-import {HttpClientTestingModule} from "@angular/common/http/testing";
+import { provideHttpClientTesting } from "@angular/common/http/testing";
 import {NewsService} from "../../shared/news/news.service";
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -14,16 +15,14 @@ describe('HomeComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [HomeComponent],
-      imports: [MatCardModule,
+    declarations: [HomeComponent],
+    imports: [MatCardModule,
         MatIconModule,
         MatListModule,
         NoopAnimationsModule,
-        SearchModule,
-        HttpClientTestingModule
-      ],
-      providers: [NewsService]
-    })
+        SearchModule],
+    providers: [NewsService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+})
       .compileComponents();
   }));
 

@@ -2,8 +2,9 @@ import {of as observableOf} from 'rxjs';
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {NewsComponent} from './news.component';
 import {NewsService} from '../../shared/news/news.service';
-import {HttpClientTestingModule} from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import {ActivatedRoute} from '@angular/router';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('NewsComponent', () => {
   let component: NewsComponent;
@@ -11,10 +12,10 @@ describe('NewsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      declarations: [NewsComponent],
-      providers: [NewsService, {provide: ActivatedRoute, useValue: {params: observableOf('')}}]
-    })
+    declarations: [NewsComponent],
+    imports: [],
+    providers: [NewsService, { provide: ActivatedRoute, useValue: { params: observableOf('') } }, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+})
       .compileComponents();
   }));
 

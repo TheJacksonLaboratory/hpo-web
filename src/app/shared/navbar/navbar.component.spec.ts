@@ -5,7 +5,8 @@ import {SearchModule} from "../search/search.module";
 import {FormsModule} from "@angular/forms";
 import {RouterTestingModule} from "@angular/router/testing";
 import {ExtrasModule} from "../modules/extras.module";
-import {HttpClientTestingModule} from "@angular/common/http/testing";
+import { provideHttpClientTesting } from "@angular/common/http/testing";
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('NavbarComponent', () => {
   let component: NavbarComponent;
@@ -13,16 +14,14 @@ describe('NavbarComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [
-        GlobalMaterialModules,
+    declarations: [NavbarComponent],
+    imports: [GlobalMaterialModules,
         FormsModule,
         RouterTestingModule,
         ExtrasModule,
-        HttpClientTestingModule,
-        SearchModule
-      ],
-      declarations: [NavbarComponent]
-    })
+        SearchModule],
+    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+})
       .compileComponents();
   }));
 
