@@ -3,12 +3,7 @@
 @tailwind components;
 @tailwind utilities;
 html {
-  line-height: 1.15;
-  font-size: 10px;
-}
-
-body {
-  line-height: 1.42857143;
+  line-height: 1;
   font-size: 14px;
 }
 
@@ -586,10 +581,6 @@ a.mat-button-base {
 
 .source .material-icons,.material-icons-outlined {
   font-size: 12px;
-}
-
-.anchor-bottom {
-  vertical-align: bottom !important;
 }
 
 .nav-hover:hover {

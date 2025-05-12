@@ -3,13 +3,13 @@
     <img src="assets/hpo-logo-white-no-words.png" class="nav-logo"/>
   </div>
   <!-- Main Desktop Navbar -->
-  <div class="nav-components" fxHide fxShow.gt-sm>
+  <div class="nav-components hidden sm:block">
     <button mat-button routerLink="about">About</button>
     <button mat-button [matMenuTriggerFor]="downloadsMenu">Data
       <mat-icon>arrow_drop_down</mat-icon>
     </button>
     <a class="nav-hover" mat-button href="https://obophenotype.github.io/human-phenotype-ontology/" target="_blank">Documentation
-      <mat-icon class="medium-icon anchor-bottom">open_in_new</mat-icon>
+      <mat-icon class="open-in-new">open_in_new</mat-icon>
     </a>
     <button mat-button [matMenuTriggerFor]="toolsMenu">
       Tools
@@ -46,9 +46,8 @@
   </mat-menu>
   <!-- ------ -->
   <div class="fill-remaining-space">
-
   </div>
-  <button class="mobile-menu" fxShow fxHide.gt-sm color="white" mat-button (click)="navOpen()">
+  <button class="mobile-menu sm-hidden" color="white" mat-button (click)="navOpen()">
     <mat-icon>menu</mat-icon>
   </button>
   <!-- Mobile Navbar -->

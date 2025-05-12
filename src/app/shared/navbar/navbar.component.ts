@@ -1,6 +1,5 @@
 import {Component, EventEmitter, HostListener, OnInit, Output} from '@angular/core';
 import {NavigationEnd, Router} from '@angular/router';
-import {SearchService} from '../search/service/search.service';
 import {Disease, Gene, Term} from '../../browser/models/models';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 
@@ -40,13 +39,12 @@ export class NavbarComponent implements OnInit {
     this.navToggle.emit(true);
   }
 
-  constructor(private router: Router, private searchService: SearchService) {
-
-  }
+  constructor(private router: Router) {}
 
   ngOnInit() {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
+        console.log(event)
         if (this.router.url !== '/') {
           this.showSearch = true;
         } else {
