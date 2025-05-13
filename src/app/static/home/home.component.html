@@ -1,5 +1,5 @@
-<div fxLayout="row">
-  <div class="home-search" fxFlex.gt-md="65" fxFlexOffset.gt-md="17" fxFlex="90" fxFlexOffset="5">
+<div class="flex flex-row">
+  <div class="home-search md:flex-[0_0_65%] md:ml-[17%] flex-[90%] ml-[5%]">
     <div class="search-container mat-elevation-z4">
       <img class="main-logo" src="assets/hpo-logo-white.png"/>
       <div class="searchbar-container">
@@ -8,8 +8,8 @@
     </div>
   </div>
 </div>
-<div class="info-section" fxLayout="row wrap" fxLayoutAlign="space-evenly">
-  <div fxFlex.gt-md="45" fxFlex="80">
+<div class="info-section flex flex-row flex-wrap place-content-evenly">
+  <div class="md:flex-[0_0_45%] flex-[0_0_80%]">
     <h2>The Human Phenotype Ontology</h2>
     <hr>
     <div class="info-body">
@@ -31,18 +31,20 @@
       </div>
     </div>
   </div>
-  <div fxFlex.gt-md="25" fxFlex="80">
+  <div class="md:flex-[0_0_25%] flex-[0_0_80%]">
     <h2>News & Updates</h2>
     <hr>
     <div class="info-body teaser">
       <div *ngIf="teaserNews">
-        <mat-list class="list">
-          <mat-list-item *ngFor="let item of teaserNews">
-            <div class="teaser-title"><a routerLink="/news/{{item.monthYear}}">{{item.teaserTitle}}</a></div>
+        <mat-list role="list">
+          <mat-list-item *ngFor="let item of teaserNews" role="listitem">
+            <div class="teaser-title">
+              <a routerLink="/news/{{item.monthYear}}">{{item.teaserTitle}}</a>
+            </div>
             <span class="teaser-date">{{item.date}}</span>
           </mat-list-item>
         </mat-list>
-        <div class="button-wrapper">
+        <div class="button-wrapper text-white">
           <a mat-raised-button routerLink="/news" class="mat-btn">View All News</a>
         </div>
       </div>
@@ -53,67 +55,63 @@
     </div>
   </div>
 </div>
-<div class="home-highlight-menu" fxLayout="row wrap">
-  <div routerLink="/tools/exomiser" class="home-item dark" fxFlex.gt-md="35" fxFlexOffset.gt-md="10"
-       fxFlex="90" fxFlexOffset="5">
-    <div fxFlex="row" fxLayoutAlign="space-between center">
+<div class="home-highlight-menu flex flex-row flex-wrap">
+  <div routerLink="/tools/exomiser" class="home-item dark md:flex-[0_0_35%] md:ml-[10%] flex-[90%] ml-[5%]">
+    <div class="flex flex-row flex-1 items-center justify-between">
       <img class="tool-icon" src="assets/highlight-images/exomiser.png"/>
       <div class="home-body">
         <h2 class="title">Exomiser</h2>
         <p class="description"><i>Evaluate variants based on the predicted pathogenicity.</i></p>
       </div>
-      <i class="material-icons" fxShow fxHide.xs>
+      <i class="material-icons xs:hidden sm:block">
         chevron_right
       </i>
     </div>
   </div>
-  <div routerLink="/tools/phenomizer" class="home-item light cursor-not-allowed " fxFlex.gt-md="35" fxFlexOffset.gt-md="10"
-       fxFlex="90" fxFlexOffset="5">
-    <div fxFlex="row" fxLayoutAlign="space-between center">
+  <div routerLink="/tools/phenomizer" class="home-item light cursor-not-allowed md:flex-[0_0_35%] md:ml-[10%] flex-[90%] ml-[5%]">
+    <div class="flex flex-row flex-1 items-center justify-between">
       <img class="tool-icon" src="assets/highlight-images/phenomizer.png"/>
       <div class="home-body">
         <h2 class="title">Phenomizer <span class="text-red">[Offline]</span></h2>
         <p class="description"><i>Rank disease differential diagnosis by clinical features.</i></p>
       </div>
-      <i class="material-icons" fxShow fxHide.xs>
+      <i class="material-icons xs:hidden sm:block">
         chevron_right
       </i>
     </div>
   </div>
-  <div routerLink="/tools/genomiser" class="home-item light" fxFlex.gt-md="35" fxFlexOffset.gt-md="10"
-       fxFlex="90" fxFlexOffset="5">
-    <div fxFlex="row" fxLayoutAlign="space-between center">
+  <div routerLink="/tools/genomiser" class="home-item light md:flex-[0_0_35%] md:ml-[10%] flex-[90%] ml-[5%]">
+    <div class="flex flex-row flex-1 items-center justify-between">
       <img class="tool-icon" src="assets/highlight-images/genomiser.png"/>
       <div class="home-body">
         <h2 class="title">Genomiser</h2>
         <p class="description"><i>Analyze genome sequence data for non-coding variants.</i></p>
       </div>
-      <i class="material-icons" fxShow fxHide.xs>
+      <i class="material-icons xs:hidden sm:block">
         chevron_right
       </i>
     </div>
   </div>
-  <div routerLink="/browse/profile-search" class="home-item dark" fxFlex.gt-md="35" fxFlexOffset.gt-md="10"
-       fxFlex="90" fxFlexOffset="5">
-    <div fxFlex="row" fxLayoutAlign="space-between center">
+  <div routerLink="/browse/profile-search" class="home-item dark md:flex-[0_0_35%] md:ml-[10%] flex-[90%] ml-[5%]">
+    <div class="flex flex-row flex-1 items-center justify-between">
       <img class="tool-icon" src="assets/highlight-images/patientarchive.png"/>
       <div class="home-body">
         <h2 class="title">Profile Search</h2>
         <p class="description"><i>Discover diseases with a phenotype profile.</i></p>
       </div>
-      <i class="material-icons" fxShow fxHide.xs>
+      <i class="material-icons xs:hidden sm:block">
         chevron_right
       </i>
     </div>
   </div>
 </div>
 <br><br>
-<div fxLayout="row" fxLayoutAlign="space-between center">
-  <div class="phenopacket-banner mat-elevation-z1" fxFlex="80" fxFlexOffset="10" (click)="this.utilityService.openExternalUrl('https://www.ga4gh.org/product/phenopackets/')">
+<div class="flex flex-row items-center justify-between">
+  <div class="phenopacket-banner mat-elevation-z1 flex-[1_1_80%] ml-[10%] max-w-[80%]" (click)="this.utilityService.openExternalUrl('https://www.ga4gh.org/product/phenopackets/')">
     <img class="phenopacket-logo" src="assets/phenopackets.png"/>
-    <div class="description" fxHide.lt-sm>
+    <div class="description xs:hidden sm:block">
       <h4>Phenopackets</h4>
-      <span class="text">A Global Alliance for Genomics and Health (GA4GH) international standard for phenotypic data exchange.</span>
+      <span class="text-base">A Global Alliance for Genomics and Health (GA4GH) international standard for phenotypic data exchange.</span>
     </div>
   </div>
 </div>
@@ -130,6 +128,7 @@
   </a>
 </div>
 
-<a href="http://www.irdirc.org/research/irdirc-recognized-resources/" target="__blank"><img class="irdirc"
-                                                                                            src="assets/irdirc-logo.jpg"/></a>
+<a href="http://www.irdirc.org/research/irdirc-recognized-resources/" target="__blank">
+  <img class="irdirc" src="assets/irdirc-logo.jpg"/>
+</a>
 

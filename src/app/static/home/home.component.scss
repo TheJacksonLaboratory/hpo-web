@@ -20,7 +20,7 @@
   width: 100%;
 }
 
-.quick-links-card mat-list-item {
+.quick-links-card mat-mdc-list-item {
   background-color: #D0D3D4;
   opacity: 0.7;
   margin-bottom: 5px;
@@ -30,12 +30,12 @@
   text-decoration: none;
 }
 
-.quick-links-card mat-list-item:hover {
+.quick-links-card mat-mdc-list-item:hover {
   background-color: #D0D3D4;
   opacity: 0.9;
 }
 
-.quick-links-card mat-card-title h3 {
+.quick-links-card mat-mdc-card-title h3 {
   margin: 0;
 }
 
@@ -44,7 +44,7 @@ a.mat-btn {
   background-color: #ec9736;
 }
 
-.quick-links-card a[mat-list-item] {
+.quick-links-card a[mat-mdc-list-item] {
   background-color: #D0D3D4;
   opacity: 0.7;
   margin-bottom: 5px;
@@ -117,7 +117,6 @@ a.mat-btn {
 }
 
 .teaser-date {
-  justify-content: flex-end;
   margin: 0 0 0 auto;
 }
 
@@ -136,8 +135,8 @@ a.mat-btn {
 }
 
 .mailing-list-body {
-  margin: 0 0 0 50px;
   font-weight: bold;
+  margin: .5rem 0 0 3rem;
 }
 
 .mailing-list-body h4 {
@@ -235,7 +234,7 @@ a .irdirc {
     }
 
     & .title {
-      margin: 15px 0 0 0;
+      font-size: 1.4rem;
     }
 
     & .description {
@@ -253,8 +252,6 @@ a .irdirc {
   height: 200px;
   padding: 25px;
   display: flex;
-  flex: 0;
-  margin-left: 25px;
   cursor: pointer;
 
   &:hover{
