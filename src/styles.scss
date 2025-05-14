@@ -192,11 +192,6 @@ a:hover {
   text-decoration: underline;
 }
 
-.main {
-  margin-top: 15px;
-  margin-bottom: 15px;
-}
-
 .hr {
   border-bottom: 1px solid rgba(208, 211, 212, .8);
   width: 250px;
@@ -274,7 +269,7 @@ a.mat-btn .mdc-button__label {
   z-index: 4;
 }
 
-.mat-mdc-drawer-content {
+.mat-drawer-content {
   min-height: 100%;
   display: flex !important;
   flex-direction: column;
