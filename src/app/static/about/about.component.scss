@@ -2,14 +2,16 @@
   .sub-title {
     text-transform: uppercase;
     color: darkslategray;
-    opacity:0.6;
+    opacity: 0.6;
   }
 
   p {
     font-size: 16px;
+    margin-block-start: 1rem;
+    margin-block-end: 1rem;
   }
 
-  .mat-flat-button.mat-primary {
+  .mat-mdc-unelevated-button.mat-primary {
     background-color: #ec9736;
     font-weight: bold;
   }
@@ -18,7 +20,8 @@
     background-color: #29657c;
     color: white;
     padding: 4rem 0;
-    margin: 2.5rem 0;
+    margin-top: 2.5rem;
+    margin-bottom: 2.5rem;
   }
 
   .banner-card {
@@ -53,15 +56,6 @@
     padding: 1rem 2rem 1rem 2rem;
     color: white;
 
-    & .contact-banner-title-wrapper {
-      align-items:center;
-    }
-
-    & .contact-banner-title {
-      display: flex;
-      vertical-align: middle;
-    }
-
     & .contact-icon {
       font-size: 32px;
       height: 32px;
@@ -72,6 +66,7 @@
     & .contact-banner-btn-wrapper {
       & .contact-btn {
         border-color: white;
+        color: white !important;
       }
 
       & .contact-btn {
