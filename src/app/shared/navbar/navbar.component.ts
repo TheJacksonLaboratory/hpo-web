@@ -44,7 +44,6 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        console.log(event)
         if (this.router.url !== '/') {
           this.showSearch = true;
         } else {

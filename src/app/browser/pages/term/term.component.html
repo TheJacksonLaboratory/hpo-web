@@ -80,6 +80,7 @@
                 <div>
                   <strong>Synonyms:</strong> &nbsp;&nbsp;
                   <i *ngFor="let item of term.synonyms; let isLast=last">{{item}}{{isLast ? '' : "\t-\t"}}</i>
+                  <hr class="underline-hr">
                 </div>
                 <div *ngIf="term.comment">
                   <strong>Comment:</strong> &nbsp;&nbsp; {{term.comment}}
@@ -90,7 +91,6 @@
                   <i *ngFor="let item of term.xrefs; let isLast=last">{{item}}{{isLast ? '' : ', '}}</i>
                   <hr class="underline-hr">
                 </div>
-                <hr class="underline-hr">
               <button mat-raised-button class="download-associations"
                       [disabled]="this.diseaseAssocCount === 0 && this.geneAssocCount === 0"
                       (click)="downloadDialog()"><span class="material-icons">get_app</span> Export Associations
