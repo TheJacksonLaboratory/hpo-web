@@ -350,7 +350,7 @@ a.mat-btn .mdc-button__label {
   }
 }
 
-.mat-mdcmenu-panel {
+.mat-mdc-menu-panel {
   max-width: 380px !important;
   border-radius: 0 !important;
 }
@@ -361,7 +361,7 @@ a.mat-btn .mdc-button__label {
 
 @media (max-width: 767px) {
 
-  .mat-mdctoolbar-single-row {
+  .mat-mdc-toolbar-single-row {
     height: auto !important;
     flex-wrap: wrap;
   }
@@ -390,7 +390,7 @@ a.mat-btn .mdc-button__label {
   font-size: 14px;
   color: darkslategray !important;
 
-  & .mat-mdcicon {
+  & .mat-icon {
     font-size: 16px;
     padding-top: 0.25rem;
   }
