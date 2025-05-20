@@ -1,5 +1,5 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {ActivatedRoute, Params, Router} from '@angular/router';
+import { Component, OnInit, ViewChild} from '@angular/core';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
@@ -15,7 +15,7 @@ import { OntologyService } from "../../services/ontology/ontology.service";
 @Component({
   selector: 'app-term',
   templateUrl: './term.component.html',
-  styleUrls: ['./term.component.css']
+  styleUrls: ['./term.component.scss']
 })
 export class TermComponent implements OnInit {
   termTitle: string;
@@ -63,15 +63,24 @@ export class TermComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.params.pipe(switchMap((params: Params) => {
-      const id = params['id'];
+    this.route.paramMap.pipe(
+      switchMap((params: ParamMap) => {
+      const id = params.get('id');
       this.assocLoading = true;
       this.overlay = false;
       this.paramId = id;
       this.refreshData(id);
-      return this.annotationService.fromPhenotype(id);
+      return this.annotationService.fromPhenotype(id).pipe(catchError(
+        () => {
+          this.networkError = true;
+          this.assocLoading = false;
+          return of(undefined);
+        }
+      ));
     })).subscribe((associations) => {
-
+      if (!associations) {
+        return;
+      }
       this.geneSource = new MatTableDataSource(associations.genes);
       this.geneAssocCount = associations.genes.length;
       this.geneAssocMax = 10000; // fix
@@ -99,7 +108,7 @@ export class TermComponent implements OnInit {
         console.error(e);
         return of(undefined)
       })
-    ).subscribe((term) => {
+    ).subscribe((term: Term) => {
       if (term) {
         forkJoin({
           parents: this.ontologyService.parents(term.id).pipe(catchError(() => of([]))),

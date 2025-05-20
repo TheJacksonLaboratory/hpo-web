@@ -1,24 +1,29 @@
 <div class="term-component">
   <div class="container-custom">
-    <div fxLayout="row wrap">
+    <div class="flex flex-row flex-wrap max-w-full">
       <!-- Term navigtaion tree - left pane-->
-      <div class="tree-container" fxFlex.gt-sm="25" fxFill>
+      <div class="tree-container flex-[1_0_25%] basis-full xl:basis-1/4 xl:max-w-[25%]">
         <mat-card class="tree-navigation">
-          <mat-card-content>
-            <div>
+          <div class="flex items-center flex-auto basis-full px-4 pt-2">
+            <div class="flex-[1_1_100%]">
               <h4 class="no-descendants">No. Descendants</h4>
-              <h3 class="card-title">Hierarchy</h3>
-              <span matTooltip="Neighborhood View of HPO Hierarchy" matTooltipPosition="left" class="info-badge">
-                  <i class="material-icons">help_outline</i>
-                </span>
             </div>
+            <h3 class="flex-[1_1_100%] text-center">Hierarchy</h3>
+            <div class="flex-end flex-[1_1_100%]">
+              <span matTooltip="Neighborhood View of HPO Hierarchy" matTooltipPosition="left" class="info-badge">
+                <i class="material-icons">help_outline</i>
+              </span>
+            </div>
+          </div>
+
+          <mat-card-content>
             <hr class="underline-hr">
             <ul class="tree" *ngIf="treeData">
               <li *ngFor="let parent of treeData.parents">
                         <span class="tree-counts" [ngStyle]="{'margin-left': '-100px', 'margin-right': '5px'}"
                               matTooltip="{{parent.descendantCount}}" *ngIf="parent.descendantCount !== 0"
                               matTooltipPosition="above"> </span>
-                <a class="link" routerLink="../{{parent.id}}">{{parent.name | translate: parent.translations: selectedLanguage.language: "name"}}</a>
+                <a class="link" [routerLink]="['../', parent.id]">{{parent.name | translate: parent.translations: selectedLanguage.language: "name"}}</a>
               </li>
               <li>
                 <div class="term">
@@ -31,7 +36,7 @@
                   <li *ngFor="let child of treeData.children" class="children">
                             <span class="tree-counts" [ngStyle]="setTreeStyles(child)" *ngIf="child.descendantCount !== 0"
                                   matTooltip="{{child.descendantCount}}" matTooltipPosition="above"> </span>
-                    <a class="link" routerLink="../{{child.id}}">{{child.name | translate: child.translations: selectedLanguage.language: "name"}}</a>
+                    <a class="link" [routerLink]="['../', child.id]">{{child.name | translate: child.translations: selectedLanguage.language: "name"}}</a>
                   </li>
                 </ul>
               </li>
@@ -39,9 +44,8 @@
           </mat-card-content>
         </mat-card>
       </div>
-
       <!-- right pane -->
-      <div fxFlex.gt-sm fxFlexOffset.gt-sm="1" fxFill>
+      <div class="flex-[1_1_auto] xl:ml-[1%] xl:max-w-[74%] max-w-full">
         <!-- Term summary -->
         <mat-card class="item-summary">
           <mat-card-content>
@@ -50,53 +54,43 @@
               </mat-progress-bar>
             </div>
             <div *ngIf="treeData && term">
-              <div>
-                <span class="item-title">{{termTitle | translate: term.translations: selectedLanguage.language: "name"}}&nbsp;</span>
-                <span class="item-id" *ngIf="paramId !== term.id">
-                <span class="crossout">{{paramId}}</span>
-                <i class="material-icons obsolete-arrow">arrow_right_alt</i></span>
-                <span class="item-id">{{term.id}}</span>
+              <div class="flex flex-row flex-wrap items-center justify-start">
+                <h4 class="item-title">{{termTitle | translate: term.translations: selectedLanguage.language: "name"}}&nbsp;</h4>
+                <h4 class="item-id" *ngIf="paramId !== term.id">
+                <h4 class="crossout">{{paramId}}</h4>
+                <i class="material-icons obsolete-arrow">arrow_right_alt</i></h4>
+                <h4 class="item-id">{{term.id}}</h4>
                 <!-- <i matTooltip="Copy purl to clipboard!" matTooltipPosition="above"
                     (click)="copyToClipboard(term.purl)" class="material-icons copyToClipboard">content_copy</i>-->
                 <br>
-                <mat-chip-list class="translation-chips" aria-label="Language Selection" multiple="false">
-                <mat-chip class="translation-chip" *ngFor="let lang of languages" color="primary"
-                          (click)="changeLanguage(lang)" [selected]="selectedLanguage.language === lang.language" [disableRipple]="true">
+                <br>
+              </div>
+              <mat-chip-set class="translation-chips" aria-label="Language Selection" multiple="false">
+                <mat-chip-option class="translation-chip" *ngFor="let lang of languages" color="primary"
+                                 (click)="changeLanguage(lang)" [selected]="selectedLanguage.language === lang.language" [disableRipple]="true">
                   <img matChipAvatar src="https://unpkg.com/language-icons@0.3.0/icons/{{lang.language}}.svg" alt="{{lang.language}}"/>
                   {{lang.language_long}}
-                </mat-chip>
-              </mat-chip-list>
-              </div>
+                </mat-chip-option>
+              </mat-chip-set>
               <hr class="underline-hr">
-              <div>
-                <p>
+                <p class="my-0">
                   {{term.definition !== "" ? (term.definition | translate: term.translations: selectedLanguage.language: "definition") : "No definition found."}}
                 </p>
-              </div>
-              <mat-list>
-                <mat-divider></mat-divider>
-                <mat-list-item>
+                <hr class="underline-hr">
+                <div>
                   <strong>Synonyms:</strong> &nbsp;&nbsp;
                   <i *ngFor="let item of term.synonyms; let isLast=last">{{item}}{{isLast ? '' : "\t-\t"}}</i>
-                </mat-list-item>
-                <mat-divider></mat-divider>
-                <mat-list-item *ngIf="term.comment">
+                </div>
+                <div *ngIf="term.comment">
                   <strong>Comment:</strong> &nbsp;&nbsp; {{term.comment}}
-                </mat-list-item>
-                <mat-divider></mat-divider>
-<!--                <mat-list-item *ngIf="term.pubmedXrefs.length > 0">-->
-<!--                  <strong>Pubmed References:</strong> &nbsp;&nbsp;-->
-<!--                  <span *ngFor="let item of term.pubmedXrefs; let isLast=last">-->
-<!--                        <a href="https://www.ncbi.nlm.nih.gov/pubmed/{{item.id}}" target="_blank"><i> {{item.whole}}</i></a>-->
-<!--                    {{isLast ? '' : ', '}}-->
-<!--                      </span>-->
-<!--                </mat-list-item>-->
-                <mat-list-item *ngIf="term.xrefs.length > 0">
+                  <hr class="underline-hr">
+                </div>
+                <div *ngIf="term.xrefs.length > 0">
                   <strong>Cross References:</strong> &nbsp;&nbsp;
                   <i *ngFor="let item of term.xrefs; let isLast=last">{{item}}{{isLast ? '' : ', '}}</i>
-                </mat-list-item>
-                <mat-divider></mat-divider>
-              </mat-list>
+                  <hr class="underline-hr">
+                </div>
+                <hr class="underline-hr">
               <button mat-raised-button class="download-associations"
                       [disabled]="this.diseaseAssocCount === 0 && this.geneAssocCount === 0"
                       (click)="downloadDialog()"><span class="material-icons">get_app</span> Export Associations
@@ -104,7 +98,6 @@
               <a *ngIf="languages && languages.length > 0" class="translate-btn" href="https://obophenotype.github.io/hpo-translations/" mat-stroked-button color="primary" target="_blank">
                 <span class="material-icons">open_in_new</span> Translate your language
               </a>
-
             </div>
           </mat-card-content>
         </mat-card>
@@ -114,7 +107,7 @@
           <mat-tab-group selectedIndex="0" class="term-details-tab-group mat-elevation-z6">
             <!-- Disease Association -->
             <mat-tab label="Disease Associations">
-              <div [hidden]="diseaseAssocCount === 0">
+              <div [hidden]="diseaseAssocCount === 0 || this.networkError">
                 <div class="tab-output-container">
 
                   <!-- filter. Display when all results are loaded -->
@@ -175,7 +168,7 @@
 
             <!-- Gene Association -->
             <mat-tab label="Gene Associations [Inferred]">
-              <div [hidden]="geneAssocCount === 0">
+              <div [hidden]="geneAssocCount === 0 || this.networkError">
                 <div class="tab-output-container">
                   <div class="filter-container">
                     <div id="geneFilter" class="filter-header">
@@ -225,7 +218,7 @@
 
             <!-- Medical Action Association -->
             <mat-tab label="Medical Actions">
-              <div [hidden]="medicalActionDisplayCount === 0">
+              <div [hidden]="medicalActionDisplayCount === 0 || this.networkError">
                 <div class="tab-output-container">
                   <mat-progress-bar *ngIf="assocLoading" class="loading-result-details" color="primary"
                                     mode="indeterminate">
@@ -286,11 +279,14 @@
               <div class="container center" [hidden]="medicalActionDisplayCount !== 0">
                 <h4>No medical actions found for <strong>{{term.id}}</strong></h4>
               </div>
+              <div class="container center" [hidden]="!this.networkError">
+                <h4>Ontology Annotation Network Error. <a href="https://github.com/TheJacksonLaboratory/ontology-annotation-network/issues/new" target="_blank">Please report this issue.</a></h4>
+              </div>
             </mat-tab>
 
             <!-- Loinc Association -->
             <mat-tab label="LOINC Associations">
-                <div [hidden]="loincDisplayCount === 0">
+                <div [hidden]="loincDisplayCount === 0 || this.networkError">
                   <mat-progress-bar *ngIf="assocLoading && !this.networkError" class="loading-result-details" color="primary"
                                     mode="indeterminate">
                   </mat-progress-bar>
