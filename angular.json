@@ -12,9 +12,7 @@
           "builder": "@angular-devkit/build-angular:application",
           "options": {
             "aot": true,
-            "outputPath": {
-              "base": "dist"
-            },
+            "outputPath": "dist/hpo-web",
             "index": "src/index.html",
             "tsConfig": "src/tsconfig.app.json",
             "polyfills": [
@@ -99,16 +97,8 @@
         "test": {
           "builder": "@angular-devkit/build-angular:jest",
           "options": {
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "src/tsconfig.spec.json",
-            "scripts": [],
-            "styles": [
-              "src/styles.scss"
-            ],
-            "assets": [
-              "src/assets",
-              "src/favicon.ico"
-            ]
+            "polyfills": ["src/polyfills.ts"],
+            "tsConfig": "src/tsconfig.spec.json"
           }
         },
         "lint": {

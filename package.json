@@ -36,6 +36,7 @@
     "zone.js": "~0.14.10"
   },
   "devDependencies": {
+    "@angular-devkit/build-angular": "^18.2.20",
     "@angular-eslint/builder": "18.4.3",
     "@angular-eslint/eslint-plugin": "18.4.3",
     "@angular-eslint/eslint-plugin-template": "18.4.3",
@@ -52,7 +53,7 @@
     "intl": "^1.2.5",
     "jest": "^30.0.5",
     "jest-environment-jsdom": "^30.0.5",
-    "jest-preset-angular": "^15.0.0",
+    "jest-preset-angular": "^14.5.5",
     "protractor": "^7.0.0",
     "tar": "^6.1.11",
     "ts-node": "~8.6.2",
