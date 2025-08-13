@@ -5,9 +5,9 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --configuration=development",
-    "startProd": "ng serve --configuration=production",
+    "start:prod": "ng serve --configuration=production",
     "build": "ng build --configuration=development",
-    "buildProd": "ng build --configuration=production",
+    "build:prod": "ng build --configuration=production",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:ci": "jest --ci --coverage --watchAll=false",
