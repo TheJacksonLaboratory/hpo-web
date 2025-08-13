@@ -1,26 +1,25 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 import {NavbarComponent} from './navbar.component';
 import {GlobalMaterialModules} from "../modules/global.module";
 import {SearchModule} from "../search/search.module";
 import {FormsModule} from "@angular/forms";
-import {RouterTestingModule} from "@angular/router/testing";
 import {ExtrasModule} from "../modules/extras.module";
 import { provideHttpClientTesting } from "@angular/common/http/testing";
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideRouter } from '@angular/router';
 
 describe('NavbarComponent', () => {
   let component: NavbarComponent;
   let fixture: ComponentFixture<NavbarComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
     declarations: [NavbarComponent],
     imports: [GlobalMaterialModules,
         FormsModule,
-        RouterTestingModule,
         ExtrasModule,
         SearchModule],
-    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting(), provideRouter([])]
 })
       .compileComponents();
   }));

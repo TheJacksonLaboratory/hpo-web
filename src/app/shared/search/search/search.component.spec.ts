@@ -1,8 +1,7 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 
 import {SearchComponent} from './search.component';
 import {GlobalMaterialModules} from '../../modules/global.module';
-import {RouterTestingModule} from '@angular/router/testing';
 import {HighlightPipe} from '../../pipes/highlight.pipe';
 import {SearchService} from '../service/search.service';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
@@ -14,10 +13,10 @@ describe('NewsearchComponent', () => {
   let component: SearchComponent;
   let fixture: ComponentFixture<SearchComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
     declarations: [SearchComponent, HighlightPipe],
-    imports: [GlobalMaterialModules, RouterTestingModule,
+    imports: [GlobalMaterialModules,
         NoopAnimationsModule, FormsModule],
     providers: [SearchService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
 })

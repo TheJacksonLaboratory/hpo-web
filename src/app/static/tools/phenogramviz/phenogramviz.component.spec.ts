@@ -1,12 +1,11 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-
-import {PhenogramVizComponent} from './phenogramviz.component';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { PhenogramVizComponent } from './phenogramviz.component';
 
 describe('PhenogramVizComponent', () => {
   let component: PhenogramVizComponent;
   let fixture: ComponentFixture<PhenogramVizComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [PhenogramVizComponent]
     })

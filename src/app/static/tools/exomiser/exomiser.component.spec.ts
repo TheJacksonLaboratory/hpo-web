@@ -1,12 +1,11 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-
-import {ExomiserComponent} from './exomiser.component';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ExomiserComponent } from './exomiser.component';
 
 describe('ExomiserComponent', () => {
   let component: ExomiserComponent;
   let fixture: ComponentFixture<ExomiserComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ExomiserComponent]
     })

@@ -1,10 +1,10 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import {PublicationsComponent} from './publications.component';
-import {MatTableModule} from '@angular/material/table';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {GlobalMaterialModules} from '../../../shared/modules/global.module';
+import { PublicationsComponent } from './publications.component';
+import { MatTableModule } from '@angular/material/table';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { GlobalMaterialModules } from '../../../shared/modules/global.module';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
-import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('PublicationsComponent', () => {
   let component: PublicationsComponent;

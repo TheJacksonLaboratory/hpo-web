@@ -1,12 +1,11 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-
-import {ExternalToolsComponent} from './external.component';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ExternalToolsComponent } from './external.component';
 
 describe('ExternalToolsComponent', () => {
   let component: ExternalToolsComponent;
   let fixture: ComponentFixture<ExternalToolsComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ExternalToolsComponent]
     })

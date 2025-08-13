@@ -8,6 +8,7 @@ import {NoopAnimationsModule} from "@angular/platform-browser/animations";
 import { provideHttpClientTesting } from "@angular/common/http/testing";
 import {NewsService} from "../../shared/news/news.service";
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { GlobalMaterialModules } from '../../shared/modules/global.module';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -16,9 +17,7 @@ describe('HomeComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
     declarations: [HomeComponent],
-    imports: [MatCardModule,
-        MatIconModule,
-        MatListModule,
+    imports: [GlobalMaterialModules,
         NoopAnimationsModule,
         SearchModule],
     providers: [NewsService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
