@@ -1,8 +1,8 @@
-import { Component, OnInit, ViewChild} from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import {MatTableDataSource} from '@angular/material/table';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatSort} from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import { forkJoin, of } from 'rxjs';
 import { catchError, switchMap } from 'rxjs/operators';
 import { UtilityService } from '../../../shared/utility/utility.service';
@@ -49,11 +49,11 @@ export class TermComponent implements OnInit {
   assocLoading = true;
   overlay = false;
   languages: Language[];
-  selectedLanguage: Language = {language: "en", language_long: "English"};
+  selectedLanguage: Language = { language: "en", language_long: "English" };
   networkError = false;
 
-  @ViewChild('diseasePaginator', {static: true}) diseasePaginator: MatPaginator;
-  @ViewChild('genePaginator', {static: true}) genePaginator: MatPaginator;
+  @ViewChild('diseasePaginator', { static: true }) diseasePaginator: MatPaginator;
+  @ViewChild('genePaginator', { static: true }) genePaginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private route: ActivatedRoute, private ontologyService: OntologyService,
@@ -113,10 +113,10 @@ export class TermComponent implements OnInit {
         forkJoin({
           parents: this.ontologyService.parents(term.id).pipe(catchError(() => of([]))),
           children: this.ontologyService.children(term.id).pipe(catchError(() => of([])))
-        }).subscribe(({parents, children}) => {
+        }).subscribe(({ parents, children }) => {
           this.setDefaults(term);
           const maxTermWidth = 100;
-          this.treeData = {parents: parents, children: children, descendantCount: term.descendantCount};
+          this.treeData = { parents: parents, children: children, descendantCount: term.descendantCount };
           this.treeData.maxTermWidth = maxTermWidth;
           this.treeData.children.sort((a, b) => a.descendantCount > b.descendantCount ? (-1) : 1);
           this.treeData.children.map(term => {
@@ -159,7 +159,7 @@ export class TermComponent implements OnInit {
       if (term.translations != undefined && term.translations.length > 0){
         // Get unique set of languages
         this.languages = [...new Set(term.translations.map((t) => {
-          return {language: t.language, language_long: t.language_long}
+          return { language: t.language, language_long: t.language_long }
         }))];
 
         // Add english default
@@ -199,7 +199,7 @@ export class TermComponent implements OnInit {
   }
 
   setTreeStyles(child: Term): any {
-    return {'width': child.treeCountWidth + 'px', 'margin-left': child.treeMargin + 'px', 'margin-right': '20px'};
+    return { 'width': child.treeCountWidth + 'px', 'margin-left': child.treeMargin + 'px', 'margin-right': '20px' };
   }
 
   changeLanguage(language: Language){

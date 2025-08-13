@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import {AnnotationsDownloadComponent} from './annotations-download.component';
+import { AnnotationsDownloadComponent } from './annotations-download.component';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { GlobalMaterialModules } from '../../../shared/modules/global.module';

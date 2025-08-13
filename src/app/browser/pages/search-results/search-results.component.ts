@@ -1,9 +1,9 @@
-import {Component, ViewChild} from '@angular/core';
-import {MatTableDataSource} from '@angular/material/table';
-import {MatPaginator} from '@angular/material/paginator';
-import {Disease, Gene, Term} from '../../models/models';
-import {SearchService} from '../../../shared/search/service/search.service';
-import {ActivatedRoute} from '@angular/router';
+import { Component, ViewChild } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { Disease, Gene, Term } from '../../models/models';
+import { SearchService } from '../../../shared/search/service/search.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-search-results',
@@ -29,9 +29,9 @@ export class SearchResultsComponent {
   geneDisplayedColumns = ['entrezGeneId', 'entrezGeneSymbol', 'matching_string'];
   geneDataSource: MatTableDataSource<Gene>;
 
-  @ViewChild('termPaginator', {static: true}) termPaginator: MatPaginator;
-  @ViewChild('diseasePaginator', {static: true}) diseasePaginator: MatPaginator;
-  @ViewChild('genePaginator', {static: true}) genePaginator: MatPaginator;
+  @ViewChild('termPaginator', { static: true }) termPaginator: MatPaginator;
+  @ViewChild('diseasePaginator', { static: true }) diseasePaginator: MatPaginator;
+  @ViewChild('genePaginator', { static: true }) genePaginator: MatPaginator;
 
 
   constructor(private route: ActivatedRoute, private searchService: SearchService) {
@@ -47,7 +47,7 @@ export class SearchResultsComponent {
     // Filter should have precedence
     // then if the filter is as is default to the most counts
     if (this.navFilter === 'all') {
-      const counts = {'term': this.termDataSource.data.length, 'gene': this.geneDataSource.data.length, 'disease': this.diseaseDataSource.data.length};
+      const counts = { 'term': this.termDataSource.data.length, 'gene': this.geneDataSource.data.length, 'disease': this.diseaseDataSource.data.length };
       const maxTab = Object.keys(counts).reduce((a, b) => counts[a] > counts[b] ? a : b);
       this.determineTab(maxTab);
     } else {

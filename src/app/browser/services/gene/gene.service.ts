@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import {environment} from '../../../../environments/environment';
-import {map} from 'rxjs/operators';
-import {Observable} from 'rxjs';
+import { environment } from '../../../../environments/environment';
+import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class GeneService {
@@ -29,7 +29,7 @@ export class GeneService {
     params = params.append('format', 'tab');
     params = params.append('columns', 'id,reviewed');
     return this.http
-      .post(environment.HPO_UNIPROT_MAPPING_URL, null, {params: params, responseType: 'text'})
+      .post(environment.HPO_UNIPROT_MAPPING_URL, null, { params: params, responseType: 'text' })
       .pipe(map(res => this.parseUniprotMapping(res.split('\n'))));
   }
 

@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {NewsService} from '../../shared/news/news.service';
-import {News} from '../../browser/models/models';
-import {UtilityService } from '../../shared/utility/utility.service';
+import { Component, OnInit } from '@angular/core';
+import { NewsService } from '../../shared/news/news.service';
+import { News } from '../../browser/models/models';
+import { UtilityService } from '../../shared/utility/utility.service';
 
 @Component({
   selector: 'app-home',

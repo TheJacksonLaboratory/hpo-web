@@ -9,7 +9,7 @@ import { DialogData, EntityType } from '../../browser/models/models';
 })
 export class DialogExcelDownloadComponent implements OnInit {
 
-  supported = {first: "", second: ""};
+  supported = { first: "", second: "" };
 
   constructor(public dialogRef: MatDialogRef<DialogExcelDownloadComponent>,
               @Inject(MAT_DIALOG_DATA) public data: DialogData) {

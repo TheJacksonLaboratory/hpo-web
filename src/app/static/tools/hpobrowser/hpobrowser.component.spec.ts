@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import {HpobrowserComponent} from './hpobrowser.component';
+import { HpobrowserComponent } from './hpobrowser.component';
 
 describe('HpobrowserComponent', () => {
   let component: HpobrowserComponent;

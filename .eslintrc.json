@@ -36,6 +36,8 @@
             "type": "attribute"
           }
         ]
+    ,
+    "object-curly-spacing": ["error", "always"]
       }
     },
     {

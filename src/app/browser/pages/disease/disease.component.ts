@@ -1,12 +1,12 @@
-import {Component, ViewChild} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {MatTableDataSource} from '@angular/material/table';
-import {MatSort} from '@angular/material/sort';
-import {MatPaginator} from '@angular/material/paginator';
+import { Component, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
 import { UtilityService } from '../../../shared/utility/utility.service';
 import { Disease, Gene, MedicalActionSourceExtended, SimpleTerm, Term, TermCategory } from '../../models/models';
 import { AnnotationService } from '../../services/annotation/annotation.service';
-import {DialogService} from '../../../shared/dialog-excel-download/dialog.service';
+import { DialogService } from '../../../shared/dialog-excel-download/dialog.service';
 
 @Component({
   selector: 'app-disease',
@@ -75,7 +75,7 @@ export class DiseaseComponent {
         return fterm;
       });
       const termSource = new MatTableDataSource(catTermSource);
-      this.catTermSources.push({catLabel: key, annotationCount: values.length, termSource});
+      this.catTermSources.push({ catLabel: key, annotationCount: values.length, termSource });
     });
 
     const sort_categories = ['Inheritance', 'Growth', 'Head and neck', 'Ear', 'Eye', 'Cardiovascular', 'Respiratory System',

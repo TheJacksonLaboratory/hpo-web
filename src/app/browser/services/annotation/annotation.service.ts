@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { DiseaseAssociation, Gene, GeneAssociation, PhenotypeAssociation, SimpleTerm, Term } from '../../models/models';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class AnnotationService {
 
   constructor(private httpClient: HttpClient) {}

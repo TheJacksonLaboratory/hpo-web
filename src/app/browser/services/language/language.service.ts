@@ -3,9 +3,9 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Language } from '../../models/models';
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class LanguageService {
-  default: Language = {language: "en", language_long: "English"};
+  default: Language = { language: "en", language_long: "English" };
   languageSubject = new BehaviorSubject<Language>(this.default);
   active$ = this.languageSubject.asObservable();
   languageLookup = {

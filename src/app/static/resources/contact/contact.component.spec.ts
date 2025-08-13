@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import {ContactComponent} from './contact.component';
+import { ContactComponent } from './contact.component';
 import { GlobalMaterialModules } from '../../../shared/modules/global.module';
 describe('ContactComponent', () => {
   let component: ContactComponent;

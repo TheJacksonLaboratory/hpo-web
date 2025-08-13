@@ -1,7 +1,7 @@
-import {Component, EventEmitter, HostListener, OnInit, Output} from '@angular/core';
-import {NavigationEnd, Router} from '@angular/router';
-import {Disease, Gene, Term} from '../../browser/models/models';
-import {animate, state, style, transition, trigger} from '@angular/animations';
+import { Component, EventEmitter, HostListener, OnInit, Output } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
+import { Disease, Gene, Term } from '../../browser/models/models';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-navbar-hpo',

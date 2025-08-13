@@ -1,11 +1,11 @@
-import {Router} from '@angular/router';
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import { Router } from '@angular/router';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Disease, Gene, SimpleTerm, Term } from '../../../browser/models/models';
-import {SearchService} from '../service/search.service';
+import { SearchService } from '../service/search.service';
 
-import {animate, state, style, transition, trigger} from '@angular/animations';
-import {Subject} from 'rxjs';
-import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'app-search-bar',
@@ -45,7 +45,7 @@ export class SearchComponent implements OnInit {
   notFoundFlag = false;
   loadingSearchResults = false;
 
-  @ViewChild('searchbar', {static: true}) searchBar: ElementRef;
+  @ViewChild('searchbar', { static: true }) searchBar: ElementRef;
 
   constructor(private router: Router, private searchService: SearchService) {
     this.router = router;
@@ -59,7 +59,7 @@ export class SearchComponent implements OnInit {
         this.queryText = val
 
 
-        this.searchService.searchAll(val).subscribe(({terms, genes, diseases}) => {
+        this.searchService.searchAll(val).subscribe(({ terms, genes, diseases }) => {
           this.terms = terms.terms;
           this.diseases = diseases.results;
           this.genes = genes.results;
@@ -111,7 +111,7 @@ export class SearchComponent implements OnInit {
     if (this.searchstate === 'active') {
       this.searchstate = 'inactive';
     }
-    this.router.navigate(['/browse/search'], {queryParams: {q: input, navFilter: this.navFilter}});
+    this.router.navigate(['/browse/search'], { queryParams: { q: input, navFilter: this.navFilter } });
   }
 
   isCorrectCategory(filter: string) {

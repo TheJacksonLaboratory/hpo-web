@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import {TranslationComponent} from './translation.component';
+import { TranslationComponent } from './translation.component';
 
 describe('MappingComponent', () => {
   let component: TranslationComponent;

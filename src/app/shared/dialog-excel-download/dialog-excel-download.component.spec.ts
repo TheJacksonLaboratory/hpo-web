@@ -1,7 +1,7 @@
-import {waitForAsync, ComponentFixture, TestBed} from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { EntityType } from '../../browser/models/models';
-import {DialogExcelDownloadComponent} from './dialog-excel-download.component';
-import {MAT_DIALOG_DATA, MatDialogModule, MatDialogRef} from "@angular/material/dialog";
+import { DialogExcelDownloadComponent } from './dialog-excel-download.component';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from "@angular/material/dialog";
 
 
 describe('DialogExcelDownloadComponent', () => {
@@ -12,9 +12,9 @@ describe('DialogExcelDownloadComponent', () => {
     TestBed.configureTestingModule({
       declarations: [DialogExcelDownloadComponent],
       imports: [MatDialogModule],
-      providers: [{provide: MatDialogRef, useValue: {}}, {
+      providers: [{ provide: MatDialogRef, useValue: {} }, {
         provide: MAT_DIALOG_DATA,
-        useValue: {'association': '', 'id': '', 'counts': {'genes': 0, 'diseases': 0, 'terms': 0}, supported_download: [EntityType.DISEASE, EntityType.GENE]}
+        useValue: { 'association': '', 'id': '', 'counts': { 'genes': 0, 'diseases': 0, 'terms': 0 }, supported_download: [EntityType.DISEASE, EntityType.GENE] }
       }]
     })
       .compileComponents();

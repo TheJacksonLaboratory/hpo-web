@@ -1,12 +1,12 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Observable, of } from 'rxjs';
-import {UntypedFormControl} from "@angular/forms";
+import { UntypedFormControl } from "@angular/forms";
 import { catchError, debounceTime, distinctUntilChanged, filter, map, switchMap } from 'rxjs/operators';
 import { AnnotationService } from '../../services/annotation/annotation.service';
 import { OntologyService } from '../../services/ontology/ontology.service';
-import {MatStepper} from "@angular/material/stepper";
-import {MatSort} from "@angular/material/sort";
+import { MatStepper } from "@angular/material/stepper";
+import { MatSort } from "@angular/material/sort";
 import { SimpleTerm } from '../../models/models';
 
 @Component({

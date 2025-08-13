@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import {NoPageFoundComponent} from './no-page-found.component';
+import { NoPageFoundComponent } from './no-page-found.component';
 
 describe('NoPageFoundComponent', () => {
   let component: NoPageFoundComponent;

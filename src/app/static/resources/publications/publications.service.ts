@@ -1,9 +1,9 @@
-import {Injectable} from '@angular/core';
-import {environment} from '../../../../environments/environment.dev';
+import { Injectable } from '@angular/core';
+import { environment } from '../../../../environments/environment.dev';
 import { HttpClient } from '@angular/common/http';
-import {Publication} from '../../../browser/models/models';
-import {map} from 'rxjs/operators';
-import {Observable} from 'rxjs';
+import { Publication } from '../../../browser/models/models';
+import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,7 @@ export class PublicationsService {
 
   getPublications(): Observable<Publication[]> {
     return this.http
-      .get(environment.HPO_PUBLICATION_REST_URL, {responseType: 'text'}).pipe(
+      .get(environment.HPO_PUBLICATION_REST_URL, { responseType: 'text' }).pipe(
         map(response => {
           return this.buildPublications(response.split('\n'));
         }));

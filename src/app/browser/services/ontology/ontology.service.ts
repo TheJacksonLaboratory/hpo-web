@@ -6,7 +6,7 @@ import { environment } from '../../../../environments/environment';
 import { Language, OntologySearchResponse, Term } from '../../models/models';
 import { LanguageService } from '../language/language.service';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class OntologyService {
 
   constructor(private httpClient: HttpClient, private languageService: LanguageService) {}

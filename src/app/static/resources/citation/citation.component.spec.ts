@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { CitationComponent } from './citation.component';
 
 describe('CitationComponent', () => {

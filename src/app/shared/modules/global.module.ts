@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core';
+import { NgModule } from '@angular/core';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
@@ -14,13 +14,13 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatSortModule} from '@angular/material/sort';
-import {MatExpansionModule} from '@angular/material/expansion';
-import {MatDividerModule} from '@angular/material/divider';
-import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatStepperModule} from "@angular/material/stepper";
-import {MatButtonToggleModule} from "@angular/material/button-toggle";
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSortModule } from '@angular/material/sort';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatStepperModule } from "@angular/material/stepper";
+import { MatButtonToggleModule } from "@angular/material/button-toggle";
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 
