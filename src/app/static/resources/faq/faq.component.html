@@ -1,12 +1,12 @@
-<div class="container faq" fxLayout="column wrap">
+<div class="container faq flex flex-col flex-wrap">
   <h1 class="center pageTitle">Frequently Asked Questions</h1>
   <br>
   <div class="center">
     <a mat-button href="https://github.com/TheJacksonLaboratory/hpo-web/issues/new" target="__blank" class="faq-btn">Request
       a Feature or Report a Bug</a>
   </div>
-  <div class="faq-container" fxLayout="row wrap">
-    <div fxFlex="100" fxFlex.gt-sm="50" fxFlexOffset.gt-sm="25">
+  <div class="faq-container flex flex-row flex-wrap">
+  <div class="w-full sm:w-1/2 sm:ml-[25%]">
       <h3>
         Ontology
       </h3>
@@ -220,10 +220,10 @@
         <mat-expansion-panel [expanded]="openPanel === 9" id="genes-phenotypes">
           <mat-expansion-panel-header>
             <mat-panel-title>
-            <span fxHide fxShow.gt-sm>
+            <span class="hidden sm:inline">
               <strong>What is the difference between genes_to_phenotypes.txt and phenotype_to_genes.txt?</strong>
             </span>
-              <span fxShow fxHide.gt-sm>
+              <span class="inline sm:hidden">
                  <strong>genes_to_phenotypes.txt and phenotype_to_genes.txt?</strong>
             </span>
             </mat-panel-title>
@@ -255,10 +255,10 @@
         <mat-expansion-panel [expanded]="openPanel === 10" id="frequencies">
           <mat-expansion-panel-header>
             <mat-panel-title>
-            <span fxHide fxShow.gt-sm>
+            <span class="hidden sm:inline">
               <strong>What is the difference between “ALL_FREQUENCIES” and “FREQUENT_FEATURES”?</strong>
             </span>
-              <span fxShow fxHide.gt-sm>
+              <span class="inline sm:hidden">
                  <strong >“ALL_FREQUENCIES” vs “FREQUENT_FEATURES”?</strong>
             </span>
             </mat-panel-title>
@@ -270,10 +270,10 @@
         <mat-expansion-panel [expanded]="openPanel === 11" id="association-rules">
           <mat-expansion-panel-header>
             <mat-panel-title>
-            <span fxHide fxShow.gt-sm>
+            <span class="hidden sm:inline">
               <strong>What is your procedure for associating genes with HPO phenotypes?</strong>
             </span>
-              <span fxShow fxHide.gt-sm>
+              <span class="inline sm:hidden">
                  <strong>Genes to Phenotypes Procedure?</strong>
             </span>
             </mat-panel-title>

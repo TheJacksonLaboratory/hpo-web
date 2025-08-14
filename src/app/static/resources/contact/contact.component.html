@@ -1,16 +1,16 @@
 <div class="container">
   <div>
       <h1 class="center pageTitle">Contact</h1>
-      <div fxLayout="row wrap" fxLayoutAlign="center center">
-        <div class="contact-general" fxFlex.gt-sm="50" fxFlexOffset="25" fxLayout="column">
+  <div class="flex flex-row flex-wrap justify-center items-center">
+  <div class="contact-general w-full sm:w-1/2 sm:ml-[25%] flex flex-col">
           <h4>
-            For general human phenotype ontology questions:
+            For data & general human phenotype ontology questions:
           </h4>
-          <div class="contact-card" fxLayout="row" *ngFor="let contact of generalContacts">
+          <div class="contact-card flex flex-row" *ngFor="let contact of generalContacts">
             <div class="contact-img">
               <img [src]="contact.src" [alt]="contact.name">
             </div>
-            <div class="contact-bio" fxFlex="85">
+            <div class="contact-bio flex-1">
               <h3>{{contact.name}}</h3>
               <h4>{{contact.affiliation}}</h4>
               <a [href]="'mailto:' + contact.email" target="_blank">
@@ -19,15 +19,15 @@
             </div>
           </div>
         </div>
-        <div class="contact-technical" fxFlex.gt-sm="50" fxFlexOffset="25"  fxLayout="column">
+  <div class="contact-technical w-full sm:w-1/2 sm:ml-[25%] flex flex-col">
           <h4>
             For technical hpo web application and api questions or bugs:
           </h4>
-          <div class="contact-card" *ngFor="let contact of technicalContacts">
+          <div class="contact-card flex flex-row" *ngFor="let contact of technicalContacts">
             <div class="contact-img">
               <img [src]="contact.src" [alt]="contact.name">
             </div>
-            <div class="contact-bio" fxFlex="85">
+            <div class="contact-bio flex-1">
               <h3>{{contact.name}}</h3>
               <h4>{{contact.affiliation}}</h4>
               <a [href]="'mailto:' + contact.email" target="_blank">
