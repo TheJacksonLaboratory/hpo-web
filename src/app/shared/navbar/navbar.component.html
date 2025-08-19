@@ -41,7 +41,7 @@
     <button mat-menu-item [matMenuTriggerFor]="otherMenu"> Translation</button>
   </mat-menu>
   <mat-menu #otherMenu="matMenu">
-    <button mat-menu-item routerLink="data/translations"> Translations and Mapping</button>
+    <button mat-menu-item (click)="utility.openExternalUrl('https://obophenotype.github.io/hpo-translations/')">Translations</button>
     <button mat-menu-item routerLink="data/layperson"> Layperson Synonyms</button>
   </mat-menu>
   <!-- ------ -->

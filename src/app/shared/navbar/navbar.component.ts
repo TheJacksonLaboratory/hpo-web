@@ -2,6 +2,7 @@ import { Component, EventEmitter, HostListener, OnInit, Output } from '@angular/
 import { NavigationEnd, Router } from '@angular/router';
 import { Disease, Gene, Term } from '../../browser/models/models';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { UtilityService } from '../utility/utility.service';
 
 @Component({
   selector: 'app-navbar-hpo',
@@ -35,11 +36,7 @@ export class NavbarComponent implements OnInit {
   searchstate = 'inactive';
   @Output() navToggle = new EventEmitter();
 
-  navOpen() {
-    this.navToggle.emit(true);
-  }
-
-  constructor(private router: Router) {}
+  constructor(private router: Router, public utility: UtilityService) {}
 
   ngOnInit() {
     this.router.events.subscribe((event) => {
@@ -67,5 +64,10 @@ export class NavbarComponent implements OnInit {
 
   navigateToDocs() {
     window.open("https://ontology.jax.org/", "__blank");
+  }
+
+
+  navOpen() {
+    this.navToggle.emit(true);
   }
 }
