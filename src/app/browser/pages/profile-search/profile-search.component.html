@@ -2,8 +2,7 @@
   <h1 class="center">Profile Search</h1>
   <h4 class="center">This tool will find diseases that share your profile of phenotypes.
   </h4>
-  <div>
-    <mat-horizontal-stepper labelPosition="bottom" #stepper>
+  <mat-horizontal-stepper labelPosition="bottom" #stepper>
       <mat-step [completed]="submittedTerms">
         <form class="discover-form">
           <ng-template matStepLabel>Build Phenotype List</ng-template>
@@ -97,6 +96,5 @@
         <div>
         </div>
       </mat-step>
-    </mat-horizontal-stepper>
-  </div>
+  </mat-horizontal-stepper>
 </div>
