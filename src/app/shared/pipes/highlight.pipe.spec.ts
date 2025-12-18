@@ -1,7 +1,7 @@
-import {DomSanitizer} from '@angular/platform-browser'
-import {inject, TestBed} from '@angular/core/testing';
+import { DomSanitizer } from '@angular/platform-browser'
+import { inject, TestBed } from '@angular/core/testing';
 
-import {HighlightPipe} from './highlight.pipe';
+import { HighlightPipe } from './highlight.pipe';
 
 describe('Highlight pipe test', () => {
   let pipe: HighlightPipe;
@@ -24,22 +24,22 @@ describe('Highlight pipe test', () => {
 
   const testData = [
     {
-      targetString: {name: 'small skull'},
+      targetString: { name: 'small skull' },
       query: 'small skull',
       expected: '<span><strong>small</strong> <strong>skull</strong></span>'
     },
     {
-      targetString: {name: 'small skull anantomy'},
+      targetString: { name: 'small skull anantomy' },
       query: 'small skull',
       expected: '<span><strong>small</strong> <strong>skull</strong> anantomy</span>'
     },
     {
-      targetString: {name: 'small anantomy skull'},
+      targetString: { name: 'small anantomy skull' },
       query: 'small skull',
       expected: '<span><strong>small</strong> anantomy <strong>skull</strong></span>'
     },
     {
-      targetString: {name: 'small anantomy skull'},
+      targetString: { name: 'small anantomy skull' },
       query: 'small skull s',
       expected: '<span><strong>small</strong> anantomy <strong>skull</strong></span>'
     }

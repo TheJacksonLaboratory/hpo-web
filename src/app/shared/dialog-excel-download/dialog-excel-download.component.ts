@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA as MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { DialogData, EntityType } from '../../browser/models/models';
 
 @Component({
@@ -9,7 +9,7 @@ import { DialogData, EntityType } from '../../browser/models/models';
 })
 export class DialogExcelDownloadComponent implements OnInit {
 
-  supported = {first: "", second: ""};
+  supported = { first: "", second: "" };
 
   constructor(public dialogRef: MatDialogRef<DialogExcelDownloadComponent>,
               @Inject(MAT_DIALOG_DATA) public data: DialogData) {

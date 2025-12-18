@@ -1,12 +1,12 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import {IndigenousComponent} from './indigenous.component';
+import { IndigenousComponent } from './indigenous.component';
 
 describe('IndigenousComponent', () => {
   let component: IndigenousComponent;
   let fixture: ComponentFixture<IndigenousComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [IndigenousComponent]
     })

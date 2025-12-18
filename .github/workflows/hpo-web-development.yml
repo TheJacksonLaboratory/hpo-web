@@ -14,11 +14,11 @@ jobs:
       - name: Configure Node
         uses: actions/setup-node@v3
         with:
-          node-version: 16.10.0
+          node-version: 24.5.0
           cache: 'npm'
 
       - name: Lint, Test, Build
         run: |
           npm install
           npm run lint
-          npm run testci
+          npm run test:ci

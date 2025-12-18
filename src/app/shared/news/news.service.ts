@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
-import {News} from '../../browser/models/models';
-import {Observable} from 'rxjs';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {environment} from '../../../environments/environment';
+import { Injectable } from '@angular/core';
+import { News } from '../../browser/models/models';
+import { Observable } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 import { map, publishReplay, refCount } from "rxjs/operators";
 
 @Injectable()

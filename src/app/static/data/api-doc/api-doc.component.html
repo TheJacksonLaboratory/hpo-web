@@ -1,24 +1,7 @@
-<div class="container api" fxLayout="row wrap" fxLayoutAlign="center center">
-  <h1 class="pageTitle center" fxFlexFill>RESTful API</h1>
-  <div class="api-cards" fxLayout="row wrap" fxLayoutAlign="start center">
-      <mat-card class="deprecated-card" fxFlex="25">
-        <mat-card-header>
-          <mat-card-title>Human Phenotype Ontology API</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <p>
-            This API [ https://hpo.jax.org/api ] was deprecated in the 2.0.0 Release.
-            <i>Do not use this anymore.</i>
-          </p>
-        </mat-card-content>
-        <mat-card-actions>
-          <div class="actions" fxFlex="75">
-            <button mat-button disabled>DOCUMENTATION</button>
-            <button mat-button disabled>GITHUB</button>
-          </div>
-        </mat-card-actions>
-      </mat-card>
-      <mat-card class="active-card" fxFlex="25">
+<div class="container api flex flex-row flex-wrap h-full">
+  <h1 class="pageTitle center w-full">RESTful API</h1>
+  <div class="api-cards flex flex-col mx-auto justify-around h-full">
+      <mat-card class="active-card">
         <mat-card-header>
           <mat-card-title>Ontology Service</mat-card-title>
         </mat-card-header>
@@ -29,13 +12,13 @@
           </p>
         </mat-card-content>
         <mat-card-actions>
-          <div class="actions" fxFlex="75">
+          <div class="actions flex flex-row justify-between">
             <a mat-stroked-button href="https://ontology.jax.org/api/hp/docs" target="_blank">DOCUMENTATION</a>
-            <a mat-stroked-button href="https://github.com/TheJacksonLaboratory/ontology-service" target="_blank">GITHUB</a>
+            <a class="ml-2" mat-stroked-button href="https://github.com/TheJacksonLaboratory/ontology-service" target="_blank">GITHUB</a>
           </div>
         </mat-card-actions>
       </mat-card>
-      <mat-card class="new-card" fxFlex="25">
+      <mat-card class="new-card">
         <mat-card-header>
           <mat-card-title>Ontology Annotation Network</mat-card-title>
         </mat-card-header>
@@ -46,9 +29,9 @@
           </p>
         </mat-card-content>
         <mat-card-actions>
-          <div class="actions" fxFlex="75">
+          <div class="actions flex flex-row justify-between">
             <a mat-stroked-button href="https://ontology.jax.org/api/network/docs" target="_blank">DOCUMENTATION</a>
-            <a mat-stroked-button href="https://github.com/TheJacksonLaboratory/ontology-annotation-network" target="_blank">GITHUB</a>
+            <a class="ml-2" mat-stroked-button href="https://github.com/TheJacksonLaboratory/ontology-annotation-network" target="_blank">GITHUB</a>
           </div>
         </mat-card-actions>
       </mat-card>

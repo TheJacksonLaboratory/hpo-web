@@ -1,14 +1,14 @@
-import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { AnnotationService } from '../../services/annotation/annotation.service';
-import {GeneService} from '../../services/gene/gene.service';
+import { GeneService } from '../../services/gene/gene.service';
 import { Disease, EntrezGene, Gene, SimpleTerm, Term } from '../../models/models';
-import {ActivatedRoute, Router} from '@angular/router';
-import {MatTableDataSource} from '@angular/material/table';
-import {MatSort} from '@angular/material/sort';
-import {MatPaginator} from '@angular/material/paginator';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
 //import * as ProtVista from 'ProtVista';
-import {environment} from '../../../../environments/environment';
-import {DialogService} from '../../../shared/dialog-excel-download/dialog.service';
+import { environment } from '../../../../environments/environment';
+import { DialogService } from '../../../shared/dialog-excel-download/dialog.service';
 
 @Component({
   selector: 'app-gene',
@@ -24,7 +24,7 @@ export class GeneComponent implements OnInit {
   termAssoc: Term[] = [];
   diseaseAssoc: Disease[] = [];
   termDataSource: MatTableDataSource<Term>;
-  diseaseDataSource: MatTableDataSource<Disease>;
+  diseaseDataSource;
   termColumns = ['id', 'name'];
   diseaseColumns = ['id', 'name'];
   isLoading = true;
@@ -34,9 +34,9 @@ export class GeneComponent implements OnInit {
   mobile = false;
   entrezError = false;
 
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
-  @ViewChild('termPaginator', {static: true}) termPaginator: MatPaginator;
-  @ViewChild('diseasePaginator', {static: true}) diseasePaginator: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
+  @ViewChild('termPaginator', { static: true }) termPaginator: MatPaginator;
+  @ViewChild('diseasePaginator', { static: true }) diseasePaginator: MatPaginator;
 
   constructor(private route: ActivatedRoute, private geneService: GeneService,
               private annotationService: AnnotationService,

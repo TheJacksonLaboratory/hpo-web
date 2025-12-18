@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {UtilityService} from '../../../shared/utility/utility.service';
-import {environment} from "../../../../environments/environment";
+import { UtilityService } from '../../../shared/utility/utility.service';
+import { environment } from "../../../../environments/environment";
 
 @Component({
   selector: 'app-ontology',

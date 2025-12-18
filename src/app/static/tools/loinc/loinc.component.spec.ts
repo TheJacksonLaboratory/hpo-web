@@ -1,12 +1,11 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-
-import {LoincComponent} from './loinc.component';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { LoincComponent } from './loinc.component';
 
 describe('LoincComponent', () => {
   let component: LoincComponent;
   let fixture: ComponentFixture<LoincComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [LoincComponent]
     })

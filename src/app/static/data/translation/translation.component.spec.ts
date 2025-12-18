@@ -1,12 +1,12 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import {TranslationComponent} from './translation.component';
+import { TranslationComponent } from './translation.component';
 
 describe('MappingComponent', () => {
   let component: TranslationComponent;
   let fixture: ComponentFixture<TranslationComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [TranslationComponent]
     })

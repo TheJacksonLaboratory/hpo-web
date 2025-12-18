@@ -1,14 +1,15 @@
-import {inject, TestBed} from '@angular/core/testing';
-import {NewsService} from './news.service';
-import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
-import {allMockNews, subMockNews} from './news.mock';
+import { inject, TestBed } from '@angular/core/testing';
+import { NewsService } from './news.service';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { allMockNews, subMockNews } from './news.mock';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('NewsService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [NewsService]
-    });
+    imports: [],
+    providers: [NewsService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
   });
 
   it('should be created', inject([NewsService], (service: NewsService) => {

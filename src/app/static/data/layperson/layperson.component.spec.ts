@@ -1,12 +1,11 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-
-import {LaypersonComponent} from './layperson.component';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { LaypersonComponent } from './layperson.component';
 
 describe('LaypersonComponent', () => {
   let component: LaypersonComponent;
   let fixture: ComponentFixture<LaypersonComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [LaypersonComponent]
     })

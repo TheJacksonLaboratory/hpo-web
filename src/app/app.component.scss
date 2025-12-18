@@ -1,7 +1,3 @@
-.main {
-  flex: auto;
-}
-
 .sidenav {
   width: 50%;
   background: rgba(41, 101, 124, 1);
@@ -17,13 +13,19 @@
   color: white;
 }
 
-.sidenav .mat-menu-item {
+.sidenav .mat-mdc-menu-item {
   padding: 0 0 0 15px;
   border-bottom: 1px solid #d3d3d370;
   color: white !important;
+
+  &.iconed {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+  }
 }
 
-.sidenav .mat-menu-item .mat-icon {
+.sidenav .mat-mdc-menu-item .mat-icon {
   margin: 12px 5px;
   float: right;
   color: white;
@@ -33,12 +35,12 @@
   margin-bottom: 0;
 }
 
-.sidenav .mat-menu-item.backButton {
+.sidenav .mat-mdc-menu-item.backButton {
   background-color: #d3d3d370;
   padding-left: 0;
 }
 
-.sidenav .mat-menu-item.backButton .mat-icon {
+.sidenav .mat-mdc-menu-item.backButton .mat-icon {
   float: left;
 }
 

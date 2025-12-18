@@ -1,6 +1,7 @@
-<div class="about-us container" fxLayout="row wrap">
-  <h1 class="center pageTitle" fxFlexFill>The Human Phenotype Ontology</h1>
-  <div fxFlex="100" fxFlex.gt-sm=70 fxFlexOffset.gt-sm="15">
+<div class="about-us container flex flex-row flex-wrap">
+  <h1 class="center pageTitle flex-[1_1_100%]">The Human Phenotype Ontology</h1>
+  <div class="sm:mx-[5%]">
+    <div class="flex-[100%] sm:flex-[70%]">
       <h3 class="sub-title">Who we are!</h3>
       <p>
         The Human Phenotype Ontology (HPO) project provides an ontology of medically relevant phenotypes,
@@ -31,72 +32,62 @@
         abnormalities.
       </p>
       <button mat-flat-button color="primary" routerLink="/browse/term/HP:0000001">
-      Explore Ontology
-      <mat-icon>keyboard_arrow_right</mat-icon>
-    </button>
+        Explore Ontology
+        <mat-icon>keyboard_arrow_right</mat-icon>
+      </button>
       &nbsp;
       <a class="science-direct"
-       href="https://www.sciencedirect.com/topics/medicine-and-dentistry/human-phenotype-ontology"
-       mat-stroked-button target="_blank">HPO on Science Direct</a>
-  </div>
-  <div class="about-us-banner" fxFlex="100" fxFlex.gt-sm=70 fxFlexOffset.gt-sm="15" fxLayout="column" fxLayout.gt-sm="row"  fxLayoutAlign="space-evenly center">
-    <div class="banner-card" routerLink="/community">
-      <div class="icon-wrapper">
-        <mat-icon>groups</mat-icon>
-      </div>
-      <h3>Our Team</h3>
+         href="https://www.sciencedirect.com/topics/medicine-and-dentistry/human-phenotype-ontology"
+         mat-stroked-button target="_blank">HPO on Science Direct</a>
     </div>
-    <div class="banner-card" routerLink="/resources/publications">
-      <div class="icon-wrapper">
-        <mat-icon>menu_book</mat-icon>
-      </div>
-      <h3>Publications</h3>
-    </div>
-    <div class="banner-card" routerLink="/citation">
-      <div class="icon-wrapper">
-        <mat-icon>history_edu</mat-icon>
-      </div>
-      <h3>Cite Us</h3>
-    </div>
-  </div>
-  <div class="history" fxFlex="100" fxFlex.gt-sm=70 fxFlexOffset.gt-sm="15">
-    <h3 class="sub-title">Where it started!</h3>
-    <p>The Human Phenotype Ontology was initially developed at the <a href="https://www.charite.de/" target="__blank">Charité University Hospital</a> in Berlin, Germany by
-      Peter N Robinson and Sebastian K&ouml;hler with support from Sandra Doelken and Sebastian Bauer. Very soon after the
-      <a href="https://www.ncbi.nlm.nih.gov/pubmed/18950739" target="__blank">initial publication</a>  of the
-      HPO in 2008, a collaboration was initiated with researchers from the <a href="http://www.lbl.gov/" target="__blank">Lawrence Berkeley National Laboratory</a>
-      (Chris Mungall, Suzi Lewis, and Nicole Washington), the <a href="https://www.cam.ac.uk/" target="__blank">University of Cambridge</a> (Michael Ashburner
-      Paul Schofield, George Gkoutos), and the <a href="https://uoregon.edu/" target="__blank">University of Oregon</a> (Melissa Haendel, Monte Westerfield).
-      These groups have developed a scheme for <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2774506/" target="__blank">Linking human diseases
-        to animal models using ontology-based phenotype annotation</a>. In parallel, the DECIPHER project at the
-      <a href="http://www.sanger.ac.uk/" target="__blank">Wellcome Trust Sanger Institute</a> led by Helen Firth and Matt Hurles, conducted clinical
-      workshops to extend the HPO and have provided an enormous amount of support and input in subsequent years.
-    </p>
-    <p>
-      The initially unfunded collaboration grew over the years, and has now become the <a href="https://monarchinitiative.org/" target="__blank">Monarch Initiative</a>, now an NIH-supported
-      project that aims to integrate biological information using semantics, and to use computational reasoning to
-      enable phenotype comparison both within and across species, with the ultimate goal of improving biomedical research.
-    </p>
-    <a class="mat-btn" mat-flat-button color="primary" href="https://monarchinitiative.org/about/monarch" target="_blank">
-      Learn more about the Monarch Initiative
-      <mat-icon>keyboard_arrow_right</mat-icon>
-    </a>
-  </div>
-  <div class="contact-banner" fxFlex="100" fxFlex.gt-sm=70 fxFlexOffset.gt-sm="15" fxLayout="column" fxLayout.gt-sm="row"
-       fxLayoutAlign="center center">
-        <div class="contact-banner-title-wrapper" fxFlex fxLayout="row" fxLayoutAlign="center center">
-          <h2 class="contact-banner-title" fxFlex>
-            <mat-icon class="contact-icon">contact_support</mat-icon>
-            Still have some questions?
-          </h2>
+    <div class="about-us-banner flex-[100%] sm:flex-[70%] flex flex-col sm:flex-row items-center justify-evenly gap-4">
+      <div class="banner-card" routerLink="/browse/term/HP:0001166">
+        <div class="icon-wrapper">
+          <mat-icon>travel_explore</mat-icon>
         </div>
-        <div class="contact-banner-btn-wrapper" fxFlex.lt-md="120" fxLayout="column" fxLayout.gt-sm="row"
-        fxLayoutAlign.gt-sm="end center" fxLayoutAlign="space-evenly center">
-          <button class="contact-btn" mat-stroked-button routerLink="/faq">Frequently Asked Questions</button>
-          <button class="contact-btn" mat-stroked-button routerLink="/contact">Contact us</button>
-          <button class="contact-btn" mat-stroked-button (click)="utilityService.openExternalUrl('https://github.com/obophenotype/human-phenotype-ontology/issues/new/choose')">
-            Contribute
-          </button>
+        <h3>Browse</h3>
+      </div>
+      <div class="banner-card" routerLink="/resources/publications">
+        <div class="icon-wrapper">
+          <mat-icon>menu_book</mat-icon>
         </div>
+        <h3>Publications</h3>
+      </div>
+      <div class="banner-card" routerLink="/citation">
+        <div class="icon-wrapper">
+          <mat-icon>history_edu</mat-icon>
+        </div>
+        <h3>Cite Us</h3>
+      </div>
+    </div>
+    <div class="history flex-[100%] sm:flex-[70%]">
+      <h3 class="sub-title">Where it started!</h3>
+      <p>The Human Phenotype Ontology was initially developed at the <a href="https://www.charite.de/" target="__blank">Charité University Hospital</a> in Berlin, Germany by
+        Peter N Robinson and Sebastian K&ouml;hler with support from Sandra Doelken and Sebastian Bauer. Very soon after the
+        <a href="https://www.ncbi.nlm.nih.gov/pubmed/18950739" target="__blank">initial publication</a>  of the
+        HPO in 2008, a collaboration was initiated with researchers from the <a href="http://www.lbl.gov/" target="__blank">Lawrence Berkeley National Laboratory</a>
+        (Chris Mungall, Suzi Lewis, and Nicole Washington), the <a href="https://www.cam.ac.uk/" target="__blank">University of Cambridge</a> (Michael Ashburner
+        Paul Schofield, George Gkoutos), and the <a href="https://uoregon.edu/" target="__blank">University of Oregon</a> (Melissa Haendel, Monte Westerfield).
+        These groups have developed a scheme for <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2774506/" target="__blank">Linking human diseases
+          to animal models using ontology-based phenotype annotation</a>. In parallel, the DECIPHER project at the
+        <a href="http://www.sanger.ac.uk/" target="__blank">Wellcome Trust Sanger Institute</a> led by Helen Firth and Matt Hurles, conducted clinical
+        workshops to extend the HPO and have provided an enormous amount of support and input in subsequent years.
+      </p>
+    </div>
+    <div class="contact-banner flex-[100%] sm:flex-[70%] flex flex-col sm:flex-row items-center">
+      <div class="contact-banner-title-wrapper flex flex-row items-center justify-center sm:justify-start w-full sm:w-auto sm:flex-[1_1_0]">
+        <h2 class="contact-banner-title flex items-center">
+          <mat-icon class="contact-icon">contact_support</mat-icon>
+          Still have some questions?
+        </h2>
+      </div>
+      <div class="contact-banner-btn-wrapper flex flex-col sm:flex-row gap-2 w-full sm:w-auto sm:flex-[1_1_0] sm:justify-end">
+        <button class="contact-btn" mat-stroked-button routerLink="/faq">Frequently Asked Questions</button>
+        <button class="contact-btn" mat-stroked-button routerLink="/contact">Contact us</button>
+        <button class="contact-btn" mat-stroked-button (click)="utilityService.openExternalUrl('https://github.com/obophenotype/human-phenotype-ontology/issues/new/choose')">
+          Contribute
+        </button>
+      </div>
+    </div>
   </div>
 </div>

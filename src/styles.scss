@@ -1,15 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
-@import url("https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css");
-@import '@angular/material/prebuilt-themes/indigo-pink.css';
-
-html {
-  line-height: 1.15;
-  font-size: 10px;
-}
-
-body {
-  line-height: 1.42857143;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+html, body {
+  line-height: 1;
   font-size: 14px;
+  height: 100%;
+  width: 100%;
 }
 
 * {
@@ -131,6 +128,22 @@ samp {
   font-size: 1em;
 }
 
+h1 {
+  font-size: 1.6rem;
+}
+
+h2 {
+  font-size: 1.4rem;
+}
+
+h3 {
+  font-size: 1.2rem;
+}
+
+h4 {
+  font-size: 1rem;
+}
+
 pre {
   margin-top: 0;
   margin-bottom: 1rem;
@@ -181,11 +194,6 @@ a:hover {
   text-decoration: underline;
 }
 
-.main {
-  margin-top: 15px;
-  margin-bottom: 15px;
-}
-
 .hr {
   border-bottom: 1px solid rgba(208, 211, 212, .8);
   width: 250px;
@@ -193,7 +201,9 @@ a:hover {
 }
 
 p {
-  font-size: 14px;
+  font-size: 1.1rem;
+  margin-block-start: 1rem;
+  margin-block-end: 1rem;
 }
 
 strong {
@@ -216,6 +226,10 @@ table, th, td {
   font-size: 10px;
 }
 
+.medium-icon {
+  font-size:  14px;
+}
+
 .crossout {
   text-decoration: line-through;
 }
@@ -226,24 +240,23 @@ table, th, td {
   height: auto;
 }
 
-.mat-menu-item {
+.mat-mdc-menu-item {
   font-size: 14px !important;
 }
 
-a.mat-btn .mat-button-wrapper {
+a.mat-btn .mdc-button__label {
   color: white;
   font-weight: bold;
 }
 
 .container {
   padding: 1.5rem;
-  margin: 0 5rem;
+  margin: 0 auto
 }
 
 @media screen and (max-width: 767px) {
   .container {
     padding: 1.5rem;
-    margin: 0 2.5rem;
   }
 }
 
@@ -256,7 +269,7 @@ a.mat-btn .mat-button-wrapper {
   margin: 0;
 }
 
-.mat-drawer {
+.mat-mdc-drawer {
   z-index: 4;
 }
 
@@ -266,7 +279,7 @@ a.mat-btn .mat-button-wrapper {
   flex-direction: column;
 }
 
-.mat-raised-button {
+.mat-mdc-raised-button {
   border-radius: 0 !important;
 }
 
@@ -288,8 +301,23 @@ a.mat-btn .mat-button-wrapper {
   padding: 15px;
 }
 
+.info-section {
+  .mdc-list-item__content{
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+  .mat-mdc-list-item {
+    height: 24px;
+    padding-left: 0;
+  }
 
-.info-body.teaser .mat-list-item-content {
+  .mat-mdc-list-item-unscoped-content {
+    display: flex;
+    width: 100%;
+  }
+}
+.info-body.teaser .mat-mdc-list-item-content {
   padding: 0 !important;
 }
 
@@ -322,7 +350,7 @@ a.mat-btn .mat-button-wrapper {
   }
 }
 
-.mat-menu-panel {
+.mat-mdc-menu-panel {
   max-width: 380px !important;
   border-radius: 0 !important;
 }
@@ -333,7 +361,7 @@ a.mat-btn .mat-button-wrapper {
 
 @media (max-width: 767px) {
 
-  .mat-toolbar-single-row {
+  .mat-mdc-toolbar-single-row {
     height: auto !important;
     flex-wrap: wrap;
   }
@@ -354,8 +382,7 @@ a.mat-btn .mat-button-wrapper {
 }
 
 .item-title {
-  font-size: 24px;
-  text-align: center;
+  font-size: 1.6rem;
   text-shadow: 1px 1px #D0D3D4;
 }
 
@@ -374,13 +401,13 @@ a.mat-btn .mat-button-wrapper {
   margin-bottom: 10px;
 }
 
-.item-summary .mat-list-item-content {
+.item-summary .mat-mdc-list-item-content {
   font-size: 14px;
   padding: 5px !important;
   display: block !important;
 }
 
-.item-summary .mat-list-item {
+.item-summary .mat-mdc-list-item {
   height: auto !important;
 }
 
@@ -389,12 +416,12 @@ a.mat-btn .mat-button-wrapper {
   margin-bottom: 10px;
 }
 
-.item-summary .mat-card-content .associations h4 {
+.item-summary .mat-mdc-card-content .associations h4 {
   float: left;
 }
 
 hr.underline-hr {
-  margin: 0;
+  margin: .5rem 0;
   height: 1px;
 }
 
@@ -402,91 +429,125 @@ hr.underline-hr {
   margin: 0 0 15px 0;
 }
 
-/* Mat-Tab-group colors across multiple pages */
+/* mat-mdcTab-group colors across multiple pages */
+.hpo-group-tab {
+  .mat-mdc-tab {
+    &.mdc-tab--active {
+      color: white;
+      background-color: rgba(41, 101, 124, 1);
+      font-weight: 900;
+      opacity: 1;
 
-.hpo-group-tab .mat-table {
-  overflow: auto;
-  max-height: 500px;
-}
+      &:focus, &:hover  {
+        & .mdc-tab__text-label {
+          color: white;
+        }
+        & .mdc-tab-indicator__content--underline {
+          border-color: rgba(41, 101, 124, 1);
+        }
+      }
 
-.hpo-group-tab .mat-header-row {
-  background-color: rgb(78, 139, 162);
-}
+      & .mdc-tab__text-label {
+        color: white;
+      }
+    }
+    .mdc-tab-indicator__content--underline {
+      border-color: rgba(41, 101, 124, 1);
+    }
+  }
+  .mat-mdc-table {
+    overflow: auto;
+    max-height: 500px;
+  }
+  .mat-mdc-header-row {
+    background-color: rgb(78, 139, 162);
+  }
+  .mat-mdc-tab-header {
+    border-top: 1px solid rgba(0, 0, 0, 0.12);
+    border-bottom: 5px solid rgba(41, 101, 124, 1)
+  }
+  .mat-mdc-tab-body-wrapper {
+    border-right: 5px solid rgba(41, 101, 124, 1);
+    border-bottom: 5px solid rgba(41, 101, 124, 1);
+    border-left: 5px solid rgba(41, 101, 124, 1);
+  }
+  .mat-mdc-tab-label {
+    border-right: 1px solid rgba(0, 0, 0, 0.12);
+    font-size: 16px;
+  }
+  .mat-mdc-header-row {
+    .mat-mdc-header-cell {
+      color: white;
+      font-size: 14px;
+    }
+  }
+  .mat-mdc-text-field-wrapper:hover .mat-mdc-form-field-focus-overlay {
+    opacity: 0;
+  }
+  .associations .mat-mdc-mdc-table {
+    max-height: 346px;
+  }
+  .filter-container {
+    & .filter-header, .mdc-text-field--filled {
+      background-color: rgb(78, 139, 162);
+    }
 
-.hpo-group-tab .mat-header-row .mat-header-cell {
-  color: white;
-}
+    & .filter-header {
+      .mdc-line-ripple {
+        &:before {
+          border-bottom-color: white !important;
+        }
 
-.hpo-group-tab .associations .mat-table {
-  max-height: 346px;
-}
-
-.hpo-group-tab .mat-tab-label {
-  border-right: 1px solid rgba(0, 0, 0, 0.12);
-  font-size: 16px;
-}
-
-.hpo-group-tab .mat-tab-header {
-  border-top: 1px solid rgba(0, 0, 0, 0.12);
-  border-bottom: 5px solid rgba(41, 101, 124, 1)
-}
-
-.hpo-group-tab .mat-tab-body-wrapper {
-  border-right: 5px solid rgba(41, 101, 124, 1);
-  border-bottom: 5px solid rgba(41, 101, 124, 1);
-  border-left: 5px solid rgba(41, 101, 124, 1);
-}
-
-.hpo-group-tab .mat-tab-group.mat-primary .mat-ink-bar {
-  display: none !important;
-}
-
-.hpo-group-tab .mat-tab-group.mat-primary .mat-tab-label:not(.mat-tab-disabled):focus {
-  background-color: rgba(41, 101, 124, 1);
-}
-
-.hpo-group-tab .mat-tab-label-active {
-  background-color: rgba(41, 101, 124, 1);
-  font-weight: 900;
-  opacity: 1;
-  color: white;
-}
-
-.hpo-group-tab .mat-header-cell {
-  font-size: 14px;
-}
-
-.hpo-group-tab .mat-paginator {
-  font-size: 14px;
-}
-
-
-.hpo-group-tab .filter-container .filter-header {
-  background-color: rgb(78, 139, 162);
-}
-
-.hpo-group-tab .filter-container .filter-header .mat-form-field-label {
-  color: white;
-}
-
-.hpo-group-tab .filter-container .filter-header .mat-form-field-underline {
-  background-color: rgba(255, 255, 255, 0.42);
-}
-
-.hpo-group-tab .filter-container .filter-header .mat-form-field-ripple {
-  background-color: whitesmoke;
-}
-
-.hpo-group-tab .filter-container .filter-header .mat-form-field-ripple .mat-form-field-label {
-  color: white;
-}
-
-.hpo-group-tab .filter-container .filter-header .mat-form-field-ripple .mat-focused .mat-form-field-label {
-  color: white;
-}
-
-.hpo-group-tab .filter-container .filter-header .mat-input-element {
-  color: white;
+        &:after {
+          border-bottom-color: whitesmoke;
+        }
+      }
+      .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-text-field__input {
+        color: white !important;
+      }
+      .mat-mdc-form-field-label {
+        color: white;
+      }
+      .mdc-line-ripple {
+        background-color: rgba(255, 255, 255, 0.42);
+      }
+      .mat-mdc-form-field-ripple {
+        background-color: whitesmoke;
+        .mat-mdc-form-field-label {
+          color: white;
+        }
+        .mat-mdc-focused {
+          .mat-mdc-form-field-label {
+            color: white;
+          }
+        }
+      }
+      .mat-mdc-input-element {
+        color: white;
+      }
+      .mdc-text-field__input, .mdc-text-field--filled {
+        height: 40px !important;
+        color: white;
+        opacity: 1;
+        padding-left: 0;
+        &::placeholder {
+          opacity: 1;
+          color: white;
+        }
+        &::-moz-placeholder {
+          opacity: 1;
+          color: white;
+        }
+        &::-webkit-input-placeholder{opacity:1}
+        & .mat-mdc-form-field-infix {
+          padding: .5rem 0 .5rem 0;
+        }
+      }
+    }
+  }
+  .mat-mdc-paginator {
+    font-size: 14px;
+  }
 }
 
 .search-highlight {
@@ -499,32 +560,32 @@ hr.underline-hr {
   color: white !important;
 }
 
-.mat-sort-header-stem, .mat-sort-header-arrow {
+.mat-mdc-sort-header-stem, .mat-mdc-sort-header-arrow {
   color: white !important;
   opacity: .6 !important;
 }
 
-.mat-stepper-horizontal, .mat-stepper-vertical {
+.mat-mdc-stepper-horizontal, .mat-mdc-stepper-vertical {
   background-color: unset !important;
 }
 
-.mat-expanded .mat-expansion-panel-header {
+.mat-mdc-expanded .mat-mdc-expansion-panel-header {
     background-color: rgba(41, 101, 124, 1);
 }
 
-.mat-expanded .mat-expansion-panel-header:hover, .mat-expanded .mat-expansion-panel-header:focus  {
+.mat-mdc-expanded .mat-mdc-expansion-panel-header:hover, .mat-mdc-expanded .mat-mdc-expansion-panel-header:focus  {
   background: rgba(41, 101, 124, 1) !important;
 }
 
-.mat-expanded .mat-expansion-panel-header-title {
+.mat-mdc-expanded .mat-mdc-expansion-panel-header-title {
   color: white;
 }
 
-.mat-button-basem .mat-button-wrapper {
+.mat-mdc-button-basem .mat-mdc-button-wrapper {
   vertical-align: middle !important;
 }
 
-a.mat-button-base {
+a.mat-mdc-button-base {
   text-decoration: none;
 }
 
@@ -546,22 +607,23 @@ a.mat-button-base {
     }
 }
 
-.filter-container .mat-form-field {
+.filter-container .mat-mdc-form-field {
   width: 100%;
 }
 
-.translation-chips .mat-chip-list-wrapper {
+.translation-chips .mat-mdc-chip-list-wrapper {
   padding: 1rem 0 1rem 0;
 }
 
-.mat-chip.mat-standard-chip.mat-chip-selected.mat-primary {
-  background: #ec9736;
-}
-
- .mat-standard-chip:focus::after {
+.mat-mdc-standard-chip:focus::after {
    opacity: unset;
    background: unset;
- }
+}
+
+.mdc-evolution-chip--selected .mdc-evolution-chip__checkmark {
+  display: none !important;
+}
+
 
 .associationsPaging {
   text-align: right;
@@ -582,4 +644,12 @@ a.mat-button-base {
 
 .source .material-icons,.material-icons-outlined {
   font-size: 12px;
+}
+
+.nav-hover:hover {
+  color: lightgray !important;
+}
+
+.mat-stepper-horizontal {
+   background: unset !important;
 }

@@ -1,17 +1,19 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import {AnnotationsDownloadComponent} from './annotations-download.component';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-
+import { AnnotationsDownloadComponent } from './annotations-download.component';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { GlobalMaterialModules } from '../../../shared/modules/global.module';
 describe('AnnotationsComponent', () => {
   let component: AnnotationsDownloadComponent;
   let fixture: ComponentFixture<AnnotationsDownloadComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      declarations: [AnnotationsDownloadComponent]
-    })
+    declarations: [AnnotationsDownloadComponent],
+    imports: [GlobalMaterialModules],
+    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+})
       .compileComponents();
   }));
 

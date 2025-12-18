@@ -1,11 +1,11 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {PublicationsService} from './publications.service';
-import {Publication} from '../../../browser/models/models';
-import {UntypedFormControl} from '@angular/forms';
-import {from} from 'rxjs';
-import {distinct, flatMap, map, toArray} from 'rxjs/operators';
-import {MatTableDataSource} from '@angular/material/table';
-import {MatSort} from '@angular/material/sort';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { PublicationsService } from './publications.service';
+import { Publication } from '../../../browser/models/models';
+import { UntypedFormControl } from '@angular/forms';
+import { from } from 'rxjs';
+import { distinct, mergeMap, map, toArray } from 'rxjs/operators';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
 
 
 @Component({
@@ -24,7 +24,7 @@ export class PublicationsComponent implements OnInit {
   category = 'all';
   topics = new UntypedFormControl();
   topicList = [];
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   ngOnInit() {
     this.pubService.getPublications().subscribe(publications => {
@@ -38,7 +38,7 @@ export class PublicationsComponent implements OnInit {
   findUniquePublicationTopics(pbs: Publication[]) {
     const topics$ = from(pbs);
     topics$.pipe(
-      flatMap(pb => pb.topicList),
+      mergeMap(pb => pb.topicList),
       distinct(),
       map(pb => pb.toUpperCase()),
       toArray()

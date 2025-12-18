@@ -1,21 +1,19 @@
-<mat-toolbar [ngClass]="{'navbar-home': !showSearch }" class="mat-elevation-z1 navbar">
+<mat-toolbar [ngClass]="{'navbar-home': !showSearch }" class="mat-elevation-z1 navbar max-sm:flex-wrap flex-nowrap">
   <div class="nav-brand" routerLink="/">
     <img src="assets/hpo-logo-white-no-words.png" class="nav-logo"/>
   </div>
   <!-- Main Desktop Navbar -->
-  <div class="nav-components" fxHide fxShow.gt-sm>
+  <div class="nav-components hidden sm:block">
     <button mat-button routerLink="about">About</button>
     <button mat-button [matMenuTriggerFor]="downloadsMenu">Data
       <mat-icon>arrow_drop_down</mat-icon>
     </button>
+    <a class="nav-hover" mat-button href="https://obophenotype.github.io/human-phenotype-ontology/" target="_blank">Documentation
+      <mat-icon class="open-in-new">open_in_new</mat-icon>
+    </a>
     <button mat-button [matMenuTriggerFor]="toolsMenu">
       Tools
       <mat-icon>arrow_drop_down</mat-icon>
-    </button>
-    <button mat-button [matMenuTriggerFor]="resourcesMenu">Resources
-      <mat-icon>arrow_drop_down</mat-icon>
-    </button>
-    <button mat-button routerLink="/community">Community
     </button>
   </div>
   <!-- Tools Menu and SubMenus -->
@@ -24,7 +22,6 @@
     <button mat-menu-item [matMenuTriggerFor]="genomicMenu">Genomic Tools</button>
     <button mat-menu-item [matMenuTriggerFor]="phenomicMenu">Phenomic Tools</button>
     <button mat-menu-item routerLink="tools/hpo-browser"> Other HPO Browsers</button>
-    <button mat-menu-item routerLink="tools/workbench"> HPO Workbench</button>
   </mat-menu>
   <mat-menu class="hpo-menus" #genomicMenu="matMenu">
     <button mat-menu-item routerLink="tools/genomiser"> Genomiser: Analyze non-coding variants</button>
@@ -35,37 +32,26 @@
     <button mat-menu-item routerLink="tools/phenogramviz"> PhenoGramViz: Evaluation of CNV's</button>
     <button mat-menu-item routerLink="tools/loinc2hpo"> LOINC2HPO: Integration of Laboratory Tests</button>
   </mat-menu>
-
-  <!-- Help Menu and SubMenus -->
-  <mat-menu [overlapTrigger]="false" #resourcesMenu="matMenu">
-    <button mat-menu-item routerLink="resources/faq"> FAQ</button>
-    <button mat-menu-item routerLink="contact/"> Contact Us</button>
-    <button mat-menu-item routerLink="resources/clinician-guide"> Clinicians Guide</button>
-    <button mat-menu-item routerLink="resources/contributing"> Contributing</button>
-
-  </mat-menu>
   <mat-menu [overlapTrigger]="false" #downloadsMenu="matMenu">
     <button mat-menu-item routerLink="data/ontology"> Ontology</button>
     <button mat-menu-item routerLink="data/annotations"> Annotations</button>
     <button mat-menu-item routerLink="data/api">
       API <span class="new-badge">new</span>
     </button>
-    <button mat-menu-item routerLink="resources/phenopacket"> Phenopacket</button>
     <button mat-menu-item [matMenuTriggerFor]="otherMenu"> Translation</button>
   </mat-menu>
   <mat-menu #otherMenu="matMenu">
-    <button mat-menu-item routerLink="data/translations"> Translations and Mapping</button>
+    <button mat-menu-item (click)="utility.openExternalUrl('https://obophenotype.github.io/hpo-translations/')">Translations</button>
     <button mat-menu-item routerLink="data/layperson"> Layperson Synonyms</button>
   </mat-menu>
   <!-- ------ -->
   <div class="fill-remaining-space">
-
   </div>
-  <button class="mobile-menu" fxShow fxHide.gt-sm color="white" mat-button (click)="navOpen()">
+  <button class="mobile-menu sm-hidden" color="white" mat-button (click)="navOpen()">
     <mat-icon>menu</mat-icon>
   </button>
   <!-- Mobile Navbar -->
-  <div *ngIf="showSearch" class="navbar-search-wrapper">
+  <div *ngIf="showSearch" class="navbar-search-wrapper content-center">
     <app-search-bar></app-search-bar>
   </div>
 </mat-toolbar>

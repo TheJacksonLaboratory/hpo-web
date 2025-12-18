@@ -7,36 +7,46 @@
   background: -ms-linear-gradient(left, rgba(41, 101, 124, 1) 0%, rgba(39, 86, 105, 1) 46%, rgba(39, 84, 103, 1) 51%, rgba(43, 63, 78, 1) 88%, rgba(46, 56, 68, 1) 100%);
   background: linear-gradient(to right, rgba(41, 101, 124, 1) 0%, rgba(39, 86, 105, 1) 46%, rgba(39, 84, 103, 1) 51%, rgba(43, 63, 78, 1) 88%, rgba(46, 56, 68, 1) 100%);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#29657c', endColorstr='#2e3844', GradientType=1);
+
+  & .nav-components {
+    & .mat-mdc-button {
+      margin-left: 15px;
+      font-size: 1rem;
+      font-weight: bold;
+      color: white;
+      flex-direction: row-reverse;
+      & .mat-icon:not(.open-in-new) {
+        font-size: 1.2rem;
+        height: 1.2rem;
+        width: 1.2rem;
+        margin-left: .5rem;
+        margin-top: .25rem;
+      }
+      & .mat-icon.open-in-new {
+        font-size: 1rem;
+        height: 1rem;
+        width: 1rem;
+        margin-left: .5rem;
+      }
+    }
+  }
+
+  & .nav-brand {
+    outline: none;
+    .nav-logo {
+      height: 40px;
+      width: 40px;
+      float: left;
+      cursor: pointer;
+      &:hover {
+        opacity: .8;
+      }
+    }
+  }
 }
 
-.nav-components {
+.mobile-menu.mat-mdc-button {
   color: white;
-}
-
-.nav-brand .nav-logo {
-  height: 50px;
-  width: 50px;
-  margin: 0 0 0 1rem;
-  float: left;
-  cursor: pointer;
-}
-
-.nav-brand .nav-logo:hover {
-  opacity: .8;
-}
-
-.nav-brand {
-  outline: none;
-}
-
-.mobile-menu.mat-button {
-  color: white;
-}
-
-.nav-components .mat-button {
-  margin-left: 15px;
-  font-size: 1.6rem;
-  font-weight: bold;
 }
 
 .fill-remaining-space {
@@ -82,7 +92,7 @@
   vertical-align: super;
 }
 
-.mat-badge {
+.mdc-badge {
   position: unset;
   display: inline-block;
   .notification {
@@ -98,7 +108,6 @@
 
 .navbar-search-wrapper {
   line-height: 20px;
-  padding: 10px 0 0 15px;
   font-size: 14px;
   height: 100%;
 }
@@ -108,7 +117,7 @@
   z-index: 20;
 }
 
-button.mat-menu-item a {
+button.mdc-menu-item a {
   color: inherit !important;
   text-decoration: none;
   font-family: inherit;
@@ -120,7 +129,7 @@ button.mat-menu-item a {
 }
 
 @media (max-width: 767px) {
-  .mobile-menu.mat-button {
+  .mobile-menu.mdc-button {
     padding: 0 0 0 25px;
   }
 
@@ -149,6 +158,13 @@ button.mat-menu-item a {
     height: auto !important;
   }
 }
+
+@media (min-width: 640px) {
+  .sm-hidden {
+    display: none !important;
+    }
+ }
+
 
 .ontoversion {
   color: white;

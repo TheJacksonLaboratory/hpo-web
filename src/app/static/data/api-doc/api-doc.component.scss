@@ -1,13 +1,9 @@
 .api {
-  .deprecated-card {
-    opacity: 0.4;
+  .mat-mdc-card {
+    border-radius: 0;
   }
 
-  .mat-card {
-    margin: 0 0 0 1rem;
-  }
-
-  .mat-card-header-text {
+  .mat-mdc-card-header-text {
     margin: unset;
   }
 }

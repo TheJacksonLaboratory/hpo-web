@@ -1,12 +1,12 @@
-import {Component, ViewChild} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {MatTableDataSource} from '@angular/material/table';
-import {MatSort} from '@angular/material/sort';
-import {MatPaginator} from '@angular/material/paginator';
+import { Component, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
 import { UtilityService } from '../../../shared/utility/utility.service';
-import { Disease, MedicalActionSourceExtended, SimpleTerm, Term, TermCategory } from '../../models/models';
+import { Disease, Gene, MedicalActionSourceExtended, SimpleTerm, Term, TermCategory } from '../../models/models';
 import { AnnotationService } from '../../services/annotation/annotation.service';
-import {DialogService} from '../../../shared/dialog-excel-download/dialog.service';
+import { DialogService } from '../../../shared/dialog-excel-download/dialog.service';
 
 @Component({
   selector: 'app-disease',
@@ -22,14 +22,11 @@ export class DiseaseComponent {
   geneColumns = ['id', 'name'];
   medicalActionColumns = ['id', 'name', 'relations', 'targets']
   medicalActionsDataSource: MatTableDataSource<MedicalActionSourceExtended>;
-  geneDataSource: MatTableDataSource<SimpleTerm>;
+  geneDataSource: MatTableDataSource<Gene>;
 
   isLoading = true;
   catTermSources: TermCategory[] = [];
   @ViewChild(MatSort) sort: MatSort;
-
-  @ViewChild('genePaginator', {static: true}) genePaginator: MatPaginator;
-
   constructor(private route: ActivatedRoute,
               public dialogService: DialogService, public annotationService: AnnotationService,
               public utilityService: UtilityService,
@@ -47,7 +44,6 @@ export class DiseaseComponent {
         this.catTermSources = [];
         this.setCatTermsDBSource(data.categories);
         this.geneDataSource = new MatTableDataSource(data.genes);
-        this.geneDataSource.paginator = this.genePaginator;
         this.medicalActionsDataSource = new MatTableDataSource(data.medicalActions);
         this.isLoading = false;
       }, (error) => {
@@ -79,7 +75,7 @@ export class DiseaseComponent {
         return fterm;
       });
       const termSource = new MatTableDataSource(catTermSource);
-      this.catTermSources.push({catLabel: key, annotationCount: values.length, termSource});
+      this.catTermSources.push({ catLabel: key, annotationCount: values.length, termSource });
     });
 
     const sort_categories = ['Inheritance', 'Growth', 'Head and neck', 'Ear', 'Eye', 'Cardiovascular', 'Respiratory System',

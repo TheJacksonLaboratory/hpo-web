@@ -1,28 +1,3 @@
-.term-association .mat-column-ontologyId {
-  max-width: 150px;
-}
-
-.term-association .mat-column-onset, .term-association .mat-column-frequency, .term-association .mat-column-sources {
-  max-width: 175px;
-}
-
-.term-association .mat-column-sources .material-icons, .term-association .mat-column-sources .material-icons-outlined {
-  font-size: 18px;
-}
-
-.mat-column-dbDiseases {
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-}
-
-.gene-association .mat-column-diseaseName {
-  width: 425px;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-}
-
 .disease-details-tab-group {
   border: 1px solid #e8e8e8;
 }
@@ -64,8 +39,4 @@
   display: block !important;
   padding-top: .25rem;
   padding-bottom: .25rem;
-}
-
-.mat-row {
-  border-bottom-color: rgba(0, 0, 0, 0.25) !important;
 }

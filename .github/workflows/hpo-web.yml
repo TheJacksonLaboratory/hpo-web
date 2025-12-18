@@ -24,15 +24,15 @@ jobs:
     - name: Configure Node
       uses: actions/setup-node@v3
       with:
-        node-version: 16.10.0
+        node-version: 24.5.0
         cache: 'npm'
 
     - name: Lint, Test, Build
       run: |
         npm install
         npm run lint
-        npm run testci
-        npm run buildProd --if-present
+        npm run test:ci
+        npm run build:prod --if-present
 
     - name: Set Project Version
       run: echo "PROJECT_VERSION=$(cat package.json | jq -r '.version')" >> "$GITHUB_ENV"
@@ -42,7 +42,7 @@ jobs:
 
     - name: Deploy to GCS
       run: |
-        gsutil -m cp -r dist/* "$GCLOUD_BUCKET/hpo-web-$PROJECT_VERSION-$GIT_HASH/"
+        gsutil -m cp -r dist/hpo-web/* "$GCLOUD_BUCKET/hpo-web-$PROJECT_VERSION-$GIT_HASH/"
         gsutil -m rm -f "$GCLOUD_BUCKET/*" || true
         gsutil -m rm -rf "$GCLOUD_BUCKET/assets/" || true
         gsutil -m cp -r "$GCLOUD_BUCKET/hpo-web-$PROJECT_VERSION-$GIT_HASH/*"  "$GCLOUD_BUCKET/"

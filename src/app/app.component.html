@@ -13,23 +13,22 @@
       <div *ngIf="mobileNavSection === 'home'">
         <button mat-menu-item routerLink="/">Home</button>
         <button mat-menu-item (click)="sidenav.close()" routerLink="about"> About</button>
-        <button mat-menu-item (click)="mobileNavigate('dataMenu')"> Data
+        <button class="iconed" mat-menu-item (click)="mobileNavigate('dataMenu')"> Data
           <mat-icon>arrow_right</mat-icon>
         </button>
-        <button mat-menu-item (click)="mobileNavigate('toolsMenu')"> Tools
+        <button class="iconed" mat-menu-item (click)="mobileNavigate('toolsMenu')"> Tools
           <mat-icon>arrow_right</mat-icon>
         </button>
-        <button mat-menu-item (click)="mobileNavigate('resourcesMenu')"> Resources
+        <button class="iconed" mat-menu-item (click)="mobileNavigate('resourcesMenu')"> Resources
           <mat-icon>arrow_right</mat-icon>
         </button>
-        <button mat-menu-item (click)="sidenav.close()" routerLink="/community"> Community</button>
       </div>
       <div *ngIf="mobileNavSection === 'toolsMenu'">
         <button mat-menu-item routerLink="browse/profile-search"> Profile Search</button>
-        <button mat-menu-item (click)="mobileNavigate('genomicTools')">Genomic Tools
+        <button class="iconed" mat-menu-item (click)="mobileNavigate('genomicTools')">Genomic Tools
           <mat-icon>arrow_right</mat-icon>
         </button>
-        <button mat-menu-item (click)="mobileNavigate('phenomicTools')">Phenomic Tools
+        <button class="iconed" mat-menu-item (click)="mobileNavigate('phenomicTools')">Phenomic Tools
           <mat-icon>arrow_right</mat-icon>
         </button>
         <button mat-menu-item (click)="sidenav.close()" routerLink="tools/hpo-browser"> Other HPO Browsers</button>
@@ -50,14 +49,12 @@
       <div *ngIf="mobileNavSection === 'resourcesMenu'">
         <button mat-menu-item (click)="sidenav.close()" routerLink="resources/faq"> FAQ</button>
         <button mat-menu-item routerLink="contact/"> Contact Us</button>
-        <button mat-menu-item routerLink="resources/clinician-guide"> Clinicians Guide</button>
-        <button mat-menu-item routerLink="resources/contributing"> Contributing</button>
       </div>
       <div *ngIf="mobileNavSection === 'dataMenu'">
         <button mat-menu-item (click)="sidenav.close()" routerLink="data/ontology"> Ontology</button>
         <button mat-menu-item (click)="sidenav.close()" routerLink="data/annotations"> Annotations</button>
         <button mat-menu-item (click)="sidenav.close()" routerLink="resources/phenopacket"> Annotations</button>
-        <button mat-menu-item (click)="mobileNavigate('translationMenu')">Translation
+        <button class="iconed" mat-menu-item (click)="mobileNavigate('translationMenu')">Translation
           <mat-icon>arrow_right</mat-icon>
         </button>
         <a mat-menu-item href="/api/hpo/docs"> API</a>
@@ -71,7 +68,7 @@
 
     </mat-nav-list>
   </mat-sidenav>
-  <div class="main" fxLayout="column">
+  <div class="flex flex-col my-4 flex-auto">
     <router-outlet></router-outlet>
   </div>
   <app-footer class="mat-elevation-z4"></app-footer>

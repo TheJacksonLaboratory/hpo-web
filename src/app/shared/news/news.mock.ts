@@ -31,7 +31,7 @@ const december2019news = [
   }
 ];
 
-export const subMockNews = {'April 2018': april2018news, 'March 2018': march2018news};
+export const subMockNews = { 'April 2018': april2018news, 'March 2018': march2018news };
 export const allMockNews = {
   'April 2018': april2018news,
   'March 2018': march2018news,

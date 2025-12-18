@@ -24,7 +24,7 @@ $orange-hover: rgba(236, 151, 54, 0.8);
     }
   }
 
-  & .mat-select {
+  & .mat-mdc-select {
     background-color: #eaeaea;
     float: left;
     border-right: solid 1px lightgray;
@@ -44,7 +44,7 @@ $orange-hover: rgba(236, 151, 54, 0.8);
     z-index: 999;
 
     & .search-all {
-      padding: 0 10px 0 10px;
+      padding: 2px 10px 0 10px;
       margin: 0 0 10px 0;
       font-weight: 900;
       background-color: $blue-searchall-color;
@@ -58,37 +58,6 @@ $orange-hover: rgba(236, 151, 54, 0.8);
         position: relative;
         top: 4px;
       }
-
-      &:after {
-        content: '';
-        position: absolute;
-        top: 0;
-        right: 0;
-        border-right: 15px solid white;
-        border-top: 20px solid $blue-searchall-color;
-        width: 0;
-      }
-
-      &:before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        border-left: 15px solid white;
-        border-top: 20px solid $blue-searchall-color;
-        width: 0;
-      }
-
-      @media(max-width: 991px) {
-        &:after {
-          border-top: 21px solid $blue-searchall-color;
-        }
-
-        &:before {
-          border-top: 21px solid $blue-searchall-color;
-        }
-      }
-
       &:hover {
         opacity: .8;
       }
@@ -105,27 +74,11 @@ $orange-hover: rgba(236, 151, 54, 0.8);
     & .result-title {
       font-weight: bold;
       margin: 5px 0 0 0;
-      padding: 0 0 0 10px;
-      width: 60%;
+      padding: 5px;
+      width: 40%;
       background-color: $category-label-green;
       color: white;
       cursor: default;
-
-      &:after {
-        content: '';
-        position: absolute;
-        right: 40%;
-        border-right: 15px solid white;
-        border-top: 20px solid $category-label-green;
-        width: 0;
-      }
-
-      @media(max-width: 767px) {
-        width: 100%;
-        &:after {
-          display: none;
-        }
-      }
     }
 
     & .result-list {
@@ -134,6 +87,10 @@ $orange-hover: rgba(236, 151, 54, 0.8);
       color: black !important;
 
       & .result {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        justify-content: space-around;
         padding: 5px 10px 0 25px;
         height: 25px;
         outline: none;
@@ -152,6 +109,7 @@ $orange-hover: rgba(236, 151, 54, 0.8);
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
+          flex: 1 1 auto;
         }
 
         & .id {
@@ -165,8 +123,6 @@ $orange-hover: rgba(236, 151, 54, 0.8);
     & .term-result {
       & .result-list {
         & .result .id {
-          display: block;
-          float: left;
           width: 60px;
         }
       }
@@ -175,18 +131,7 @@ $orange-hover: rgba(236, 151, 54, 0.8);
     & .disease-result {
       & .result-list {
         & .result .id {
-          display: block;
-          float: left;
           width: 50px;
-        }
-      }
-    }
-
-    & .gene-result {
-      & .result-list {
-        & .result .id {
-          display: block;
-          float: left;
         }
       }
     }

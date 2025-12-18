@@ -1,11 +1,11 @@
 <h4 mat-dialog-title>{{data.id}}</h4>
-<div fxLayout="row wrap" fxLayoutAlign="center" mat-dialog-content>
-  <p fxFlex="100">Which association would you like to download?</p>
-  <div fxFlex="50">
+<div class="flex flex-row flex-wrap justify-center items-center" mat-dialog-content>
+  <p class="w-full">Which association would you like to download?</p>
+  <div class="w-1/2">
     <button class="dialog-selection" [disabled]="data.counts.diseases === 0"
             mat-raised-button [mat-dialog-close]="EntityType[this.data.supported_download[0]]">{{supported.first}}</button>
   </div>
-  <div fxFlex="50">
+  <div class="w-1/2">
     <button class="dialog-selection" [disabled]="data.counts.genes === 0"
             mat-raised-button [mat-dialog-close]="EntityType[this.data.supported_download[1]]">{{supported.second}}</button>
   </div>
