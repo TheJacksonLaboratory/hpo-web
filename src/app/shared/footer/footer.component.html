@@ -1,18 +1,18 @@
-<footer class="footer mat-elevation-z4 !flex flex-row flex-wrap">
-  <div class="group-links-wrapper flex md:flex-[33%] md:ml-[0] flex-[80%] ml-[10%] items-center">
+<footer class="footer mat-elevation-z4 flex flex-row flex-wrap">
+  <div class="group-links-wrapper flex md:flex-[33%] flex-[80%] items-center justify-evenly">
       <button mat-button routerLink="license">License</button>
       <button mat-button routerLink="funding">Funding</button>
       <button mat-button routerLink="citation">Cite</button>
       <button mat-button routerLink="disclaimer">Disclaimer</button>
       <button mat-button routerLink="resources/faq">FAQ</button>
   </div>
-  <div class="version md:flex-[33%] md:ml-[0] flex-[80%] ml-[10%]">
-    <p>{{version}}</p>
+  <div class="version md:flex-[33%] flex-[80%] flex justify-center py-4 sm:py-0">
+    <p class="h-full w-full content-center">{{version}}</p>
   </div>
-  <div class="logo-group-wrapper md:flex-[33%] md:ml-[0] flex-[80%] ml-[10%]">
+  <div class="logo-group-wrapper md:flex-[33%] flex-[80%] content-center py-4 sm:py-0">
     <div class="logo-group flex items-center justify-evenly">
       <a href="https://www.jax.org/" target="__blank">
-        <img class="footer-brand" src="assets/jax_logo.png"/>
+        <img class="footer-brand-larger" src="assets/jax_logo.png"/>
       </a>
       <a href="https://www.bihealth.org/" target="__blank">
       <img class="footer-brand-larger" src="assets/bih-logo.svg"/>

@@ -47,8 +47,12 @@
 
   .contact-banner {
     background-color: #29657c;
-    padding: 1rem 2rem 1rem 2rem;
+    padding: 1rem 1rem;
     color: white;
+
+    @media (min-width: 640px) {
+      padding: 1rem 2rem;
+    }
 
     & .contact-icon {
       font-size: 32px;
@@ -57,14 +61,26 @@
       margin: 0 .5rem 0;
     }
 
+    & .contact-banner-title {
+      font-size: 1.25rem;
+      text-align: center;
+      
+      @media (min-width: 640px) {
+        font-size: 1.5rem;
+        text-align: left;
+      }
+    }
+
     & .contact-banner-btn-wrapper {
-      & .contact-btn {
-        border-color: white;
-        color: white !important;
+      margin-top: 1rem;
+      
+      @media (min-width: 640px) {
+        margin-top: 0;
       }
 
       & .contact-btn {
-        margin-left: 1rem;
+        border-color: white;
+        color: white !important;
       }
     }
   }

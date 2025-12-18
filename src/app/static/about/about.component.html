@@ -40,7 +40,7 @@
          href="https://www.sciencedirect.com/topics/medicine-and-dentistry/human-phenotype-ontology"
          mat-stroked-button target="_blank">HPO on Science Direct</a>
     </div>
-    <div class="about-us-banner flex-[100%] sm:flex-[70%] flex flex-column sm:flex-row items-center justify-evenly">
+    <div class="about-us-banner flex-[100%] sm:flex-[70%] flex flex-col sm:flex-row items-center justify-evenly gap-4">
       <div class="banner-card" routerLink="/browse/term/HP:0001166">
         <div class="icon-wrapper">
           <mat-icon>travel_explore</mat-icon>
@@ -74,14 +74,14 @@
         workshops to extend the HPO and have provided an enormous amount of support and input in subsequent years.
       </p>
     </div>
-    <div class="contact-banner flex-[100%] sm:flex-[70%] flex flex-column sm:flex-row items-center">
-      <div class="contact-banner-title-wrapper flex flex-[1_1_0] flex-row items-center justify-start">
+    <div class="contact-banner flex-[100%] sm:flex-[70%] flex flex-col sm:flex-row items-center">
+      <div class="contact-banner-title-wrapper flex flex-row items-center justify-center sm:justify-start w-full sm:w-auto sm:flex-[1_1_0]">
         <h2 class="contact-banner-title flex items-center">
           <mat-icon class="contact-icon">contact_support</mat-icon>
           Still have some questions?
         </h2>
       </div>
-      <div class="contact-banner-btn-wrapper flex flex-column sm:flex-row xs:flex-[120%] sm:justify-end items-center justify-evenly">
+      <div class="contact-banner-btn-wrapper flex flex-col sm:flex-row gap-2 w-full sm:w-auto sm:flex-[1_1_0] sm:justify-end">
         <button class="contact-btn" mat-stroked-button routerLink="/faq">Frequently Asked Questions</button>
         <button class="contact-btn" mat-stroked-button routerLink="/contact">Contact us</button>
         <button class="contact-btn" mat-stroked-button (click)="utilityService.openExternalUrl('https://github.com/obophenotype/human-phenotype-ontology/issues/new/choose')">
