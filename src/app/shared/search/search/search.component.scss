@@ -42,6 +42,7 @@ $orange-hover: rgba(236, 151, 54, 0.8);
     background-color: white;
     position: relative;
     z-index: 999;
+    line-height: 20px;
 
     & .search-all {
       padding: 2px 10px 0 10px;
@@ -75,7 +76,7 @@ $orange-hover: rgba(236, 151, 54, 0.8);
       font-weight: bold;
       margin: 5px 0 0 0;
       padding: 5px;
-      width: 40%;
+      width: 100%;
       background-color: $category-label-green;
       color: white;
       cursor: default;
