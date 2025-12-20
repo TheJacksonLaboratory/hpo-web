@@ -1,5 +1,5 @@
 import { Router } from '@angular/router';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Disease, Gene, SimpleTerm, Term } from '../../../browser/models/models';
 import { SearchService } from '../service/search.service';
 
@@ -19,7 +19,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
         'visibility': 'hidden'
       })),
       state('active', style({
-        'max-height': '500px',
+        'max-height': '750px',
         'overflow-y': 'scroll',
         'visibility': 'visible'
       })),
@@ -31,6 +31,8 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
   ]
 })
 export class SearchComponent implements OnInit {
+
+  @Input() showHint = false;
   terms: Term[] = [];
   diseases: SimpleTerm[] = [];
   genes: SimpleTerm[] = [];
