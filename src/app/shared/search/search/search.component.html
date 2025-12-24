@@ -26,10 +26,9 @@
       <div class="result-list">
         <div class="result" (click)="closeDropDown()" routerLink="/browse/term/{{item.id}}"
              *ngFor="let item of terms;">
-          <div class="id">{{item.id}}</div>
           <div class="name" *ngIf="!item.synonym" [innerHtml]="{name: item.name } | highlight: queryText"></div>
           <div class="name" *ngIf="item.synonym" [innerHtml]="{name: item.synonym } | highlight: queryText"></div>
-          <br>
+          <div class="id">{{item.id}}</div>
         </div>
       </div>
     </div>
@@ -41,8 +40,8 @@
       <div class="result-list">
         <div class="result" (click)="closeDropDown()" routerLink="/browse/disease/{{item.id}}"
              *ngFor="let item of diseases;">
-          <div class="id">{{dbOnly(item.id)}}</div>
           <div class="name" [innerHtml]="{name: item.name } | highlight: queryText"></div>
+          <div class="id">{{item.id}}</div>
           <br>
         </div>
       </div>
@@ -55,8 +54,8 @@
       <div class="result-list">
         <div class="result" (click)="closeDropDown()" routerLink="/browse/gene/{{item.id}}"
              *ngFor="let item of genes;">
-          <div class="id">{{item.id.split(":")[0]}}</div>
           <div class="name" [innerHtml]="{name: item.name } | highlight: queryText"></div>
+          <div class="id">{{item.id}}</div>
           <br>
         </div>
       </div>
