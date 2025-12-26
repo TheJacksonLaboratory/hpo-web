@@ -1,10 +1,8 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { PublicationsComponent } from './publications.component';
-import { MatTableModule } from '@angular/material/table';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { GlobalMaterialModules } from '../../../shared/modules/global.module';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { provideRouter } from '@angular/router';
 
 describe('PublicationsComponent', () => {
   let component: PublicationsComponent;
@@ -12,10 +10,8 @@ describe('PublicationsComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-    declarations: [PublicationsComponent],
-    imports: [MatTableModule, FormsModule,
-        ReactiveFormsModule, GlobalMaterialModules, NoopAnimationsModule],
-    providers: [provideHttpClient(withInterceptorsFromDi())]
+    imports: [PublicationsComponent, NoopAnimationsModule],
+    providers: [provideHttpClient(withInterceptorsFromDi()), provideRouter([])]
 })
       .compileComponents();
   }));

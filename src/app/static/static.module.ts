@@ -35,9 +35,11 @@ import { ResourcesModule } from './resources/resources.module';
     LoincComponent,
     AboutComponent,
     FundingComponent,
-    FeedbackComponent
+    FeedbackComponent,
+    HomeComponent,
+    NewsComponent
   ],
-  declarations: [HomeComponent, NewsComponent],
+  declarations: [],
   providers: [SearchService]
 })
 export class StaticModule {

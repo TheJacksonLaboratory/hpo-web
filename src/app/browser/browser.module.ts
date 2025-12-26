@@ -30,13 +30,17 @@ import { ProfileSearchComponent } from './pages/profile-search/profile-search.co
         BrowserRoutingModule,
         GlobalMaterialModules,
         HighlightPipe,
-        TranslatePipe
+        TranslatePipe,
+        TermComponent,
+        DiseaseComponent,
+        GeneComponent,
+        SearchResultsComponent,
+        DialogExcelDownloadComponent,
+        ProfileSearchComponent
     ],
     providers: [SearchService, GeneService, DialogService,
         OntologyService, AnnotationService],
-    declarations: [TermComponent, DiseaseComponent,
-        GeneComponent,
-        SearchResultsComponent, DialogExcelDownloadComponent, ProfileSearchComponent]
+    declarations: []
 })
 export class BrowserHPOModule {
 }

@@ -21,10 +21,7 @@ import { SafeHtmlPipe } from './shared/pipes/sanitize.pipe';
 import { FloatingFeedbackComponent } from './shared/floating-feedback/floating-feedback.component';
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        NavbarComponent
-    ],
+    declarations: [],
     bootstrap: [AppComponent],
     imports: [BrowserModule,
         BrowserAnimationsModule,
@@ -33,6 +30,8 @@ import { FloatingFeedbackComponent } from './shared/floating-feedback/floating-f
         FooterComponent,
         NoPageFoundComponent,
         FloatingFeedbackComponent,
+        AppComponent,
+        NavbarComponent,
         RoutingModule,
         SearchModule],
     providers: [SearchService, NewsService,

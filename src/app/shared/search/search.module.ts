@@ -14,9 +14,10 @@ import { SearchComponent } from './search/search.component';
     FormsModule,
     GlobalMaterialModules,
     RouterModule,
-    HighlightPipe
+    HighlightPipe,
+    SearchComponent
   ],
-  declarations: [SearchComponent],
+  declarations: [],
   providers: [SearchService],
   exports: [SearchComponent]
 })

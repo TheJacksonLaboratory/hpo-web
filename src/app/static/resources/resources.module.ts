@@ -15,9 +15,10 @@ import { PublicationsComponent } from './publications/publications.component';
     GlobalMaterialModules,
     FormsModule,
     ReactiveFormsModule,
-    FaqComponent
+    FaqComponent,
+    PublicationsComponent
   ],
-  declarations: [PublicationsComponent],
+  declarations: [],
   providers: [PublicationsService]
 })
 export class ResourcesModule {
