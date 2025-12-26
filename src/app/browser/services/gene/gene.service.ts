@@ -4,7 +4,7 @@ import { environment } from '../../../../environments/environment';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class GeneService {
   options = {
     headers: new HttpHeaders({

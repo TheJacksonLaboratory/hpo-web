@@ -13,7 +13,7 @@ out/
 *.iml
 
 build/
-.jest/
+.jest-cache/
 .angular/
 # IDE - VSCode
 .vscode/*
