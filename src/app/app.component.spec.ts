@@ -45,7 +45,7 @@ describe('AppComponent', () => {
   it('it should check that search url environment variable is set', () => {
 
     //Check an example of one of the evironment variables
-    let searchUrl = environment.ONTOLOGY_API_HP_SEARCH;
+    const searchUrl = environment.ONTOLOGY_API_HP_SEARCH;
     expect(searchUrl).toContain('hp/search');
   });
 });

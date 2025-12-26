@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PhenogramVizComponent {
   pageTitle: string = "Tools / PhenoGramViz";
-  pageIntro: String = "";
+  pageIntro: string = "";
 
   constructor() {
   }

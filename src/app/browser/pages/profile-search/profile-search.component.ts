@@ -58,7 +58,7 @@ export class ProfileSearchComponent implements OnInit {
     this.stepper.next();
     this.submittedTerms = true;
     this.loadingIntersectingAssociations = true;
-    let termIds = this.selectedTerms.map(term => term.id);
+    const termIds = this.selectedTerms.map(term => term.id);
     this.annotationService.searchProfile(termIds.join(",")).pipe(
       debounceTime(1000),
       distinctUntilChanged(),

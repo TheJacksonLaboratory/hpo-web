@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ExomiserComponent {
   pageTitle: string = "Tools / Exomiser";
-  pageIntro: String = "";
+  pageIntro: string = "";
 
   constructor() {
   }

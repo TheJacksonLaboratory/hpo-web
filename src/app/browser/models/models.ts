@@ -93,7 +93,7 @@ export interface Publication {
   authors: string;
   title: string;
   journal: string;
-  year: Number;
+  year: number;
   volume: string;
   pages: string;
   pmid: string;

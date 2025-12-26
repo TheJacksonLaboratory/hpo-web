@@ -47,8 +47,8 @@ describe('Highlight pipe test', () => {
   ];
 
   it('highlights terms in the text', () => {
-    for (let idx in testData) {
-      let result = pipe.transform(testData[idx]["targetString"], testData[idx]["query"]);
+    for (const idx in testData) {
+      const result = pipe.transform(testData[idx]["targetString"], testData[idx]["query"]);
       expect(testData[idx].expected).toEqual(result);
     }
   });
