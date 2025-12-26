@@ -15,7 +15,7 @@ import { OntologyService } from './services/ontology/ontology.service';
 import { TermComponent } from './pages/term/term.component';
 import { DiseaseComponent } from './pages/disease/disease.component';
 import { GeneComponent } from './pages/gene/gene.component';
-import { ExtrasModule } from '../shared/modules/extras.module';
+import { HighlightPipe } from '../shared/pipes/highlight.pipe';
 import { SearchResultsComponent } from './pages/search-results/search-results.component';
 import { DialogExcelDownloadComponent } from '../shared/dialog-excel-download/dialog-excel-download.component';
 import { DialogService } from '../shared/dialog-excel-download/dialog.service';
@@ -29,13 +29,14 @@ import { ProfileSearchComponent } from './pages/profile-search/profile-search.co
         ReactiveFormsModule,
         BrowserRoutingModule,
         GlobalMaterialModules,
-        ExtrasModule
+        HighlightPipe,
+        TranslatePipe
     ],
     providers: [SearchService, GeneService, DialogService,
         OntologyService, AnnotationService],
     declarations: [TermComponent, DiseaseComponent,
         GeneComponent,
-        SearchResultsComponent, DialogExcelDownloadComponent, ProfileSearchComponent, TranslatePipe]
+        SearchResultsComponent, DialogExcelDownloadComponent, ProfileSearchComponent]
 })
 export class BrowserHPOModule {
 }

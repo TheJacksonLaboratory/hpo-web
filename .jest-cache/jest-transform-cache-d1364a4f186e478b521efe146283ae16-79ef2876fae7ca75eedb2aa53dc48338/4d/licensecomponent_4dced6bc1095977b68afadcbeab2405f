@@ -1,0 +1,20 @@
+3caefbee31960f5b5e6170e97d6db1a8
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.LicenseComponent = void 0;
+const tslib_1 = require("tslib");
+const core_1 = require("@angular/core");
+let LicenseComponent = class LicenseComponent {
+    constructor() {
+    }
+    static { this.ctorParameters = () => []; }
+};
+exports.LicenseComponent = LicenseComponent;
+exports.LicenseComponent = LicenseComponent = tslib_1.__decorate([
+    (0, core_1.Component)({
+        selector: 'app-license',
+        template: require("./license.component.html")
+    }),
+    tslib_1.__metadata("design:paramtypes", [])
+], LicenseComponent);
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJmaWxlIjoiL1VzZXJzL2dhcmdhbS9EZXZlbG9wL2hwby13ZWIvc3JjL2FwcC9zdGF0aWMvcmVzb3VyY2VzL2xpY2Vuc2UvbGljZW5zZS5jb21wb25lbnQudHMiLCJtYXBwaW5ncyI6Ijs7OztBQUFBLHdDQUFrRDtBQU8zQyxJQUFNLGdCQUFnQixHQUF0QixNQUFNLGdCQUFnQjtJQUMzQjtJQUNBLENBQUM7OztBQUZVLDRDQUFnQjsyQkFBaEIsZ0JBQWdCO0lBTDVCLElBQUEsZ0JBQVMsRUFBQztRQUNULFFBQVEsRUFBRSxhQUFhO1FBQ3ZCLDZDQUF1QztLQUV4QyxDQUFDOztHQUNXLGdCQUFnQixDQUk1QiIsIm5hbWVzIjpbXSwic291cmNlcyI6WyIvVXNlcnMvZ2FyZ2FtL0RldmVsb3AvaHBvLXdlYi9zcmMvYXBwL3N0YXRpYy9yZXNvdXJjZXMvbGljZW5zZS9saWNlbnNlLmNvbXBvbmVudC50cyJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBDb21wb25lbnQsIE9uSW5pdCB9IGZyb20gJ0Bhbmd1bGFyL2NvcmUnO1xuXG5AQ29tcG9uZW50KHtcbiAgc2VsZWN0b3I6ICdhcHAtbGljZW5zZScsXG4gIHRlbXBsYXRlVXJsOiAnLi9saWNlbnNlLmNvbXBvbmVudC5odG1sJyxcbiAgc3R5bGVVcmxzOiBbJy4vbGljZW5zZS5jb21wb25lbnQuY3NzJ11cbn0pXG5leHBvcnQgY2xhc3MgTGljZW5zZUNvbXBvbmVudCB7XG4gIGNvbnN0cnVjdG9yKCkge1xuICB9XG5cbn1cbiJdLCJ2ZXJzaW9uIjozfQ==

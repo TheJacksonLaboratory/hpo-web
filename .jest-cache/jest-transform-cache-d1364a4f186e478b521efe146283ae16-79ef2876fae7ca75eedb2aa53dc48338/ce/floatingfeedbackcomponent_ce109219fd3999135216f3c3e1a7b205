@@ -1,0 +1,2 @@
+5951cf366b41e02c8f1b1aa84c6e5e44
+module.exports="<a mat-fab\n   color=\"secondary\"\n   routerLink=\"/feedback\"\n   matTooltip=\"Give Feedback\"\n   matTooltipPosition=\"left\"\n   class=\"feedback-fab\"\n   aria-label=\"Give Feedback\">\n  <mat-icon>feedback</mat-icon>\n</a>\n"

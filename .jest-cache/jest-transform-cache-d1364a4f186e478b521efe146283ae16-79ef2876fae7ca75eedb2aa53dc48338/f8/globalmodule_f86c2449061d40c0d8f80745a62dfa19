@@ -1,0 +1,85 @@
+e2b0ff6dd7b361503ac4180544baff90
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.GlobalMaterialModules = void 0;
+const tslib_1 = require("tslib");
+const core_1 = require("@angular/core");
+const autocomplete_1 = require("@angular/material/autocomplete");
+const badge_1 = require("@angular/material/badge");
+const button_1 = require("@angular/material/button");
+const card_1 = require("@angular/material/card");
+const chips_1 = require("@angular/material/chips");
+const dialog_1 = require("@angular/material/dialog");
+const icon_1 = require("@angular/material/icon");
+const input_1 = require("@angular/material/input");
+const list_1 = require("@angular/material/list");
+const menu_1 = require("@angular/material/menu");
+const paginator_1 = require("@angular/material/paginator");
+const progress_bar_1 = require("@angular/material/progress-bar");
+const select_1 = require("@angular/material/select");
+const table_1 = require("@angular/material/table");
+const tabs_1 = require("@angular/material/tabs");
+const toolbar_1 = require("@angular/material/toolbar");
+const sort_1 = require("@angular/material/sort");
+const expansion_1 = require("@angular/material/expansion");
+const divider_1 = require("@angular/material/divider");
+const sidenav_1 = require("@angular/material/sidenav");
+const stepper_1 = require("@angular/material/stepper");
+const button_toggle_1 = require("@angular/material/button-toggle");
+const tooltip_1 = require("@angular/material/tooltip");
+let GlobalMaterialModules = class GlobalMaterialModules {
+};
+exports.GlobalMaterialModules = GlobalMaterialModules;
+exports.GlobalMaterialModules = GlobalMaterialModules = tslib_1.__decorate([
+    (0, core_1.NgModule)({
+        imports: [button_1.MatButtonModule,
+            menu_1.MatMenuModule,
+            icon_1.MatIconModule,
+            toolbar_1.MatToolbarModule,
+            input_1.MatInputModule,
+            card_1.MatCardModule,
+            progress_bar_1.MatProgressBarModule,
+            tabs_1.MatTabsModule,
+            table_1.MatTableModule,
+            paginator_1.MatPaginatorModule,
+            sort_1.MatSortModule,
+            tooltip_1.MatTooltipModule,
+            list_1.MatListModule,
+            expansion_1.MatExpansionModule,
+            select_1.MatSelectModule,
+            divider_1.MatDividerModule,
+            sidenav_1.MatSidenavModule,
+            dialog_1.MatDialogModule,
+            stepper_1.MatStepperModule,
+            autocomplete_1.MatAutocompleteModule,
+            button_toggle_1.MatButtonToggleModule,
+            chips_1.MatChipsModule,
+            badge_1.MatBadgeModule
+        ],
+        exports: [button_1.MatButtonModule,
+            menu_1.MatMenuModule,
+            toolbar_1.MatToolbarModule,
+            input_1.MatInputModule,
+            icon_1.MatIconModule,
+            card_1.MatCardModule,
+            progress_bar_1.MatProgressBarModule,
+            tabs_1.MatTabsModule,
+            table_1.MatTableModule,
+            paginator_1.MatPaginatorModule,
+            sort_1.MatSortModule,
+            tooltip_1.MatTooltipModule,
+            list_1.MatListModule,
+            expansion_1.MatExpansionModule,
+            select_1.MatSelectModule,
+            divider_1.MatDividerModule,
+            sidenav_1.MatSidenavModule,
+            dialog_1.MatDialogModule,
+            autocomplete_1.MatAutocompleteModule,
+            stepper_1.MatStepperModule,
+            button_toggle_1.MatButtonToggleModule,
+            chips_1.MatChipsModule,
+            badge_1.MatBadgeModule
+        ],
+    })
+], GlobalMaterialModules);
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJmaWxlIjoiL1VzZXJzL2dhcmdhbS9EZXZlbG9wL2hwby13ZWIvc3JjL2FwcC9zaGFyZWQvbW9kdWxlcy9nbG9iYWwubW9kdWxlLnRzIiwibWFwcGluZ3MiOiI7Ozs7QUFBQSx3Q0FBeUM7QUFDekMsaUVBQXVFO0FBQ3ZFLG1EQUF5RDtBQUN6RCxxREFBMkQ7QUFDM0QsaURBQXVEO0FBQ3ZELG1EQUF5RDtBQUN6RCxxREFBMkQ7QUFDM0QsaURBQXVEO0FBQ3ZELG1EQUF5RDtBQUN6RCxpREFBdUQ7QUFDdkQsaURBQXVEO0FBQ3ZELDJEQUFpRTtBQUNqRSxpRUFBc0U7QUFDdEUscURBQTJEO0FBQzNELG1EQUF5RDtBQUN6RCxpREFBdUQ7QUFDdkQsdURBQTZEO0FBQzdELGlEQUF1RDtBQUN2RCwyREFBaUU7QUFDakUsdURBQTZEO0FBQzdELHVEQUE2RDtBQUM3RCx1REFBNkQ7QUFDN0QsbUVBQXdFO0FBQ3hFLHVEQUE2RDtBQXFEdEQsSUFBTSxxQkFBcUIsR0FBM0IsTUFBTSxxQkFBcUI7Q0FDakMsQ0FBQTtBQURZLHNEQUFxQjtnQ0FBckIscUJBQXFCO0lBbERqQyxJQUFBLGVBQVEsRUFBQztRQUNSLE9BQU8sRUFBRSxDQUFDLHdCQUFlO1lBQ3ZCLG9CQUFhO1lBQ2Isb0JBQWE7WUFDYiwwQkFBZ0I7WUFDaEIsc0JBQWM7WUFDZCxvQkFBYTtZQUNiLG1DQUFvQjtZQUNwQixvQkFBYTtZQUNiLHNCQUFjO1lBQ2QsOEJBQWtCO1lBQ2xCLG9CQUFhO1lBQ2IsMEJBQWdCO1lBQ2hCLG9CQUFhO1lBQ2IsOEJBQWtCO1lBQ2xCLHdCQUFlO1lBQ2YsMEJBQWdCO1lBQ2hCLDBCQUFnQjtZQUNoQix3QkFBZTtZQUNmLDBCQUFnQjtZQUNoQixvQ0FBcUI7WUFDckIscUNBQXFCO1lBQ3JCLHNCQUFjO1lBQ2Qsc0JBQWM7U0FDZjtRQUNELE9BQU8sRUFBRSxDQUFDLHdCQUFlO1lBQ3ZCLG9CQUFhO1lBQ2IsMEJBQWdCO1lBQ2hCLHNCQUFjO1lBQ2Qsb0JBQWE7WUFDYixvQkFBYTtZQUNiLG1DQUFvQjtZQUNwQixvQkFBYTtZQUNiLHNCQUFjO1lBQ2QsOEJBQWtCO1lBQ2xCLG9CQUFhO1lBQ2IsMEJBQWdCO1lBQ2hCLG9CQUFhO1lBQ2IsOEJBQWtCO1lBQ2xCLHdCQUFlO1lBQ2YsMEJBQWdCO1lBQ2hCLDBCQUFnQjtZQUNoQix3QkFBZTtZQUNmLG9DQUFxQjtZQUNyQiwwQkFBZ0I7WUFDaEIscUNBQXFCO1lBQ3JCLHNCQUFjO1lBQ2Qsc0JBQWM7U0FDZjtLQUNGLENBQUM7R0FDVyxxQkFBcUIsQ0FDakMiLCJuYW1lcyI6W10sInNvdXJjZXMiOlsiL1VzZXJzL2dhcmdhbS9EZXZlbG9wL2hwby13ZWIvc3JjL2FwcC9zaGFyZWQvbW9kdWxlcy9nbG9iYWwubW9kdWxlLnRzIl0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IE5nTW9kdWxlIH0gZnJvbSAnQGFuZ3VsYXIvY29yZSc7XG5pbXBvcnQgeyBNYXRBdXRvY29tcGxldGVNb2R1bGUgfSBmcm9tICdAYW5ndWxhci9tYXRlcmlhbC9hdXRvY29tcGxldGUnO1xuaW1wb3J0IHsgTWF0QmFkZ2VNb2R1bGUgfSBmcm9tICdAYW5ndWxhci9tYXRlcmlhbC9iYWRnZSc7XG5pbXBvcnQgeyBNYXRCdXR0b25Nb2R1bGUgfSBmcm9tICdAYW5ndWxhci9tYXRlcmlhbC9idXR0b24nO1xuaW1wb3J0IHsgTWF0Q2FyZE1vZHVsZSB9IGZyb20gJ0Bhbmd1bGFyL21hdGVyaWFsL2NhcmQnO1xuaW1wb3J0IHsgTWF0Q2hpcHNNb2R1bGUgfSBmcm9tICdAYW5ndWxhci9tYXRlcmlhbC9jaGlwcyc7XG5pbXBvcnQgeyBNYXREaWFsb2dNb2R1bGUgfSBmcm9tICdAYW5ndWxhci9tYXRlcmlhbC9kaWFsb2cnO1xuaW1wb3J0IHsgTWF0SWNvbk1vZHVsZSB9IGZyb20gJ0Bhbmd1bGFyL21hdGVyaWFsL2ljb24nO1xuaW1wb3J0IHsgTWF0SW5wdXRNb2R1bGUgfSBmcm9tICdAYW5ndWxhci9tYXRlcmlhbC9pbnB1dCc7XG5pbXBvcnQgeyBNYXRMaXN0TW9kdWxlIH0gZnJvbSAnQGFuZ3VsYXIvbWF0ZXJpYWwvbGlzdCc7XG5pbXBvcnQgeyBNYXRNZW51TW9kdWxlIH0gZnJvbSAnQGFuZ3VsYXIvbWF0ZXJpYWwvbWVudSc7XG5pbXBvcnQgeyBNYXRQYWdpbmF0b3JNb2R1bGUgfSBmcm9tICdAYW5ndWxhci9tYXRlcmlhbC9wYWdpbmF0b3InO1xuaW1wb3J0IHsgTWF0UHJvZ3Jlc3NCYXJNb2R1bGUgfSBmcm9tICdAYW5ndWxhci9tYXRlcmlhbC9wcm9ncmVzcy1iYXInO1xuaW1wb3J0IHsgTWF0U2VsZWN0TW9kdWxlIH0gZnJvbSAnQGFuZ3VsYXIvbWF0ZXJpYWwvc2VsZWN0JztcbmltcG9ydCB7IE1hdFRhYmxlTW9kdWxlIH0gZnJvbSAnQGFuZ3VsYXIvbWF0ZXJpYWwvdGFibGUnO1xuaW1wb3J0IHsgTWF0VGFic01vZHVsZSB9IGZyb20gJ0Bhbmd1bGFyL21hdGVyaWFsL3RhYnMnO1xuaW1wb3J0IHsgTWF0VG9vbGJhck1vZHVsZSB9IGZyb20gJ0Bhbmd1bGFyL21hdGVyaWFsL3Rvb2xiYXInO1xuaW1wb3J0IHsgTWF0U29ydE1vZHVsZSB9IGZyb20gJ0Bhbmd1bGFyL21hdGVyaWFsL3NvcnQnO1xuaW1wb3J0IHsgTWF0RXhwYW5zaW9uTW9kdWxlIH0gZnJvbSAnQGFuZ3VsYXIvbWF0ZXJpYWwvZXhwYW5zaW9uJztcbmltcG9ydCB7IE1hdERpdmlkZXJNb2R1bGUgfSBmcm9tICdAYW5ndWxhci9tYXRlcmlhbC9kaXZpZGVyJztcbmltcG9ydCB7IE1hdFNpZGVuYXZNb2R1bGUgfSBmcm9tICdAYW5ndWxhci9tYXRlcmlhbC9zaWRlbmF2JztcbmltcG9ydCB7IE1hdFN0ZXBwZXJNb2R1bGUgfSBmcm9tIFwiQGFuZ3VsYXIvbWF0ZXJpYWwvc3RlcHBlclwiO1xuaW1wb3J0IHsgTWF0QnV0dG9uVG9nZ2xlTW9kdWxlIH0gZnJvbSBcIkBhbmd1bGFyL21hdGVyaWFsL2J1dHRvbi10b2dnbGVcIjtcbmltcG9ydCB7IE1hdFRvb2x0aXBNb2R1bGUgfSBmcm9tICdAYW5ndWxhci9tYXRlcmlhbC90b29sdGlwJztcblxuXG5ATmdNb2R1bGUoe1xuICBpbXBvcnRzOiBbTWF0QnV0dG9uTW9kdWxlLFxuICAgIE1hdE1lbnVNb2R1bGUsXG4gICAgTWF0SWNvbk1vZHVsZSxcbiAgICBNYXRUb29sYmFyTW9kdWxlLFxuICAgIE1hdElucHV0TW9kdWxlLFxuICAgIE1hdENhcmRNb2R1bGUsXG4gICAgTWF0UHJvZ3Jlc3NCYXJNb2R1bGUsXG4gICAgTWF0VGFic01vZHVsZSxcbiAgICBNYXRUYWJsZU1vZHVsZSxcbiAgICBNYXRQYWdpbmF0b3JNb2R1bGUsXG4gICAgTWF0U29ydE1vZHVsZSxcbiAgICBNYXRUb29sdGlwTW9kdWxlLFxuICAgIE1hdExpc3RNb2R1bGUsXG4gICAgTWF0RXhwYW5zaW9uTW9kdWxlLFxuICAgIE1hdFNlbGVjdE1vZHVsZSxcbiAgICBNYXREaXZpZGVyTW9kdWxlLFxuICAgIE1hdFNpZGVuYXZNb2R1bGUsXG4gICAgTWF0RGlhbG9nTW9kdWxlLFxuICAgIE1hdFN0ZXBwZXJNb2R1bGUsXG4gICAgTWF0QXV0b2NvbXBsZXRlTW9kdWxlLFxuICAgIE1hdEJ1dHRvblRvZ2dsZU1vZHVsZSxcbiAgICBNYXRDaGlwc01vZHVsZSxcbiAgICBNYXRCYWRnZU1vZHVsZVxuICBdLFxuICBleHBvcnRzOiBbTWF0QnV0dG9uTW9kdWxlLFxuICAgIE1hdE1lbnVNb2R1bGUsXG4gICAgTWF0VG9vbGJhck1vZHVsZSxcbiAgICBNYXRJbnB1dE1vZHVsZSxcbiAgICBNYXRJY29uTW9kdWxlLFxuICAgIE1hdENhcmRNb2R1bGUsXG4gICAgTWF0UHJvZ3Jlc3NCYXJNb2R1bGUsXG4gICAgTWF0VGFic01vZHVsZSxcbiAgICBNYXRUYWJsZU1vZHVsZSxcbiAgICBNYXRQYWdpbmF0b3JNb2R1bGUsXG4gICAgTWF0U29ydE1vZHVsZSxcbiAgICBNYXRUb29sdGlwTW9kdWxlLFxuICAgIE1hdExpc3RNb2R1bGUsXG4gICAgTWF0RXhwYW5zaW9uTW9kdWxlLFxuICAgIE1hdFNlbGVjdE1vZHVsZSxcbiAgICBNYXREaXZpZGVyTW9kdWxlLFxuICAgIE1hdFNpZGVuYXZNb2R1bGUsXG4gICAgTWF0RGlhbG9nTW9kdWxlLFxuICAgIE1hdEF1dG9jb21wbGV0ZU1vZHVsZSxcbiAgICBNYXRTdGVwcGVyTW9kdWxlLFxuICAgIE1hdEJ1dHRvblRvZ2dsZU1vZHVsZSxcbiAgICBNYXRDaGlwc01vZHVsZSxcbiAgICBNYXRCYWRnZU1vZHVsZVxuICBdLFxufSlcbmV4cG9ydCBjbGFzcyBHbG9iYWxNYXRlcmlhbE1vZHVsZXMge1xufVxuIl0sInZlcnNpb24iOjN9

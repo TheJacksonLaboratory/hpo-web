@@ -1,0 +1,9 @@
+13dd3e0a5e6d489c5adcf8557914d3b7
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const zone_1 = require("jest-preset-angular/setup-env/zone");
+(0, zone_1.setupZoneTestEnv)({
+    errorOnUnknownElements: true,
+    errorOnUnknownProperties: true,
+});
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJmaWxlIjoiL1VzZXJzL2dhcmdhbS9EZXZlbG9wL2hwby13ZWIvc3JjL3Rlc3Qtc2V0dXAudHMiLCJtYXBwaW5ncyI6Ijs7QUFBQSw2REFBc0U7QUFFdEUsSUFBQSx1QkFBZ0IsRUFBQztJQUNmLHNCQUFzQixFQUFFLElBQUk7SUFDNUIsd0JBQXdCLEVBQUUsSUFBSTtDQUMvQixDQUFDLENBQUMiLCJuYW1lcyI6W10sInNvdXJjZXMiOlsiL1VzZXJzL2dhcmdhbS9EZXZlbG9wL2hwby13ZWIvc3JjL3Rlc3Qtc2V0dXAudHMiXSwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgc2V0dXBab25lVGVzdEVudiB9IGZyb20gJ2plc3QtcHJlc2V0LWFuZ3VsYXIvc2V0dXAtZW52L3pvbmUnO1xuXG5zZXR1cFpvbmVUZXN0RW52KHtcbiAgZXJyb3JPblVua25vd25FbGVtZW50czogdHJ1ZSxcbiAgZXJyb3JPblVua25vd25Qcm9wZXJ0aWVzOiB0cnVlLFxufSk7XG4iXSwidmVyc2lvbiI6M30=

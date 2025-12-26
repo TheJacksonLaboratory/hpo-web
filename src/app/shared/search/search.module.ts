@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { GlobalMaterialModules } from '../modules/global.module';
-import { ExtrasModule } from '../modules/extras.module';
+import { HighlightPipe } from '../pipes/highlight.pipe';
 import { SearchService } from './service/search.service';
 import { SearchComponent } from './search/search.component';
 
@@ -14,7 +14,7 @@ import { SearchComponent } from './search/search.component';
     FormsModule,
     GlobalMaterialModules,
     RouterModule,
-    ExtrasModule
+    HighlightPipe
   ],
   declarations: [SearchComponent],
   providers: [SearchService],

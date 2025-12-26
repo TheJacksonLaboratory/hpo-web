@@ -6,7 +6,7 @@ import { environment } from '../environments/environment';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { GlobalMaterialModules } from './shared/modules/global.module';
 import { FormsModule } from '@angular/forms';
-import { ExtrasModule } from './shared/modules/extras.module';
+import { SafeHtmlPipe } from './shared/pipes/sanitize.pipe';
 import { SearchService } from './shared/search/service/search.service';
 import { NewsService } from './shared/news/news.service';
 import { SearchModule } from './shared/search/search.module';
@@ -28,7 +28,7 @@ describe('AppComponent', () => {
     imports: [
         GlobalMaterialModules,
         FormsModule,
-        ExtrasModule,
+        SafeHtmlPipe,
         SearchModule,
         NoopAnimationsModule, RouterOutlet],
     providers: [SearchService, NewsService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting(), provideRouter([]), // Pass your routes here if needed

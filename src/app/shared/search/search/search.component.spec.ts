@@ -15,9 +15,9 @@ describe('NewsearchComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-    declarations: [SearchComponent, HighlightPipe],
+    declarations: [SearchComponent],
     imports: [GlobalMaterialModules,
-        NoopAnimationsModule, FormsModule],
+        NoopAnimationsModule, FormsModule, HighlightPipe],
     providers: [SearchService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
 })
       .compileComponents();

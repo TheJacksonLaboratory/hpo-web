@@ -1,0 +1,22 @@
+2a740c7fca7acfb2f204b914f0ab8236
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.PhenogramVizComponent = void 0;
+const tslib_1 = require("tslib");
+const core_1 = require("@angular/core");
+let PhenogramVizComponent = class PhenogramVizComponent {
+    constructor() {
+        this.pageTitle = "Tools / PhenoGramViz";
+        this.pageIntro = "";
+    }
+    static { this.ctorParameters = () => []; }
+};
+exports.PhenogramVizComponent = PhenogramVizComponent;
+exports.PhenogramVizComponent = PhenogramVizComponent = tslib_1.__decorate([
+    (0, core_1.Component)({
+        selector: 'app-phenogramviz',
+        template: require("./phenogramviz.component.html")
+    }),
+    tslib_1.__metadata("design:paramtypes", [])
+], PhenogramVizComponent);
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJmaWxlIjoiL1VzZXJzL2dhcmdhbS9EZXZlbG9wL2hwby13ZWIvc3JjL2FwcC9zdGF0aWMvdG9vbHMvcGhlbm9ncmFtdml6L3BoZW5vZ3JhbXZpei5jb21wb25lbnQudHMiLCJtYXBwaW5ncyI6Ijs7OztBQUFBLHdDQUFrRDtBQU8zQyxJQUFNLHFCQUFxQixHQUEzQixNQUFNLHFCQUFxQjtJQUloQztRQUhBLGNBQVMsR0FBVyxzQkFBc0IsQ0FBQztRQUMzQyxjQUFTLEdBQVcsRUFBRSxDQUFDO0lBR3ZCLENBQUM7OztBQUxVLHNEQUFxQjtnQ0FBckIscUJBQXFCO0lBTGpDLElBQUEsZ0JBQVMsRUFBQztRQUNULFFBQVEsRUFBRSxrQkFBa0I7UUFDNUIsa0RBQTRDO0tBRTdDLENBQUM7O0dBQ1cscUJBQXFCLENBT2pDIiwibmFtZXMiOltdLCJzb3VyY2VzIjpbIi9Vc2Vycy9nYXJnYW0vRGV2ZWxvcC9ocG8td2ViL3NyYy9hcHAvc3RhdGljL3Rvb2xzL3BoZW5vZ3JhbXZpei9waGVub2dyYW12aXouY29tcG9uZW50LnRzIl0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IENvbXBvbmVudCwgT25Jbml0IH0gZnJvbSAnQGFuZ3VsYXIvY29yZSc7XG5cbkBDb21wb25lbnQoe1xuICBzZWxlY3RvcjogJ2FwcC1waGVub2dyYW12aXonLFxuICB0ZW1wbGF0ZVVybDogJy4vcGhlbm9ncmFtdml6LmNvbXBvbmVudC5odG1sJyxcbiAgc3R5bGVVcmxzOiBbJy4vcGhlbm9ncmFtdml6LmNvbXBvbmVudC5jc3MnXVxufSlcbmV4cG9ydCBjbGFzcyBQaGVub2dyYW1WaXpDb21wb25lbnQge1xuICBwYWdlVGl0bGU6IHN0cmluZyA9IFwiVG9vbHMgLyBQaGVub0dyYW1WaXpcIjtcbiAgcGFnZUludHJvOiBzdHJpbmcgPSBcIlwiO1xuXG4gIGNvbnN0cnVjdG9yKCkge1xuICB9XG5cbn1cbiJdLCJ2ZXJzaW9uIjozfQ==

@@ -1,0 +1,20 @@
+051919761c8d44d04a967521a8c4b12f
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.FundingComponent = void 0;
+const tslib_1 = require("tslib");
+const core_1 = require("@angular/core");
+let FundingComponent = class FundingComponent {
+    constructor() {
+    }
+    static { this.ctorParameters = () => []; }
+};
+exports.FundingComponent = FundingComponent;
+exports.FundingComponent = FundingComponent = tslib_1.__decorate([
+    (0, core_1.Component)({
+        selector: 'app-funding',
+        template: require("./funding.component.html")
+    }),
+    tslib_1.__metadata("design:paramtypes", [])
+], FundingComponent);
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJmaWxlIjoiL1VzZXJzL2dhcmdhbS9EZXZlbG9wL2hwby13ZWIvc3JjL2FwcC9zdGF0aWMvcmVzb3VyY2VzL2Z1bmRpbmcvZnVuZGluZy5jb21wb25lbnQudHMiLCJtYXBwaW5ncyI6Ijs7OztBQUFBLHdDQUFrRDtBQU8zQyxJQUFNLGdCQUFnQixHQUF0QixNQUFNLGdCQUFnQjtJQUUzQjtJQUNBLENBQUM7OztBQUhVLDRDQUFnQjsyQkFBaEIsZ0JBQWdCO0lBTDVCLElBQUEsZ0JBQVMsRUFBQztRQUNULFFBQVEsRUFBRSxhQUFhO1FBQ3ZCLDZDQUF1QztLQUV4QyxDQUFDOztHQUNXLGdCQUFnQixDQUk1QiIsIm5hbWVzIjpbXSwic291cmNlcyI6WyIvVXNlcnMvZ2FyZ2FtL0RldmVsb3AvaHBvLXdlYi9zcmMvYXBwL3N0YXRpYy9yZXNvdXJjZXMvZnVuZGluZy9mdW5kaW5nLmNvbXBvbmVudC50cyJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBDb21wb25lbnQsIE9uSW5pdCB9IGZyb20gJ0Bhbmd1bGFyL2NvcmUnO1xuXG5AQ29tcG9uZW50KHtcbiAgc2VsZWN0b3I6ICdhcHAtZnVuZGluZycsXG4gIHRlbXBsYXRlVXJsOiAnLi9mdW5kaW5nLmNvbXBvbmVudC5odG1sJyxcbiAgc3R5bGVVcmxzOiBbJy4vZnVuZGluZy5jb21wb25lbnQuY3NzJ11cbn0pXG5leHBvcnQgY2xhc3MgRnVuZGluZ0NvbXBvbmVudCB7XG5cbiAgY29uc3RydWN0b3IoKSB7XG4gIH1cbn1cbiJdLCJ2ZXJzaW9uIjozfQ==

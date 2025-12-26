@@ -1,0 +1,32 @@
+783437af0b774ce3d9ad81c5e0164d1c
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.AnnotationsDownloadComponent = void 0;
+const tslib_1 = require("tslib");
+const core_1 = require("@angular/core");
+const environment_1 = require("../../../../environments/environment");
+const utility_service_1 = require("../../../shared/utility/utility.service");
+let AnnotationsDownloadComponent = class AnnotationsDownloadComponent {
+    constructor(utilityService) {
+        this.utilityService = utilityService;
+        this.hpoaUrl = `${environment_1.environment.HPO_ANNOTATION_FILE_PURL}`;
+        this.maxoUrl = `${environment_1.environment.MAXO_ANNOTATION_FILE_PURL}`;
+    }
+    ngOnInit() {
+        this.utilityService.getMostRecentReleaseHPO().subscribe((version) => {
+            this.version = version;
+        });
+    }
+    static { this.ctorParameters = () => [
+        { type: utility_service_1.UtilityService }
+    ]; }
+};
+exports.AnnotationsDownloadComponent = AnnotationsDownloadComponent;
+exports.AnnotationsDownloadComponent = AnnotationsDownloadComponent = tslib_1.__decorate([
+    (0, core_1.Component)({
+        selector: 'app-annotations',
+        template: require("./annotations-download.component.html")
+    }),
+    tslib_1.__metadata("design:paramtypes", [utility_service_1.UtilityService])
+], AnnotationsDownloadComponent);
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJmaWxlIjoiL1VzZXJzL2dhcmdhbS9EZXZlbG9wL2hwby13ZWIvc3JjL2FwcC9zdGF0aWMvZGF0YS9hbm5vdGF0aW9ucy1kb3dubG9hZC9hbm5vdGF0aW9ucy1kb3dubG9hZC5jb21wb25lbnQudHMiLCJtYXBwaW5ncyI6Ijs7OztBQUFBLHdDQUFrRDtBQUNsRCxzRUFBbUU7QUFDbkUsNkVBQXlFO0FBT2xFLElBQU0sNEJBQTRCLEdBQWxDLE1BQU0sNEJBQTRCO0lBS3ZDLFlBQW1CLGNBQThCO1FBQTlCLG1CQUFjLEdBQWQsY0FBYyxDQUFnQjtRQUh4QyxZQUFPLEdBQUcsR0FBRyx5QkFBVyxDQUFDLHdCQUF3QixFQUFFLENBQUM7UUFDcEQsWUFBTyxHQUFHLEdBQUcseUJBQVcsQ0FBQyx5QkFBeUIsRUFBRSxDQUFDO0lBRVYsQ0FBQztJQUVyRCxRQUFRO1FBQ04sSUFBSSxDQUFDLGNBQWMsQ0FBQyx1QkFBdUIsRUFBRSxDQUFDLFNBQVMsQ0FBQyxDQUFDLE9BQU8sRUFBRSxFQUFFO1lBQ2xFLElBQUksQ0FBQyxPQUFPLEdBQUcsT0FBTyxDQUFDO1FBQ3pCLENBQUMsQ0FBQyxDQUFDO0lBQ0wsQ0FBQzs7Ozs7QUFYVSxvRUFBNEI7dUNBQTVCLDRCQUE0QjtJQUx4QyxJQUFBLGdCQUFTLEVBQUM7UUFDVCxRQUFRLEVBQUUsaUJBQWlCO1FBQzNCLDBEQUFvRDtLQUVyRCxDQUFDOzZDQU1tQyxnQ0FBYztHQUx0Qyw0QkFBNEIsQ0FZeEMiLCJuYW1lcyI6W10sInNvdXJjZXMiOlsiL1VzZXJzL2dhcmdhbS9EZXZlbG9wL2hwby13ZWIvc3JjL2FwcC9zdGF0aWMvZGF0YS9hbm5vdGF0aW9ucy1kb3dubG9hZC9hbm5vdGF0aW9ucy1kb3dubG9hZC5jb21wb25lbnQudHMiXSwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgQ29tcG9uZW50LCBPbkluaXQgfSBmcm9tICdAYW5ndWxhci9jb3JlJztcbmltcG9ydCB7IGVudmlyb25tZW50IH0gZnJvbSBcIi4uLy4uLy4uLy4uL2Vudmlyb25tZW50cy9lbnZpcm9ubWVudFwiO1xuaW1wb3J0IHsgVXRpbGl0eVNlcnZpY2UgfSBmcm9tICcuLi8uLi8uLi9zaGFyZWQvdXRpbGl0eS91dGlsaXR5LnNlcnZpY2UnO1xuXG5AQ29tcG9uZW50KHtcbiAgc2VsZWN0b3I6ICdhcHAtYW5ub3RhdGlvbnMnLFxuICB0ZW1wbGF0ZVVybDogJy4vYW5ub3RhdGlvbnMtZG93bmxvYWQuY29tcG9uZW50Lmh0bWwnLFxuICBzdHlsZVVybHM6IFsnLi9hbm5vdGF0aW9ucy1kb3dubG9hZC5jb21wb25lbnQuc2NzcyddXG59KVxuZXhwb3J0IGNsYXNzIEFubm90YXRpb25zRG93bmxvYWRDb21wb25lbnQgaW1wbGVtZW50cyBPbkluaXQge1xuXG4gIHJlYWRvbmx5IGhwb2FVcmwgPSBgJHtlbnZpcm9ubWVudC5IUE9fQU5OT1RBVElPTl9GSUxFX1BVUkx9YDtcbiAgcmVhZG9ubHkgbWF4b1VybCA9IGAke2Vudmlyb25tZW50Lk1BWE9fQU5OT1RBVElPTl9GSUxFX1BVUkx9YDtcbiAgdmVyc2lvbjogc3RyaW5nO1xuICBjb25zdHJ1Y3RvcihwdWJsaWMgdXRpbGl0eVNlcnZpY2U6IFV0aWxpdHlTZXJ2aWNlKSB7fVxuXG4gIG5nT25Jbml0KCkge1xuICAgIHRoaXMudXRpbGl0eVNlcnZpY2UuZ2V0TW9zdFJlY2VudFJlbGVhc2VIUE8oKS5zdWJzY3JpYmUoKHZlcnNpb24pID0+IHtcbiAgICAgIHRoaXMudmVyc2lvbiA9IHZlcnNpb247XG4gICAgfSk7XG4gIH1cbn1cbiJdLCJ2ZXJzaW9uIjozfQ==

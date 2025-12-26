@@ -1,0 +1,41 @@
+013f406c1a06ebe7aa320c6a81861b2a
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.allMockNews = exports.subMockNews = void 0;
+const april2018news = [
+    {
+        'title': 'Paper on novel annotation model',
+        'date': 'April 9, 2018',
+        'body': 'fake test body1',
+        'teaserTitle': 'Novel annotation model'
+    },
+    {
+        'title': 'Nature Genetics Paper on layperson vocabulary',
+        'date': 'April 10, 2018',
+        'body': 'fake test body2',
+        'teaserTitle': 'Layperson vocabulary: Nature Genetics'
+    }
+];
+const march2018news = [
+    {
+        'title': 'March 2018 release',
+        'date': 'March 9, 2018',
+        'body': 'fake test body3',
+        'teaserTitle': 'March 2018 Release'
+    }
+];
+const december2019news = [
+    {
+        'title': 'December 2019 release',
+        'date': 'December 17, 2019',
+        'body': 'fake test body3',
+        'teaserTitle': 'December 2019 Release'
+    }
+];
+exports.subMockNews = { 'April 2018': april2018news, 'March 2018': march2018news };
+exports.allMockNews = {
+    'April 2018': april2018news,
+    'March 2018': march2018news,
+    'December 2019': december2019news
+};
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJmaWxlIjoiL1VzZXJzL2dhcmdhbS9EZXZlbG9wL2hwby13ZWIvc3JjL2FwcC9zaGFyZWQvbmV3cy9uZXdzLm1vY2sudHMiLCJtYXBwaW5ncyI6Ijs7O0FBQUEsTUFBTSxhQUFhLEdBQUc7SUFDcEI7UUFDRSxPQUFPLEVBQUUsaUNBQWlDO1FBQzFDLE1BQU0sRUFBRSxlQUFlO1FBQ3ZCLE1BQU0sRUFBRSxpQkFBaUI7UUFDekIsYUFBYSxFQUFFLHdCQUF3QjtLQUN4QztJQUNEO1FBQ0UsT0FBTyxFQUFFLCtDQUErQztRQUN4RCxNQUFNLEVBQUUsZ0JBQWdCO1FBQ3hCLE1BQU0sRUFBRSxpQkFBaUI7UUFDekIsYUFBYSxFQUFFLHVDQUF1QztLQUN2RDtDQUNGLENBQUM7QUFFRixNQUFNLGFBQWEsR0FBRztJQUNwQjtRQUNFLE9BQU8sRUFBRSxvQkFBb0I7UUFDN0IsTUFBTSxFQUFFLGVBQWU7UUFDdkIsTUFBTSxFQUFFLGlCQUFpQjtRQUN6QixhQUFhLEVBQUUsb0JBQW9CO0tBQ3BDO0NBQ0YsQ0FBQztBQUVGLE1BQU0sZ0JBQWdCLEdBQUc7SUFDdkI7UUFDRSxPQUFPLEVBQUUsdUJBQXVCO1FBQ2hDLE1BQU0sRUFBRSxtQkFBbUI7UUFDM0IsTUFBTSxFQUFFLGlCQUFpQjtRQUN6QixhQUFhLEVBQUUsdUJBQXVCO0tBQ3ZDO0NBQ0YsQ0FBQztBQUVXLFFBQUEsV0FBVyxHQUFHLEVBQUUsWUFBWSxFQUFFLGFBQWEsRUFBRSxZQUFZLEVBQUUsYUFBYSxFQUFFLENBQUM7QUFDM0UsUUFBQSxXQUFXLEdBQUc7SUFDekIsWUFBWSxFQUFFLGFBQWE7SUFDM0IsWUFBWSxFQUFFLGFBQWE7SUFDM0IsZUFBZSxFQUFFLGdCQUFnQjtDQUNsQyxDQUFDIiwibmFtZXMiOltdLCJzb3VyY2VzIjpbIi9Vc2Vycy9nYXJnYW0vRGV2ZWxvcC9ocG8td2ViL3NyYy9hcHAvc2hhcmVkL25ld3MvbmV3cy5tb2NrLnRzIl0sInNvdXJjZXNDb250ZW50IjpbImNvbnN0IGFwcmlsMjAxOG5ld3MgPSBbXG4gIHtcbiAgICAndGl0bGUnOiAnUGFwZXIgb24gbm92ZWwgYW5ub3RhdGlvbiBtb2RlbCcsXG4gICAgJ2RhdGUnOiAnQXByaWwgOSwgMjAxOCcsXG4gICAgJ2JvZHknOiAnZmFrZSB0ZXN0IGJvZHkxJyxcbiAgICAndGVhc2VyVGl0bGUnOiAnTm92ZWwgYW5ub3RhdGlvbiBtb2RlbCdcbiAgfSxcbiAge1xuICAgICd0aXRsZSc6ICdOYXR1cmUgR2VuZXRpY3MgUGFwZXIgb24gbGF5cGVyc29uIHZvY2FidWxhcnknLFxuICAgICdkYXRlJzogJ0FwcmlsIDEwLCAyMDE4JyxcbiAgICAnYm9keSc6ICdmYWtlIHRlc3QgYm9keTInLFxuICAgICd0ZWFzZXJUaXRsZSc6ICdMYXlwZXJzb24gdm9jYWJ1bGFyeTogTmF0dXJlIEdlbmV0aWNzJ1xuICB9XG5dO1xuXG5jb25zdCBtYXJjaDIwMThuZXdzID0gW1xuICB7XG4gICAgJ3RpdGxlJzogJ01hcmNoIDIwMTggcmVsZWFzZScsXG4gICAgJ2RhdGUnOiAnTWFyY2ggOSwgMjAxOCcsXG4gICAgJ2JvZHknOiAnZmFrZSB0ZXN0IGJvZHkzJyxcbiAgICAndGVhc2VyVGl0bGUnOiAnTWFyY2ggMjAxOCBSZWxlYXNlJ1xuICB9XG5dO1xuXG5jb25zdCBkZWNlbWJlcjIwMTluZXdzID0gW1xuICB7XG4gICAgJ3RpdGxlJzogJ0RlY2VtYmVyIDIwMTkgcmVsZWFzZScsXG4gICAgJ2RhdGUnOiAnRGVjZW1iZXIgMTcsIDIwMTknLFxuICAgICdib2R5JzogJ2Zha2UgdGVzdCBib2R5MycsXG4gICAgJ3RlYXNlclRpdGxlJzogJ0RlY2VtYmVyIDIwMTkgUmVsZWFzZSdcbiAgfVxuXTtcblxuZXhwb3J0IGNvbnN0IHN1Yk1vY2tOZXdzID0geyAnQXByaWwgMjAxOCc6IGFwcmlsMjAxOG5ld3MsICdNYXJjaCAyMDE4JzogbWFyY2gyMDE4bmV3cyB9O1xuZXhwb3J0IGNvbnN0IGFsbE1vY2tOZXdzID0ge1xuICAnQXByaWwgMjAxOCc6IGFwcmlsMjAxOG5ld3MsXG4gICdNYXJjaCAyMDE4JzogbWFyY2gyMDE4bmV3cyxcbiAgJ0RlY2VtYmVyIDIwMTknOiBkZWNlbWJlcjIwMTluZXdzXG59O1xuIl0sInZlcnNpb24iOjN9

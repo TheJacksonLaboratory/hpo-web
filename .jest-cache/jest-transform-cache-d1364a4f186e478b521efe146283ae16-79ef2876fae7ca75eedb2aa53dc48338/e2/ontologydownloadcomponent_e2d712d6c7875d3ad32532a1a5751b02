@@ -1,0 +1,34 @@
+06a69fe14b24d247082cb8324097478c
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.OntologyDownloadComponent = void 0;
+const tslib_1 = require("tslib");
+const core_1 = require("@angular/core");
+const utility_service_1 = require("../../../shared/utility/utility.service");
+const environment_1 = require("../../../../environments/environment");
+let OntologyDownloadComponent = class OntologyDownloadComponent {
+    constructor(utilityService) {
+        this.utilityService = utilityService;
+        this.oboUrl = `${environment_1.environment.ONTO_RELEASE_NO_EXT}.obo`;
+        this.owlUrl = `${environment_1.environment.ONTO_RELEASE_NO_EXT}.owl`;
+        this.jsonUrl = `${environment_1.environment.ONTO_RELEASE_NO_EXT}.json`;
+        this.otherReleases = environment_1.environment.HPO_RELEASES;
+    }
+    ngOnInit() {
+        this.utilityService.getMostRecentReleaseHPO().subscribe((version) => {
+            this.version = `v${version}`;
+        });
+    }
+    static { this.ctorParameters = () => [
+        { type: utility_service_1.UtilityService }
+    ]; }
+};
+exports.OntologyDownloadComponent = OntologyDownloadComponent;
+exports.OntologyDownloadComponent = OntologyDownloadComponent = tslib_1.__decorate([
+    (0, core_1.Component)({
+        selector: 'app-ontology',
+        template: require("./ontology-download.component.html")
+    }),
+    tslib_1.__metadata("design:paramtypes", [utility_service_1.UtilityService])
+], OntologyDownloadComponent);
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJmaWxlIjoiL1VzZXJzL2dhcmdhbS9EZXZlbG9wL2hwby13ZWIvc3JjL2FwcC9zdGF0aWMvZGF0YS9vbnRvbG9neS1kb3dubG9hZC9vbnRvbG9neS1kb3dubG9hZC5jb21wb25lbnQudHMiLCJtYXBwaW5ncyI6Ijs7OztBQUFBLHdDQUFrRDtBQUNsRCw2RUFBeUU7QUFDekUsc0VBQW1FO0FBTzVELElBQU0seUJBQXlCLEdBQS9CLE1BQU0seUJBQXlCO0lBT3BDLFlBQW1CLGNBQThCO1FBQTlCLG1CQUFjLEdBQWQsY0FBYyxDQUFnQjtRQUx4QyxXQUFNLEdBQUcsR0FBRyx5QkFBVyxDQUFDLG1CQUFtQixNQUFNLENBQUM7UUFDbEQsV0FBTSxHQUFHLEdBQUcseUJBQVcsQ0FBQyxtQkFBbUIsTUFBTSxDQUFDO1FBQ2xELFlBQU8sR0FBRyxHQUFHLHlCQUFXLENBQUMsbUJBQW1CLE9BQU8sQ0FBQztRQUNwRCxrQkFBYSxHQUFHLHlCQUFXLENBQUMsWUFBWSxDQUFDO0lBRUUsQ0FBQztJQUVyRCxRQUFRO1FBQ04sSUFBSSxDQUFDLGNBQWMsQ0FBQyx1QkFBdUIsRUFBRSxDQUFDLFNBQVMsQ0FBQyxDQUFDLE9BQU8sRUFBRSxFQUFFO1lBQ2xFLElBQUksQ0FBQyxPQUFPLEdBQUcsSUFBSSxPQUFPLEVBQUUsQ0FBQTtRQUM5QixDQUFDLENBQUMsQ0FBQztJQUNMLENBQUM7Ozs7O0FBYlUsOERBQXlCO29DQUF6Qix5QkFBeUI7SUFMckMsSUFBQSxnQkFBUyxFQUFDO1FBQ1QsUUFBUSxFQUFFLGNBQWM7UUFDeEIsdURBQWlEO0tBRWxELENBQUM7NkNBUW1DLGdDQUFjO0dBUHRDLHlCQUF5QixDQWNyQyIsIm5hbWVzIjpbXSwic291cmNlcyI6WyIvVXNlcnMvZ2FyZ2FtL0RldmVsb3AvaHBvLXdlYi9zcmMvYXBwL3N0YXRpYy9kYXRhL29udG9sb2d5LWRvd25sb2FkL29udG9sb2d5LWRvd25sb2FkLmNvbXBvbmVudC50cyJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBDb21wb25lbnQsIE9uSW5pdCB9IGZyb20gJ0Bhbmd1bGFyL2NvcmUnO1xuaW1wb3J0IHsgVXRpbGl0eVNlcnZpY2UgfSBmcm9tICcuLi8uLi8uLi9zaGFyZWQvdXRpbGl0eS91dGlsaXR5LnNlcnZpY2UnO1xuaW1wb3J0IHsgZW52aXJvbm1lbnQgfSBmcm9tIFwiLi4vLi4vLi4vLi4vZW52aXJvbm1lbnRzL2Vudmlyb25tZW50XCI7XG5cbkBDb21wb25lbnQoe1xuICBzZWxlY3RvcjogJ2FwcC1vbnRvbG9neScsXG4gIHRlbXBsYXRlVXJsOiAnLi9vbnRvbG9neS1kb3dubG9hZC5jb21wb25lbnQuaHRtbCcsXG4gIHN0eWxlVXJsczogWycuL29udG9sb2d5LWRvd25sb2FkLmNvbXBvbmVudC5zY3NzJ11cbn0pXG5leHBvcnQgY2xhc3MgT250b2xvZ3lEb3dubG9hZENvbXBvbmVudCBpbXBsZW1lbnRzIE9uSW5pdCB7XG5cbiAgcmVhZG9ubHkgb2JvVXJsID0gYCR7ZW52aXJvbm1lbnQuT05UT19SRUxFQVNFX05PX0VYVH0ub2JvYDtcbiAgcmVhZG9ubHkgb3dsVXJsID0gYCR7ZW52aXJvbm1lbnQuT05UT19SRUxFQVNFX05PX0VYVH0ub3dsYDtcbiAgcmVhZG9ubHkganNvblVybCA9IGAke2Vudmlyb25tZW50Lk9OVE9fUkVMRUFTRV9OT19FWFR9Lmpzb25gO1xuICByZWFkb25seSBvdGhlclJlbGVhc2VzID0gZW52aXJvbm1lbnQuSFBPX1JFTEVBU0VTO1xuICB2ZXJzaW9uOiBzdHJpbmc7XG4gIGNvbnN0cnVjdG9yKHB1YmxpYyB1dGlsaXR5U2VydmljZTogVXRpbGl0eVNlcnZpY2UpIHt9XG5cbiAgbmdPbkluaXQoKSB7XG4gICAgdGhpcy51dGlsaXR5U2VydmljZS5nZXRNb3N0UmVjZW50UmVsZWFzZUhQTygpLnN1YnNjcmliZSgodmVyc2lvbikgPT4ge1xuICAgICAgdGhpcy52ZXJzaW9uID0gYHYke3ZlcnNpb259YFxuICAgIH0pO1xuICB9XG59XG4iXSwidmVyc2lvbiI6M30=

@@ -1,0 +1,47 @@
+5644071d1e923a46761069865dba21f9
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.DialogExcelDownloadComponent = void 0;
+const tslib_1 = require("tslib");
+const core_1 = require("@angular/core");
+const dialog_1 = require("@angular/material/dialog");
+const models_1 = require("../../browser/models/models");
+let DialogExcelDownloadComponent = class DialogExcelDownloadComponent {
+    constructor(dialogRef, data) {
+        this.dialogRef = dialogRef;
+        this.data = data;
+        this.supported = { first: "", second: "" };
+        this.EntityType = models_1.EntityType;
+    }
+    ngOnInit() {
+        this.supported.first = this.getEntityDisplay(this.data.supported_download[0]);
+        this.supported.second = this.getEntityDisplay(this.data.supported_download[1]);
+    }
+    getEntityDisplay(type) {
+        if (type === models_1.EntityType.PHENOTYPE) {
+            return "Phenotype";
+        }
+        else if (type === models_1.EntityType.DISEASE) {
+            return "Diseases";
+        }
+        else if (type === models_1.EntityType.GENE) {
+            return "Genes";
+        }
+    }
+    onNoClick() {
+        this.dialogRef.close();
+    }
+    static { this.ctorParameters = () => [
+        { type: dialog_1.MatDialogRef },
+        { type: models_1.DialogData, decorators: [{ type: core_1.Inject, args: [dialog_1.MAT_DIALOG_DATA,] }] }
+    ]; }
+};
+exports.DialogExcelDownloadComponent = DialogExcelDownloadComponent;
+exports.DialogExcelDownloadComponent = DialogExcelDownloadComponent = tslib_1.__decorate([
+    (0, core_1.Component)({
+        selector: 'app-dialog-excel-download',
+        template: require("./dialog-excel-download.component.html")
+    }),
+    tslib_1.__metadata("design:paramtypes", [dialog_1.MatDialogRef, Object])
+], DialogExcelDownloadComponent);
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJmaWxlIjoiL1VzZXJzL2dhcmdhbS9EZXZlbG9wL2hwby13ZWIvc3JjL2FwcC9zaGFyZWQvZGlhbG9nLWV4Y2VsLWRvd25sb2FkL2RpYWxvZy1leGNlbC1kb3dubG9hZC5jb21wb25lbnQudHMiLCJtYXBwaW5ncyI6Ijs7OztBQUFBLHdDQUEwRDtBQUMxRCxxREFBNEY7QUFDNUYsd0RBQXFFO0FBTzlELElBQU0sNEJBQTRCLEdBQWxDLE1BQU0sNEJBQTRCO0lBSXZDLFlBQW1CLFNBQXFELEVBQzVCLElBQWdCO1FBRHpDLGNBQVMsR0FBVCxTQUFTLENBQTRDO1FBQzVCLFNBQUksR0FBSixJQUFJLENBQVk7UUFINUQsY0FBUyxHQUFHLEVBQUUsS0FBSyxFQUFFLEVBQUUsRUFBRSxNQUFNLEVBQUUsRUFBRSxFQUFFLENBQUM7UUF5Qm5CLGVBQVUsR0FBRyxtQkFBVSxDQUFDO0lBckIzQyxDQUFDO0lBRUQsUUFBUTtRQUNKLElBQUksQ0FBQyxTQUFTLENBQUMsS0FBSyxHQUFHLElBQUksQ0FBQyxnQkFBZ0IsQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLGtCQUFrQixDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUM7UUFDOUUsSUFBSSxDQUFDLFNBQVMsQ0FBQyxNQUFNLEdBQUcsSUFBSSxDQUFDLGdCQUFnQixDQUFDLElBQUksQ0FBQyxJQUFJLENBQUMsa0JBQWtCLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQztJQUNuRixDQUFDO0lBRUQsZ0JBQWdCLENBQUMsSUFBZ0I7UUFDL0IsSUFBSSxJQUFJLEtBQUssbUJBQVUsQ0FBQyxTQUFTLEVBQUMsQ0FBQztZQUNqQyxPQUFPLFdBQVcsQ0FBQztRQUNyQixDQUFDO2FBQU0sSUFBSSxJQUFJLEtBQUssbUJBQVUsQ0FBQyxPQUFPLEVBQUMsQ0FBQztZQUN0QyxPQUFPLFVBQVUsQ0FBQztRQUNwQixDQUFDO2FBQU0sSUFBSSxJQUFJLEtBQUssbUJBQVUsQ0FBQyxJQUFJLEVBQUMsQ0FBQztZQUNuQyxPQUFPLE9BQU8sQ0FBQztRQUNqQixDQUFDO0lBQ0gsQ0FBQztJQUVELFNBQVM7UUFDUCxJQUFJLENBQUMsU0FBUyxDQUFDLEtBQUssRUFBRSxDQUFDO0lBQ3pCLENBQUM7OzswREFwQlksYUFBTSxTQUFDLHdCQUFlOzs7QUFMeEIsb0VBQTRCO3VDQUE1Qiw0QkFBNEI7SUFMeEMsSUFBQSxnQkFBUyxFQUFDO1FBQ1QsUUFBUSxFQUFFLDJCQUEyQjtRQUNyQywyREFBcUQ7S0FFdEQsQ0FBQzs2Q0FLOEIscUJBQVk7R0FKL0IsNEJBQTRCLENBNEJ4QyIsIm5hbWVzIjpbXSwic291cmNlcyI6WyIvVXNlcnMvZ2FyZ2FtL0RldmVsb3AvaHBvLXdlYi9zcmMvYXBwL3NoYXJlZC9kaWFsb2ctZXhjZWwtZG93bmxvYWQvZGlhbG9nLWV4Y2VsLWRvd25sb2FkLmNvbXBvbmVudC50cyJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBDb21wb25lbnQsIEluamVjdCwgT25Jbml0IH0gZnJvbSAnQGFuZ3VsYXIvY29yZSc7XG5pbXBvcnQgeyBNQVRfRElBTE9HX0RBVEEgYXMgTUFUX0RJQUxPR19EQVRBLCBNYXREaWFsb2dSZWYgfSBmcm9tICdAYW5ndWxhci9tYXRlcmlhbC9kaWFsb2cnO1xuaW1wb3J0IHsgRGlhbG9nRGF0YSwgRW50aXR5VHlwZSB9IGZyb20gJy4uLy4uL2Jyb3dzZXIvbW9kZWxzL21vZGVscyc7XG5cbkBDb21wb25lbnQoe1xuICBzZWxlY3RvcjogJ2FwcC1kaWFsb2ctZXhjZWwtZG93bmxvYWQnLFxuICB0ZW1wbGF0ZVVybDogJy4vZGlhbG9nLWV4Y2VsLWRvd25sb2FkLmNvbXBvbmVudC5odG1sJyxcbiAgc3R5bGVVcmxzOiBbJy4vZGlhbG9nLWV4Y2VsLWRvd25sb2FkLmNvbXBvbmVudC5jc3MnXVxufSlcbmV4cG9ydCBjbGFzcyBEaWFsb2dFeGNlbERvd25sb2FkQ29tcG9uZW50IGltcGxlbWVudHMgT25Jbml0IHtcblxuICBzdXBwb3J0ZWQgPSB7IGZpcnN0OiBcIlwiLCBzZWNvbmQ6IFwiXCIgfTtcblxuICBjb25zdHJ1Y3RvcihwdWJsaWMgZGlhbG9nUmVmOiBNYXREaWFsb2dSZWY8RGlhbG9nRXhjZWxEb3dubG9hZENvbXBvbmVudD4sXG4gICAgICAgICAgICAgIEBJbmplY3QoTUFUX0RJQUxPR19EQVRBKSBwdWJsaWMgZGF0YTogRGlhbG9nRGF0YSkge1xuICB9XG5cbiAgbmdPbkluaXQoKSB7XG4gICAgICB0aGlzLnN1cHBvcnRlZC5maXJzdCA9IHRoaXMuZ2V0RW50aXR5RGlzcGxheSh0aGlzLmRhdGEuc3VwcG9ydGVkX2Rvd25sb2FkWzBdKTtcbiAgICAgIHRoaXMuc3VwcG9ydGVkLnNlY29uZCA9IHRoaXMuZ2V0RW50aXR5RGlzcGxheSh0aGlzLmRhdGEuc3VwcG9ydGVkX2Rvd25sb2FkWzFdKTtcbiAgfVxuXG4gIGdldEVudGl0eURpc3BsYXkodHlwZTogRW50aXR5VHlwZSk6IHN0cmluZyB7XG4gICAgaWYgKHR5cGUgPT09IEVudGl0eVR5cGUuUEhFTk9UWVBFKXtcbiAgICAgIHJldHVybiBcIlBoZW5vdHlwZVwiO1xuICAgIH0gZWxzZSBpZiAodHlwZSA9PT0gRW50aXR5VHlwZS5ESVNFQVNFKXtcbiAgICAgIHJldHVybiBcIkRpc2Vhc2VzXCI7XG4gICAgfSBlbHNlIGlmICh0eXBlID09PSBFbnRpdHlUeXBlLkdFTkUpe1xuICAgICAgcmV0dXJuIFwiR2VuZXNcIjtcbiAgICB9XG4gIH1cblxuICBvbk5vQ2xpY2soKTogdm9pZCB7XG4gICAgdGhpcy5kaWFsb2dSZWYuY2xvc2UoKTtcbiAgfVxuXG4gIHByb3RlY3RlZCByZWFkb25seSBFbnRpdHlUeXBlID0gRW50aXR5VHlwZTtcbn1cbiJdLCJ2ZXJzaW9uIjozfQ==

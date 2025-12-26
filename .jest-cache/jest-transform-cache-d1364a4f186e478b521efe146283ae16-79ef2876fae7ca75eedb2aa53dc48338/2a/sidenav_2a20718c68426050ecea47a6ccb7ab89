@@ -1,0 +1,995 @@
+3527f3151b8e94cb894b2b4538cee9b4
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(
+  // If the importer is in node compatibility mode or this is not an ESM
+  // file that has been converted to a CommonJS file using a Babel-
+  // compatible transform (i.e. "__esModule" has not been set), then set
+  // "default" to the CommonJS "module.exports" for node compatibility.
+  isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target,
+  mod
+));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var sidenav_exports = {};
+__export(sidenav_exports, {
+  MAT_DRAWER_DEFAULT_AUTOSIZE: () => MAT_DRAWER_DEFAULT_AUTOSIZE,
+  MAT_DRAWER_DEFAULT_AUTOSIZE_FACTORY: () => MAT_DRAWER_DEFAULT_AUTOSIZE_FACTORY,
+  MatDrawer: () => MatDrawer,
+  MatDrawerContainer: () => MatDrawerContainer,
+  MatDrawerContent: () => MatDrawerContent,
+  MatSidenav: () => MatSidenav,
+  MatSidenavContainer: () => MatSidenavContainer,
+  MatSidenavContent: () => MatSidenavContent,
+  MatSidenavModule: () => MatSidenavModule,
+  matDrawerAnimations: () => matDrawerAnimations,
+  throwMatDuplicatedDrawerError: () => throwMatDuplicatedDrawerError
+});
+module.exports = __toCommonJS(sidenav_exports);
+var i1 = __toESM(require("@angular/cdk/scrolling"), 1);
+var import_scrolling = require("@angular/cdk/scrolling");
+var i0 = __toESM(require("@angular/core"), 1);
+var import_core = require("@angular/core");
+var import_core2 = require("@angular/material/core");
+var i2 = __toESM(require("@angular/cdk/a11y"), 1);
+var i4 = __toESM(require("@angular/cdk/bidi"), 1);
+var import_coercion = require("@angular/cdk/coercion");
+var import_keycodes = require("@angular/cdk/keycodes");
+var i3 = __toESM(require("@angular/cdk/platform"), 1);
+var import_common = require("@angular/common");
+var import_rxjs = require("rxjs");
+var import_operators = require("rxjs/operators");
+var import_animations = require("@angular/animations");
+const matDrawerAnimations = {
+  /** Animation that slides a drawer in and out. */
+  transformDrawer: (0, import_animations.trigger)("transform", [
+    // We remove the `transform` here completely, rather than setting it to zero, because:
+    // 1. Having a transform can cause elements with ripples or an animated
+    //    transform to shift around in Chrome with an RTL layout (see #10023).
+    // 2. 3d transforms causes text to appear blurry on IE and Edge.
+    (0, import_animations.state)("open, open-instant", (0, import_animations.style)({
+      "transform": "none",
+      "visibility": "visible"
+    })),
+    (0, import_animations.state)("void", (0, import_animations.style)({
+      // Avoids the shadow showing up when closed in SSR.
+      "box-shadow": "none",
+      "visibility": "hidden"
+    })),
+    (0, import_animations.transition)("void => open-instant", (0, import_animations.animate)("0ms")),
+    (0, import_animations.transition)("void <=> open, open-instant => void", (0, import_animations.animate)("400ms cubic-bezier(0.25, 0.8, 0.25, 1)"))
+  ])
+};
+function throwMatDuplicatedDrawerError(position) {
+  throw Error(`A drawer was already declared for 'position="${position}"'`);
+}
+const MAT_DRAWER_DEFAULT_AUTOSIZE = new import_core.InjectionToken("MAT_DRAWER_DEFAULT_AUTOSIZE", {
+  providedIn: "root",
+  factory: MAT_DRAWER_DEFAULT_AUTOSIZE_FACTORY
+});
+const MAT_DRAWER_CONTAINER = new import_core.InjectionToken("MAT_DRAWER_CONTAINER");
+function MAT_DRAWER_DEFAULT_AUTOSIZE_FACTORY() {
+  return false;
+}
+const _MatDrawerContent = class _MatDrawerContent extends import_scrolling.CdkScrollable {
+  constructor(_changeDetectorRef, _container, elementRef, scrollDispatcher, ngZone) {
+    super(elementRef, scrollDispatcher, ngZone);
+    this._changeDetectorRef = _changeDetectorRef;
+    this._container = _container;
+  }
+  ngAfterContentInit() {
+    this._container._contentMarginChanges.subscribe(() => {
+      this._changeDetectorRef.markForCheck();
+    });
+  }
+};
+_MatDrawerContent.\u0275fac = i0.\u0275\u0275ngDeclareFactory({ minVersion: "12.0.0", version: "18.2.0-next.2", ngImport: i0, type: _MatDrawerContent, deps: [{ token: i0.ChangeDetectorRef }, { token: (0, import_core.forwardRef)(() => MatDrawerContainer) }, { token: i0.ElementRef }, { token: i1.ScrollDispatcher }, { token: i0.NgZone }], target: i0.\u0275\u0275FactoryTarget.Component });
+_MatDrawerContent.\u0275cmp = i0.\u0275\u0275ngDeclareComponent({ minVersion: "14.0.0", version: "18.2.0-next.2", type: _MatDrawerContent, isStandalone: true, selector: "mat-drawer-content", host: { properties: { "style.margin-left.px": "_container._contentMargins.left", "style.margin-right.px": "_container._contentMargins.right" }, classAttribute: "mat-drawer-content" }, providers: [
+  {
+    provide: import_scrolling.CdkScrollable,
+    useExisting: _MatDrawerContent
+  }
+], usesInheritance: true, ngImport: i0, template: "<ng-content></ng-content>", isInline: true, changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None });
+let MatDrawerContent = _MatDrawerContent;
+i0.\u0275\u0275ngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.0-next.2", ngImport: i0, type: MatDrawerContent, decorators: [{
+  type: import_core.Component,
+  args: [{
+    selector: "mat-drawer-content",
+    template: "<ng-content></ng-content>",
+    host: {
+      "class": "mat-drawer-content",
+      "[style.margin-left.px]": "_container._contentMargins.left",
+      "[style.margin-right.px]": "_container._contentMargins.right"
+    },
+    changeDetection: import_core.ChangeDetectionStrategy.OnPush,
+    encapsulation: import_core.ViewEncapsulation.None,
+    providers: [
+      {
+        provide: import_scrolling.CdkScrollable,
+        useExisting: MatDrawerContent
+      }
+    ],
+    standalone: true
+  }]
+}], ctorParameters: () => [{ type: i0.ChangeDetectorRef }, { type: MatDrawerContainer, decorators: [{
+  type: import_core.Inject,
+  args: [(0, import_core.forwardRef)(() => MatDrawerContainer)]
+}] }, { type: i0.ElementRef }, { type: i1.ScrollDispatcher }, { type: i0.NgZone }] });
+const _MatDrawer = class _MatDrawer {
+  /** The side that the drawer is attached to. */
+  get position() {
+    return this._position;
+  }
+  set position(value) {
+    value = value === "end" ? "end" : "start";
+    if (value !== this._position) {
+      if (this._isAttached) {
+        this._updatePositionInParent(value);
+      }
+      this._position = value;
+      this.onPositionChanged.emit();
+    }
+  }
+  /** Mode of the drawer; one of 'over', 'push' or 'side'. */
+  get mode() {
+    return this._mode;
+  }
+  set mode(value) {
+    this._mode = value;
+    this._updateFocusTrapState();
+    this._modeChanged.next();
+  }
+  /** Whether the drawer can be closed with the escape key or by clicking on the backdrop. */
+  get disableClose() {
+    return this._disableClose;
+  }
+  set disableClose(value) {
+    this._disableClose = (0, import_coercion.coerceBooleanProperty)(value);
+  }
+  /**
+   * Whether the drawer should focus the first focusable element automatically when opened.
+   * Defaults to false in when `mode` is set to `side`, otherwise defaults to `true`. If explicitly
+   * enabled, focus will be moved into the sidenav in `side` mode as well.
+   * @breaking-change 14.0.0 Remove boolean option from autoFocus. Use string or AutoFocusTarget
+   * instead.
+   */
+  get autoFocus() {
+    const value = this._autoFocus;
+    if (value == null) {
+      if (this.mode === "side") {
+        return "dialog";
+      } else {
+        return "first-tabbable";
+      }
+    }
+    return value;
+  }
+  set autoFocus(value) {
+    if (value === "true" || value === "false" || value == null) {
+      value = (0, import_coercion.coerceBooleanProperty)(value);
+    }
+    this._autoFocus = value;
+  }
+  /**
+   * Whether the drawer is opened. We overload this because we trigger an event when it
+   * starts or end.
+   */
+  get opened() {
+    return this._opened;
+  }
+  set opened(value) {
+    this.toggle((0, import_coercion.coerceBooleanProperty)(value));
+  }
+  constructor(_elementRef, _focusTrapFactory, _focusMonitor, _platform, _ngZone, _interactivityChecker, _doc, _container) {
+    this._elementRef = _elementRef;
+    this._focusTrapFactory = _focusTrapFactory;
+    this._focusMonitor = _focusMonitor;
+    this._platform = _platform;
+    this._ngZone = _ngZone;
+    this._interactivityChecker = _interactivityChecker;
+    this._doc = _doc;
+    this._container = _container;
+    this._focusTrap = null;
+    this._elementFocusedBeforeDrawerWasOpened = null;
+    this._enableAnimations = false;
+    this._position = "start";
+    this._mode = "over";
+    this._disableClose = false;
+    this._opened = false;
+    this._animationStarted = new import_rxjs.Subject();
+    this._animationEnd = new import_rxjs.Subject();
+    this._animationState = "void";
+    this.openedChange = // Note this has to be async in order to avoid some issues with two-bindings (see #8872).
+    new import_core.EventEmitter(
+      /* isAsync */
+      true
+    );
+    this._openedStream = this.openedChange.pipe((0, import_operators.filter)((o) => o), (0, import_operators.map)(() => {
+    }));
+    this.openedStart = this._animationStarted.pipe((0, import_operators.filter)((e) => e.fromState !== e.toState && e.toState.indexOf("open") === 0), (0, import_operators.mapTo)(void 0));
+    this._closedStream = this.openedChange.pipe((0, import_operators.filter)((o) => !o), (0, import_operators.map)(() => {
+    }));
+    this.closedStart = this._animationStarted.pipe((0, import_operators.filter)((e) => e.fromState !== e.toState && e.toState === "void"), (0, import_operators.mapTo)(void 0));
+    this._destroyed = new import_rxjs.Subject();
+    this.onPositionChanged = new import_core.EventEmitter();
+    this._modeChanged = new import_rxjs.Subject();
+    this._injector = (0, import_core.inject)(import_core.Injector);
+    this._changeDetectorRef = (0, import_core.inject)(import_core.ChangeDetectorRef);
+    this.openedChange.pipe((0, import_operators.takeUntil)(this._destroyed)).subscribe((opened) => {
+      if (opened) {
+        if (this._doc) {
+          this._elementFocusedBeforeDrawerWasOpened = this._doc.activeElement;
+        }
+        this._takeFocus();
+      } else if (this._isFocusWithinDrawer()) {
+        this._restoreFocus(this._openedVia || "program");
+      }
+    });
+    this._ngZone.runOutsideAngular(() => {
+      (0, import_rxjs.fromEvent)(this._elementRef.nativeElement, "keydown").pipe((0, import_operators.filter)((event) => {
+        return event.keyCode === import_keycodes.ESCAPE && !this.disableClose && !(0, import_keycodes.hasModifierKey)(event);
+      }), (0, import_operators.takeUntil)(this._destroyed)).subscribe((event) => this._ngZone.run(() => {
+        this.close();
+        event.stopPropagation();
+        event.preventDefault();
+      }));
+    });
+    this._animationEnd.subscribe((event) => {
+      const { fromState, toState } = event;
+      if (toState.indexOf("open") === 0 && fromState === "void" || toState === "void" && fromState.indexOf("open") === 0) {
+        this.openedChange.emit(this._opened);
+      }
+    });
+  }
+  /**
+   * Focuses the provided element. If the element is not focusable, it will add a tabIndex
+   * attribute to forcefully focus it. The attribute is removed after focus is moved.
+   * @param element The element to focus.
+   */
+  _forceFocus(element, options) {
+    if (!this._interactivityChecker.isFocusable(element)) {
+      element.tabIndex = -1;
+      this._ngZone.runOutsideAngular(() => {
+        const callback = () => {
+          element.removeEventListener("blur", callback);
+          element.removeEventListener("mousedown", callback);
+          element.removeAttribute("tabindex");
+        };
+        element.addEventListener("blur", callback);
+        element.addEventListener("mousedown", callback);
+      });
+    }
+    element.focus(options);
+  }
+  /**
+   * Focuses the first element that matches the given selector within the focus trap.
+   * @param selector The CSS selector for the element to set focus to.
+   */
+  _focusByCssSelector(selector, options) {
+    let elementToFocus = this._elementRef.nativeElement.querySelector(selector);
+    if (elementToFocus) {
+      this._forceFocus(elementToFocus, options);
+    }
+  }
+  /**
+   * Moves focus into the drawer. Note that this works even if
+   * the focus trap is disabled in `side` mode.
+   */
+  _takeFocus() {
+    if (!this._focusTrap) {
+      return;
+    }
+    const element = this._elementRef.nativeElement;
+    switch (this.autoFocus) {
+      case false:
+      case "dialog":
+        return;
+      case true:
+      case "first-tabbable":
+        (0, import_core.afterNextRender)(() => {
+          const hasMovedFocus = this._focusTrap.focusInitialElement();
+          if (!hasMovedFocus && typeof element.focus === "function") {
+            element.focus();
+          }
+        }, { injector: this._injector });
+        break;
+      case "first-heading":
+        this._focusByCssSelector('h1, h2, h3, h4, h5, h6, [role="heading"]');
+        break;
+      default:
+        this._focusByCssSelector(this.autoFocus);
+        break;
+    }
+  }
+  /**
+   * Restores focus to the element that was originally focused when the drawer opened.
+   * If no element was focused at that time, the focus will be restored to the drawer.
+   */
+  _restoreFocus(focusOrigin) {
+    if (this.autoFocus === "dialog") {
+      return;
+    }
+    if (this._elementFocusedBeforeDrawerWasOpened) {
+      this._focusMonitor.focusVia(this._elementFocusedBeforeDrawerWasOpened, focusOrigin);
+    } else {
+      this._elementRef.nativeElement.blur();
+    }
+    this._elementFocusedBeforeDrawerWasOpened = null;
+  }
+  /** Whether focus is currently within the drawer. */
+  _isFocusWithinDrawer() {
+    const activeEl = this._doc.activeElement;
+    return !!activeEl && this._elementRef.nativeElement.contains(activeEl);
+  }
+  ngAfterViewInit() {
+    this._isAttached = true;
+    if (this._position === "end") {
+      this._updatePositionInParent("end");
+    }
+    if (this._platform.isBrowser) {
+      this._focusTrap = this._focusTrapFactory.create(this._elementRef.nativeElement);
+      this._updateFocusTrapState();
+    }
+  }
+  ngAfterContentChecked() {
+    if (this._platform.isBrowser) {
+      this._enableAnimations = true;
+    }
+  }
+  ngOnDestroy() {
+    var _a, _b;
+    (_a = this._focusTrap) == null ? void 0 : _a.destroy();
+    (_b = this._anchor) == null ? void 0 : _b.remove();
+    this._anchor = null;
+    this._animationStarted.complete();
+    this._animationEnd.complete();
+    this._modeChanged.complete();
+    this._destroyed.next();
+    this._destroyed.complete();
+  }
+  /**
+   * Open the drawer.
+   * @param openedVia Whether the drawer was opened by a key press, mouse click or programmatically.
+   * Used for focus management after the sidenav is closed.
+   */
+  open(openedVia) {
+    return this.toggle(true, openedVia);
+  }
+  /** Close the drawer. */
+  close() {
+    return this.toggle(false);
+  }
+  /** Closes the drawer with context that the backdrop was clicked. */
+  _closeViaBackdropClick() {
+    return this._setOpen(
+      /* isOpen */
+      false,
+      /* restoreFocus */
+      true,
+      "mouse"
+    );
+  }
+  /**
+   * Toggle this drawer.
+   * @param isOpen Whether the drawer should be open.
+   * @param openedVia Whether the drawer was opened by a key press, mouse click or programmatically.
+   * Used for focus management after the sidenav is closed.
+   */
+  toggle(isOpen = !this.opened, openedVia) {
+    if (isOpen && openedVia) {
+      this._openedVia = openedVia;
+    }
+    const result = this._setOpen(
+      isOpen,
+      /* restoreFocus */
+      !isOpen && this._isFocusWithinDrawer(),
+      this._openedVia || "program"
+    );
+    if (!isOpen) {
+      this._openedVia = null;
+    }
+    return result;
+  }
+  /**
+   * Toggles the opened state of the drawer.
+   * @param isOpen Whether the drawer should open or close.
+   * @param restoreFocus Whether focus should be restored on close.
+   * @param focusOrigin Origin to use when restoring focus.
+   */
+  _setOpen(isOpen, restoreFocus, focusOrigin) {
+    this._opened = isOpen;
+    if (isOpen) {
+      this._animationState = this._enableAnimations ? "open" : "open-instant";
+    } else {
+      this._animationState = "void";
+      if (restoreFocus) {
+        this._restoreFocus(focusOrigin);
+      }
+    }
+    this._changeDetectorRef.markForCheck();
+    this._updateFocusTrapState();
+    return new Promise((resolve) => {
+      this.openedChange.pipe((0, import_operators.take)(1)).subscribe((open) => resolve(open ? "open" : "close"));
+    });
+  }
+  _getWidth() {
+    return this._elementRef.nativeElement ? this._elementRef.nativeElement.offsetWidth || 0 : 0;
+  }
+  /** Updates the enabled state of the focus trap. */
+  _updateFocusTrapState() {
+    var _a;
+    if (this._focusTrap) {
+      this._focusTrap.enabled = !!((_a = this._container) == null ? void 0 : _a.hasBackdrop) && this.opened;
+    }
+  }
+  /**
+   * Updates the position of the drawer in the DOM. We need to move the element around ourselves
+   * when it's in the `end` position so that it comes after the content and the visual order
+   * matches the tab order. We also need to be able to move it back to `start` if the sidenav
+   * started off as `end` and was changed to `start`.
+   */
+  _updatePositionInParent(newPosition) {
+    if (!this._platform.isBrowser) {
+      return;
+    }
+    const element = this._elementRef.nativeElement;
+    const parent = element.parentNode;
+    if (newPosition === "end") {
+      if (!this._anchor) {
+        this._anchor = this._doc.createComment("mat-drawer-anchor");
+        parent.insertBefore(this._anchor, element);
+      }
+      parent.appendChild(element);
+    } else if (this._anchor) {
+      this._anchor.parentNode.insertBefore(element, this._anchor);
+    }
+  }
+};
+_MatDrawer.\u0275fac = i0.\u0275\u0275ngDeclareFactory({ minVersion: "12.0.0", version: "18.2.0-next.2", ngImport: i0, type: _MatDrawer, deps: [{ token: i0.ElementRef }, { token: i2.FocusTrapFactory }, { token: i2.FocusMonitor }, { token: i3.Platform }, { token: i0.NgZone }, { token: i2.InteractivityChecker }, { token: import_common.DOCUMENT, optional: true }, { token: MAT_DRAWER_CONTAINER, optional: true }], target: i0.\u0275\u0275FactoryTarget.Component });
+_MatDrawer.\u0275cmp = i0.\u0275\u0275ngDeclareComponent({ minVersion: "14.0.0", version: "18.2.0-next.2", type: _MatDrawer, isStandalone: true, selector: "mat-drawer", inputs: { position: "position", mode: "mode", disableClose: "disableClose", autoFocus: "autoFocus", opened: "opened" }, outputs: { openedChange: "openedChange", _openedStream: "opened", openedStart: "openedStart", _closedStream: "closed", closedStart: "closedStart", onPositionChanged: "positionChanged" }, host: { attributes: { "tabIndex": "-1" }, listeners: { "@transform.start": "_animationStarted.next($event)", "@transform.done": "_animationEnd.next($event)" }, properties: { "attr.align": "null", "class.mat-drawer-end": 'position === "end"', "class.mat-drawer-over": 'mode === "over"', "class.mat-drawer-push": 'mode === "push"', "class.mat-drawer-side": 'mode === "side"', "class.mat-drawer-opened": "opened", "@transform": "_animationState" }, classAttribute: "mat-drawer" }, viewQueries: [{ propertyName: "_content", first: true, predicate: ["content"], descendants: true }], exportAs: ["matDrawer"], ngImport: i0, template: '<div class="mat-drawer-inner-container" cdkScrollable #content>\r\n  <ng-content></ng-content>\r\n</div>\r\n', dependencies: [{ kind: "directive", type: import_scrolling.CdkScrollable, selector: "[cdk-scrollable], [cdkScrollable]" }], animations: [matDrawerAnimations.transformDrawer], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None });
+let MatDrawer = _MatDrawer;
+i0.\u0275\u0275ngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.0-next.2", ngImport: i0, type: MatDrawer, decorators: [{
+  type: import_core.Component,
+  args: [{ selector: "mat-drawer", exportAs: "matDrawer", animations: [matDrawerAnimations.transformDrawer], host: {
+    "class": "mat-drawer",
+    // must prevent the browser from aligning text based on value
+    "[attr.align]": "null",
+    "[class.mat-drawer-end]": 'position === "end"',
+    "[class.mat-drawer-over]": 'mode === "over"',
+    "[class.mat-drawer-push]": 'mode === "push"',
+    "[class.mat-drawer-side]": 'mode === "side"',
+    "[class.mat-drawer-opened]": "opened",
+    "tabIndex": "-1",
+    "[@transform]": "_animationState",
+    "(@transform.start)": "_animationStarted.next($event)",
+    "(@transform.done)": "_animationEnd.next($event)"
+  }, changeDetection: import_core.ChangeDetectionStrategy.OnPush, encapsulation: import_core.ViewEncapsulation.None, standalone: true, imports: [import_scrolling.CdkScrollable], template: '<div class="mat-drawer-inner-container" cdkScrollable #content>\r\n  <ng-content></ng-content>\r\n</div>\r\n' }]
+}], ctorParameters: () => [{ type: i0.ElementRef }, { type: i2.FocusTrapFactory }, { type: i2.FocusMonitor }, { type: i3.Platform }, { type: i0.NgZone }, { type: i2.InteractivityChecker }, { type: void 0, decorators: [{
+  type: import_core.Optional
+}, {
+  type: import_core.Inject,
+  args: [import_common.DOCUMENT]
+}] }, { type: MatDrawerContainer, decorators: [{
+  type: import_core.Optional
+}, {
+  type: import_core.Inject,
+  args: [MAT_DRAWER_CONTAINER]
+}] }], propDecorators: { position: [{
+  type: import_core.Input
+}], mode: [{
+  type: import_core.Input
+}], disableClose: [{
+  type: import_core.Input
+}], autoFocus: [{
+  type: import_core.Input
+}], opened: [{
+  type: import_core.Input
+}], openedChange: [{
+  type: import_core.Output
+}], _openedStream: [{
+  type: import_core.Output,
+  args: ["opened"]
+}], openedStart: [{
+  type: import_core.Output
+}], _closedStream: [{
+  type: import_core.Output,
+  args: ["closed"]
+}], closedStart: [{
+  type: import_core.Output
+}], onPositionChanged: [{
+  type: import_core.Output,
+  args: ["positionChanged"]
+}], _content: [{
+  type: import_core.ViewChild,
+  args: ["content"]
+}] } });
+const _MatDrawerContainer = class _MatDrawerContainer {
+  /** The drawer child with the `start` position. */
+  get start() {
+    return this._start;
+  }
+  /** The drawer child with the `end` position. */
+  get end() {
+    return this._end;
+  }
+  /**
+   * Whether to automatically resize the container whenever
+   * the size of any of its drawers changes.
+   *
+   * **Use at your own risk!** Enabling this option can cause layout thrashing by measuring
+   * the drawers on every change detection cycle. Can be configured globally via the
+   * `MAT_DRAWER_DEFAULT_AUTOSIZE` token.
+   */
+  get autosize() {
+    return this._autosize;
+  }
+  set autosize(value) {
+    this._autosize = (0, import_coercion.coerceBooleanProperty)(value);
+  }
+  /**
+   * Whether the drawer container should have a backdrop while one of the sidenavs is open.
+   * If explicitly set to `true`, the backdrop will be enabled for drawers in the `side`
+   * mode as well.
+   */
+  get hasBackdrop() {
+    return this._drawerHasBackdrop(this._start) || this._drawerHasBackdrop(this._end);
+  }
+  set hasBackdrop(value) {
+    this._backdropOverride = value == null ? null : (0, import_coercion.coerceBooleanProperty)(value);
+  }
+  /** Reference to the CdkScrollable instance that wraps the scrollable content. */
+  get scrollable() {
+    return this._userContent || this._content;
+  }
+  constructor(_dir, _element, _ngZone, _changeDetectorRef, viewportRuler, defaultAutosize = false, _animationMode) {
+    this._dir = _dir;
+    this._element = _element;
+    this._ngZone = _ngZone;
+    this._changeDetectorRef = _changeDetectorRef;
+    this._animationMode = _animationMode;
+    this._drawers = new import_core.QueryList();
+    this.backdropClick = new import_core.EventEmitter();
+    this._destroyed = new import_rxjs.Subject();
+    this._doCheckSubject = new import_rxjs.Subject();
+    this._contentMargins = { left: null, right: null };
+    this._contentMarginChanges = new import_rxjs.Subject();
+    this._injector = (0, import_core.inject)(import_core.Injector);
+    if (_dir) {
+      _dir.change.pipe((0, import_operators.takeUntil)(this._destroyed)).subscribe(() => {
+        this._validateDrawers();
+        this.updateContentMargins();
+      });
+    }
+    viewportRuler.change().pipe((0, import_operators.takeUntil)(this._destroyed)).subscribe(() => this.updateContentMargins());
+    this._autosize = defaultAutosize;
+  }
+  ngAfterContentInit() {
+    this._allDrawers.changes.pipe((0, import_operators.startWith)(this._allDrawers), (0, import_operators.takeUntil)(this._destroyed)).subscribe((drawer) => {
+      this._drawers.reset(drawer.filter((item) => !item._container || item._container === this));
+      this._drawers.notifyOnChanges();
+    });
+    this._drawers.changes.pipe((0, import_operators.startWith)(null)).subscribe(() => {
+      this._validateDrawers();
+      this._drawers.forEach((drawer) => {
+        this._watchDrawerToggle(drawer);
+        this._watchDrawerPosition(drawer);
+        this._watchDrawerMode(drawer);
+      });
+      if (!this._drawers.length || this._isDrawerOpen(this._start) || this._isDrawerOpen(this._end)) {
+        this.updateContentMargins();
+      }
+      this._changeDetectorRef.markForCheck();
+    });
+    this._ngZone.runOutsideAngular(() => {
+      this._doCheckSubject.pipe(
+        (0, import_operators.debounceTime)(10),
+        // Arbitrary debounce time, less than a frame at 60fps
+        (0, import_operators.takeUntil)(this._destroyed)
+      ).subscribe(() => this.updateContentMargins());
+    });
+  }
+  ngOnDestroy() {
+    this._contentMarginChanges.complete();
+    this._doCheckSubject.complete();
+    this._drawers.destroy();
+    this._destroyed.next();
+    this._destroyed.complete();
+  }
+  /** Calls `open` of both start and end drawers */
+  open() {
+    this._drawers.forEach((drawer) => drawer.open());
+  }
+  /** Calls `close` of both start and end drawers */
+  close() {
+    this._drawers.forEach((drawer) => drawer.close());
+  }
+  /**
+   * Recalculates and updates the inline styles for the content. Note that this should be used
+   * sparingly, because it causes a reflow.
+   */
+  updateContentMargins() {
+    let left = 0;
+    let right = 0;
+    if (this._left && this._left.opened) {
+      if (this._left.mode == "side") {
+        left += this._left._getWidth();
+      } else if (this._left.mode == "push") {
+        const width = this._left._getWidth();
+        left += width;
+        right -= width;
+      }
+    }
+    if (this._right && this._right.opened) {
+      if (this._right.mode == "side") {
+        right += this._right._getWidth();
+      } else if (this._right.mode == "push") {
+        const width = this._right._getWidth();
+        right += width;
+        left -= width;
+      }
+    }
+    left = left || null;
+    right = right || null;
+    if (left !== this._contentMargins.left || right !== this._contentMargins.right) {
+      this._contentMargins = { left, right };
+      this._ngZone.run(() => this._contentMarginChanges.next(this._contentMargins));
+    }
+  }
+  ngDoCheck() {
+    if (this._autosize && this._isPushed()) {
+      this._ngZone.runOutsideAngular(() => this._doCheckSubject.next());
+    }
+  }
+  /**
+   * Subscribes to drawer events in order to set a class on the main container element when the
+   * drawer is open and the backdrop is visible. This ensures any overflow on the container element
+   * is properly hidden.
+   */
+  _watchDrawerToggle(drawer) {
+    drawer._animationStarted.pipe((0, import_operators.filter)((event) => event.fromState !== event.toState), (0, import_operators.takeUntil)(this._drawers.changes)).subscribe((event) => {
+      if (event.toState !== "open-instant" && this._animationMode !== "NoopAnimations") {
+        this._element.nativeElement.classList.add("mat-drawer-transition");
+      }
+      this.updateContentMargins();
+      this._changeDetectorRef.markForCheck();
+    });
+    if (drawer.mode !== "side") {
+      drawer.openedChange.pipe((0, import_operators.takeUntil)(this._drawers.changes)).subscribe(() => this._setContainerClass(drawer.opened));
+    }
+  }
+  /**
+   * Subscribes to drawer onPositionChanged event in order to
+   * re-validate drawers when the position changes.
+   */
+  _watchDrawerPosition(drawer) {
+    if (!drawer) {
+      return;
+    }
+    drawer.onPositionChanged.pipe((0, import_operators.takeUntil)(this._drawers.changes)).subscribe(() => {
+      (0, import_core.afterNextRender)(() => {
+        this._validateDrawers();
+      }, { injector: this._injector, phase: import_core.AfterRenderPhase.Read });
+    });
+  }
+  /** Subscribes to changes in drawer mode so we can run change detection. */
+  _watchDrawerMode(drawer) {
+    if (drawer) {
+      drawer._modeChanged.pipe((0, import_operators.takeUntil)((0, import_rxjs.merge)(this._drawers.changes, this._destroyed))).subscribe(() => {
+        this.updateContentMargins();
+        this._changeDetectorRef.markForCheck();
+      });
+    }
+  }
+  /** Toggles the 'mat-drawer-opened' class on the main 'mat-drawer-container' element. */
+  _setContainerClass(isAdd) {
+    const classList = this._element.nativeElement.classList;
+    const className = "mat-drawer-container-has-open";
+    if (isAdd) {
+      classList.add(className);
+    } else {
+      classList.remove(className);
+    }
+  }
+  /** Validate the state of the drawer children components. */
+  _validateDrawers() {
+    this._start = this._end = null;
+    this._drawers.forEach((drawer) => {
+      if (drawer.position == "end") {
+        if (this._end != null && (typeof ngDevMode === "undefined" || ngDevMode)) {
+          throwMatDuplicatedDrawerError("end");
+        }
+        this._end = drawer;
+      } else {
+        if (this._start != null && (typeof ngDevMode === "undefined" || ngDevMode)) {
+          throwMatDuplicatedDrawerError("start");
+        }
+        this._start = drawer;
+      }
+    });
+    this._right = this._left = null;
+    if (this._dir && this._dir.value === "rtl") {
+      this._left = this._end;
+      this._right = this._start;
+    } else {
+      this._left = this._start;
+      this._right = this._end;
+    }
+  }
+  /** Whether the container is being pushed to the side by one of the drawers. */
+  _isPushed() {
+    return this._isDrawerOpen(this._start) && this._start.mode != "over" || this._isDrawerOpen(this._end) && this._end.mode != "over";
+  }
+  _onBackdropClicked() {
+    this.backdropClick.emit();
+    this._closeModalDrawersViaBackdrop();
+  }
+  _closeModalDrawersViaBackdrop() {
+    [this._start, this._end].filter((drawer) => drawer && !drawer.disableClose && this._drawerHasBackdrop(drawer)).forEach((drawer) => drawer._closeViaBackdropClick());
+  }
+  _isShowingBackdrop() {
+    return this._isDrawerOpen(this._start) && this._drawerHasBackdrop(this._start) || this._isDrawerOpen(this._end) && this._drawerHasBackdrop(this._end);
+  }
+  _isDrawerOpen(drawer) {
+    return drawer != null && drawer.opened;
+  }
+  // Whether argument drawer should have a backdrop when it opens
+  _drawerHasBackdrop(drawer) {
+    if (this._backdropOverride == null) {
+      return !!drawer && drawer.mode !== "side";
+    }
+    return this._backdropOverride;
+  }
+};
+_MatDrawerContainer.\u0275fac = i0.\u0275\u0275ngDeclareFactory({ minVersion: "12.0.0", version: "18.2.0-next.2", ngImport: i0, type: _MatDrawerContainer, deps: [{ token: i4.Directionality, optional: true }, { token: i0.ElementRef }, { token: i0.NgZone }, { token: i0.ChangeDetectorRef }, { token: i1.ViewportRuler }, { token: MAT_DRAWER_DEFAULT_AUTOSIZE }, { token: import_core.ANIMATION_MODULE_TYPE, optional: true }], target: i0.\u0275\u0275FactoryTarget.Component });
+_MatDrawerContainer.\u0275cmp = i0.\u0275\u0275ngDeclareComponent({ minVersion: "17.0.0", version: "18.2.0-next.2", type: _MatDrawerContainer, isStandalone: true, selector: "mat-drawer-container", inputs: { autosize: "autosize", hasBackdrop: "hasBackdrop" }, outputs: { backdropClick: "backdropClick" }, host: { properties: { "class.mat-drawer-container-explicit-backdrop": "_backdropOverride" }, classAttribute: "mat-drawer-container" }, providers: [
+  {
+    provide: MAT_DRAWER_CONTAINER,
+    useExisting: _MatDrawerContainer
+  }
+], queries: [{ propertyName: "_content", first: true, predicate: MatDrawerContent, descendants: true }, { propertyName: "_allDrawers", predicate: MatDrawer, descendants: true }], viewQueries: [{ propertyName: "_userContent", first: true, predicate: MatDrawerContent, descendants: true }], exportAs: ["matDrawerContainer"], ngImport: i0, template: '@if (hasBackdrop) {\n  <div class="mat-drawer-backdrop" (click)="_onBackdropClicked()"\n       [class.mat-drawer-shown]="_isShowingBackdrop()"></div>\n}\n\n<ng-content select="mat-drawer"></ng-content>\n\n<ng-content select="mat-drawer-content">\n</ng-content>\n\n@if (!_content) {\n  <mat-drawer-content>\n    <ng-content></ng-content>\n  </mat-drawer-content>\n}\n', styles: ['.mat-drawer-container{position:relative;z-index:1;color:var(--mat-sidenav-content-text-color, var(--mat-app-on-background));background-color:var(--mat-sidenav-content-background-color, var(--mat-app-background));box-sizing:border-box;-webkit-overflow-scrolling:touch;display:block;overflow:hidden}.mat-drawer-container[fullscreen]{top:0;left:0;right:0;bottom:0;position:absolute}.mat-drawer-container[fullscreen].mat-drawer-container-has-open{overflow:hidden}.mat-drawer-container.mat-drawer-container-explicit-backdrop .mat-drawer-side{z-index:3}.mat-drawer-container.ng-animate-disabled .mat-drawer-backdrop,.mat-drawer-container.ng-animate-disabled .mat-drawer-content,.ng-animate-disabled .mat-drawer-container .mat-drawer-backdrop,.ng-animate-disabled .mat-drawer-container .mat-drawer-content{transition:none}.mat-drawer-backdrop{top:0;left:0;right:0;bottom:0;position:absolute;display:block;z-index:3;visibility:hidden}.mat-drawer-backdrop.mat-drawer-shown{visibility:visible;background-color:var(--mat-sidenav-scrim-color)}.mat-drawer-transition .mat-drawer-backdrop{transition-duration:400ms;transition-timing-function:cubic-bezier(0.25, 0.8, 0.25, 1);transition-property:background-color,visibility}.cdk-high-contrast-active .mat-drawer-backdrop{opacity:.5}.mat-drawer-content{position:relative;z-index:1;display:block;height:100%;overflow:auto}.mat-drawer-transition .mat-drawer-content{transition-duration:400ms;transition-timing-function:cubic-bezier(0.25, 0.8, 0.25, 1);transition-property:transform,margin-left,margin-right}.mat-drawer{position:relative;z-index:4;color:var(--mat-sidenav-container-text-color, var(--mat-app-on-surface-variant));box-shadow:var(--mat-sidenav-container-elevation-shadow);background-color:var(--mat-sidenav-container-background-color, var(--mat-app-surface));border-top-right-radius:var(--mat-sidenav-container-shape, var(--mat-app-corner-large));border-bottom-right-radius:var(--mat-sidenav-container-shape, var(--mat-app-corner-large));width:var(--mat-sidenav-container-width);display:block;position:absolute;top:0;bottom:0;z-index:3;outline:0;box-sizing:border-box;overflow-y:auto;transform:translate3d(-100%, 0, 0)}.cdk-high-contrast-active .mat-drawer,.cdk-high-contrast-active [dir=rtl] .mat-drawer.mat-drawer-end{border-right:solid 1px currentColor}.cdk-high-contrast-active [dir=rtl] .mat-drawer,.cdk-high-contrast-active .mat-drawer.mat-drawer-end{border-left:solid 1px currentColor;border-right:none}.mat-drawer.mat-drawer-side{z-index:2}.mat-drawer.mat-drawer-end{right:0;transform:translate3d(100%, 0, 0);border-top-left-radius:var(--mat-sidenav-container-shape, var(--mat-app-corner-large));border-bottom-left-radius:var(--mat-sidenav-container-shape, var(--mat-app-corner-large));border-top-right-radius:0;border-bottom-right-radius:0}[dir=rtl] .mat-drawer{border-top-left-radius:var(--mat-sidenav-container-shape, var(--mat-app-corner-large));border-bottom-left-radius:var(--mat-sidenav-container-shape, var(--mat-app-corner-large));border-top-right-radius:0;border-bottom-right-radius:0;transform:translate3d(100%, 0, 0)}[dir=rtl] .mat-drawer.mat-drawer-end{border-top-right-radius:var(--mat-sidenav-container-shape, var(--mat-app-corner-large));border-bottom-right-radius:var(--mat-sidenav-container-shape, var(--mat-app-corner-large));border-top-left-radius:0;border-bottom-left-radius:0;left:0;right:auto;transform:translate3d(-100%, 0, 0)}.mat-drawer[style*="visibility: hidden"]{display:none}.mat-drawer-side{box-shadow:none;border-right-color:var(--mat-sidenav-container-divider-color);border-right-width:1px;border-right-style:solid}.mat-drawer-side.mat-drawer-end{border-left-color:var(--mat-sidenav-container-divider-color);border-left-width:1px;border-left-style:solid;border-right:none}[dir=rtl] .mat-drawer-side{border-left-color:var(--mat-sidenav-container-divider-color);border-left-width:1px;border-left-style:solid;border-right:none}[dir=rtl] .mat-drawer-side.mat-drawer-end{border-right-color:var(--mat-sidenav-container-divider-color);border-right-width:1px;border-right-style:solid;border-left:none}.mat-drawer-inner-container{width:100%;height:100%;overflow:auto;-webkit-overflow-scrolling:touch}.mat-sidenav-fixed{position:fixed}'], dependencies: [{ kind: "component", type: MatDrawerContent, selector: "mat-drawer-content" }], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None });
+let MatDrawerContainer = _MatDrawerContainer;
+i0.\u0275\u0275ngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.0-next.2", ngImport: i0, type: MatDrawerContainer, decorators: [{
+  type: import_core.Component,
+  args: [{ selector: "mat-drawer-container", exportAs: "matDrawerContainer", host: {
+    "class": "mat-drawer-container",
+    "[class.mat-drawer-container-explicit-backdrop]": "_backdropOverride"
+  }, changeDetection: import_core.ChangeDetectionStrategy.OnPush, encapsulation: import_core.ViewEncapsulation.None, providers: [
+    {
+      provide: MAT_DRAWER_CONTAINER,
+      useExisting: MatDrawerContainer
+    }
+  ], standalone: true, imports: [MatDrawerContent], template: '@if (hasBackdrop) {\n  <div class="mat-drawer-backdrop" (click)="_onBackdropClicked()"\n       [class.mat-drawer-shown]="_isShowingBackdrop()"></div>\n}\n\n<ng-content select="mat-drawer"></ng-content>\n\n<ng-content select="mat-drawer-content">\n</ng-content>\n\n@if (!_content) {\n  <mat-drawer-content>\n    <ng-content></ng-content>\n  </mat-drawer-content>\n}\n', styles: ['.mat-drawer-container{position:relative;z-index:1;color:var(--mat-sidenav-content-text-color, var(--mat-app-on-background));background-color:var(--mat-sidenav-content-background-color, var(--mat-app-background));box-sizing:border-box;-webkit-overflow-scrolling:touch;display:block;overflow:hidden}.mat-drawer-container[fullscreen]{top:0;left:0;right:0;bottom:0;position:absolute}.mat-drawer-container[fullscreen].mat-drawer-container-has-open{overflow:hidden}.mat-drawer-container.mat-drawer-container-explicit-backdrop .mat-drawer-side{z-index:3}.mat-drawer-container.ng-animate-disabled .mat-drawer-backdrop,.mat-drawer-container.ng-animate-disabled .mat-drawer-content,.ng-animate-disabled .mat-drawer-container .mat-drawer-backdrop,.ng-animate-disabled .mat-drawer-container .mat-drawer-content{transition:none}.mat-drawer-backdrop{top:0;left:0;right:0;bottom:0;position:absolute;display:block;z-index:3;visibility:hidden}.mat-drawer-backdrop.mat-drawer-shown{visibility:visible;background-color:var(--mat-sidenav-scrim-color)}.mat-drawer-transition .mat-drawer-backdrop{transition-duration:400ms;transition-timing-function:cubic-bezier(0.25, 0.8, 0.25, 1);transition-property:background-color,visibility}.cdk-high-contrast-active .mat-drawer-backdrop{opacity:.5}.mat-drawer-content{position:relative;z-index:1;display:block;height:100%;overflow:auto}.mat-drawer-transition .mat-drawer-content{transition-duration:400ms;transition-timing-function:cubic-bezier(0.25, 0.8, 0.25, 1);transition-property:transform,margin-left,margin-right}.mat-drawer{position:relative;z-index:4;color:var(--mat-sidenav-container-text-color, var(--mat-app-on-surface-variant));box-shadow:var(--mat-sidenav-container-elevation-shadow);background-color:var(--mat-sidenav-container-background-color, var(--mat-app-surface));border-top-right-radius:var(--mat-sidenav-container-shape, var(--mat-app-corner-large));border-bottom-right-radius:var(--mat-sidenav-container-shape, var(--mat-app-corner-large));width:var(--mat-sidenav-container-width);display:block;position:absolute;top:0;bottom:0;z-index:3;outline:0;box-sizing:border-box;overflow-y:auto;transform:translate3d(-100%, 0, 0)}.cdk-high-contrast-active .mat-drawer,.cdk-high-contrast-active [dir=rtl] .mat-drawer.mat-drawer-end{border-right:solid 1px currentColor}.cdk-high-contrast-active [dir=rtl] .mat-drawer,.cdk-high-contrast-active .mat-drawer.mat-drawer-end{border-left:solid 1px currentColor;border-right:none}.mat-drawer.mat-drawer-side{z-index:2}.mat-drawer.mat-drawer-end{right:0;transform:translate3d(100%, 0, 0);border-top-left-radius:var(--mat-sidenav-container-shape, var(--mat-app-corner-large));border-bottom-left-radius:var(--mat-sidenav-container-shape, var(--mat-app-corner-large));border-top-right-radius:0;border-bottom-right-radius:0}[dir=rtl] .mat-drawer{border-top-left-radius:var(--mat-sidenav-container-shape, var(--mat-app-corner-large));border-bottom-left-radius:var(--mat-sidenav-container-shape, var(--mat-app-corner-large));border-top-right-radius:0;border-bottom-right-radius:0;transform:translate3d(100%, 0, 0)}[dir=rtl] .mat-drawer.mat-drawer-end{border-top-right-radius:var(--mat-sidenav-container-shape, var(--mat-app-corner-large));border-bottom-right-radius:var(--mat-sidenav-container-shape, var(--mat-app-corner-large));border-top-left-radius:0;border-bottom-left-radius:0;left:0;right:auto;transform:translate3d(-100%, 0, 0)}.mat-drawer[style*="visibility: hidden"]{display:none}.mat-drawer-side{box-shadow:none;border-right-color:var(--mat-sidenav-container-divider-color);border-right-width:1px;border-right-style:solid}.mat-drawer-side.mat-drawer-end{border-left-color:var(--mat-sidenav-container-divider-color);border-left-width:1px;border-left-style:solid;border-right:none}[dir=rtl] .mat-drawer-side{border-left-color:var(--mat-sidenav-container-divider-color);border-left-width:1px;border-left-style:solid;border-right:none}[dir=rtl] .mat-drawer-side.mat-drawer-end{border-right-color:var(--mat-sidenav-container-divider-color);border-right-width:1px;border-right-style:solid;border-left:none}.mat-drawer-inner-container{width:100%;height:100%;overflow:auto;-webkit-overflow-scrolling:touch}.mat-sidenav-fixed{position:fixed}'] }]
+}], ctorParameters: () => [{ type: i4.Directionality, decorators: [{
+  type: import_core.Optional
+}] }, { type: i0.ElementRef }, { type: i0.NgZone }, { type: i0.ChangeDetectorRef }, { type: i1.ViewportRuler }, { type: void 0, decorators: [{
+  type: import_core.Inject,
+  args: [MAT_DRAWER_DEFAULT_AUTOSIZE]
+}] }, { type: void 0, decorators: [{
+  type: import_core.Optional
+}, {
+  type: import_core.Inject,
+  args: [import_core.ANIMATION_MODULE_TYPE]
+}] }], propDecorators: { _allDrawers: [{
+  type: import_core.ContentChildren,
+  args: [MatDrawer, {
+    // We need to use `descendants: true`, because Ivy will no longer match
+    // indirect descendants if it's left as false.
+    descendants: true
+  }]
+}], _content: [{
+  type: import_core.ContentChild,
+  args: [MatDrawerContent]
+}], _userContent: [{
+  type: import_core.ViewChild,
+  args: [MatDrawerContent]
+}], autosize: [{
+  type: import_core.Input
+}], hasBackdrop: [{
+  type: import_core.Input
+}], backdropClick: [{
+  type: import_core.Output
+}] } });
+const _MatSidenavContent = class _MatSidenavContent extends MatDrawerContent {
+  constructor(changeDetectorRef, container, elementRef, scrollDispatcher, ngZone) {
+    super(changeDetectorRef, container, elementRef, scrollDispatcher, ngZone);
+  }
+};
+_MatSidenavContent.\u0275fac = i0.\u0275\u0275ngDeclareFactory({ minVersion: "12.0.0", version: "18.2.0-next.2", ngImport: i0, type: _MatSidenavContent, deps: [{ token: i0.ChangeDetectorRef }, { token: (0, import_core.forwardRef)(() => MatSidenavContainer) }, { token: i0.ElementRef }, { token: i1.ScrollDispatcher }, { token: i0.NgZone }], target: i0.\u0275\u0275FactoryTarget.Component });
+_MatSidenavContent.\u0275cmp = i0.\u0275\u0275ngDeclareComponent({ minVersion: "14.0.0", version: "18.2.0-next.2", type: _MatSidenavContent, isStandalone: true, selector: "mat-sidenav-content", host: { properties: { "style.margin-left.px": "_container._contentMargins.left", "style.margin-right.px": "_container._contentMargins.right" }, classAttribute: "mat-drawer-content mat-sidenav-content" }, providers: [
+  {
+    provide: import_scrolling.CdkScrollable,
+    useExisting: _MatSidenavContent
+  }
+], usesInheritance: true, ngImport: i0, template: "<ng-content></ng-content>", isInline: true, changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None });
+let MatSidenavContent = _MatSidenavContent;
+i0.\u0275\u0275ngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.0-next.2", ngImport: i0, type: MatSidenavContent, decorators: [{
+  type: import_core.Component,
+  args: [{
+    selector: "mat-sidenav-content",
+    template: "<ng-content></ng-content>",
+    host: {
+      "class": "mat-drawer-content mat-sidenav-content",
+      "[style.margin-left.px]": "_container._contentMargins.left",
+      "[style.margin-right.px]": "_container._contentMargins.right"
+    },
+    changeDetection: import_core.ChangeDetectionStrategy.OnPush,
+    encapsulation: import_core.ViewEncapsulation.None,
+    providers: [
+      {
+        provide: import_scrolling.CdkScrollable,
+        useExisting: MatSidenavContent
+      }
+    ],
+    standalone: true
+  }]
+}], ctorParameters: () => [{ type: i0.ChangeDetectorRef }, { type: MatSidenavContainer, decorators: [{
+  type: import_core.Inject,
+  args: [(0, import_core.forwardRef)(() => MatSidenavContainer)]
+}] }, { type: i0.ElementRef }, { type: i1.ScrollDispatcher }, { type: i0.NgZone }] });
+const _MatSidenav = class _MatSidenav extends MatDrawer {
+  constructor() {
+    super(...arguments);
+    this._fixedInViewport = false;
+    this._fixedTopGap = 0;
+    this._fixedBottomGap = 0;
+  }
+  /** Whether the sidenav is fixed in the viewport. */
+  get fixedInViewport() {
+    return this._fixedInViewport;
+  }
+  set fixedInViewport(value) {
+    this._fixedInViewport = (0, import_coercion.coerceBooleanProperty)(value);
+  }
+  /**
+   * The gap between the top of the sidenav and the top of the viewport when the sidenav is in fixed
+   * mode.
+   */
+  get fixedTopGap() {
+    return this._fixedTopGap;
+  }
+  set fixedTopGap(value) {
+    this._fixedTopGap = (0, import_coercion.coerceNumberProperty)(value);
+  }
+  /**
+   * The gap between the bottom of the sidenav and the bottom of the viewport when the sidenav is in
+   * fixed mode.
+   */
+  get fixedBottomGap() {
+    return this._fixedBottomGap;
+  }
+  set fixedBottomGap(value) {
+    this._fixedBottomGap = (0, import_coercion.coerceNumberProperty)(value);
+  }
+};
+_MatSidenav.\u0275fac = i0.\u0275\u0275ngDeclareFactory({ minVersion: "12.0.0", version: "18.2.0-next.2", ngImport: i0, type: _MatSidenav, deps: null, target: i0.\u0275\u0275FactoryTarget.Component });
+_MatSidenav.\u0275cmp = i0.\u0275\u0275ngDeclareComponent({ minVersion: "14.0.0", version: "18.2.0-next.2", type: _MatSidenav, isStandalone: true, selector: "mat-sidenav", inputs: { fixedInViewport: "fixedInViewport", fixedTopGap: "fixedTopGap", fixedBottomGap: "fixedBottomGap" }, host: { attributes: { "tabIndex": "-1" }, properties: { "attr.align": "null", "class.mat-drawer-end": 'position === "end"', "class.mat-drawer-over": 'mode === "over"', "class.mat-drawer-push": 'mode === "push"', "class.mat-drawer-side": 'mode === "side"', "class.mat-drawer-opened": "opened", "class.mat-sidenav-fixed": "fixedInViewport", "style.top.px": "fixedInViewport ? fixedTopGap : null", "style.bottom.px": "fixedInViewport ? fixedBottomGap : null" }, classAttribute: "mat-drawer mat-sidenav" }, exportAs: ["matSidenav"], usesInheritance: true, ngImport: i0, template: '<div class="mat-drawer-inner-container" cdkScrollable #content>\r\n  <ng-content></ng-content>\r\n</div>\r\n', dependencies: [{ kind: "directive", type: import_scrolling.CdkScrollable, selector: "[cdk-scrollable], [cdkScrollable]" }], animations: [matDrawerAnimations.transformDrawer], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None });
+let MatSidenav = _MatSidenav;
+i0.\u0275\u0275ngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.0-next.2", ngImport: i0, type: MatSidenav, decorators: [{
+  type: import_core.Component,
+  args: [{ selector: "mat-sidenav", exportAs: "matSidenav", animations: [matDrawerAnimations.transformDrawer], host: {
+    "class": "mat-drawer mat-sidenav",
+    "tabIndex": "-1",
+    // must prevent the browser from aligning text based on value
+    "[attr.align]": "null",
+    "[class.mat-drawer-end]": 'position === "end"',
+    "[class.mat-drawer-over]": 'mode === "over"',
+    "[class.mat-drawer-push]": 'mode === "push"',
+    "[class.mat-drawer-side]": 'mode === "side"',
+    "[class.mat-drawer-opened]": "opened",
+    "[class.mat-sidenav-fixed]": "fixedInViewport",
+    "[style.top.px]": "fixedInViewport ? fixedTopGap : null",
+    "[style.bottom.px]": "fixedInViewport ? fixedBottomGap : null"
+  }, changeDetection: import_core.ChangeDetectionStrategy.OnPush, encapsulation: import_core.ViewEncapsulation.None, standalone: true, imports: [import_scrolling.CdkScrollable], template: '<div class="mat-drawer-inner-container" cdkScrollable #content>\r\n  <ng-content></ng-content>\r\n</div>\r\n' }]
+}], propDecorators: { fixedInViewport: [{
+  type: import_core.Input
+}], fixedTopGap: [{
+  type: import_core.Input
+}], fixedBottomGap: [{
+  type: import_core.Input
+}] } });
+const _MatSidenavContainer = class _MatSidenavContainer extends MatDrawerContainer {
+  constructor() {
+    super(...arguments);
+    this._allDrawers = void 0;
+    this._content = void 0;
+  }
+};
+_MatSidenavContainer.\u0275fac = i0.\u0275\u0275ngDeclareFactory({ minVersion: "12.0.0", version: "18.2.0-next.2", ngImport: i0, type: _MatSidenavContainer, deps: null, target: i0.\u0275\u0275FactoryTarget.Component });
+_MatSidenavContainer.\u0275cmp = i0.\u0275\u0275ngDeclareComponent({ minVersion: "17.0.0", version: "18.2.0-next.2", type: _MatSidenavContainer, isStandalone: true, selector: "mat-sidenav-container", host: { properties: { "class.mat-drawer-container-explicit-backdrop": "_backdropOverride" }, classAttribute: "mat-drawer-container mat-sidenav-container" }, providers: [
+  {
+    provide: MAT_DRAWER_CONTAINER,
+    useExisting: _MatSidenavContainer
+  }
+], queries: [{ propertyName: "_content", first: true, predicate: MatSidenavContent, descendants: true }, { propertyName: "_allDrawers", predicate: MatSidenav, descendants: true }], exportAs: ["matSidenavContainer"], usesInheritance: true, ngImport: i0, template: '@if (hasBackdrop) {\n  <div class="mat-drawer-backdrop" (click)="_onBackdropClicked()"\n       [class.mat-drawer-shown]="_isShowingBackdrop()"></div>\n}\n\n<ng-content select="mat-sidenav"></ng-content>\n\n<ng-content select="mat-sidenav-content">\n</ng-content>\n\n@if (!_content) {\n  <mat-sidenav-content>\n    <ng-content></ng-content>\n  </mat-sidenav-content>\n}\n', styles: ['.mat-drawer-container{position:relative;z-index:1;color:var(--mat-sidenav-content-text-color, var(--mat-app-on-background));background-color:var(--mat-sidenav-content-background-color, var(--mat-app-background));box-sizing:border-box;-webkit-overflow-scrolling:touch;display:block;overflow:hidden}.mat-drawer-container[fullscreen]{top:0;left:0;right:0;bottom:0;position:absolute}.mat-drawer-container[fullscreen].mat-drawer-container-has-open{overflow:hidden}.mat-drawer-container.mat-drawer-container-explicit-backdrop .mat-drawer-side{z-index:3}.mat-drawer-container.ng-animate-disabled .mat-drawer-backdrop,.mat-drawer-container.ng-animate-disabled .mat-drawer-content,.ng-animate-disabled .mat-drawer-container .mat-drawer-backdrop,.ng-animate-disabled .mat-drawer-container .mat-drawer-content{transition:none}.mat-drawer-backdrop{top:0;left:0;right:0;bottom:0;position:absolute;display:block;z-index:3;visibility:hidden}.mat-drawer-backdrop.mat-drawer-shown{visibility:visible;background-color:var(--mat-sidenav-scrim-color)}.mat-drawer-transition .mat-drawer-backdrop{transition-duration:400ms;transition-timing-function:cubic-bezier(0.25, 0.8, 0.25, 1);transition-property:background-color,visibility}.cdk-high-contrast-active .mat-drawer-backdrop{opacity:.5}.mat-drawer-content{position:relative;z-index:1;display:block;height:100%;overflow:auto}.mat-drawer-transition .mat-drawer-content{transition-duration:400ms;transition-timing-function:cubic-bezier(0.25, 0.8, 0.25, 1);transition-property:transform,margin-left,margin-right}.mat-drawer{position:relative;z-index:4;color:var(--mat-sidenav-container-text-color, var(--mat-app-on-surface-variant));box-shadow:var(--mat-sidenav-container-elevation-shadow);background-color:var(--mat-sidenav-container-background-color, var(--mat-app-surface));border-top-right-radius:var(--mat-sidenav-container-shape, var(--mat-app-corner-large));border-bottom-right-radius:var(--mat-sidenav-container-shape, var(--mat-app-corner-large));width:var(--mat-sidenav-container-width);display:block;position:absolute;top:0;bottom:0;z-index:3;outline:0;box-sizing:border-box;overflow-y:auto;transform:translate3d(-100%, 0, 0)}.cdk-high-contrast-active .mat-drawer,.cdk-high-contrast-active [dir=rtl] .mat-drawer.mat-drawer-end{border-right:solid 1px currentColor}.cdk-high-contrast-active [dir=rtl] .mat-drawer,.cdk-high-contrast-active .mat-drawer.mat-drawer-end{border-left:solid 1px currentColor;border-right:none}.mat-drawer.mat-drawer-side{z-index:2}.mat-drawer.mat-drawer-end{right:0;transform:translate3d(100%, 0, 0);border-top-left-radius:var(--mat-sidenav-container-shape, var(--mat-app-corner-large));border-bottom-left-radius:var(--mat-sidenav-container-shape, var(--mat-app-corner-large));border-top-right-radius:0;border-bottom-right-radius:0}[dir=rtl] .mat-drawer{border-top-left-radius:var(--mat-sidenav-container-shape, var(--mat-app-corner-large));border-bottom-left-radius:var(--mat-sidenav-container-shape, var(--mat-app-corner-large));border-top-right-radius:0;border-bottom-right-radius:0;transform:translate3d(100%, 0, 0)}[dir=rtl] .mat-drawer.mat-drawer-end{border-top-right-radius:var(--mat-sidenav-container-shape, var(--mat-app-corner-large));border-bottom-right-radius:var(--mat-sidenav-container-shape, var(--mat-app-corner-large));border-top-left-radius:0;border-bottom-left-radius:0;left:0;right:auto;transform:translate3d(-100%, 0, 0)}.mat-drawer[style*="visibility: hidden"]{display:none}.mat-drawer-side{box-shadow:none;border-right-color:var(--mat-sidenav-container-divider-color);border-right-width:1px;border-right-style:solid}.mat-drawer-side.mat-drawer-end{border-left-color:var(--mat-sidenav-container-divider-color);border-left-width:1px;border-left-style:solid;border-right:none}[dir=rtl] .mat-drawer-side{border-left-color:var(--mat-sidenav-container-divider-color);border-left-width:1px;border-left-style:solid;border-right:none}[dir=rtl] .mat-drawer-side.mat-drawer-end{border-right-color:var(--mat-sidenav-container-divider-color);border-right-width:1px;border-right-style:solid;border-left:none}.mat-drawer-inner-container{width:100%;height:100%;overflow:auto;-webkit-overflow-scrolling:touch}.mat-sidenav-fixed{position:fixed}'], dependencies: [{ kind: "component", type: MatSidenavContent, selector: "mat-sidenav-content" }], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None });
+let MatSidenavContainer = _MatSidenavContainer;
+i0.\u0275\u0275ngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.0-next.2", ngImport: i0, type: MatSidenavContainer, decorators: [{
+  type: import_core.Component,
+  args: [{ selector: "mat-sidenav-container", exportAs: "matSidenavContainer", host: {
+    "class": "mat-drawer-container mat-sidenav-container",
+    "[class.mat-drawer-container-explicit-backdrop]": "_backdropOverride"
+  }, changeDetection: import_core.ChangeDetectionStrategy.OnPush, encapsulation: import_core.ViewEncapsulation.None, providers: [
+    {
+      provide: MAT_DRAWER_CONTAINER,
+      useExisting: MatSidenavContainer
+    }
+  ], standalone: true, imports: [MatSidenavContent], template: '@if (hasBackdrop) {\n  <div class="mat-drawer-backdrop" (click)="_onBackdropClicked()"\n       [class.mat-drawer-shown]="_isShowingBackdrop()"></div>\n}\n\n<ng-content select="mat-sidenav"></ng-content>\n\n<ng-content select="mat-sidenav-content">\n</ng-content>\n\n@if (!_content) {\n  <mat-sidenav-content>\n    <ng-content></ng-content>\n  </mat-sidenav-content>\n}\n', styles: ['.mat-drawer-container{position:relative;z-index:1;color:var(--mat-sidenav-content-text-color, var(--mat-app-on-background));background-color:var(--mat-sidenav-content-background-color, var(--mat-app-background));box-sizing:border-box;-webkit-overflow-scrolling:touch;display:block;overflow:hidden}.mat-drawer-container[fullscreen]{top:0;left:0;right:0;bottom:0;position:absolute}.mat-drawer-container[fullscreen].mat-drawer-container-has-open{overflow:hidden}.mat-drawer-container.mat-drawer-container-explicit-backdrop .mat-drawer-side{z-index:3}.mat-drawer-container.ng-animate-disabled .mat-drawer-backdrop,.mat-drawer-container.ng-animate-disabled .mat-drawer-content,.ng-animate-disabled .mat-drawer-container .mat-drawer-backdrop,.ng-animate-disabled .mat-drawer-container .mat-drawer-content{transition:none}.mat-drawer-backdrop{top:0;left:0;right:0;bottom:0;position:absolute;display:block;z-index:3;visibility:hidden}.mat-drawer-backdrop.mat-drawer-shown{visibility:visible;background-color:var(--mat-sidenav-scrim-color)}.mat-drawer-transition .mat-drawer-backdrop{transition-duration:400ms;transition-timing-function:cubic-bezier(0.25, 0.8, 0.25, 1);transition-property:background-color,visibility}.cdk-high-contrast-active .mat-drawer-backdrop{opacity:.5}.mat-drawer-content{position:relative;z-index:1;display:block;height:100%;overflow:auto}.mat-drawer-transition .mat-drawer-content{transition-duration:400ms;transition-timing-function:cubic-bezier(0.25, 0.8, 0.25, 1);transition-property:transform,margin-left,margin-right}.mat-drawer{position:relative;z-index:4;color:var(--mat-sidenav-container-text-color, var(--mat-app-on-surface-variant));box-shadow:var(--mat-sidenav-container-elevation-shadow);background-color:var(--mat-sidenav-container-background-color, var(--mat-app-surface));border-top-right-radius:var(--mat-sidenav-container-shape, var(--mat-app-corner-large));border-bottom-right-radius:var(--mat-sidenav-container-shape, var(--mat-app-corner-large));width:var(--mat-sidenav-container-width);display:block;position:absolute;top:0;bottom:0;z-index:3;outline:0;box-sizing:border-box;overflow-y:auto;transform:translate3d(-100%, 0, 0)}.cdk-high-contrast-active .mat-drawer,.cdk-high-contrast-active [dir=rtl] .mat-drawer.mat-drawer-end{border-right:solid 1px currentColor}.cdk-high-contrast-active [dir=rtl] .mat-drawer,.cdk-high-contrast-active .mat-drawer.mat-drawer-end{border-left:solid 1px currentColor;border-right:none}.mat-drawer.mat-drawer-side{z-index:2}.mat-drawer.mat-drawer-end{right:0;transform:translate3d(100%, 0, 0);border-top-left-radius:var(--mat-sidenav-container-shape, var(--mat-app-corner-large));border-bottom-left-radius:var(--mat-sidenav-container-shape, var(--mat-app-corner-large));border-top-right-radius:0;border-bottom-right-radius:0}[dir=rtl] .mat-drawer{border-top-left-radius:var(--mat-sidenav-container-shape, var(--mat-app-corner-large));border-bottom-left-radius:var(--mat-sidenav-container-shape, var(--mat-app-corner-large));border-top-right-radius:0;border-bottom-right-radius:0;transform:translate3d(100%, 0, 0)}[dir=rtl] .mat-drawer.mat-drawer-end{border-top-right-radius:var(--mat-sidenav-container-shape, var(--mat-app-corner-large));border-bottom-right-radius:var(--mat-sidenav-container-shape, var(--mat-app-corner-large));border-top-left-radius:0;border-bottom-left-radius:0;left:0;right:auto;transform:translate3d(-100%, 0, 0)}.mat-drawer[style*="visibility: hidden"]{display:none}.mat-drawer-side{box-shadow:none;border-right-color:var(--mat-sidenav-container-divider-color);border-right-width:1px;border-right-style:solid}.mat-drawer-side.mat-drawer-end{border-left-color:var(--mat-sidenav-container-divider-color);border-left-width:1px;border-left-style:solid;border-right:none}[dir=rtl] .mat-drawer-side{border-left-color:var(--mat-sidenav-container-divider-color);border-left-width:1px;border-left-style:solid;border-right:none}[dir=rtl] .mat-drawer-side.mat-drawer-end{border-right-color:var(--mat-sidenav-container-divider-color);border-right-width:1px;border-right-style:solid;border-left:none}.mat-drawer-inner-container{width:100%;height:100%;overflow:auto;-webkit-overflow-scrolling:touch}.mat-sidenav-fixed{position:fixed}'] }]
+}], propDecorators: { _allDrawers: [{
+  type: import_core.ContentChildren,
+  args: [MatSidenav, {
+    // We need to use `descendants: true`, because Ivy will no longer match
+    // indirect descendants if it's left as false.
+    descendants: true
+  }]
+}], _content: [{
+  type: import_core.ContentChild,
+  args: [MatSidenavContent]
+}] } });
+const _MatSidenavModule = class _MatSidenavModule {
+};
+_MatSidenavModule.\u0275fac = i0.\u0275\u0275ngDeclareFactory({ minVersion: "12.0.0", version: "18.2.0-next.2", ngImport: i0, type: _MatSidenavModule, deps: [], target: i0.\u0275\u0275FactoryTarget.NgModule });
+_MatSidenavModule.\u0275mod = i0.\u0275\u0275ngDeclareNgModule({ minVersion: "14.0.0", version: "18.2.0-next.2", ngImport: i0, type: _MatSidenavModule, imports: [
+  import_core2.MatCommonModule,
+  import_scrolling.CdkScrollableModule,
+  MatDrawer,
+  MatDrawerContainer,
+  MatDrawerContent,
+  MatSidenav,
+  MatSidenavContainer,
+  MatSidenavContent
+], exports: [
+  import_scrolling.CdkScrollableModule,
+  import_core2.MatCommonModule,
+  MatDrawer,
+  MatDrawerContainer,
+  MatDrawerContent,
+  MatSidenav,
+  MatSidenavContainer,
+  MatSidenavContent
+] });
+_MatSidenavModule.\u0275inj = i0.\u0275\u0275ngDeclareInjector({ minVersion: "12.0.0", version: "18.2.0-next.2", ngImport: i0, type: _MatSidenavModule, imports: [
+  import_core2.MatCommonModule,
+  import_scrolling.CdkScrollableModule,
+  import_scrolling.CdkScrollableModule,
+  import_core2.MatCommonModule
+] });
+let MatSidenavModule = _MatSidenavModule;
+i0.\u0275\u0275ngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.0-next.2", ngImport: i0, type: MatSidenavModule, decorators: [{
+  type: import_core.NgModule,
+  args: [{
+    imports: [
+      import_core2.MatCommonModule,
+      import_scrolling.CdkScrollableModule,
+      MatDrawer,
+      MatDrawerContainer,
+      MatDrawerContent,
+      MatSidenav,
+      MatSidenavContainer,
+      MatSidenavContent
+    ],
+    exports: [
+      import_scrolling.CdkScrollableModule,
+      import_core2.MatCommonModule,
+      MatDrawer,
+      MatDrawerContainer,
+      MatDrawerContent,
+      MatSidenav,
+      MatSidenavContainer,
+      MatSidenavContent
+    ]
+  }]
+}] });

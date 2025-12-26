@@ -1,0 +1,20 @@
+772f7e03d56407cb39117e577e2bec02
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ExtrasModule = void 0;
+const tslib_1 = require("tslib");
+const core_1 = require("@angular/core");
+const highlight_pipe_1 = require("../pipes/highlight.pipe");
+let ExtrasModule = class ExtrasModule {
+};
+exports.ExtrasModule = ExtrasModule;
+exports.ExtrasModule = ExtrasModule = tslib_1.__decorate([
+    (0, core_1.NgModule)({
+        imports: [],
+        declarations: [highlight_pipe_1.HighlightPipe],
+        exports: [
+            highlight_pipe_1.HighlightPipe
+        ],
+    })
+], ExtrasModule);
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJmaWxlIjoiL1VzZXJzL2dhcmdhbS9EZXZlbG9wL2hwby13ZWIvc3JjL2FwcC9zaGFyZWQvbW9kdWxlcy9leHRyYXMubW9kdWxlLnRzIiwibWFwcGluZ3MiOiI7Ozs7QUFBQSx3Q0FBeUM7QUFDekMsNERBQXdEO0FBU2pELElBQU0sWUFBWSxHQUFsQixNQUFNLFlBQVk7Q0FDeEIsQ0FBQTtBQURZLG9DQUFZO3VCQUFaLFlBQVk7SUFQeEIsSUFBQSxlQUFRLEVBQUM7UUFDUixPQUFPLEVBQUUsRUFBRTtRQUNYLFlBQVksRUFBRSxDQUFDLDhCQUFhLENBQUM7UUFDN0IsT0FBTyxFQUFFO1lBQ1AsOEJBQWE7U0FDZDtLQUNGLENBQUM7R0FDVyxZQUFZLENBQ3hCIiwibmFtZXMiOltdLCJzb3VyY2VzIjpbIi9Vc2Vycy9nYXJnYW0vRGV2ZWxvcC9ocG8td2ViL3NyYy9hcHAvc2hhcmVkL21vZHVsZXMvZXh0cmFzLm1vZHVsZS50cyJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBOZ01vZHVsZSB9IGZyb20gJ0Bhbmd1bGFyL2NvcmUnO1xuaW1wb3J0IHsgSGlnaGxpZ2h0UGlwZSB9IGZyb20gJy4uL3BpcGVzL2hpZ2hsaWdodC5waXBlJztcblxuQE5nTW9kdWxlKHtcbiAgaW1wb3J0czogW10sXG4gIGRlY2xhcmF0aW9uczogW0hpZ2hsaWdodFBpcGVdLFxuICBleHBvcnRzOiBbXG4gICAgSGlnaGxpZ2h0UGlwZVxuICBdLFxufSlcbmV4cG9ydCBjbGFzcyBFeHRyYXNNb2R1bGUge1xufVxuIl0sInZlcnNpb24iOjN9

@@ -1,0 +1,22 @@
+801824231d15d9e57ad34aa4a66dea2a
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ExomiserComponent = void 0;
+const tslib_1 = require("tslib");
+const core_1 = require("@angular/core");
+let ExomiserComponent = class ExomiserComponent {
+    constructor() {
+        this.pageTitle = "Tools / Exomiser";
+        this.pageIntro = "";
+    }
+    static { this.ctorParameters = () => []; }
+};
+exports.ExomiserComponent = ExomiserComponent;
+exports.ExomiserComponent = ExomiserComponent = tslib_1.__decorate([
+    (0, core_1.Component)({
+        selector: 'app-exomiser',
+        template: require("./exomiser.component.html")
+    }),
+    tslib_1.__metadata("design:paramtypes", [])
+], ExomiserComponent);
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJmaWxlIjoiL1VzZXJzL2dhcmdhbS9EZXZlbG9wL2hwby13ZWIvc3JjL2FwcC9zdGF0aWMvdG9vbHMvZXhvbWlzZXIvZXhvbWlzZXIuY29tcG9uZW50LnRzIiwibWFwcGluZ3MiOiI7Ozs7QUFBQSx3Q0FBa0Q7QUFPM0MsSUFBTSxpQkFBaUIsR0FBdkIsTUFBTSxpQkFBaUI7SUFJNUI7UUFIQSxjQUFTLEdBQVcsa0JBQWtCLENBQUM7UUFDdkMsY0FBUyxHQUFXLEVBQUUsQ0FBQztJQUd2QixDQUFDOzs7QUFMVSw4Q0FBaUI7NEJBQWpCLGlCQUFpQjtJQUw3QixJQUFBLGdCQUFTLEVBQUM7UUFDVCxRQUFRLEVBQUUsY0FBYztRQUN4Qiw4Q0FBd0M7S0FFekMsQ0FBQzs7R0FDVyxpQkFBaUIsQ0FNN0IiLCJuYW1lcyI6W10sInNvdXJjZXMiOlsiL1VzZXJzL2dhcmdhbS9EZXZlbG9wL2hwby13ZWIvc3JjL2FwcC9zdGF0aWMvdG9vbHMvZXhvbWlzZXIvZXhvbWlzZXIuY29tcG9uZW50LnRzIl0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IENvbXBvbmVudCwgT25Jbml0IH0gZnJvbSAnQGFuZ3VsYXIvY29yZSc7XG5cbkBDb21wb25lbnQoe1xuICBzZWxlY3RvcjogJ2FwcC1leG9taXNlcicsXG4gIHRlbXBsYXRlVXJsOiAnLi9leG9taXNlci5jb21wb25lbnQuaHRtbCcsXG4gIHN0eWxlVXJsczogWycuL2V4b21pc2VyLmNvbXBvbmVudC5jc3MnXVxufSlcbmV4cG9ydCBjbGFzcyBFeG9taXNlckNvbXBvbmVudCB7XG4gIHBhZ2VUaXRsZTogc3RyaW5nID0gXCJUb29scyAvIEV4b21pc2VyXCI7XG4gIHBhZ2VJbnRybzogU3RyaW5nID0gXCJcIjtcblxuICBjb25zdHJ1Y3RvcigpIHtcbiAgfVxufVxuIl0sInZlcnNpb24iOjN9

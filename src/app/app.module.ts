@@ -9,7 +9,6 @@ import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
 import { SearchService } from './shared/search/service/search.service';
 // Global Material Modules
 import { GlobalMaterialModules } from './shared/modules/global.module';
-import { ExtrasModule } from './shared/modules/extras.module';
 
 // Custom Shared Components
 import { AppComponent } from './app.component';
@@ -27,14 +26,13 @@ import { FloatingFeedbackComponent } from './shared/floating-feedback/floating-f
         NavbarComponent,
         FooterComponent,
         NoPageFoundComponent,
-        SafeHtmlPipe,
         FloatingFeedbackComponent
     ],
     bootstrap: [AppComponent],
     imports: [BrowserModule,
         BrowserAnimationsModule,
         GlobalMaterialModules,
-        ExtrasModule,
+        SafeHtmlPipe,
         RoutingModule,
         SearchModule],
     providers: [SearchService, NewsService,
