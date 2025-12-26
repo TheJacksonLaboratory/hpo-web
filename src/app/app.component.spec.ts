@@ -21,11 +21,11 @@ describe('AppComponent', () => {
     TestBed.configureTestingModule({
     declarations: [
         AppComponent,
-        NavbarComponent,
-        FooterComponent,
-        FloatingFeedbackComponent
+        NavbarComponent
     ],
     imports: [
+        FooterComponent,
+        FloatingFeedbackComponent,
         GlobalMaterialModules,
         FormsModule,
         SafeHtmlPipe,

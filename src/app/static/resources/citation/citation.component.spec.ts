@@ -7,7 +7,7 @@ describe('CitationComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [CitationComponent]
+      imports: [CitationComponent]
     })
       .compileComponents();
   }));

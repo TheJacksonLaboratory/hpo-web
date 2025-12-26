@@ -7,7 +7,7 @@ describe('PhenomizerComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [PhenomizerComponent]
+      imports: [PhenomizerComponent]
     })
       .compileComponents();
   }));

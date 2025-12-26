@@ -10,8 +10,8 @@ describe('FaqComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [ NoopAnimationsModule, MatExpansionModule],
-      declarations: [FaqComponent],
+      imports: [FaqComponent, NoopAnimationsModule, MatExpansionModule],
+      declarations: [],
       providers: [provideRouter([])]
     })
       .compileComponents();

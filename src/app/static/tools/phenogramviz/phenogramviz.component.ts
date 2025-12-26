@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-phenogramviz',
+  standalone: true,
+  imports: [],
   templateUrl: './phenogramviz.component.html',
   styleUrls: ['./phenogramviz.component.css']
 })

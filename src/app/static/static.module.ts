@@ -27,12 +27,17 @@ import { ResourcesModule } from './resources/resources.module';
     ResourcesModule,
     GlobalMaterialModules,
     SearchModule,
-    StaticRoutingModule
+    StaticRoutingModule,
+    ContactComponent,
+    CitationComponent,
+    LicenseComponent,
+    DisclaimerComponent,
+    LoincComponent,
+    AboutComponent,
+    FundingComponent,
+    FeedbackComponent
   ],
-  declarations: [HomeComponent,
-    ContactComponent, CitationComponent, LicenseComponent, NewsComponent, DisclaimerComponent,
-    LoincComponent, AboutComponent, FundingComponent, FeedbackComponent
-  ],
+  declarations: [HomeComponent, NewsComponent],
   providers: [SearchService]
 })
 export class StaticModule {

@@ -10,8 +10,8 @@ describe('OntologyComponent', () => {
 
   beforeEach(( ) => {
     TestBed.configureTestingModule({
-    declarations: [OntologyDownloadComponent],
-    imports: [GlobalMaterialModules],
+    declarations: [],
+    imports: [OntologyDownloadComponent, GlobalMaterialModules],
     providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
 })
       .compileComponents();

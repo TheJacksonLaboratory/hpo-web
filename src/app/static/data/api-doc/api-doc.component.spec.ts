@@ -9,8 +9,8 @@ describe('ApiDocComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ApiDocComponent ],
-      imports: [GlobalMaterialModules]
+      declarations: [],
+      imports: [ApiDocComponent, GlobalMaterialModules]
     })
     .compileComponents();
 

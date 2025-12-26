@@ -1,0 +1,22 @@
+622f310edb90bcbc8f5c499af4a3477e
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.GenomiserComponent = void 0;
+const tslib_1 = require("tslib");
+const core_1 = require("@angular/core");
+let GenomiserComponent = class GenomiserComponent {
+    constructor() {
+    }
+    static { this.ctorParameters = () => []; }
+};
+exports.GenomiserComponent = GenomiserComponent;
+exports.GenomiserComponent = GenomiserComponent = tslib_1.__decorate([
+    (0, core_1.Component)({
+        selector: 'app-genomiser',
+        standalone: true,
+        imports: [],
+        template: require("./genomiser.component.html")
+    }),
+    tslib_1.__metadata("design:paramtypes", [])
+], GenomiserComponent);
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJmaWxlIjoiL1VzZXJzL2dhcmdhbS9EZXZlbG9wL2hwby13ZWIvc3JjL2FwcC9zdGF0aWMvdG9vbHMvZ2Vub21pc2VyL2dlbm9taXNlci5jb21wb25lbnQudHMiLCJtYXBwaW5ncyI6Ijs7OztBQUFBLHdDQUEwQztBQVNuQyxJQUFNLGtCQUFrQixHQUF4QixNQUFNLGtCQUFrQjtJQUM3QjtJQUNBLENBQUM7OztBQUZVLGdEQUFrQjs2QkFBbEIsa0JBQWtCO0lBUDlCLElBQUEsZ0JBQVMsRUFBQztRQUNULFFBQVEsRUFBRSxlQUFlO1FBQ3pCLFVBQVUsRUFBRSxJQUFJO1FBQ2hCLE9BQU8sRUFBRSxFQUFFO1FBQ1gsK0NBQXlDO0tBRTFDLENBQUM7O0dBQ1csa0JBQWtCLENBRzlCIiwibmFtZXMiOltdLCJzb3VyY2VzIjpbIi9Vc2Vycy9nYXJnYW0vRGV2ZWxvcC9ocG8td2ViL3NyYy9hcHAvc3RhdGljL3Rvb2xzL2dlbm9taXNlci9nZW5vbWlzZXIuY29tcG9uZW50LnRzIl0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IENvbXBvbmVudCB9IGZyb20gJ0Bhbmd1bGFyL2NvcmUnO1xuXG5AQ29tcG9uZW50KHtcbiAgc2VsZWN0b3I6ICdhcHAtZ2Vub21pc2VyJyxcbiAgc3RhbmRhbG9uZTogdHJ1ZSxcbiAgaW1wb3J0czogW10sXG4gIHRlbXBsYXRlVXJsOiAnLi9nZW5vbWlzZXIuY29tcG9uZW50Lmh0bWwnLFxuICBzdHlsZVVybHM6IFsnLi9nZW5vbWlzZXIuY29tcG9uZW50LmNzcyddXG59KVxuZXhwb3J0IGNsYXNzIEdlbm9taXNlckNvbXBvbmVudCB7XG4gIGNvbnN0cnVjdG9yKCkge1xuICB9XG59XG4iXSwidmVyc2lvbiI6M30=

@@ -14,11 +14,10 @@ import { PublicationsComponent } from './publications/publications.component';
     ResourcesRoutingModule,
     GlobalMaterialModules,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FaqComponent
   ],
-  declarations: [
-    FaqComponent, PublicationsComponent
-  ],
+  declarations: [PublicationsComponent],
   providers: [PublicationsService]
 })
 export class ResourcesModule {

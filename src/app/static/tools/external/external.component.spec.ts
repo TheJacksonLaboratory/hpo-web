@@ -7,7 +7,7 @@ describe('ExternalToolsComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ExternalToolsComponent]
+      imports: [ExternalToolsComponent]
     })
       .compileComponents();
   }));

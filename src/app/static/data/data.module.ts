@@ -17,11 +17,15 @@ import { ApiDocComponent } from './api-doc/api-doc.component';
     DataRoutingModule,
     GlobalMaterialModules,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AnnotationsDownloadComponent,
+    TranslationComponent,
+    IndigenousComponent,
+    LaypersonComponent,
+    OntologyDownloadComponent,
+    ApiDocComponent
   ],
-  declarations: [AnnotationsDownloadComponent, TranslationComponent,
-    IndigenousComponent, LaypersonComponent, OntologyDownloadComponent, ApiDocComponent
-  ]
+  declarations: []
 })
 export class DataModule {
 }

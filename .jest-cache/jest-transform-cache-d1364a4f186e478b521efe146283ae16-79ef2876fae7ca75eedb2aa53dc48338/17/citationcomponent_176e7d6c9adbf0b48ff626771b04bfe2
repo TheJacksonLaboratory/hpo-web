@@ -1,0 +1,22 @@
+fbbe2c304b98c4060a0d44bac3c4cce4
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.CitationComponent = void 0;
+const tslib_1 = require("tslib");
+const core_1 = require("@angular/core");
+let CitationComponent = class CitationComponent {
+    constructor() {
+    }
+    static { this.ctorParameters = () => []; }
+};
+exports.CitationComponent = CitationComponent;
+exports.CitationComponent = CitationComponent = tslib_1.__decorate([
+    (0, core_1.Component)({
+        selector: 'app-citation',
+        standalone: true,
+        imports: [],
+        template: require("./citation.component.html")
+    }),
+    tslib_1.__metadata("design:paramtypes", [])
+], CitationComponent);
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJmaWxlIjoiL1VzZXJzL2dhcmdhbS9EZXZlbG9wL2hwby13ZWIvc3JjL2FwcC9zdGF0aWMvcmVzb3VyY2VzL2NpdGF0aW9uL2NpdGF0aW9uLmNvbXBvbmVudC50cyIsIm1hcHBpbmdzIjoiOzs7O0FBQUEsd0NBQTBDO0FBU25DLElBQU0saUJBQWlCLEdBQXZCLE1BQU0saUJBQWlCO0lBQzVCO0lBQ0EsQ0FBQzs7O0FBRlUsOENBQWlCOzRCQUFqQixpQkFBaUI7SUFQN0IsSUFBQSxnQkFBUyxFQUFDO1FBQ1QsUUFBUSxFQUFFLGNBQWM7UUFDeEIsVUFBVSxFQUFFLElBQUk7UUFDaEIsT0FBTyxFQUFFLEVBQUU7UUFDWCw4Q0FBd0M7S0FFekMsQ0FBQzs7R0FDVyxpQkFBaUIsQ0FJN0IiLCJuYW1lcyI6W10sInNvdXJjZXMiOlsiL1VzZXJzL2dhcmdhbS9EZXZlbG9wL2hwby13ZWIvc3JjL2FwcC9zdGF0aWMvcmVzb3VyY2VzL2NpdGF0aW9uL2NpdGF0aW9uLmNvbXBvbmVudC50cyJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBDb21wb25lbnQgfSBmcm9tICdAYW5ndWxhci9jb3JlJztcblxuQENvbXBvbmVudCh7XG4gIHNlbGVjdG9yOiAnYXBwLWNpdGF0aW9uJyxcbiAgc3RhbmRhbG9uZTogdHJ1ZSxcbiAgaW1wb3J0czogW10sXG4gIHRlbXBsYXRlVXJsOiAnLi9jaXRhdGlvbi5jb21wb25lbnQuaHRtbCcsXG4gIHN0eWxlVXJsczogWycuL2NpdGF0aW9uLmNvbXBvbmVudC5jc3MnXVxufSlcbmV4cG9ydCBjbGFzcyBDaXRhdGlvbkNvbXBvbmVudCB7XG4gIGNvbnN0cnVjdG9yKCkge1xuICB9XG5cbn1cbiJdLCJ2ZXJzaW9uIjozfQ==

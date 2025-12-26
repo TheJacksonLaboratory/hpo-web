@@ -16,10 +16,15 @@ import { GlobalMaterialModules } from "../../shared/modules/global.module";
   imports: [
     CommonModule,
     ToolsRoutingModule,
-    GlobalMaterialModules
+    GlobalMaterialModules,
+    PhenomizerComponent,
+    ExternalToolsComponent,
+    PhenogramVizComponent,
+    ExomiserComponent,
+    GenomiserComponent,
+    HpobrowserComponent
   ],
-  declarations: [PhenomizerComponent, ExternalToolsComponent, PhenogramVizComponent,
-    ExomiserComponent, GenomiserComponent, HpobrowserComponent]
+  declarations: []
 })
 export class ToolsModule {
 }

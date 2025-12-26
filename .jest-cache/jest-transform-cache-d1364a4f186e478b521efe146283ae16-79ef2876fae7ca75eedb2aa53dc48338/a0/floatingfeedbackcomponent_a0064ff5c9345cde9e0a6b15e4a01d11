@@ -1,0 +1,22 @@
+fb18eb5409c817bc802b125c532c3ab6
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.FloatingFeedbackComponent = void 0;
+const tslib_1 = require("tslib");
+const core_1 = require("@angular/core");
+const router_1 = require("@angular/router");
+const button_1 = require("@angular/material/button");
+const icon_1 = require("@angular/material/icon");
+const tooltip_1 = require("@angular/material/tooltip");
+let FloatingFeedbackComponent = class FloatingFeedbackComponent {
+};
+exports.FloatingFeedbackComponent = FloatingFeedbackComponent;
+exports.FloatingFeedbackComponent = FloatingFeedbackComponent = tslib_1.__decorate([
+    (0, core_1.Component)({
+        selector: 'app-floating-feedback',
+        standalone: true,
+        imports: [router_1.RouterModule, button_1.MatButtonModule, icon_1.MatIconModule, tooltip_1.MatTooltipModule],
+        template: require("./floating-feedback.component.html")
+    })
+], FloatingFeedbackComponent);
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJmaWxlIjoiL1VzZXJzL2dhcmdhbS9EZXZlbG9wL2hwby13ZWIvc3JjL2FwcC9zaGFyZWQvZmxvYXRpbmctZmVlZGJhY2svZmxvYXRpbmctZmVlZGJhY2suY29tcG9uZW50LnRzIiwibWFwcGluZ3MiOiI7Ozs7QUFBQSx3Q0FBMEM7QUFDMUMsNENBQStDO0FBQy9DLHFEQUEyRDtBQUMzRCxpREFBdUQ7QUFDdkQsdURBQTZEO0FBU3RELElBQU0seUJBQXlCLEdBQS9CLE1BQU0seUJBQXlCO0NBQUcsQ0FBQTtBQUE1Qiw4REFBeUI7b0NBQXpCLHlCQUF5QjtJQVByQyxJQUFBLGdCQUFTLEVBQUM7UUFDVCxRQUFRLEVBQUUsdUJBQXVCO1FBQ2pDLFVBQVUsRUFBRSxJQUFJO1FBQ2hCLE9BQU8sRUFBRSxDQUFDLHFCQUFZLEVBQUUsd0JBQWUsRUFBRSxvQkFBYSxFQUFFLDBCQUFnQixDQUFDO1FBQ3pFLHVEQUFpRDtLQUVsRCxDQUFDO0dBQ1cseUJBQXlCLENBQUciLCJuYW1lcyI6W10sInNvdXJjZXMiOlsiL1VzZXJzL2dhcmdhbS9EZXZlbG9wL2hwby13ZWIvc3JjL2FwcC9zaGFyZWQvZmxvYXRpbmctZmVlZGJhY2svZmxvYXRpbmctZmVlZGJhY2suY29tcG9uZW50LnRzIl0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IENvbXBvbmVudCB9IGZyb20gJ0Bhbmd1bGFyL2NvcmUnO1xuaW1wb3J0IHsgUm91dGVyTW9kdWxlIH0gZnJvbSAnQGFuZ3VsYXIvcm91dGVyJztcbmltcG9ydCB7IE1hdEJ1dHRvbk1vZHVsZSB9IGZyb20gJ0Bhbmd1bGFyL21hdGVyaWFsL2J1dHRvbic7XG5pbXBvcnQgeyBNYXRJY29uTW9kdWxlIH0gZnJvbSAnQGFuZ3VsYXIvbWF0ZXJpYWwvaWNvbic7XG5pbXBvcnQgeyBNYXRUb29sdGlwTW9kdWxlIH0gZnJvbSAnQGFuZ3VsYXIvbWF0ZXJpYWwvdG9vbHRpcCc7XG5cbkBDb21wb25lbnQoe1xuICBzZWxlY3RvcjogJ2FwcC1mbG9hdGluZy1mZWVkYmFjaycsXG4gIHN0YW5kYWxvbmU6IHRydWUsXG4gIGltcG9ydHM6IFtSb3V0ZXJNb2R1bGUsIE1hdEJ1dHRvbk1vZHVsZSwgTWF0SWNvbk1vZHVsZSwgTWF0VG9vbHRpcE1vZHVsZV0sXG4gIHRlbXBsYXRlVXJsOiAnLi9mbG9hdGluZy1mZWVkYmFjay5jb21wb25lbnQuaHRtbCcsXG4gIHN0eWxlVXJsczogWycuL2Zsb2F0aW5nLWZlZWRiYWNrLmNvbXBvbmVudC5zY3NzJ11cbn0pXG5leHBvcnQgY2xhc3MgRmxvYXRpbmdGZWVkYmFja0NvbXBvbmVudCB7fVxuIl0sInZlcnNpb24iOjN9

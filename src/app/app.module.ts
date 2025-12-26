@@ -23,16 +23,16 @@ import { FloatingFeedbackComponent } from './shared/floating-feedback/floating-f
 @NgModule({
     declarations: [
         AppComponent,
-        NavbarComponent,
-        FooterComponent,
-        NoPageFoundComponent,
-        FloatingFeedbackComponent
+        NavbarComponent
     ],
     bootstrap: [AppComponent],
     imports: [BrowserModule,
         BrowserAnimationsModule,
         GlobalMaterialModules,
         SafeHtmlPipe,
+        FooterComponent,
+        NoPageFoundComponent,
+        FloatingFeedbackComponent,
         RoutingModule,
         SearchModule],
     providers: [SearchService, NewsService,

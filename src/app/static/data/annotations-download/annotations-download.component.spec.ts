@@ -10,8 +10,8 @@ describe('AnnotationsComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-    declarations: [AnnotationsDownloadComponent],
-    imports: [GlobalMaterialModules],
+    declarations: [],
+    imports: [AnnotationsDownloadComponent, GlobalMaterialModules],
     providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
 })
       .compileComponents();
