@@ -21,7 +21,8 @@ import { NewsService } from './shared/news/news.service';
 import { SafeHtmlPipe } from './shared/pipes/sanitize.pipe';
 import { FloatingFeedbackComponent } from './shared/floating-feedback/floating-feedback.component';
 
-@NgModule({ declarations: [
+@NgModule({
+    declarations: [
         AppComponent,
         NavbarComponent,
         FooterComponent,
@@ -35,9 +36,10 @@ import { FloatingFeedbackComponent } from './shared/floating-feedback/floating-f
         GlobalMaterialModules,
         ExtrasModule,
         RoutingModule,
-        SearchModule], 
-    providers: [SearchService, NewsService, 
-{ provide: MAT_TABS_CONFIG, useValue: { animationDuration: '0ms' } }, 
-provideHttpClient(withInterceptorsFromDi())] })
+        SearchModule],
+    providers: [SearchService, NewsService,
+        { provide: MAT_TABS_CONFIG, useValue: { animationDuration: '0ms' } },
+        provideHttpClient(withInterceptorsFromDi())]
+})
 export class AppModule {
 }
