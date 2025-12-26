@@ -19,19 +19,27 @@ import { NoPageFoundComponent } from './error/no-page-found.component';
 import { SearchModule } from './shared/search/search.module';
 import { NewsService } from './shared/news/news.service';
 import { SafeHtmlPipe } from './shared/pipes/sanitize.pipe';
+import { FloatingFeedbackComponent } from './shared/floating-feedback/floating-feedback.component';
 
-@NgModule({ declarations: [
+@NgModule({
+    declarations: [
         AppComponent,
         NavbarComponent,
         FooterComponent,
         NoPageFoundComponent,
-        SafeHtmlPipe
+        SafeHtmlPipe,
+        FloatingFeedbackComponent
     ],
-    bootstrap: [AppComponent], imports: [BrowserModule,
+    bootstrap: [AppComponent],
+    imports: [BrowserModule,
         BrowserAnimationsModule,
         GlobalMaterialModules,
         ExtrasModule,
         RoutingModule,
-        SearchModule], providers: [SearchService, NewsService, { provide: MAT_TABS_CONFIG, useValue: { animationDuration: '0ms' } }, provideHttpClient(withInterceptorsFromDi())] })
+        SearchModule],
+    providers: [SearchService, NewsService,
+        { provide: MAT_TABS_CONFIG, useValue: { animationDuration: '0ms' } },
+        provideHttpClient(withInterceptorsFromDi())]
+})
 export class AppModule {
 }

@@ -14,6 +14,7 @@ import { DisclaimerComponent } from './resources/disclaimer/disclaimer.component
 import { LoincComponent } from './tools/loinc/loinc.component';
 import { AboutComponent } from './about/about.component';
 import { FundingComponent } from './resources/funding/funding.component';
+import { FeedbackComponent } from './feedback/feedback.component';
 import { DataModule } from './data/data.module';
 import { ResourcesModule } from './resources/resources.module';
 
@@ -30,7 +31,7 @@ import { ResourcesModule } from './resources/resources.module';
   ],
   declarations: [HomeComponent,
     ContactComponent, CitationComponent, LicenseComponent, NewsComponent, DisclaimerComponent,
-    LoincComponent, AboutComponent, FundingComponent
+    LoincComponent, AboutComponent, FundingComponent, FeedbackComponent
   ],
   providers: [SearchService]
 })

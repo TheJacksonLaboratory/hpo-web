@@ -2,7 +2,6 @@ import { TestBed, waitForAsync } from '@angular/core/testing';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { AppComponent } from './app.component';
-import { RouterTestingModule } from '@angular/router/testing';
 import { environment } from '../environments/environment';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { GlobalMaterialModules } from './shared/modules/global.module';
@@ -13,7 +12,9 @@ import { NewsService } from './shared/news/news.service';
 import { SearchModule } from './shared/search/search.module';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
-
+import { FloatingFeedbackComponent } from './shared/floating-feedback/floating-feedback.component';
+import { provideRouter, RouterOutlet } from '@angular/router';
+import { provideLocationMocks } from '@angular/common/testing';
 
 describe('AppComponent', () => {
   beforeEach(waitForAsync(() => {
@@ -21,15 +22,17 @@ describe('AppComponent', () => {
     declarations: [
         AppComponent,
         NavbarComponent,
-        FooterComponent
+        FooterComponent,
+        FloatingFeedbackComponent
     ],
-    imports: [RouterTestingModule,
+    imports: [
         GlobalMaterialModules,
         FormsModule,
         ExtrasModule,
         SearchModule,
-        NoopAnimationsModule],
-    providers: [SearchService, NewsService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+        NoopAnimationsModule, RouterOutlet],
+    providers: [SearchService, NewsService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting(), provideRouter([]), // Pass your routes here if needed
+    provideLocationMocks()]
 }).compileComponents();
   }));
 
