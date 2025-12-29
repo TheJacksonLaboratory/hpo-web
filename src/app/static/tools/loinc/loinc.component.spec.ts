@@ -7,7 +7,7 @@ describe('LoincComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [LoincComponent]
+      imports: [LoincComponent]
     })
       .compileComponents();
   }));

@@ -3,9 +3,9 @@ import { News } from '../../browser/models/models';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { map, publishReplay, refCount } from "rxjs/operators";
+import { map, shareReplay } from "rxjs/operators";
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class NewsService {
   private allNews: any;
   private newsObservable$: any;
@@ -68,8 +68,7 @@ export class NewsService {
   getNews(): Observable<News[]> {
     if (!this.newsObservable$) {
       this.newsObservable$ = this.http.get(environment.HPO_NEWS_JSON_URL).pipe(
-        publishReplay(1),
-        refCount()
+        shareReplay(1)
       );
     }
     return this.newsObservable$;

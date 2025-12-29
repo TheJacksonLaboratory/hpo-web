@@ -6,7 +6,6 @@ import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ActivatedRoute } from '@angular/router';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { LayoutModule } from '@angular/cdk/layout';
-import { GlobalMaterialModules } from '../../shared/modules/global.module';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('NewsComponent', () => {
@@ -28,9 +27,8 @@ describe('NewsComponent', () => {
       };
     };
     TestBed.configureTestingModule({
-    declarations: [NewsComponent],
-    imports: [GlobalMaterialModules, NoopAnimationsModule],
-    providers: [NewsService, { provide: ActivatedRoute, useValue: { params: observableOf('') } }, 
+    imports: [NewsComponent, NoopAnimationsModule],
+    providers: [NewsService, { provide: ActivatedRoute, useValue: { params: observableOf('') } },
         provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting(), LayoutModule]
     }).compileComponents();
   }));

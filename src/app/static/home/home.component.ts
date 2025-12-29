@@ -1,10 +1,28 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { NewsService } from '../../shared/news/news.service';
 import { News } from '../../browser/models/models';
 import { UtilityService } from '../../shared/utility/utility.service';
+import { SearchComponent } from '../../shared/search/search/search.component';
+
+import { MatButtonModule } from '@angular/material/button';
+import { MatListModule } from '@angular/material/list';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-home',
+  standalone: true,
+  imports: [
+    CommonModule,
+    RouterModule,
+    MatButtonModule,
+    MatListModule,
+    MatProgressBarModule,
+    MatIconModule,
+    SearchComponent
+  ],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })

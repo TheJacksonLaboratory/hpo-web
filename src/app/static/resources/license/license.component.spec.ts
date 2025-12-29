@@ -7,7 +7,7 @@ describe('LicenseComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [LicenseComponent]
+      imports: [LicenseComponent]
     })
       .compileComponents();
   }));

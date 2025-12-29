@@ -12,10 +12,9 @@
 out/
 *.iml
 
-# gradle local cache
-.gradle/
 build/
-
+.jest-cache/
+.angular/
 # IDE - VSCode
 .vscode/*
 !.vscode/settings.json

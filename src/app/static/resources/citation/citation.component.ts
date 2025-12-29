@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-citation',
+  standalone: true,
+  imports: [],
   templateUrl: './citation.component.html',
   styleUrls: ['./citation.component.css']
 })

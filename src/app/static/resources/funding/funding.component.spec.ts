@@ -7,7 +7,7 @@ describe('FundingComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [FundingComponent]
+      imports: [FundingComponent]
     })
       .compileComponents();
   }));

@@ -1,0 +1,17 @@
+:host {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 1000;
+
+}
+
+.feedback-fab {
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  background-color: #ff4081;
+  fill: white;
+  color: white;
+  &:hover {
+    transform: scale(1.1);
+  }
+}

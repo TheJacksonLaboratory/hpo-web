@@ -1,11 +1,28 @@
 import { Component, EventEmitter, HostListener, OnInit, Output } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { Disease, Gene, Term } from '../../browser/models/models';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { UtilityService } from '../utility/utility.service';
+import { SearchComponent } from '../search/search/search.component';
+
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
 
 @Component({
   selector: 'app-navbar-hpo',
+  standalone: true,
+  imports: [
+    CommonModule,
+    RouterModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatIconModule,
+    MatMenuModule,
+    SearchComponent
+  ],
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
   animations: [

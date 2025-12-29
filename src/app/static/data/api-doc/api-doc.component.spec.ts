@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ApiDocComponent } from './api-doc.component';
-import { GlobalMaterialModules } from '../../../shared/modules/global.module';
 
 describe('ApiDocComponent', () => {
   let component: ApiDocComponent;
@@ -9,8 +8,7 @@ describe('ApiDocComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ApiDocComponent ],
-      imports: [GlobalMaterialModules]
+      imports: [ApiDocComponent]
     })
     .compileComponents();
 

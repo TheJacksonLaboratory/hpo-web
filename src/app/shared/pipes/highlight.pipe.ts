@@ -8,7 +8,7 @@ import { Pipe, PipeTransform } from '@angular/core';
   At the end we want to bold the terms that are contained with @ and #
     replace @ with <strong> & # with </strong>
  */
-@Pipe({ name: 'highlight' })
+@Pipe({ name: 'highlight', standalone: true })
 export class HighlightPipe implements PipeTransform {
   transform(targetString: any, query: string): string {
     let response = targetString['name'];

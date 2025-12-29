@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { MatIconModule } from '@angular/material/icon';
 import { UtilityService } from '../../../shared/utility/utility.service';
 import { environment } from "../../../../environments/environment";
 
 @Component({
   selector: 'app-ontology',
+  standalone: true,
+  imports: [MatIconModule],
   templateUrl: './ontology-download.component.html',
   styleUrls: ['./ontology-download.component.scss']
 })

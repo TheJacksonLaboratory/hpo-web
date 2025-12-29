@@ -7,7 +7,7 @@ describe('ExomiserComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ExomiserComponent]
+      imports: [ExomiserComponent]
     })
       .compileComponents();
   }));
