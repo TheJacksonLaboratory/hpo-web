@@ -1,0 +1,31 @@
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.pageTitle {
+  margin-bottom: 16px;
+}
+
+.description {
+  color: #666;
+  margin-bottom: 24px;
+}
+
+.center {
+  text-align: center;
+}
+
+.form-container {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+
+  iframe {
+    max-width: 100%;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+}

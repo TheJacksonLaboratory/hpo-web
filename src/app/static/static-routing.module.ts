@@ -11,6 +11,7 @@ import { NewsComponent } from './news/news.component';
 import { DisclaimerComponent } from './resources/disclaimer/disclaimer.component';
 import { AboutComponent } from './about/about.component';
 import { FundingComponent } from './resources/funding/funding.component';
+import { FeedbackComponent } from './feedback/feedback.component';
 
 const staticRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -26,7 +27,8 @@ const staticRoutes: Routes = [
   { path: 'data', loadChildren: () => import('./data/data.module').then(m => m.DataModule) },
   { path: 'resources', loadChildren: () => import('./resources/resources.module').then(m => m.ResourcesModule) },
   { path: 'tools', loadChildren: () => import('./tools/tools.module').then(m => m.ToolsModule) },
-  { path: 'disclaimer', component: DisclaimerComponent }
+  { path: 'disclaimer', component: DisclaimerComponent },
+  { path: 'feedback', component: FeedbackComponent }
 ];
 
 export const staticRouting = RouterModule.forChild(staticRoutes);
