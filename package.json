@@ -58,6 +58,6 @@
     "tar": "^6.1.11",
     "ts-node": "~8.6.2",
     "typescript": "^5.4.5",
-    "webpack-dev-server": "^4.7.4"
+    "webpack-dev-server": "^5.2.1"
   }
 }
