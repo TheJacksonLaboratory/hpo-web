@@ -42,7 +42,7 @@
     "@angular-eslint/eslint-plugin-template": "18.4.3",
     "@angular-eslint/schematics": "^18.4.3",
     "@angular-eslint/template-parser": "18.4.3",
-    "@angular/cli": "^18.2.19",
+    "@angular/cli": "^21.1.0",
     "@angular/compiler-cli": "^18.2.13",
     "@angular/language-service": "^18.2.13",
     "@types/jest": "^30.0.0",
@@ -55,7 +55,7 @@
     "jest-environment-jsdom": "^29.5.0",
     "jest-preset-angular": "^14.5.5",
     "protractor": "^7.0.0",
-    "tar": "^6.1.11",
+    "tar": "^7.5.6",
     "ts-node": "~8.6.2",
     "typescript": "^5.4.5",
     "webpack-dev-server": "^4.7.4"
