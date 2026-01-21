@@ -3,6 +3,8 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-feedback',
+  standalone: true,
+  imports: [],
   templateUrl: './feedback.component.html',
   styleUrls: ['./feedback.component.scss']
 })

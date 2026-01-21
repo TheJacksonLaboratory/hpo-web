@@ -7,7 +7,7 @@ describe('PhenogramVizComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [PhenogramVizComponent]
+      imports: [PhenogramVizComponent]
     })
       .compileComponents();
   }));

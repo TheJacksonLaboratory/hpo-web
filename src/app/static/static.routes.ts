@@ -1,7 +1,4 @@
-// Modules
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-// Components
+import { Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { ContactComponent } from './resources/contact/contact.component';
 import { CitationComponent } from './resources/citation/citation.component';
@@ -13,7 +10,7 @@ import { AboutComponent } from './about/about.component';
 import { FundingComponent } from './resources/funding/funding.component';
 import { FeedbackComponent } from './feedback/feedback.component';
 
-const staticRoutes: Routes = [
+export const staticRoutes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'about', component: AboutComponent },
   { path: 'citation', component: CitationComponent },
@@ -24,20 +21,9 @@ const staticRoutes: Routes = [
   { path: 'news', component: NewsComponent },
   { path: 'news/:id', component: NewsComponent },
   { path: 'funding', component: FundingComponent },
-  { path: 'data', loadChildren: () => import('./data/data.module').then(m => m.DataModule) },
-  { path: 'resources', loadChildren: () => import('./resources/resources.module').then(m => m.ResourcesModule) },
-  { path: 'tools', loadChildren: () => import('./tools/tools.module').then(m => m.ToolsModule) },
+  { path: 'data', loadChildren: () => import('./data/data.routes').then(m => m.dataRoutes) },
+  { path: 'resources', loadChildren: () => import('./resources/resources.routes').then(m => m.resourcesRoutes) },
+  { path: 'tools', loadChildren: () => import('./tools/tools.routes').then(m => m.toolsRoutes) },
   { path: 'disclaimer', component: DisclaimerComponent },
   { path: 'feedback', component: FeedbackComponent }
 ];
-
-export const staticRouting = RouterModule.forChild(staticRoutes);
-
-@NgModule({
-  imports: [
-    RouterModule,
-    staticRouting
-  ],
-  exports: [RouterModule]
-})
-export class StaticRoutingModule {}

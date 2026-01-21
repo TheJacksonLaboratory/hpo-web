@@ -1,5 +1,7 @@
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { Disease, Gene, SimpleTerm, Term } from '../../../browser/models/models';
 import { SearchService } from '../service/search.service';
 
@@ -7,8 +9,23 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { HighlightPipe } from '../../pipes/highlight.pipe';
+
 @Component({
   selector: 'app-search-bar',
+  standalone: true,
+  imports: [
+    CommonModule,
+    FormsModule,
+    RouterModule,
+    MatSelectModule,
+    MatInputModule,
+    MatProgressBarModule,
+    HighlightPipe
+  ],
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss'],
   animations: [

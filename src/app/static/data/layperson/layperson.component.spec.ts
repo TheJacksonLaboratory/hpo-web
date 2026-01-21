@@ -7,7 +7,7 @@ describe('LaypersonComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [LaypersonComponent]
+      imports: [LaypersonComponent]
     })
       .compileComponents();
   }));
