@@ -5,7 +5,7 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { UtilityService } from '../../../shared/utility/utility.service';
-import { Disease, Gene, MedicalActionSourceExtended, SimpleTerm, Term, TermCategory } from '../../models/models';
+import { Disease, MedicalActionSourceExtended, SimpleTerm, Term, TermCategory } from '../../models/models';
 import { AnnotationService } from '../../services/annotation/annotation.service';
 import { DialogService } from '../../../shared/dialog-excel-download/dialog.service';
 

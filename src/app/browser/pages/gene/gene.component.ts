@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AnnotationService } from '../../services/annotation/annotation.service';
 import { GeneService } from '../../services/gene/gene.service';
-import { Disease, EntrezGene, SimpleTerm, Term } from '../../models/models';
+import { Disease, EntrezGene, SimpleTerm } from '../../models/models';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatSort, MatSortModule } from '@angular/material/sort';
