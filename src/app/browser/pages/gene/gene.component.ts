@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AnnotationService } from '../../services/annotation/annotation.service';
 import { GeneService } from '../../services/gene/gene.service';
-import { Disease, EntrezGene, Gene, SimpleTerm, Term } from '../../models/models';
+import { Disease, EntrezGene, SimpleTerm, Term } from '../../models/models';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatSort, MatSortModule } from '@angular/material/sort';
@@ -43,9 +43,9 @@ export class GeneComponent implements OnInit {
   gene: string;
   query: string;
   uniprotId = '';
-  termAssoc: Term[] = [];
+  termAssoc: SimpleTerm[] = [];
   diseaseAssoc: Disease[] = [];
-  termDataSource: MatTableDataSource<Term>;
+  termDataSource: MatTableDataSource<SimpleTerm>;
   diseaseDataSource;
   termColumns = ['id', 'name'];
   diseaseColumns = ['id', 'name'];
@@ -114,42 +114,6 @@ export class GeneComponent implements OnInit {
 
     if (!this.mobile) {
       ///this.uniprotWidgetInit();
-    }
-  }
-
-  // uniprotWidgetInit() {
-  //   this.uniProtLoading = true;
-  //   // Make service call for Mapping  EntrezId to UniProtKB Accession
-  //   this.geneService.searchUniprot(this.query).subscribe((uniprotId) => {
-  //     if (uniprotId != null) {
-  //       // UniprotVista Viewer if identifier found.
-  //       const protVistaDiv = document.getElementsByClassName('ProtVistaReference');
-  //       new ProtVista(
-  //         {
-  //           el: protVistaDiv[0],
-  //           uniprotacc: uniprotId,
-  //           categoryOrder: ['DOMAINS_AND_SITES', 'VARIATION', 'PTM', 'PROTEOMICS'],
-  //           exclusions: ['ANTIGEN', 'MOLECULE_PROCESSING']
-  //         });
-  //       this.uniprotId = uniprotId;
-  //     } else {
-  //       this.uniprotId = 'error';
-  //     }
-  //     this.uniProtLoading = false;
-  //   }, (error) => {
-  //     // TODO: Implement Better Error Handling
-  //     console.log(error);
-  //   });
-  //   this.uniProtWidgetInitilized = true;
-  // }
-
-  /**
-   * Initialize tab components where needed
-   */
-  initTabs(event) {
-    // initialize uniProt widget
-    if (event.index === 0 && !this.uniProtWidgetInitilized) {
-      //this.uniprotWidgetInit();
     }
   }
 

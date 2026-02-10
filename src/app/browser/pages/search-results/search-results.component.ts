@@ -89,7 +89,7 @@ export class SearchResultsComponent {
   reloadResultsData() {
     this.isLoading = true;
 
-    this.searchService.searchFetchAll(this.query).subscribe((data) => {
+    this.searchService.searchAll(this.query, -1).subscribe((data) => {
       this.terms = this.termMatchingStringBuilder(this.query, data.terms);
       this.diseases = this.responseMatchingStringBuilder(data.diseases);
       this.genes = this.responseMatchingStringBuilder(data.genes);
@@ -115,7 +115,7 @@ export class SearchResultsComponent {
   // If synonym exists, it's the matching string apply
   // the highlight pipe. Otherwise the term is the matching string.
   // This is needed for the way tables are built with angular material
-  termMatchingStringBuilder(query, termResponse) {
+  termMatchingStringBuilder(query: string, termResponse: { terms: Term[]}) {
     termResponse.terms.map(term => {
       term.synonyms.map(syn => {
         if (syn.toLowerCase().includes(query.toLowerCase())){

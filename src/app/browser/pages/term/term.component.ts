@@ -226,7 +226,7 @@ export class TermComponent implements OnInit {
     this.dialogService.openDownloadDialog(this.term.id, counts);
   }
 
-  setTreeStyles(child: Term): any {
+  setTreeStyles(child: Term): { 'width': string, 'margin-left': string, 'margin-right': string } {
     return { 'width': child.treeCountWidth + 'px', 'margin-left': child.treeMargin + 'px', 'margin-right': '20px' };
   }
 
@@ -241,7 +241,3 @@ export class TermComponent implements OnInit {
     this.medicalActionSource.sort = this.sort;
   }
 }
-
-
-
-

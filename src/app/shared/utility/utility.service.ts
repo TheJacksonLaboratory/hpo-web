@@ -29,7 +29,7 @@ export class UtilityService {
       map((versions: []) => {
         return versions.find(Boolean);
       }),
-      map((version: any) => {
+      map((version: { tag_name: string }) => {
         const version_date = version.tag_name.replace('v','')
         if(version_date == '' || version_date === undefined){
           return "latest"

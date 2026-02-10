@@ -1,7 +1,7 @@
 <div class="flex flex-row">
   <div class="home-search md:flex-[0_0_65%] md:ml-[17%] flex-[100%]">
     <div class="search-container mat-elevation-z4">
-      <img class="main-logo" src="assets/hpo-logo-white.png"/>
+      <img class="main-logo" src="assets/hpo-logo-white.png" alt="Human Phenotype Ontology logo"/>
       <div class="searchbar-container">
         <app-search-bar [showHint]="true"></app-search-bar>
       </div>
@@ -54,7 +54,7 @@
 <div class="home-highlight-menu flex flex-row flex-wrap">
   <div routerLink="/tools/exomiser" class="home-item dark md:flex-[0_0_35%] md:ml-[10%] flex-[90%] ml-[2.5%] mr-[2.5%]">
     <div class="flex flex-row flex-1 items-center justify-between">
-      <img class="tool-icon" src="assets/highlight-images/exomiser.png"/>
+      <img class="tool-icon" src="assets/highlight-images/exomiser.png" alt="Exomiser tool icon"/>
       <div class="home-body">
         <h2 class="title">Exomiser</h2>
         <p class="description"><i>Evaluate variants based on the predicted pathogenicity.</i></p>
@@ -66,7 +66,7 @@
   </div>
   <div routerLink="/tools/phenomizer" class="home-item light cursor-not-allowed md:flex-[0_0_35%] md:ml-[10%] flex-[90%] ml-[2.5%] mr-[2.5%]">
     <div class="flex flex-row flex-1 items-center justify-between">
-      <img class="tool-icon" src="assets/highlight-images/phenomizer.png"/>
+      <img class="tool-icon" src="assets/highlight-images/phenomizer.png" alt="Phenomizer tool icon"/>
       <div class="home-body">
         <h2 class="title">Phenomizer <span class="text-red">[Offline]</span></h2>
         <p class="description"><i>Rank disease differential diagnosis by clinical features.</i></p>
@@ -78,7 +78,7 @@
   </div>
   <div routerLink="/tools/genomiser" class="home-item light md:flex-[0_0_35%] md:ml-[10%] flex-[90%] ml-[2.5%] mr-[2.5%]">
     <div class="flex flex-row flex-1 items-center justify-between">
-      <img class="tool-icon" src="assets/highlight-images/genomiser.png"/>
+      <img class="tool-icon" src="assets/highlight-images/genomiser.png" alt="Genomiser tool icon"/>
       <div class="home-body">
         <h2 class="title">Genomiser</h2>
         <p class="description"><i>Analyze genome sequence data for non-coding variants.</i></p>
@@ -90,7 +90,7 @@
   </div>
   <div routerLink="/browse/profile-search" class="home-item dark md:flex-[0_0_35%] md:ml-[10%] flex-[90%] ml-[2.5%] mr-[2.5%]">
     <div class="flex flex-row flex-1 items-center justify-between">
-      <img class="tool-icon" src="assets/highlight-images/patientarchive.png"/>
+      <img class="tool-icon" src="assets/highlight-images/patientarchive.png" alt="Profile Search tool icon"/>
       <div class="home-body">
         <h2 class="title">Profile Search</h2>
         <p class="description"><i>Discover diseases with a phenotype profile.</i></p>
@@ -103,8 +103,8 @@
 </div>
 <br><br>
 <div class="flex flex-row items-center justify-between">
-  <div class="phenopacket-banner mat-elevation-z1 flex-[1_1_80%] ml-[10%] max-w-[80%]" (click)="this.utilityService.openExternalUrl('https://www.ga4gh.org/product/phenopackets/')">
-    <img class="phenopacket-logo" src="assets/phenopackets.png"/>
+  <div class="phenopacket-banner mat-elevation-z1 flex-[1_1_80%] ml-[10%] max-w-[80%]" (click)="this.utilityService.openExternalUrl('https://www.ga4gh.org/product/phenopackets/')" (keydown.enter)="this.utilityService.openExternalUrl('https://www.ga4gh.org/product/phenopackets/')" tabindex="0" role="button">
+    <img class="phenopacket-logo" src="assets/phenopackets.png" alt="Phenopackets logo"/>
     <div class="description hidden sm:block">
       <h1>Phenopackets</h1>
       <span class="text-base">A Global Alliance for Genomics and Health (GA4GH) international standard for phenotypic data exchange.</span>
@@ -125,6 +125,6 @@
 </div>
 
 <a href="https://irdirc.org/resources-2/irdirc-recognized-resources/" target="__blank">
-  <img class="irdirc" src="assets/irdirc-logo.jpg"/>
+  <img class="irdirc" src="assets/irdirc-logo.jpg" alt="IRDiRC Recognized Resource logo"/>
 </a>
 

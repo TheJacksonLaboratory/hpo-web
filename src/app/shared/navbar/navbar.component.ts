@@ -71,8 +71,8 @@ export class NavbarComponent implements OnInit {
     });
   }
 
-  @HostListener('document:click', ['$event'])
-  documentClick(event: Event): void {
+  @HostListener('document:click')
+  documentClick(): void {
     if (this.searchstate === 'active') {
       this.searchstate = 'inactive';
       this.query = '';

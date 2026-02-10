@@ -24,7 +24,7 @@
         Phenotypes - {{terms.length}} of {{termsCount}} displayed
       </div>
       <div class="result-list flex flex-column">
-        <div class="result" (click)="closeDropDown()" routerLink="/browse/term/{{item.id}}"
+        <div class="result" (click)="closeDropDown()" (keydown.enter)="closeDropDown()" tabindex="0" routerLink="/browse/term/{{item.id}}"
              *ngFor="let item of terms;">
           <div class="name" *ngIf="!item.synonym" [innerHtml]="{name: item.name } | highlight: queryText"></div>
           <div class="name" *ngIf="item.synonym" [innerHtml]="{name: item.synonym } | highlight: queryText"></div>
@@ -38,7 +38,7 @@
         Diseases - {{diseases.length}} of {{diseasesCount}} displayed
       </div>
       <div class="result-list flex flex-column">
-        <div class="result" (click)="closeDropDown()" routerLink="/browse/disease/{{item.id}}"
+        <div class="result" (click)="closeDropDown()" (keydown.enter)="closeDropDown()" tabindex="0" routerLink="/browse/disease/{{item.id}}"
              *ngFor="let item of diseases;">
           <div class="name" [innerHtml]="{name: item.name } | highlight: queryText"></div>
           <div class="id">{{item.id}}</div>
@@ -52,7 +52,7 @@
         Genes - {{genes.length}} of {{genesCount}} displayed
       </div>
       <div class="result-list flex flex-column">
-        <div class="result" (click)="closeDropDown()" routerLink="/browse/gene/{{item.id}}"
+        <div class="result" (click)="closeDropDown()" (keydown.enter)="closeDropDown()" tabindex="0" routerLink="/browse/gene/{{item.id}}"
              *ngFor="let item of genes;">
           <div class="name" [innerHtml]="{name: item.name } | highlight: queryText"></div>
           <div class="id">{{item.id}}</div>
@@ -68,9 +68,9 @@
 </div>
 <div class="flex flex-row flex-wrap align-items-center justify-center">
   <p class="hint w-full" *ngIf="showHint && searchstate !== 'active'">
-    <strong>e.g. <a (click)="setQuery('Arachnodactyly')">Arachnodactyly</a> |
-    <a (click)="setQuery('Marfan syndrome')">Marfan syndrome</a> |
-    <a (click)="setQuery('FBN1')">FBN1</a></strong>
+    <strong>e.g. <a (click)="setQuery('Arachnodactyly')" (keydown.enter)="setQuery('Arachnodactyly')" tabindex="0">Arachnodactyly</a> |
+    <a (click)="setQuery('Marfan syndrome')" (keydown.enter)="setQuery('Marfan syndrome')" tabindex="0">Marfan syndrome</a> |
+    <a (click)="setQuery('FBN1')" (keydown.enter)="setQuery('FBN1')" tabindex="0">FBN1</a></strong>
   </p>
 </div>
 

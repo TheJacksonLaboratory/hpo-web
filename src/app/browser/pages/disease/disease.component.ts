@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatSort, MatSortModule } from '@angular/material/sort';
-import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { UtilityService } from '../../../shared/utility/utility.service';
 import { Disease, Gene, MedicalActionSourceExtended, SimpleTerm, Term, TermCategory } from '../../models/models';
 import { AnnotationService } from '../../services/annotation/annotation.service';
@@ -46,7 +46,7 @@ export class DiseaseComponent {
   geneColumns = ['id', 'name'];
   medicalActionColumns = ['id', 'name', 'relations', 'targets']
   medicalActionsDataSource: MatTableDataSource<MedicalActionSourceExtended>;
-  geneDataSource: MatTableDataSource<Gene>;
+  geneDataSource: MatTableDataSource<SimpleTerm>;
 
   isLoading = true;
   catTermSources: TermCategory[] = [];
@@ -98,7 +98,7 @@ export class DiseaseComponent {
         fterm.metadata.sources = source.length === 0 ? [this.query] : source;
         return fterm;
       });
-      const termSource = new MatTableDataSource(catTermSource);
+      const termSource = new MatTableDataSource<{frequency: string, onset: string, sources: string[]}>(catTermSource);
       this.catTermSources.push({ catLabel: key, annotationCount: values.length, termSource });
     });
 

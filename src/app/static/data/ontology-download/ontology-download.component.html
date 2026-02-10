@@ -5,15 +5,15 @@
         <h2>{{version}}</h2>
         <a [href]="otherReleases" target="_blank">Older Versions</a>
       </div>
-      <div class="download-banner-wrapper mat-elevation-z4 flex flex-row" (click)="utilityService.downloadFile(oboUrl)">
+      <div class="download-banner-wrapper mat-elevation-z4 flex flex-row" (click)="utilityService.downloadFile(oboUrl)" (keydown.enter)="utilityService.downloadFile(oboUrl)" tabindex="0" role="button">
         <mat-icon>download</mat-icon>
         <h3 class="download-banner-title">Download latest hp.obo</h3>
       </div>
-      <div class="download-banner-wrapper mat-elevation-z4 flex flex-row" (click)="utilityService.downloadFile(owlUrl)">
+      <div class="download-banner-wrapper mat-elevation-z4 flex flex-row" (click)="utilityService.downloadFile(owlUrl)" (keydown.enter)="utilityService.downloadFile(owlUrl)" tabindex="0" role="button">
         <mat-icon>download</mat-icon>
         <h3 class="download-banner-title">Download latest hp.owl</h3>
       </div>
-      <div class="download-banner-wrapper mat-elevation-z4 flex flex-row" (click)="utilityService.downloadFile(jsonUrl)">
+      <div class="download-banner-wrapper mat-elevation-z4 flex flex-row" (click)="utilityService.downloadFile(jsonUrl)" (keydown.enter)="utilityService.downloadFile(jsonUrl)" tabindex="0" role="button">
         <mat-icon>download</mat-icon>
         <h3 class="download-banner-title">Download latest hp.json</h3>
       </div>

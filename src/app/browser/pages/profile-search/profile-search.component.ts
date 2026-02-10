@@ -72,7 +72,7 @@ export class ProfileSearchComponent implements OnInit {
       );
   }
 
-  addTerm(term: any) {
+  addTerm(term: SimpleTerm) {
     if (!this.selectedTerms.some(existent => existent.id == term.id)) {
       this.selectedTerms.push(term);
     }

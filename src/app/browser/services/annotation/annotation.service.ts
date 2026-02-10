@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment';
-import { DiseaseAssociation, Gene, GeneAssociation, PhenotypeAssociation, SimpleTerm, Term } from '../../models/models';
+import { DiseaseAssociation, GeneAssociation, OntologyAnnotationSearchResult, PhenotypeAssociation, SimpleTerm } from '../../models/models';
 
 @Injectable({ providedIn: 'root' })
 export class AnnotationService {
@@ -21,12 +21,12 @@ export class AnnotationService {
     return this.httpClient.get<GeneAssociation>(environment.ONTOLOGY_NETWORK_ANNOTATION_API + id);
   }
 
-  searchGene(query: string, limit: number): Observable<SimpleTerm[]> {
-    return this.httpClient.get<SimpleTerm[]>(`${environment.ONTOLOGY_NETWORK_SEARCH_API}gene?q=${query}&limit=${limit}`);
+  searchGene(query: string, limit: number): Observable<OntologyAnnotationSearchResult<SimpleTerm>> {
+    return this.httpClient.get<OntologyAnnotationSearchResult<SimpleTerm>>(`${environment.ONTOLOGY_NETWORK_SEARCH_API}gene?q=${query}&limit=${limit}`);
   }
 
-  searchDisease(query: string, limit: number): Observable<SimpleTerm[]> {
-    return this.httpClient.get<SimpleTerm[]>(`${environment.ONTOLOGY_NETWORK_SEARCH_API}disease?q=${query}&limit=${limit}`);
+  searchDisease(query: string, limit: number): Observable<OntologyAnnotationSearchResult<SimpleTerm>> {
+    return this.httpClient.get<OntologyAnnotationSearchResult<SimpleTerm>>(`${environment.ONTOLOGY_NETWORK_SEARCH_API}disease?q=${query}&limit=${limit}`);
   }
 
   searchProfile(query: string): Observable<SimpleTerm[]> {

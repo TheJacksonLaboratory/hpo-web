@@ -10,8 +10,8 @@ import { Pipe, PipeTransform } from '@angular/core';
  */
 @Pipe({ name: 'highlight', standalone: true })
 export class HighlightPipe implements PipeTransform {
-  transform(targetString: any, query: string): string {
-    let response = targetString['name'];
+  transform(targetString: {name: string}, query: string): string {
+    let response = targetString.name;
     if (response && query) {
       const subHighlight = query.trim().split(' ');
       for (const x in subHighlight) {
@@ -20,7 +20,7 @@ export class HighlightPipe implements PipeTransform {
           // (?<!@)" + subHighlight[x] + "(?!\#)" WORKS IN CHROME 62+ but not natively in other browsers
           // lookahead -> lookbehind not suitable for production yet.
           // Limited implementation to favor ending strings
-          const regex = new RegExp(subHighlight[x] + '(?!\#)', 'gi');
+          const regex = new RegExp(subHighlight[x] + '(?!#)', 'gi');
           const match = response.match(regex);
           if (match && match.length > 1) {
             replace = '@' + match[0] + '#';
