@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const packageJson = require('../../package.json');
 const ONTOLOGY_API_BASE_URL = 'http://localhost:8081/api/';
 const ONTOLOGY_API_ANNOTATION_BASE_URL = 'http://localhost:8080/api/';
 const ONTOLOGY_SERVICE_API_HP = ONTOLOGY_API_BASE_URL + 'hp/';
@@ -5,7 +7,7 @@ const ONTOLOGY_SERVICE_API_HP = ONTOLOGY_API_BASE_URL + 'hp/';
 export const environment = {
   production: false,
 
-  VERSION: require('../../package.json').version,
+  VERSION: packageJson.version,
   ONTOLOGY_API_HP_TERMS: ONTOLOGY_SERVICE_API_HP + 'terms/',
   ONTOLOGY_API_HP_SEARCH: ONTOLOGY_SERVICE_API_HP + 'search',
   ONTOLOGY_NETWORK_ANNOTATION_API: ONTOLOGY_API_ANNOTATION_BASE_URL + 'network/annotation/',
