@@ -10,6 +10,7 @@
           (input)="contentChanging($event.target.value)"
           (keyup.enter)="submitQuery($event.target.value)"
           (focus)="toggleDropdown($event)"
+          (blur)="toggleDropdown($event)"
           [(ngModel)]="queryString" #searchbar>
   </div>
   <div class="search-output mat-elevation-z4 w-[80%] sm:ml-[20%] align-items-center justify-center" [@searchState]="searchstate">
