@@ -33,5 +33,7 @@ export const environment = {
   MAXO_ANNOTATION_FILE_PURL: 'https://purl.obolibrary.org/obo/maxo/maxo-annotations.tsv',
   HPO_GITHUB_REPO_URL:'https://api.github.com/repos/obophenotype/human-phenotype-ontology',
   ONTO_RELEASE_NO_EXT: 'https://github.com/obophenotype/human-phenotype-ontology/releases/latest/download/',
-  HPO_RELEASES: 'https://github.com/obophenotype/human-phenotype-ontology/releases'
+  HPO_RELEASES: 'https://github.com/obophenotype/human-phenotype-ontology/releases',
+  // Feedback Form
+  HPO_FEEDBACK_FORM_URL: 'https://docs.google.com/forms/d/e/1FAIpQLSfID5F6is5J7GSJUlFzIYZ7FOsXEebjLjLZwXhLdFPELVBVMQ/viewform?usp=dialog'
 };
