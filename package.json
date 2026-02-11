@@ -18,12 +18,12 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "^19.2.18",
-    "@angular/cdk": "^18.2.14",
+    "@angular/cdk": "^19.2.19",
     "@angular/common": "^19.2.18",
     "@angular/compiler": "^19.2.18",
     "@angular/core": "^19.2.18",
     "@angular/forms": "^19.2.18",
-    "@angular/material": "^18.2.14",
+    "@angular/material": "^19.2.19",
     "@angular/platform-browser": "^19.2.18",
     "@angular/platform-browser-dynamic": "^19.2.18",
     "@angular/router": "^19.2.18",
@@ -58,7 +58,7 @@
     "protractor": "^7.0.0",
     "tar": "^6.1.11",
     "ts-node": "~8.6.2",
-    "typescript": "^5.4.5",
+    "typescript": "^5.5.2",
     "webpack-dev-server": "^4.7.4"
   }
 }
