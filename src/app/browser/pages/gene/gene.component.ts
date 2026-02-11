@@ -7,7 +7,6 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
-//import * as ProtVista from 'ProtVista';
 import { environment } from '../../../../environments/environment';
 import { DialogService } from '../../../shared/dialog-excel-download/dialog.service';
 
@@ -33,7 +32,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatButtonModule
 ],
     templateUrl: './gene.component.html',
-    styleUrls: ['./gene.component.css', '../../../../../node_modules/ProtVista/style/main.css'],
+    styleUrls: ['./gene.component.css'],
     encapsulation: ViewEncapsulation.None
 })
 export class GeneComponent implements OnInit {
