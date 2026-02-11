@@ -19,7 +19,6 @@
       "dom"
     ],
     "module": "esnext",
-    "baseUrl": "./",
     "paths": {
       "rxjs/internal/Observable": [
         "../node_modules/rxjs/_esm5/internal/Observable"
