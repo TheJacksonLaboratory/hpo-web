@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-disclaimer',
+  standalone: true,
+  imports: [],
   templateUrl: './disclaimer.component.html',
   styleUrls: ['./disclaimer.component.css']
 })

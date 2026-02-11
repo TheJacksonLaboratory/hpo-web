@@ -8,7 +8,7 @@ describe('MappingComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [TranslationComponent]
+      imports: [TranslationComponent]
     })
       .compileComponents();
   }));

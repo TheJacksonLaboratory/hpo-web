@@ -1,14 +1,31 @@
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { Disease, Gene, SimpleTerm, Term } from '../../../browser/models/models';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { SimpleTerm, Term } from '../../../browser/models/models';
 import { SearchService } from '../service/search.service';
 
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { HighlightPipe } from '../../pipes/highlight.pipe';
+
 @Component({
   selector: 'app-search-bar',
+  standalone: true,
+  imports: [
+    CommonModule,
+    FormsModule,
+    RouterModule,
+    MatSelectModule,
+    MatInputModule,
+    MatProgressBarModule,
+    HighlightPipe
+  ],
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss'],
   animations: [
@@ -61,11 +78,11 @@ export class SearchComponent implements OnInit {
         this.queryText = val
 
 
-        this.searchService.searchAll(val).subscribe(({ terms, genes, diseases }) => {
+        this.searchService.searchAll(val, 10).subscribe(({ terms, genes, diseases }) => {
           this.terms = terms.terms;
           this.diseases = diseases.results;
           this.genes = genes.results;
-          this.termsCount = terms.totalCount;
+          this.termsCount = terms.terms.length;
           this.diseasesCount = diseases.totalCount;
           this.genesCount = genes.totalCount;
           this.notFoundFlag = (this.terms.length === 0 && this.diseases.length === 0 && this.genes.length === 0);
@@ -96,11 +113,11 @@ export class SearchComponent implements OnInit {
     return (qString && qString.length >= 3);
   }
 
-  toggleDropdown(target: any) {
+  toggleDropdown(target: FocusEvent) {
     if (this.searchstate === 'inactive' && this.hasValidInput(this.queryString)) {
       this.searchstate = 'active';
       return;
-    } else if (target.relatedTarget != null) {
+    } else if (target.relatedTarget instanceof HTMLElement) {
       if (target.relatedTarget.className.includes('result')) {
         return;
       }

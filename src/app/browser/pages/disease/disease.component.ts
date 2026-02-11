@@ -1,15 +1,39 @@
 import { Component, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { MatTableDataSource } from '@angular/material/table';
-import { MatSort } from '@angular/material/sort';
-import { MatPaginator } from '@angular/material/paginator';
+import { CommonModule } from '@angular/common';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatSort, MatSortModule } from '@angular/material/sort';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { UtilityService } from '../../../shared/utility/utility.service';
-import { Disease, Gene, MedicalActionSourceExtended, SimpleTerm, Term, TermCategory } from '../../models/models';
+import { Disease, MedicalActionSourceExtended, SimpleTerm, Term, TermCategory } from '../../models/models';
 import { AnnotationService } from '../../services/annotation/annotation.service';
 import { DialogService } from '../../../shared/dialog-excel-download/dialog.service';
 
+import { MatCardModule } from '@angular/material/card';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+
 @Component({
   selector: 'app-disease',
+  standalone: true,
+  imports: [
+    CommonModule,
+    RouterModule,
+    MatCardModule,
+    MatProgressBarModule,
+    MatTabsModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatIconModule
+  ],
   templateUrl: './disease.component.html',
   styleUrls: ['./disease.component.css']
 })
@@ -22,7 +46,7 @@ export class DiseaseComponent {
   geneColumns = ['id', 'name'];
   medicalActionColumns = ['id', 'name', 'relations', 'targets']
   medicalActionsDataSource: MatTableDataSource<MedicalActionSourceExtended>;
-  geneDataSource: MatTableDataSource<Gene>;
+  geneDataSource: MatTableDataSource<SimpleTerm>;
 
   isLoading = true;
   catTermSources: TermCategory[] = [];
@@ -74,7 +98,7 @@ export class DiseaseComponent {
         fterm.metadata.sources = source.length === 0 ? [this.query] : source;
         return fterm;
       });
-      const termSource = new MatTableDataSource(catTermSource);
+      const termSource = new MatTableDataSource<{frequency: string, onset: string, sources: string[]}>(catTermSource);
       this.catTermSources.push({ catLabel: key, annotationCount: values.length, termSource });
     });
 

@@ -8,7 +8,7 @@ describe('HpobrowserComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [HpobrowserComponent]
+      imports: [HpobrowserComponent]
     })
       .compileComponents();
   }));

@@ -1,7 +1,7 @@
 <div class="container flex flex-row flex-wrap items-center justify-center">
   <h1 class="pageTitle center w-full">Download Annotations</h1>
   <div *ngIf="version" class="download-banner-wrapper mat-elevation-z4 flex flex-[1_1_100%] md:flex-[1_1_30%] md:max-w-[30%]"
-       (click)="utilityService.openExternalUrl(hpoaUrl)">
+       (click)="utilityService.openExternalUrl(hpoaUrl)" (keydown.enter)="utilityService.openExternalUrl(hpoaUrl)" tabindex="0" role="button">
     <mat-icon class="sm:block hidden">download</mat-icon>
     <h3 class="download-banner-title">Download HPO annotations ({{version}})</h3>
   </div>
@@ -13,25 +13,25 @@
   <span class="flex-[1_1_100%]"></span>
   <h2 class="center flex-[1_1_100%] mt-4">Additional resources</h2>
   <div class="download-banner-wrapper additional-resources mat-elevation-z4 flex-[1_1_100%] md:flex-[1_1_20%] md:max-w-[20%]"
-       (click)="utilityService.openExternalUrl(maxoUrl)">
+       (click)="utilityService.openExternalUrl(maxoUrl)" (keydown.enter)="utilityService.openExternalUrl(maxoUrl)" tabindex="0" role="button">
     <mat-icon class="sm:block hidden">download</mat-icon>
     <h3 class="download-banner-title">MAxO Annotations</h3>
   </div>
   <span class="flex-[1_1_100%]"></span>
   <div class="download-banner-wrapper additional-resources mat-elevation-z4 flex-[1_1_100%] md:flex-[1_1_20%] md:max-w-[20%]"
-       (click)="utilityService.openExternalUrl('https://purl.obolibrary.org/obo/hp/hpoa/genes_to_phenotype.txt')">
+       (click)="utilityService.openExternalUrl('https://purl.obolibrary.org/obo/hp/hpoa/genes_to_phenotype.txt')" (keydown.enter)="utilityService.openExternalUrl('https://purl.obolibrary.org/obo/hp/hpoa/genes_to_phenotype.txt')" tabindex="0" role="button">
     <mat-icon class="sm:block hidden">download</mat-icon>
     <h3 class="download-banner-title">Genes To Phenotype</h3>
   </div>
   <span class="flex-[1_1_100%]"></span>
   <div class="download-banner-wrapper additional-resources mat-elevation-z4 flex-[1_1_100%] md:flex-[1_1_20%] md:max-w-[20%]"
-       (click)="utilityService.openExternalUrl('https://purl.obolibrary.org/obo/hp/hpoa/phenotype_to_genes.txt')">
+       (click)="utilityService.openExternalUrl('https://purl.obolibrary.org/obo/hp/hpoa/phenotype_to_genes.txt')" (keydown.enter)="utilityService.openExternalUrl('https://purl.obolibrary.org/obo/hp/hpoa/phenotype_to_genes.txt')" tabindex="0" role="button">
     <mat-icon class="sm:block hidden">download</mat-icon>
     <h3 class="download-banner-title">Phenotype To Genes</h3>
   </div>
   <span class="flex-[1_1_100%]"></span>
   <div class="download-banner-wrapper additional-resources mat-elevation-z4 flex-[1_1_100%] md:flex-[1_1_20%] md:max-w-[20%]"
-       (click)="utilityService.openExternalUrl('https://purl.obolibrary.org/obo/hp/hpoa/genes_to_disease.txt')">
+       (click)="utilityService.openExternalUrl('https://purl.obolibrary.org/obo/hp/hpoa/genes_to_disease.txt')" (keydown.enter)="utilityService.openExternalUrl('https://purl.obolibrary.org/obo/hp/hpoa/genes_to_disease.txt')" tabindex="0" role="button">
     <mat-icon class="sm:block hidden">download</mat-icon>
     <h3 class="download-banner-title">Genes to Disease</h3>
   </div>

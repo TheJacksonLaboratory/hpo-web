@@ -1,12 +1,23 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { News } from '../../browser/models/models';
 import { NewsService } from '../../shared/news/news.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { MediaMatcher } from "@angular/cdk/layout";
-import { MatSidenav } from "@angular/material/sidenav";
+import { MatSidenav, MatSidenavModule } from "@angular/material/sidenav";
+import { MatButtonModule } from '@angular/material/button';
+import { MatListModule } from '@angular/material/list';
 
 @Component({
   selector: 'app-news',
+  standalone: true,
+  imports: [
+    CommonModule,
+    RouterModule,
+    MatSidenavModule,
+    MatButtonModule,
+    MatListModule
+  ],
   templateUrl: './news.component.html',
   styleUrls: ['./news.component.css']
 })

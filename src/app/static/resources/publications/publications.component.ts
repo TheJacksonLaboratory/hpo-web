@@ -1,15 +1,31 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { ReactiveFormsModule, UntypedFormControl } from '@angular/forms';
 import { PublicationsService } from './publications.service';
 import { Publication } from '../../../browser/models/models';
-import { UntypedFormControl } from '@angular/forms';
 import { from } from 'rxjs';
 import { distinct, mergeMap, map, toArray } from 'rxjs/operators';
-import { MatTableDataSource } from '@angular/material/table';
-import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatSort, MatSortModule } from '@angular/material/sort';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatButtonModule } from '@angular/material/button';
 
 
 @Component({
   selector: 'app-publications',
+  standalone: true,
+  imports: [
+    CommonModule,
+    RouterModule,
+    ReactiveFormsModule,
+    MatTableModule,
+    MatSortModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatButtonModule
+  ],
   templateUrl: './publications.component.html',
   styleUrls: ['./publications.component.scss']
 })

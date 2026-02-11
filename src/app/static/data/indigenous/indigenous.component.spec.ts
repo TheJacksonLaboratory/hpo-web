@@ -8,7 +8,7 @@ describe('IndigenousComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [IndigenousComponent]
+      imports: [IndigenousComponent]
     })
       .compileComponents();
   }));

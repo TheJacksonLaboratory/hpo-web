@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Language, Translation } from '../../browser/models/models';
+import { Translation } from '../../browser/models/models';
 
-@Pipe({ name: 'translate' })
+@Pipe({ name: 'translate', standalone: true })
 export class TranslatePipe implements PipeTransform {
 
   constructor() {

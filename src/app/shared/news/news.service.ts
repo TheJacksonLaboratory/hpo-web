@@ -3,12 +3,11 @@ import { News } from '../../browser/models/models';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { map, publishReplay, refCount } from "rxjs/operators";
+import { map, shareReplay } from "rxjs/operators";
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class NewsService {
-  private allNews: any;
-  private newsObservable$: any;
+  private newsObservable$: Observable<News[]>;
   options = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -51,7 +50,7 @@ export class NewsService {
   /* Get the 3 most recent news items */
   selectTeasers(allNews: News[]) {
     let news = Object.keys(allNews).map(key => allNews[key]);
-    news = [].concat.apply([], news);
+    news = [].concat(...news);
     news.sort((a, b) => {
       const a1 = new Date(a.date);
       const b1 = new Date(b.date);
@@ -67,16 +66,10 @@ export class NewsService {
   /* Get news items from github and store it as a "cache" */
   getNews(): Observable<News[]> {
     if (!this.newsObservable$) {
-      this.newsObservable$ = this.http.get(environment.HPO_NEWS_JSON_URL).pipe(
-        publishReplay(1),
-        refCount()
+      this.newsObservable$ = this.http.get<News[]>(environment.HPO_NEWS_JSON_URL).pipe(
+        shareReplay(1)
       );
     }
     return this.newsObservable$;
-  }
-
-  /* Get the news items from the api */
-  setAllNews(news: News[]): void {
-    this.allNews = news;
   }
 }

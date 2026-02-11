@@ -1,7 +1,6 @@
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { inject, TestBed } from '@angular/core/testing';
 import { environment } from '../../../../environments/environment';
-import { SearchService } from '../../../shared/search/service/search.service';
 
 import { OntologyService } from './ontology.service';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';

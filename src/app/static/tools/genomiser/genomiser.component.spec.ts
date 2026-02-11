@@ -8,7 +8,7 @@ describe('GenomiserComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [GenomiserComponent]
+      imports: [GenomiserComponent]
     })
       .compileComponents();
   }));

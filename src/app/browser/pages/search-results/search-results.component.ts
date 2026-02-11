@@ -1,12 +1,33 @@
 import { Component, ViewChild } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
+import { CommonModule } from '@angular/common';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { Disease, Gene, Term } from '../../models/models';
 import { SearchService } from '../../../shared/search/service/search.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
+import { HighlightPipe } from '../../../shared/pipes/highlight.pipe';
+
+import { MatCardModule } from '@angular/material/card';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-search-results',
+  standalone: true,
+  imports: [
+    CommonModule,
+    RouterModule,
+    MatCardModule,
+    MatProgressBarModule,
+    MatTabsModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatFormFieldModule,
+    MatInputModule,
+    HighlightPipe
+  ],
   templateUrl: './search-results.component.html',
   styleUrls: ['./search-results.component.css']
 })
@@ -68,7 +89,7 @@ export class SearchResultsComponent {
   reloadResultsData() {
     this.isLoading = true;
 
-    this.searchService.searchFetchAll(this.query).subscribe((data) => {
+    this.searchService.searchAll(this.query, -1).subscribe((data) => {
       this.terms = this.termMatchingStringBuilder(this.query, data.terms);
       this.diseases = this.responseMatchingStringBuilder(data.diseases);
       this.genes = this.responseMatchingStringBuilder(data.genes);
@@ -94,7 +115,7 @@ export class SearchResultsComponent {
   // If synonym exists, it's the matching string apply
   // the highlight pipe. Otherwise the term is the matching string.
   // This is needed for the way tables are built with angular material
-  termMatchingStringBuilder(query, termResponse) {
+  termMatchingStringBuilder(query: string, termResponse: { terms: Term[]}) {
     termResponse.terms.map(term => {
       term.synonyms.map(syn => {
         if (syn.toLowerCase().includes(query.toLowerCase())){

@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-translations',
+  standalone: true,
+  imports: [],
   templateUrl: './translation.component.html',
   styleUrls: ['./translation.component.css']
 })

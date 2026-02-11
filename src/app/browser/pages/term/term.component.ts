@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
+import { CommonModule } from '@angular/common';
+import { ActivatedRoute, ParamMap, Router, RouterModule } from '@angular/router';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatSort, MatSortModule } from '@angular/material/sort';
 import { forkJoin, of } from 'rxjs';
 import { catchError, switchMap } from 'rxjs/operators';
 import { UtilityService } from '../../../shared/utility/utility.service';
@@ -11,9 +12,36 @@ import { LanguageService } from '../../services/language/language.service';
 import { Language, MedicalActionSourceExtended, SimpleTerm, Term, TermTree } from '../../models/models';
 import { DialogService } from '../../../shared/dialog-excel-download/dialog.service';
 import { OntologyService } from "../../services/ontology/ontology.service";
+import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
+
+import { MatCardModule } from '@angular/material/card';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-term',
+  standalone: true,
+  imports: [
+    CommonModule,
+    RouterModule,
+    MatCardModule,
+    MatProgressBarModule,
+    MatChipsModule,
+    MatTabsModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatTooltipModule,
+    TranslatePipe
+  ],
   templateUrl: './term.component.html',
   styleUrls: ['./term.component.scss']
 })
@@ -198,7 +226,7 @@ export class TermComponent implements OnInit {
     this.dialogService.openDownloadDialog(this.term.id, counts);
   }
 
-  setTreeStyles(child: Term): any {
+  setTreeStyles(child: Term): { 'width': string, 'margin-left': string, 'margin-right': string } {
     return { 'width': child.treeCountWidth + 'px', 'margin-left': child.treeMargin + 'px', 'margin-right': '20px' };
   }
 
@@ -213,7 +241,3 @@ export class TermComponent implements OnInit {
     this.medicalActionSource.sort = this.sort;
   }
 }
-
-
-
-

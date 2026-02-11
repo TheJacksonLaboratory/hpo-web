@@ -1,3 +1,5 @@
+import { MatTableDataSource } from "@angular/material/table";
+
 export interface SimpleTerm {
   id: string;
   name: string;
@@ -32,11 +34,15 @@ export class EntrezGene {
   }
 }
 
+export interface EntrezGeneResult {
+  result: EntrezGene
+}
+
 export interface Term extends SimpleTerm {
   definition?: string;
   altTermIds?: Array<string>;
   comment?: string;
-  synonyms?: Array<string>;
+  synonyms: Array<string>;
   isObsolete?: boolean;
   xrefs?: Array<string>;
   purl?: string;
@@ -45,7 +51,7 @@ export interface Term extends SimpleTerm {
   matchingString?: string;
   treeCountWidth?: number;
   treeMargin?: number;
-  pubmedXrefs: Array<any>;
+  pubmedXrefs: Array<string>;
   translations?: Translation[];
 }
 
@@ -74,7 +80,7 @@ export interface IndividualContributer {
 export interface TermCategory {
   catLabel: string;
   annotationCount: number;
-  termSource: any;
+  termSource: MatTableDataSource<{frequency: string, onset: string, sources: string[]}>;
 }
 
 export interface DialogData {
@@ -93,7 +99,7 @@ export interface Publication {
   authors: string;
   title: string;
   journal: string;
-  year: Number;
+  year: number;
   volume: string;
   pages: string;
   pmid: string;
@@ -118,7 +124,6 @@ export interface TeamMember {
   alumni?: boolean;
 }
 
-
 export interface Translation extends Language, SimpleTerm {
   name: string;
   status: string;
@@ -134,21 +139,21 @@ export interface OntologySearchResponse {
 }
 
 export interface PhenotypeAssociation {
-    diseases: any[];
-    genes: any[];
-    assays: any[];
-    medicalActions: any[];
+    diseases: OntologyAnnotationDisease[];
+    genes: SimpleTerm[];
+    assays: SimpleTerm[];
+    medicalActions: MedicalActionSourceExtended[];
 }
 
 export interface GeneAssociation {
-  diseases: any[];
-  phenotypes: any[];
+  diseases: OntologyAnnotationDisease[];
+  phenotypes: SimpleTerm[];
 }
 
 export interface DiseaseAssociation {
   disease: Disease;
-  categories: {};
-  genes: any[];
+  categories: object;
+  genes: SimpleTerm[];
   medicalActions: MedicalActionSourceExtended[];
 }
 
@@ -158,7 +163,7 @@ export enum EntityType {
   GENE
 }
 
-export interface MedicalActionSourceExtended extends SimpleTerm{
+export interface MedicalActionSourceExtended extends SimpleTerm {
   relations: string[];
   sources: string[];
 }
@@ -166,4 +171,14 @@ export interface MedicalActionSourceExtended extends SimpleTerm{
 export interface MedicalActionTargetExtended extends SimpleTerm {
   targets: string[];
   sources: string[];
+}
+
+export interface OntologyAnnotationDisease extends SimpleTerm {
+  mondoId: string;
+  description: string;
+}
+
+export interface OntologyAnnotationSearchResult<T extends SimpleTerm> {
+  results: T[];
+  totalCount: number;
 }
