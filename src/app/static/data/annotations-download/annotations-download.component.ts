@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { MatIconModule } from '@angular/material/icon';
 import { environment } from "../../../../environments/environment";
 import { UtilityService } from '../../../shared/utility/utility.service';
 
 @Component({
     selector: 'app-annotations',
-    imports: [CommonModule, MatIconModule],
+    imports: [MatIconModule],
     templateUrl: './annotations-download.component.html',
     styleUrls: ['./annotations-download.component.scss']
 })

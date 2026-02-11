@@ -1,6 +1,6 @@
 import { Router, RouterModule } from '@angular/router';
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 import { SimpleTerm, Term } from '../../../browser/models/models';
 import { SearchService } from '../service/search.service';
@@ -17,14 +17,13 @@ import { HighlightPipe } from '../../pipes/highlight.pipe';
 @Component({
     selector: 'app-search-bar',
     imports: [
-        CommonModule,
-        FormsModule,
-        RouterModule,
-        MatSelectModule,
-        MatInputModule,
-        MatProgressBarModule,
-        HighlightPipe
-    ],
+    FormsModule,
+    RouterModule,
+    MatSelectModule,
+    MatInputModule,
+    MatProgressBarModule,
+    HighlightPipe
+],
     templateUrl: './search.component.html',
     styleUrls: ['./search.component.scss'],
     animations: [

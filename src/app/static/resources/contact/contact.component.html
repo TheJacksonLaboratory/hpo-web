@@ -1,12 +1,13 @@
 <div class="container">
   <div>
-      <h1 class="center pageTitle">Contact</h1>
-  <div class="flex flex-row flex-wrap justify-center items-center">
-  <div class="contact-general w-full sm:w-1/2 sm:ml-[25%] flex flex-col">
-          <h4>
-            For data & general human phenotype ontology questions:
-          </h4>
-          <div class="contact-card flex flex-row" *ngFor="let contact of generalContacts">
+    <h1 class="center pageTitle">Contact</h1>
+    <div class="flex flex-row flex-wrap justify-center items-center">
+      <div class="contact-general w-full sm:w-1/2 sm:ml-[25%] flex flex-col">
+        <h4>
+          For data & general human phenotype ontology questions:
+        </h4>
+        @for (contact of generalContacts; track contact) {
+          <div class="contact-card flex flex-row">
             <div class="contact-img">
               <img [src]="contact.src" [alt]="contact.name">
             </div>
@@ -18,12 +19,14 @@
               </a>
             </div>
           </div>
-        </div>
-  <div class="contact-technical w-full sm:w-1/2 sm:ml-[25%] flex flex-col">
-          <h4>
-            For technical hpo web application and api questions or bugs:
-          </h4>
-          <div class="contact-card flex flex-row" *ngFor="let contact of technicalContacts">
+        }
+      </div>
+      <div class="contact-technical w-full sm:w-1/2 sm:ml-[25%] flex flex-col">
+        <h4>
+          For technical hpo web application and api questions or bugs:
+        </h4>
+        @for (contact of technicalContacts; track contact) {
+          <div class="contact-card flex flex-row">
             <div class="contact-img">
               <img [src]="contact.src" [alt]="contact.name">
             </div>
@@ -35,7 +38,8 @@
               </a>
             </div>
           </div>
-        </div>
+        }
       </div>
     </div>
+  </div>
 </div>

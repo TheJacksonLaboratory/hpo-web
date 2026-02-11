@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { RouterModule } from '@angular/router';
 
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -14,16 +14,15 @@ import { FloatingFeedbackComponent } from './shared/floating-feedback/floating-f
 @Component({
     selector: 'app-root',
     imports: [
-        CommonModule,
-        RouterModule,
-        MatSidenavModule,
-        MatListModule,
-        MatButtonModule,
-        MatIconModule,
-        NavbarComponent,
-        FooterComponent,
-        FloatingFeedbackComponent
-    ],
+    RouterModule,
+    MatSidenavModule,
+    MatListModule,
+    MatButtonModule,
+    MatIconModule,
+    NavbarComponent,
+    FooterComponent,
+    FloatingFeedbackComponent
+],
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss']
 })

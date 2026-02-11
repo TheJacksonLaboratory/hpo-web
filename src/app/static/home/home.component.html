@@ -12,119 +12,127 @@
   <div class="md:flex-[0_0_45%] flex-[0_0_80%]">
     <h2>The Human Phenotype Ontology</h2>
     <hr>
-    <div class="info-body">
-      <p>The Human Phenotype Ontology (HPO) provides a standardized vocabulary of phenotypic abnormalities encountered
-        in human disease. Each term in the HPO describes a phenotypic abnormality, such as
-        <a routerLink="/browse/term/HP:0001631">Atrial septal defect</a>. The HPO is currently being developed using
-        the medical literature, Orphanet, DECIPHER, and OMIM. HPO currently contains over 18,000 terms and over
-        156,000 annotations to hereditary diseases. The HPO project and others have developed software for
-        phenotype-driven differential diagnostics, genomic diagnostics, and translational research. The HPO is a central component of one of the
-        <a href="https://www.ga4gh.org/howwework/driver-projects.html" target="__blank">13 driver
+      <div class="info-body">
+        <p>The Human Phenotype Ontology (HPO) provides a standardized vocabulary of phenotypic abnormalities encountered
+          in human disease. Each term in the HPO describes a phenotypic abnormality, such as
+          <a routerLink="/browse/term/HP:0001631">Atrial septal defect</a>. The HPO is currently being developed using
+          the medical literature, Orphanet, DECIPHER, and OMIM. HPO currently contains over 18,000 terms and over
+          156,000 annotations to hereditary diseases. The HPO project and others have developed software for
+          phenotype-driven differential diagnostics, genomic diagnostics, and translational research. The HPO is a central component of one of the
+          <a href="https://www.ga4gh.org/howwework/driver-projects.html" target="__blank">13 driver
           projects</a> in the <a href=" https://www.ga4gh.org/" target="__blank">Global Alliance for Genomics and
           Health</a> (GA4GH) <a href="https://www.ga4gh.org/about-us/strategic-road-map/">strategic roadmap</a>.</p>
-      <div class="button-wrapper">
-        <a mat-raised-button routerLink="about" class="mat-btn">Learn More About HPO</a>
-      </div>
-    </div>
-  </div>
-  <div class="md:flex-[0_0_25%] flex-[0_0_80%]">
-    <h2>News & Updates</h2>
-    <hr class="mb-0">
-    <div class="info-body teaser">
-      <div *ngIf="teaserNews">
-        <mat-list role="list">
-          <mat-list-item *ngFor="let item of teaserNews" role="listitem">
-            <div class="teaser-title">
-              <a routerLink="/news/{{item.monthYear}}">{{item.teaserTitle}}</a>
-            </div>
-            <span class="teaser-date">{{item.date}}</span>
-          </mat-list-item>
-        </mat-list>
-        <div class="button-wrapper text-white">
-          <a mat-raised-button routerLink="/news" class="mat-btn">View All News</a>
+          <div class="button-wrapper">
+            <a mat-raised-button routerLink="about" class="mat-btn">Learn More About HPO</a>
+          </div>
         </div>
       </div>
-      <div *ngIf="newsError">
-        Temporarily Unavailable. Please <a routerLink="/contact">contact us </a> if this does not return soon.
-      </div>
-      <mat-progress-bar mode="indeterminate" *ngIf="loadingNews"></mat-progress-bar>
-    </div>
-  </div>
-</div>
-<div class="home-highlight-menu flex flex-row flex-wrap">
-  <div routerLink="/tools/exomiser" class="home-item dark md:flex-[0_0_35%] md:ml-[10%] flex-[90%] ml-[2.5%] mr-[2.5%]">
-    <div class="flex flex-row flex-1 items-center justify-between">
-      <img class="tool-icon" src="assets/highlight-images/exomiser.png" alt="Exomiser tool icon"/>
-      <div class="home-body">
-        <h2 class="title">Exomiser</h2>
-        <p class="description"><i>Evaluate variants based on the predicted pathogenicity.</i></p>
-      </div>
-      <i class="material-icons xs:hidden sm:block">
-        chevron_right
-      </i>
-    </div>
-  </div>
-  <div routerLink="/tools/phenomizer" class="home-item light cursor-not-allowed md:flex-[0_0_35%] md:ml-[10%] flex-[90%] ml-[2.5%] mr-[2.5%]">
-    <div class="flex flex-row flex-1 items-center justify-between">
-      <img class="tool-icon" src="assets/highlight-images/phenomizer.png" alt="Phenomizer tool icon"/>
-      <div class="home-body">
-        <h2 class="title">Phenomizer <span class="text-red">[Offline]</span></h2>
-        <p class="description"><i>Rank disease differential diagnosis by clinical features.</i></p>
-      </div>
-      <i class="material-icons xs:hidden sm:block">
-        chevron_right
-      </i>
-    </div>
-  </div>
-  <div routerLink="/tools/genomiser" class="home-item light md:flex-[0_0_35%] md:ml-[10%] flex-[90%] ml-[2.5%] mr-[2.5%]">
-    <div class="flex flex-row flex-1 items-center justify-between">
-      <img class="tool-icon" src="assets/highlight-images/genomiser.png" alt="Genomiser tool icon"/>
-      <div class="home-body">
-        <h2 class="title">Genomiser</h2>
-        <p class="description"><i>Analyze genome sequence data for non-coding variants.</i></p>
-      </div>
-      <i class="material-icons xs:hidden sm:block">
-        chevron_right
-      </i>
-    </div>
-  </div>
-  <div routerLink="/browse/profile-search" class="home-item dark md:flex-[0_0_35%] md:ml-[10%] flex-[90%] ml-[2.5%] mr-[2.5%]">
-    <div class="flex flex-row flex-1 items-center justify-between">
-      <img class="tool-icon" src="assets/highlight-images/patientarchive.png" alt="Profile Search tool icon"/>
-      <div class="home-body">
-        <h2 class="title">Profile Search</h2>
-        <p class="description"><i>Discover diseases with a phenotype profile.</i></p>
-      </div>
-      <i class="material-icons xs:hidden sm:block">
-        chevron_right
-      </i>
-    </div>
-  </div>
-</div>
-<br><br>
-<div class="flex flex-row items-center justify-between">
-  <div class="phenopacket-banner mat-elevation-z1 flex-[1_1_80%] ml-[10%] max-w-[80%]" (click)="this.utilityService.openExternalUrl('https://www.ga4gh.org/product/phenopackets/')" (keydown.enter)="this.utilityService.openExternalUrl('https://www.ga4gh.org/product/phenopackets/')" tabindex="0" role="button">
-    <img class="phenopacket-logo" src="assets/phenopackets.png" alt="Phenopackets logo"/>
-    <div class="description hidden sm:block">
-      <h1>Phenopackets</h1>
-      <span class="text-base">A Global Alliance for Genomics and Health (GA4GH) international standard for phenotypic data exchange.</span>
-    </div>
-  </div>
-</div>
-<br><br>
-<div class="mailing-list-wrapper">
-  <a href="https://groups.io/g/human-phenotype-ontology" target="_blank">
-    <div class="mailing-list">
-      <mat-icon>mail_outline</mat-icon>
-      <div class="mailing-list-body">
-        <h4>HPO Mailing List!</h4>
-        Get official announcements and updates from the core developers.
+      <div class="md:flex-[0_0_25%] flex-[0_0_80%]">
+        <h2>News & Updates</h2>
+        <hr class="mb-0">
+        <div class="info-body teaser">
+          @if (teaserNews) {
+            <div>
+              <mat-list role="list">
+                @for (item of teaserNews; track item) {
+                  <mat-list-item role="listitem">
+                    <div class="teaser-title">
+                      <a routerLink="/news/{{item.monthYear}}">{{item.teaserTitle}}</a>
+                    </div>
+                    <span class="teaser-date">{{item.date}}</span>
+                  </mat-list-item>
+                }
+              </mat-list>
+              <div class="button-wrapper text-white">
+                <a mat-raised-button routerLink="/news" class="mat-btn">View All News</a>
+              </div>
+            </div>
+          }
+          @if (newsError) {
+            <div>
+              Temporarily Unavailable. Please <a routerLink="/contact">contact us </a> if this does not return soon.
+            </div>
+          }
+          @if (loadingNews) {
+            <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+          }
+        </div>
       </div>
     </div>
-  </a>
-</div>
+    <div class="home-highlight-menu flex flex-row flex-wrap">
+      <div routerLink="/tools/exomiser" class="home-item dark md:flex-[0_0_35%] md:ml-[10%] flex-[90%] ml-[2.5%] mr-[2.5%]">
+        <div class="flex flex-row flex-1 items-center justify-between">
+          <img class="tool-icon" src="assets/highlight-images/exomiser.png" alt="Exomiser tool icon"/>
+          <div class="home-body">
+            <h2 class="title">Exomiser</h2>
+            <p class="description"><i>Evaluate variants based on the predicted pathogenicity.</i></p>
+          </div>
+          <i class="material-icons xs:hidden sm:block">
+            chevron_right
+          </i>
+        </div>
+      </div>
+      <div routerLink="/tools/phenomizer" class="home-item light cursor-not-allowed md:flex-[0_0_35%] md:ml-[10%] flex-[90%] ml-[2.5%] mr-[2.5%]">
+        <div class="flex flex-row flex-1 items-center justify-between">
+          <img class="tool-icon" src="assets/highlight-images/phenomizer.png" alt="Phenomizer tool icon"/>
+          <div class="home-body">
+            <h2 class="title">Phenomizer <span class="text-red">[Offline]</span></h2>
+            <p class="description"><i>Rank disease differential diagnosis by clinical features.</i></p>
+          </div>
+          <i class="material-icons xs:hidden sm:block">
+            chevron_right
+          </i>
+        </div>
+      </div>
+      <div routerLink="/tools/genomiser" class="home-item light md:flex-[0_0_35%] md:ml-[10%] flex-[90%] ml-[2.5%] mr-[2.5%]">
+        <div class="flex flex-row flex-1 items-center justify-between">
+          <img class="tool-icon" src="assets/highlight-images/genomiser.png" alt="Genomiser tool icon"/>
+          <div class="home-body">
+            <h2 class="title">Genomiser</h2>
+            <p class="description"><i>Analyze genome sequence data for non-coding variants.</i></p>
+          </div>
+          <i class="material-icons xs:hidden sm:block">
+            chevron_right
+          </i>
+        </div>
+      </div>
+      <div routerLink="/browse/profile-search" class="home-item dark md:flex-[0_0_35%] md:ml-[10%] flex-[90%] ml-[2.5%] mr-[2.5%]">
+        <div class="flex flex-row flex-1 items-center justify-between">
+          <img class="tool-icon" src="assets/highlight-images/patientarchive.png" alt="Profile Search tool icon"/>
+          <div class="home-body">
+            <h2 class="title">Profile Search</h2>
+            <p class="description"><i>Discover diseases with a phenotype profile.</i></p>
+          </div>
+          <i class="material-icons xs:hidden sm:block">
+            chevron_right
+          </i>
+        </div>
+      </div>
+    </div>
+    <br><br>
+    <div class="flex flex-row items-center justify-between">
+      <div class="phenopacket-banner mat-elevation-z1 flex-[1_1_80%] ml-[10%] max-w-[80%]" (click)="this.utilityService.openExternalUrl('https://www.ga4gh.org/product/phenopackets/')" (keydown.enter)="this.utilityService.openExternalUrl('https://www.ga4gh.org/product/phenopackets/')" tabindex="0" role="button">
+        <img class="phenopacket-logo" src="assets/phenopackets.png" alt="Phenopackets logo"/>
+        <div class="description hidden sm:block">
+          <h1>Phenopackets</h1>
+          <span class="text-base">A Global Alliance for Genomics and Health (GA4GH) international standard for phenotypic data exchange.</span>
+        </div>
+      </div>
+    </div>
+    <br><br>
+    <div class="mailing-list-wrapper">
+      <a href="https://groups.io/g/human-phenotype-ontology" target="_blank">
+        <div class="mailing-list">
+          <mat-icon>mail_outline</mat-icon>
+          <div class="mailing-list-body">
+            <h4>HPO Mailing List!</h4>
+            Get official announcements and updates from the core developers.
+          </div>
+        </div>
+      </a>
+    </div>
 
-<a href="https://irdirc.org/resources-2/irdirc-recognized-resources/" target="__blank">
-  <img class="irdirc" src="assets/irdirc-logo.jpg" alt="IRDiRC Recognized Resource logo"/>
-</a>
+    <a href="https://irdirc.org/resources-2/irdirc-recognized-resources/" target="__blank">
+      <img class="irdirc" src="assets/irdirc-logo.jpg" alt="IRDiRC Recognized Resource logo"/>
+    </a>
 

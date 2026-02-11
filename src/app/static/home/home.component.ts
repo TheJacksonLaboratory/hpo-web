@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { RouterModule } from '@angular/router';
 import { NewsService } from '../../shared/news/news.service';
 import { News } from '../../browser/models/models';
@@ -14,14 +14,13 @@ import { MatIconModule } from '@angular/material/icon';
 @Component({
     selector: 'app-home',
     imports: [
-        CommonModule,
-        RouterModule,
-        MatButtonModule,
-        MatListModule,
-        MatProgressBarModule,
-        MatIconModule,
-        SearchComponent
-    ],
+    RouterModule,
+    MatButtonModule,
+    MatListModule,
+    MatProgressBarModule,
+    MatIconModule,
+    SearchComponent
+],
     templateUrl: './home.component.html',
     styleUrls: ['./home.component.scss']
 })

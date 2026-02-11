@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { Disease, Gene, Term } from '../../models/models';
@@ -16,17 +16,16 @@ import { MatInputModule } from '@angular/material/input';
 @Component({
     selector: 'app-search-results',
     imports: [
-        CommonModule,
-        RouterModule,
-        MatCardModule,
-        MatProgressBarModule,
-        MatTabsModule,
-        MatTableModule,
-        MatPaginatorModule,
-        MatFormFieldModule,
-        MatInputModule,
-        HighlightPipe
-    ],
+    RouterModule,
+    MatCardModule,
+    MatProgressBarModule,
+    MatTabsModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatFormFieldModule,
+    MatInputModule,
+    HighlightPipe
+],
     templateUrl: './search-results.component.html',
     styleUrls: ['./search-results.component.css']
 })

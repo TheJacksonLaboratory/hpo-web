@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { AnnotationService } from '../../services/annotation/annotation.service';
 import { GeneService } from '../../services/gene/gene.service';
 import { Disease, EntrezGene, SimpleTerm } from '../../models/models';
@@ -21,18 +21,17 @@ import { MatButtonModule } from '@angular/material/button';
 @Component({
     selector: 'app-gene',
     imports: [
-        CommonModule,
-        RouterModule,
-        MatCardModule,
-        MatProgressBarModule,
-        MatTabsModule,
-        MatTableModule,
-        MatSortModule,
-        MatPaginatorModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatButtonModule
-    ],
+    RouterModule,
+    MatCardModule,
+    MatProgressBarModule,
+    MatTabsModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule
+],
     templateUrl: './gene.component.html',
     styleUrls: ['./gene.component.css', '../../../../../node_modules/ProtVista/style/main.css'],
     encapsulation: ViewEncapsulation.None
