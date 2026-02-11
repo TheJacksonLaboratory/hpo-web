@@ -12,21 +12,20 @@ import { FooterComponent } from './shared/footer/footer.component';
 import { FloatingFeedbackComponent } from './shared/floating-feedback/floating-feedback.component';
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [
-    CommonModule,
-    RouterModule,
-    MatSidenavModule,
-    MatListModule,
-    MatButtonModule,
-    MatIconModule,
-    NavbarComponent,
-    FooterComponent,
-    FloatingFeedbackComponent
-  ],
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+    selector: 'app-root',
+    imports: [
+        CommonModule,
+        RouterModule,
+        MatSidenavModule,
+        MatListModule,
+        MatButtonModule,
+        MatIconModule,
+        NavbarComponent,
+        FooterComponent,
+        FloatingFeedbackComponent
+    ],
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
   mobileNavSection = 'home';

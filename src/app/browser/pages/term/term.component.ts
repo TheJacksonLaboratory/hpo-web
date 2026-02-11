@@ -24,26 +24,25 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
-  selector: 'app-term',
-  standalone: true,
-  imports: [
-    CommonModule,
-    RouterModule,
-    MatCardModule,
-    MatProgressBarModule,
-    MatChipsModule,
-    MatTabsModule,
-    MatTableModule,
-    MatSortModule,
-    MatPaginatorModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MatTooltipModule,
-    TranslatePipe
-  ],
-  templateUrl: './term.component.html',
-  styleUrls: ['./term.component.scss']
+    selector: 'app-term',
+    imports: [
+        CommonModule,
+        RouterModule,
+        MatCardModule,
+        MatProgressBarModule,
+        MatChipsModule,
+        MatTabsModule,
+        MatTableModule,
+        MatSortModule,
+        MatPaginatorModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonModule,
+        MatTooltipModule,
+        TranslatePipe
+    ],
+    templateUrl: './term.component.html',
+    styleUrls: ['./term.component.scss']
 })
 export class TermComponent implements OnInit {
   termTitle: string;

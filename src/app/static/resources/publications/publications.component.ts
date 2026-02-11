@@ -14,20 +14,19 @@ import { MatButtonModule } from '@angular/material/button';
 
 
 @Component({
-  selector: 'app-publications',
-  standalone: true,
-  imports: [
-    CommonModule,
-    RouterModule,
-    ReactiveFormsModule,
-    MatTableModule,
-    MatSortModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatButtonModule
-  ],
-  templateUrl: './publications.component.html',
-  styleUrls: ['./publications.component.scss']
+    selector: 'app-publications',
+    imports: [
+        CommonModule,
+        RouterModule,
+        ReactiveFormsModule,
+        MatTableModule,
+        MatSortModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        MatButtonModule
+    ],
+    templateUrl: './publications.component.html',
+    styleUrls: ['./publications.component.scss']
 })
 export class PublicationsComponent implements OnInit {
 

@@ -15,37 +15,34 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { HighlightPipe } from '../../pipes/highlight.pipe';
 
 @Component({
-  selector: 'app-search-bar',
-  standalone: true,
-  imports: [
-    CommonModule,
-    FormsModule,
-    RouterModule,
-    MatSelectModule,
-    MatInputModule,
-    MatProgressBarModule,
-    HighlightPipe
-  ],
-  templateUrl: './search.component.html',
-  styleUrls: ['./search.component.scss'],
-  animations: [
-    trigger('searchState', [
-      state('inactive', style({
-        'height': 0,
-        'overflow-y': 'hidden',
-        'visibility': 'hidden'
-      })),
-      state('active', style({
-        'max-height': '750px',
-        'overflow-y': 'scroll',
-        'visibility': 'visible'
-      })),
-      transition('inactive => active',
-        animate('500ms ease-in-out')),
-      transition('active => inactive',
-        animate('200ms ease-in-out'))
-    ])
-  ]
+    selector: 'app-search-bar',
+    imports: [
+        CommonModule,
+        FormsModule,
+        RouterModule,
+        MatSelectModule,
+        MatInputModule,
+        MatProgressBarModule,
+        HighlightPipe
+    ],
+    templateUrl: './search.component.html',
+    styleUrls: ['./search.component.scss'],
+    animations: [
+        trigger('searchState', [
+            state('inactive', style({
+                'height': 0,
+                'overflow-y': 'hidden',
+                'visibility': 'hidden'
+            })),
+            state('active', style({
+                'max-height': '750px',
+                'overflow-y': 'scroll',
+                'visibility': 'visible'
+            })),
+            transition('inactive => active', animate('500ms ease-in-out')),
+            transition('active => inactive', animate('200ms ease-in-out'))
+        ])
+    ]
 })
 export class SearchComponent implements OnInit {
 

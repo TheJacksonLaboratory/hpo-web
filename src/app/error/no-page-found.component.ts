@@ -4,11 +4,10 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-  selector: 'app-no-page-found',
-  standalone: true,
-  imports: [CommonModule, RouterModule, MatButtonModule],
-  templateUrl: './no-page-found.component.html',
-  styleUrls: ['./no-page-found.component.css']
+    selector: 'app-no-page-found',
+    imports: [CommonModule, RouterModule, MatButtonModule],
+    templateUrl: './no-page-found.component.html',
+    styleUrls: ['./no-page-found.component.css']
 })
 export class NoPageFoundComponent {
   pageTitle: string = 'Oops. Looks like something happened with your request.';

@@ -14,22 +14,21 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
 @Component({
-  selector: 'app-search-results',
-  standalone: true,
-  imports: [
-    CommonModule,
-    RouterModule,
-    MatCardModule,
-    MatProgressBarModule,
-    MatTabsModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatFormFieldModule,
-    MatInputModule,
-    HighlightPipe
-  ],
-  templateUrl: './search-results.component.html',
-  styleUrls: ['./search-results.component.css']
+    selector: 'app-search-results',
+    imports: [
+        CommonModule,
+        RouterModule,
+        MatCardModule,
+        MatProgressBarModule,
+        MatTabsModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatFormFieldModule,
+        MatInputModule,
+        HighlightPipe
+    ],
+    templateUrl: './search-results.component.html',
+    styleUrls: ['./search-results.component.css']
 })
 export class SearchResultsComponent {
 

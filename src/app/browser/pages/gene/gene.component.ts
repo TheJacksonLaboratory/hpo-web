@@ -19,24 +19,23 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-  selector: 'app-gene',
-  standalone: true,
-  imports: [
-    CommonModule,
-    RouterModule,
-    MatCardModule,
-    MatProgressBarModule,
-    MatTabsModule,
-    MatTableModule,
-    MatSortModule,
-    MatPaginatorModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule
-  ],
-  templateUrl: './gene.component.html',
-  styleUrls: ['./gene.component.css', '../../../../../node_modules/ProtVista/style/main.css'],
-  encapsulation: ViewEncapsulation.None
+    selector: 'app-gene',
+    imports: [
+        CommonModule,
+        RouterModule,
+        MatCardModule,
+        MatProgressBarModule,
+        MatTabsModule,
+        MatTableModule,
+        MatSortModule,
+        MatPaginatorModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonModule
+    ],
+    templateUrl: './gene.component.html',
+    styleUrls: ['./gene.component.css', '../../../../../node_modules/ProtVista/style/main.css'],
+    encapsulation: ViewEncapsulation.None
 })
 export class GeneComponent implements OnInit {
   entrezGene: EntrezGene = new EntrezGene();

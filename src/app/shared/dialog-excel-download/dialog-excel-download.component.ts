@@ -5,11 +5,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { DialogData, EntityType } from '../../browser/models/models';
 
 @Component({
-  selector: 'app-dialog-excel-download',
-  standalone: true,
-  imports: [CommonModule, MatDialogModule, MatButtonModule],
-  templateUrl: './dialog-excel-download.component.html',
-  styleUrls: ['./dialog-excel-download.component.css']
+    selector: 'app-dialog-excel-download',
+    imports: [CommonModule, MatDialogModule, MatButtonModule],
+    templateUrl: './dialog-excel-download.component.html',
+    styleUrls: ['./dialog-excel-download.component.css']
 })
 export class DialogExcelDownloadComponent implements OnInit {
 
