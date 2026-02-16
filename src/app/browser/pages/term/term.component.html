@@ -18,29 +18,41 @@
 
           <mat-card-content>
             <hr class="underline-hr">
-            <ul class="tree" *ngIf="treeData">
-              <li *ngFor="let parent of treeData.parents">
-                        <span class="tree-counts" [ngStyle]="{'margin-left': '-100px', 'margin-right': '5px'}"
-                              matTooltip="{{parent.descendantCount}}" *ngIf="parent.descendantCount !== 0"
-                              matTooltipPosition="above"> </span>
-                <a class="link" [routerLink]="['../', parent.id]">{{parent.name | translate: parent.translations: selectedLanguage.language: "name"}}</a>
-              </li>
-              <li>
-                <div class="term">
-                          <span class="tree-counts" [ngStyle]="{'margin-left': '-115px'}"
-                                *ngIf="treeData.descendantCount !== 0" matTooltip="{{treeData.descendantCount}}"
-                                matTooltipPosition="above"> </span>
-                  <strong>{{term.name | translate: term.translations: selectedLanguage.language: "name"}}</strong>
-                </div>
-                <ul>
-                  <li *ngFor="let child of treeData.children" class="children">
-                            <span class="tree-counts" [ngStyle]="setTreeStyles(child)" *ngIf="child.descendantCount !== 0"
-                                  matTooltip="{{child.descendantCount}}" matTooltipPosition="above"> </span>
-                    <a class="link" [routerLink]="['../', child.id]">{{child.name | translate: child.translations: selectedLanguage.language: "name"}}</a>
+            @if (treeData) {
+              <ul class="tree">
+                @for (parent of treeData.parents; track parent) {
+                  <li>
+                    @if (parent.descendantCount !== 0) {
+                      <span class="tree-counts" [ngStyle]="{'margin-left': '-100px', 'margin-right': '5px'}"
+                        matTooltip="{{parent.descendantCount}}"
+                      matTooltipPosition="above"> </span>
+                    }
+                    <a class="link" [routerLink]="['../', parent.id]">{{parent.name | translate: parent.translations: selectedLanguage.language: "name"}}</a>
                   </li>
-                </ul>
-              </li>
-            </ul>
+                }
+                <li>
+                  <div class="term">
+                    @if (treeData.descendantCount !== 0) {
+                      <span class="tree-counts" [ngStyle]="{'margin-left': '-115px'}"
+                        matTooltip="{{treeData.descendantCount}}"
+                      matTooltipPosition="above"> </span>
+                    }
+                    <strong>{{term.name | translate: term.translations: selectedLanguage.language: "name"}}</strong>
+                  </div>
+                  <ul>
+                    @for (child of treeData.children; track child) {
+                      <li class="children">
+                        @if (child.descendantCount !== 0) {
+                          <span class="tree-counts" [ngStyle]="setTreeStyles(child)"
+                          matTooltip="{{child.descendantCount}}" matTooltipPosition="above"> </span>
+                        }
+                        <a class="link" [routerLink]="['../', child.id]">{{child.name | translate: child.translations: selectedLanguage.language: "name"}}</a>
+                      </li>
+                    }
+                  </ul>
+                </li>
+              </ul>
+            }
           </mat-card-content>
         </mat-card>
       </div>
@@ -49,294 +61,330 @@
         <!-- Term summary -->
         <mat-card class="item-summary">
           <mat-card-content>
-            <div *ngIf="!treeData">
-              <mat-progress-bar class="loading-result-details" color="primary" mode="indeterminate">
-              </mat-progress-bar>
-            </div>
-            <div *ngIf="treeData && term">
-              <div class="flex flex-row flex-wrap items-center justify-start">
-                <h4 class="item-title">{{termTitle | translate: term.translations: selectedLanguage.language: "name"}}&nbsp;</h4>
-                <h4 class="item-id" *ngIf="paramId !== term.id">
-                <h4 class="crossout">{{paramId}}</h4>
-                <i class="material-icons obsolete-arrow">arrow_right_alt</i></h4>
-                <h4 class="item-id">{{term.id}}</h4>
-                <!-- <i matTooltip="Copy purl to clipboard!" matTooltipPosition="above"
-                    (click)="copyToClipboard(term.purl)" class="material-icons copyToClipboard">content_copy</i>-->
-                <br>
-                <br>
+            @if (!treeData) {
+              <div>
+                <mat-progress-bar class="loading-result-details" color="primary" mode="indeterminate">
+                </mat-progress-bar>
               </div>
-              <mat-chip-set class="translation-chips" aria-label="Language Selection" multiple="false">
-                <mat-chip-option class="translation-chip" *ngFor="let lang of languages" color="primary"
-                                 (click)="changeLanguage(lang)" [selected]="selectedLanguage.language === lang.language" [disableRipple]="true">
-                  <img matChipAvatar src="https://unpkg.com/language-icons@0.3.0/icons/{{lang.language}}.svg" alt="{{lang.language}}"/>
-                  {{lang.language_long}}
-                </mat-chip-option>
-              </mat-chip-set>
-              <hr class="underline-hr">
-                <p class="my-0">
-                  {{term.definition !== "" ? (term.definition | translate: term.translations: selectedLanguage.language: "definition") : "No definition found."}}
-                </p>
-                <hr class="underline-hr">
-                <div>
-                  <strong>Synonyms:</strong> &nbsp;&nbsp;
-                  <i *ngFor="let item of term.synonyms; let isLast=last">{{item}}{{isLast ? '' : "\t-\t"}}</i>
-                  <hr class="underline-hr">
-                </div>
-                <div *ngIf="term.comment">
-                  <strong>Comment:</strong> &nbsp;&nbsp; {{term.comment}}
-                  <hr class="underline-hr">
-                </div>
-                <div *ngIf="term.xrefs.length > 0">
-                  <strong>Cross References:</strong> &nbsp;&nbsp;
-                  <i *ngFor="let item of term.xrefs; let isLast=last">{{item}}{{isLast ? '' : ', '}}</i>
-                  <hr class="underline-hr">
-                </div>
-              <button mat-raised-button class="download-associations"
+            }
+            @if (treeData && term) {
+              <div>
+                <div class="flex flex-row flex-wrap items-center justify-start">
+                  <h4 class="item-title">{{termTitle | translate: term.translations: selectedLanguage.language: "name"}}&nbsp;</h4>
+                  @if (paramId !== term.id) {
+                    <h4 class="item-id">
+                      <h4 class="crossout">{{paramId}}</h4>
+                      <i class="material-icons obsolete-arrow">arrow_right_alt</i></h4>
+                    }
+                    <h4 class="item-id">{{term.id}}</h4>
+                    <!-- <i matTooltip="Copy purl to clipboard!" matTooltipPosition="above"
+                  (click)="copyToClipboard(term.purl)" class="material-icons copyToClipboard">content_copy</i>-->
+                  <br>
+                    <br>
+                    </div>
+                    <mat-chip-set class="translation-chips" aria-label="Language Selection" multiple="false">
+                      @for (lang of languages; track lang) {
+                        <mat-chip-option class="translation-chip" color="primary"
+                          (click)="changeLanguage(lang)" [selected]="selectedLanguage.language === lang.language" [disableRipple]="true">
+                          <img matChipAvatar src="https://unpkg.com/language-icons@0.3.0/icons/{{lang.language}}.svg" alt="{{lang.language}}"/>
+                          {{lang.language_long}}
+                        </mat-chip-option>
+                      }
+                    </mat-chip-set>
+                    <hr class="underline-hr">
+                    <p class="my-0">
+                      {{term.definition !== "" ? (term.definition | translate: term.translations: selectedLanguage.language: "definition") : "No definition found."}}
+                    </p>
+                    <hr class="underline-hr">
+                    <div>
+                      <strong>Synonyms:</strong> &nbsp;&nbsp;
+                      @for (item of term.synonyms; track item; let isLast = $last) {
+                        <i>{{item}}{{isLast ? '' : "\t-\t"}}</i>
+                      }
+                      <hr class="underline-hr">
+                    </div>
+                    @if (term.comment) {
+                      <div>
+                        <strong>Comment:</strong> &nbsp;&nbsp; {{term.comment}}
+                        <hr class="underline-hr">
+                      </div>
+                    }
+                    @if (term.xrefs.length > 0) {
+                      <div>
+                        <strong>Cross References:</strong> &nbsp;&nbsp;
+                        @for (item of term.xrefs; track item; let isLast = $last) {
+                          <i>{{item}}{{isLast ? '' : ', '}}</i>
+                        }
+                        <hr class="underline-hr">
+                      </div>
+                    }
+                    <button mat-raised-button class="download-associations"
                       [disabled]="this.diseaseAssocCount === 0 && this.geneAssocCount === 0"
                       (click)="downloadDialog()"><span class="material-icons">get_app</span> Export Associations
-              </button>
-              <a *ngIf="languages && languages.length > 0" class="translate-btn" href="https://obophenotype.github.io/hpo-translations/" mat-stroked-button color="primary" target="_blank">
-                <span class="material-icons">open_in_new</span> Translate your language
-              </a>
-            </div>
-          </mat-card-content>
-        </mat-card>
-
-        <!-- TABS -->
-        <div class="hpo-group-tab" *ngIf="term">
-          <mat-tab-group selectedIndex="0" class="term-details-tab-group mat-elevation-z6">
-            <!-- Disease Association -->
-            <mat-tab label="Disease Associations">
-              <div [hidden]="diseaseAssocCount === 0 || this.networkError">
-                <div class="tab-output-container">
-
-                  <!-- filter. Display when all results are loaded -->
-                  <div class="filter-container">
-                    <div id="diseaseFilter" class="filter-header">
-                      <mat-form-field>
-                        <input id="diseaseFilterInput" matInput (keyup)="applyDiseaseFilter($event.target.value)"
-                               placeholder="Filter by disease">
-                      </mat-form-field>
-                    </div>
+                    </button>
+                    @if (languages && languages.length > 0) {
+                      <a class="translate-btn" href="https://obophenotype.github.io/hpo-translations/" mat-stroked-button color="primary" target="_blank">
+                        <span class="material-icons">open_in_new</span> Translate your language
+                      </a>
+                    }
                   </div>
-                  <mat-progress-bar *ngIf="assocLoading && !this.networkError" class="loading-result-details" color="primary"
-                                    mode="indeterminate">
-                  </mat-progress-bar>
+                }
+              </mat-card-content>
+            </mat-card>
 
-                  <div [hidden]="assocLoading" class="associations disease-association">
-                    <mat-table [dataSource]="diseaseSource">
-                      <mat-header-row *matHeaderRowDef="diseaseColumns; sticky: true"></mat-header-row>
-                      <mat-row *matRowDef="let row; columns: diseaseColumns;"></mat-row>
-                      <ng-container matColumnDef="id">
-                        <mat-header-cell *matHeaderCellDef>Disease Id</mat-header-cell>
-                        <mat-cell *matCellDef="let row">
-                          <a routerLink="/browse/disease/{{row.id}}">{{row.id}}</a>
-                        </mat-cell>
-                      </ng-container>
-                      <ng-container matColumnDef="name">
-                        <mat-header-cell *matHeaderCellDef>Disease Name</mat-header-cell>
-                        <mat-cell *matCellDef="let row">{{row.name}}</mat-cell>
-                      </ng-container>
-                      <ng-container matColumnDef="dbGenes">
-                        <mat-header-cell *matHeaderCellDef>Associated Genes</mat-header-cell>
-                        <mat-cell *matCellDef="let row">
-                                      <span *ngFor="let gene of row.dbGenes">
-                                        {{gene.geneSymbol}}
-                                        <a routerLink="/browse/gene/{{gene.geneId}}">[{{gene.geneId}}
-                                          ]</a><br>
-                                      </span>
-                        </mat-cell>
-                      </ng-container>
-                    </mat-table>
-
-                    <!-- paging: associations subset count -->
-                    <div id="assocDiseasePagingSubset" *ngIf="!assocLoading"
-                         class="associationsPaging">
-                      <p>{{diseaseAssocCount}} disease associations.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="container center" [hidden]="diseaseAssocCount !== 0 || this.networkError">
-                <h4>No disease associations found for <strong>{{term.id}}</strong></h4>
-              </div>
-              <div class="container center" [hidden]="!this.networkError">
-                <h4>Ontology Annotation Network Error. <a href="https://github.com/TheJacksonLaboratory/ontology-annotation-network/issues/new" target="_blank">Please report this issue.</a></h4>
-              </div>
-            </mat-tab>
-
-            <!-- Gene Association -->
-            <mat-tab label="Gene Associations [Inferred]">
-              <div [hidden]="geneAssocCount === 0 || this.networkError">
-                <div class="tab-output-container">
-                  <div class="filter-container">
-                    <div id="geneFilter" class="filter-header">
-                      <mat-form-field>
-                        <input id="geneFilterInput" matInput (keyup)="applyGeneFilter($event.target.value)"
-                               placeholder="Filter by gene">
-                      </mat-form-field>
-                    </div>
-                  </div>
-                  <mat-progress-bar *ngIf="assocLoading && !this.networkError" class="loading-result-details" color="primary"
-                                    mode="indeterminate">
-                  </mat-progress-bar>
-
-                  <div [hidden]="assocLoading" class="associations gene-association">
-                    <mat-table [dataSource]="geneSource">
-                      <mat-header-row *matHeaderRowDef="geneColumns; sticky: true"></mat-header-row>
-                      <mat-row *matRowDef="let row; columns: geneColumns;"></mat-row>
-                      <ng-container matColumnDef="id">
-                        <mat-header-cell *matHeaderCellDef> Gene Id</mat-header-cell>
-                        <mat-cell *matCellDef="let row">
-                          <a routerLink="/browse/gene/{{row.id}}">{{row.id}}</a>
-                        </mat-cell>
-                      </ng-container>
-                      <ng-container matColumnDef="name">
-                        <mat-header-cell *matHeaderCellDef> Gene Symbol</mat-header-cell>
-                        <mat-cell *matCellDef="let row">
-                          {{row.name}}
-                        </mat-cell>
-                      </ng-container>
-                    </mat-table>
-
-                    <!-- paging: associations subset count -->
-                    <div id="assocGenePagingSubset" *ngIf="!assocLoading" class="associationsPaging">
-                      <p>{{geneAssocCount}} gene associations.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="container center" [hidden]="geneAssocCount !== 0 || this.networkError">
-                <h4>No gene associations found for <strong>{{term.id}}</strong></h4>
-              </div>
-              <div class="container center" [hidden]="!this.networkError">
-                <h4>Ontology Annotation Network Error. <a href="https://github.com/TheJacksonLaboratory/ontology-annotation-network/issues/new" target="_blank">Please report this issue.</a></h4>
-              </div>
-            </mat-tab>
-
-            <!-- Medical Action Association -->
-            <mat-tab label="Medical Actions">
-              <div [hidden]="medicalActionDisplayCount === 0 || this.networkError">
-                <div class="tab-output-container">
-                  <mat-progress-bar *ngIf="assocLoading" class="loading-result-details" color="primary"
-                                    mode="indeterminate">
-                  </mat-progress-bar>
-
-                  <div [hidden]="assocLoading" class="associations medical-actions-association">
-                    <mat-table [dataSource]="medicalActionSource">
-                      <mat-header-row *matHeaderRowDef="medicalActionColumns; sticky: true"></mat-header-row>
-                      <mat-row *matRowDef="let row; columns: medicalActionColumns;"></mat-row>
-                      <ng-container matColumnDef="id">
-                        <mat-header-cell *matHeaderCellDef>MaXo Id</mat-header-cell>
-                        <mat-cell *matCellDef="let row">
-                          {{row.id}}
-                        </mat-cell>
-                      </ng-container>
-                      <ng-container matColumnDef="name">
-                        <mat-header-cell *matHeaderCellDef> MaXo Name</mat-header-cell>
-                        <mat-cell *matCellDef="let row">
-                          {{row.name}}
-                        </mat-cell>
-                      </ng-container>
-                      <ng-container matColumnDef="relation">
-                        <mat-header-cell *matHeaderCellDef> Relation</mat-header-cell>
-                        <mat-cell *matCellDef="let row">
-                          <ng-container *ngIf="row.relations.length === 1">
-                            {{row.relations[0]}}
-                          </ng-container>
-                          <ng-container *ngIf="row.relations.length > 1">
-                            {{row.relations.join(" and ")}}
-                          </ng-container>
-                        </mat-cell>
-                      </ng-container>
-                      <ng-container matColumnDef="source">
-                        <mat-header-cell *matHeaderCellDef> Sources</mat-header-cell>
-                        <mat-cell *matCellDef="let row; let i = index">
-                          <div *ngFor="let source of row.sources">
-                            <div class="source" *ngIf="utilityService.isTermIdExpected(source,'PMID')">
-                              <a class="source-hover" [href]="utilityService.getExternalTermIdUrlFromId(source)" target="_blank">
-                                PubMed <i class="material-icons-outlined">library_books</i>&nbsp;&nbsp;
-                              </a>
-                              <a *ngIf="row.sources.length > 4">
-                                ({{row.sources.length - 4}} more).
-                              </a>
-                            </div>
+            <!-- TABS -->
+            @if (term) {
+              <div class="hpo-group-tab">
+                <mat-tab-group selectedIndex="0" class="term-details-tab-group mat-elevation-z6">
+                  <!-- Disease Association -->
+                  <mat-tab label="Disease Associations">
+                    <div [hidden]="diseaseAssocCount === 0 || this.networkError">
+                      <div class="tab-output-container">
+                        <!-- filter. Display when all results are loaded -->
+                        <div class="filter-container">
+                          <div id="diseaseFilter" class="filter-header">
+                            <mat-form-field>
+                              <input id="diseaseFilterInput" matInput (keyup)="applyDiseaseFilter($event.target.value)"
+                                placeholder="Filter by disease">
+                            </mat-form-field>
                           </div>
-                        </mat-cell>
-                      </ng-container>
-                    </mat-table>
-
-                    <!-- paging: associations subset count -->
-                    <div *ngIf="!assocLoading" class="associationsPaging">
-                      <p>{{medicalActionDisplayCount}} medical actions.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="container center" [hidden]="medicalActionDisplayCount !== 0">
-                <h4>No medical actions found for <strong>{{term.id}}</strong></h4>
-              </div>
-              <div class="container center" [hidden]="!this.networkError">
-                <h4>Ontology Annotation Network Error. <a href="https://github.com/TheJacksonLaboratory/ontology-annotation-network/issues/new" target="_blank">Please report this issue.</a></h4>
-              </div>
-            </mat-tab>
-
-            <!-- Loinc Association -->
-            <mat-tab label="LOINC Associations">
-                <div [hidden]="loincDisplayCount === 0 || this.networkError">
-                  <mat-progress-bar *ngIf="assocLoading && !this.networkError" class="loading-result-details" color="primary"
-                                    mode="indeterminate">
-                  </mat-progress-bar>
-                  <div class="tab-output-container">
-                    <div [hidden]="assocLoading" class="associations loinc-association">
-                      <mat-table [dataSource]="loincSource">
-                        <mat-header-row *matHeaderRowDef="loincColumns; sticky: true"></mat-header-row>
-                        <mat-row *matRowDef="let row; columns: loincColumns;"></mat-row>
-                        <ng-container matColumnDef="id">
-                          <mat-header-cell *matHeaderCellDef> LOINC Code</mat-header-cell>
-                          <mat-cell *matCellDef="let row">
-                            <a href="http://loinc.org/{{row.id}}" target="__blank">{{row.id}}</a>
-                          </mat-cell>
-                        </ng-container>
-                        <ng-container matColumnDef="name">
-                          <mat-header-cell *matHeaderCellDef> LOINC Name</mat-header-cell>
-                          <mat-cell *matCellDef="let row">
-                            {{row.name}}
-                          </mat-cell>
-                        </ng-container>
-                      </mat-table>
-                      <!-- paging: associations subset count -->
-                      <div *ngIf="!assocLoading" class="associationsPaging">
-                        <p>{{loincDisplayCount}} LOINC associations.</p>
-                      </div>
-                      <div *ngIf="!assocLoading" class="loinc-license">
-                        <sup>**</sup>This material contains content from LOINC® (
-                        <a href="http://loinc.org" target="__blank">http://loinc.org</a>). The LOINC Table, LOINC Table
-                        Core, LOINC Panels and Forms File, LOINC Answer File, LOINC Part File, LOINC Group File, LOINC
-                        Document Ontology File, LOINC Hierarchies, LOINC Linguistic Variants File, LOINC/RSNA Radiology
-                        Playbook, and LOINC/IEEE Medical Device Code Mapping Table are copyright © 1995-2018,
-                        Regenstrief Institute, Inc. and the Logical Observation Identifiers Names and Codes (LOINC)
-                        Committee and is available at no cost under the license at
-                        <a href="http://loinc.org/license" target="__blank">http://loinc.org/license</a>.
+                        </div>
+                        @if (assocLoading && !this.networkError) {
+                          <mat-progress-bar class="loading-result-details" color="primary"
+                            mode="indeterminate">
+                          </mat-progress-bar>
+                        }
+                        <div [hidden]="assocLoading" class="associations disease-association">
+                          <mat-table [dataSource]="diseaseSource">
+                            <mat-header-row *matHeaderRowDef="diseaseColumns; sticky: true"></mat-header-row>
+                            <mat-row *matRowDef="let row; columns: diseaseColumns;"></mat-row>
+                            <ng-container matColumnDef="id">
+                              <mat-header-cell *matHeaderCellDef>Disease Id</mat-header-cell>
+                              <mat-cell *matCellDef="let row">
+                                <a routerLink="/browse/disease/{{row.id}}">{{row.id}}</a>
+                              </mat-cell>
+                            </ng-container>
+                            <ng-container matColumnDef="name">
+                              <mat-header-cell *matHeaderCellDef>Disease Name</mat-header-cell>
+                              <mat-cell *matCellDef="let row">{{row.name}}</mat-cell>
+                            </ng-container>
+                            <ng-container matColumnDef="dbGenes">
+                              <mat-header-cell *matHeaderCellDef>Associated Genes</mat-header-cell>
+                              <mat-cell *matCellDef="let row">
+                                @for (gene of row.dbGenes; track gene) {
+                                  <span>
+                                    {{gene.geneSymbol}}
+                                    <a routerLink="/browse/gene/{{gene.geneId}}">[{{gene.geneId}}
+                                    ]</a><br>
+                                  </span>
+                                }
+                              </mat-cell>
+                            </ng-container>
+                          </mat-table>
+                          <!-- paging: associations subset count -->
+                          @if (!assocLoading) {
+                            <div id="assocDiseasePagingSubset"
+                              class="associationsPaging">
+                              <p>{{diseaseAssocCount}} disease associations.
+                              </p>
+                            </div>
+                          }
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </div>
-                <div class="container center" [hidden]="loincDisplayCount !== 0">
-                <div class="container center" [hidden]="loincDisplayCount !== 0 || this.networkError">
-                  <h4>No LOINC associations found for <strong>{{term.id}}</strong></h4>
-                </div>
-                </div>
-                <div class="container center" [hidden]="!this.networkError">
-                  <h4>Ontology Annotation Network Error. <a href="https://github.com/TheJacksonLaboratory/ontology-annotation-network/issues/new" target="_blank">Please report this issue.</a></h4>
-                </div>
-              </mat-tab>
-          </mat-tab-group>
+                    <div class="container center" [hidden]="diseaseAssocCount !== 0 || this.networkError">
+                      <h4>No disease associations found for <strong>{{term.id}}</strong></h4>
+                    </div>
+                    <div class="container center" [hidden]="!this.networkError">
+                      <h4>Ontology Annotation Network Error. <a href="https://github.com/TheJacksonLaboratory/ontology-annotation-network/issues/new" target="_blank">Please report this issue.</a></h4>
+                    </div>
+                  </mat-tab>
+                  <!-- Gene Association -->
+                  <mat-tab label="Gene Associations [Inferred]">
+                    <div [hidden]="geneAssocCount === 0 || this.networkError">
+                      <div class="tab-output-container">
+                        <div class="filter-container">
+                          <div id="geneFilter" class="filter-header">
+                            <mat-form-field>
+                              <input id="geneFilterInput" matInput (keyup)="applyGeneFilter($event.target.value)"
+                                placeholder="Filter by gene">
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        @if (assocLoading && !this.networkError) {
+                          <mat-progress-bar class="loading-result-details" color="primary"
+                            mode="indeterminate">
+                          </mat-progress-bar>
+                        }
+                        <div [hidden]="assocLoading" class="associations gene-association">
+                          <mat-table [dataSource]="geneSource">
+                            <mat-header-row *matHeaderRowDef="geneColumns; sticky: true"></mat-header-row>
+                            <mat-row *matRowDef="let row; columns: geneColumns;"></mat-row>
+                            <ng-container matColumnDef="id">
+                              <mat-header-cell *matHeaderCellDef> Gene Id</mat-header-cell>
+                              <mat-cell *matCellDef="let row">
+                                <a routerLink="/browse/gene/{{row.id}}">{{row.id}}</a>
+                              </mat-cell>
+                            </ng-container>
+                            <ng-container matColumnDef="name">
+                              <mat-header-cell *matHeaderCellDef> Gene Symbol</mat-header-cell>
+                              <mat-cell *matCellDef="let row">
+                                {{row.name}}
+                              </mat-cell>
+                            </ng-container>
+                          </mat-table>
+                          <!-- paging: associations subset count -->
+                          @if (!assocLoading) {
+                            <div id="assocGenePagingSubset" class="associationsPaging">
+                              <p>{{geneAssocCount}} gene associations.
+                              </p>
+                            </div>
+                          }
+                        </div>
+                      </div>
+                    </div>
+                    <div class="container center" [hidden]="geneAssocCount !== 0 || this.networkError">
+                      <h4>No gene associations found for <strong>{{term.id}}</strong></h4>
+                    </div>
+                    <div class="container center" [hidden]="!this.networkError">
+                      <h4>Ontology Annotation Network Error. <a href="https://github.com/TheJacksonLaboratory/ontology-annotation-network/issues/new" target="_blank">Please report this issue.</a></h4>
+                    </div>
+                  </mat-tab>
+                  <!-- Medical Action Association -->
+                  <mat-tab label="Medical Actions">
+                    <div [hidden]="medicalActionDisplayCount === 0 || this.networkError">
+                      <div class="tab-output-container">
+                        @if (assocLoading) {
+                          <mat-progress-bar class="loading-result-details" color="primary"
+                            mode="indeterminate">
+                          </mat-progress-bar>
+                        }
+                        <div [hidden]="assocLoading" class="associations medical-actions-association">
+                          <mat-table [dataSource]="medicalActionSource">
+                            <mat-header-row *matHeaderRowDef="medicalActionColumns; sticky: true"></mat-header-row>
+                            <mat-row *matRowDef="let row; columns: medicalActionColumns;"></mat-row>
+                            <ng-container matColumnDef="id">
+                              <mat-header-cell *matHeaderCellDef>MaXo Id</mat-header-cell>
+                              <mat-cell *matCellDef="let row">
+                                {{row.id}}
+                              </mat-cell>
+                            </ng-container>
+                            <ng-container matColumnDef="name">
+                              <mat-header-cell *matHeaderCellDef> MaXo Name</mat-header-cell>
+                              <mat-cell *matCellDef="let row">
+                                {{row.name}}
+                              </mat-cell>
+                            </ng-container>
+                            <ng-container matColumnDef="relation">
+                              <mat-header-cell *matHeaderCellDef> Relation</mat-header-cell>
+                              <mat-cell *matCellDef="let row">
+                                @if (row.relations.length === 1) {
+                                  {{row.relations[0]}}
+                                }
+                                @if (row.relations.length > 1) {
+                                  {{row.relations.join(" and ")}}
+                                }
+                              </mat-cell>
+                            </ng-container>
+                            <ng-container matColumnDef="source">
+                              <mat-header-cell *matHeaderCellDef> Sources</mat-header-cell>
+                              <mat-cell *matCellDef="let row; let i = index">
+                                @for (source of row.sources; track source) {
+                                  <div>
+                                    @if (utilityService.isTermIdExpected(source,'PMID')) {
+                                      <div class="source">
+                                        <a class="source-hover" [href]="utilityService.getExternalTermIdUrlFromId(source)" target="_blank">
+                                          PubMed <i class="material-icons-outlined">library_books</i>&nbsp;&nbsp;
+                                        </a>
+                                        @if (row.sources.length > 4) {
+                                          <a>
+                                            ({{row.sources.length - 4}} more).
+                                          </a>
+                                        }
+                                      </div>
+                                    }
+                                  </div>
+                                }
+                              </mat-cell>
+                            </ng-container>
+                          </mat-table>
+                          <!-- paging: associations subset count -->
+                          @if (!assocLoading) {
+                            <div class="associationsPaging">
+                              <p>{{medicalActionDisplayCount}} medical actions.
+                              </p>
+                            </div>
+                          }
+                        </div>
+                      </div>
+                    </div>
+                    <div class="container center" [hidden]="medicalActionDisplayCount !== 0">
+                      <h4>No medical actions found for <strong>{{term.id}}</strong></h4>
+                    </div>
+                    <div class="container center" [hidden]="!this.networkError">
+                      <h4>Ontology Annotation Network Error. <a href="https://github.com/TheJacksonLaboratory/ontology-annotation-network/issues/new" target="_blank">Please report this issue.</a></h4>
+                    </div>
+                  </mat-tab>
+                  <!-- Loinc Association -->
+                  <mat-tab label="LOINC Associations">
+                    <div [hidden]="loincDisplayCount === 0 || this.networkError">
+                      @if (assocLoading && !this.networkError) {
+                        <mat-progress-bar class="loading-result-details" color="primary"
+                          mode="indeterminate">
+                        </mat-progress-bar>
+                      }
+                      <div class="tab-output-container">
+                        <div [hidden]="assocLoading" class="associations loinc-association">
+                          <mat-table [dataSource]="loincSource">
+                            <mat-header-row *matHeaderRowDef="loincColumns; sticky: true"></mat-header-row>
+                            <mat-row *matRowDef="let row; columns: loincColumns;"></mat-row>
+                            <ng-container matColumnDef="id">
+                              <mat-header-cell *matHeaderCellDef> LOINC Code</mat-header-cell>
+                              <mat-cell *matCellDef="let row">
+                                <a href="http://loinc.org/{{row.id}}" target="__blank">{{row.id}}</a>
+                              </mat-cell>
+                            </ng-container>
+                            <ng-container matColumnDef="name">
+                              <mat-header-cell *matHeaderCellDef> LOINC Name</mat-header-cell>
+                              <mat-cell *matCellDef="let row">
+                                {{row.name}}
+                              </mat-cell>
+                            </ng-container>
+                          </mat-table>
+                          <!-- paging: associations subset count -->
+                          @if (!assocLoading) {
+                            <div class="associationsPaging">
+                              <p>{{loincDisplayCount}} LOINC associations.</p>
+                            </div>
+                          }
+                          @if (!assocLoading) {
+                            <div class="loinc-license">
+                              <sup>**</sup>This material contains content from LOINC® (
+                              <a href="http://loinc.org" target="__blank">http://loinc.org</a>). The LOINC Table, LOINC Table
+                              Core, LOINC Panels and Forms File, LOINC Answer File, LOINC Part File, LOINC Group File, LOINC
+                              Document Ontology File, LOINC Hierarchies, LOINC Linguistic Variants File, LOINC/RSNA Radiology
+                              Playbook, and LOINC/IEEE Medical Device Code Mapping Table are copyright © 1995-2018,
+                              Regenstrief Institute, Inc. and the Logical Observation Identifiers Names and Codes (LOINC)
+                              Committee and is available at no cost under the license at
+                              <a href="http://loinc.org/license" target="__blank">http://loinc.org/license</a>.
+                            </div>
+                          }
+                        </div>
+                      </div>
+                    </div>
+                    <div class="container center" [hidden]="loincDisplayCount !== 0">
+                      <div class="container center" [hidden]="loincDisplayCount !== 0 || this.networkError">
+                        <h4>No LOINC associations found for <strong>{{term.id}}</strong></h4>
+                      </div>
+                    </div>
+                    <div class="container center" [hidden]="!this.networkError">
+                      <h4>Ontology Annotation Network Error. <a href="https://github.com/TheJacksonLaboratory/ontology-annotation-network/issues/new" target="_blank">Please report this issue.</a></h4>
+                    </div>
+                  </mat-tab>
+                </mat-tab-group>
+              </div>
+            }
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</div>

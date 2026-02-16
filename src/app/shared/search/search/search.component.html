@@ -7,71 +7,97 @@
       <mat-option value="gene">Gene</mat-option>
     </mat-select>
     <input class="searchbar flex-[0_0_80%]" matInput placeholder="Search for phenotypes, diseases or genes..."
-          (input)="contentChanging($event.target.value)"
-          (keyup.enter)="submitQuery($event.target.value)"
-          (focus)="toggleDropdown($event)"
-          (blur)="toggleDropdown($event)"
-          [(ngModel)]="queryString" #searchbar>
+      (input)="contentChanging($event.target.value)"
+      (keyup.enter)="submitQuery($event.target.value)"
+      (focus)="toggleDropdown($event)"
+      (blur)="toggleDropdown($event)"
+      [(ngModel)]="queryString" #searchbar>
   </div>
   <div class="search-output mat-elevation-z4 w-[80%] sm:ml-[20%] align-items-center justify-center" [@searchState]="searchstate">
-    <div class="search-all" *ngIf="!notFoundFlag">
-      <a routerLink="/browse/search" [queryParams]="{'q': queryText, 'navFilter': 'all'}" *ngIf="queryText">
-        See all results for '{{queryText}}'
-      </a>
-    </div>
-    <mat-progress-bar mode="query" *ngIf="loadingSearchResults"></mat-progress-bar>
-    <div class="term-result" *ngIf="isCorrectCategory('term') && terms?.length > 0">
-      <div class="result-title">
-        Phenotypes - {{terms.length}} of {{termsCount}} displayed
+    @if (!notFoundFlag) {
+      <div class="search-all">
+        @if (queryText) {
+          <a routerLink="/browse/search" [queryParams]="{'q': queryText, 'navFilter': 'all'}">
+            See all results for '{{queryText}}'
+          </a>
+        }
       </div>
-      <div class="result-list flex flex-column">
-        <div class="result" (click)="closeDropDown()" (keydown.enter)="closeDropDown()" tabindex="0" routerLink="/browse/term/{{item.id}}"
-             *ngFor="let item of terms;">
-          <div class="name" *ngIf="!item.synonym" [innerHtml]="{name: item.name } | highlight: queryText"></div>
-          <div class="name" *ngIf="item.synonym" [innerHtml]="{name: item.synonym } | highlight: queryText"></div>
-          <div class="id">{{item.id}}</div>
+    }
+    @if (loadingSearchResults) {
+      <mat-progress-bar mode="query"></mat-progress-bar>
+    }
+    @if (isCorrectCategory('term') && terms?.length > 0) {
+      <div class="term-result">
+        <div class="result-title">
+          Phenotypes - {{terms.length}} of {{termsCount}} displayed
+        </div>
+        <div class="result-list flex flex-column">
+          @for (item of terms; track item) {
+            <div class="result" (click)="closeDropDown()" (keydown.enter)="closeDropDown()" tabindex="0" routerLink="/browse/term/{{item.id}}"
+              >
+              @if (!item.synonym) {
+                <div class="name" [innerHtml]="{name: item.name } | highlight: queryText"></div>
+              }
+              @if (item.synonym) {
+                <div class="name" [innerHtml]="{name: item.synonym } | highlight: queryText"></div>
+              }
+              <div class="id">{{item.id}}</div>
+            </div>
+          }
         </div>
       </div>
-    </div>
+    }
 
-    <div class="disease-result" *ngIf="isCorrectCategory('disease') && diseases?.length > 0">
-      <div class="result-title">
-        Diseases - {{diseases.length}} of {{diseasesCount}} displayed
-      </div>
-      <div class="result-list flex flex-column">
-        <div class="result" (click)="closeDropDown()" (keydown.enter)="closeDropDown()" tabindex="0" routerLink="/browse/disease/{{item.id}}"
-             *ngFor="let item of diseases;">
-          <div class="name" [innerHtml]="{name: item.name } | highlight: queryText"></div>
-          <div class="id">{{item.id}}</div>
-          <br>
+    @if (isCorrectCategory('disease') && diseases?.length > 0) {
+      <div class="disease-result">
+        <div class="result-title">
+          Diseases - {{diseases.length}} of {{diseasesCount}} displayed
         </div>
-      </div>
-    </div>
-
-    <div class="gene-result" *ngIf="isCorrectCategory('gene') && genes?.length > 0">
-      <div class="result-title">
-        Genes - {{genes.length}} of {{genesCount}} displayed
-      </div>
-      <div class="result-list flex flex-column">
-        <div class="result" (click)="closeDropDown()" (keydown.enter)="closeDropDown()" tabindex="0" routerLink="/browse/gene/{{item.id}}"
-             *ngFor="let item of genes;">
-          <div class="name" [innerHtml]="{name: item.name } | highlight: queryText"></div>
-          <div class="id">{{item.id}}</div>
-          <br>
+        <div class="result-list flex flex-column">
+          @for (item of diseases; track item) {
+            <div class="result" (click)="closeDropDown()" (keydown.enter)="closeDropDown()" tabindex="0" routerLink="/browse/disease/{{item.id}}"
+              >
+              <div class="name" [innerHtml]="{name: item.name } | highlight: queryText"></div>
+              <div class="id">{{item.id}}</div>
+              <br>
+              </div>
+            }
+          </div>
         </div>
+      }
+
+      @if (isCorrectCategory('gene') && genes?.length > 0) {
+        <div class="gene-result">
+          <div class="result-title">
+            Genes - {{genes.length}} of {{genesCount}} displayed
+          </div>
+          <div class="result-list flex flex-column">
+            @for (item of genes; track item) {
+              <div class="result" (click)="closeDropDown()" (keydown.enter)="closeDropDown()" tabindex="0" routerLink="/browse/gene/{{item.id}}"
+                >
+                <div class="name" [innerHtml]="{name: item.name } | highlight: queryText"></div>
+                <div class="id">{{item.id}}</div>
+                <br>
+                </div>
+              }
+            </div>
+          </div>
+        }
+
+        @if (notFoundFlag) {
+          <div class="no-result">
+            <h3>Sorry no results have been found!</h3>
+          </div>
+        }
       </div>
     </div>
-
-    <div class="no-result" *ngIf="notFoundFlag">
-      <h3>Sorry no results have been found!</h3>
+    <div class="flex flex-row flex-wrap align-items-center justify-center">
+      @if (showHint && searchstate !== 'active') {
+        <p class="hint w-full">
+          <strong>e.g. <a (click)="setQuery('Arachnodactyly')" (keydown.enter)="setQuery('Arachnodactyly')" tabindex="0">Arachnodactyly</a> |
+          <a (click)="setQuery('Marfan syndrome')" (keydown.enter)="setQuery('Marfan syndrome')" tabindex="0">Marfan syndrome</a> |
+          <a (click)="setQuery('FBN1')" (keydown.enter)="setQuery('FBN1')" tabindex="0">FBN1</a></strong>
+        </p>
+      }
     </div>
-  </div>
-</div>
-<div class="flex flex-row flex-wrap align-items-center justify-center">
-  <p class="hint w-full" *ngIf="showHint && searchstate !== 'active'">
-    <strong>e.g. <a (click)="setQuery('Arachnodactyly')" (keydown.enter)="setQuery('Arachnodactyly')" tabindex="0">Arachnodactyly</a> |
-    <a (click)="setQuery('Marfan syndrome')" (keydown.enter)="setQuery('Marfan syndrome')" tabindex="0">Marfan syndrome</a> |
-    <a (click)="setQuery('FBN1')" (keydown.enter)="setQuery('FBN1')" tabindex="0">FBN1</a></strong>
-  </p>
-</div>
 

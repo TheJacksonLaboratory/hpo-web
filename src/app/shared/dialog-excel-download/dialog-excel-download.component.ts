@@ -1,15 +1,14 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { MAT_DIALOG_DATA as MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { DialogData, EntityType } from '../../browser/models/models';
 
 @Component({
-  selector: 'app-dialog-excel-download',
-  standalone: true,
-  imports: [CommonModule, MatDialogModule, MatButtonModule],
-  templateUrl: './dialog-excel-download.component.html',
-  styleUrls: ['./dialog-excel-download.component.css']
+    selector: 'app-dialog-excel-download',
+    imports: [MatDialogModule, MatButtonModule],
+    templateUrl: './dialog-excel-download.component.html',
+    styleUrls: ['./dialog-excel-download.component.css']
 })
 export class DialogExcelDownloadComponent implements OnInit {
 

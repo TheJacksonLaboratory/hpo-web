@@ -1,14 +1,13 @@
 import { Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
-import { CommonModule } from '@angular/common';
+
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-  selector: 'app-no-page-found',
-  standalone: true,
-  imports: [CommonModule, RouterModule, MatButtonModule],
-  templateUrl: './no-page-found.component.html',
-  styleUrls: ['./no-page-found.component.css']
+    selector: 'app-no-page-found',
+    imports: [RouterModule, MatButtonModule],
+    templateUrl: './no-page-found.component.html',
+    styleUrls: ['./no-page-found.component.css']
 })
 export class NoPageFoundComponent {
   pageTitle: string = 'Oops. Looks like something happened with your request.';
@@ -17,7 +16,7 @@ export class NoPageFoundComponent {
   errorFlag = false;
 
   constructor(private router: Router) {
-    const routeConfig = this.router.getCurrentNavigation();
+    const routeConfig = this.router.currentNavigation();
     if (routeConfig != null) {
       if (routeConfig.extras.state != null) {
         if (routeConfig.extras.state.description != null) {

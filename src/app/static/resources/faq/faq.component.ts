@@ -3,11 +3,10 @@ import { ActivatedRoute } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-  selector: 'app-faq',
-  standalone: true,
-  imports: [MatButtonModule],
-  templateUrl: './faq.component.html',
-  styleUrls: ['./faq.component.scss']
+    selector: 'app-faq',
+    imports: [MatButtonModule],
+    templateUrl: './faq.component.html',
+    styleUrls: ['./faq.component.scss']
 })
 export class FaqComponent implements OnInit {
 

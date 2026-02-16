@@ -32,6 +32,11 @@ node_modules/*
 # logs
 *logs
 
+# Cypress
+cypress/videos
+cypress/screenshots
+cypress/downloads
+.cypress
 
 # dist
 dist/

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { RouterModule } from '@angular/router';
 
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -12,10 +12,8 @@ import { FooterComponent } from './shared/footer/footer.component';
 import { FloatingFeedbackComponent } from './shared/floating-feedback/floating-feedback.component';
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [
-    CommonModule,
+    selector: 'app-root',
+    imports: [
     RouterModule,
     MatSidenavModule,
     MatListModule,
@@ -24,9 +22,9 @@ import { FloatingFeedbackComponent } from './shared/floating-feedback/floating-f
     NavbarComponent,
     FooterComponent,
     FloatingFeedbackComponent
-  ],
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+],
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
   mobileNavSection = 'home';

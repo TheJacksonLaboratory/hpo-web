@@ -4,7 +4,7 @@
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "resolveJsonModule": true,
@@ -19,7 +19,6 @@
       "dom"
     ],
     "module": "esnext",
-    "baseUrl": "./",
     "paths": {
       "rxjs/internal/Observable": [
         "../node_modules/rxjs/_esm5/internal/Observable"

@@ -12,35 +12,32 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 
 @Component({
-  selector: 'app-navbar-hpo',
-  standalone: true,
-  imports: [
-    CommonModule,
-    RouterModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatIconModule,
-    MatMenuModule,
-    SearchComponent
-  ],
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss'],
-  animations: [
-    trigger('searchState', [
-      state('inactive', style({
-        'height': 0,
-        'overflow-y': 'hidden'
-      })),
-      state('active', style({
-        'height': '*',
-        'overflow-y': 'hidden'
-      })),
-      transition('inactive => active',
-        animate('500ms ease-in-out')),
-      transition('active => inactive',
-        animate('400ms ease-in-out'))
-    ])
-  ]
+    selector: 'app-navbar-hpo',
+    imports: [
+        CommonModule,
+        RouterModule,
+        MatToolbarModule,
+        MatButtonModule,
+        MatIconModule,
+        MatMenuModule,
+        SearchComponent
+    ],
+    templateUrl: './navbar.component.html',
+    styleUrls: ['./navbar.component.scss'],
+    animations: [
+        trigger('searchState', [
+            state('inactive', style({
+                'height': 0,
+                'overflow-y': 'hidden'
+            })),
+            state('active', style({
+                'height': '*',
+                'overflow-y': 'hidden'
+            })),
+            transition('inactive => active', animate('500ms ease-in-out')),
+            transition('active => inactive', animate('400ms ease-in-out'))
+        ])
+    ]
 })
 export class NavbarComponent implements OnInit {
   title = 'Human Phenotype Ontology';

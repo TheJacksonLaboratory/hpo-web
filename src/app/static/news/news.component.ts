@@ -9,17 +9,16 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 
 @Component({
-  selector: 'app-news',
-  standalone: true,
-  imports: [
-    CommonModule,
-    RouterModule,
-    MatSidenavModule,
-    MatButtonModule,
-    MatListModule
-  ],
-  templateUrl: './news.component.html',
-  styleUrls: ['./news.component.css']
+    selector: 'app-news',
+    imports: [
+        CommonModule,
+        RouterModule,
+        MatSidenavModule,
+        MatButtonModule,
+        MatListModule
+    ],
+    templateUrl: './news.component.html',
+    styleUrls: ['./news.component.css']
 })
 export class NewsComponent implements OnInit, OnDestroy {
   mobileQuery: MediaQueryList;
