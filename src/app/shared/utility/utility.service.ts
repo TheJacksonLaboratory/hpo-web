@@ -10,7 +10,6 @@ export class UtilityService {
 
   constructor(private http: HttpClient) { }
 
-
   openExternalUrl(url: string) {
     window.open(url, '_blank').focus();
   }
@@ -61,7 +60,7 @@ export class UtilityService {
       ? diseaseId.toUpperCase().includes(expected) : false;
   }
 
-  getDiseaseDatabaseName(diseaseId){
+  getDiseaseDatabaseName(diseaseId: string){
     return diseaseId != "" && diseaseId != null ? diseaseId.split(':')[0] : '';
   }
 }
