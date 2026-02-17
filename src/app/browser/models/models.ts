@@ -51,10 +51,9 @@ export interface Term extends SimpleTerm {
   matchingString?: string;
   treeCountWidth?: number;
   treeMargin?: number;
-  pubmedXrefs: Array<string>;
+  publicationReferences?: Array<string>;
   translations?: Translation[];
 }
-
 
 export interface TermTree {
   parents: Term[];
@@ -80,7 +79,7 @@ export interface IndividualContributer {
 export interface TermCategory {
   catLabel: string;
   annotationCount: number;
-  termSource: MatTableDataSource<{frequency: string, onset: string, sources: string[]}>;
+  termSource: MatTableDataSource<{ frequency: string, onset: string, sources: string[] }>;
 }
 
 export interface DialogData {
@@ -139,10 +138,10 @@ export interface OntologySearchResponse {
 }
 
 export interface PhenotypeAssociation {
-    diseases: OntologyAnnotationDisease[];
-    genes: SimpleTerm[];
-    assays: SimpleTerm[];
-    medicalActions: MedicalActionSourceExtended[];
+  diseases: OntologyAnnotationDisease[];
+  genes: SimpleTerm[];
+  assays: SimpleTerm[];
+  medicalActions: MedicalActionSourceExtended[];
 }
 
 export interface GeneAssociation {

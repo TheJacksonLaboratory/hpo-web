@@ -77,8 +77,8 @@
                       <i class="material-icons obsolete-arrow">arrow_right_alt</i></h4>
                     }
                     <h4 class="item-id">{{term.id}}</h4>
-                    <!-- <i matTooltip="Copy purl to clipboard!" matTooltipPosition="above"
-                  (click)="copyToClipboard(term.purl)" class="material-icons copyToClipboard">content_copy</i>-->
+                    <i matTooltip="Copy Ontology Id" matTooltipPosition="above" [cdkCopyToClipboard]="term.id"
+                      class="material-icons copyToClipboard">content_copy</i>
                   <br>
                     <br>
                     </div>

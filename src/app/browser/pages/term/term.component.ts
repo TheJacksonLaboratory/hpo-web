@@ -22,6 +22,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { CdkCopyToClipboard } from '@angular/cdk/clipboard';
 
 @Component({
     selector: 'app-term',
@@ -39,6 +40,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
         MatInputModule,
         MatButtonModule,
         MatTooltipModule,
+        CdkCopyToClipboard,
         TranslatePipe
     ],
     templateUrl: './term.component.html',
