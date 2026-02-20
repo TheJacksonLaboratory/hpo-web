@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { Meta } from '@angular/platform-browser';
 
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
@@ -10,6 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { FloatingFeedbackComponent } from './shared/floating-feedback/floating-feedback.component';
+import { environment } from '../environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -32,7 +34,10 @@ export class AppComponent {
   mobileNavSection = 'home';
   parentSections = [];
 
-  constructor() {
+  constructor(meta: Meta) {
+    if (!environment.production) {
+      meta.addTag({ name: 'robots', content: 'noindex' });
+    }
   }
 
   backNavigate() {
