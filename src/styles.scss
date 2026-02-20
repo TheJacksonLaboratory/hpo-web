@@ -108,7 +108,7 @@ a:hover {
 
 a:not([href]):not([tabindex]) {
   color: inherit;
-  text-decoration: none;
+  text-decoration: none !important;
 }
 
 a:not([href]):not([tabindex]):hover, a:not([href]):not([tabindex]):focus {
@@ -190,7 +190,7 @@ button {
 }
 
 a:hover {
-  color: #551A8B !important;
+  color: #551A8B;
   text-decoration: underline;
 }
 
@@ -279,7 +279,7 @@ a.mat-btn .mdc-button__label {
   flex-direction: column;
 }
 
-.mat-mdc-raised-button {
+.mat-mdc-button-base {
   border-radius: 0 !important;
 }
 
@@ -553,16 +553,25 @@ hr.underline-hr {
 .search-highlight {
   font-weight: 800;
 }
-
-.download-associations, .lyfe-language-btn {
-  margin-top: 10px !important;
-  background-color: rgb(78, 139, 162) !important;
+.download-associations {
+  background-color: #4e8ba2 !important;
   color: white !important;
+  margin-right: 5px;
+}
+.view-publication-btn, .download-associations, .lyfe-language-btn {
+  margin-top: .5rem !important;    
 }
 
-.mat-mdc-sort-header-stem, .mat-mdc-sort-header-arrow {
+.view-publication-btn {
+  margin-right: 5px;
+  background-color: #29657c !important;
   color: white !important;
-  opacity: .6 !important;
+  text-decoration: none;
+}
+
+.lyfe-language-btn, .view-publication-btn {
+  color: white !important;
+  background-color: rgb(78, 139, 162) !important;
 }
 
 .mat-mdc-stepper-horizontal, .mat-mdc-stepper-vertical {

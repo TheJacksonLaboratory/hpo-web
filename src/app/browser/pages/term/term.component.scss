@@ -211,7 +211,7 @@ img.mat-mdc-chip-avatar::before {
 }
 
 .translate-btn {
-  margin: .5rem 0 0 .5rem;
+  margin: .5rem 0 0 0;
   border-radius: 0;
 }
 
@@ -233,4 +233,8 @@ img.mat-mdc-chip-avatar::before {
 
 .mdc-evolution-chip--selected .mdc-evolution-chip__icon--primary {
   opacity: 1 !important;
+}
+
+.term-action-icon {
+  margin-right: 5px;
 }

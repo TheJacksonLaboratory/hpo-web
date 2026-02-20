@@ -118,13 +118,29 @@
                         <hr class="underline-hr">
                       </div>
                     }
-                    <button mat-raised-button class="download-associations"
+                    @if (term.publicationReferences.length > 1) {
+                      <button matButton class="view-publication-btn" [matMenuTriggerFor]="publicationmenu"><span class="material-icons term-action-icon">newspaper</span>View Publications</button>
+                      <mat-menu #publicationmenu="matMenu">
+                          @for (pub of term.publicationReferences; track pub) {
+                            <button mat-menu-item>
+                              <a class="text-decoration-none" href="{{utilityService.getExternalTermIdUrlFromId(pub)}}" target="_blank">
+                                {{pub}}
+                              </a>
+                            </button>
+                          }
+                      </mat-menu>
+                    } @else if (term.publicationReferences.length === 1) {
+                        <a class="view-publication-btn" matButton="filled" color="primary" href="{{utilityService.getExternalTermIdUrlFromId(term.publicationReferences[0])}}" target="_blank">
+                          <span class="material-icons term-action-icon">newspaper</span>View Publication
+                        </a>
+                    }
+                    <button matButton="tonal" color="primary" class="download-associations"
                       [disabled]="this.diseaseAssocCount === 0 && this.geneAssocCount === 0"
-                      (click)="downloadDialog()"><span class="material-icons">get_app</span> Export Associations
+                      (click)="downloadDialog()"><span class="material-icons term-action-icon">get_app</span> Export Associations
                     </button>
                     @if (languages && languages.length > 0) {
-                      <a class="translate-btn" href="https://obophenotype.github.io/hpo-translations/" mat-stroked-button color="primary" target="_blank">
-                        <span class="material-icons">open_in_new</span> Translate your language
+                      <a class="translate-btn" href="https://obophenotype.github.io/hpo-translations/" matButton="outlined" color="primary" target="_blank">
+                        <span class="material-icons term-action-icon">open_in_new</span> Translate your language
                       </a>
                     }
                   </div>
