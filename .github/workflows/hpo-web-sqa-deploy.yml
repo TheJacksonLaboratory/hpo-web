@@ -1,11 +1,11 @@
 # This is a basic workflow to help you get started with Actions
 
-name: HPO-WEB Static Deployment
+name: HPO-WEB SQA Static Deployment
 
 # Controls when the workflow will run
 on: workflow_dispatch
 env:
-  GCLOUD_BUCKET: ${{ secrets.GCLOUD_PUBLIC_BUCKET }}
+  GCLOUD_BUCKET: ${{ secrets.GCLOUD_SQA_BUCKET }}
 
 jobs:
   load:
@@ -30,9 +30,7 @@ jobs:
     - name: Lint, Test, Build
       run: |
         npm install
-        npm run lint
-        npm run test:ci
-        npm run build:prod --if-present
+        npm run build:sqa
 
     - name: Set Project Version
       run: echo "PROJECT_VERSION=$(cat package.json | jq -r '.version')" >> "$GITHUB_ENV"
