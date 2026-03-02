@@ -6,79 +6,96 @@
       <hr>
         @if (mobileNavSection !== 'home') {
           <div>
-            <button class="backButton" mat-menu-item (click)="backNavigate()">
-              <mat-icon>arrow_left</mat-icon>
-              Back
-            </button>
+            <a mat-list-item class="backButton" (click)="backNavigate()">
+              <mat-icon matListItemIcon aria-label="Go Back" fontIcon="arrow_left"></mat-icon>
+              <span matListItemTitle>Back</span>
+            </a>
           </div>
         }
         @if (mobileNavSection === 'home') {
           <div>
-            <button mat-menu-item routerLink="/">Home</button>
-            <button mat-menu-item (click)="sidenav.close()" routerLink="about"> About</button>
-            <button class="iconed" mat-menu-item (click)="mobileNavigate('dataMenu')"> Data
-              <mat-icon>arrow_right</mat-icon>
-            </button>
-            <button class="iconed" mat-menu-item (click)="mobileNavigate('toolsMenu')"> Tools
-              <mat-icon>arrow_right</mat-icon>
-            </button>
-            <button class="iconed" mat-menu-item (click)="mobileNavigate('resourcesMenu')"> Resources
-              <mat-icon>arrow_right</mat-icon>
-            </button>
+            <a mat-list-item routerLink="/">Home</a>
+            <a mat-list-item (click)="sidenav.close()" routerLink="about">About</a>
+            <a mat-list-item class="iconed" (click)="mobileNavigate('dataMenu')">
+              <span matListItemTitle>Data</span>
+              <span matListItemMeta>
+                <mat-icon aria-label="About" fontIcon="arrow_right"></mat-icon>
+              </span>   
+            </a>
+            <a mat-list-item class="iconed" (click)="mobileNavigate('toolsMenu')">
+              <span matListItemTitle>Tools</span>
+              <span matListItemMeta>
+                <mat-icon aria-label="Tools" fontIcon="arrow_right"></mat-icon>
+              </span>
+            </a>
+            <a mat-list-item class="iconed" (click)="mobileNavigate('resourcesMenu')">
+              <span matListItemTitle>Resources</span>
+              <span matListItemMeta>
+                <mat-icon aria-label="Resources" fontIcon="arrow_right"></mat-icon>
+              </span>
+            </a>
           </div>
         }
         @if (mobileNavSection === 'toolsMenu') {
           <div>
-            <button mat-menu-item routerLink="browse/profile-search"> Profile Search</button>
-            <button class="iconed" mat-menu-item (click)="mobileNavigate('genomicTools')">Genomic Tools
-              <mat-icon>arrow_right</mat-icon>
-            </button>
-            <button class="iconed" mat-menu-item (click)="mobileNavigate('phenomicTools')">Phenomic Tools
-              <mat-icon>arrow_right</mat-icon>
-            </button>
-            <button mat-menu-item (click)="sidenav.close()" routerLink="tools/hpo-browser"> Other HPO Browsers</button>
-            <button mat-menu-item (click)="sidenav.close()" routerLink="tools/workbench"> HPO Workbench</button>
+            <a mat-list-item routerLink="browse/profile-search">Profile Search</a>
+            <a mat-list-item class="iconed" (click)="mobileNavigate('genomicTools')">
+              <span matListItemTitle>Genomic Tools</span>
+              <span matListItemMeta>
+                <mat-icon aria-label="Genomic Tools" fontIcon="arrow_right"></mat-icon>
+              </span>
+            </a>
+            <a mat-list-item class="iconed" (click)="mobileNavigate('phenomicTools')">
+              <span matListItemTitle>Phenomic Tools</span>
+              <span matListItemMeta>
+                <mat-icon aria-label="Phenomic Tools" fontIcon="arrow_right"></mat-icon>
+              </span>
+            </a>
+            <a mat-list-item (click)="sidenav.close()" routerLink="tools/hpo-browser">Other HPO Browsers</a>
+            <a mat-list-item (click)="sidenav.close()" routerLink="tools/workbench">HPO Workbench</a>
           </div>
         }
 
         @if (mobileNavSection === 'genomicTools') {
           <div>
-            <button mat-menu-item (click)="sidenav.close()" routerLink="tools/genomiser"> Genomiser</button>
-            <button mat-menu-item (click)="sidenav.close()" routerLink="tools/exomiser"> Exomiser</button>
+            <a mat-list-item (click)="sidenav.close()" routerLink="tools/genomiser">Genomiser</a>
+            <a mat-list-item (click)="sidenav.close()" routerLink="tools/exomiser">Exomiser</a>
           </div>
         }
 
         @if (mobileNavSection === 'phenomicTools') {
           <div>
-            <button mat-menu-item (click)="sidenav.close()" routerLink="tools/phenomizer"> Phenomizer</button>
-            <button mat-menu-item (click)="sidenav.close()" routerLink="tools/phenogramviz"> PhenoGramViz</button>
-            <button mat-menu-item routerLink="tools/loinc2hpo"> LOINC2HPO</button>
+            <a mat-list-item (click)="sidenav.close()" routerLink="tools/phenomizer">Phenomizer</a>
+            <a mat-list-item (click)="sidenav.close()" routerLink="tools/phenogramviz">PhenoGramViz</a>
+            <a mat-list-item routerLink="tools/loinc2hpo">LOINC2HPO</a>
           </div>
         }
 
         @if (mobileNavSection === 'resourcesMenu') {
           <div>
-            <button mat-menu-item (click)="sidenav.close()" routerLink="resources/faq"> FAQ</button>
-            <button mat-menu-item routerLink="contact/"> Contact Us</button>
+            <a mat-list-item (click)="sidenav.close()" routerLink="resources/faq">FAQ</a>
+            <a mat-list-item routerLink="contact/">Contact Us</a>
           </div>
         }
         @if (mobileNavSection === 'dataMenu') {
           <div>
-            <button mat-menu-item (click)="sidenav.close()" routerLink="data/ontology"> Ontology</button>
-            <button mat-menu-item (click)="sidenav.close()" routerLink="data/annotations"> Annotations</button>
-            <button mat-menu-item (click)="sidenav.close()" routerLink="resources/phenopacket"> Annotations</button>
-            <button class="iconed" mat-menu-item (click)="mobileNavigate('translationMenu')">Translation
-              <mat-icon>arrow_right</mat-icon>
-            </button>
-            <a mat-menu-item href="/api/hpo/docs"> API</a>
+            <a mat-list-item (click)="sidenav.close()" routerLink="data/ontology">Ontology</a>
+            <a mat-list-item (click)="sidenav.close()" routerLink="data/annotations">Annotations</a>
+            <a mat-list-item (click)="sidenav.close()" routerLink="resources/phenopacket">Annotations</a>
+            <a mat-list-item class="iconed" (click)="mobileNavigate('translationMenu')">
+              <span matListItemTitle>Translation</span>
+              <span matListItemMeta>
+                <mat-icon aria-label="Translation" fontIcon="arrow_right"></mat-icon>
+              </span>
+            </a>
+            <a mat-list-item href="/api/hpo/docs">API</a>
           </div>
         }
 
         @if (mobileNavSection === 'translationMenu') {
           <div>
-            <button mat-menu-item (click)="sidenav.close()" routerLink="data/layperson"> Layperson Synonyms</button>
-            <button mat-menu-item (click)="sidenav.close()" routerLink="data/translations"> Translations and Mapping
-            </button>
+            <a mat-list-item (click)="sidenav.close()" routerLink="data/layperson">Layperson Synonyms</a>
+            <a mat-list-item (click)="sidenav.close()" routerLink="data/translations">Translations and Mapping</a>
           </div>
         }
 
