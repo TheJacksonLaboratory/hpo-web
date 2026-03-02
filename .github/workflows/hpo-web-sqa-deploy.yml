@@ -3,7 +3,11 @@
 name: HPO-WEB SQA Static Deployment
 
 # Controls when the workflow will run
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
 env:
   GCLOUD_BUCKET: ${{ secrets.GCLOUD_SQA_BUCKET }}
 
