@@ -30,7 +30,7 @@ import { environment } from '../environments/environment';
 })
 export class AppComponent {
   mobileNavSection = 'home';
-  parentSections = [];
+  parentSections: string[] = [];
 
   constructor(meta: Meta) {
     if (!environment.production) {

@@ -6,7 +6,7 @@
       <hr>
         @if (mobileNavSection !== 'home') {
           <div>
-            <a mat-list-item class="backButton" (click)="backNavigate()">
+            <a mat-list-item class="backButton" tabindex="0" (click)="backNavigate()" (keydown.enter)="backNavigate()">
               <mat-icon matListItemIcon aria-label="Go Back" fontIcon="arrow_left"></mat-icon>
               <span matListItemTitle>Back</span>
             </a>
@@ -16,19 +16,19 @@
           <div>
             <a mat-list-item routerLink="/">Home</a>
             <a mat-list-item (click)="sidenav.close()" routerLink="about">About</a>
-            <a mat-list-item class="iconed" (click)="mobileNavigate('dataMenu')">
+            <a mat-list-item class="iconed" tabindex="0" (click)="mobileNavigate('dataMenu')" (keydown.enter)="mobileNavigate('dataMenu')">
               <span matListItemTitle>Data</span>
               <span matListItemMeta>
                 <mat-icon aria-label="About" fontIcon="arrow_right"></mat-icon>
               </span>   
             </a>
-            <a mat-list-item class="iconed" (click)="mobileNavigate('toolsMenu')">
+            <a mat-list-item class="iconed" tabindex="0" (click)="mobileNavigate('toolsMenu')" (keydown.enter)="mobileNavigate('toolsMenu')">
               <span matListItemTitle>Tools</span>
               <span matListItemMeta>
                 <mat-icon aria-label="Tools" fontIcon="arrow_right"></mat-icon>
               </span>
             </a>
-            <a mat-list-item class="iconed" (click)="mobileNavigate('resourcesMenu')">
+            <a mat-list-item class="iconed" tabindex="0" (click)="mobileNavigate('resourcesMenu')" (keydown.enter)="mobileNavigate('resourcesMenu')">
               <span matListItemTitle>Resources</span>
               <span matListItemMeta>
                 <mat-icon aria-label="Resources" fontIcon="arrow_right"></mat-icon>
@@ -39,13 +39,13 @@
         @if (mobileNavSection === 'toolsMenu') {
           <div>
             <a mat-list-item routerLink="browse/profile-search">Profile Search</a>
-            <a mat-list-item class="iconed" (click)="mobileNavigate('genomicTools')">
+            <a mat-list-item class="iconed" tabindex="0" (click)="mobileNavigate('genomicTools')" (keydown.enter)="mobileNavigate('genomicTools')">
               <span matListItemTitle>Genomic Tools</span>
               <span matListItemMeta>
                 <mat-icon aria-label="Genomic Tools" fontIcon="arrow_right"></mat-icon>
               </span>
             </a>
-            <a mat-list-item class="iconed" (click)="mobileNavigate('phenomicTools')">
+            <a mat-list-item class="iconed" tabindex="0" (click)="mobileNavigate('phenomicTools')" (keydown.enter)="mobileNavigate('phenomicTools')">
               <span matListItemTitle>Phenomic Tools</span>
               <span matListItemMeta>
                 <mat-icon aria-label="Phenomic Tools" fontIcon="arrow_right"></mat-icon>
@@ -82,7 +82,7 @@
             <a mat-list-item (click)="sidenav.close()" routerLink="data/ontology">Ontology</a>
             <a mat-list-item (click)="sidenav.close()" routerLink="data/annotations">Annotations</a>
             <a mat-list-item (click)="sidenav.close()" routerLink="resources/phenopacket">Annotations</a>
-            <a mat-list-item class="iconed" (click)="mobileNavigate('translationMenu')">
+            <a mat-list-item class="iconed" tabindex="0" (click)="mobileNavigate('translationMenu')" (keydown.enter)="mobileNavigate('translationMenu')">
               <span matListItemTitle>Translation</span>
               <span matListItemMeta>
                 <mat-icon aria-label="Translation" fontIcon="arrow_right"></mat-icon>
