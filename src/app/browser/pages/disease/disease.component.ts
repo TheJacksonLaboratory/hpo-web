@@ -18,24 +18,23 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-  selector: 'app-disease',
-  standalone: true,
-  imports: [
-    CommonModule,
-    RouterModule,
-    MatCardModule,
-    MatProgressBarModule,
-    MatTabsModule,
-    MatTableModule,
-    MatSortModule,
-    MatPaginatorModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MatIconModule
-  ],
-  templateUrl: './disease.component.html',
-  styleUrls: ['./disease.component.css']
+    selector: 'app-disease',
+    imports: [
+        CommonModule,
+        RouterModule,
+        MatCardModule,
+        MatProgressBarModule,
+        MatTabsModule,
+        MatTableModule,
+        MatSortModule,
+        MatPaginatorModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonModule,
+        MatIconModule
+    ],
+    templateUrl: './disease.component.html',
+    styleUrls: ['./disease.component.css']
 })
 export class DiseaseComponent {
   query: string;

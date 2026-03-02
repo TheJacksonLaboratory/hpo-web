@@ -6,14 +6,16 @@
     <div class="page-intro">
       <div>{{errorMessage}}</div>
       <div>
-        <p *ngIf="errorFlag">Please ensure the query is valid by searching, otherwise
-          please try our sample terms <a routerLink="/browse/term/HP:0001631"><i>Atrial septal defect</i></a>,
-          <a routerLink="/browse/disease/OMIM:154700"><i>Marfan Syndrome</i></a> or
-          <a routerLink="/browse/gene/2200"><i>FBN1</i></a></p>
-        <p><strong>If you believe this is a mistake please let us know on our issue tracker.</strong></p>
-        <a mat-raised-button href="https://github.com/TheJacksonLaboratory/hpo-web/issues" target="__blank"
-           class="mat-btn">Report Issue</a>
+        @if (errorFlag) {
+          <p>Please ensure the query is valid by searching, otherwise
+            please try our sample terms <a routerLink="/browse/term/HP:0001631"><i>Atrial septal defect</i></a>,
+            <a routerLink="/browse/disease/OMIM:154700"><i>Marfan Syndrome</i></a> or
+            <a routerLink="/browse/gene/2200"><i>FBN1</i></a></p>
+          }
+          <p><strong>If you believe this is a mistake please let us know on our issue tracker.</strong></p>
+          <a mat-raised-button href="https://github.com/TheJacksonLaboratory/hpo-web/issues" target="__blank"
+          class="mat-btn">Report Issue</a>
+        </div>
       </div>
     </div>
   </div>
-</div>

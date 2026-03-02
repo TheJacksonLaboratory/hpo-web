@@ -1,192 +1,202 @@
 <div class="results-component">
   <div class="container">
-  <div class="flex flex-row justify-center items-center">
-  <div class="w-4/5">
+    <div class="flex flex-row justify-center items-center">
+      <div class="w-4/5">
         <!-- Disease Banner -->
         <mat-card class="item-summary mat-elevation-z6">
           <mat-card-content>
             <span class="item-title">Search Results For "{{query}}"</span>
             <br>
-            <i>
-            Not seeing what you're looking for?
-            <a href="https://github.com/obophenotype/human-phenotype-ontology/issues/new/choose" target="_blank">
-              Contribute a term
-            </a>
-            </i>
-          </mat-card-content>
-        </mat-card>
+              <i>
+                Not seeing what you're looking for?
+                <a href="https://github.com/obophenotype/human-phenotype-ontology/issues/new/choose" target="_blank">
+                  Contribute a term
+                </a>
+              </i>
+            </mat-card-content>
+          </mat-card>
 
 
-        <!--TABS -->
-        <div class="hpo-group-tab">
-          <mat-tab-group class="term-details-tab-group mat-elevation-z6 search-all-results-table"
-                         [(selectedIndex)]="selectedTab">
+          <!--TABS -->
+          <div class="hpo-group-tab">
+            <mat-tab-group class="term-details-tab-group mat-elevation-z6 search-all-results-table"
+              [(selectedIndex)]="selectedTab">
 
-            <!-- Term results tab -->
-            <mat-tab label="Term Results [{{termDataSource?.data.length}}]" [hidden]="!termDataSource">
+              <!-- Term results tab -->
+              <mat-tab label="Term Results [{{termDataSource?.data.length}}]" [hidden]="!termDataSource">
 
-              <mat-progress-bar *ngIf="isLoading" class="loading-result-details" color="primary" mode="buffer">
-              </mat-progress-bar>
-              <div [hidden]="terms?.length === 0">
-                <div class="filter-container mat-elevation-z8">
-                  <div class="filter-header">
-                    <mat-form-field>
-                      <input matInput (keyup)="applyTermFilter($event.target.value)" placeholder="Filter">
-                    </mat-form-field>
+                @if (isLoading) {
+                  <mat-progress-bar class="loading-result-details" color="primary" mode="buffer">
+                  </mat-progress-bar>
+                }
+                <div [hidden]="terms?.length === 0">
+                  <div class="filter-container mat-elevation-z8">
+                    <div class="filter-header">
+                      <mat-form-field>
+                        <input matInput (keyup)="applyTermFilter($event.target.value)" placeholder="Filter">
+                      </mat-form-field>
+                    </div>
+
+                    <mat-table #table [dataSource]="termDataSource">
+
+                      <mat-header-row *matHeaderRowDef="termDisplayedColumns"></mat-header-row>
+                      <mat-row *matRowDef="let row; columns: termDisplayedColumns;"></mat-row>
+
+
+                      <!-- Position Column -->
+                      <ng-container matColumnDef="ontologyId">
+                        <mat-header-cell *matHeaderCellDef> Term Identifier</mat-header-cell>
+                        <mat-cell *matCellDef="let row">
+                          <a routerLink="/browse/term/{{row.id}}">{{row.id}}</a>
+                        </mat-cell>
+                      </ng-container>
+
+                      <!-- Name Column -->
+                      <ng-container matColumnDef="name">
+                        <mat-header-cell *matHeaderCellDef> Term Name</mat-header-cell>
+                        <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
+                      </ng-container>
+
+                      <!-- Name Column -->
+                      <ng-container matColumnDef="matching_string">
+                        <mat-header-cell *matHeaderCellDef> Matching String</mat-header-cell>
+                        <mat-cell *matCellDef="let row"
+                        [innerHtml]="{name: row.matchingString } | highlight: query"></mat-cell>
+                      </ng-container>
+
+                      <!-- Weight Column -->
+                      <ng-container matColumnDef="synonym_match">
+                        <mat-header-cell *matHeaderCellDef>Synonym Match</mat-header-cell>
+                        <mat-cell *matCellDef="let row">
+                          @if (row.matchingString === row.name) {
+                            <span>No</span>
+                          }
+                          @if (row.matchingString !== row.name) {
+                            <span>Yes</span>
+                          }
+                        </mat-cell>
+                      </ng-container>
+                    </mat-table>
+                    <mat-paginator #termPaginator [pageSizeOptions]="[50, 100, 500]"></mat-paginator>
                   </div>
-
-                  <mat-table #table [dataSource]="termDataSource">
-
-                    <mat-header-row *matHeaderRowDef="termDisplayedColumns"></mat-header-row>
-                    <mat-row *matRowDef="let row; columns: termDisplayedColumns;"></mat-row>
-
-
-                    <!-- Position Column -->
-                    <ng-container matColumnDef="ontologyId">
-                      <mat-header-cell *matHeaderCellDef> Term Identifier</mat-header-cell>
-                      <mat-cell *matCellDef="let row">
-                        <a routerLink="/browse/term/{{row.id}}">{{row.id}}</a>
-                      </mat-cell>
-                    </ng-container>
-
-                    <!-- Name Column -->
-                    <ng-container matColumnDef="name">
-                      <mat-header-cell *matHeaderCellDef> Term Name</mat-header-cell>
-                      <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
-                    </ng-container>
-
-                    <!-- Name Column -->
-                    <ng-container matColumnDef="matching_string">
-                      <mat-header-cell *matHeaderCellDef> Matching String</mat-header-cell>
-                      <mat-cell *matCellDef="let row"
-                                [innerHtml]="{name: row.matchingString } | highlight: query"></mat-cell>
-                    </ng-container>
-
-                    <!-- Weight Column -->
-                    <ng-container matColumnDef="synonym_match">
-                      <mat-header-cell *matHeaderCellDef>Synonym Match</mat-header-cell>
-                      <mat-cell *matCellDef="let row">
-                        <span *ngIf="row.matchingString === row.name">No</span>
-                        <span *ngIf="row.matchingString !== row.name">Yes</span>
-                      </mat-cell>
-                    </ng-container>
-                  </mat-table>
-                  <mat-paginator #termPaginator [pageSizeOptions]="[50, 100, 500]"></mat-paginator>
                 </div>
-              </div>
-              <div class="container center" [hidden]="terms?.length !== 0 || isLoading">
-                <h4>Sorry no term results found for.. "{{query}}"</h4>
-              </div>
-            </mat-tab>
+                <div class="container center" [hidden]="terms?.length !== 0 || isLoading">
+                  <h4>Sorry no term results found for.. "{{query}}"</h4>
+                </div>
+              </mat-tab>
 
-            <!-- Disease results tab -->
-            <mat-tab label="Disease Results [{{this.diseaseDataSource?.data.length}}]" [hidden]="!diseaseDataSource">
+              <!-- Disease results tab -->
+              <mat-tab label="Disease Results [{{this.diseaseDataSource?.data.length}}]" [hidden]="!diseaseDataSource">
 
-              <mat-progress-bar *ngIf="isLoading" class="loading-result-details" color="primary" mode="buffer">
-              </mat-progress-bar>
+                @if (isLoading) {
+                  <mat-progress-bar class="loading-result-details" color="primary" mode="buffer">
+                  </mat-progress-bar>
+                }
 
-              <div [hidden]="diseases?.length === 0">
-                <div class="filter-container mat-elevation-z8">
+                <div [hidden]="diseases?.length === 0">
+                  <div class="filter-container mat-elevation-z8">
 
-                  <!-- filter -->
-                  <div class="filter-header">
-                    <mat-form-field>
-                      <input matInput (keyup)="applyDiseaseFilter($event.target.value)" placeholder="Filter">
-                    </mat-form-field>
+                    <!-- filter -->
+                    <div class="filter-header">
+                      <mat-form-field>
+                        <input matInput (keyup)="applyDiseaseFilter($event.target.value)" placeholder="Filter">
+                      </mat-form-field>
+                    </div>
+
+                    <!-- Disease table-->
+                    <mat-table #table [dataSource]="diseaseDataSource">
+
+                      <mat-header-row *matHeaderRowDef="diseaseDisplayedColumns"></mat-header-row>
+                      <mat-row *matRowDef="let row; columns: diseaseDisplayedColumns;"></mat-row>
+
+
+                      <!-- Disease Id -->
+                      <ng-container matColumnDef="diseaseId">
+                        <mat-header-cell *matHeaderCellDef> Disease Identifier</mat-header-cell>
+                        <mat-cell *matCellDef="let row">
+                          <a routerLink="/browse/disease/{{row.id}}">{{row.id}}</a>
+                        </mat-cell>
+                      </ng-container>
+
+                      <!-- Disease DB Name -->
+                      <ng-container matColumnDef="dbName">
+                        <mat-header-cell *matHeaderCellDef> Disease Name</mat-header-cell>
+                        <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
+                      </ng-container>
+
+                      <!-- Matching String -->
+                      <ng-container matColumnDef="matching_string">
+                        <mat-header-cell *matHeaderCellDef> Matching String</mat-header-cell>
+                        <mat-cell *matCellDef="let row" [innerHtml]="{name: row.matchingString } | highlight: query">
+                        </mat-cell>
+                      </ng-container>
+                    </mat-table>
+
+                    <!--paging component-->
+                    <mat-paginator #diseasePaginator [pageSizeOptions]="[50, 100, 500]"></mat-paginator>
                   </div>
-
-                  <!-- Disease table-->
-                  <mat-table #table [dataSource]="diseaseDataSource">
-
-                    <mat-header-row *matHeaderRowDef="diseaseDisplayedColumns"></mat-header-row>
-                    <mat-row *matRowDef="let row; columns: diseaseDisplayedColumns;"></mat-row>
-
-
-                    <!-- Disease Id -->
-                    <ng-container matColumnDef="diseaseId">
-                      <mat-header-cell *matHeaderCellDef> Disease Identifier</mat-header-cell>
-                      <mat-cell *matCellDef="let row">
-                        <a routerLink="/browse/disease/{{row.id}}">{{row.id}}</a>
-                      </mat-cell>
-                    </ng-container>
-
-                    <!-- Disease DB Name -->
-                    <ng-container matColumnDef="dbName">
-                      <mat-header-cell *matHeaderCellDef> Disease Name</mat-header-cell>
-                      <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
-                    </ng-container>
-
-                    <!-- Matching String -->
-                    <ng-container matColumnDef="matching_string">
-                      <mat-header-cell *matHeaderCellDef> Matching String</mat-header-cell>
-                      <mat-cell *matCellDef="let row" [innerHtml]="{name: row.matchingString } | highlight: query">
-                      </mat-cell>
-                    </ng-container>
-                  </mat-table>
-
-                  <!--paging component-->
-                  <mat-paginator #diseasePaginator [pageSizeOptions]="[50, 100, 500]"></mat-paginator>
                 </div>
-              </div>
-              <div class="container center" [hidden]="diseases?.length !== 0 || isLoading">
-                <h4>Sorry no disease results found for.. "{{query}}"</h4>
-              </div>
+                <div class="container center" [hidden]="diseases?.length !== 0 || isLoading">
+                  <h4>Sorry no disease results found for.. "{{query}}"</h4>
+                </div>
 
-            </mat-tab>
+              </mat-tab>
 
 
-            <!-- Gene results tab -->
-            <mat-tab label="Gene Results [{{this.geneDataSource?.data.length}}]">
-              <mat-progress-bar *ngIf="isLoading" class="loading-result-details" color="primary" mode="buffer">
-              </mat-progress-bar>
-              <div [hidden]="genes?.length === 0">
-                <div class="filter-container mat-elevation-z8">
+              <!-- Gene results tab -->
+              <mat-tab label="Gene Results [{{this.geneDataSource?.data.length}}]">
+                @if (isLoading) {
+                  <mat-progress-bar class="loading-result-details" color="primary" mode="buffer">
+                  </mat-progress-bar>
+                }
+                <div [hidden]="genes?.length === 0">
+                  <div class="filter-container mat-elevation-z8">
 
-                  <!-- filter -->
-                  <div class="filter-header">
-                    <mat-form-field>
-                      <input matInput (keyup)="applyGeneFilter($event.target.value)" placeholder="Filter">
-                    </mat-form-field>
+                    <!-- filter -->
+                    <div class="filter-header">
+                      <mat-form-field>
+                        <input matInput (keyup)="applyGeneFilter($event.target.value)" placeholder="Filter">
+                      </mat-form-field>
+                    </div>
+
+                    <!-- Gene table -->
+                    <mat-table #table [dataSource]="geneDataSource">
+
+                      <mat-header-row *matHeaderRowDef="geneDisplayedColumns"></mat-header-row>
+                      <mat-row *matRowDef="let row; columns: geneDisplayedColumns;"></mat-row>
+
+                      <!-- gene entrez Id -->
+                      <ng-container matColumnDef="entrezGeneId">
+                        <mat-header-cell *matHeaderCellDef> Gene Identifier</mat-header-cell>
+                        <mat-cell *matCellDef="let row">
+                          <a routerLink="/browse/gene/{{row.id}}">{{row.id}}</a>
+                        </mat-cell>
+                      </ng-container>
+
+                      <!-- gene entrez Symbol -->
+                      <ng-container matColumnDef="entrezGeneSymbol">
+                        <mat-header-cell *matHeaderCellDef> Gene Symbol</mat-header-cell>
+                        <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
+                      </ng-container>
+
+                      <!-- Matching String -->
+                      <ng-container matColumnDef="matching_string">
+                        <mat-header-cell *matHeaderCellDef> Matching String</mat-header-cell>
+                        <mat-cell *matCellDef="let row" [innerHtml]="{name: row.matchingString } | highlight: query">
+                        </mat-cell>
+                      </ng-container>
+
+                    </mat-table>
+
+                    <mat-paginator #genePaginator [pageSizeOptions]="[50, 100, 500]"></mat-paginator>
                   </div>
-
-                  <!-- Gene table -->
-                  <mat-table #table [dataSource]="geneDataSource">
-
-                    <mat-header-row *matHeaderRowDef="geneDisplayedColumns"></mat-header-row>
-                    <mat-row *matRowDef="let row; columns: geneDisplayedColumns;"></mat-row>
-
-                    <!-- gene entrez Id -->
-                    <ng-container matColumnDef="entrezGeneId">
-                      <mat-header-cell *matHeaderCellDef> Gene Identifier</mat-header-cell>
-                      <mat-cell *matCellDef="let row">
-                        <a routerLink="/browse/gene/{{row.id}}">{{row.id}}</a>
-                      </mat-cell>
-                    </ng-container>
-
-                    <!-- gene entrez Symbol -->
-                    <ng-container matColumnDef="entrezGeneSymbol">
-                      <mat-header-cell *matHeaderCellDef> Gene Symbol</mat-header-cell>
-                      <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
-                    </ng-container>
-
-                    <!-- Matching String -->
-                    <ng-container matColumnDef="matching_string">
-                      <mat-header-cell *matHeaderCellDef> Matching String</mat-header-cell>
-                      <mat-cell *matCellDef="let row" [innerHtml]="{name: row.matchingString } | highlight: query">
-                      </mat-cell>
-                    </ng-container>
-
-                  </mat-table>
-
-                  <mat-paginator #genePaginator [pageSizeOptions]="[50, 100, 500]"></mat-paginator>
                 </div>
-              </div>
-              <div class="container center" [hidden]="genes?.length !== 0 || isLoading">
-                <h4>Sorry no gene results found for.. "{{query}}"</h4>
-              </div>
-            </mat-tab>
-          </mat-tab-group>
+                <div class="container center" [hidden]="genes?.length !== 0 || isLoading">
+                  <h4>Sorry no gene results found for.. "{{query}}"</h4>
+                </div>
+              </mat-tab>
+            </mat-tab-group>
+          </div>
         </div>
       </div>
     </div>
-  </div>

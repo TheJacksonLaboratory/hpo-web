@@ -21,26 +21,25 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @Component({
-  selector: 'app-custom',
-  standalone: true,
-  imports: [
-    CommonModule,
-    RouterModule,
-    ReactiveFormsModule,
-    MatStepperModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatAutocompleteModule,
-    MatButtonModule,
-    MatIconModule,
-    MatListModule,
-    MatChipsModule,
-    MatProgressBarModule,
-    MatTableModule,
-    MatSortModule
-  ],
-  templateUrl: './profile-search.component.html',
-  styleUrls: ['./profile-search.component.scss']
+    selector: 'app-custom',
+    imports: [
+        CommonModule,
+        RouterModule,
+        ReactiveFormsModule,
+        MatStepperModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatAutocompleteModule,
+        MatButtonModule,
+        MatIconModule,
+        MatListModule,
+        MatChipsModule,
+        MatProgressBarModule,
+        MatTableModule,
+        MatSortModule
+    ],
+    templateUrl: './profile-search.component.html',
+    styleUrls: ['./profile-search.component.scss']
 })
 export class ProfileSearchComponent implements OnInit {
 

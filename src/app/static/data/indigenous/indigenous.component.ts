@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-indigenous',
-  standalone: true,
-  imports: [],
-  templateUrl: './indigenous.component.html',
-  styleUrls: ['./indigenous.component.css']
+    selector: 'app-indigenous',
+    imports: [],
+    templateUrl: './indigenous.component.html',
+    styleUrls: ['./indigenous.component.css']
 })
 export class IndigenousComponent {
 

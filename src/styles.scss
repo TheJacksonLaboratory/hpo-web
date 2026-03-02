@@ -653,3 +653,11 @@ a.mat-mdc-button-base {
 .mat-stepper-horizontal {
    background: unset !important;
 }
+
+.sidenav .mdc-list-item__primary-text {
+  color: white !important;
+}
+
+.sidenav .mat-icon {
+    vertical-align: middle;
+}

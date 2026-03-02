@@ -8,7 +8,7 @@ describe('DialogService', () => {
   }));
 
   it('should be created', () => {
-    const service: DialogService = TestBed.get(DialogService);
+    const service: DialogService = TestBed.inject(DialogService);
     expect(service).toBeTruthy();
   });
 });

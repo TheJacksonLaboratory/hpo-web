@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { AnnotationService } from '../../services/annotation/annotation.service';
 import { GeneService } from '../../services/gene/gene.service';
 import { Disease, EntrezGene, SimpleTerm } from '../../models/models';
@@ -7,7 +7,6 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
-//import * as ProtVista from 'ProtVista';
 import { environment } from '../../../../environments/environment';
 import { DialogService } from '../../../shared/dialog-excel-download/dialog.service';
 
@@ -19,10 +18,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-  selector: 'app-gene',
-  standalone: true,
-  imports: [
-    CommonModule,
+    selector: 'app-gene',
+    imports: [
     RouterModule,
     MatCardModule,
     MatProgressBarModule,
@@ -33,10 +30,10 @@ import { MatButtonModule } from '@angular/material/button';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule
-  ],
-  templateUrl: './gene.component.html',
-  styleUrls: ['./gene.component.css', '../../../../../node_modules/ProtVista/style/main.css'],
-  encapsulation: ViewEncapsulation.None
+],
+    templateUrl: './gene.component.html',
+    styleUrls: ['./gene.component.css'],
+    encapsulation: ViewEncapsulation.None
 })
 export class GeneComponent implements OnInit {
   entrezGene: EntrezGene = new EntrezGene();

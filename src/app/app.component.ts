@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { RouterModule } from '@angular/router';
 import { Meta } from '@angular/platform-browser';
 
@@ -14,10 +14,8 @@ import { FloatingFeedbackComponent } from './shared/floating-feedback/floating-f
 import { environment } from '../environments/environment';
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [
-    CommonModule,
+    selector: 'app-root',
+    imports: [
     RouterModule,
     MatSidenavModule,
     MatListModule,
@@ -26,13 +24,13 @@ import { environment } from '../environments/environment';
     NavbarComponent,
     FooterComponent,
     FloatingFeedbackComponent
-  ],
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+],
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
   mobileNavSection = 'home';
-  parentSections = [];
+  parentSections: string[] = [];
 
   constructor(meta: Meta) {
     if (!environment.production) {

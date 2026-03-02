@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { Disease, Gene, Term } from '../../models/models';
@@ -14,10 +14,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
 @Component({
-  selector: 'app-search-results',
-  standalone: true,
-  imports: [
-    CommonModule,
+    selector: 'app-search-results',
+    imports: [
     RouterModule,
     MatCardModule,
     MatProgressBarModule,
@@ -27,9 +25,9 @@ import { MatInputModule } from '@angular/material/input';
     MatFormFieldModule,
     MatInputModule,
     HighlightPipe
-  ],
-  templateUrl: './search-results.component.html',
-  styleUrls: ['./search-results.component.css']
+],
+    templateUrl: './search-results.component.html',
+    styleUrls: ['./search-results.component.css']
 })
 export class SearchResultsComponent {
 

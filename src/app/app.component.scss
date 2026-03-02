@@ -13,21 +13,12 @@
   color: white;
 }
 
-.sidenav .mat-mdc-menu-item {
-  padding: 0 0 0 15px;
+.sidenav .mat-mdc-list-item {
   border-bottom: 1px solid #d3d3d370;
-  color: white !important;
-
-  &.iconed {
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: space-between;
-  }
+  color: white;
 }
 
-.sidenav .mat-mdc-menu-item .mat-icon {
-  margin: 12px 5px;
-  float: right;
+.sidenav .mat-mdc-list-item .mat-icon {
   color: white;
 }
 
@@ -35,13 +26,12 @@
   margin-bottom: 0;
 }
 
-.sidenav .mat-mdc-menu-item.backButton {
+.sidenav .mat-mdc-list-item.backButton {
   background-color: #d3d3d370;
-  padding-left: 0;
 }
 
-.sidenav .mat-mdc-menu-item.backButton .mat-icon {
-  float: left;
+.sidenav .mat-mdc-list-item.backButton .mat-icon {
+  margin-right: 8px;
 }
 
 .banner {

@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule, UntypedFormControl } from '@angular/forms';
 import { PublicationsService } from './publications.service';
@@ -14,10 +14,8 @@ import { MatButtonModule } from '@angular/material/button';
 
 
 @Component({
-  selector: 'app-publications',
-  standalone: true,
-  imports: [
-    CommonModule,
+    selector: 'app-publications',
+    imports: [
     RouterModule,
     ReactiveFormsModule,
     MatTableModule,
@@ -25,9 +23,9 @@ import { MatButtonModule } from '@angular/material/button';
     MatFormFieldModule,
     MatSelectModule,
     MatButtonModule
-  ],
-  templateUrl: './publications.component.html',
-  styleUrls: ['./publications.component.scss']
+],
+    templateUrl: './publications.component.html',
+    styleUrls: ['./publications.component.scss']
 })
 export class PublicationsComponent implements OnInit {
 

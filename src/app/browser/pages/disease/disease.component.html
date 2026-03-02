@@ -2,213 +2,226 @@
   <div class="container-custom">
     <div class="item-header">
       <span [hidden]="!isLoading && disease">
-          <mat-progress-bar class="loading-result-details" color="primary" mode="indeterminate">
-          </mat-progress-bar>
+        <mat-progress-bar class="loading-result-details" color="primary" mode="indeterminate">
+        </mat-progress-bar>
       </span>
     </div>
-    <div *ngIf="!isLoading">
-      <div class="flex flex-flex items-stretch justify-center">
-        <div class="w-[80%]">
-          <!-- Disease Banner -->
-          <mat-card class="item-summary mat-elevation-z6">
-            <mat-card-content>
-              <span class="item-title">{{disease.name}}&nbsp;</span>
-              <a *ngIf="disease.mondoId" class="item-id" [href]="utilityService.getExternalTermIdUrlFromId(disease.mondoId)" target="_blank">
-                {{disease.mondoId}}
-                <mat-icon>open_in_new</mat-icon>
-              </a>
-              <a class="item-id" [href]="utilityService.getExternalTermIdUrlFromId(disease.id)" target="_blank">
-                {{disease.id}}
-                <mat-icon>open_in_new</mat-icon>
-              </a>
-
-              <hr class="underline-hr">
-              <p>
-                {{disease.description}}
-              </p>
-              <button mat-raised-button class="download-associations"
-                      [disabled]="!this.hasTerms && this.geneDataSource?.data.length === 0"
-                      (click)="downloadDialog()"><span class="material-icons">get_app</span> Export Associations
-              </button>
-              <button mat-raised-button class="report-issue"
-                      (click)="reportIssue()"><span class="material-icons">bug_report</span> Report Entry Issue
-              </button>
-            </mat-card-content>
-          </mat-card>
-
-          <!--TABS -->
-          <div class="hpo-group-tab">
-            <mat-tab-group selectedIndex="0" class="disease-details-tab-group mat-elevation-z6">
-
-              <!--Term associations tab -->
-              <mat-tab label="HPO Associations">
-                <div class="tab-content">
-                  <div class="associations term-association">
-                    <div *ngFor="let catTermSource of catTermSources ">
-                      <h3 class="category-title">{{catTermSource.catLabel}}
-                        <span *ngIf="catTermSource.annotationCount > 1">[ {{catTermSource.annotationCount}} annotations ]</span>
-                        <span *ngIf="catTermSource.annotationCount === 1">[ {{catTermSource.annotationCount}} annotation ]</span>
-                      </h3>
-                      <mat-table [dataSource]="catTermSource.termSource" matSort>
-                        <mat-header-row *matHeaderRowDef="termColumns; sticky: true"></mat-header-row>
-                        <mat-row *matRowDef="let row; columns: termColumns;"></mat-row>
-                        <ng-container matColumnDef="id">
-                          <mat-header-cell *matHeaderCellDef> Term Identifier</mat-header-cell>
-                          <mat-cell *matCellDef="let row">
-                            <a routerLink="/browse/term/{{row.id}}">{{row.id}}</a><br>
-                          </mat-cell>
-                        </ng-container>
-                        <ng-container matColumnDef="name">
-                          <mat-header-cell *matHeaderCellDef>Term Name</mat-header-cell>
-                          <mat-cell *matCellDef="let row">{{row.name}}</mat-cell>
-                        </ng-container>
-                        <ng-container matColumnDef="metadata.onset">
-                          <mat-header-cell *matHeaderCellDef>Onset</mat-header-cell>
-                          <mat-cell *matCellDef="let row">{{row.metadata.onset}}</mat-cell>
-                        </ng-container>
-                        <ng-container matColumnDef="metadata.frequency">
-                          <mat-header-cell *matHeaderCellDef>Frequency</mat-header-cell>
-                          <mat-cell *matCellDef="let row">{{row.metadata.frequency}}</mat-cell>
-                        </ng-container>
-                        <ng-container matColumnDef="metadata.sources">
-                          <mat-header-cell *matHeaderCellDef>Source(s)</mat-header-cell>
-                          <mat-cell [ngClass]="{'source-cell': row.metadata.sources.length > 1}" *matCellDef="let row">
-                            <ng-container *ngFor="let source of row.metadata.sources">
-                              <div class="source" *ngIf="utilityService.isTermIdExpected(source,'PMID')">
-                                <a [href]="utilityService.getExternalTermIdUrlFromId(source)" target="_blank">
-                                  PubMed <i class="material-icons-outlined">library_books</i>
-                                </a>
-                              </div>
-                              <div class="source" *ngIf="utilityService.isTermIdExpected(source, 'BOOKSHELF')">
-                                <a [href]="source" target="_blank">
-                                  Gene Review <i class="material-icons-outlined">library_books</i>
-                                </a>
-                              </div>
-                              <div class="source" *ngIf="!utilityService.isTermIdExpected(source, 'PMID') && !utilityService.isTermIdExpected(source, 'BOOKSHELF')">
-                                <a [href]="utilityService.getExternalTermIdUrlFromId(source)" target="_blank">
-                                  <span>{{utilityService.getDiseaseDatabaseName(source)}} &nbsp;</span>
-                                  <i class="material-icons">open_in_new</i>
-                                </a>
-                              </div>
+    @if (!isLoading) {
+      <div>
+        <div class="flex flex-flex items-stretch justify-center">
+          <div class="w-[80%]">
+            <!-- Disease Banner -->
+            <mat-card class="item-summary mat-elevation-z6">
+              <mat-card-content>
+                <span class="item-title">{{disease.name}}&nbsp;</span>
+                @if (disease.mondoId) {
+                  <a class="item-id" [href]="utilityService.getExternalTermIdUrlFromId(disease.mondoId)" target="_blank">
+                    {{disease.mondoId}}
+                    <mat-icon>open_in_new</mat-icon>
+                  </a>
+                }
+                <a class="item-id" [href]="utilityService.getExternalTermIdUrlFromId(disease.id)" target="_blank">
+                  {{disease.id}}
+                  <mat-icon>open_in_new</mat-icon>
+                </a>
+                <hr class="underline-hr">
+                <p>
+                  {{disease.description}}
+                </p>
+                <button mat-raised-button class="download-associations"
+                  [disabled]="!this.hasTerms && this.geneDataSource?.data.length === 0"
+                  (click)="downloadDialog()"><span class="material-icons">get_app</span> Export Associations
+                </button>
+                <button mat-raised-button class="report-issue"
+                  (click)="reportIssue()"><span class="material-icons">bug_report</span> Report Entry Issue
+                </button>
+              </mat-card-content>
+            </mat-card>
+            <!--TABS -->
+            <div class="hpo-group-tab">
+              <mat-tab-group selectedIndex="0" class="disease-details-tab-group mat-elevation-z6">
+                <!--Term associations tab -->
+                <mat-tab label="HPO Associations">
+                  <div class="tab-content">
+                    <div class="associations term-association">
+                      @for (catTermSource of catTermSources ; track catTermSource) {
+                        <div>
+                          <h3 class="category-title">{{catTermSource.catLabel}}
+                            @if (catTermSource.annotationCount > 1) {
+                              <span>[ {{catTermSource.annotationCount}} annotations ]</span>
+                            }
+                            @if (catTermSource.annotationCount === 1) {
+                              <span>[ {{catTermSource.annotationCount}} annotation ]</span>
+                            }
+                          </h3>
+                          <mat-table [dataSource]="catTermSource.termSource" matSort>
+                            <mat-header-row *matHeaderRowDef="termColumns; sticky: true"></mat-header-row>
+                            <mat-row *matRowDef="let row; columns: termColumns;"></mat-row>
+                            <ng-container matColumnDef="id">
+                              <mat-header-cell *matHeaderCellDef> Term Identifier</mat-header-cell>
+                              <mat-cell *matCellDef="let row">
+                                <a routerLink="/browse/term/{{row.id}}">{{row.id}}</a><br>
+                              </mat-cell>
                             </ng-container>
-                          </mat-cell>
-                        </ng-container>
-                      </mat-table>
+                            <ng-container matColumnDef="name">
+                              <mat-header-cell *matHeaderCellDef>Term Name</mat-header-cell>
+                              <mat-cell *matCellDef="let row">{{row.name}}</mat-cell>
+                            </ng-container>
+                            <ng-container matColumnDef="metadata.onset">
+                              <mat-header-cell *matHeaderCellDef>Onset</mat-header-cell>
+                              <mat-cell *matCellDef="let row">{{row.metadata.onset}}</mat-cell>
+                            </ng-container>
+                            <ng-container matColumnDef="metadata.frequency">
+                              <mat-header-cell *matHeaderCellDef>Frequency</mat-header-cell>
+                              <mat-cell *matCellDef="let row">{{row.metadata.frequency}}</mat-cell>
+                            </ng-container>
+                            <ng-container matColumnDef="metadata.sources">
+                              <mat-header-cell *matHeaderCellDef>Source(s)</mat-header-cell>
+                              <mat-cell [ngClass]="{'source-cell': row.metadata.sources.length > 1}" *matCellDef="let row">
+                                @for (source of row.metadata.sources; track source) {
+                                  @if (utilityService.isTermIdExpected(source,'PMID')) {
+                                    <div class="source">
+                                      <a [href]="utilityService.getExternalTermIdUrlFromId(source)" target="_blank">
+                                        PubMed <i class="material-icons-outlined">library_books</i>
+                                      </a>
+                                    </div>
+                                  }
+                                  @if (utilityService.isTermIdExpected(source, 'BOOKSHELF')) {
+                                    <div class="source">
+                                      <a [href]="source" target="_blank">
+                                        Gene Review <i class="material-icons-outlined">library_books</i>
+                                      </a>
+                                    </div>
+                                  }
+                                  @if (!utilityService.isTermIdExpected(source, 'PMID') && !utilityService.isTermIdExpected(source, 'BOOKSHELF')) {
+                                    <div class="source">
+                                      <a [href]="utilityService.getExternalTermIdUrlFromId(source)" target="_blank">
+                                        <span>{{utilityService.getDiseaseDatabaseName(source)}} &nbsp;</span>
+                                        <i class="material-icons">open_in_new</i>
+                                      </a>
+                                    </div>
+                                  }
+                                }
+                              </mat-cell>
+                            </ng-container>
+                          </mat-table>
+                        </div>
+                      }
                     </div>
                   </div>
-                </div>
-              </mat-tab>
-
-              <!-- Gene associations tab -->
-              <mat-tab label="Gene Associations">
-                <!--<div class="tab-content">-->
-                <div [hidden]="geneDataSource?.data.length === 0">
-                  <div class="tab-output-container">
-
-                    <!-- filter -->
-                    <div class="filter-container">
-                      <div class="filter-header">
-                        <mat-form-field>
-                          <input id="geneFilterInput" matInput (keyup)="applyGeneFilter($event.target.value)"
-                                 placeholder="Filter">
-                        </mat-form-field>
+                </mat-tab>
+                <!-- Gene associations tab -->
+                <mat-tab label="Gene Associations">
+                  <!--<div class="tab-content">-->
+                  <div [hidden]="geneDataSource?.data.length === 0">
+                    <div class="tab-output-container">
+                      <!-- filter -->
+                      <div class="filter-container">
+                        <div class="filter-header">
+                          <mat-form-field>
+                            <input id="geneFilterInput" matInput (keyup)="applyGeneFilter($event.target.value)"
+                              placeholder="Filter">
+                          </mat-form-field>
+                        </div>
                       </div>
-                    </div>
-                    <!-- Gene Association Table -->
-                    <div class="associations gene-association">
-                      <mat-table [dataSource]="geneDataSource" matSort>
-                        <mat-header-row *matHeaderRowDef="geneColumns; sticky: true"></mat-header-row>
-                        <mat-row *matRowDef="let row; columns: geneColumns;"></mat-row>
-                        <ng-container matColumnDef="id">
-                          <mat-header-cell *matHeaderCellDef>Gene Identifier</mat-header-cell>
-                          <mat-cell *matCellDef="let row">
-                            <a routerLink="/browse/gene/{{row.id}}">{{row.id}}</a>
-                          </mat-cell>
-                        </ng-container>
-                        <ng-container matColumnDef="name">
-                          <mat-header-cell *matHeaderCellDef>Gene Symbol</mat-header-cell>
-                          <mat-cell *matCellDef="let row">{{row.name}}</mat-cell>
-                        </ng-container>
-                      </mat-table>
-                      <div class="associationsPaging">
-                        <p>{{geneDataSource.data.length}} gene associations.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- no results found -->
-                <div class="container center" [hidden]="geneDataSource?.data.length !== 0">
-                  <h4>No gene results found for {{query}}</h4>
-                </div>
-
-              </mat-tab>
-              <!-- Medical Actions Tab -->
-              <mat-tab label="Medical Actions">
-                <!--<div class="tab-content">-->
-                <div [hidden]="medicalActionsDataSource?.data.length === 0">
-                  <div class="tab-output-container">
-                    <!-- Gene Association Table -->
-                    <div class="associations gene-association">
-                      <mat-table [dataSource]="medicalActionsDataSource" matSort>
-                        <mat-header-row *matHeaderRowDef="medicalActionColumns; sticky: true"></mat-header-row>
-                        <mat-row *matRowDef="let row; columns: medicalActionColumns;"></mat-row>
-                        <ng-container matColumnDef="id">
-                          <mat-header-cell *matHeaderCellDef>MaXo Id</mat-header-cell>
-                          <mat-cell *matCellDef="let row">
-                           {{row.id}}
-                          </mat-cell>
-                        </ng-container>
-                        <ng-container matColumnDef="name">
-                          <mat-header-cell *matHeaderCellDef>MaXo Name</mat-header-cell>
-                          <mat-cell *matCellDef="let row">{{row.name}}</mat-cell>
-                        </ng-container>
-                        <ng-container matColumnDef="relations">
-                          <mat-header-cell *matHeaderCellDef>Relation</mat-header-cell>
-                          <mat-cell *matCellDef="let row">
-                            <ng-container *ngIf="row.relations.length === 1">
-                              {{row.relations[0]}}
-                            </ng-container>
-                            <ng-container *ngIf="row.relations.length > 1">
-                              {{row.relations.join(" and ")}}
-                            </ng-container>
-                          </mat-cell>
-                        </ng-container>
-                        <ng-container matColumnDef="targets">
-                          <mat-header-cell *matHeaderCellDef>Target</mat-header-cell>
-                          <mat-cell *matCellDef="let row">
-                            <ng-container *ngIf="row.targets.length > 0">
-                              <div *ngFor="let target of row.targets">
-                                <div *ngIf="utilityService.isTermIdExpected(target.id,'HP')">
-                                  <a routerLink="/browse/term/{{target.id}}">{{target.id}}</a>
-                                </div>
-                                <div *ngIf="utilityService.isTermIdExpected(target.id,'OMIM')">
-                                  {{target.id}}
-                                </div>
-                              </div>
-                            </ng-container>
-                          </mat-cell>
-                        </ng-container>
-                      </mat-table>
-                      <div class="associationsPaging">
-                        <p>{{medicalActionsDataSource.data.length}} medical actions.
-                        </p>
+                      <!-- Gene Association Table -->
+                      <div class="associations gene-association">
+                        <mat-table [dataSource]="geneDataSource" matSort>
+                          <mat-header-row *matHeaderRowDef="geneColumns; sticky: true"></mat-header-row>
+                          <mat-row *matRowDef="let row; columns: geneColumns;"></mat-row>
+                          <ng-container matColumnDef="id">
+                            <mat-header-cell *matHeaderCellDef>Gene Identifier</mat-header-cell>
+                            <mat-cell *matCellDef="let row">
+                              <a routerLink="/browse/gene/{{row.id}}">{{row.id}}</a>
+                            </mat-cell>
+                          </ng-container>
+                          <ng-container matColumnDef="name">
+                            <mat-header-cell *matHeaderCellDef>Gene Symbol</mat-header-cell>
+                            <mat-cell *matCellDef="let row">{{row.name}}</mat-cell>
+                          </ng-container>
+                        </mat-table>
+                        <div class="associationsPaging">
+                          <p>{{geneDataSource.data.length}} gene associations.
+                          </p>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-
-                <!-- no results found -->
-                <div class="container center" [hidden]="medicalActionsDataSource?.data.length !== 0">
-                  <h4>No medical action results found for {{query}}</h4>
-                </div>
-
-              </mat-tab>
-            </mat-tab-group>
+                  <!-- no results found -->
+                  <div class="container center" [hidden]="geneDataSource?.data.length !== 0">
+                    <h4>No gene results found for {{query}}</h4>
+                  </div>
+                </mat-tab>
+                <!-- Medical Actions Tab -->
+                <mat-tab label="Medical Actions">
+                  <!--<div class="tab-content">-->
+                  <div [hidden]="medicalActionsDataSource?.data.length === 0">
+                    <div class="tab-output-container">
+                      <!-- Gene Association Table -->
+                      <div class="associations gene-association">
+                        <mat-table [dataSource]="medicalActionsDataSource" matSort>
+                          <mat-header-row *matHeaderRowDef="medicalActionColumns; sticky: true"></mat-header-row>
+                          <mat-row *matRowDef="let row; columns: medicalActionColumns;"></mat-row>
+                          <ng-container matColumnDef="id">
+                            <mat-header-cell *matHeaderCellDef>MaXo Id</mat-header-cell>
+                            <mat-cell *matCellDef="let row">
+                              {{row.id}}
+                            </mat-cell>
+                          </ng-container>
+                          <ng-container matColumnDef="name">
+                            <mat-header-cell *matHeaderCellDef>MaXo Name</mat-header-cell>
+                            <mat-cell *matCellDef="let row">{{row.name}}</mat-cell>
+                          </ng-container>
+                          <ng-container matColumnDef="relations">
+                            <mat-header-cell *matHeaderCellDef>Relation</mat-header-cell>
+                            <mat-cell *matCellDef="let row">
+                              @if (row.relations.length === 1) {
+                                {{row.relations[0]}}
+                              }
+                              @if (row.relations.length > 1) {
+                                {{row.relations.join(" and ")}}
+                              }
+                            </mat-cell>
+                          </ng-container>
+                          <ng-container matColumnDef="targets">
+                            <mat-header-cell *matHeaderCellDef>Target</mat-header-cell>
+                            <mat-cell *matCellDef="let row">
+                              @if (row.targets.length > 0) {
+                                @for (target of row.targets; track target) {
+                                  <div>
+                                    @if (utilityService.isTermIdExpected(target.id,'HP')) {
+                                      <div>
+                                        <a routerLink="/browse/term/{{target.id}}">{{target.id}}</a>
+                                      </div>
+                                    }
+                                    @if (utilityService.isTermIdExpected(target.id,'OMIM')) {
+                                      <div>
+                                        {{target.id}}
+                                      </div>
+                                    }
+                                  </div>
+                                }
+                              }
+                            </mat-cell>
+                          </ng-container>
+                        </mat-table>
+                        <div class="associationsPaging">
+                          <p>{{medicalActionsDataSource.data.length}} medical actions.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- no results found -->
+                  <div class="container center" [hidden]="medicalActionsDataSource?.data.length !== 0">
+                    <h4>No medical action results found for {{query}}</h4>
+                  </div>
+                </mat-tab>
+              </mat-tab-group>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    }
   </div>
 </div>

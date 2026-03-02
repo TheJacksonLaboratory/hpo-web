@@ -3,7 +3,11 @@
 name: HPO-WEB SQA Static Deployment
 
 # Controls when the workflow will run
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
 env:
   GCLOUD_BUCKET: ${{ secrets.GCLOUD_SQA_BUCKET }}
 
@@ -27,7 +31,7 @@ jobs:
         node-version: 24.5.0
         cache: 'npm'
 
-    - name: Lint, Test, Build
+    - name: Install & Build
       run: |
         npm install
         npm run build:sqa
