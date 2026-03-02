@@ -27,7 +27,7 @@ jobs:
         node-version: 24.5.0
         cache: 'npm'
 
-    - name: Lint, Test, Build
+    - name: Install & Build
       run: |
         npm install
         npm run build:sqa
