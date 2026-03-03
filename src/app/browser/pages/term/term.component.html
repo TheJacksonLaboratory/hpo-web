@@ -122,7 +122,7 @@
                       <button matButton class="view-publication-btn" [matMenuTriggerFor]="publicationmenu"><span class="material-icons term-action-icon">newspaper</span>View Publications</button>
                       <mat-menu #publicationmenu="matMenu">
                           @for (pub of term.publicationReferences; track pub) {
-                            <button mat-menu-item>
+                            <button class="view-publication-menu" mat-menu-item>
                               <a class="text-decoration-none" href="{{utilityService.getExternalTermIdUrlFromId(pub)}}" target="_blank">
                                 {{pub}}
                               </a>
