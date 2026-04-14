@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
 import { ContactComponent } from './resources/contact/contact.component';
 import { CitationComponent } from './resources/citation/citation.component';
 import { LicenseComponent } from './resources/license/license.component';
@@ -11,7 +10,6 @@ import { FundingComponent } from './resources/funding/funding.component';
 import { FeedbackComponent } from './feedback/feedback.component';
 
 export const staticRoutes: Routes = [
-  { path: '', component: HomeComponent },
   { path: 'about', component: AboutComponent },
   { path: 'citation', component: CitationComponent },
   { path: 'contact', component: ContactComponent },
