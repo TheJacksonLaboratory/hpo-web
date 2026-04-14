@@ -1,5 +1,24 @@
-<!-- TODO: HPO-14 — Implement Announcement Banner Component -->
-<!-- Figma: node 3099:362 — dismissible info-toast banner -->
-<section class="p-4 bg-sky-50 text-center text-sm text-gray-500 italic">
-  Announcement Banner — HPO-14
-</section>
+@for (announcement of announcements(); track announcement.id) {
+  <p-message
+    [severity]="announcement.severity ?? 'info'"
+    [closable]="true"
+    (onClose)="dismiss(announcement.id)"
+  >
+    <div class="flex items-start gap-1">
+      <i [class]="severityIcon(announcement.severity)"></i>
+      <div class="flex flex-col">
+        <span class="font-bold">{{ announcement.title }}</span>
+        <span>
+          {{ announcement.body }}
+          @if (announcement.link) {
+            Check out the
+            <a class="font-semibold underline" [routerLink]="announcement.link.href">
+              {{ announcement.link.label }}
+            </a>
+            to find out more.
+          }
+        </span>
+      </div>
+    </div>
+  </p-message>
+}
