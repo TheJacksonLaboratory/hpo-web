@@ -45,8 +45,10 @@ export class AnnouncementBannerComponent implements OnInit {
   }
 
   dismiss(id: string) {
+    const announcement = this.announcements().find((a) => a.id === id);
+    const ttl = (announcement?.dismissTtlDays ?? this.ttlDays) * 86_400_000;
     const entries = this.getDismissed();
-    entries.push({ id, expiry: Date.now() + this.ttlDays * 86_400_000 });
+    entries.push({ id, expiry: Date.now() + ttl });
     localStorage.setItem(this.storageKey, JSON.stringify(entries));
     this.announcements.update((items) =>
       items.filter((item) => item.id !== id)

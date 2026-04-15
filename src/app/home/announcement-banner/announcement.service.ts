@@ -1,20 +1,18 @@
-import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { inject, Injectable } from '@angular/core';
+import { forkJoin, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Announcement } from './announcement.model';
+import { FeatureAnnouncementService } from './feature-announcement.service';
+import { ReleaseAnnouncementService } from './release-announcement.service';
 
 @Injectable({ providedIn: 'root' })
 export class AnnouncementService {
+  private features = inject(FeatureAnnouncementService);
+  private releases = inject(ReleaseAnnouncementService);
 
-  /** Fetch active announcements. Stubbed — will eventually be backed by an API. */
   getAnnouncements(): Observable<Announcement[]> {
-    return of([
-      {
-        id: '2026-04-new-features',
-        title: 'New Features Announced!',
-        body: 'HPO has added new phenotype terms and annotations.',
-        link: { label: 'release notes', href: '/news' },
-        severity: 'info' as const,
-      },
-    ]);
+    return forkJoin([this.features.fetch(), this.releases.fetch()]).pipe(
+      map(([features, releases]) => [...features, ...releases])
+    );
   }
 }

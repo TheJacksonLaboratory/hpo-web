@@ -12,9 +12,15 @@
           {{ announcement.body }}
           @if (announcement.link) {
             Check out the
-            <a class="font-semibold underline" [routerLink]="announcement.link.href">
-              {{ announcement.link.label }}
-            </a>
+            @if (announcement.link.external) {
+              <a class="font-semibold underline" [href]="announcement.link.href" target="_blank" rel="noopener noreferrer">
+                {{ announcement.link.label }}
+              </a>
+            } @else {
+              <a class="font-semibold underline" [routerLink]="announcement.link.href">
+                {{ announcement.link.label }}
+              </a>
+            }
             to find out more.
           }
         </span>
