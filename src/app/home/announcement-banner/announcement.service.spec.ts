@@ -4,6 +4,7 @@ import { AnnouncementService } from './announcement.service';
 import { FeatureAnnouncementService } from './feature-announcement.service';
 import { ReleaseAnnouncementService } from './release-announcement.service';
 import { Announcement } from './announcement.model';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 
 describe('AnnouncementService', () => {
   const feature: Announcement = {
@@ -33,7 +34,7 @@ describe('AnnouncementService', () => {
           provide: ReleaseAnnouncementService,
           useValue: { fetch: () => of([release]) },
         },
-      ],
+      provideHttpClientTesting()],
     });
     service = TestBed.inject(AnnouncementService);
   });
