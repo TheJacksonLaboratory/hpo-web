@@ -11,14 +11,13 @@
     <div class="flex flex-wrap items-center gap-3 md:gap-6 text-white text-sm md:text-base">
       <span class="leading-snug">Popular Searches:</span>
       @for (term of popularSearches; track term) {
-        <a
+        <button
+          type="button"
           class="text-white font-semibold underline cursor-pointer hover:opacity-80"
           (click)="submitSearch(term)"
-          (keydown.enter)="submitSearch(term)"
-          tabindex="0"
         >
           {{ term }}
-        </a>
+        </button>
       }
     </div>
   </div>
