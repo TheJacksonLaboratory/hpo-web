@@ -26,8 +26,8 @@ describe('AnnouncementBannerComponent', () => {
   let fixture: ComponentFixture<AnnouncementBannerComponent>;
   let component: AnnouncementBannerComponent;
 
-  const setup = (items: Announcement[]) => {
-    TestBed.configureTestingModule({
+  const setup = async (items: Announcement[]) => {
+    await TestBed.configureTestingModule({
       imports: [AnnouncementBannerComponent],
       providers: [
         provideRouter([]),
@@ -46,23 +46,23 @@ describe('AnnouncementBannerComponent', () => {
   beforeEach(() => localStorage.clear());
   afterEach(() => localStorage.clear());
 
-  it('loads announcements that have not been dismissed', () => {
-    setup([feature, release]);
+  it('loads announcements that have not been dismissed', async () => {
+    await setup([feature, release]);
     fixture.detectChanges();
     expect(component.announcements()).toEqual([feature, release]);
   });
 
-  it('hides announcements whose dismissal is still valid', () => {
+  it('hides announcements whose dismissal is still valid', async () => {
     localStorage.setItem(
       storageKey,
       JSON.stringify([{ id: 'feat-1', expiry: Date.now() + 1_000_000 }])
     );
-    setup([feature, release]);
+    await setup([feature, release]);
     fixture.detectChanges();
     expect(component.announcements()).toEqual([release]);
   });
 
-  it('prunes expired dismissal entries on init', () => {
+  it('prunes expired dismissal entries on init', async () => {
     localStorage.setItem(
       storageKey,
       JSON.stringify([
@@ -70,7 +70,7 @@ describe('AnnouncementBannerComponent', () => {
         { id: 'release-v1', expiry: Date.now() + 1_000_000 },
       ])
     );
-    setup([feature, release]);
+    await setup([feature, release]);
     fixture.detectChanges();
 
     const stored = JSON.parse(localStorage.getItem(storageKey) ?? '[]');
@@ -79,8 +79,8 @@ describe('AnnouncementBannerComponent', () => {
     expect(component.announcements()).toEqual([feature]);
   });
 
-  it('dismiss() writes the id with the default 30-day TTL', () => {
-    setup([feature]);
+  it('dismiss() writes the id with the default 30-day TTL', async () => {
+    await setup([feature]);
     fixture.detectChanges();
 
     const before = Date.now();
@@ -95,8 +95,8 @@ describe('AnnouncementBannerComponent', () => {
     expect(component.announcements()).toEqual([]);
   });
 
-  it('dismiss() honors the per-announcement dismissTtlDays for releases', () => {
-    setup([release]);
+  it('dismiss() honors the per-announcement dismissTtlDays for releases', async () => {
+    await setup([release]);
     fixture.detectChanges();
 
     const before = Date.now();
@@ -108,8 +108,8 @@ describe('AnnouncementBannerComponent', () => {
     expect(stored[0].expiry).toBeLessThanOrEqual(after + 365 * 86_400_000);
   });
 
-  it('severityIcon() maps every severity and falls back to info', () => {
-    setup([]);
+  it('severityIcon() maps every severity and falls back to info', async () => {
+    await setup([]);
     fixture.detectChanges();
     expect(component.severityIcon('info')).toBe('pi pi-info-circle');
     expect(component.severityIcon('success')).toBe('pi pi-check-circle');
@@ -118,8 +118,8 @@ describe('AnnouncementBannerComponent', () => {
     expect(component.severityIcon(undefined)).toBe('pi pi-info-circle');
   });
 
-  it('dismissAll() writes every announcement id to storage and clears the list', () => {
-    setup([feature, release]);
+  it('dismissAll() writes every announcement id to storage and clears the list', async () => {
+    await setup([feature, release]);
     fixture.detectChanges();
     expect(component.announcements()).toHaveLength(2);
 
@@ -134,8 +134,17 @@ describe('AnnouncementBannerComponent', () => {
     expect(component.announcements()).toEqual([]);
   });
 
-  it('dismissAll() respects per-announcement TTL for each entry', () => {
-    setup([feature, release]);
+  it('recovers gracefully from corrupted localStorage', async () => {
+    localStorage.setItem(storageKey, '{not valid json!!!');
+    await setup([feature]);
+    fixture.detectChanges();
+
+    expect(component.announcements()).toEqual([feature]);
+    expect(JSON.parse(localStorage.getItem(storageKey) ?? '[]')).toEqual([]);
+  });
+
+  it('dismissAll() respects per-announcement TTL for each entry', async () => {
+    await setup([feature, release]);
     fixture.detectChanges();
 
     const before = Date.now();

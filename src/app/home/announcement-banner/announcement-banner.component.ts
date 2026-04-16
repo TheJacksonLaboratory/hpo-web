@@ -68,7 +68,14 @@ export class AnnouncementBannerComponent implements OnInit {
 
   private getDismissed(): DismissedEntry[] {
     const raw = localStorage.getItem(this.storageKey);
-    return raw ? JSON.parse(raw) : [];
+    if (!raw) return [];
+    try {
+      const parsed = JSON.parse(raw);
+      return Array.isArray(parsed) ? parsed : [];
+    } catch {
+      localStorage.removeItem(this.storageKey);
+      return [];
+    }
   }
 
   private pruneExpired() {
