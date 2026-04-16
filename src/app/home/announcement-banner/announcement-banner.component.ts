@@ -55,6 +55,17 @@ export class AnnouncementBannerComponent implements OnInit {
     );
   }
 
+  dismissAll() {
+    const entries = this.getDismissed();
+    for (const announcement of this.announcements()) {
+      const ttl =
+        (announcement.dismissTtlDays ?? this.ttlDays) * 86_400_000;
+      entries.push({ id: announcement.id, expiry: Date.now() + ttl });
+    }
+    localStorage.setItem(this.storageKey, JSON.stringify(entries));
+    this.announcements.set([]);
+  }
+
   private getDismissed(): DismissedEntry[] {
     const raw = localStorage.getItem(this.storageKey);
     return raw ? JSON.parse(raw) : [];

@@ -1,4 +1,5 @@
-@for (announcement of announcements(); track announcement.id) {
+@if (announcements().length === 1) {
+  @let announcement = announcements()[0];
   <p-message
     [severity]="announcement.severity ?? 'info'"
     [closable]="true"
@@ -24,6 +25,40 @@
             to find out more.
           }
         </span>
+      </div>
+    </div>
+  </p-message>
+} @else if (announcements().length > 1) {
+  <p-message
+    severity="info"
+    [closable]="true"
+    (onClose)="dismissAll()"
+  >
+    <div class="flex items-start gap-1">
+      <i class="pi pi-info-circle"></i>
+      <div class="flex flex-col">
+        <span class="font-bold">Announcements</span>
+        <ul class="mt-1 list-disc pl-4">
+          @for (announcement of announcements(); track announcement.id) {
+            <li>
+              <span class="font-semibold">{{ announcement.title }}</span> &mdash;
+              {{ announcement.body }}
+              @if (announcement.link) {
+                Check out the
+                @if (announcement.link.external) {
+                  <a class="font-semibold underline" [href]="announcement.link.href" target="_blank" rel="noopener noreferrer">
+                    {{ announcement.link.label }}
+                  </a>
+                } @else {
+                  <a class="font-semibold underline" [routerLink]="announcement.link.href">
+                    {{ announcement.link.label }}
+                  </a>
+                }
+                to find out more.
+              }
+            </li>
+          }
+        </ul>
       </div>
     </div>
   </p-message>
