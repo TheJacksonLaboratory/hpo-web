@@ -22,7 +22,10 @@ bootstrapApplication(AppComponent, {
     provideAnimations(),
     providePrimeNG({
       theme: {
-        preset: EchoPreset
+        preset: EchoPreset,
+        options: {
+          darkModeSelector: '.dark-mode'
+        }
       }
     }),
     { provide: MAT_TABS_CONFIG, useValue: { animationDuration: '0ms' } }
