@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { AnnouncementBannerComponent } from './announcement-banner/announcement-banner.component';
-import { SearchSectionComponent } from './search-section/search-section.component';
+import { HeroBannerComponent } from './hero-banner/hero-banner.component';
 import { ToolSectionComponent } from './tool-section/tool-section.component';
 import { VideoSectionComponent } from './video-section/video-section.component';
 import { PublicationSectionComponent } from './publication-section/publication-section.component';
@@ -15,7 +15,7 @@ import { FundingSectionComponent } from './funding-section/funding-section.compo
   standalone: true,
   imports: [
     AnnouncementBannerComponent,
-    SearchSectionComponent,
+    HeroBannerComponent,
     ToolSectionComponent,
     VideoSectionComponent,
     PublicationSectionComponent,
