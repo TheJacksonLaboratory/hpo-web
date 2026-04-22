@@ -34,16 +34,6 @@ export class AnnouncementBannerComponent implements OnInit {
     });
   }
 
-  severityIcon(severity?: string): string {
-    const icons: Record<string, string> = {
-      info: 'pi pi-info-circle',
-      success: 'pi pi-check-circle',
-      warn: 'pi pi-exclamation-triangle',
-      error: 'pi pi-times-circle',
-    };
-    return icons[severity ?? 'info'] ?? icons['info'];
-  }
-
   dismiss(id: string) {
     const announcement = this.announcements().find((a) => a.id === id);
     const ttl = (announcement?.dismissTtlDays ?? this.ttlDays) * 86_400_000;

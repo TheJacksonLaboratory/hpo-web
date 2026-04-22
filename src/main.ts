@@ -60,6 +60,18 @@ if (environment.production) {
           950: '{slate.950}'
         }
       }
+    },
+    components: {
+      message: {
+        colorScheme: {
+          light: {
+            info: {
+              background: '{teal.50}',
+              borderColor: '{teal.300}'
+            }
+          }
+        }
+      }
     }
   });
 bootstrapApplication(AppComponent, {

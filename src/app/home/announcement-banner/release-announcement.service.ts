@@ -28,7 +28,7 @@ export class ReleaseAnnouncementService {
             href: release.html_url,
             external: true,
           },
-          severity: 'success' as const,
+          severity: 'info' as const,
           dismissTtlDays: 365,
         },
       ]),
