@@ -42,6 +42,9 @@ if (environment.production) {
           700: '{teal.700}',
           800: '{teal.800}',
           900: '{teal.900}',
+        },
+        formField: {
+          placeholderColor: '{gray.600}'
         }
       },
       dark: {
@@ -67,7 +70,17 @@ if (environment.production) {
           light: {
             info: {
               background: '{teal.50}',
-              borderColor: '{teal.300}'
+              borderColor: '{teal.300}',
+              color: '{teal.700}'
+            }
+          }
+        }
+      },
+      button: {
+         colorScheme: {
+          light: {
+            link: {
+              color: '{primary.700}', 
             }
           }
         }
