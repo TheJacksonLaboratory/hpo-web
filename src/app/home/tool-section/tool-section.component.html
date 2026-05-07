@@ -9,7 +9,7 @@
         <div class="flex h-52">
 
           @if (i % 2 === 0) {
-            <div class="relative shrink-0 w-[17.9375rem] h-full bg-[#1a1a2e]">
+            <div class="relative shrink-0 w-72 h-full bg-[#1a1a2e]">
               <img [src]="tool.image" [alt]="tool.title" class="absolute inset-0 w-full h-full object-contain" />
             </div>
           }
@@ -19,11 +19,11 @@
               <h3 class="text-xl font-bold leading-7 text-[#222]">{{ tool.title }}</h3>
               <p class="text-base text-[#636363] leading-normal my-0">{{ tool.subtitle }}</p>
             </div>
-            <p class="text-base text-[#222] leading-[1.625] my-0">{{ tool.description }}</p>
+            <p class="text-base text-[#222] leading-relaxed my-0">{{ tool.description }}</p>
           </div>
 
           @if (i % 2 !== 0) {
-            <div class="relative shrink-0 w-[17.9375rem] h-full bg-[#1a1a2e]">
+            <div class="relative shrink-0 w-72 h-full bg-[#1a1a2e]">
               <img [src]="tool.image" [alt]="tool.title" class="absolute inset-0 w-full h-full object-contain" />
             </div>
           }
