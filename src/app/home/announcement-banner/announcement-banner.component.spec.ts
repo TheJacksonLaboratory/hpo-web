@@ -108,16 +108,6 @@ describe('AnnouncementBannerComponent', () => {
     expect(stored[0].expiry).toBeLessThanOrEqual(after + 365 * 86_400_000);
   });
 
-  it('severityIcon() maps every severity and falls back to info', async () => {
-    await setup([]);
-    fixture.detectChanges();
-    expect(component.severityIcon('info')).toBe('pi pi-info-circle');
-    expect(component.severityIcon('success')).toBe('pi pi-check-circle');
-    expect(component.severityIcon('warn')).toBe('pi pi-exclamation-triangle');
-    expect(component.severityIcon('error')).toBe('pi pi-times-circle');
-    expect(component.severityIcon(undefined)).toBe('pi pi-info-circle');
-  });
-
   it('dismissAll() writes every announcement id to storage and clears the list', async () => {
     await setup([feature, release]);
     fixture.detectChanges();

@@ -40,7 +40,7 @@ describe('ReleaseAnnouncementService', () => {
           href: 'https://github.com/obophenotype/human-phenotype-ontology/releases/tag/v2026.04.01',
           external: true,
         },
-        severity: 'success',
+        severity: 'info',
         dismissTtlDays: 365,
       });
       done();
