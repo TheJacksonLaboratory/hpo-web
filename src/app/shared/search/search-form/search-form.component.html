@@ -1,0 +1,31 @@
+<div class="flex flex-col md:flex-row items-stretch md:items-start gap-3 md:gap-4 justify-center w-full px-4 md:px-0">
+  <div class="flex flex-col gap-2 flex-1 max-w-[38rem]">
+    <input
+      pInputText
+      type="text"
+      class="w-full text-base md:text-xl"
+      placeholder="Search for phenotypes, diseases or genes, including synonyms"
+      [(ngModel)]="searchQuery"
+      (keyup.enter)="submitSearch(searchQuery)"
+    />
+    <div class="flex flex-wrap items-center gap-3 md:gap-6 text-gray-900 text-sm md:text-base">
+      <span class="leading-snug">Popular Searches:</span>
+      @for (term of popularSearches; track term) {
+        <p-button
+          class="font-semibold !underline"
+          (click)="submitSearch(term)"
+          link
+        >
+          <span class="underline">{{ term }}</span>
+        </p-button>
+      }
+    </div>
+  </div>
+
+  <p-button
+    label="Search"
+    icon="pi pi-search"
+    styleClass="h-[3.2rem] text-xl"
+    (onClick)="submitSearch(searchQuery)"
+  />
+</div>

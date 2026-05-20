@@ -11,6 +11,7 @@ html, body {
   font-family: 'Source Sans 3', sans-serif;
 }
 
+
 * {
   box-sizing: border-box;
   font-family: 'Source Sans 3', sans-serif;
@@ -269,16 +270,6 @@ a.mat-btn .mdc-button__label {
 
 .container-custom .row {
   margin: 0;
-}
-
-.mat-mdc-drawer {
-  z-index: 4;
-}
-
-.mat-drawer-content {
-  min-height: 100%;
-  display: flex !important;
-  flex-direction: column;
 }
 
 .mat-mdc-button-base {
@@ -676,3 +667,4 @@ a.mat-mdc-button-base {
 .view-publication-menu a {
   text-decoration: none !important;
 }
+
