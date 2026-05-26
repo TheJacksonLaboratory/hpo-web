@@ -1,22 +1,51 @@
-<footer class="footer mat-elevation-z4 flex flex-row flex-wrap md:flex-nowrap">
-  <div class="group-links-wrapper flex md:flex-[33%] flex-[80%] items-center justify-evenly py-4 md:py-0">
-      <button mat-button routerLink="license">License</button>
-      <button mat-button routerLink="funding">Funding</button>
-      <button mat-button routerLink="citation">Cite</button>
-      <button mat-button routerLink="disclaimer">Disclaimer</button>
-      <button mat-button routerLink="resources/faq">FAQ</button>
-  </div>
-  <div class="version md:flex-[33%] flex-[80%] flex justify-center py-4 md:py-0">
-    <p class="h-full w-full content-center">{{version}}</p>
-  </div>
-  <div class="logo-group-wrapper md:flex-[33%] flex-[80%] content-center py-4 md:py-0">
-    <div class="logo-group flex items-center justify-evenly">
-      <a href="https://www.jax.org/" target="__blank">
-        <img class="footer-brand-larger" src="assets/jax_logo.png" alt="The Jackson Laboratory logo"/>
+<footer class="app-footer w-full block">
+  <div
+    class="flex items-stretch gap-16 px-12 py-4 max-[900px]:flex-col max-[900px]:gap-6 max-[900px]:p-6"
+  >
+    <!-- Logo -->
+    <div
+      class="w-[22rem] shrink-0 flex items-center py-6 max-[900px]:w-auto max-[900px]:py-0 max-[900px]:justify-center"
+    >
+      <a routerLink="/" aria-label="Human Phenotype Ontology">
+        <img
+          src="assets/hpo-logo-white.png"
+          alt="Human Phenotype Ontology"
+          class="app-footer__logo"
+        />
       </a>
-      <a href="https://www.bihealth.org/" target="__blank" class="mr-4">
-      <img class="footer-brand-larger" src="assets/bih-logo.svg" alt="Berlin Institute of Health logo"/>
-      </a>
+    </div>
+
+    <!-- Nav links -->
+    <nav
+      class="flex-1 min-w-0 py-8 flex justify-center max-[900px]:py-0 max-[900px]:justify-center"
+      aria-label="Footer navigation"
+    >
+      <ul class="list-none m-0 p-0 grid grid-cols-[repeat(3,max-content)] auto-rows-max gap-x-8 gap-y-2 max-[900px]:grid-cols-2 max-[900px]:gap-x-4">
+        @for (item of navItems; track item.label) {
+          <li>
+            @if (item.routerLink) {
+              <a
+                [routerLink]="item.routerLink"
+                class="app-footer__item inline-flex items-center px-3 py-2 rounded-md no-underline font-bold text-base whitespace-nowrap hover:bg-white/10 focus-visible:bg-white/10 focus-visible:outline-none"
+              >{{ item.label }}</a>
+            } @else if (item.url) {
+              <a
+                [href]="item.url"
+                [attr.target]="item.target ?? null"
+                rel="noopener noreferrer"
+                class="app-footer__item inline-flex items-center px-3 py-2 rounded-md no-underline font-bold text-base whitespace-nowrap hover:bg-white/10 focus-visible:bg-white/10 focus-visible:outline-none"
+              >{{ item.label }}</a>
+            }
+          </li>
+        }
+      </ul>
+    </nav>
+
+    <!-- Version -->
+    <div
+      class="flex items-end justify-end py-8 text-xl leading-7 whitespace-nowrap shrink-0 max-[900px]:py-0 max-[900px]:justify-center app-footer__version"
+    >
+      {{ version }}
     </div>
   </div>
 </footer>

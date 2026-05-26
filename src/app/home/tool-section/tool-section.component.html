@@ -1,5 +1,35 @@
-<!-- TODO: HPO-110 — Implement Tool Section Component -->
-<!-- Figma: node 3099:377 — "Explore Available tools" heading + 4 horizontal cards -->
-<section class="p-4 bg-green-50 text-center text-sm text-gray-500 italic">
-  Tool Section — HPO-110
+<section class="flex flex-col gap-14 w-full px-12 py-10">
+  <h2 class="text-2xl font-bold leading-8 capitalize text-[#222]">
+    Explore Available Tools
+  </h2>
+
+  @for (tool of tools; track tool.title; let i = $index) {
+    <p-card class="overflow-hidden" [pt]="{ body: { style: 'padding: 0' }, content: { style: 'padding: 0' } }">
+      <ng-template #content>
+        <div class="flex h-52">
+
+          @if (i % 2 === 0) {
+            <div class="relative shrink-0 w-72 h-full bg-[#1a1a2e]">
+              <img [src]="tool.image" [alt]="tool.title" class="absolute inset-0 w-full h-full object-contain" />
+            </div>
+          }
+
+          <div class="flex flex-1 flex-col gap-4 p-4 min-w-0">
+            <div class="flex flex-col gap-2">
+              <h3 class="text-xl font-bold leading-7 text-[#222]">{{ tool.title }}</h3>
+              <p class="text-base text-[#636363] leading-normal my-0">{{ tool.subtitle }}</p>
+            </div>
+            <p class="text-base text-[#222] leading-relaxed my-0">{{ tool.description }}</p>
+          </div>
+
+          @if (i % 2 !== 0) {
+            <div class="relative shrink-0 w-72 h-full bg-[#1a1a2e]">
+              <img [src]="tool.image" [alt]="tool.title" class="absolute inset-0 w-full h-full object-contain" />
+            </div>
+          }
+
+        </div>
+      </ng-template>
+    </p-card>
+  }
 </section>
