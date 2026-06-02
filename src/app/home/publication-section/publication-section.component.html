@@ -1,5 +1,56 @@
-<!-- TODO: Needs ticket — "Most Recent Publication / Recent Ontology Publications" card -->
-<!-- Figma: node 3099:456 — large horizontal card with image + body -->
-<section class="p-4 bg-purple-50 text-center text-sm text-gray-500 italic">
-  Publication Section — needs ticket
+<section class="flex flex-col items-center gap-16 w-full px-[7.5rem] py-12">
+
+  @if (mostRecentPublication) {
+    <p-card
+      class="w-full max-w-[74rem] overflow-hidden"
+      [pt]="{ body: { style: 'padding: 0' }, content: { style: 'padding: 0' } }"
+    >
+      <ng-template #content>
+        <div class="flex h-96">
+
+          <div class="relative shrink-0 w-[36rem] overflow-hidden">
+            <img
+              src="assets/hpo-diagram.png"
+              alt="HPO Publication"
+              class="absolute inset-0 w-full h-full object-cover"
+            />
+          </div>
+
+          <div class="flex flex-1 flex-col gap-4 p-4 min-w-0">
+            <div class="flex flex-1 flex-col gap-2">
+              <div class="flex flex-col gap-2">
+                <h2 class="text-xl font-bold leading-7 text-[#222] m-0">Most Recent HPO Publication</h2>
+                <p class="text-base text-[#636363] leading-normal m-0">
+                  {{ mostRecentPublication.journal }} &middot; {{ mostRecentPublication.year }}
+                </p>
+              </div>
+              <h3 class="text-lg font-semibold leading-snug text-[#222] m-0">{{ mostRecentPublication.title }}</h3>
+              <p class="text-base text-[#222] leading-relaxed m-0">{{ mostRecentPublication.authors }}</p>
+            </div>
+
+            @if (mostRecentPublication.pmid) {
+              <a
+                [href]="'https://pubmed.ncbi.nlm.nih.gov/' + mostRecentPublication.pmid"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-sm font-semibold text-[#0177b2] hover:underline"
+              >
+                View on PubMed &rarr;
+              </a>
+            }
+          </div>
+
+        </div>
+      </ng-template>
+    </p-card>
+  }
+
+  <p-button
+    label="View all Publications"
+    icon="pi pi-book"
+    iconPos="left"
+    [routerLink]="['/resources/publications']"
+    [raised]="true"
+  />
+
 </section>
