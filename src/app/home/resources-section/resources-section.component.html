@@ -1,5 +1,60 @@
-<!-- TODO: Needs ticket — "Other Resources" section -->
-<!-- Figma: node 3099:487 — 3 vertical cards: GA4GH Partnership, Other HPO Browsers, More from this Team -->
-<section class="p-4 bg-orange-50 text-center text-sm text-gray-500 italic">
-  Resources Section — needs ticket
+<section class="flex flex-col gap-10 w-full max-w-[90%] lg:max-w-[75%] mx-auto px-12 py-10">
+  <h2 class="text-2xl font-bold leading-8 capitalize text-[#222]">
+    Other Resources
+  </h2>
+
+  <div class="flex flex-col sm:flex-row gap-6 items-stretch">
+    @for (resource of resources; track resource.title) {
+      <div class="flex-1 min-w-0">
+        <p-card
+          class="h-full"
+          [style]="{'--p-card-shadow': '0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12)', '--p-card-border-radius': '12px'}"
+          [pt]="{
+            body: { style: 'padding: 0; height: 100%' },
+            content: { style: 'padding: 0; height: 100%' }
+          }"
+        >
+          <ng-template #content>
+            <div class="flex flex-col h-full overflow-hidden rounded-[12px]">
+              <div class="h-[172px] relative shrink-0 w-full overflow-hidden bg-[#1a1a2e]">
+                @if (resource.header.type === 'image') {
+                  <img
+                    [src]="resource.header.src"
+                    [alt]="resource.title"
+                    class="absolute inset-0 w-full h-full"
+                    [style.object-fit]="resource.header.fit ?? 'cover'"
+                  />
+                } @else {
+                  <div
+                    class="absolute inset-0 flex items-center justify-center"
+                    [style.background-color]="resource.header.bgColor ?? '#1a1a2e'"
+                  >
+                    <i
+                      [class]="resource.header.icon"
+                      class="!text-[4rem]"
+                      [style.color]="resource.header.iconColor ?? '#ffffff'"
+                    ></i>
+                  </div>
+                }
+              </div>
+
+              <div class="flex flex-col gap-4 p-4 flex-1">
+                <div class="flex flex-col gap-2">
+                  <h3 class="text-xl font-bold leading-7 text-[#222] my-0">
+                    {{ resource.title }}
+                  </h3>
+                  <p class="text-base text-[#636363] leading-normal my-0">
+                    {{ resource.subtitle }}
+                  </p>
+                </div>
+                <p class="text-base text-[#222] leading-relaxed my-0">
+                  {{ resource.description }}
+                </p>
+              </div>
+            </div>
+          </ng-template>
+        </p-card>
+      </div>
+    }
+  </div>
 </section>
