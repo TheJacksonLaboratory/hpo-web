@@ -1,0 +1,24 @@
+<section class="py-12 bg-stone-50">
+  <h2 class="text-center text-xl md:text-2xl font-bold text-[#222] mb-10 px-4">
+    Powering Genomics and Healthcare Applications Worldwide
+  </h2>
+  <div class="marquee-wrapper">
+    <div class="flex items-center gap-16 marquee-track">
+      @for (logo of logos; track logo.alt) {
+        <img
+          [src]="logo.src"
+          [alt]="logo.alt"
+          class="h-10 md:h-14 w-auto max-w-[8rem] md:max-w-[10rem] object-contain shrink-0 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+        />
+      }
+      @for (logo of logos; track logo.alt) {
+        <img
+          [src]="logo.src"
+          [alt]="logo.alt"
+          aria-hidden="true"
+          class="h-10 md:h-14 w-auto max-w-[8rem] md:max-w-[10rem] object-contain shrink-0 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+        />
+      }
+    </div>
+  </div>
+</section>

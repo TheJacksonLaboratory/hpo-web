@@ -9,6 +9,7 @@ import { ConnectSectionComponent } from './connect-section/connect-section.compo
 import { ResourcesSectionComponent } from './resources-section/resources-section.component';
 import { CitationSectionComponent } from './citation-section/citation-section.component';
 import { FundingSectionComponent } from './funding-section/funding-section.component';
+import { TrustedBySectionComponent } from './trusted-by-section/trusted-by-section.component';
 
 @Component({
   selector: 'app-home',
@@ -23,6 +24,7 @@ import { FundingSectionComponent } from './funding-section/funding-section.compo
     ResourcesSectionComponent,
     CitationSectionComponent,
     FundingSectionComponent,
+    TrustedBySectionComponent,
   ],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
