@@ -8,7 +8,8 @@
         <img
           [src]="logo.src"
           [alt]="logo.alt"
-          class="h-10 md:h-14 w-auto max-w-[8rem] md:max-w-[10rem] object-contain shrink-0 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+          loading="eager"
+          class="h-10 md:h-14 w-[8rem] md:w-[10rem] object-contain shrink-0 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
         />
       }
       @for (logo of logos; track logo.alt) {
@@ -16,7 +17,8 @@
           [src]="logo.src"
           [alt]="logo.alt"
           aria-hidden="true"
-          class="h-10 md:h-14 w-auto max-w-[8rem] md:max-w-[10rem] object-contain shrink-0 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+          loading="eager"
+          class="h-10 md:h-14 w-[8rem] md:w-[10rem] object-contain shrink-0 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
         />
       }
     </div>
