@@ -50,11 +50,12 @@ export class ResourcesSectionComponent {
       url: 'https://www.jax.org/',
     },
     {
-      header: { type: 'image', src: 'assets/other-browser-images/ols.png', fit: 'cover' },
-      title: 'Other HPO Browsers',
+      header: { type: 'image', src: 'assets/tools-banner.png', fit: 'cover' },
+      title: 'HPO Tools',
       subtitle: 'Explore HPO in Other Tools',
       description:
-        'HPO is integrated into many leading ontology platforms. Explore phenotype ontology terms through BioPortal, OLS, Ontobee, and other community tools that build on the HPO standard.',
+        'HPO is integrated into many genomic, diagnostic, and AI resources. Explore and leverage the phenotype ontology terms through BioPortal, OLS, Ontobee, and other tools that build on the HPO standard.',
+      url: 'https://obophenotype.github.io/human-phenotype-ontology/tools/overview/'   
     }
   ];
 }
