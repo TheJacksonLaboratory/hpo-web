@@ -41,20 +41,20 @@ export class ResourcesSectionComponent {
         'HPO is a core component of GA4GH standards, including Phenopackets and the Variant Interpretation for Cancer Consortium. Our collaboration drives interoperability across genomic and clinical data sharing worldwide.',
       url: 'https://www.ga4gh.org/',
     },
+   {
+      header: { type: 'image', src: 'assets/abstract-blue.png', fit: 'cover'},
+      title: 'Robinson Lab Bioinformatics',
+      subtitle: 'More about this Team',
+      description:
+        'Discover additional tools, datasets, and research outputs from the Robinson Lab at Charite and The Jackson Laboratory. Our team develops open-source resources for phenotype-driven disease analysis and genomic medicine.',
+      url: 'https://www.jax.org/',
+    },
     {
       header: { type: 'image', src: 'assets/other-browser-images/ols.png', fit: 'cover' },
       title: 'Other HPO Browsers',
       subtitle: 'Explore HPO in Other Tools',
       description:
         'HPO is integrated into many leading ontology platforms. Explore phenotype ontology terms through BioPortal, OLS, Ontobee, and other community tools that build on the HPO standard.',
-    },
-    {
-      header: { type: 'icon', icon: 'pi pi-users', bgColor: '#1a1a2e', iconColor: '#ffffff' },
-      title: 'More from this Team',
-      subtitle: 'Robinson Lab Bioinformatics',
-      description:
-        'Discover additional tools, datasets, and research outputs from the Robinson Lab at Charite and The Jackson Laboratory. Our team develops open-source resources for phenotype-driven disease analysis and genomic medicine.',
-      url: 'https://www.jax.org/',
-    },
+    }
   ];
 }
