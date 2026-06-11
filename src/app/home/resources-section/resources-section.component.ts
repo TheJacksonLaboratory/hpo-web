@@ -42,7 +42,7 @@ export class ResourcesSectionComponent {
       url: 'https://www.ga4gh.org/',
     },
    {
-      header: { type: 'image', src: 'assets/abstract-blue.png', fit: 'cover'},
+      header: { type: 'image', src: 'assets/abstract-blue.png', fit: 'cover' },
       title: 'Robinson Lab Bioinformatics',
       subtitle: 'More about this Team',
       description:
