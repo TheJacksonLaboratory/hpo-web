@@ -54,7 +54,7 @@ export class ResourcesSectionComponent {
       title: 'HPO Tools',
       subtitle: 'Explore HPO in Other Tools',
       description:
-        'HPO is integrated into many genomic, diagnostic, and AI resources. Explore and leverage the phenotype ontology terms through BioPortal, OLS, Ontobee, and other tools that build on the HPO standard.',
+        'Many genomic, diagnostic, and AI resources build on the HPO standard. Explore and leverage the phenotype ontology terms through BioPortal, OLS, Ontobee, and other tools.',
       url: 'https://obophenotype.github.io/human-phenotype-ontology/tools/overview/'   
     }
   ];
