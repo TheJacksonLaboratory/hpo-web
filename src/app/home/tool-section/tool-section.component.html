@@ -1,18 +1,20 @@
-<section class="flex flex-col gap-14 w-full px-12 py-10">
+<section class="flex flex-col gap-14 w-full max-w-[90%] lg:max-w-[75%] mx-auto px-12 py-10">
   <h2 class="text-2xl font-bold leading-8 capitalize text-[#222]">
     Explore Available Tools
   </h2>
 
   @for (tool of tools; track tool.title; let i = $index) {
-    <p-card class="overflow-hidden" [pt]="{ body: { style: 'padding: 0' }, content: { style: 'padding: 0' } }">
+    <p-card [style]="{'--p-card-shadow': '0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12)'}" [pt]="{
+      body: { style: 'padding: 0' },
+      content: { style: 'padding: 0' }
+    }">
       <ng-template #content>
-        <div class="flex h-52">
+        <div class="flex flex-col sm:flex-row min-h-52 overflow-hidden rounded-[12px]">
 
-          @if (i % 2 === 0) {
-            <div class="relative shrink-0 w-72 h-full bg-[#1a1a2e]">
-              <img [src]="tool.image" [alt]="tool.title" class="absolute inset-0 w-full h-full object-contain" />
-            </div>
-          }
+          <div class="relative w-full h-48 sm:h-auto sm:w-72 sm:shrink-0 sm:self-stretch bg-[#1a1a2e]"
+               [class.sm:order-last]="i % 2 !== 0">
+            <img [src]="tool.image" [alt]="tool.title" class="absolute inset-0 w-full h-full object-contain" />
+          </div>
 
           <div class="flex flex-1 flex-col gap-4 p-4 min-w-0">
             <div class="flex flex-col gap-2">
@@ -21,12 +23,6 @@
             </div>
             <p class="text-base text-[#222] leading-relaxed my-0">{{ tool.description }}</p>
           </div>
-
-          @if (i % 2 !== 0) {
-            <div class="relative shrink-0 w-72 h-full bg-[#1a1a2e]">
-              <img [src]="tool.image" [alt]="tool.title" class="absolute inset-0 w-full h-full object-contain" />
-            </div>
-          }
 
         </div>
       </ng-template>

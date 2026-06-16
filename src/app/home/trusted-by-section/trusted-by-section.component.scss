@@ -1,0 +1,35 @@
+:host {
+  display: block;
+  max-width: 100%;
+}
+
+.marquee-wrapper {
+  position: relative;
+  width: 100%;
+  height: 3.5rem;
+  overflow: hidden;
+
+  @media (min-width: 768px) {
+    height: 4.5rem;
+  }
+}
+
+.marquee-track {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: max-content;
+  height: 100%;
+  will-change: transform;
+  animation: marquee 30s linear infinite;
+
+}
+
+@keyframes marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
