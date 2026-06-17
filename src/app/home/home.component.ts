@@ -6,7 +6,6 @@ import { ToolSectionComponent } from './tool-section/tool-section.component';
 import { VideoSectionComponent } from './video-section/video-section.component';
 import { PublicationSectionComponent } from './publication-section/publication-section.component';
 import { ResourcesSectionComponent } from './resources-section/resources-section.component';
-import { CitationSectionComponent } from './citation-section/citation-section.component';
 import { TrustedBySectionComponent } from './trusted-by-section/trusted-by-section.component';
 
 @Component({
@@ -19,8 +18,7 @@ import { TrustedBySectionComponent } from './trusted-by-section/trusted-by-secti
     VideoSectionComponent,
     PublicationSectionComponent,
     ResourcesSectionComponent,
-    CitationSectionComponent,
-    TrustedBySectionComponent,
+    TrustedBySectionComponent
   ],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
