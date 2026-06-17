@@ -1,5 +1,21 @@
-<!-- TODO: Needs ticket — "Most Recent Publication / Recent Ontology Publications" card -->
-<!-- Figma: node 3099:456 — large horizontal card with image + body -->
-<section class="p-4 bg-purple-50 text-center text-sm text-gray-500 italic">
-  Publication Section — needs ticket
-</section>
+<div
+  class="px-4 md:px-12 py-12 font-main bg-center bg-cover text-white w-full"
+  style="background-image: url('assets/growth-banner.png');"
+>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-10 items-center">
+    <p class="font-bold text-4xl md:text-left text-center">
+      Our Impact Is Accelerating.
+    </p>
+    <p class="md:border-l-4 md:border-white md:pl-3 md:text-left text-center">
+      Thanks to researchers in 150+ countries, HPO is now among 1% most cited papers in science.
+    </p>
+    <div class="flex justify-center">
+      <p-button
+        label="Read the Paper"
+        icon="pi pi-external-link"
+        iconPos="right"
+        (onClick)="openPaper()"
+      />
+    </div>
+  </div>
+</div>

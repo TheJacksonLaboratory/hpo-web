@@ -94,19 +94,6 @@ export interface LoincEntry {
   longName: string;
 }
 
-export interface Publication {
-  authors: string;
-  title: string;
-  journal: string;
-  year: number;
-  volume: string;
-  pages: string;
-  pmid: string;
-  inhouse: boolean;
-  hpo: boolean;
-  monarch: boolean;
-  topicList: string[];
-}
 
 export interface Organization extends SimpleTerm {
   description?: string;
