@@ -13,6 +13,7 @@
     "test:ci": "jest --ci --coverage --watchAll=false",
     "lint": "ng lint",
     "fixlint": "ng lint --fix",
+    "update-citations": "node scripts/update-citations.js",
     "e2e": "cypress run",
     "e2e:open": "cypress open"
   },

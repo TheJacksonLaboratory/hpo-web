@@ -26,8 +26,6 @@ export const environment = {
   HPO_UNIPROT_WIDGET_URL: 'https://www.uniprot.org/uniprot/',
   // News
   HPO_NEWS_JSON_URL: 'https://raw.githubusercontent.com/monarch-initiative/hpo-web-config/master/news.json',
-  // Publications
-  HPO_PUBLICATION_REST_URL: 'https://raw.githubusercontent.com/monarch-initiative/hpo-web-config/master/hpocitations.txt',
   //HPOA
   HPO_ANNOTATION_FILE_PURL: 'https://purl.obolibrary.org/obo/hp/hpoa/phenotype.hpoa',
   MAXO_ANNOTATION_FILE_PURL: 'https://purl.obolibrary.org/obo/maxo/maxo-annotations.tsv',
