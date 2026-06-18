@@ -1,5 +1,19 @@
-<!-- TODO: Needs ticket — "What is HPO?" video card (part of HPO-2 epic) -->
-<!-- Figma: node 3099:431 — video card in light blue bg -->
-<section class="p-4 bg-indigo-50 text-center text-sm text-gray-500 italic">
-  Video Section — needs ticket
+<section class="flex justify-center px-8 py-12 lg:px-[7.5rem]">
+  <div class="w-full max-w-[49.375rem] rounded-xl border border-[#c8ced5] bg-white p-6
+              shadow-[0px_1px_3px_0px_rgba(0,0,0,0.1),0px_1px_2px_-1px_rgba(0,0,0,0.1)]
+              flex flex-col gap-2">
+    <div class="overflow-hidden rounded-xl">
+      <iframe
+        [src]="videoUrl"
+        class="w-full aspect-video block"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+        title="What is HPO?"
+      ></iframe>
+    </div>
+    <div class="flex flex-col gap-2 p-4">
+      <p class="text-xl font-bold leading-7 text-[#222] my-0">What is HPO?</p>
+      <p class="text-base text-[#636363] leading-normal my-0">2 min</p>
+    </div>
+  </div>
 </section>
