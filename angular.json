@@ -23,8 +23,9 @@
               "src/favicon.ico"
             ],
             "styles": [
+              "node_modules/@jax-data-science/components/styles/styles.css",
+              "node_modules/@jax-data-science/components/styles/components-tailwind.css",
               "src/styles.scss",
-              "node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "node_modules/primeicons/primeicons.css"
             ],
             "scripts": [],

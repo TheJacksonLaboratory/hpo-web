@@ -27,44 +27,56 @@ if (environment.production) {
         700: '{cyan.700}',
         800: '{cyan.800}',
         900: '{cyan.900}',
-      }
-    },
-    colorScheme: {
-      light: {
-        surface: {
-          50: '{teal.50}',
-          100: '{teal.100}',
-          200: '{teal.200}',
-          300: '{teal.300}',
-          400: '{teal.400}',
-          500: '{teal.500}',
-          600: '{teal.600}',
-          700: '{teal.700}',
-          800: '{teal.800}',
-          900: '{teal.900}',
+      },
+      colorScheme: {
+        light: {
+          surface: {
+            50: '{teal.50}',
+            100: '{teal.100}',
+            200: '{teal.200}',
+            300: '{teal.300}',
+            400: '{teal.400}',
+            500: '{teal.500}',
+            600: '{teal.600}',
+            700: '{teal.700}',
+            800: '{teal.800}',
+            900: '{teal.900}',
+          },
+          formField: {
+            placeholderColor: '{gray.600}'
+          }
         },
-        formField: {
-          placeholderColor: '{gray.600}'
+        dark: {
+          surface: {
+            0: '#ffffff',
+            50: '{slate.50}',
+            100: '{slate.100}',
+            200: '{slate.200}',
+            300: '{slate.300}',
+            400: '{slate.400}',
+            500: '{slate.500}',
+            600: '{slate.600}',
+            700: '{slate.700}',
+            800: '{slate.800}',
+            900: '{slate.900}',
+            950: '{slate.950}'
+          }
         }
       },
-      dark: {
-        surface: {
-          0: '#ffffff',
-          50: '{slate.50}',
-          100: '{slate.100}',
-          200: '{slate.200}',
-          300: '{slate.300}',
-          400: '{slate.400}',
-          500: '{slate.500}',
-          600: '{slate.600}',
-          700: '{slate.700}',
-          800: '{slate.800}',
-          900: '{slate.900}',
-          950: '{slate.950}'
-        }
-      }
     },
     components: {
+      menubar: {
+        colorScheme: {
+          light: {
+            root: {
+              color: '#000000'
+            },
+            item: {
+              color: '#000000'
+            }
+          }
+        }
+      },
       message: {
         colorScheme: {
           light: {
