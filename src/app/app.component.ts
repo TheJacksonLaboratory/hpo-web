@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { Meta } from '@angular/platform-browser';
 
-import { NavbarComponent } from '@jax-data-science/components';
+import { JdsMenuItem, NavbarComponent } from '@jax-data-science/components';
 import { FooterComponent } from './shared/footer/footer.component';
 import { FloatingFeedbackComponent } from './shared/floating-feedback/floating-feedback.component';
 import { environment } from '../environments/environment';
@@ -22,7 +22,7 @@ import { environment } from '../environments/environment';
 })
 export class AppComponent {
 
-  readonly navbarItems =
+  readonly navbarItems: JdsMenuItem =
     [
       {
         label: "About",
@@ -34,28 +34,25 @@ export class AppComponent {
           [
             {
               label: "Ontology",
-              routerLink: "about"
+              routerLink: "data/ontology"
             },
             {
               label: "API",
-              routerLink: "downloads"
+              routerLink: "data/api"
             }
           ]
       },
       {
         label: "Tools",
         icon: "",
-        items:
-          [
-            {
-              label: "ISA Data",
-              routerLink: "services/docs/isa-data",
-            }
-          ]
+        routerLink: ""
       },
       {
         label: "Documentation",
-        icon: "pi pi-external-link"
+        icon: "pi pi-external-link",
+        iconEnd: true,
+        url: "https://obophenotype.github.io/human-phenotype-ontology/",
+        target: '_blank'
       }
     ]
   constructor(meta: Meta) {
