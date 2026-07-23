@@ -10,6 +10,7 @@
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:application",
+          "defaultConfiguration": "development",
           "options": {
             "aot": true,
             "outputPath": "dist/hpo-web",
@@ -39,13 +40,7 @@
                   "maximumWarning": "6kb"
                 }
               ],
-              "sourceMap": true,
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.dev.ts"
-                }
-              ]
+              "sourceMap": true
             },
             "sqa": {
               "budgets": [

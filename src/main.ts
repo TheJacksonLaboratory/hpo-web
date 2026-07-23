@@ -92,7 +92,30 @@ if (environment.production) {
          colorScheme: {
           light: {
             link: {
-              color: '{primary.700}', 
+              color: '{primary.700}',
+            }
+          }
+        }
+      },
+      tabs: {
+        // No border on the tablist container itself: its border-box is 1px taller than
+        // each .p-tab child (border adds to its own height), so a border here always
+        // lands 1px below each tab's own border-bottom. Drawing the line on the tabs
+        // themselves instead keeps every tab's border on the same pixel row.
+        tablist: {
+          background: 'white',
+        },
+        tab: {
+          borderWidth: '0 0 1px 0',
+          color: '#636363',
+          activeColor: '{primary.700}',
+          borderColor: '#D9D9D9',
+          activeBorderColor: '{primary.700}',
+        },
+        colorScheme: {
+          light: {
+            tab: {
+              background: 'rgba(0, 0, 0, 0)'
             }
           }
         }

@@ -1,0 +1,25 @@
+<div class="flex items-start w-full">
+  <div class="flex flex-col items-center justify-center shrink-0 w-8 pt-4">
+    <i class="pi pi-bolt text-lg text-[#16191d]"></i>
+  </div>
+
+  <p-card styleClass="w-full shadow-none!" [pt]="{ body: { style: 'padding: 0' }, content: { style: 'padding: 0' } }">
+    <ng-template #content>
+      <div class="flex flex-col gap-1 px-4 py-3 w-full">
+        <a
+          [routerLink]="item.routerLink"
+          class="font-semibold text-base leading-6 text-[#0177b2] underline w-fit"
+        >
+          {{ item.title }}
+        </a>
+        <p class="text-base text-[#636363] my-0">{{ item.subtitle }}</p>
+        @if (item.description) {
+          <p
+            class="text-base text-[#222] leading-relaxed my-0"
+            [innerHTML]="{ name: item.description } | highlight: query"
+          ></p>
+        }
+      </div>
+    </ng-template>
+  </p-card>
+</div>

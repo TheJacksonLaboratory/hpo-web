@@ -4,28 +4,45 @@
       pInputText
       type="text"
       class="w-full text-base md:text-xl"
-      placeholder="Search for phenotypes, diseases or genes, including synonyms"
+      [placeholder]="placeholder"
       [(ngModel)]="searchQuery"
       (keyup.enter)="submitSearch(searchQuery)"
     />
-    <div class="flex flex-wrap items-center gap-2 text-gray-900 text-sm md:text-base">
-      <span class="leading-snug">Popular Searches:</span>
-      @for (term of popularSearches; track term) {
-        <p-button
-          class="font-semibold !underline"
-          (click)="submitSearch(term)"
-          link
-        >
-          <span class="underline">{{ term }}</span>
-        </p-button>
-      }
-    </div>
+    @if (showPopularSearches) {
+      <div class="flex flex-wrap items-center gap-2 text-gray-900 text-sm md:text-base">
+        <span class="leading-snug">Popular Searches:</span>
+        @for (term of popularSearches; track term) {
+          <p-button
+            class="font-semibold !underline"
+            (click)="submitSearch(term)"
+            link
+          >
+            <span class="underline">{{ term }}</span>
+          </p-button>
+        }
+      </div>
+    }
+    @if (showAdditionalCriteria) {
+      <!-- Visual-only stub: no additional-criteria form exists in the design yet -->
+      <button
+        type="button"
+        class="flex items-center gap-2 text-base font-bold text-[#0177b2] bg-transparent border-0 cursor-pointer p-0 w-fit"
+        (click)="toggleAdditionalCriteria()"
+      >
+        <i class="pi" [class.pi-chevron-right]="!additionalCriteriaExpanded" [class.pi-chevron-down]="additionalCriteriaExpanded"></i>
+        Additional Search Criteria
+      </button>
+    }
   </div>
 
-  <p-button
-    label="Search"
-    icon="pi pi-search"
-    styleClass="h-[3.2rem] text-xl"
-    (onClick)="submitSearch(searchQuery)"
-  />
+  @if (showAdditionalCriteria) {
+    <p-button icon="pi pi-search" [rounded]="true" styleClass="h-12 w-12" (onClick)="submitSearch(searchQuery)" />
+  } @else {
+    <p-button
+      label="Search"
+      icon="pi pi-search"
+      styleClass="h-[3.2rem] text-xl"
+      (onClick)="submitSearch(searchQuery)"
+    />
+  }
 </div>
