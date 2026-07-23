@@ -8,5 +8,15 @@ export const browserRoutes: Routes = [
   { path: 'term/:id', component: TermComponent },
   { path: 'disease/:id', component: DiseaseComponent },
   { path: 'gene/:id', component: GeneComponent },
-  { path: 'profile-search', component: ProfileSearchComponent }
+  { path: 'profile-search', component: ProfileSearchComponent },
+  // Backwards compatibility: search moved to the top-level /search route.
+  // A plain string redirectTo drops query params, so this preserves q/navFilter.
+  {
+    path: 'search',
+    pathMatch: 'full',
+    redirectTo: ({ queryParams }) => {
+      const params = new URLSearchParams(queryParams as Record<string, string>).toString();
+      return params ? `/search?${params}` : '/search';
+    }
+  }
 ];
