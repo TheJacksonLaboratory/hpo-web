@@ -19,13 +19,26 @@
   <div class="flex flex-col w-full px-8 md:px-32 pt-10">
     <div class="flex flex-col gap-4 w-full">
       <div class="flex flex-col gap-2 w-full">
+        <h2 class="text-xl font-bold leading-7 text-[#222] m-0">Search Results for "{{ query }}"</h2>
+        <p class="text-xs leading-5 text-[#222] m-0">
+          Not seeing what you're looking for?
+          <a
+            href="https://github.com/obophenotype/human-phenotype-ontology/issues/new/choose"
+            target="_blank"
+            class="text-[#0177b2] font-semibold underline"
+          >Contribute a term</a>
+        </p>
+      </div>
+
+      <div class="flex flex-col gap-2 w-full">
 
         <p-tabs [value]="activeCategory" (valueChange)="onTabChange($event)">
           <p-tablist>
-            <p-tab value="all">All Terms</p-tab>
-            <p-tab value="term">Phenotypes ({{ termItems.length }})</p-tab>
-            <p-tab value="disease">Diseases ({{ diseaseItems.length }})</p-tab>
-            <p-tab value="gene">Genes ({{ geneItems.length }})</p-tab>
+            <!-- Hidden for now until "All Terms" has a real cross-category implementation -->
+            <p-tab value="all" class="hidden">All Terms</p-tab>
+            <p-tab value="term">Phenotypes <span class="font-normal">({{ termItems.length }})</span></p-tab>
+            <p-tab value="disease">Diseases <span class="font-normal">({{ diseaseItems.length }})</span></p-tab>
+            <p-tab value="gene">Genes <span class="font-normal">({{ geneItems.length }})</span></p-tab>
             <!--
               Plain filler flex-item projected into the same tab-list row so the
               baseline continues past the last tab. p-tablist's own opaque white
@@ -50,20 +63,27 @@
             }
           </div>
 
-          <div class="flex items-center gap-2 ml-auto">
-            <span class="text-base text-[#454545]">Sorted by:</span>
-            <!-- Visual-only stub: no alternate sort logic exists yet -->
+          <div class="flex items-center gap-2">
+            <span class="text-xs md:text-base text-[#454545]">Sorted by:</span>
+            <!--
+              Visual-only stub: no alternate sort logic exists yet.
+              Below md, styled to match the "Additional Search Criteria" link
+              (bold blue text, no box) - PrimeNG's own border/background/color
+              tokens win a specificity tie against plain Tailwind utilities
+              (border-none doesn't stick), so these are overridden directly
+              via their underlying CSS custom properties instead.
+            -->
             <p-select
               [options]="sortOptions"
               [(ngModel)]="sortBy"
               optionLabel="label"
-              styleClass="border-none"
+              styleClass="text-xs font-bold [--p-select-padding-x:8px] [--p-select-padding-y:6px] max-md:[--p-select-border-color:transparent] max-md:[--p-select-background:transparent] max-md:[--p-select-color:#0177b2] max-md:[--p-select-dropdown-color:#0177b2] max-md:shadow-none md:text-base md:font-normal md:[--p-select-padding-x:12px] md:[--p-select-padding-y:8px]"
             />
           </div>
         </div>
       </div>
 
-      <div class="flex flex-col gap-3 w-full">
+      <div class="flex flex-col gap-1 w-full">
         @for (item of pagedItems; track item.id) {
           <app-search-result-card [item]="item" [query]="query" />
         } @empty {

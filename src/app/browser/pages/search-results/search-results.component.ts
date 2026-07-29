@@ -29,7 +29,9 @@ export class SearchResultsComponent {
 
   query: string;
   isLoading = true;
-  activeCategory: ResultCategory = 'all';
+  // "All Terms" tab is hidden for now until it has a real cross-category
+  // implementation (today it's just a naive concatenation) - default to Phenotypes.
+  activeCategory: ResultCategory = 'term';
 
   termItems: SearchResultItem[] = [];
   diseaseItems: SearchResultItem[] = [];
@@ -57,7 +59,7 @@ export class SearchResultsComponent {
   constructor(private route: ActivatedRoute, private router: Router, private searchService: SearchService) {
     this.route.queryParams.subscribe((params) => {
       this.query = params['q'];
-      this.activeCategory = (params['navFilter'] as ResultCategory) ?? 'all';
+      this.activeCategory = this.normalizeCategory(params['navFilter']);
       this.reloadResultsData();
     });
   }
@@ -71,14 +73,12 @@ export class SearchResultsComponent {
 
   get activeCategoryItems(): SearchResultItem[] {
     switch (this.activeCategory) {
-      case 'term':
-        return this.termItems;
       case 'disease':
         return this.diseaseItems;
       case 'gene':
         return this.geneItems;
       default:
-        return this.allItems;
+        return this.termItems;
     }
   }
 
@@ -87,8 +87,14 @@ export class SearchResultsComponent {
   }
 
   onTabChange(category: string | number | undefined): void {
-    this.activeCategory = (category as ResultCategory) ?? 'all';
+    this.activeCategory = this.normalizeCategory(category as string);
     this.first = 0;
+  }
+
+  // "All Terms" tab is hidden for now (see activeCategory) - treat it as Phenotypes
+  // so old links/navFilter=all don't land on a tab that isn't shown.
+  private normalizeCategory(navFilter: string | undefined): ResultCategory {
+    return navFilter === 'disease' || navFilter === 'gene' ? navFilter : 'term';
   }
 
   onPageChange(event: PaginatorState): void {
