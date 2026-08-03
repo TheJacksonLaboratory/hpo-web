@@ -31,19 +31,18 @@ if (environment.production) {
       colorScheme: {
         light: {
           surface: {
-            50: '{teal.50}',
-            100: '{teal.100}',
-            200: '{teal.200}',
-            300: '{teal.300}',
-            400: '{teal.400}',
-            500: '{teal.500}',
-            600: '{teal.600}',
-            700: '{teal.700}',
-            800: '{teal.800}',
-            900: '{teal.900}',
-          },
-          formField: {
-            placeholderColor: '{gray.600}'
+            0: '#ffffff',
+            50: '{grey.100}',
+            100: '{grey.200}',
+            200: '{grey.300}',
+            300: '{grey.300}',
+            400: '{grey.500}',
+            500: '{grey.700}',
+            600: '{grey.800}',
+            700: '{grey.900}',
+            800: '{grey.900}',
+            900: '{grey.1000}',
+            950: '{grey.1000}'
           }
         },
         dark: {
@@ -69,6 +68,7 @@ if (environment.production) {
         colorScheme: {
           light: {
             root: {
+              background: '{teal.400}',
               color: '#000000'
             },
             item: {
@@ -92,7 +92,33 @@ if (environment.production) {
          colorScheme: {
           light: {
             link: {
-              color: '{primary.700}', 
+              color: '{primary.700}',
+            }
+          }
+        }
+      },
+      select: {
+        option: {
+          focusBackground: '{primary.50}'
+        }
+      },
+      tabs: {
+        tablist: {
+          background: 'white',
+        },
+        tab: {
+          borderWidth: '0 0 1px 0',
+          color: '#636363',
+          activeColor: '{primary.700}',
+          borderColor: '#D9D9D9',
+          hoverBorderColor: '#D9D9D9',
+          activeBorderColor: '{primary.700}',
+        },
+        colorScheme: {
+          light: {
+            tab: {
+              background: 'rgba(0, 0, 0, 0)',
+              hoverBackground: '{primary.50}'
             }
           }
         }

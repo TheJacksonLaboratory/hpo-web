@@ -126,7 +126,7 @@ export class SearchComponent implements OnInit {
     if (this.searchstate === 'active') {
       this.searchstate = 'inactive';
     }
-    this.router.navigate(['/browse/search'], { queryParams: { q: input, navFilter: this.navFilter } });
+    this.router.navigate(['/search'], { queryParams: { q: input, navFilter: this.navFilter } });
   }
 
   isCorrectCategory(filter: string) {

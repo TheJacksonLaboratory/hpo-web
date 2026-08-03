@@ -17,7 +17,7 @@
     @if (!notFoundFlag) {
       <div class="search-all">
         @if (queryText) {
-          <a routerLink="/browse/search" [queryParams]="{'q': queryText, 'navFilter': 'all'}">
+          <a routerLink="/search" [queryParams]="{'q': queryText, 'navFilter': 'all'}">
             See all results for '{{queryText}}'
           </a>
         }

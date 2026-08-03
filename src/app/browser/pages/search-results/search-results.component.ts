@@ -1,158 +1,173 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
-import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
-import { Disease, Gene, Term } from '../../models/models';
+import { Tabs, TabList, Tab } from 'primeng/tabs';
+import { ToggleButton } from 'primeng/togglebutton';
+import { Select } from 'primeng/select';
+import { Paginator, PaginatorState } from 'primeng/paginator';
+
+import { SimpleTerm, Term } from '../../models/models';
 import { SearchService } from '../../../shared/search/service/search.service';
-import { ActivatedRoute, RouterModule } from '@angular/router';
-import { HighlightPipe } from '../../../shared/pipes/highlight.pipe';
+import { SearchResultCardComponent, SearchResultItem } from './search-result-card/search-result-card.component';
+import { SearchFormComponent } from '../../../shared/search/search-form/search-form.component';
 
-import { MatCardModule } from '@angular/material/card';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { MatTabsModule } from '@angular/material/tabs';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
+type ResultCategory = 'all' | 'term' | 'disease' | 'gene';
+
+interface SortOption {
+  label: string;
+  value: string;
+}
 
 @Component({
-    selector: 'app-search-results',
-    imports: [
-    RouterModule,
-    MatCardModule,
-    MatProgressBarModule,
-    MatTabsModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatFormFieldModule,
-    MatInputModule,
-    HighlightPipe
-],
-    templateUrl: './search-results.component.html',
-    styleUrls: ['./search-results.component.css']
+  selector: 'app-search-results',
+  standalone: true,
+  imports: [FormsModule, Tabs, TabList, Tab, ToggleButton, Select, Paginator, SearchResultCardComponent, SearchFormComponent],
+  templateUrl: './search-results.component.html',
 })
 export class SearchResultsComponent {
 
   query: string;
-  terms: Term[] = [];
-  diseases: Disease[] = [];
-  genes: Gene[] = [];
   isLoading = true;
-  navFilter = 'term';
-  selectedTab = 0;
+  // "All Terms" tab is hidden for now until it has a real cross-category
+  // implementation (today it's just a naive concatenation) - default to Phenotypes.
+  activeCategory: ResultCategory = 'term';
 
-  termDisplayedColumns = ['ontologyId', 'name', 'matching_string', 'synonym_match'];
-  termDataSource
+  termItems: SearchResultItem[] = [];
+  diseaseItems: SearchResultItem[] = [];
+  geneItems: SearchResultItem[] = [];
+  allItems: SearchResultItem[] = [];
 
-  diseaseDisplayedColumns = ['diseaseId', 'dbName', 'matching_string'];
-  diseaseDataSource;
+  // Visual-only stub: not wired to any real subcategory filtering data/API yet.
+  subcategoryPills = ['Placeholder Subcategory', 'Placeholder Subcategory', 'Placeholder Subcategory'];
+  subcategoryPillActive: boolean[] = this.subcategoryPills.map(() => false);
 
-  geneDisplayedColumns = ['entrezGeneId', 'entrezGeneSymbol', 'matching_string'];
-  geneDataSource: MatTableDataSource<Gene>;
+  // Visual-only stub: options match the Figma menu, but no sort logic is wired yet.
+  sortOptions: SortOption[] = [
+    { label: 'Most Relevant', value: 'relevant' },
+    { label: 'Identifier (A-Z)', value: 'identifier-asc' },
+    { label: 'Identifier (Z-A)', value: 'identifier-desc' },
+    { label: 'Name (A-Z)', value: 'name-asc' },
+    { label: 'Name (Z-A)', value: 'name-desc' },
+  ];
+  sortBy: SortOption = this.sortOptions[0];
 
-  @ViewChild('termPaginator', { static: true }) termPaginator: MatPaginator;
-  @ViewChild('diseasePaginator', { static: true }) diseasePaginator: MatPaginator;
-  @ViewChild('genePaginator', { static: true }) genePaginator: MatPaginator;
+  first = 0;
+  rows = 10;
+  rowsPerPageOptions = [10, 20];
 
-
-  constructor(private route: ActivatedRoute, private searchService: SearchService) {
+  constructor(private route: ActivatedRoute, private router: Router, private searchService: SearchService) {
     this.route.queryParams.subscribe((params) => {
       this.query = params['q'];
-      this.navFilter = params['navFilter'];
-
+      this.activeCategory = this.normalizeCategory(params['navFilter']);
       this.reloadResultsData();
     });
   }
 
-  setSelectedTab() {
-    // Filter should have precedence
-    // then if the filter is as is default to the most counts
-    if (this.navFilter === 'all') {
-      const counts = { 'term': this.termDataSource.data.length, 'gene': this.geneDataSource.data.length, 'disease': this.diseaseDataSource.data.length };
-      const maxTab = Object.keys(counts).reduce((a, b) => counts[a] > counts[b] ? a : b);
-      this.determineTab(maxTab);
-    } else {
-      this.determineTab(this.navFilter);
-    }
-  }
-
-  determineTab(filterItem: string) {
-    if (filterItem === 'disease') {
-      this.selectedTab = 1;
-    } else if (filterItem === 'gene') {
-      this.selectedTab = 2;
-    } else if (filterItem === 'term') {
-      this.selectedTab = 0;
-    }
-  }
-
-  reloadResultsData() {
-    this.isLoading = true;
-
-    this.searchService.searchAll(this.query, -1).subscribe((data) => {
-      this.terms = this.termMatchingStringBuilder(this.query, data.terms);
-      this.diseases = this.responseMatchingStringBuilder(data.diseases);
-      this.genes = this.responseMatchingStringBuilder(data.genes);
-
-      this.termDataSource = new MatTableDataSource(this.terms);
-      this.diseaseDataSource = new MatTableDataSource(this.diseases);
-      this.geneDataSource = new MatTableDataSource(this.genes);
-
-      this.termDataSource.paginator = this.termPaginator;
-      this.diseaseDataSource.paginator = this.diseasePaginator;
-      this.geneDataSource.paginator = this.genePaginator;
-
-      this.isLoading = false;
-      this.setSelectedTab();
-
-    }, (error) => {
-      // TODO: Implement Better Error Handling
-      console.log(error);
+  onSearchSubmit(newQuery: string): void {
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { q: newQuery, navFilter: this.activeCategory },
     });
   }
 
-  // Method to convert a matching string column.
-  // If synonym exists, it's the matching string apply
-  // the highlight pipe. Otherwise the term is the matching string.
-  // This is needed for the way tables are built with angular material
-  termMatchingStringBuilder(query: string, termResponse: { terms: Term[]}) {
-    termResponse.terms.map(term => {
-      term.synonyms.map(syn => {
-        if (syn.toLowerCase().includes(query.toLowerCase())){
+  get activeCategoryItems(): SearchResultItem[] {
+    switch (this.activeCategory) {
+      case 'disease':
+        return this.diseaseItems;
+      case 'gene':
+        return this.geneItems;
+      default:
+        return this.termItems;
+    }
+  }
+
+  get pagedItems(): SearchResultItem[] {
+    return this.activeCategoryItems.slice(this.first, this.first + this.rows);
+  }
+
+  onTabChange(category: string | number | undefined): void {
+    this.activeCategory = this.normalizeCategory(category as string);
+    this.first = 0;
+  }
+
+  // "All Terms" tab is hidden for now (see activeCategory) - treat it as Phenotypes
+  // so old links/navFilter=all don't land on a tab that isn't shown.
+  private normalizeCategory(navFilter: string | undefined): ResultCategory {
+    return navFilter === 'disease' || navFilter === 'gene' ? navFilter : 'term';
+  }
+
+  onPageChange(event: PaginatorState): void {
+    this.first = event.first ?? 0;
+    this.rows = event.rows ?? this.rows;
+  }
+
+  reloadResultsData(): void {
+    this.isLoading = true;
+
+    this.searchService.searchAll(this.query, -1).subscribe(({ terms, genes, diseases }) => {
+      this.termItems = this.termMatchingStringBuilder(this.query, terms.terms).map((term) => ({
+        category: 'term' as const,
+        id: term.id,
+        routerLink: `/browse/term/${term.id}`,
+        title: term.name,
+        subtitle: term.id,
+        matchingString: term['matchingString'] ?? term.name,
+        description: term.definition ?? '',
+      }));
+
+      this.diseaseItems = this.responseMatchingStringBuilder<SimpleTerm>(diseases.results).map((disease) => ({
+        category: 'disease' as const,
+        id: disease.id,
+        routerLink: `/browse/disease/${disease.id}`,
+        title: disease.name,
+        subtitle: disease.id,
+        matchingString: disease['matchingString'] ?? disease.name,
+        description: '',
+      }));
+
+      this.geneItems = this.responseMatchingStringBuilder<SimpleTerm>(genes.results).map((gene) => ({
+        category: 'gene' as const,
+        id: gene.id,
+        routerLink: `/browse/gene/${gene.id}`,
+        title: gene.name,
+        subtitle: gene.id,
+        matchingString: gene['matchingString'] ?? gene.name,
+        description: '',
+      }));
+
+      this.allItems = [...this.termItems, ...this.diseaseItems, ...this.geneItems];
+      this.first = 0;
+      this.isLoading = false;
+    }, (error) => {
+      console.log(error);
+      this.isLoading = false;
+    });
+  }
+
+  // Ported unchanged from search-results.component.ts to preserve existing
+  // synonym-aware highlight-matching behavior.
+  termMatchingStringBuilder(query: string, termResponse: Term[]): Term[] {
+    termResponse.map(term => {
+      term.synonyms?.map(syn => {
+        if (syn.toLowerCase().includes(query.toLowerCase())) {
           term['matchingString'] = syn;
           return;
         }
       });
-      if (term['matchingString'] === null) {
+      if (!term['matchingString']) {
         term['matchingString'] = term.name;
       }
     });
-    return termResponse.terms;
+    return termResponse;
   }
 
-  responseMatchingStringBuilder(response) {
-    response.results.map(result => {
+  responseMatchingStringBuilder<T extends { name: string; matchingString?: string }>(response: T[]): T[] {
+    response.map(result => {
       if (result.name) {
-        result['matchingString'] = result.name;
+        result.matchingString = result.name;
       }
     });
-    return response.results;
+    return response;
   }
-
-  applyTermFilter(filterValue: string) {
-    filterValue = filterValue.trim(); // Remove whitespace
-    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
-    this.termDataSource.filter = filterValue;
-  }
-
-  applyDiseaseFilter(filterValue: string) {
-    filterValue = filterValue.trim(); // Remove whitespace
-    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
-    this.diseaseDataSource.filter = filterValue;
-  }
-
-  applyGeneFilter(filterValue: string) {
-    filterValue = filterValue.trim(); // Remove whitespace
-    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
-    this.geneDataSource.filter = filterValue;
-  }
-
 }
