@@ -66,18 +66,18 @@
           <div class="flex items-center gap-2">
             <span class="hidden md:inline text-base text-[#454545]">Sorted by:</span>
             <!--
-              Visual-only stub: no alternate sort logic exists yet.
-              Below md, styled to match the "Additional Search Criteria" link
-              (bold blue text, no box) - PrimeNG's own border/background/color
-              tokens win a specificity tie against plain Tailwind utilities
-              (border-none doesn't stick), so these are overridden directly
-              via their underlying CSS custom properties instead.
+              PrimeNG defaults scrollHeight to 200px, which clips this 5-option list at
+              roughly 4.2 rows - and macOS overlay scrollbars stay invisible until you
+              scroll, so the cut reads as the end of the list. Empty opts out of the
+              max-height clamp entirely (it falls back to `auto`), so the overlay just
+              fits its options.
             -->
             <p-select
               [options]="sortOptions"
               [(ngModel)]="sortBy"
               optionLabel="label"
-              styleClass="text-xs font-bold [--p-select-padding-x:8px] [--p-select-padding-y:6px] max-md:[--p-select-border-color:transparent] max-md:[--p-select-background:transparent] max-md:[--p-select-color:#0177b2] max-md:[--p-select-dropdown-color:#0177b2] max-md:shadow-none md:text-base md:font-normal md:[--p-select-padding-x:12px] md:[--p-select-padding-y:8px]"
+              scrollHeight=""
+              styleClass="text-xs font-semibold [--p-select-padding-x:8px] [--p-select-padding-y:6px] max-md:[--p-select-border-color:transparent] max-md:[--p-select-background:transparent] max-md:[--p-select-color:#0177b2] max-md:[--p-select-dropdown-color:#0177b2] max-md:shadow-none md:text-base md:font-normal md:[--p-select-padding-x:12px] md:[--p-select-padding-y:8px]"
             />
           </div>
         </div>

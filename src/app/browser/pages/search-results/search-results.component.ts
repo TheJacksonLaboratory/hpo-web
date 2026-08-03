@@ -53,8 +53,8 @@ export class SearchResultsComponent {
   sortBy: SortOption = this.sortOptions[0];
 
   first = 0;
-  rows = 20;
-  rowsPerPageOptions = [20, 50, 100, 500];
+  rows = 10;
+  rowsPerPageOptions = [10, 20];
 
   constructor(private route: ActivatedRoute, private router: Router, private searchService: SearchService) {
     this.route.queryParams.subscribe((params) => {
