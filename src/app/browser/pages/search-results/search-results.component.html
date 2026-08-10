@@ -76,6 +76,7 @@
               [options]="sortOptions"
               [(ngModel)]="sortBy"
               optionLabel="label"
+              (onChange)="onSortChange()"
               scrollHeight=""
               styleClass="text-xs font-semibold [--p-select-padding-x:8px] [--p-select-padding-y:6px] max-md:[--p-select-border-color:transparent] max-md:[--p-select-background:transparent] max-md:[--p-select-color:#0177b2] max-md:[--p-select-dropdown-color:#0177b2] max-md:shadow-none md:text-base md:font-normal md:[--p-select-padding-x:12px] md:[--p-select-padding-y:8px]"
             />
