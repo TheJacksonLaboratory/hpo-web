@@ -42,7 +42,8 @@ export class SearchResultsComponent {
   subcategoryPills = ['Placeholder Subcategory', 'Placeholder Subcategory', 'Placeholder Subcategory'];
   subcategoryPillActive: boolean[] = this.subcategoryPills.map(() => false);
 
-  // Visual-only stub: options match the Figma menu, but no sort logic is wired yet.
+  // "Most Relevant" is whatever order the search API returns - the other options
+  // are applied client-side until the search endpoint supports sorting.
   sortOptions: SortOption[] = [
     { label: 'Most Relevant', value: 'relevant' },
     { label: 'Identifier (A-Z)', value: 'identifier-asc' },
@@ -71,6 +72,10 @@ export class SearchResultsComponent {
     });
   }
 
+  // Sorted copy of the active category, recomputed only when the data, the active
+  // tab or the sort option changes - a getter would re-sort on every change detection.
+  sortedItems: SearchResultItem[] = [];
+
   get activeCategoryItems(): SearchResultItem[] {
     switch (this.activeCategory) {
       case 'disease':
@@ -83,12 +88,38 @@ export class SearchResultsComponent {
   }
 
   get pagedItems(): SearchResultItem[] {
-    return this.activeCategoryItems.slice(this.first, this.first + this.rows);
+    return this.sortedItems.slice(this.first, this.first + this.rows);
   }
 
   onTabChange(category: string | number | undefined): void {
     this.activeCategory = this.normalizeCategory(category as string);
     this.first = 0;
+    this.applySort();
+  }
+
+  onSortChange(): void {
+    this.first = 0;
+    this.applySort();
+  }
+
+  private applySort(): void {
+    const items = this.activeCategoryItems;
+
+    // "Most Relevant" is the order the API returned the results in.
+    if (this.sortBy?.value === 'relevant') {
+      this.sortedItems = items;
+      return;
+    }
+
+    // Identifiers are prefixed and numeric (HP:0001250, OMIM:154700), so compare
+    // numerically to keep 0000002 ahead of 0000010.
+    const [field, direction] = this.sortBy.value.split('-');
+    const key: keyof SearchResultItem = field === 'identifier' ? 'subtitle' : 'title';
+    const sign = direction === 'desc' ? -1 : 1;
+
+    this.sortedItems = [...items].sort(
+      (a, b) => sign * String(a[key] ?? '').localeCompare(String(b[key] ?? ''), undefined, { numeric: true, sensitivity: 'base' }),
+    );
   }
 
   // "All Terms" tab is hidden for now (see activeCategory) - treat it as Phenotypes
@@ -138,6 +169,7 @@ export class SearchResultsComponent {
 
       this.allItems = [...this.termItems, ...this.diseaseItems, ...this.geneItems];
       this.first = 0;
+      this.applySort();
       this.isLoading = false;
     }, (error) => {
       console.log(error);
