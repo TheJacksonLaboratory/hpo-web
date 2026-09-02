@@ -8,6 +8,9 @@ export const appRoutes: Routes = [
   { path: '', pathMatch: 'prefix', loadChildren: () => import('./static/static.routes').then(m => m.staticRoutes) },
   { path: 'app', pathMatch: 'prefix', redirectTo: '' },
   { path: 'search', component: SearchResultsComponent },
+  { path: 'term/:id', loadComponent: () => import('./browser/pages/term/term.component').then(m => m.TermComponent) },
+  { path: 'diseases/:id', loadComponent: () => import('./browser/pages/disease/disease.component').then(m => m.DiseaseComponent) },
+  { path: 'gene/:id', loadComponent: () => import('./browser/pages/gene/gene.component').then(m => m.GeneComponent) },
   { path: 'browse', loadChildren: () => import('./browser/browser.routes').then(m => m.browserRoutes) },
   { path: '**', component: NoPageFoundComponent }
 ];
