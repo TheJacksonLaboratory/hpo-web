@@ -1,7 +1,7 @@
 @if (copyable) {
   <button
     type="button"
-    [class]="chipClasses + ' cursor-pointer transition-colors hover:bg-[var(--p-surface-50)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-[var(--p-primary-color)]'"
+    [class]="chipClasses + ' cursor-pointer transition-opacity hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-[var(--p-primary-color)]'"
     [cdkCopyToClipboard]="id"
     (cdkCopyToClipboardCopied)="onCopied($event)"
     [attr.aria-label]="'Copy ' + id"
