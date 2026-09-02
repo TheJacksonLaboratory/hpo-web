@@ -168,3 +168,20 @@ export interface OntologyAnnotationSearchResult<T extends SimpleTerm> {
   results: T[];
   totalCount: number;
 }
+
+/**
+ * One entry in an entity page's "On this page" panel menu, describing a
+ * section of the page it can scroll to.
+ */
+export interface PanelMenuItem {
+  /** Stable key for the section, unique within one page. */
+  id: string;
+  /** Text shown in the menu, e.g. `Disease Associations`. */
+  label: string;
+  /** DOM id of the section element this entry scrolls to. */
+  anchor: string;
+  /** Number of rows in the section. Omitted for sections that are not lists. */
+  count?: number;
+  /** True when the section has no content, which renders the entry inert. */
+  disabled?: boolean;
+}

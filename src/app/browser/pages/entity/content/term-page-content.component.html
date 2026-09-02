@@ -1,0 +1,234 @@
+<!--
+  Spacing follows Figma node 315:4083 ("main-content"): a 24px column whose
+  blocks are the summary (header + grey detail card) and the association
+  sections. Gaps live on the flex parents rather than as margins on children,
+  so a block can be added or removed without retuning its neighbours.
+-->
+<div class="flex flex-col gap-6">
+  <section id="summary" class="scroll-mt-24 flex flex-col gap-6">
+    <!-- Figma 315:4084 -->
+    <div class="flex flex-col gap-4">
+      <!-- Figma 315:4085 header-row -->
+      <div class="flex flex-col gap-1">
+        <h1 class="text-[2.5rem] leading-[3.5rem] font-bold text-[#1e293b] my-0">
+          {{ viewModel.term.name | translate: viewModel.term.translations : selectedLanguage.language : 'name' }}
+        </h1>
+        <div class="flex flex-wrap items-center gap-2">
+          @if (viewModel.paramId !== viewModel.term.id) {
+            <span class="line-through text-[var(--p-text-muted-color)]">{{ viewModel.paramId }}</span>
+            <i class="pi pi-arrow-right text-[var(--p-text-muted-color)]"></i>
+          }
+          <app-id-badge [id]="viewModel.term.id" [copyable]="true" />
+        </div>
+      </div>
+
+      @if (viewModel.languages.length > 0) {
+        <div class="flex flex-wrap items-center gap-2">
+          <p-select
+            [options]="viewModel.languages"
+            optionLabel="language_long"
+            [ngModel]="selectedLanguage"
+            (onChange)="changeLanguage($event.value)"
+            styleClass="w-[180px]"
+          />
+          <a
+            href="https://obophenotype.github.io/hpo-translations/"
+            target="_blank"
+            pButton
+            icon="pi pi-external-link"
+            label="Contribute Translation"
+            severity="secondary"
+            [text]="true"
+          ></a>
+        </div>
+      }
+
+      <p class="my-0 text-base leading-7 text-[var(--p-text-color)]">
+        {{ viewModel.term.definition !== '' ? (viewModel.term.definition | translate: viewModel.term.translations : selectedLanguage.language : 'definition') : 'No definition found.' }}
+      </p>
+    </div>
+
+    <div class="bg-[var(--p-surface-50)] rounded-lg px-4 py-3 flex flex-col gap-6">
+      <div class="flex flex-col gap-2 text-[var(--p-text-color)]">
+        <div class="font-bold text-sm leading-6 text-[#454545]">Synonyms</div>
+        <span class="flex flex-wrap items-center">
+          @for (item of viewModel.term.synonyms; track item; let isLast = $last) {
+            <i>{{ item }}</i>
+            @if (!isLast) {
+              <span class="mx-4 border-l border-[var(--p-content-border-color)] self-stretch"></span>
+            }
+          }
+        </span>
+      </div>
+
+      @if (viewModel.term.comment) {
+        <div class="flex flex-col gap-2 text-[var(--p-text-color)]">
+          <div class="font-bold text-sm leading-6 text-[#454545]">Comment</div>
+          {{ viewModel.term.comment }}
+        </div>
+      }
+
+      @if (viewModel.term.xrefs.length > 0) {
+        <div class="flex flex-col gap-2 text-[var(--p-text-color)]">
+          <div class="font-bold text-sm leading-6 text-[#454545]">Cross References</div>
+          <span class="flex flex-wrap items-center">
+            @for (item of viewModel.term.xrefs; track item; let isLast = $last) {
+              <a [href]="utilityService.getExternalTermIdUrlFromId(item)" target="_blank" class="text-[#0177b2] underline font-semibold">{{ item }}</a>
+              @if (!isLast) {
+                <span class="mx-4 border-l border-[var(--p-content-border-color)] self-stretch"></span>
+              }
+            }
+          </span>
+        </div>
+      }
+    </div>
+
+  </section>
+
+  <!-- Figma 315:4135: association sections, 32px apart -->
+  <div class="flex flex-col gap-8">
+    <app-associations-table-block
+      anchorId="examples"
+      [emptyCtaLink]="contributeLinks.examples"
+      title="Examples"
+      [value]="[]"
+      [filterable]="false"
+    />
+
+    <app-associations-table-block
+      anchorId="disease-associations"
+      [emptyCtaLink]="contributeLinks.disease"
+      title="Disease Associations"
+      [description]="sectionDescriptions.disease"
+      [value]="viewModel.diseaseAssoc"
+      [networkError]="viewModel.networkError"
+      [globalFilterFields]="['id', 'name']"
+      [sortOptions]="diseaseSortOptions"
+    >
+      <!--
+        Plain <th>: PrimeNG's pSortableColumn/p-sortIcon inject Table, which is
+        not an ancestor of this projected template's declaration site, so they
+        throw NG0201 here. Sorting is driven by [sortOptions] above instead.
+      -->
+      <ng-template #headerCells>
+        <th>Disease Id</th>
+        <th>Disease Name</th>
+      </ng-template>
+      <ng-template #rowCells let-row>
+        <td><a [routerLink]="['/browse/disease', row.id]" class="text-[#0177b2] underline">{{ row.id }}</a></td>
+        <td>{{ row.name }}</td>
+      </ng-template>
+    </app-associations-table-block>
+
+    <app-associations-table-block
+      anchorId="gene-associations"
+      [emptyCtaLink]="contributeLinks.gene"
+      title="Gene Associations"
+      [description]="sectionDescriptions.gene"
+      [value]="viewModel.geneAssoc"
+      [networkError]="viewModel.networkError"
+      [globalFilterFields]="['id', 'name']"
+      [sortOptions]="geneSortOptions"
+    >
+      <!-- Plain <th> for the same reason as Disease Associations above. -->
+      <ng-template #headerCells>
+        <th>Gene Id</th>
+        <th>Gene Symbol</th>
+      </ng-template>
+      <ng-template #rowCells let-row>
+        <td><a [routerLink]="['/browse/gene', row.id]" class="text-[#0177b2] underline">{{ row.id }}</a></td>
+        <td>{{ row.name }}</td>
+      </ng-template>
+    </app-associations-table-block>
+
+    <app-associations-table-block
+      anchorId="medical-actions"
+      [emptyCtaLink]="contributeLinks.medicalActions"
+      title="Medical Actions"
+      [value]="viewModel.medicalActions"
+      [networkError]="viewModel.networkError"
+      [filterable]="false"
+    >
+      <ng-template #headerCells>
+        <th>MaXo Id</th>
+        <th>MaXo Name</th>
+        <th>Relation</th>
+        <th>Sources</th>
+      </ng-template>
+      <ng-template #rowCells let-row>
+        <td>{{ row.id }}</td>
+        <td>{{ row.name }}</td>
+        <td>
+          @if (row.relations.length === 1) {
+            {{ row.relations[0] }}
+          } @else if (row.relations.length > 1) {
+            {{ row.relations.join(' and ') }}
+          }
+        </td>
+        <td>
+          @for (source of medicalActionSources(row); track source) {
+            <div>
+              <a [href]="utilityService.getExternalTermIdUrlFromId(source)" target="_blank" class="text-[#0177b2] underline">
+                PubMed <i class="pi pi-book"></i>
+              </a>
+            </div>
+          }
+          @if (row.sources.length > 4) {
+            <span class="text-[var(--p-text-muted-color)] text-xs">({{ row.sources.length - 4 }} more)</span>
+          }
+        </td>
+      </ng-template>
+    </app-associations-table-block>
+
+    <app-associations-table-block
+      anchorId="loinc-associations"
+      [emptyCtaLink]="contributeLinks.loinc"
+      title="LOINC Associations"
+      [value]="viewModel.loincAssoc"
+      [networkError]="viewModel.networkError"
+      [filterable]="false"
+    >
+      <ng-template #headerCells>
+        <th>LOINC Code</th>
+        <th>LOINC Name</th>
+      </ng-template>
+      <ng-template #rowCells let-row>
+        <td><a [href]="'http://loinc.org/' + row.id" target="_blank" class="text-[#0177b2] underline">{{ row.id }}</a></td>
+        <td>{{ row.name }}</td>
+      </ng-template>
+    </app-associations-table-block>
+
+    @if (viewModel.loincAssoc.length > 0) {
+      <p class="text-xs text-[var(--p-text-muted-color)] my-0">
+        <sup>**</sup>This material contains content from LOINC&reg; (<a href="http://loinc.org" target="_blank" class="underline">http://loinc.org</a>).
+        The LOINC Table, LOINC Table Core, LOINC Panels and Forms File, LOINC Answer File, LOINC Part File, LOINC Group File, LOINC Document Ontology File,
+        LOINC Hierarchies, LOINC Linguistic Variants File, LOINC/RSNA Radiology Playbook, and LOINC/IEEE Medical Device Code Mapping Table are copyright
+        &copy; 1995-2018, Regenstrief Institute, Inc. and the Logical Observation Identifiers Names and Codes (LOINC) Committee and is available at no cost
+        under the license at <a href="http://loinc.org/license" target="_blank" class="underline">http://loinc.org/license</a>.
+      </p>
+    }
+
+    <!--
+      Id-only for now: the design shows title and abstract, which no current
+      field supplies. See PublicationReference in entity-page.types.ts.
+    -->
+    <app-associations-table-block
+      anchorId="publications"
+      [emptyCtaLink]="contributeLinks.publications"
+      title="Publications"
+      [value]="viewModel.publications"
+      [filterable]="false"
+    >
+      <ng-template #headerCells>
+        <th>Publication</th>
+      </ng-template>
+      <ng-template #rowCells let-row>
+        <td>
+          <a [href]="utilityService.getExternalTermIdUrlFromId(row.id)" target="_blank" class="text-[#0177b2] underline">
+            {{ row.id }} <i class="pi pi-external-link"></i>
+          </a>
+        </td>
+      </ng-template>
+    </app-associations-table-block>
+  </div>
+</div>

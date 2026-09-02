@@ -1,0 +1,22 @@
+<!--
+  Figma 315:4477: outlined primary, download icon leading, chevron trailing.
+
+  The label must not wrap - the design declares whitespace-nowrap on it, and it
+  needs 162.7px of the 234px button. Between the two 16px icons and their 8px
+  gaps, that leaves the side padding as the only knob: 184px minus twice the
+  padding has to clear 162.7, so padding must be 10px or less. PrimeNG defaults
+  to 16px, hence the override. The design's own value is 13.5px, which does not
+  fit here because its icons are 14px wide rather than 16px.
+-->
+<button
+  pButton
+  type="button"
+  [outlined]="true"
+  class="w-full !px-2.5"
+  [disabled]="disabled"
+  (click)="openDialog()"
+>
+  <i class="pi pi-download"></i>
+  <span class="font-bold whitespace-nowrap">Download Associations</span>
+  <i class="pi pi-chevron-down"></i>
+</button>

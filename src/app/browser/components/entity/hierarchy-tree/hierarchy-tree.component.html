@@ -1,0 +1,56 @@
+<div>
+  <div class="flex items-center justify-between mb-2">
+    <h3 class="text-base font-semibold text-[var(--p-text-color)] my-0">Hierarchy</h3>
+    <i
+      class="pi pi-question-circle text-[var(--p-text-muted-color)]"
+      pTooltip="Neighborhood View of HPO Hierarchy"
+      tooltipPosition="left"
+    ></i>
+  </div>
+  <hr class="border-[var(--p-content-border-color)]">
+  @if (treeData) {
+    <ul class="tree">
+      @for (parent of treeData.parents; track parent) {
+        <li>
+          @if (parent.descendantCount !== 0) {
+            <span
+              class="tree-counts"
+              [ngStyle]="{ 'margin-left': '-40px', 'margin-right': '5px' }"
+              [pTooltip]="'' + parent.descendantCount"
+              tooltipPosition="top"
+            ></span>
+          }
+          <a class="link" [routerLink]="['../', parent.id]">{{ parent.name | translate: parent.translations : selectedLanguage.language : 'name' }}</a>
+        </li>
+      }
+      <li>
+        <div class="term">
+          @if (treeData.descendantCount !== 0) {
+            <span
+              class="tree-counts"
+              [ngStyle]="{ 'margin-left': '-46px' }"
+              [pTooltip]="'' + treeData.descendantCount"
+              tooltipPosition="top"
+            ></span>
+          }
+          <strong>{{ term.name | translate: term.translations : selectedLanguage.language : 'name' }}</strong>
+        </div>
+        <ul>
+          @for (child of treeData.children; track child) {
+            <li class="children">
+              @if (child.descendantCount !== 0) {
+                <span
+                  class="tree-counts"
+                  [ngStyle]="setTreeStyles(child)"
+                  [pTooltip]="'' + child.descendantCount"
+                  tooltipPosition="top"
+                ></span>
+              }
+              <a class="link" [routerLink]="['../', child.id]">{{ child.name | translate: child.translations : selectedLanguage.language : 'name' }}</a>
+            </li>
+          }
+        </ul>
+      </li>
+    </ul>
+  }
+</div>

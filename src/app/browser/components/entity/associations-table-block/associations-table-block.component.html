@@ -1,0 +1,80 @@
+<!--
+  Figma 315:4143: a 16px column under a heading row that carries its own 8px of
+  vertical padding. Spacing between sections belongs to the parent (32px), not
+  to this component.
+-->
+<section [id]="anchorId" class="scroll-mt-24 flex flex-col gap-4">
+  <div class="flex flex-col gap-2 py-2">
+    <h2 class="text-2xl leading-8 font-bold capitalize text-[#222] my-0">
+      {{ title }} <span class="font-normal">({{ value.length }})</span>
+    </h2>
+    @if (description) {
+      <!-- Figma card/subtitle/color. -->
+      <p class="text-base leading-7 text-[var(--p-text-muted-color)] my-0">{{ description }}</p>
+    }
+  </div>
+
+  @if (loading) {
+    <div class="flex flex-col gap-2">
+      <p-skeleton height="2.5rem" />
+      <p-skeleton height="2.5rem" />
+      <p-skeleton height="2.5rem" />
+    </div>
+  } @else if (networkError) {
+    <p class="text-red-600">
+      Ontology Annotation Network Error.
+      <a
+        href="https://github.com/TheJacksonLaboratory/ontology-annotation-network/issues/new"
+        target="_blank"
+        class="underline"
+      >Please report this issue.</a>
+    </p>
+  } @else if (!value.length) {
+    <app-empty-state [ctaHref]="emptyCtaLink" />
+  } @else {
+    <div class="flex items-center justify-between flex-wrap gap-2">
+      @if (sortOptions?.length) {
+        <p-select
+          [options]="sortOptions"
+          optionLabel="label"
+          [(ngModel)]="selectedSort"
+          (onChange)="onSortChange()"
+          placeholder="Sort by"
+          styleClass="w-[240px]"
+        />
+      } @else {
+        <span></span>
+      }
+      @if (filterable) {
+        <p-iconfield>
+          <p-inputicon class="pi pi-search" />
+          <input pInputText type="text" placeholder="Filter terms" (input)="onFilterInput($any($event.target).value)" />
+        </p-iconfield>
+      }
+    </div>
+
+    <p-table
+      #dt
+      [value]="value"
+      [paginator]="paginated"
+      [rows]="10"
+      [rowsPerPageOptions]="[10, 20, 50]"
+      [globalFilterFields]="globalFilterFields"
+      [sortField]="sortField"
+      [sortOrder]="sortOrder"
+      [showCurrentPageReport]="true"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords}"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <ng-container *ngTemplateOutlet="headerCellsTpl"></ng-container>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-row>
+        <tr>
+          <ng-container *ngTemplateOutlet="rowCellsTpl; context: { $implicit: row, row: row }"></ng-container>
+        </tr>
+      </ng-template>
+    </p-table>
+  }
+</section>

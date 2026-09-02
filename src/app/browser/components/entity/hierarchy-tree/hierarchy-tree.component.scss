@@ -1,0 +1,82 @@
+// Figma specs a fixed 284px sidebar (no live tree in the mock to calibrate
+// against - it's a placeholder image there). The original 7rem reservation
+// for the descendant-count bars was tuned for a much wider legacy sidebar;
+// scaled down here so link text has room and doesn't wrap mid-word.
+.tree {
+  margin-left: 3rem !important;
+}
+
+.link {
+  text-decoration: none;
+}
+
+.tree,
+.tree ul {
+  padding: 0;
+  list-style: none;
+  position: relative;
+}
+
+.tree li:last-child div.term {
+  border-left: 1px solid;
+  padding: 5px 0 0 10px;
+  font-weight: 900;
+}
+
+.tree li .tree-counts {
+  background: lightgray;
+  display: inline-block;
+  height: 10px;
+  width: 40px;
+  max-width: 40px;
+  margin-right: 15px;
+}
+
+.tree li ul {
+  margin-left: 1em;
+}
+
+.tree li:last-child,
+.tree li:last-child li {
+  margin: 0;
+  padding: 0 0 0 1rem;
+  line-height: 2em;
+  position: relative;
+}
+
+.tree li:last-child {
+  margin-top: 5px;
+}
+
+.tree li:first-child:before {
+  border: none;
+}
+
+.tree li ul:before {
+  content: "";
+  display: block;
+  width: 0;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  border-left: 1px solid;
+}
+
+.tree li ul li:before {
+  content: "";
+  display: block;
+  width: 10px;
+  height: 2px;
+  border-top: 1px solid;
+  margin-top: -1px;
+  position: absolute;
+  top: 1em;
+  left: 0;
+}
+
+.tree li ul li:last-child:before {
+  background: white;
+  height: auto;
+  top: 1em;
+}

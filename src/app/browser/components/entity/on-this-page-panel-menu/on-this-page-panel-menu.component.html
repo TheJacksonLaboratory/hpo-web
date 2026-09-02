@@ -1,0 +1,26 @@
+<!--
+  Figma 315:4445 (_panelmenu-panel): a 4px-padded white card; a 12px header row;
+  items inset 16px, each 8px padded with its count inline in the label.
+-->
+<nav
+  class="rounded-md border border-[var(--p-content-border-color)] bg-[var(--p-content-background)] p-1"
+  aria-label="On this page"
+>
+  <p class="p-3 text-base font-semibold text-[var(--p-text-color)] my-0">
+    On this page
+  </p>
+  <ul class="list-none m-0 p-0">
+    @for (item of items; track item.id) {
+      <li class="pl-4">
+        <button
+          type="button"
+          [class]="itemClasses(item)"
+          [disabled]="item.disabled"
+          (click)="scrollTo(item)"
+        >
+          {{ item.label }}@if (item.count !== undefined) { ({{ item.count }})}
+        </button>
+      </li>
+    }
+  </ul>
+</nav>
