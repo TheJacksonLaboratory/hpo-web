@@ -1,8 +1,3 @@
-<!--
-  One element per variant, all carrying the same chip box. The copyable variant
-  is the button itself rather than a control nested inside a pill, so the whole
-  chip is the click target.
--->
 @if (copyable) {
   <button
     type="button"
@@ -13,13 +8,7 @@
     [title]="'Copy ' + id"
   >
     <span>{{ id }}</span>
-    <!--
-      Fixed box: the tick glyph's advance is a hair wider than the copy glyph's,
-      which would otherwise nudge the chip 1px on every copy. `1em` ties it to
-      the icon's own font size rather than pinning a pixel value.
-    -->
     <i class="pi w-[1em] text-center" [class.pi-copy]="!copied" [class.pi-check]="copied" aria-hidden="true"></i>
-    <!-- Out of flow (sr-only is absolutely positioned), so it adds no width. -->
     <span class="sr-only" role="status">{{ copied ? 'Copied ' + id : '' }}</span>
   </button>
 } @else if (externalUrl) {

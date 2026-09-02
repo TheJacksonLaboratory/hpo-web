@@ -7,8 +7,6 @@ import { OntologyService } from '../../services/ontology/ontology.service';
 import { LanguageService } from '../../services/language/language.service';
 import { EntityPageViewModel, PublicationReference, TermPageViewModel } from './entity-page.types';
 
-// Scaled down from the legacy 100px bar for the narrower 284px Figma sidebar
-// column (see hierarchy-tree.component.scss) - leaves more room for link text.
 const MAX_TREE_WIDTH = 40;
 
 /**

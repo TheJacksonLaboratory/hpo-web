@@ -1,7 +1,3 @@
-// Figma specs a fixed 284px sidebar (no live tree in the mock to calibrate
-// against - it's a placeholder image there). The original 7rem reservation
-// for the descendant-count bars was tuned for a much wider legacy sidebar;
-// scaled down here so link text has room and doesn't wrap mid-word.
 .tree {
   margin-left: 3rem !important;
 }

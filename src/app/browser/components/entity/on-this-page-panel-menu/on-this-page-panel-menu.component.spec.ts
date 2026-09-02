@@ -118,7 +118,7 @@ describe('OnThisPagePanelMenuComponent', () => {
 
   it('gives the active item a solid teal pill and disabled items muted styling', () => {
     component.activeAnchor = 'disease-associations';
-    expect(component.itemClasses(items[1])).toContain('bg-[#94e1dc]');
+    expect(component.itemClasses(items[1])).toContain('bg-[var(--p-teal-300)]');
     expect(component.itemClasses(items[2])).toContain('cursor-not-allowed');
   });
 

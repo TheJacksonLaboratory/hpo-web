@@ -1,15 +1,9 @@
-<!--
-  Figma 315:4143: a 16px column under a heading row that carries its own 8px of
-  vertical padding. Spacing between sections belongs to the parent (32px), not
-  to this component.
--->
 <section [id]="anchorId" class="scroll-mt-24 flex flex-col gap-4">
   <div class="flex flex-col gap-2 py-2">
     <h2 class="text-2xl leading-8 font-bold capitalize text-[#222] my-0">
       {{ title }} <span class="font-normal">({{ value.length }})</span>
     </h2>
     @if (description) {
-      <!-- Figma card/subtitle/color. -->
       <p class="text-base leading-7 text-[var(--p-text-muted-color)] my-0">{{ description }}</p>
     }
   </div>
@@ -40,7 +34,7 @@
           [(ngModel)]="selectedSort"
           (onChange)="onSortChange()"
           placeholder="Sort by"
-          styleClass="w-[240px]"
+          styleClass="w-full sm:w-[240px]"
         />
       } @else {
         <span></span>

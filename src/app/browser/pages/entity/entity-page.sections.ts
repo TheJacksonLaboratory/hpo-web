@@ -30,10 +30,6 @@ export function buildSections(viewModel: EntityPageViewModel): PanelMenuItem[] {
 export function buildTermPageSections(viewModel: TermPageViewModel): PanelMenuItem[] {
   const [summary, ...associations] = [
     { id: 'summary', label: 'Summary', anchor: 'summary' },
-    // Examples has no backing field on `Term` at all, so it is always empty
-    // and always disabled. It is listed because the approved design carries it
-    // - see the 2026-09-02 amendment in
-    // `docs/adr/0001-HPO-68-unified-entity-page.md`, which this overrides.
     { id: 'examples', label: 'Examples', anchor: 'examples', count: 0, disabled: true },
     {
       id: 'disease-associations',
@@ -72,9 +68,6 @@ export function buildTermPageSections(viewModel: TermPageViewModel): PanelMenuIt
     },
   ];
 
-  // Empty sections sink to the bottom, in their canonical order relative to
-  // each other. AssociationsTableBlockComponent applies the same rule to the
-  // rendered sections via `order-last`, so panel and page stay in step.
   return [
     summary,
     ...associations.filter((section) => !section.disabled),

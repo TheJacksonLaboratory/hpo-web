@@ -1,40 +1,32 @@
 @if (loading) {
-  <div class="container-custom py-10 flex justify-center">
+  <div class="py-10 flex justify-center">
     <p class="text-[var(--p-text-muted-color)]">Loading&hellip;</p>
   </div>
 } @else if (viewModel) {
   <app-session-placeholder [currentLabel]="viewModel.title" />
-  <div class="container-custom">
-    <div class="flex flex-col lg:flex-row gap-6 lg:gap-0">
-      <!--
-        One case per entity type, declaring that type's left rail (optional) and
-        its content column. Everything outside the switch - the row, the sticky
-        aside below - is identical for every type and lives here so it is
-        written once rather than once per content component.
-      -->
-      @switch (viewModel.kind) {
-        @case (EntityType.PHENOTYPE) {
-          <div class="w-full lg:w-[284px] bg-white border border-t-0 border-[#e2e8f0] px-6 py-4">
-            <app-hierarchy-tree
-              [term]="viewModel.term"
-              [treeData]="viewModel.treeData"
-              [selectedLanguage]="selectedLanguage"
-            />
-          </div>
-          <div class="flex-1 min-w-0 p-6">
-            <app-term-page-content [viewModel]="viewModel" [selectedLanguage]="selectedLanguage" />
-          </div>
-        }
-      }
-
-      <!-- Figma 315:4443: px-24 py-32, 16px between the panel and each button. -->
-      <aside class="w-full lg:w-[282px] shrink-0 px-6 py-8">
-        <div class="lg:sticky lg:top-4 flex flex-col gap-4">
-          <app-on-this-page-panel-menu [items]="sections" />
-          <app-export-associations-button [id]="viewModel.id" [counts]="viewModel.downloadCounts" />
-          <app-report-entry-issue-button [id]="viewModel.id" />
+  <div class="flex flex-col lg:flex-row lg:flex-wrap gap-6 lg:gap-0">
+    @switch (viewModel.kind) {
+      @case (EntityType.PHENOTYPE) {
+        <div class="w-full lg:w-[284px] lg:shrink-0 bg-white border border-t-0 border-[#e2e8f0] px-6 py-4">
+          <app-hierarchy-tree
+            [term]="viewModel.term"
+            [treeData]="viewModel.treeData"
+            [selectedLanguage]="selectedLanguage"
+          />
         </div>
-      </aside>
-    </div>
+        <div class="flex-1 min-w-0 p-6">
+          <app-term-page-content [viewModel]="viewModel" [selectedLanguage]="selectedLanguage" />
+        </div>
+      }
+    }
+
+    <!-- 282px is the narrowest the export button's label fits without wrapping. -->
+    <aside class="w-full xl:w-[282px] xl:shrink-0 px-6 py-8">
+      <div class="xl:sticky xl:top-4 flex flex-col gap-4">
+        <app-on-this-page-panel-menu [items]="sections" />
+        <app-export-associations-button [id]="viewModel.id" [counts]="viewModel.downloadCounts" />
+        <app-report-entry-issue-button [id]="viewModel.id" />
+      </div>
+    </aside>
   </div>
 }

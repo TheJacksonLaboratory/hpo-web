@@ -15,16 +15,3 @@ if (!globalThis.ResizeObserver) {
     disconnect(): void { /* no-op */ }
   };
 }
-
-// jsdom has no IntersectionObserver, used by OnThisPagePanelMenuComponent's
-// scroll-spy. A no-op stub lets it construct under jsdom; tests that need to
-// exercise scroll-spy behavior drive the stored callback manually.
-if (!globalThis.IntersectionObserver) {
-  globalThis.IntersectionObserver = class {
-    constructor(private callback: IntersectionObserverCallback) {}
-    observe(): void { /* no-op */ }
-    unobserve(): void { /* no-op */ }
-    disconnect(): void { /* no-op */ }
-    takeRecords(): IntersectionObserverEntry[] { return []; }
-  } as unknown as typeof IntersectionObserver;
-}

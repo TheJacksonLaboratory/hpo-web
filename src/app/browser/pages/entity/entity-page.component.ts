@@ -75,6 +75,10 @@ export class EntityPageComponent implements OnInit {
    * navigating between two terms re-fetches instead of leaving stale data on
    * screen. Failures route to the error page - by this point the entity does
    * not exist or has no resolver, so there is nothing partial worth rendering.
+   *
+   * The active language is re-checked after each swap, because the entity just
+   * navigated to may not have a translation for the language the previous one
+   * was showing.
    */
   ngOnInit(): void {
     this.entityType = this.route.snapshot.data['entityType'];
@@ -93,8 +97,6 @@ export class EntityPageComponent implements OnInit {
           this.viewModel = viewModel;
           this.sections = buildSections(viewModel);
           this.loading = false;
-          // Re-check after the swap: the entity just navigated to may not have
-          // a translation for the language the previous one was showing.
           this.onActiveLanguageChange(this.languageService.languageSubject.value);
         },
         error: (error) => {

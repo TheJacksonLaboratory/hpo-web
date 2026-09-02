@@ -210,16 +210,20 @@ describe('Browse term page (shared entity page)', () => {
   });
 
   it('follows the scroll position in the panel menu, not just clicks', () => {
-    // The IntersectionObserver callback runs outside Angular's zone, so setting
-    // the active anchor there schedules no change detection on its own - the
-    // highlight would only appear when some unrelated event happened to trigger
-    // a tick. Clicking always worked because a click handler is already in the
-    // zone. should(callback) retries, which .then() does not - the observer
-    // fires a frame or two after the scroll settles.
-    const ACTIVE = 'bg-[#94e1dc]';
+    // ScrollDispatcher registers its listener with runOutsideAngular, so setting
+    // the active anchor in that subscription schedules no change detection on
+    // its own - the highlight would only appear when some unrelated event
+    // happened to trigger a tick. Clicking always worked because a click
+    // handler is already in the zone. should(callback) retries, which .then()
+    // does not - scrolled() is throttled, so it lands after the scroll settles.
+    // Asserting the resolved colour rather than the class name also proves the
+    // --p-teal-300 token the active pill uses actually emits from the preset.
+    const ACTIVE_BG = 'rgb(148, 225, 220)';
     const expectActive = (matcher: (label: string) => void) =>
       cy.get('app-on-this-page-panel-menu button').should(($b) => {
-        const active = [...$b].filter((b) => b.className.includes(ACTIVE));
+        const active = [...$b].filter(
+          (b) => b.ownerDocument.defaultView!.getComputedStyle(b).backgroundColor === ACTIVE_BG,
+        );
         expect(active, 'exactly one highlighted item').to.have.length(1);
         matcher(active[0].textContent!.trim().replace(/\s+/g, ' '));
       });

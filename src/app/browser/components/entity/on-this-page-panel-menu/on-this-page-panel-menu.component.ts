@@ -34,14 +34,20 @@ export class OnThisPagePanelMenuComponent {
   /** Anchor of the section currently highlighted, or null before the first check. */
   activeAnchor: string | null = null;
 
-  // ScrollDispatcher listens outside Angular's zone, so writing activeAnchor
-  // from its callback schedules no change detection on its own. Clicking always
-  // worked because a click handler is already in the zone; scrolling was not.
+  /**
+   * `ScrollDispatcher` listens outside Angular's zone, so writing
+   * {@link activeAnchor} from its callback schedules no change detection on its
+   * own. Clicking always worked because a click handler is already in the zone;
+   * scrolling was not.
+   */
   private readonly zone = inject(NgZone);
 
+  /**
+   * Runs the first check after render - the sections are siblings rendered by
+   * the page around this component, so they are not in the DOM before then -
+   * and re-checks on every throttled scroll thereafter.
+   */
   constructor() {
-    // Sections are siblings rendered by the page around this component, so they
-    // are not in the DOM until after the first render.
     afterNextRender(() => this.refresh());
 
     inject(ScrollDispatcher)
@@ -58,16 +64,12 @@ export class OnThisPagePanelMenuComponent {
    * @returns The full class string for the button element.
    */
   itemClasses(item: PanelMenuItem): string {
-    // Figma: _panelmenu-item active state is a solid #94e1dc (Teal/300) pill,
-    // not a color/weight change on transparent background.
     const base = 'w-full text-left p-2 rounded-md text-base transition-colors';
     if (item.disabled) {
-      // Figma uses inputtext/disabled/color here, not the muted text colour -
-      // muted (#636363) is the card-subtitle token and reads as active copy.
       return `${base} text-[var(--p-form-field-disabled-color)] cursor-not-allowed`;
     }
     if (this.activeAnchor === item.anchor) {
-      return `${base} font-bold text-[#222] bg-[#94e1dc]`;
+      return `${base} font-bold text-[#222] bg-[var(--p-teal-300)]`;
     }
     return `${base} text-[var(--p-text-color)]`;
   }

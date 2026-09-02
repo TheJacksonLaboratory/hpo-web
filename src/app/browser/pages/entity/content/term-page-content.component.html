@@ -1,14 +1,6 @@
-<!--
-  Spacing follows Figma node 315:4083 ("main-content"): a 24px column whose
-  blocks are the summary (header + grey detail card) and the association
-  sections. Gaps live on the flex parents rather than as margins on children,
-  so a block can be added or removed without retuning its neighbours.
--->
 <div class="flex flex-col gap-6">
   <section id="summary" class="scroll-mt-24 flex flex-col gap-6">
-    <!-- Figma 315:4084 -->
     <div class="flex flex-col gap-4">
-      <!-- Figma 315:4085 header-row -->
       <div class="flex flex-col gap-1">
         <h1 class="text-[2.5rem] leading-[3.5rem] font-bold text-[#1e293b] my-0">
           {{ viewModel.term.name | translate: viewModel.term.translations : selectedLanguage.language : 'name' }}
@@ -29,7 +21,7 @@
             optionLabel="language_long"
             [ngModel]="selectedLanguage"
             (onChange)="changeLanguage($event.value)"
-            styleClass="w-[180px]"
+            styleClass="w-full sm:w-[180px]"
           />
           <a
             href="https://obophenotype.github.io/hpo-translations/"
@@ -82,10 +74,8 @@
         </div>
       }
     </div>
-
   </section>
 
-  <!-- Figma 315:4135: association sections, 32px apart -->
   <div class="flex flex-col gap-8">
     <app-associations-table-block
       anchorId="examples"
@@ -105,11 +95,6 @@
       [globalFilterFields]="['id', 'name']"
       [sortOptions]="diseaseSortOptions"
     >
-      <!--
-        Plain <th>: PrimeNG's pSortableColumn/p-sortIcon inject Table, which is
-        not an ancestor of this projected template's declaration site, so they
-        throw NG0201 here. Sorting is driven by [sortOptions] above instead.
-      -->
       <ng-template #headerCells>
         <th>Disease Id</th>
         <th>Disease Name</th>
@@ -130,7 +115,6 @@
       [globalFilterFields]="['id', 'name']"
       [sortOptions]="geneSortOptions"
     >
-      <!-- Plain <th> for the same reason as Disease Associations above. -->
       <ng-template #headerCells>
         <th>Gene Id</th>
         <th>Gene Symbol</th>
@@ -208,10 +192,7 @@
       </p>
     }
 
-    <!--
-      Id-only for now: the design shows title and abstract, which no current
-      field supplies. See PublicationReference in entity-page.types.ts.
-    -->
+    <!-- Id-only until HPO-200 settles where publication metadata comes from. -->
     <app-associations-table-block
       anchorId="publications"
       [emptyCtaLink]="contributeLinks.publications"
