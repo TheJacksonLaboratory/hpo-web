@@ -40,3 +40,6 @@ cypress/downloads
 
 # dist
 dist/
+
+# git worktrees
+.worktrees/
