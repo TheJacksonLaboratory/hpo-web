@@ -1,0 +1,144 @@
+<div class="w-full max-w-[900px] mx-auto px-6 md:px-12 py-16 md:py-20 flex flex-col gap-8">
+
+  <h1 class="text-4xl font-extrabold text-[#222] m-0">Data</h1>
+
+  <p-tabs [value]="activeTab" (valueChange)="onTabChange($event)">
+    <p-tablist>
+      <p-tab value="ontology">Ontology</p-tab>
+      <p-tab value="annotations">Annotations</p-tab>
+      <p-tab value="api">API</p-tab>
+    </p-tablist>
+
+    <p-tabpanels>
+
+      <p-tabpanel value="ontology" [pt]="{ root: { style: 'padding: 0' } }">
+        <div class="flex flex-col gap-5">
+          <div class="flex items-center gap-2.5 flex-wrap text-sm font-semibold text-[#636363]">
+            <span>Current release: {{ version }}</span>
+            <span class="text-[#d1d5db]">&bull;</span>
+            <a
+              [href]="releasesUrl"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-1.5 font-bold text-[#0177b2] no-underline hover:underline"
+            >
+              See Releases
+              <i class="pi pi-external-link text-xs"></i>
+            </a>
+          </div>
+
+          <div class="flex flex-col gap-3">
+            @for (file of ontologyFiles; track file.name) {
+              <a
+                [href]="file.url"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="block no-underline transition-transform hover:-translate-y-0.5"
+              >
+                <div class="flex items-center gap-4 px-5 py-4 bg-white rounded-xl shadow-[0px_3px_1px_-2px_rgba(0,0,0,0.2),0px_2px_2px_0px_rgba(0,0,0,0.14),0px_1px_5px_0px_rgba(0,0,0,0.12)]">
+                  <div class="w-10 h-10 rounded-full bg-[#222] text-white flex items-center justify-center shrink-0">
+                    <mat-icon>download</mat-icon>
+                  </div>
+                  <div class="flex flex-col gap-0.5 min-w-0">
+                    <h3 class="text-base font-bold text-[#222] m-0">{{ file.name }}</h3>
+                    <p class="text-[13px] text-[#636363] m-0">{{ file.description }}</p>
+                  </div>
+                </div>
+              </a>
+            }
+          </div>
+        </div>
+      </p-tabpanel>
+
+      <p-tabpanel value="annotations" [pt]="{ root: { style: 'padding: 0' } }">
+        <div class="flex flex-col gap-5">
+          <div class="flex items-center gap-2.5 flex-wrap text-sm font-semibold text-[#636363]">
+            <span>Current release: {{ version }}</span>
+            <span class="text-[#d1d5db]">&bull;</span>
+            <a
+              [href]="annotationsInfoUrl"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-1.5 font-bold text-[#0177b2] no-underline hover:underline"
+            >
+              More about these formats
+              <i class="pi pi-external-link text-xs"></i>
+            </a>
+          </div>
+
+          <div class="flex flex-col gap-3">
+            @for (file of annotationFiles; track file.name) {
+              <a
+                [href]="file.url"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="block no-underline transition-transform hover:-translate-y-0.5"
+              >
+                <div class="flex items-center gap-4 px-5 py-4 bg-white rounded-xl shadow-[0px_3px_1px_-2px_rgba(0,0,0,0.2),0px_2px_2px_0px_rgba(0,0,0,0.14),0px_1px_5px_0px_rgba(0,0,0,0.12)]">
+                  <div class="w-10 h-10 rounded-full bg-[#222] text-white flex items-center justify-center shrink-0">
+                    <mat-icon>download</mat-icon>
+                  </div>
+                  <div class="flex flex-col gap-0.5 min-w-0">
+                    <h3 class="text-base font-bold text-[#222] m-0">{{ file.name }}</h3>
+                    <p class="text-[13px] text-[#636363] m-0">{{ file.description }}</p>
+                  </div>
+                </div>
+              </a>
+            }
+          </div>
+        </div>
+      </p-tabpanel>
+
+      <p-tabpanel value="api" [pt]="{ root: { style: 'padding: 0' } }">
+        <div class="flex flex-col gap-5">
+          <p class="text-sm font-semibold text-[#636363] m-0">
+            RESTful services for programmatic access to the ontology and its annotations
+          </p>
+
+          <div class="flex flex-col gap-3">
+
+            <div class="flex flex-col gap-2 px-5 py-5 bg-white rounded-xl shadow-[0px_3px_1px_-2px_rgba(0,0,0,0.2),0px_2px_2px_0px_rgba(0,0,0,0.14),0px_1px_5px_0px_rgba(0,0,0,0.12)]">
+              <h3 class="text-base font-bold text-[#222] m-0">Ontology Service</h3>
+              <p class="text-[13px] text-[#636363] m-0">
+                This Human Phenotype Ontology API is an instance of an
+                <a href="https://ontology.jax.org/Ontologies/" target="_blank" rel="noopener noreferrer" class="text-[#0177b2] font-semibold">Ontology Service</a>.
+                <em>Use this API if you need to locate your term and traverse the ontology.</em>
+              </p>
+              <div class="flex gap-6 mt-1">
+                <a href="https://ontology.jax.org/api/hp/docs" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 font-bold text-sm text-[#0177b2] no-underline hover:underline">
+                  Documentation
+                  <i class="pi pi-external-link text-xs"></i>
+                </a>
+                <a href="https://github.com/TheJacksonLaboratory/ontology-service" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 font-bold text-sm text-[#0177b2] no-underline hover:underline">
+                  GitHub
+                  <i class="pi pi-external-link text-xs"></i>
+                </a>
+              </div>
+            </div>
+
+            <div class="flex flex-col gap-2 px-5 py-5 bg-white rounded-xl shadow-[0px_3px_1px_-2px_rgba(0,0,0,0.2),0px_2px_2px_0px_rgba(0,0,0,0.14),0px_1px_5px_0px_rgba(0,0,0,0.12)]">
+              <h3 class="text-base font-bold text-[#222] m-0">Ontology Annotation Network</h3>
+              <p class="text-[13px] text-[#636363] m-0">
+                This API is our graph instance of ontology annotations. Our goal is to expand on annotation relations to the HPO.
+                <em>Use this API if you need the annotations</em>
+              </p>
+              <div class="flex gap-6 mt-1">
+                <a href="https://ontology.jax.org/api/network/docs" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 font-bold text-sm text-[#0177b2] no-underline hover:underline">
+                  Documentation
+                  <i class="pi pi-external-link text-xs"></i>
+                </a>
+                <a href="https://github.com/TheJacksonLaboratory/ontology-annotation-network" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 font-bold text-sm text-[#0177b2] no-underline hover:underline">
+                  GitHub
+                  <i class="pi pi-external-link text-xs"></i>
+                </a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </p-tabpanel>
+
+    </p-tabpanels>
+  </p-tabs>
+
+</div>

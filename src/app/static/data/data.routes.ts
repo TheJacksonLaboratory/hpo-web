@@ -1,16 +1,9 @@
 import { Routes } from '@angular/router';
-import { ApiDocComponent } from './api-doc/api-doc.component';
-import { LaypersonComponent } from './layperson/layperson.component';
-import { TranslationComponent } from './translation/translation.component';
-import { AnnotationsDownloadComponent } from './annotations-download/annotations-download.component';
-import { IndigenousComponent } from './indigenous/indigenous.component';
-import { OntologyDownloadComponent } from './ontology-download/ontology-download.component';
+import { DataHomeComponent } from './data-home/data-home.component';
 
 export const dataRoutes: Routes = [
-  { path: 'annotations', component: AnnotationsDownloadComponent },
-  { path: 'api', component: ApiDocComponent },
-  { path: 'ontology', component: OntologyDownloadComponent },
-  { path: 'layperson', component: LaypersonComponent },
-  { path: 'translations', component: TranslationComponent },
-  { path: 'indigenous-languages', component: IndigenousComponent }
+  { path: '', component: DataHomeComponent },
+  { path: 'ontology', pathMatch: 'full', redirectTo: '/data' },
+  { path: 'annotations', pathMatch: 'full', redirectTo: '/data?tab=annotations' },
+  { path: 'api', pathMatch: 'full', redirectTo: '/data?tab=api' },
 ];

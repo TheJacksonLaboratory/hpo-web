@@ -30,17 +30,7 @@ export class AppComponent {
       },
       {
         label: "Data",
-        items:
-          [
-            {
-              label: "Ontology",
-              routerLink: "data/ontology"
-            },
-            {
-              label: "API",
-              routerLink: "data/api"
-            }
-          ]
+        routerLink: "data"
       },
       {
         label: "Tools",
