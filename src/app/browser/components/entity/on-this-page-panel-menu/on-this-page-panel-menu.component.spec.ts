@@ -118,8 +118,12 @@ describe('OnThisPagePanelMenuComponent', () => {
 
   it('gives the active item a solid teal pill and disabled items muted styling', () => {
     component.activeAnchor = 'disease-associations';
-    expect(component.itemClasses(items[1])).toContain('bg-[var(--p-teal-300)]');
-    expect(component.itemClasses(items[2])).toContain('cursor-not-allowed');
+    fixture.detectChanges();
+
+    const buttons: HTMLButtonElement[] = Array.from(fixture.nativeElement.querySelectorAll('button'));
+    expect(buttons[1].className).toContain('bg-[var(--p-teal-300)]');
+    expect(buttons[2].className).toContain('cursor-not-allowed');
+    expect(buttons[0].className).toContain('text-[var(--p-text-color)]');
   });
 
 });

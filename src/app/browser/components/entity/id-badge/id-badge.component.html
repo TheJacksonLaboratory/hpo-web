@@ -1,7 +1,7 @@
 @if (copyable) {
   <button
     type="button"
-    [class]="chipClasses + ' cursor-pointer transition-opacity hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-[var(--p-primary-color)]'"
+    class="inline-flex items-center gap-2 px-2 py-1 rounded-md whitespace-nowrap bg-[var(--p-slate-900)] text-[var(--p-surface-0)] text-sm leading-4 font-bold cursor-pointer transition-opacity hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-[var(--p-primary-color)]"
     [cdkCopyToClipboard]="id"
     (cdkCopyToClipboardCopied)="onCopied($event)"
     [attr.aria-label]="'Copy ' + id"
@@ -12,10 +12,17 @@
     <span class="sr-only" role="status">{{ copied ? 'Copied ' + id : '' }}</span>
   </button>
 } @else if (externalUrl) {
-  <a [href]="externalUrl" target="_blank" [class]="chipClasses + ' no-underline'">
+  <a
+    [href]="externalUrl"
+    target="_blank"
+    class="inline-flex items-center gap-2 px-2 py-1 rounded-md whitespace-nowrap bg-[var(--p-slate-900)] text-[var(--p-surface-0)] text-sm leading-4 font-bold no-underline"
+  >
     <span>{{ id }}</span>
     <i class="pi pi-external-link" aria-hidden="true"></i>
   </a>
 } @else {
-  <span [class]="chipClasses">{{ id }}</span>
+  <span
+    class="inline-flex items-center gap-2 px-2 py-1 rounded-md whitespace-nowrap bg-[var(--p-slate-900)] text-[var(--p-surface-0)] text-sm leading-4 font-bold"
+    >{{ id }}</span
+  >
 }

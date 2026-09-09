@@ -10,7 +10,12 @@
       <li class="pl-4">
         <button
           type="button"
-          [class]="itemClasses(item)"
+          class="w-full text-left p-2 rounded-md text-base transition-colors"
+          [ngClass]="{
+            'text-[var(--p-form-field-disabled-color)] cursor-not-allowed': item.disabled,
+            'font-bold text-[#222] bg-[var(--p-teal-300)]': !item.disabled && activeAnchor === item.anchor,
+            'text-[var(--p-text-color)]': !item.disabled && activeAnchor !== item.anchor
+          }"
           [disabled]="item.disabled"
           (click)="scrollTo(item)"
         >

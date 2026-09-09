@@ -24,11 +24,6 @@ const COPIED_FEEDBACK_MS = 1500;
   templateUrl: './id-badge.component.html',
 })
 export class IdBadgeComponent {
-  /** The chip's box, shared by all three variants. */
-  readonly chipClasses =
-    'inline-flex items-center gap-2 px-2 py-1 rounded-md whitespace-nowrap ' +
-    'bg-[var(--p-slate-900)] text-[var(--p-surface-0)] text-sm leading-4 font-bold';
-
   /** The identifier to display, e.g. `HP:0001250`. */
   @Input() id: string;
 

@@ -1,4 +1,5 @@
 import { Component, Input, NgZone, afterNextRender, inject } from '@angular/core';
+import { NgClass } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ScrollDispatcher } from '@angular/cdk/scrolling';
 import { PanelMenuItem } from '../../../models/models';
@@ -20,7 +21,7 @@ const SCROLL_THROTTLE_MS = 100;
 @Component({
   selector: 'app-on-this-page-panel-menu',
   standalone: true,
-  imports: [],
+  imports: [NgClass],
   templateUrl: './on-this-page-panel-menu.component.html',
 })
 export class OnThisPagePanelMenuComponent {
@@ -54,24 +55,6 @@ export class OnThisPagePanelMenuComponent {
       .scrolled(SCROLL_THROTTLE_MS)
       .pipe(takeUntilDestroyed())
       .subscribe(() => this.refresh());
-  }
-
-  /**
-   * Classes for one menu button, covering the disabled, active, and default
-   * states.
-   *
-   * @param item The section this button represents.
-   * @returns The full class string for the button element.
-   */
-  itemClasses(item: PanelMenuItem): string {
-    const base = 'w-full text-left p-2 rounded-md text-base transition-colors';
-    if (item.disabled) {
-      return `${base} text-[var(--p-form-field-disabled-color)] cursor-not-allowed`;
-    }
-    if (this.activeAnchor === item.anchor) {
-      return `${base} font-bold text-[#222] bg-[var(--p-teal-300)]`;
-    }
-    return `${base} text-[var(--p-text-color)]`;
   }
 
   /**
