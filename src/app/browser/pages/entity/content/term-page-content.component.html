@@ -21,8 +21,21 @@
             optionLabel="language_long"
             [ngModel]="selectedLanguage"
             (onChange)="changeLanguage($event.value)"
-            styleClass="w-full sm:w-[180px]"
-          />
+            styleClass="w-full sm:w-[180px] [--p-select-background:var(--p-indigo-100)] [--p-select-border-color:var(--p-indigo-100)] [--p-select-color:var(--p-grey-900)] [--p-select-dropdown-color:var(--p-grey-600)]"
+          >
+            <ng-template pTemplate="selectedItem" let-selected>
+              <span class="flex items-center gap-2 text-[var(--p-grey-900)]">
+                <span class="inline-flex items-center justify-center shrink-0 w-5 h-5 rounded-full uppercase bg-[var(--p-slate-800)] text-[var(--p-surface-0)] text-[0.625rem] leading-none font-bold">{{ selected.language }}</span>
+                <span>{{ selected.language_long }}</span>
+              </span>
+            </ng-template>
+            <ng-template pTemplate="item" let-language>
+              <span class="flex items-center gap-2 text-[var(--p-grey-900)]">
+                <span class="inline-flex items-center justify-center shrink-0 w-5 h-5 rounded-full uppercase bg-[var(--p-slate-800)] text-[var(--p-surface-0)] text-[0.625rem] leading-none font-bold">{{ language.language }}</span>
+                <span>{{ language.language_long }}</span>
+              </span>
+            </ng-template>
+          </p-select>
           <a
             href="https://obophenotype.github.io/hpo-translations/"
             target="_blank"

@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ButtonDirective } from 'primeng/button';
+import { PrimeTemplate } from 'primeng/api';
 import { Select } from 'primeng/select';
 import { Language, MedicalActionSourceExtended } from '../../../models/models';
 import { TranslatePipe } from '../../../../shared/pipes/translate.pipe';
@@ -30,6 +31,7 @@ import { TermPageViewModel } from '../entity-page.types';
     RouterLink,
     FormsModule,
     ButtonDirective,
+    PrimeTemplate,
     Select,
     TranslatePipe,
     AssociationsTableBlockComponent,
