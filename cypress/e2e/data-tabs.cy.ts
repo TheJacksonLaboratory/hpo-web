@@ -29,7 +29,8 @@ describe('Data page tabs', () => {
 
   it('redirects old deep links to the right tab', () => {
     cy.visit('/data/ontology');
-    cy.url().should('match', /\/data$/);
+    cy.url().should('include', '/data').and('include', 'tab=ontology');
+    cy.get('[role="tab"]').contains('Ontology').should('have.attr', 'aria-selected', 'true');
 
     cy.visit('/data/annotations');
     cy.url().should('include', '/data').and('include', 'tab=annotations');

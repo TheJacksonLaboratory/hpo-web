@@ -9,6 +9,7 @@ import { DataHomeComponent } from './data-home.component';
 describe('DataHomeComponent', () => {
   let component: DataHomeComponent;
   let fixture: ComponentFixture<DataHomeComponent>;
+  let navigateSpy: jest.SpyInstance;
 
   function configure(queryParams: Record<string, string> = {}): void {
     TestBed.configureTestingModule({
@@ -20,6 +21,10 @@ describe('DataHomeComponent', () => {
         { provide: ActivatedRoute, useValue: { queryParams: of(queryParams) } },
       ],
     });
+
+    // jest.spyOn keeps the original implementation unless one is supplied, which would
+    // fire a real navigation against the empty route config above.
+    navigateSpy = jest.spyOn(TestBed.inject(Router), 'navigate').mockResolvedValue(true);
 
     fixture = TestBed.createComponent(DataHomeComponent);
     component = fixture.componentInstance;
@@ -66,12 +71,35 @@ describe('DataHomeComponent', () => {
   it('updates activeTab and navigates when the tab changes', () => {
     configure();
     fixture.detectChanges();
-    const router = TestBed.inject(Router);
-    const navigateSpy = jest.spyOn(router, 'navigate');
+    navigateSpy.mockClear();
 
     component.onTabChange('api');
 
     expect(component.activeTab).toBe('api');
-    expect(navigateSpy).toHaveBeenCalledWith([], { relativeTo: expect.anything(), queryParams: { tab: 'api' } });
+    expect(navigateSpy).toHaveBeenCalledWith([], {
+      relativeTo: expect.anything(),
+      queryParams: { tab: 'api' },
+      queryParamsHandling: 'merge',
+      replaceUrl: true,
+    });
+  });
+
+  it('rewrites the URL to the canonical tab when the param is missing or unrecognized', () => {
+    configure({ tab: 'not-a-real-tab' });
+    fixture.detectChanges();
+
+    expect(navigateSpy).toHaveBeenCalledWith([], {
+      relativeTo: expect.anything(),
+      queryParams: { tab: 'ontology' },
+      queryParamsHandling: 'merge',
+      replaceUrl: true,
+    });
+  });
+
+  it('does not renavigate when the tab param is already canonical', () => {
+    configure({ tab: 'annotations' });
+    fixture.detectChanges();
+
+    expect(navigateSpy).not.toHaveBeenCalled();
   });
 });

@@ -11,11 +11,13 @@
 
     <p-tabpanels>
 
-      <p-tabpanel value="ontology" [pt]="{ root: { style: 'padding: 0' } }">
+      <p-tabpanel value="ontology">
         <div class="flex flex-col gap-5">
           <div class="flex items-center gap-2.5 flex-wrap text-sm font-semibold text-[#636363]">
-            <span>Current release: {{ version }}</span>
-            <span class="text-[#d1d5db]">&bull;</span>
+            @if (version) {
+              <span>Current release: {{ version }}</span>
+              <span class="text-[#d1d5db]">&bull;</span>
+            }
             <a
               [href]="releasesUrl"
               target="_blank"
@@ -50,11 +52,13 @@
         </div>
       </p-tabpanel>
 
-      <p-tabpanel value="annotations" [pt]="{ root: { style: 'padding: 0' } }">
+      <p-tabpanel value="annotations">
         <div class="flex flex-col gap-5">
           <div class="flex items-center gap-2.5 flex-wrap text-sm font-semibold text-[#636363]">
-            <span>Current release: {{ version }}</span>
-            <span class="text-[#d1d5db]">&bull;</span>
+            @if (version) {
+              <span>Current release: {{ version }}</span>
+              <span class="text-[#d1d5db]">&bull;</span>
+            }
             <a
               [href]="annotationsInfoUrl"
               target="_blank"
@@ -89,7 +93,7 @@
         </div>
       </p-tabpanel>
 
-      <p-tabpanel value="api" [pt]="{ root: { style: 'padding: 0' } }">
+      <p-tabpanel value="api">
         <div class="flex flex-col gap-5">
           <p class="text-sm font-semibold text-[#636363] m-0">
             RESTful services for programmatic access to the ontology and its annotations
