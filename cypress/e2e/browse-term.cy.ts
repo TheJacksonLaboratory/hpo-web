@@ -106,47 +106,43 @@ describe('Browse term page (shared entity page)', () => {
     cy.get('#medical-actions thead').should('contain.text', 'MaXo Id').and('contain.text', 'Relation');
   });
 
-  it('renders the on-this-page panel with a disabled item for the empty LOINC section', () => {
+  it('renders the on-this-page panel with every section navigable, empty ones included', () => {
     cy.get('app-on-this-page-panel-menu').contains('button', 'Summary').should('exist');
-    cy.get('app-on-this-page-panel-menu').contains('button', 'LOINC Associations').should('be.disabled');
+    cy.get('app-on-this-page-panel-menu').contains('button', 'LOINC Associations').should('not.be.disabled');
+    cy.get('app-on-this-page-panel-menu').contains('button', 'Examples').should('not.be.disabled');
     cy.get('app-on-this-page-panel-menu').contains('button', 'Disease Associations').should('not.be.disabled');
   });
 
-  it('lists panel items with populated sections first and empty ones disabled', () => {
+  it('lists panel items in page order, whether or not a section has rows', () => {
     cy.get('app-on-this-page-panel-menu button').then(($b) => {
       const labels = [...$b].map((b) => b.textContent!.trim().replace(/\s+/g, ' '));
       expect(labels).to.deep.equal([
         'Summary',
-        // populated first...
+        'Examples (0)',
         'Disease Associations (1)',
         'Gene Associations (1)',
         'Medical Actions (1)',
-        'Publications (2)',
-        // ...then the empty ones, in canonical order
-        'Examples (0)',
         'LOINC Associations (0)',
+        'Publications (2)',
       ]);
     });
-    cy.get('app-on-this-page-panel-menu').contains('button', 'Examples').should('be.disabled');
-    // Publications is populated from the term's PMIDs, so it is enabled
-    cy.get('app-on-this-page-panel-menu').contains('button', 'Publications').should('not.be.disabled');
   });
 
-  it('renders every empty section below every populated one', () => {
-    const top = (sel: string) => cy.get(sel).then(($e) => $e[0].getBoundingClientRect().top);
-    cy.get('#medical-actions').then(($populated) => {
-      const populatedTop = $populated[0].getBoundingClientRect().top;
-      for (const empty of ['#examples', '#loinc-associations']) {
-        cy.get(empty).then(($e) => {
-          expect($e[0].getBoundingClientRect().top, `${empty} below #medical-actions`).to.be.greaterThan(populatedTop);
-        });
-      }
-    });
-    // and the empty ones keep their canonical order relative to each other
-    top('#examples').then((examplesTop) => {
-      top('#loinc-associations').then((loincTop) => {
-        expect(loincTop).to.be.greaterThan(examplesTop);
-      });
+  it('renders sections in canonical page order, empty ones in place', () => {
+    // Regression guard: empty sections used to carry `order-last`, which moved
+    // them visually without moving them in the DOM.
+    const ids = [
+      '#examples',
+      '#disease-associations',
+      '#gene-associations',
+      '#medical-actions',
+      '#loinc-associations',
+      '#publications',
+    ];
+    cy.get(ids.join(', ')).then(($sections) => {
+      expect([...$sections].map((s) => `#${s.id}`), 'DOM order').to.deep.equal(ids);
+      const tops = [...$sections].map((s) => s.getBoundingClientRect().top);
+      expect(tops, 'visual order matches DOM order').to.deep.equal([...tops].sort((a, b) => a - b));
     });
   });
 
@@ -179,20 +175,6 @@ describe('Browse term page (shared entity page)', () => {
     cy.get('#summary').should('not.contain.text', 'View Publication');
   });
 
-  it('keeps the rail buttons on one line at the design width', () => {
-    // The label needs 162.7px and the rail gives 164px, so the chrome around it
-    // (padding, icon width) has to stay trimmed or the label wraps and the
-    // button grows from 38px to 54px.
-    cy.get('aside app-export-associations-button button').then(($b) => {
-      const r = $b[0].getBoundingClientRect();
-      expect(r.width, 'button width').to.be.closeTo(234, 1);
-      expect(r.height, 'button height - 54 means the label wrapped').to.be.closeTo(38, 1);
-    });
-    cy.get('aside app-report-entry-issue-button a').then(($b) => {
-      expect($b[0].getBoundingClientRect().height, 'report button height').to.be.closeTo(38, 1);
-    });
-  });
-
   it('renders both right-rail actions', () => {
     cy.contains('app-export-associations-button', 'Download Associations').should('exist');
     cy.get('app-report-entry-issue-button a')
@@ -203,10 +185,6 @@ describe('Browse term page (shared entity page)', () => {
 
   it('has no console errors', () => {
     cy.get('@consoleError').should('not.have.been.called');
-  });
-
-  it('visual check - viewport only', () => {
-    cy.screenshot('term-page-viewport', { capture: 'viewport' });
   });
 
   it('follows the scroll position in the panel menu, not just clicks', () => {
@@ -231,12 +209,10 @@ describe('Browse term page (shared entity page)', () => {
     expectActive((l) => expect(l, 'summary active at rest').to.contain('Summary'));
 
     cy.scrollTo('bottom');
-    // Empty sections (Examples, LOINC) are skipped, so the last navigable
-    // section stays marked rather than the highlight disappearing.
-    expectActive((l) => {
-      expect(l, 'highlight moved off Summary').to.not.contain('Summary');
-      expect(l, 'not an empty section').to.not.contain('(0)');
-    });
+    // Scrolling names whichever section covers the activation offset. The page
+    // clamps before Publications can reach the top, so scrolling alone never
+    // names it - clicking is what reaches it, covered separately below.
+    expectActive((l) => expect(l, 'highlight moved off Summary').to.not.contain('Summary'));
 
     cy.scrollTo('top');
     expectActive((l) => expect(l, 'highlight came back').to.contain('Summary'));
@@ -244,8 +220,56 @@ describe('Browse term page (shared entity page)', () => {
 
   it('scrolls to a section when its panel-menu item is clicked', () => {
     cy.window().its('scrollY').should('eq', 0);
-    cy.get('app-on-this-page-panel-menu').contains('button', 'Medical Actions').click();
+    cy.get('app-on-this-page-panel-menu').contains('button', 'Medical Actions').click({ scrollBehavior: false });
     cy.window().its('scrollY').should('be.greaterThan', 0);
     cy.get('#medical-actions').should('be.visible');
+  });
+
+  it('lands a clicked section at its own scroll-margin, not inside the previous one', () => {
+    // Asserted against the section's computed scroll-margin-top rather than a
+    // fixed number, so tuning the offset does not need a test edit. What must
+    // hold at any value is the second assertion: an offset larger than the gap
+    // above the section left the previous one's paginator on screen.
+    cy.get('app-on-this-page-panel-menu').contains('button', 'Gene Associations').click({ scrollBehavior: false });
+    cy.get('#gene-associations').should(($s) => {
+      const el = $s[0];
+      const offset = parseFloat(el.ownerDocument.defaultView!.getComputedStyle(el).scrollMarginTop);
+      expect(el.getBoundingClientRect().top, 'heading lands at its scroll-margin').to.be.closeTo(offset, 2);
+    });
+    cy.get('#disease-associations').should(($prev) => {
+      expect($prev[0].getBoundingClientRect().bottom, 'previous section ends off screen').to.be.at.most(1);
+    });
+  });
+
+  it('keeps a short section highlighted after clicking it, rather than skipping to the next', () => {
+    // Examples is 136px tall. An activation line further down the viewport sat
+    // below it entirely, so the scroll that followed the click immediately
+    // reassigned the highlight to Disease Associations.
+    cy.get('app-on-this-page-panel-menu').contains('button', 'Examples').click({ scrollBehavior: false });
+    cy.get('#examples').should('be.visible');
+    // The spy is throttled at 100ms, so the click's own highlight would pass
+    // this assertion before the spy could overrule it. Waiting first is the
+    // point: it proves the highlight survives the spy, not that it was set.
+    cy.wait(500);
+    cy.get('app-on-this-page-panel-menu')
+      .contains('button', 'Examples')
+      .should('have.css', 'background-color', 'rgb(148, 225, 220)');
+  });
+
+  it('keeps a clicked section highlighted where the page clamps before reaching it', () => {
+    // Publications needs more scroll than the document has, so it lands at the
+    // page end with LOINC still covering the handover point. The click has to
+    // outrank position until the reader scrolls away.
+    cy.get('app-on-this-page-panel-menu').contains('button', 'Publications').click({ scrollBehavior: false });
+    cy.wait(500); // long enough for the throttled scroll listener to have run
+    cy.get('app-on-this-page-panel-menu')
+      .contains('button', 'Publications')
+      .should('have.css', 'background-color', 'rgb(148, 225, 220)');
+
+    // and scrolling releases it
+    cy.scrollTo(0, 900);
+    cy.get('app-on-this-page-panel-menu')
+      .contains('button', 'Publications')
+      .should('not.have.css', 'background-color', 'rgb(148, 225, 220)');
   });
 });

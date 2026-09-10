@@ -182,6 +182,4 @@ export interface PanelMenuItem {
   anchor: string;
   /** Number of rows in the section. Omitted for sections that are not lists. */
   count?: number;
-  /** True when the section has no content, which renders the entry inert. */
-  disabled?: boolean;
 }

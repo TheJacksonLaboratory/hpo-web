@@ -1,4 +1,4 @@
-import { Component, ContentChild, HostBinding, Input, TemplateRef, ViewChild } from '@angular/core';
+import { Component, ContentChild, Input, TemplateRef, ViewChild } from '@angular/core';
 import { NgTemplateOutlet } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Table, TableModule } from 'primeng/table';
@@ -122,21 +122,6 @@ export class AssociationsTableBlockComponent {
 
   /** Options for the "Sort by" dropdown (Figma: Left Inputs / select). Omit to hide it. */
   @Input() sortOptions?: SortOption[];
-
-  /**
-   * Sinks a section with no rows to the bottom of the page, so the reader meets
-   * everything that has content first. Relies on the parent being a flex
-   * column; `order` leaves DOM order untouched, and flex keeps same-order
-   * siblings in source order, so the empty ones stay in their canonical
-   * sequence relative to each other.
-   *
-   * `buildSections` applies the same rule to the panel menu, keyed off the same
-   * emptiness, so the two orders always agree.
-   */
-  @HostBinding('class.order-last')
-  get sinksToBottom(): boolean {
-    return !this.value.length;
-  }
 
   /** Projected `<th>` cells for the header row. See the class example. */
   @ContentChild('headerCells', { read: TemplateRef }) headerCellsTpl: TemplateRef<unknown>;

@@ -2,7 +2,8 @@
 
 ## Status
 
-Accepted (2026-08-31)
+Accepted (2026-08-31). The empty-section ordering decision below is superseded
+by [0002](0002-HPO-68-empty-section-position.md) (2026-09-10); the rest stands.
 
 ## Context
 

@@ -25,7 +25,7 @@ describe('buildTermPageSections', () => {
     expect(sections[0]).toEqual({ id: 'summary', label: 'Summary', anchor: 'summary' });
   });
 
-  it('disables and zero-counts a section with no rows', () => {
+  it('zero-counts a section with no rows, leaving it navigable', () => {
     const sections = buildTermPageSections(baseViewModel);
     const diseaseSection = sections.find((s) => s.id === 'disease-associations');
     expect(diseaseSection).toEqual({
@@ -33,11 +33,10 @@ describe('buildTermPageSections', () => {
       label: 'Disease Associations',
       anchor: 'disease-associations',
       count: 0,
-      disabled: true,
     });
   });
 
-  it('enables a section and reports its count when rows are present', () => {
+  it('reports a section count when rows are present', () => {
     const viewModel: TermPageViewModel = {
       ...baseViewModel,
       geneAssoc: [{ id: 'NCBIGene:672', name: 'BRCA1' }],
@@ -49,18 +48,17 @@ describe('buildTermPageSections', () => {
       label: 'Gene Associations',
       anchor: 'gene-associations',
       count: 1,
-      disabled: false,
     });
   });
 
-  it('always disables Examples, which has no backing field at all', () => {
+  it('always zero-counts Examples, which has no backing field at all', () => {
     const withRows: TermPageViewModel = {
       ...baseViewModel,
       diseaseAssoc: [{ id: 'OMIM:1', name: 'D' }],
       publications: [{ id: 'PMID:1' }],
     };
     const examples = buildTermPageSections(withRows).find((s) => s.id === 'examples');
-    expect(examples).toEqual({ id: 'examples', label: 'Examples', anchor: 'examples', count: 0, disabled: true });
+    expect(examples).toEqual({ id: 'examples', label: 'Examples', anchor: 'examples', count: 0 });
   });
 
   it('counts publications from the term and enables the section when it has any', () => {
@@ -73,7 +71,6 @@ describe('buildTermPageSections', () => {
       label: 'Publications',
       anchor: 'publications',
       count: 2,
-      disabled: false,
     });
   });
 
@@ -82,7 +79,7 @@ describe('buildTermPageSections', () => {
     expect(gene!.label).toBe('Gene Associations');
   });
 
-  it('sinks empty sections below populated ones, keeping canonical order within each group', () => {
+  it('keeps every section in its canonical position when only some have rows', () => {
     const viewModel: TermPageViewModel = {
       ...baseViewModel,
       diseaseAssoc: [{ id: 'OMIM:1', name: 'D' }],
@@ -91,12 +88,10 @@ describe('buildTermPageSections', () => {
 
     expect(buildTermPageSections(viewModel).map((s) => s.id)).toEqual([
       'summary',
-      // populated, in canonical order
-      'disease-associations',
-      'medical-actions',
-      // empty, in canonical order
       'examples',
+      'disease-associations',
       'gene-associations',
+      'medical-actions',
       'loinc-associations',
       'publications',
     ]);

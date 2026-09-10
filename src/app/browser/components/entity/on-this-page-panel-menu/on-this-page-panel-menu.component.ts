@@ -4,11 +4,22 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ScrollDispatcher } from '@angular/cdk/scrolling';
 import { PanelMenuItem } from '../../../models/models';
 
-/** Fraction of the viewport height at which a section becomes the active one. */
-const ACTIVATION_LINE = 0.3;
+/**
+ * Distance below the viewport top at which a section hands over to the next,
+ * in pixels. Matches the `gap-8` between association sections in
+ * `term-page-content.component.html`, so a section yields as its bottom edge
+ * clears the gap above the next one rather than at an arbitrary line.
+ *
+ * A section shorter than this can never be named by scrolling, which no
+ * section is - the shortest is an empty state at 136px.
+ */
+const SECTION_GAP_PX = 32;
 
 /** How often to re-check the scroll position, in milliseconds. */
 const SCROLL_THROTTLE_MS = 100;
+
+/** Scroll movement, in pixels, that counts as the reader having scrolled. */
+const SCROLL_RELEASE_PX = 1;
 
 /**
  * The sticky "On this page" navigator: one button per page section, which
@@ -27,13 +38,20 @@ const SCROLL_THROTTLE_MS = 100;
 export class OnThisPagePanelMenuComponent {
   /**
    * Sections to list, in page order. Each item's `anchor` must be the DOM id of
-   * that section. Items marked `disabled` are rendered but inert - that is how
-   * an empty section is shown as unavailable rather than hidden.
+   * that section. Every entry is navigable, including a section with no rows -
+   * its `count` of zero is what marks it as empty.
    */
   @Input() items: PanelMenuItem[] = [];
 
   /** Anchor of the section currently highlighted, or null before the first check. */
   activeAnchor: string | null = null;
+
+  /**
+   * The section last clicked and the scroll offset that click landed on, held
+   * until the reader scrolls away from it. The jump is synchronous, so the
+   * offset recorded in {@link scrollTo} is where the page came to rest.
+   */
+  private clicked?: { anchor: string; scrollY: number };
 
   /**
    * `ScrollDispatcher` listens outside Angular's zone, so writing
@@ -58,22 +76,39 @@ export class OnThisPagePanelMenuComponent {
   }
 
   /**
-   * Smooth-scrolls to a section and marks it active immediately, so the
-   * highlight responds to the click rather than waiting for the scroll to
-   * cross the activation line. Disabled items are ignored.
+   * Jumps to a section and marks it active immediately, so the highlight
+   * responds to the click rather than waiting for the next scroll sample.
+   *
+   * Deliberately not `behavior: 'smooth'`: that form of `scrollIntoView` moves
+   * the page zero pixels in this app, measured as forty consecutive samples at
+   * scroll offset 0, while `window.scrollTo` with the same option works - most
+   * likely the `html, body { height: 100% }` in `styles.scss`. Jumping also
+   * means no animation for the scroll listener to sample part-way through, so
+   * the highlight cannot walk through the sections in between.
    *
    * @param item The section to scroll to.
    */
   scrollTo(item: PanelMenuItem): void {
-    if (item.disabled) {
-      return;
-    }
     this.activeAnchor = item.anchor;
-    document.getElementById(item.anchor)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    document.getElementById(item.anchor)?.scrollIntoView({ block: 'start' });
+    this.clicked = { anchor: item.anchor, scrollY: window.scrollY };
   }
 
-  /** Re-checks the scroll position, entering the zone only when it changed. */
+  /**
+   * Re-checks the scroll position, entering the zone only when it changed.
+   *
+   * A click holds its own section until the reader scrolls away from where the
+   * jump landed. Without that, clicking a section the page cannot bring to the
+   * top - the last screenful, where the scroll clamps - would leave the
+   * section above it marked, because that is the one covering the activation
+   * offset.
+   */
   private refresh(): void {
+    if (this.clicked && Math.abs(window.scrollY - this.clicked.scrollY) <= SCROLL_RELEASE_PX) {
+      return;
+    }
+    this.clicked = undefined;
+
     const next = this.computeActive();
     if (next !== this.activeAnchor) {
       this.zone.run(() => (this.activeAnchor = next));
@@ -81,23 +116,30 @@ export class OnThisPagePanelMenuComponent {
   }
 
   /**
-   * The lowest section whose top has passed the activation line - i.e. the one
-   * the reader is currently inside. Positions are read fresh and sorted by
-   * them, so this does not depend on {@link items} being in visual order.
+   * The first section that has not yet scrolled past {@link SECTION_GAP_PX} -
+   * the one the reader is in, or the one they are about to reach when that
+   * point falls in the gap between two sections.
    *
-   * Empty sections are skipped: their disabled styling would win over the
-   * active pill anyway, leaving nothing highlighted at all.
+   * Each section is judged by its bottom edge rather than its top, so a section
+   * shorter than the offset is still reachable. {@link items} is trusted to be
+   * in page order, which `docs/adr/0002-HPO-68-empty-section-position.md` makes
+   * a property of the template rather than of the data.
+   *
+   * A section the page cannot scroll to the top - the last one, once the scroll
+   * clamps - is simply never named by scrolling. Reaching it is what clicking
+   * is for; see {@link scrollTo}.
    */
   private computeActive(): string | null {
-    const line = window.innerHeight * ACTIVATION_LINE;
-    const positions = this.items
-      .filter((item) => !item.disabled)
+    const sections = this.items
       .map((item) => ({ anchor: item.anchor, el: document.getElementById(item.anchor) }))
-      .filter((entry): entry is { anchor: string; el: HTMLElement } => entry.el !== null)
-      .map((entry) => ({ anchor: entry.anchor, top: entry.el.getBoundingClientRect().top }))
-      .sort((a, b) => a.top - b.top);
+      .filter((entry): entry is { anchor: string; el: HTMLElement } => entry.el !== null);
 
-    const passed = positions.filter((entry) => entry.top <= line);
-    return (passed.at(-1) ?? positions.at(0))?.anchor ?? null;
+    const last = sections.at(-1);
+    if (!last) {
+      return null;
+    }
+
+    const current = sections.find((entry) => entry.el.getBoundingClientRect().bottom > SECTION_GAP_PX);
+    return (current ?? last).anchor;
   }
 }
