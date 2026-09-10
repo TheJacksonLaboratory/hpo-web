@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { ButtonDirective } from 'primeng/button';
 
 /**
  * Placeholder shown in a section that has no rows: an invitation to contribute
@@ -16,7 +17,7 @@ import { Component, Input } from '@angular/core';
 @Component({
   selector: 'app-empty-state',
   standalone: true,
-  imports: [],
+  imports: [ButtonDirective],
   templateUrl: './empty-state.component.html',
 })
 export class EmptyStateComponent {

@@ -1,5 +1,14 @@
 <div class="flex flex-col items-start gap-2 py-8 text-left">
   @if (ctaLabel && ctaHref) {
-    <a [href]="ctaHref" target="_blank" class="text-[var(--p-primary-color)] underline font-semibold">{{ ctaLabel }}</a>
+    <a
+      [href]="ctaHref"
+      target="_blank"
+      pButton
+      icon="pi pi-external-link"
+      [label]="ctaLabel"
+      severity="secondary"
+      size="small"
+      [text]="true"
+    ></a>
   }
 </div>
