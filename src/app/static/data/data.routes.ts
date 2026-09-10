@@ -1,16 +1,17 @@
-import { Routes } from '@angular/router';
-import { ApiDocComponent } from './api-doc/api-doc.component';
-import { LaypersonComponent } from './layperson/layperson.component';
-import { TranslationComponent } from './translation/translation.component';
-import { AnnotationsDownloadComponent } from './annotations-download/annotations-download.component';
-import { IndigenousComponent } from './indigenous/indigenous.component';
-import { OntologyDownloadComponent } from './ontology-download/ontology-download.component';
+import { inject } from '@angular/core';
+import { RedirectFunction, Router, Routes } from '@angular/router';
+import { DataHomeComponent, DataTab } from './data-home/data-home.component';
+
+/**
+ * A string `redirectTo` builds its query params from the redirect string alone, so any
+ * params on the incoming link are dropped. Returning a UrlTree lets us carry them over.
+ */
+const toTab = (tab: DataTab): RedirectFunction => ({ queryParams }) =>
+  inject(Router).createUrlTree(['/data'], { queryParams: { ...queryParams, tab } });
 
 export const dataRoutes: Routes = [
-  { path: 'annotations', component: AnnotationsDownloadComponent },
-  { path: 'api', component: ApiDocComponent },
-  { path: 'ontology', component: OntologyDownloadComponent },
-  { path: 'layperson', component: LaypersonComponent },
-  { path: 'translations', component: TranslationComponent },
-  { path: 'indigenous-languages', component: IndigenousComponent }
+  { path: '', component: DataHomeComponent },
+  { path: 'ontology', pathMatch: 'full', redirectTo: toTab('ontology') },
+  { path: 'annotations', pathMatch: 'full', redirectTo: toTab('annotations') },
+  { path: 'api', pathMatch: 'full', redirectTo: toTab('api') },
 ];
