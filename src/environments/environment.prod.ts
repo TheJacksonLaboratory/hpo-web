@@ -30,6 +30,10 @@ export const environment = {
   //HPOA
   HPO_ANNOTATION_FILE_PURL: 'https://purl.obolibrary.org/obo/hp/hpoa/phenotype.hpoa',
   MAXO_ANNOTATION_FILE_PURL: 'https://purl.obolibrary.org/obo/maxo/maxo-annotations.tsv',
+  HPO_GENES_TO_PHENOTYPE_PURL: 'https://purl.obolibrary.org/obo/hp/hpoa/genes_to_phenotype.txt',
+  HPO_PHENOTYPE_TO_GENES_PURL: 'https://purl.obolibrary.org/obo/hp/hpoa/phenotype_to_genes.txt',
+  HPO_GENES_TO_DISEASE_PURL: 'https://purl.obolibrary.org/obo/hp/hpoa/genes_to_disease.txt',
+  HPO_ANNOTATIONS_INFO_URL: 'https://obophenotype.github.io/human-phenotype-ontology/annotations/introduction/',
   HPO_GITHUB_REPO_URL:'https://api.github.com/repos/obophenotype/human-phenotype-ontology',
   ONTO_RELEASE_NO_EXT: 'https://github.com/obophenotype/human-phenotype-ontology/releases/latest/download/hp',
   HPO_RELEASES: 'https://github.com/obophenotype/human-phenotype-ontology/releases',

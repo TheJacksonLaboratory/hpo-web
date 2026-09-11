@@ -36,12 +36,19 @@ describe('Browse gene page (shared entity page)', () => {
     cy.intercept('GET', '**/esummary.fcgi*', ENTREZ).as('entrez');
     cy.intercept('GET', '**/network/annotation/NCBIGene:1497', ASSOCIATIONS).as('associations');
 
-    cy.visit('/browse/gene/NCBIGene:1497', {
+    cy.visit('/gene/NCBIGene:1497', {
       onBeforeLoad(win) {
         cy.spy(win.console, 'error').as('consoleError');
       },
     });
     cy.wait(['@entrez', '@associations']);
+  });
+
+  it('serves the same page from the legacy /browse/gene path', () => {
+    cy.visit('/browse/gene/NCBIGene:1497');
+    cy.wait(['@entrez', '@associations']);
+    cy.location('pathname').should('match', /^\/gene\/NCBIGene(%3A|:)1497$/);
+    cy.get('#summary h1').should('have.text', 'CTNS');
   });
 
   it('renders the gene summary from the Entrez record', () => {
@@ -131,7 +138,7 @@ describe('Browse gene page (shared entity page)', () => {
   describe('when the Entrez lookup fails', () => {
     beforeEach(() => {
       cy.intercept('GET', '**/esummary.fcgi*', { statusCode: 500, body: {} }).as('entrezError');
-      cy.visit('/browse/gene/NCBIGene:1497');
+      cy.visit('/gene/NCBIGene:1497');
       cy.wait(['@entrezError', '@associations']);
     });
 
@@ -145,7 +152,7 @@ describe('Browse gene page (shared entity page)', () => {
   describe('when the annotation call fails', () => {
     beforeEach(() => {
       cy.intercept('GET', '**/network/annotation/NCBIGene:1497', { statusCode: 500, body: {} }).as('assocError');
-      cy.visit('/browse/gene/NCBIGene:1497');
+      cy.visit('/gene/NCBIGene:1497');
       cy.wait(['@entrez', '@assocError']);
     });
 

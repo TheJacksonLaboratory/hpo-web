@@ -46,12 +46,19 @@ describe('Browse term page (shared entity page)', () => {
     cy.intercept('GET', '**/hp/terms/HP:0001250/children', CHILDREN).as('children');
     cy.intercept('GET', '**/network/annotation/HP:0001250', ASSOCIATIONS).as('associations');
 
-    cy.visit('/browse/term/HP:0001250', {
+    cy.visit('/term/HP:0001250', {
       onBeforeLoad(win) {
         cy.spy(win.console, 'error').as('consoleError');
       },
     });
     cy.wait(['@term', '@parents', '@children', '@associations']);
+  });
+
+  it('serves the same page from the legacy /browse/term path', () => {
+    cy.visit('/browse/term/HP:0001250');
+    cy.wait(['@term', '@parents', '@children', '@associations']);
+    cy.location('pathname').should('match', /^\/term\/HP(%3A|:)0001250$/);
+    cy.get('#summary').should('contain.text', 'Seizure');
   });
 
   it('renders the term summary', () => {

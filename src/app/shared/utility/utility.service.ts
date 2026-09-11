@@ -14,15 +14,6 @@ export class UtilityService {
     window.open(url, '_blank').focus();
   }
 
-  downloadFile(url: string) {
-    const link = document.createElement('a');
-    link.setAttribute('target', '_blank');
-    link.setAttribute('href', url);
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
-  }
-
   getMostRecentReleaseHPO() {
     return this.http.get(environment.HPO_GITHUB_REPO_URL + '/releases?per_page=1').pipe(
       map((versions: []) => {

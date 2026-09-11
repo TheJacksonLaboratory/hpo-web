@@ -39,14 +39,6 @@
             <p-tab value="term">Phenotypes <span class="font-normal">({{ termItems.length }})</span></p-tab>
             <p-tab value="disease">Diseases <span class="font-normal">({{ diseaseItems.length }})</span></p-tab>
             <p-tab value="gene">Genes <span class="font-normal">({{ geneItems.length }})</span></p-tab>
-            <!--
-              Plain filler flex-item projected into the same tab-list row so the
-              baseline continues past the last tab. p-tablist's own opaque white
-              background sits on top of any border/shadow drawn on an ancestor
-              wrapper, hiding it - putting the border on a sibling *inside* the
-              row avoids that, and flex stretch aligns its height with the tabs.
-            -->
-            <div class="flex-1 border-b border-[#D9D9D9]" aria-hidden="true"></div>
           </p-tablist>
         </p-tabs>
 

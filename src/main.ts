@@ -140,6 +140,16 @@ if (environment.production) {
       tabs: {
         tablist: {
           background: 'white',
+          // Without this the only line under the tabs is each tab's own bottom border,
+          // so it stopped at the last tab instead of running the width of the panel.
+          borderWidth: '0 0 1px 0',
+          borderColor: '#D9D9D9',
+        },
+        tabpanel: {
+          // PrimeNG applies this to .p-tabpanels, the container. Zero the sides so panel
+          // content lines up with the tablist border and the heading above it; keep the
+          // top gap between the border and the first row of content.
+          padding: '0.875rem 0 0 0',
         },
         tab: {
           borderWidth: '0 0 1px 0',
