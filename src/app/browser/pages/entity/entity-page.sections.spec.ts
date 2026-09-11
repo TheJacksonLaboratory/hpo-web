@@ -1,7 +1,8 @@
 import { EntityType } from '../../models/models';
 import { buildSections } from './entity-page.sections';
 import { buildTermPageSections } from './content/term-page-content.sections';
-import { TermPageViewModel } from './entity-page.types';
+import { buildGenePageSections } from './content/gene-page-content.sections';
+import { GenePageViewModel, TermPageViewModel } from './entity-page.types';
 
 describe('buildSections', () => {
   const termViewModel: TermPageViewModel = {
@@ -21,7 +22,23 @@ describe('buildSections', () => {
     languages: [],
   };
 
+  const geneViewModel: GenePageViewModel = {
+    kind: EntityType.GENE,
+    id: 'NCBIGene:1497',
+    title: 'CTNS',
+    downloadCounts: { diseases: 0, terms: 0 },
+    gene: { uid: '1497', name: 'CTNS', maplocation: '17p13.2', summary: '', otheraliases: '', aliases: [] },
+    phenotypeAssoc: [],
+    diseaseAssoc: [],
+    entrezError: false,
+    networkError: false,
+  };
+
   it('dispatches a phenotype view model to the term page section config', () => {
     expect(buildSections(termViewModel)).toEqual(buildTermPageSections(termViewModel));
+  });
+
+  it('dispatches a gene view model to the gene page section config', () => {
+    expect(buildSections(geneViewModel)).toEqual(buildGenePageSections(geneViewModel));
   });
 });

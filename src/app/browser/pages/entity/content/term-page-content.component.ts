@@ -108,14 +108,6 @@ export class TermPageContentComponent {
   }
 
   /**
-   * Router link to a gene page from a disease row's associated-gene entry,
-   * which carries a bare numeric id rather than a prefixed one.
-   */
-  geneRowLink(gene: { geneId: number }): string[] {
-    return ['/browse/gene', String(gene.geneId)];
-  }
-
-  /**
    * The PubMed-linkable sources for a medical action. A `sources` list may also
    * hold non-PMID provenance strings, which have no link target.
    */

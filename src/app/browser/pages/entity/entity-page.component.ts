@@ -6,6 +6,7 @@ import { EntityDataResolverService } from './entity-data.resolvers';
 import { EntityPageViewModel } from './entity-page.types';
 import { buildSections } from './entity-page.sections';
 import { TermPageContentComponent } from './content/term-page-content.component';
+import { GenePageContentComponent } from './content/gene-page-content.component';
 import { HierarchyTreeComponent } from '../../components/entity/hierarchy-tree/hierarchy-tree.component';
 import { OnThisPagePanelMenuComponent } from '../../components/entity/on-this-page-panel-menu/on-this-page-panel-menu.component';
 import { ExportAssociationsButtonComponent } from '../../components/entity/export-associations-button/export-associations-button.component';
@@ -30,6 +31,7 @@ import { LanguageService } from '../../services/language/language.service';
   standalone: true,
   imports: [
     TermPageContentComponent,
+    GenePageContentComponent,
     HierarchyTreeComponent,
     OnThisPagePanelMenuComponent,
     ExportAssociationsButtonComponent,

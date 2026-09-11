@@ -1,4 +1,13 @@
-import { EntityType, Language, MedicalActionSourceExtended, SimpleTerm, Term, TermTree } from '../../models/models';
+import {
+  EntityType,
+  EntrezGene,
+  Language,
+  MedicalActionSourceExtended,
+  OntologyAnnotationDisease,
+  SimpleTerm,
+  Term,
+  TermTree,
+} from '../../models/models';
 
 /**
  * The surface every entity view model must expose so that
@@ -79,12 +88,35 @@ export interface TermPageViewModel extends EntityPageViewModelBase {
   networkError: boolean;
 }
 
+/** View model backing the gene entity page. */
+export interface GenePageViewModel extends EntityPageViewModelBase {
+  kind: EntityType.GENE;
+  /**
+   * The Entrez record behind the summary: symbol, cytogenetic location,
+   * RefSeq definition and aliases.
+   */
+  gene: EntrezGene;
+  /** Phenotypes annotated to this gene. */
+  phenotypeAssoc: SimpleTerm[];
+  /** Diseases this gene is associated with. */
+  diseaseAssoc: OntologyAnnotationDisease[];
+  /**
+   * True when the Entrez lookup failed. The associations still render, so the
+   * page loses its definition and location rather than the whole route.
+   */
+  entrezError: boolean;
+  /**
+   * True when the annotation network call failed, which renders both
+   * association sections as an error block.
+   */
+  networkError: boolean;
+}
+
 /**
  * Discriminated union of every entity page's view model, keyed by
  * {@link EntityPageViewModelBase.kind}.
  *
- * Widens to `TermPageViewModel | GenePageViewModel | DiseasePageViewModel`
- * once those are added in the gene/disease steps - see
+ * Widens to include `DiseasePageViewModel` once the disease step lands - see
  * `docs/adr/0001-HPO-68-unified-entity-page.md`.
  */
-export type EntityPageViewModel = TermPageViewModel;
+export type EntityPageViewModel = TermPageViewModel | GenePageViewModel;

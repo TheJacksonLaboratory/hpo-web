@@ -1,6 +1,7 @@
 import { EntityType, PanelMenuItem } from '../../models/models';
 import { EntityPageViewModel } from './entity-page.types';
 import { buildTermPageSections } from './content/term-page-content.sections';
+import { buildGenePageSections } from './content/gene-page-content.sections';
 
 /**
  * Dispatches to the section config of whichever entity page is being rendered.
@@ -13,5 +14,7 @@ export function buildSections(viewModel: EntityPageViewModel): PanelMenuItem[] {
   switch (viewModel.kind) {
     case EntityType.PHENOTYPE:
       return buildTermPageSections(viewModel);
+    case EntityType.GENE:
+      return buildGenePageSections(viewModel);
   }
 }

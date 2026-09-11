@@ -1,0 +1,92 @@
+<div class="flex flex-col gap-8">
+  <section id="summary" class="scroll-mt-8 flex flex-col gap-6">
+    <div class="flex flex-col gap-4">
+      <div class="flex flex-col gap-1">
+        <h1 class="text-[2.5rem] leading-[3.5rem] font-bold text-[#1e293b] my-0">{{ viewModel.gene.name || viewModel.id }}</h1>
+        <div class="flex flex-wrap items-center gap-2">
+          <app-id-badge [id]="viewModel.id" [copyable]="true" />
+        </div>
+      </div>
+
+      @if (viewModel.entrezError) {
+        <p class="my-0 text-red-600">
+          Could not load the Entrez record for {{ viewModel.id }}, so this gene's definition, location and synonyms are unavailable.
+        </p>
+      } @else {
+        <p class="my-0 text-base leading-7 text-[var(--p-text-color)]">{{ viewModel.gene.summary }}</p>
+      }
+    </div>
+
+    @if (viewModel.gene.maplocation || viewModel.gene.aliases.length > 0) {
+      <div class="bg-[var(--p-surface-50)] rounded-lg px-4 py-3 flex flex-col gap-6">
+        @if (viewModel.gene.maplocation) {
+          <div class="flex flex-col gap-2 text-[var(--p-text-color)]">
+            <div class="font-bold text-sm leading-6 text-[#454545]">Chromosomal Location</div>
+            <span class="flex items-center gap-3">
+              <svg width="16" height="36" viewBox="0 0 16 36" class="shrink-0" aria-hidden="true">
+                <rect x="0" y="0" width="16" height="10" rx="4" fill="var(--p-cyan-700)" />
+                <rect x="0" y="13" width="16" height="6" fill="var(--p-navy-800)" />
+                <rect x="0" y="19" width="16" height="17" rx="4" fill="#e2e8f0" />
+              </svg>
+              <span class="text-2xl leading-8 font-bold">{{ viewModel.gene.maplocation }}</span>
+            </span>
+          </div>
+        }
+
+        @if (viewModel.gene.aliases.length > 0) {
+          <div class="flex flex-col gap-2 text-[var(--p-text-color)]">
+            <div class="font-bold text-sm leading-6 text-[#454545]">Synonyms</div>
+            <span class="flex flex-wrap items-center">
+              @for (item of viewModel.gene.aliases; track item; let isLast = $last) {
+                <span>{{ item }}</span>
+                @if (!isLast) {
+                  <span class="mx-4 border-l border-[var(--p-content-border-color)] self-stretch"></span>
+                }
+              }
+            </span>
+          </div>
+        }
+      </div>
+    }
+  </section>
+
+  <div class="flex flex-col gap-8">
+    <app-associations-table-block
+      anchorId="phenotype-associations"
+      [emptyCtaLink]="contributeLinks.phenotype"
+      title="Phenotype Associations"
+      [value]="viewModel.phenotypeAssoc"
+      [networkError]="viewModel.networkError"
+      [globalFilterFields]="['id', 'name']"
+      [sortOptions]="phenotypeSortOptions"
+    >
+      <ng-template #headerCells>
+        <th>Term ID</th>
+        <th>Term Name</th>
+      </ng-template>
+      <ng-template #rowCells let-row>
+        <td><a [routerLink]="['/browse/term', row.id]" class="text-[var(--p-cyan-700)] underline">{{ row.id }}</a></td>
+        <td>{{ row.name }}</td>
+      </ng-template>
+    </app-associations-table-block>
+
+    <app-associations-table-block
+      anchorId="disease-associations"
+      [emptyCtaLink]="contributeLinks.disease"
+      title="Disease Associations"
+      [value]="viewModel.diseaseAssoc"
+      [networkError]="viewModel.networkError"
+      [filterable]="false"
+      [paginated]="false"
+    >
+      <ng-template #headerCells>
+        <th>Disease ID</th>
+        <th>Disease Name</th>
+      </ng-template>
+      <ng-template #rowCells let-row>
+        <td><a [routerLink]="['/browse/disease', row.id]" class="text-[var(--p-cyan-700)] underline">{{ row.id }}</a></td>
+        <td>{{ row.name }}</td>
+      </ng-template>
+    </app-associations-table-block>
+  </div>
+</div>

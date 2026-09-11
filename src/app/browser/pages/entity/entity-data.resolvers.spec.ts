@@ -4,13 +4,15 @@ import { EntityType, Term } from '../../models/models';
 import { AnnotationService } from '../../services/annotation/annotation.service';
 import { OntologyService } from '../../services/ontology/ontology.service';
 import { LanguageService } from '../../services/language/language.service';
+import { GeneService } from '../../services/gene/gene.service';
 import { EntityDataResolverService } from './entity-data.resolvers';
-import { TermPageViewModel } from './entity-page.types';
+import { GenePageViewModel, TermPageViewModel } from './entity-page.types';
 
 describe('EntityDataResolverService', () => {
   let service: EntityDataResolverService;
   let ontologyService: any;
   let annotationService: any;
+  let geneService: any;
   let languageService: LanguageService;
 
   const baseTerm: Term = {
@@ -33,6 +35,10 @@ describe('EntityDataResolverService', () => {
     };
     annotationService = {
       fromPhenotype: jest.fn(),
+      fromGene: jest.fn(),
+    };
+    geneService = {
+      searchGeneInfo: jest.fn(),
     };
 
     TestBed.configureTestingModule({
@@ -40,6 +46,7 @@ describe('EntityDataResolverService', () => {
         EntityDataResolverService,
         { provide: OntologyService, useValue: ontologyService },
         { provide: AnnotationService, useValue: annotationService },
+        { provide: GeneService, useValue: geneService },
         LanguageService,
       ],
     });
@@ -49,7 +56,7 @@ describe('EntityDataResolverService', () => {
   });
 
   it('errors for an entity type with no registered resolver', (done) => {
-    service.resolve(EntityType.GENE, 'NCBIGene:672').subscribe({
+    service.resolve(EntityType.DISEASE, 'OMIM:219800').subscribe({
       error: (err) => {
         expect(err.message).toContain('No entity-page resolver registered');
         done();
@@ -219,6 +226,95 @@ describe('EntityDataResolverService', () => {
       expect(vm.treeData.children[0].treeCountWidth).toBe(32); // 8/10 * 40 (MAX_TREE_WIDTH)
       expect(vm.treeData.children[1].treeCountWidth).toBe(8); // 2/10 * 40
       done();
+    });
+  });
+
+  describe('gene', () => {
+    const ENTREZ = {
+      uid: '1497',
+      name: 'CTNS',
+      maplocation: '17p13.2',
+      summary: 'This gene encodes a seven-transmembrane domain protein.',
+      otheraliases: 'CTNS-LSB, PQLC4, SLC66A4',
+    };
+    const ASSOCIATIONS = {
+      phenotypes: [{ id: 'HP:0001250', name: 'Seizure' }],
+      diseases: [{ id: 'OMIM:219800', name: 'Cystinosis', mondoId: 'MONDO:0009244', description: '' }],
+    };
+
+    const resolveGene = (done: jest.DoneCallback, assert: (vm: GenePageViewModel) => void) =>
+      service.resolve(EntityType.GENE, 'NCBIGene:1497').subscribe((viewModel) => {
+        assert(viewModel as GenePageViewModel);
+        done();
+      });
+
+    it('looks the Entrez record up by bare uid and reads it back out of the keyed map', (done) => {
+      geneService.searchGeneInfo.mockReturnValue(of({ result: { '1497': ENTREZ } }));
+      annotationService.fromGene.mockReturnValue(of(ASSOCIATIONS));
+
+      resolveGene(done, (vm) => {
+        expect(geneService.searchGeneInfo).toHaveBeenCalledWith('1497');
+        expect(annotationService.fromGene).toHaveBeenCalledWith('NCBIGene:1497');
+        expect(vm.gene.name).toBe('CTNS');
+        expect(vm.gene.maplocation).toBe('17p13.2');
+      });
+    });
+
+    it('splits the comma-joined aliases into synonyms', (done) => {
+      geneService.searchGeneInfo.mockReturnValue(of({ result: { '1497': ENTREZ } }));
+      annotationService.fromGene.mockReturnValue(of(ASSOCIATIONS));
+
+      resolveGene(done, (vm) => expect(vm.gene.aliases).toEqual(['CTNS-LSB', 'PQLC4', 'SLC66A4']));
+    });
+
+    it('derives the shell inputs the page chrome reads', (done) => {
+      geneService.searchGeneInfo.mockReturnValue(of({ result: { '1497': ENTREZ } }));
+      annotationService.fromGene.mockReturnValue(of(ASSOCIATIONS));
+
+      resolveGene(done, (vm) => {
+        expect(vm.kind).toBe(EntityType.GENE);
+        expect(vm.id).toBe('NCBIGene:1497');
+        expect(vm.title).toBe('CTNS');
+        expect(vm.downloadCounts).toEqual({ diseases: 1, terms: 1 });
+      });
+    });
+
+    it('keeps the associations when the Entrez lookup fails', (done) => {
+      geneService.searchGeneInfo.mockReturnValue(throwError(() => new Error('entrez down')));
+      annotationService.fromGene.mockReturnValue(of(ASSOCIATIONS));
+
+      resolveGene(done, (vm) => {
+        expect(vm.entrezError).toBe(true);
+        expect(vm.networkError).toBe(false);
+        expect(vm.phenotypeAssoc).toHaveLength(1);
+        expect(vm.title).toBe('NCBIGene:1497'); // falls back to the id
+        expect(vm.gene.summary).toBe('No Entrez definition entry.');
+      });
+    });
+
+    it('keeps the Entrez summary when the annotation call fails', (done) => {
+      geneService.searchGeneInfo.mockReturnValue(of({ result: { '1497': ENTREZ } }));
+      annotationService.fromGene.mockReturnValue(throwError(() => new Error('network down')));
+
+      resolveGene(done, (vm) => {
+        expect(vm.networkError).toBe(true);
+        expect(vm.entrezError).toBe(false);
+        expect(vm.gene.name).toBe('CTNS');
+        expect(vm.phenotypeAssoc).toEqual([]);
+        expect(vm.diseaseAssoc).toEqual([]);
+        expect(vm.downloadCounts).toEqual({ diseases: 0, terms: 0 });
+      });
+    });
+
+    it('resolves rather than erroring when an unknown uid returns no record', (done) => {
+      geneService.searchGeneInfo.mockReturnValue(of({ result: {} }));
+      annotationService.fromGene.mockReturnValue(of({ phenotypes: [], diseases: [] }));
+
+      resolveGene(done, (vm) => {
+        expect(vm.entrezError).toBe(true);
+        expect(vm.gene.aliases).toEqual([]);
+        expect(vm.gene.maplocation).toBe('');
+      });
     });
   });
 });

@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Observable, forkJoin, of, throwError } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
-import { EntityType, Language, Term, TermTree } from '../../models/models';
+import { EntityType, EntrezGene, Language, Term, TermTree } from '../../models/models';
 import { AnnotationService } from '../../services/annotation/annotation.service';
 import { OntologyService } from '../../services/ontology/ontology.service';
 import { LanguageService } from '../../services/language/language.service';
-import { EntityPageViewModel, PublicationReference, TermPageViewModel } from './entity-page.types';
+import { GeneService } from '../../services/gene/gene.service';
+import { EntityPageViewModel, GenePageViewModel, PublicationReference, TermPageViewModel } from './entity-page.types';
 
 const MAX_TREE_WIDTH = 40;
 
@@ -26,12 +27,14 @@ export class EntityDataResolverService {
    */
   private resolvers: Partial<Record<EntityType, (id: string) => Observable<EntityPageViewModel>>> = {
     [EntityType.PHENOTYPE]: (id) => this.fetchTerm(id),
+    [EntityType.GENE]: (id) => this.fetchGene(id),
   };
 
   constructor(
     private ontologyService: OntologyService,
     private annotationService: AnnotationService,
     private languageService: LanguageService,
+    private geneService: GeneService,
   ) {}
 
   /**
@@ -101,6 +104,60 @@ export class EntityDataResolverService {
         );
       }),
     );
+  }
+
+  /**
+   * Resolves the Entrez record and the gene's annotations.
+   *
+   * Both calls are allowed to fail independently: the Entrez lookup supplies
+   * the summary, the annotation call supplies the tables, and losing one is
+   * not a reason to drop the other. Unlike the term page there is nothing to
+   * look up the entity by first, so neither failure can error the route.
+   */
+  private fetchGene(id: string): Observable<GenePageViewModel> {
+    // Entrez keys its records by bare uid, while the route carries the
+    // prefixed id - `NCBIGene:1497` is looked up as `1497`. Older links point
+    // at the bare id, which is left as-is rather than losing the lookup.
+    const uid = id.includes(':') ? id.split(':')[1] : id;
+
+    return forkJoin({
+      entrez: this.geneService.searchGeneInfo(uid).pipe(
+        map((response) => response.result[uid] ?? null),
+        catchError(() => of(null)),
+      ),
+      associations: this.annotationService.fromGene(id).pipe(catchError(() => of(null))),
+    }).pipe(
+      map(({ entrez, associations }) => ({
+        kind: EntityType.GENE as const,
+        id,
+        title: entrez?.name ?? id,
+        downloadCounts: {
+          diseases: associations?.diseases.length ?? 0,
+          terms: associations?.phenotypes.length ?? 0,
+        },
+        gene: this.normalizeGene(entrez),
+        phenotypeAssoc: associations?.phenotypes ?? [],
+        diseaseAssoc: associations?.diseases ?? [],
+        entrezError: entrez === null,
+        networkError: associations === null,
+      })),
+    );
+  }
+
+  /**
+   * Fills in the display defaults the gene template assumes, and splits the
+   * comma-joined `otheraliases` string Entrez returns into the synonym list
+   * the summary renders.
+   */
+  private normalizeGene(gene: EntrezGene | null): EntrezGene {
+    return {
+      uid: gene?.uid,
+      name: gene?.name ?? '',
+      maplocation: gene?.maplocation ?? '',
+      summary: gene?.summary || 'No Entrez definition entry.',
+      otheraliases: gene?.otheraliases ?? '',
+      aliases: gene?.otheraliases ? gene.otheraliases.split(',').map((alias) => alias.trim()) : [],
+    };
   }
 
   /**

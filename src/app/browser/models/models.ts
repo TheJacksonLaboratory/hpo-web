@@ -22,7 +22,12 @@ export interface Disease extends SimpleTerm {
 
 export class EntrezGene {
   uid?: string;
+  /** Gene symbol, e.g. `CTNS`. Shown as the page heading. */
   name?: string;
+  /** Full gene name, e.g. `cystinosin`. Distinct from the {@link name} symbol. */
+  description?: string;
+  /** Chromosome number, e.g. `17`. Coarser than {@link maplocation}. */
+  chromosome?: string;
   maplocation?: string;
   summary?: string;
   otheraliases?: string;
@@ -35,7 +40,11 @@ export class EntrezGene {
 }
 
 export interface EntrezGeneResult {
-  result: EntrezGene
+  /**
+   * Gene records keyed by Entrez uid, as esummary returns them. A lookup for a
+   * single id still comes back as a map, so the caller indexes by that id.
+   */
+  result: Record<string, EntrezGene>
 }
 
 export interface Term extends SimpleTerm {
