@@ -22,12 +22,12 @@
         @if (viewModel.gene.maplocation) {
           <div class="flex flex-col gap-2 text-[var(--p-text-color)]">
             <div class="font-bold text-sm leading-6 text-[#454545]">Chromosomal Location</div>
-            <span class="flex items-center gap-3">
-              <svg width="16" height="36" viewBox="0 0 16 36" class="shrink-0" aria-hidden="true">
-                <rect x="0" y="0" width="16" height="10" rx="4" fill="var(--p-cyan-700)" />
-                <rect x="0" y="13" width="16" height="6" fill="var(--p-navy-800)" />
-                <rect x="0" y="19" width="16" height="17" rx="4" fill="#e2e8f0" />
-              </svg>
+            <span class="flex items-center gap-2.5">
+              <span class="flex flex-col items-center shrink-0 w-4 h-9 rounded-lg bg-[#e2e8f0]" aria-hidden="true">
+                <span class="w-4 h-2 rounded-t-lg bg-[var(--p-cyan-700)]"></span>
+                <span class="w-4 h-0.5 bg-white"></span>
+                <span class="w-4 h-1.5 bg-[var(--p-navy-800)]"></span>
+              </span>
               <span class="text-2xl leading-8 font-bold">{{ viewModel.gene.maplocation }}</span>
             </span>
           </div>
