@@ -116,3 +116,123 @@ describe('AssociationsTableBlockComponent', () => {
     expect(fixture.nativeElement.querySelector('h2').textContent).toContain('Disease Associations (2)');
   });
 });
+
+@Component({
+  standalone: true,
+  imports: [AssociationsTableBlockComponent],
+  template: `
+    <app-associations-table-block
+      anchorId="phenotype-associations"
+      title="Phenotype Associations"
+      [value]="value"
+      [groupRowsBy]="groupRowsBy"
+      [groupOrder]="groupOrder"
+      [paginated]="false"
+    >
+      <ng-template #headerCells>
+        <th>Id</th>
+        <th>Name</th>
+      </ng-template>
+      <ng-template #groupHeaderCells let-row>
+        <td colspan="2">{{ row.category }} ({{ row.categoryCount }})</td>
+      </ng-template>
+      <ng-template #rowCells let-row>
+        <td>{{ row.id }}</td>
+        <td>{{ row.name }}</td>
+      </ng-template>
+    </app-associations-table-block>
+  `,
+})
+class GroupedHostComponent {
+  value: { id: string; name: string; category: string; categoryCount: number }[] = [
+    { id: 'HP:0004322', name: 'Short stature', category: 'Growth', categoryCount: 2 },
+    { id: 'HP:0001510', name: 'Growth delay', category: 'Growth', categoryCount: 2 },
+    { id: 'HP:0000252', name: 'Microcephaly', category: 'Head and neck', categoryCount: 1 },
+  ];
+  groupRowsBy?: string = 'category';
+  groupOrder?: string[];
+}
+
+describe('AssociationsTableBlockComponent grouping', () => {
+  let fixture: ComponentFixture<GroupedHostComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({ imports: [GroupedHostComponent] }).compileComponents();
+    fixture = TestBed.createComponent(GroupedHostComponent);
+  });
+
+  it('inserts one subheader per run of rows sharing the grouped value', () => {
+    fixture.detectChanges();
+
+    const text = fixture.nativeElement.textContent;
+    expect(text).toContain('Growth (2)');
+    expect(text).toContain('Head and neck (1)');
+  });
+
+  it('renders every row alongside the subheaders', () => {
+    fixture.detectChanges();
+
+    const text = fixture.nativeElement.textContent;
+    for (const name of ['Short stature', 'Growth delay', 'Microcephaly']) {
+      expect(text).toContain(name);
+    }
+  });
+
+  const subheaderText = () =>
+    Array.from(fixture.nativeElement.querySelectorAll('tbody td[colspan]')).map((cell: any) =>
+      cell.textContent.trim(),
+    );
+
+  it('gathers scattered rows of one value into a single group', () => {
+    fixture.componentInstance.value = [
+      { id: 'HP:0004322', name: 'Short stature', category: 'Growth', categoryCount: 2 },
+      { id: 'HP:0000252', name: 'Microcephaly', category: 'Head and neck', categoryCount: 1 },
+      { id: 'HP:0001510', name: 'Growth delay', category: 'Growth', categoryCount: 2 },
+    ];
+    fixture.detectChanges();
+
+    expect(subheaderText()).toEqual(['Growth (2)', 'Head and neck (1)']);
+  });
+
+  it('orders groups alphabetically when no explicit order is given', () => {
+    fixture.componentInstance.value = [
+      { id: 'HP:0001250', name: 'Seizure', category: 'Nervous System', categoryCount: 1 },
+      { id: 'HP:0004322', name: 'Short stature', category: 'Growth', categoryCount: 1 },
+      { id: 'HP:0000007', name: 'Autosomal recessive inheritance', category: 'Inheritance', categoryCount: 1 },
+    ];
+    fixture.detectChanges();
+
+    expect(subheaderText()).toEqual(['Growth (1)', 'Inheritance (1)', 'Nervous System (1)']);
+  });
+
+  it('follows an explicit group order instead of sorting alphabetically', () => {
+    fixture.componentInstance.groupOrder = ['Inheritance', 'Growth', 'Nervous System'];
+    fixture.componentInstance.value = [
+      { id: 'HP:0001250', name: 'Seizure', category: 'Nervous System', categoryCount: 1 },
+      { id: 'HP:0004322', name: 'Short stature', category: 'Growth', categoryCount: 1 },
+      { id: 'HP:0000007', name: 'Autosomal recessive inheritance', category: 'Inheritance', categoryCount: 1 },
+    ];
+    fixture.detectChanges();
+
+    expect(subheaderText()).toEqual(['Inheritance (1)', 'Growth (1)', 'Nervous System (1)']);
+  });
+
+  it('sorts a group outside the explicit order last', () => {
+    fixture.componentInstance.groupOrder = ['Inheritance', 'Growth'];
+    fixture.componentInstance.value = [
+      { id: 'HP:9999999', name: 'Unknown', category: 'Some New Category', categoryCount: 1 },
+      { id: 'HP:0004322', name: 'Short stature', category: 'Growth', categoryCount: 1 },
+    ];
+    fixture.detectChanges();
+
+    expect(subheaderText()).toEqual(['Growth (1)', 'Some New Category (1)']);
+  });
+
+  it('renders no subheaders when grouping is off', () => {
+    fixture.componentInstance.groupRowsBy = undefined;
+    fixture.detectChanges();
+
+    expect(fixture.nativeElement.querySelectorAll('tbody td[colspan]')).toHaveLength(0);
+    expect(fixture.nativeElement.textContent).toContain('Short stature');
+  });
+});

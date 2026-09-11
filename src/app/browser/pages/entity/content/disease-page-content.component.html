@@ -1,0 +1,70 @@
+<div class="flex flex-col gap-8">
+  <section id="summary" class="scroll-mt-8 flex flex-col gap-1">
+    <h1 class="text-[2.5rem] leading-[3.5rem] font-bold text-[#1e293b] my-0">{{ viewModel.disease.name }}</h1>
+    <div class="flex flex-wrap items-center gap-2">
+      <app-id-badge [id]="viewModel.disease.id" [copyable]="true" />
+      @if (viewModel.disease.mondoId) {
+        <app-id-badge [id]="viewModel.disease.mondoId" [copyable]="true" />
+      }
+    </div>
+  </section>
+
+  <div class="flex flex-col gap-8">
+    <app-associations-table-block
+      anchorId="phenotype-associations"
+      [emptyCtaLink]="contributeLinks.phenotype"
+      title="Phenotype Associations"
+      [value]="viewModel.phenotypeAssoc"
+      [networkError]="viewModel.networkError"
+      [globalFilterFields]="['id', 'name', 'category']"
+      [sortOptions]="phenotypeSortOptions"
+      groupRowsBy="category"
+      [groupOrder]="bodySystemOrder"
+    >
+      <ng-template #headerCells>
+        <th>Term ID</th>
+        <th>Term Name</th>
+        <th>Onset</th>
+        <th>Frequency</th>
+        <th>Source(s)</th>
+      </ng-template>
+      <ng-template #groupHeaderCells let-row>
+        <td colspan="5" class="font-semibold">{{ row.category }} ({{ row.categoryCount }})</td>
+      </ng-template>
+      <ng-template #rowCells let-row>
+        <td><a [routerLink]="['/term', row.id]" class="text-[var(--p-cyan-700)] underline">{{ row.id }}</a></td>
+        <td>{{ row.name }}</td>
+        <td>{{ row.onset }}</td>
+        <td>{{ row.frequency }}</td>
+        <td>
+          @for (source of phenotypeSources(row); track source.href) {
+            <div>
+              <a [href]="source.href" target="_blank" class="text-[var(--p-cyan-700)] underline inline-flex items-center gap-1">
+                {{ source.label }} <i class="pi pi-external-link text-xs"></i>
+              </a>
+            </div>
+          }
+        </td>
+      </ng-template>
+    </app-associations-table-block>
+
+    <app-associations-table-block
+      anchorId="gene-associations"
+      [emptyCtaLink]="contributeLinks.gene"
+      title="Gene Associations"
+      [value]="viewModel.geneAssoc"
+      [networkError]="viewModel.networkError"
+      [filterable]="false"
+      [paginated]="false"
+    >
+      <ng-template #headerCells>
+        <th>Gene ID</th>
+        <th>Gene Symbol</th>
+      </ng-template>
+      <ng-template #rowCells let-row>
+        <td><a [routerLink]="['/gene', row.id]" class="text-[var(--p-cyan-700)] underline">{{ row.id }}</a></td>
+        <td>{{ row.name }}</td>
+      </ng-template>
+    </app-associations-table-block>
+  </div>
+</div>

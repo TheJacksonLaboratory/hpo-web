@@ -23,6 +23,11 @@
           <app-gene-page-content [viewModel]="viewModel" />
         </div>
       }
+      @case (EntityType.DISEASE) {
+        <div class="flex-1 min-w-0 p-6">
+          <app-disease-page-content [viewModel]="viewModel" />
+        </div>
+      }
     }
 
     <!-- 282px is the narrowest the export button's label fits without wrapping. -->

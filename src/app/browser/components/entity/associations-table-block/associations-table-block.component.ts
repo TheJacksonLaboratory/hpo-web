@@ -123,11 +123,31 @@ export class AssociationsTableBlockComponent {
   /** Options for the "Sort by" dropdown (Figma: Left Inputs / select). Omit to hide it. */
   @Input() sortOptions?: SortOption[];
 
+  /**
+   * Row property to group by, which inserts a subheader row wherever its value
+   * changes. Requires {@link groupHeaderCellsTpl}. A group is a run of adjacent
+   * rows, not a bucket, so the table orders rows by this property first.
+   */
+  @Input() groupRowsBy?: string;
+
+  /**
+   * Explicit order for {@link groupRowsBy}'s values, applied while no sort
+   * option is chosen. Values outside the list sort last. Without it the table
+   * orders groups alphabetically.
+   */
+  @Input() groupOrder?: string[];
+
   /** Projected `<th>` cells for the header row. See the class example. */
   @ContentChild('headerCells', { read: TemplateRef }) headerCellsTpl: TemplateRef<unknown>;
 
   /** Projected `<td>` cells for a body row, with the row as implicit context. */
   @ContentChild('rowCells', { read: TemplateRef }) rowCellsTpl: TemplateRef<unknown>;
+
+  /**
+   * Projected `<td>` for a group subheader, with the first row of the group as
+   * the implicit context. Must carry its own `colspan`.
+   */
+  @ContentChild('groupHeaderCells', { read: TemplateRef }) groupHeaderCellsTpl: TemplateRef<unknown>;
 
   /** The underlying PrimeNG table, used to drive global filtering. */
   @ViewChild('dt') table: Table;
@@ -155,5 +175,34 @@ export class AssociationsTableBlockComponent {
   onSortChange(): void {
     this.sortField = this.selectedSort?.field;
     this.sortOrder = this.selectedSort?.order ?? 1;
+  }
+
+  /** Whether the table hands sorting back to {@link sortRows}. */
+  get usesGroupOrder(): boolean {
+    return !!this.groupOrder?.length;
+  }
+
+  /**
+   * Sorts rows by {@link groupOrder} while no sort option is chosen, and by the
+   * chosen field otherwise.
+   *
+   * @param event The table's sort request, carrying the rows to order in place.
+   */
+  sortRows(event: { data?: unknown[]; field: string; order: number }): void {
+    const byGroupOrder = this.usesGroupOrder && !this.sortField;
+    const key = (row: unknown) => {
+      const value = (row as Record<string, unknown>)?.[event.field];
+      if (!byGroupOrder) {
+        return value as string | number;
+      }
+      const index = this.groupOrder.indexOf(value as string);
+      return index === -1 ? this.groupOrder.length : index;
+    };
+
+    event.data?.sort((a, b) => {
+      const [first, second] = [key(a), key(b)];
+      const result = first < second ? -1 : first > second ? 1 : 0;
+      return result * event.order;
+    });
   }
 }

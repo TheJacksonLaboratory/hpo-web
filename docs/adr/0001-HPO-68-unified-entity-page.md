@@ -3,7 +3,9 @@
 ## Status
 
 Accepted (2026-08-31). The empty-section ordering decision below is superseded
-by [0002](0002-HPO-68-empty-section-position.md) (2026-09-10); the rest stands.
+by [0002](0002-HPO-68-empty-section-position.md) (2026-09-10), and disease's
+section list by [0003](0003-HPO-68-disease-sections.md) (2026-09-11); the rest
+stands.
 
 ## Context
 

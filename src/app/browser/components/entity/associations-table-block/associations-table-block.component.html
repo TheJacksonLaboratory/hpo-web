@@ -56,6 +56,10 @@
       [globalFilterFields]="globalFilterFields"
       [sortField]="sortField"
       [sortOrder]="sortOrder"
+      [rowGroupMode]="groupRowsBy ? 'subheader' : undefined"
+      [groupRowsBy]="groupRowsBy"
+      [customSort]="usesGroupOrder"
+      (sortFunction)="sortRows($any($event))"
       [showCurrentPageReport]="true"
       currentPageReportTemplate="Showing {first} to {last} of {totalRecords}"
     >
@@ -64,6 +68,13 @@
           <ng-container *ngTemplateOutlet="headerCellsTpl"></ng-container>
         </tr>
       </ng-template>
+      @if (groupRowsBy && groupHeaderCellsTpl) {
+        <ng-template pTemplate="groupheader" let-row>
+          <tr class="bg-[var(--p-slate-800)] text-[var(--p-surface-0)]">
+            <ng-container *ngTemplateOutlet="groupHeaderCellsTpl; context: { $implicit: row, row: row }"></ng-container>
+          </tr>
+        </ng-template>
+      }
       <ng-template pTemplate="body" let-row>
         <tr>
           <ng-container *ngTemplateOutlet="rowCellsTpl; context: { $implicit: row, row: row }"></ng-container>

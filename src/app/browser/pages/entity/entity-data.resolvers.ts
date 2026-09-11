@@ -2,13 +2,27 @@ import { Injectable } from '@angular/core';
 import { Observable, forkJoin, of, throwError } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { EntityType, EntrezGene, Language, Term, TermTree } from '../../models/models';
+import { DiseasePageViewModel, DiseasePhenotypeRow } from './entity-page.types';
 import { AnnotationService } from '../../services/annotation/annotation.service';
 import { OntologyService } from '../../services/ontology/ontology.service';
 import { LanguageService } from '../../services/language/language.service';
 import { GeneService } from '../../services/gene/gene.service';
 import { EntityPageViewModel, GenePageViewModel, PublicationReference, TermPageViewModel } from './entity-page.types';
 
+
 const MAX_TREE_WIDTH = 40;
+
+/** Order the disease page lists body systems in. Labels outside it sort last. */
+export const BODY_SYSTEM_ORDER = [
+  'Inheritance', 'Growth', 'Head and neck', 'Ear', 'Eye', 'Cardiovascular', 'Respiratory System',
+  'Thoracic cavity', 'Breast', 'Digestive System', 'Endocrine', 'Genitourinary system', 'Immunology',
+  'Blood and blood-forming tissues', 'Skeletal system', 'Musculature', 'Limbs', 'Connective tissue',
+  'Skin, Hair, and Nails', 'Nervous System', 'Voice', 'Prenatal and Birth', 'Constitutional Symptom',
+  'Neoplasm', 'Metabolism/Laboratory abnormality', 'Cellular phenotype',
+];
+
+/** Shown in place of an onset or frequency the annotation does not carry. */
+const NO_VALUE = '-';
 
 /**
  * Fetches and shapes the data behind each entity page.
@@ -28,6 +42,7 @@ export class EntityDataResolverService {
   private resolvers: Partial<Record<EntityType, (id: string) => Observable<EntityPageViewModel>>> = {
     [EntityType.PHENOTYPE]: (id) => this.fetchTerm(id),
     [EntityType.GENE]: (id) => this.fetchGene(id),
+    [EntityType.DISEASE]: (id) => this.fetchDisease(id),
   };
 
   constructor(
@@ -136,6 +151,69 @@ export class EntityDataResolverService {
         entrezError: entrez === null,
         networkError: associations === null,
       })),
+    );
+  }
+
+  /**
+   * Resolves the disease and its annotations. A failure errors the route, since
+   * the annotation call is the only source for the page.
+   */
+  private fetchDisease(id: string): Observable<DiseasePageViewModel> {
+    return this.annotationService.fromDisease(id).pipe(
+      map((associations) => ({
+        kind: EntityType.DISEASE as const,
+        id: associations.disease?.id ?? id,
+        title: associations.disease?.name ?? id,
+        downloadCounts: {
+          genes: associations.genes.length,
+          terms: this.countPhenotypes(associations.categories),
+        },
+        disease: associations.disease,
+        phenotypeAssoc: this.buildPhenotypeRows(associations.categories, id),
+        geneAssoc: associations.genes,
+        networkError: false,
+      })),
+      catchError(() => throwError(() => new Error(`Could not find requested ${id}.`))),
+    );
+  }
+
+  /**
+   * Flattens the API's `{ bodySystem: phenotype[] }` map into one list ordered
+   * by {@link BODY_SYSTEM_ORDER}, which is the order the table groups in.
+   *
+   * @param categories Phenotypes keyed by body-system label.
+   * @param diseaseId Used as the provenance when an annotation carries none.
+   */
+  private buildPhenotypeRows(categories: object, diseaseId: string): DiseasePhenotypeRow[] {
+    const byCategory = (categories ?? {}) as Record<string, any[]>;
+
+    return Object.keys(byCategory)
+      .filter((category) => byCategory[category]?.length)
+      .sort((a, b) => this.bodySystemRank(a) - this.bodySystemRank(b))
+      .flatMap((category) =>
+        byCategory[category].map((phenotype) => ({
+          id: phenotype.id,
+          name: phenotype.name,
+          category,
+          categoryCount: byCategory[category].length,
+          onset: phenotype.metadata?.onset ?? NO_VALUE,
+          frequency: phenotype.metadata?.frequency ?? NO_VALUE,
+          sources: phenotype.metadata?.sources?.length ? phenotype.metadata.sources : [diseaseId],
+        })),
+      );
+  }
+
+  /** Position of a body-system label in {@link BODY_SYSTEM_ORDER}; unknown labels sort last. */
+  private bodySystemRank(category: string): number {
+    const index = BODY_SYSTEM_ORDER.indexOf(category);
+    return index === -1 ? BODY_SYSTEM_ORDER.length : index;
+  }
+
+  /** Total phenotypes across every body system, for the export dialog's count. */
+  private countPhenotypes(categories: object): number {
+    return Object.values((categories ?? {}) as Record<string, any[]>).reduce(
+      (total, phenotypes) => total + (phenotypes?.length ?? 0),
+      0,
     );
   }
 

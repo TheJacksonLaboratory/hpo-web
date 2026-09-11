@@ -1,4 +1,5 @@
 import {
+  Disease,
   EntityType,
   EntrezGene,
   Language,
@@ -107,10 +108,40 @@ export interface GenePageViewModel extends EntityPageViewModelBase {
 }
 
 /**
+ * One phenotype annotated to a disease, flattened out of the API's
+ * category-keyed map so the table can render and group a single list.
+ */
+export interface DiseasePhenotypeRow extends SimpleTerm {
+  /** Body-system label this phenotype is grouped under, e.g. `Head and neck`. */
+  category: string;
+  /** How many phenotypes share this row's {@link category}. */
+  categoryCount: number;
+  /** Age of onset, or `-` when the annotation carries none. */
+  onset: string;
+  /** How often the phenotype presents, or `-` when the annotation carries none. */
+  frequency: string;
+  /** Provenance ids for the annotation - PMIDs, bookshelf URLs, database ids. */
+  sources: string[];
+}
+
+/** View model backing the disease entity page. */
+export interface DiseasePageViewModel extends EntityPageViewModelBase {
+  kind: EntityType.DISEASE;
+  /** The resolved disease. */
+  disease: Disease;
+  /** Phenotypes annotated to this disease, ordered by body system. */
+  phenotypeAssoc: DiseasePhenotypeRow[];
+  /** Genes associated with this disease. */
+  geneAssoc: SimpleTerm[];
+  /**
+   * True when the annotation call failed, which renders both association
+   * sections as an error block.
+   */
+  networkError: boolean;
+}
+
+/**
  * Discriminated union of every entity page's view model, keyed by
  * {@link EntityPageViewModelBase.kind}.
- *
- * Widens to include `DiseasePageViewModel` once the disease step lands - see
- * `docs/adr/0001-HPO-68-unified-entity-page.md`.
  */
-export type EntityPageViewModel = TermPageViewModel | GenePageViewModel;
+export type EntityPageViewModel = TermPageViewModel | GenePageViewModel | DiseasePageViewModel;

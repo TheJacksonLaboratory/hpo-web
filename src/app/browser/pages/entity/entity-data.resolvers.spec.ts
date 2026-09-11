@@ -6,7 +6,7 @@ import { OntologyService } from '../../services/ontology/ontology.service';
 import { LanguageService } from '../../services/language/language.service';
 import { GeneService } from '../../services/gene/gene.service';
 import { EntityDataResolverService } from './entity-data.resolvers';
-import { GenePageViewModel, TermPageViewModel } from './entity-page.types';
+import { DiseasePageViewModel, GenePageViewModel, TermPageViewModel } from './entity-page.types';
 
 describe('EntityDataResolverService', () => {
   let service: EntityDataResolverService;
@@ -36,6 +36,7 @@ describe('EntityDataResolverService', () => {
     annotationService = {
       fromPhenotype: jest.fn(),
       fromGene: jest.fn(),
+      fromDisease: jest.fn(),
     };
     geneService = {
       searchGeneInfo: jest.fn(),
@@ -55,8 +56,9 @@ describe('EntityDataResolverService', () => {
     languageService = TestBed.inject(LanguageService);
   });
 
+
   it('errors for an entity type with no registered resolver', (done) => {
-    service.resolve(EntityType.DISEASE, 'OMIM:219800').subscribe({
+    service.resolve(-1 as EntityType, 'HP:0001250').subscribe({
       error: (err) => {
         expect(err.message).toContain('No entity-page resolver registered');
         done();
@@ -314,6 +316,154 @@ describe('EntityDataResolverService', () => {
         expect(vm.entrezError).toBe(true);
         expect(vm.gene.aliases).toEqual([]);
         expect(vm.gene.maplocation).toBe('');
+      });
+    });
+  });
+
+  describe('disease', () => {
+    const DISEASE = { id: 'OMIM:254940', name: 'Carey-Fineman-Ziter syndrome', mondoId: 'MONDO:0031415' };
+
+    const association = (categories: object, genes: any[] = []) => ({
+      disease: DISEASE,
+      categories,
+      genes,
+      medicalActions: [],
+    });
+
+    const phenotype = (id: string, name: string, metadata: object = {}) => ({ id, name, metadata });
+
+    const resolveDisease = (done: jest.DoneCallback, assert: (vm: DiseasePageViewModel) => void) =>
+      service.resolve(EntityType.DISEASE, 'OMIM:254940').subscribe((viewModel) => {
+        assert(viewModel as DiseasePageViewModel);
+        done();
+      });
+
+    it('flattens the category map into rows tagged with their body system', (done) => {
+      annotationService.fromDisease.mockReturnValue(
+        of(association({ Growth: [phenotype('HP:0004322', 'Short stature')] })),
+      );
+
+      resolveDisease(done, (vm) => {
+        expect(vm.phenotypeAssoc).toHaveLength(1);
+        expect(vm.phenotypeAssoc[0]).toEqual({
+          id: 'HP:0004322',
+          name: 'Short stature',
+          category: 'Growth',
+          categoryCount: 1,
+          onset: '-',
+          frequency: '-',
+          sources: ['OMIM:254940'],
+        });
+      });
+    });
+
+    it('orders body systems by the canonical list, not alphabetically', (done) => {
+      annotationService.fromDisease.mockReturnValue(
+        of(
+          association({
+            'Nervous System': [phenotype('HP:0001250', 'Seizure')],
+            Growth: [phenotype('HP:0004322', 'Short stature')],
+            Inheritance: [phenotype('HP:0000007', 'Autosomal recessive inheritance')],
+          }),
+        ),
+      );
+
+      resolveDisease(done, (vm) => {
+        expect(vm.phenotypeAssoc.map((row) => row.category)).toEqual([
+          'Inheritance',
+          'Growth',
+          'Nervous System',
+        ]);
+      });
+    });
+
+    it('keeps rows of one body system adjacent, which is what the table groups on', (done) => {
+      annotationService.fromDisease.mockReturnValue(
+        of(
+          association({
+            Growth: [phenotype('HP:0004322', 'Short stature'), phenotype('HP:0001510', 'Growth delay')],
+            Eye: [phenotype('HP:0000505', 'Visual impairment')],
+          }),
+        ),
+      );
+
+      resolveDisease(done, (vm) => {
+        expect(vm.phenotypeAssoc.map((row) => row.category)).toEqual(['Growth', 'Growth', 'Eye']);
+        expect(vm.phenotypeAssoc[0].categoryCount).toBe(2);
+      });
+    });
+
+    it('sorts an unrecognised body system last rather than dropping it', (done) => {
+      annotationService.fromDisease.mockReturnValue(
+        of(
+          association({
+            'Some New Category': [phenotype('HP:9999999', 'Unknown')],
+            Growth: [phenotype('HP:0004322', 'Short stature')],
+          }),
+        ),
+      );
+
+      resolveDisease(done, (vm) =>
+        expect(vm.phenotypeAssoc.map((row) => row.category)).toEqual(['Growth', 'Some New Category']),
+      );
+    });
+
+    it('skips a body system with no phenotypes', (done) => {
+      annotationService.fromDisease.mockReturnValue(
+        of(association({ Growth: [], Eye: [phenotype('HP:0000505', 'Visual impairment')] })),
+      );
+
+      resolveDisease(done, (vm) => expect(vm.phenotypeAssoc.map((row) => row.category)).toEqual(['Eye']));
+    });
+
+    it('keeps the annotation metadata and its own sources when present', (done) => {
+      annotationService.fromDisease.mockReturnValue(
+        of(
+          association({
+            Growth: [
+              phenotype('HP:0004322', 'Short stature', {
+                onset: 'Childhood onset',
+                frequency: 'Frequent',
+                sources: ['PMID:12345678'],
+              }),
+            ],
+          }),
+        ),
+      );
+
+      resolveDisease(done, (vm) => {
+        expect(vm.phenotypeAssoc[0].onset).toBe('Childhood onset');
+        expect(vm.phenotypeAssoc[0].frequency).toBe('Frequent');
+        expect(vm.phenotypeAssoc[0].sources).toEqual(['PMID:12345678']);
+      });
+    });
+
+    it('derives the shell inputs the page chrome reads', (done) => {
+      annotationService.fromDisease.mockReturnValue(
+        of(
+          association({ Growth: [phenotype('HP:0004322', 'Short stature'), phenotype('HP:0001510', 'Growth delay')] }, [
+            { id: 'NCBIGene:389827', name: 'MYMK' },
+          ]),
+        ),
+      );
+
+      resolveDisease(done, (vm) => {
+        expect(vm.kind).toBe(EntityType.DISEASE);
+        expect(vm.id).toBe('OMIM:254940');
+        expect(vm.title).toBe('Carey-Fineman-Ziter syndrome');
+        expect(vm.downloadCounts).toEqual({ genes: 1, terms: 2 });
+        expect(vm.geneAssoc).toHaveLength(1);
+      });
+    });
+
+    it('errors the route when the annotation call fails', (done) => {
+      annotationService.fromDisease.mockReturnValue(throwError(() => new Error('network down')));
+
+      service.resolve(EntityType.DISEASE, 'OMIM:254940').subscribe({
+        error: (err) => {
+          expect(err.message).toContain('Could not find requested OMIM:254940');
+          done();
+        },
       });
     });
   });

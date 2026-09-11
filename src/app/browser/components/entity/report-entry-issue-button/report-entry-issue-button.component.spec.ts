@@ -24,6 +24,15 @@ describe('ReportEntryIssueButtonComponent', () => {
     expect(fixture.nativeElement.querySelector('a').getAttribute('href')).toContain('Issue%20with%20MONDO%3A0000001');
   });
 
+  it('sends ORPHA entries to Orphanet, which curates them', () => {
+    fixture.componentInstance.id = 'ORPHA:1358';
+    fixture.detectChanges();
+
+    const href = fixture.nativeElement.querySelector('a').getAttribute('href');
+    expect(href).toContain('orpha.net');
+    expect(href).not.toContain('obophenotype');
+  });
+
   it('opens in a new tab', () => {
     fixture.componentInstance.id = 'HP:0001250';
     fixture.detectChanges();

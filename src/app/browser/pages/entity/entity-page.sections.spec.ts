@@ -2,7 +2,8 @@ import { EntityType } from '../../models/models';
 import { buildSections } from './entity-page.sections';
 import { buildTermPageSections } from './content/term-page-content.sections';
 import { buildGenePageSections } from './content/gene-page-content.sections';
-import { GenePageViewModel, TermPageViewModel } from './entity-page.types';
+import { buildDiseasePageSections } from './content/disease-page-content.sections';
+import { DiseasePageViewModel, GenePageViewModel, TermPageViewModel } from './entity-page.types';
 
 describe('buildSections', () => {
   const termViewModel: TermPageViewModel = {
@@ -40,5 +41,20 @@ describe('buildSections', () => {
 
   it('dispatches a gene view model to the gene page section config', () => {
     expect(buildSections(geneViewModel)).toEqual(buildGenePageSections(geneViewModel));
+  });
+
+  const diseaseViewModel: DiseasePageViewModel = {
+    kind: EntityType.DISEASE,
+    id: 'OMIM:254940',
+    title: 'Carey-Fineman-Ziter syndrome',
+    downloadCounts: { genes: 0, terms: 0 },
+    disease: { id: 'OMIM:254940', name: 'Carey-Fineman-Ziter syndrome' },
+    phenotypeAssoc: [],
+    geneAssoc: [],
+    networkError: false,
+  };
+
+  it('dispatches a disease view model to the disease page section config', () => {
+    expect(buildSections(diseaseViewModel)).toEqual(buildDiseasePageSections(diseaseViewModel));
   });
 });
