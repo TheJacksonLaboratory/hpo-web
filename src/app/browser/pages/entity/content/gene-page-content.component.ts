@@ -9,9 +9,7 @@ import { GenePageViewModel } from '../entity-page.types';
  * and disease association sections.
  *
  * Renders the middle column only. The page grid and the sticky "On this page"
- * aside belong to {@link EntityPageComponent} and are shared with the phenotype
- * and disease pages. Gene has no hierarchy, so unlike the phenotype page there
- * is no left rail beside this column.
+ * aside belong to {@link EntityPageComponent}.
  */
 @Component({
   selector: 'app-gene-page-content',
@@ -27,8 +25,7 @@ export class GenePageContentComponent {
    * Where each section's "contribute" call to action points when that section
    * is empty.
    *
-   * TODO(HPO-201): placeholders - replace with the real contribution targets
-   * for phenotype and disease annotations.
+   * TODO(HPO-201): replace the placeholders with the real contribution targets.
    */
   readonly contributeLinks = {
     phenotype: 'https://www.google.com',

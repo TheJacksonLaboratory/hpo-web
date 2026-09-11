@@ -100,15 +100,9 @@ export interface GenePageViewModel extends EntityPageViewModelBase {
   phenotypeAssoc: SimpleTerm[];
   /** Diseases this gene is associated with. */
   diseaseAssoc: OntologyAnnotationDisease[];
-  /**
-   * True when the Entrez lookup failed. The associations still render, so the
-   * page loses its definition and location rather than the whole route.
-   */
+  /** True when the Entrez lookup failed, which hides the summary fields. */
   entrezError: boolean;
-  /**
-   * True when the annotation network call failed, which renders both
-   * association sections as an error block.
-   */
+  /** True when the annotation call failed, which shows an error in each section. */
   networkError: boolean;
 }
 

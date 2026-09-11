@@ -107,17 +107,12 @@ export class EntityDataResolverService {
   }
 
   /**
-   * Resolves the Entrez record and the gene's annotations.
-   *
-   * Both calls are allowed to fail independently: the Entrez lookup supplies
-   * the summary, the annotation call supplies the tables, and losing one is
-   * not a reason to drop the other. Unlike the term page there is nothing to
-   * look up the entity by first, so neither failure can error the route.
+   * Resolves the Entrez record and the gene's annotations. Either call may
+   * fail on its own, surfacing as `entrezError` or `networkError`; neither
+   * errors the route.
    */
   private fetchGene(id: string): Observable<GenePageViewModel> {
-    // Entrez keys its records by bare uid, while the route carries the
-    // prefixed id - `NCBIGene:1497` is looked up as `1497`. Older links point
-    // at the bare id, which is left as-is rather than losing the lookup.
+    // Entrez keys records by bare uid; the route may carry either form.
     const uid = id.includes(':') ? id.split(':')[1] : id;
 
     return forkJoin({
@@ -145,9 +140,8 @@ export class EntityDataResolverService {
   }
 
   /**
-   * Fills in the display defaults the gene template assumes, and splits the
-   * comma-joined `otheraliases` string Entrez returns into the synonym list
-   * the summary renders.
+   * Fills in the display defaults the gene template assumes and splits the
+   * comma-joined `otheraliases` string into the synonym list.
    */
   private normalizeGene(gene: EntrezGene | null): EntrezGene {
     return {
