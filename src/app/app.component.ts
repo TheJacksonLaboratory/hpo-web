@@ -25,10 +25,6 @@ export class AppComponent {
   readonly navbarItems: JdsMenuItem =
     [
       {
-        label: "About",
-        routerLink: "about"
-      },
-      {
         label: "Data",
         routerLink: "data"
       },
