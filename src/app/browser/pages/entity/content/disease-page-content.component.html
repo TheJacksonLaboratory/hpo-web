@@ -29,7 +29,7 @@
         <th>Source(s)</th>
       </ng-template>
       <ng-template #groupHeaderCells let-row>
-        <td colspan="5" class="font-semibold">{{ row.category }} ({{ row.categoryCount }})</td>
+        <td colspan="5" class="font-semibold bg-slate-700 text-white">{{ row.category }} ({{ row.categoryCount }})</td>
       </ng-template>
       <ng-template #rowCells let-row>
         <td><a [routerLink]="['/term', row.id]" class="text-[var(--p-cyan-700)] underline">{{ row.id }}</a></td>
