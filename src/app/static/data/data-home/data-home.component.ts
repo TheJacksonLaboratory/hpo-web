@@ -36,11 +36,11 @@ export class DataHomeComponent implements OnInit {
   ];
 
   readonly annotationFiles: DataFile[] = [
-    { name: 'phenotype.hpoa', description: 'Disease-to-phenotype annotations, with frequency and age-of-onset modifiers', url: environment.HPO_ANNOTATION_FILE_PURL },
-    { name: 'maxo-annotations.tsv', description: 'Links diseases to recommended medical actions, procedures, and treatments', url: environment.MAXO_ANNOTATION_FILE_PURL },
+    { name: 'phenotype.hpoa', description: 'Disease-to-phenotype annotations from manual and automated curation, with frequency and onset', url: environment.HPO_ANNOTATION_FILE_PURL },
+    { name: 'maxo-annotations.tsv', description: 'Links disease phenotypes to medical actions that treat, prevent, or are contraindicated for them, from manual and AI-assisted curation', url: environment.MAXO_ANNOTATION_FILE_PURL },
     { name: 'genes_to_phenotype.txt', description: 'Maps genes to the phenotypes associated with their disorders', url: environment.HPO_GENES_TO_PHENOTYPE_PURL },
-    { name: 'phenotype_to_genes.txt', description: 'Maps phenotypes to the genes known to cause them', url: environment.HPO_PHENOTYPE_TO_GENES_PURL },
-    { name: 'genes_to_disease.txt', description: 'Maps genes to the diseases they are known to cause', url: environment.HPO_GENES_TO_DISEASE_PURL },
+    { name: 'phenotype_to_genes.txt', description: 'Phenotype-to-gene associations via diseases, propagated to ancestor terms', url: environment.HPO_PHENOTYPE_TO_GENES_PURL },
+    { name: 'genes_to_disease.txt', description: 'Gene–disease associations from OMIM and Orphanet, with association type', url: environment.HPO_GENES_TO_DISEASE_PURL },
   ];
 
   constructor(
