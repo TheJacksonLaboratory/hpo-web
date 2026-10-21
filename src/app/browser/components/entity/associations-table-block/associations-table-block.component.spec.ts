@@ -179,8 +179,8 @@ describe('AssociationsTableBlockComponent grouping', () => {
   });
 
   const subheaderText = () =>
-    Array.from(fixture.nativeElement.querySelectorAll('tbody td[colspan]')).map((cell: any) =>
-      cell.textContent.trim(),
+    Array.from((fixture.nativeElement as HTMLElement).querySelectorAll('tbody td[colspan]')).map((cell) =>
+      (cell.textContent ?? '').trim(),
     );
 
   it('gathers scattered rows of one value into a single group', () => {

@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { of, throwError } from 'rxjs';
-import { EntityType, Term } from '../../models/models';
+import { EntityType, SimpleTerm, Term } from '../../models/models';
 import { AnnotationService } from '../../services/annotation/annotation.service';
 import { OntologyService } from '../../services/ontology/ontology.service';
 import { LanguageService } from '../../services/language/language.service';
@@ -10,9 +10,9 @@ import { DiseasePageViewModel, GenePageViewModel, TermPageViewModel } from './en
 
 describe('EntityDataResolverService', () => {
   let service: EntityDataResolverService;
-  let ontologyService: any;
-  let annotationService: any;
-  let geneService: any;
+  let ontologyService: { term: jest.Mock; parents: jest.Mock; children: jest.Mock };
+  let annotationService: { fromPhenotype: jest.Mock; fromGene: jest.Mock; fromDisease: jest.Mock };
+  let geneService: { searchGeneInfo: jest.Mock };
   let languageService: LanguageService;
 
   const baseTerm: Term = {
@@ -323,7 +323,7 @@ describe('EntityDataResolverService', () => {
   describe('disease', () => {
     const DISEASE = { id: 'OMIM:254940', name: 'Carey-Fineman-Ziter syndrome', mondoId: 'MONDO:0031415' };
 
-    const association = (categories: object, genes: any[] = []) => ({
+    const association = (categories: object, genes: SimpleTerm[] = []) => ({
       disease: DISEASE,
       categories,
       genes,
