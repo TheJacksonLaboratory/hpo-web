@@ -12,8 +12,9 @@ import { HierarchyTreeComponent } from '../../components/entity/hierarchy-tree/h
 import { OnThisPagePanelMenuComponent } from '../../components/entity/on-this-page-panel-menu/on-this-page-panel-menu.component';
 import { ExportAssociationsButtonComponent } from '../../components/entity/export-associations-button/export-associations-button.component';
 import { ReportEntryIssueButtonComponent } from '../../components/entity/report-entry-issue-button/report-entry-issue-button.component';
-import { SessionPlaceholderComponent } from '../../components/session/session-placeholder.component';
+import { SessionHistoryComponent } from '../../components/session/session-history.component';
 import { LanguageService } from '../../services/language/language.service';
+import { SessionHistoryService } from '../../services/session-history/session-history.service';
 
 /**
  * The single routed component behind the phenotype, gene, and disease detail
@@ -38,7 +39,7 @@ import { LanguageService } from '../../services/language/language.service';
     OnThisPagePanelMenuComponent,
     ExportAssociationsButtonComponent,
     ReportEntryIssueButtonComponent,
-    SessionPlaceholderComponent,
+    SessionHistoryComponent,
   ],
   templateUrl: './entity-page.component.html',
 })
@@ -70,6 +71,7 @@ export class EntityPageComponent implements OnInit {
     private router: Router,
     private resolverService: EntityDataResolverService,
     private languageService: LanguageService,
+    private sessionHistory: SessionHistoryService,
   ) {
     this.languageService.active$.subscribe((active) => this.onActiveLanguageChange(active));
   }
@@ -100,6 +102,7 @@ export class EntityPageComponent implements OnInit {
         next: (viewModel) => {
           this.viewModel = viewModel;
           this.sections = buildSections(viewModel);
+          this.sessionHistory.record({ entityType: viewModel.kind, id: viewModel.id, label: viewModel.title });
           this.loading = false;
           this.onActiveLanguageChange(this.languageService.languageSubject.value);
         },

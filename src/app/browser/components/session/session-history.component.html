@@ -1,0 +1,31 @@
+<nav aria-label="Session History" class="bg-[#f0faff] px-3 py-2">
+  <p class="text-xs text-[#636363] my-0">Session History</p>
+  @if (view().steps.length > 0) {
+    <ol class="flex flex-wrap items-center gap-2 list-none m-0 mt-2 p-0 text-base font-semibold leading-none">
+      @if (view().hasHidden) {
+        <li class="flex items-center gap-2 text-[#0177b2]">
+          <span>...</span>
+          <i class="pi pi-angle-right text-[#636363]" aria-hidden="true"></i>
+        </li>
+      }
+      @for (item of view().steps; track item.index; let last = $last) {
+        <li class="flex items-center gap-2">
+          @if (last) {
+            <span class="flex items-center gap-2 text-[#0177b2]" aria-current="page">
+              <i [class]="iconClass(item.step)" aria-hidden="true"></i>{{ item.step.label }}
+            </span>
+          } @else {
+            <a
+              class="flex items-center gap-2 text-[#0177b2] no-underline hover:underline"
+              [href]="href(item.step)"
+              (click)="onStepClick($event, item.index)"
+            >
+              <i [class]="iconClass(item.step)" aria-hidden="true"></i>{{ item.step.label }}
+            </a>
+            <i class="pi pi-angle-right text-[#636363]" aria-hidden="true"></i>
+          }
+        </li>
+      }
+    </ol>
+  }
+</nav>
