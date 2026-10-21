@@ -145,6 +145,16 @@ describe('SessionHistoryService', () => {
     expect(create([{ entityType: 'gene', id: 5, label: null }]).steps()).toEqual([]);
   });
 
+  it('record applies the captured context rather than a later navigation\'s', () => {
+    const service = create([hypertension, ptbp1]);
+    navigateFrom('/gene/NCBIGene:5725', 'popstate');
+    const context = service.captureContext();
+    navigateFrom('/gene/NCBIGene:5725');
+    service.record(hypertension, context);
+
+    expect(service.steps()).toEqual([hypertension]);
+  });
+
   it('works when sessionStorage throws', () => {
     jest.spyOn(Storage.prototype, 'getItem').mockImplementation(() => {
       throw new Error('blocked');

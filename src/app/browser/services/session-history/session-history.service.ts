@@ -11,7 +11,7 @@ const STORAGE_KEY = 'hpo.sessionHistory';
 const ENTITY_URL = /^\/(term|gene|disease)\//;
 
 /** What the router was doing when the current navigation started. */
-interface NavigationContext {
+export interface NavigationContext {
   /** True when the page being left was an entity page. */
   fromEntity: boolean;
   /** True when the navigation is a browser Back or Forward. */
@@ -62,9 +62,10 @@ export class SessionHistoryService {
    * new trail.
    *
    * @param step The resolved entity.
+   * @param context The context of the navigation that produced the page, from
+   * {@link captureContext}. Defaults to the navigation currently in flight.
    */
-  record(step: SessionStep): void {
-    const context = this.context;
+  record(step: SessionStep, context: NavigationContext | undefined = this.context): void {
     const current = this.trail();
     const last = current[current.length - 1];
 
@@ -81,6 +82,16 @@ export class SessionHistoryService {
     } else {
       this.update(startTrail(step));
     }
+  }
+
+  /**
+   * Snapshots the context of the navigation in flight, to pass to {@link record}
+   * once that navigation's page has resolved.
+   *
+   * @returns The context, or undefined before any navigation has started.
+   */
+  captureContext(): NavigationContext | undefined {
+    return this.context;
   }
 
   /**

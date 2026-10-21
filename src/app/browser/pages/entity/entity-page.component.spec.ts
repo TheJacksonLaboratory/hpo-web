@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { ActivatedRoute, Router, convertToParamMap } from '@angular/router';
-import { of, throwError } from 'rxjs';
+import { Subject, of, throwError } from 'rxjs';
 import { EntityType, Language } from '../../models/models';
 import { LanguageService } from '../../services/language/language.service';
 import { SessionHistoryService } from '../../services/session-history/session-history.service';
@@ -26,14 +26,16 @@ describe('EntityPageComponent', () => {
   let navigate: jest.Mock;
   let resolve: jest.Mock;
 
-  function create(): void {
+  const captured = { fromEntity: true, isPopstate: false, isRewind: false };
+
+  function create() {
     TestBed.configureTestingModule({
       imports: [EntityPageComponent],
       providers: [
         { provide: ActivatedRoute, useValue: { snapshot: { data: { entityType: EntityType.GENE } }, paramMap: of(convertToParamMap({ id: 'NCBIGene:5725' })) } },
         { provide: Router, useValue: { navigate } },
         { provide: EntityDataResolverService, useValue: { resolve } },
-        { provide: SessionHistoryService, useValue: { record } },
+        { provide: SessionHistoryService, useValue: { record, captureContext: () => captured } },
         {
           provide: LanguageService,
           useValue: { default: english, active$: of(english), languageSubject: { value: english } },
@@ -41,7 +43,9 @@ describe('EntityPageComponent', () => {
       ],
     });
     TestBed.overrideComponent(EntityPageComponent, { set: { imports: [], template: '' } });
-    TestBed.createComponent(EntityPageComponent).detectChanges();
+    const fixture = TestBed.createComponent(EntityPageComponent);
+    fixture.detectChanges();
+    return fixture;
   }
 
   beforeEach(() => {
@@ -54,7 +58,30 @@ describe('EntityPageComponent', () => {
     resolve.mockReturnValue(of(geneViewModel));
     create();
 
-    expect(record).toHaveBeenCalledWith({ entityType: EntityType.GENE, id: 'NCBIGene:5725', label: 'PTBP1' });
+    expect(record).toHaveBeenCalledWith({ entityType: EntityType.GENE, id: 'NCBIGene:5725', label: 'PTBP1' }, captured);
+  });
+
+  it('reports with the context captured when the resolve started', () => {
+    const resolved = new Subject<GenePageViewModel>();
+    resolve.mockReturnValue(resolved);
+    const captureContext = jest.fn().mockReturnValue(captured);
+    TestBed.overrideProvider(SessionHistoryService, { useValue: { record, captureContext } });
+    create();
+
+    expect(captureContext).toHaveBeenCalledTimes(1);
+    captureContext.mockReturnValue({ ...captured, isPopstate: true });
+    resolved.next(geneViewModel);
+
+    expect(record).toHaveBeenCalledWith(expect.anything(), captured);
+  });
+
+  it('does not report after the page is destroyed', () => {
+    const resolved = new Subject<GenePageViewModel>();
+    resolve.mockReturnValue(resolved);
+    create().destroy();
+    resolved.next(geneViewModel);
+
+    expect(record).not.toHaveBeenCalled();
   });
 
   it('does not report anything when the resolve errors', () => {

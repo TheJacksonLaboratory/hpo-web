@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DestroyRef, OnInit, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 import { EntityType, Language, PanelMenuItem } from '../../models/models';
 import { EntityDataResolverService } from './entity-data.resolvers';
 import { EntityPageViewModel } from './entity-page.types';
@@ -50,6 +51,8 @@ export class EntityPageComponent implements OnInit {
   /** Which entity page this is, from the route's `data.entityType`. */
   entityType: EntityType;
 
+  private readonly destroyRef = inject(DestroyRef);
+
   /** The resolved page data, or null while loading or after a failure. */
   viewModel: EntityPageViewModel | null = null;
 
@@ -95,14 +98,18 @@ export class EntityPageComponent implements OnInit {
           this.loading = true;
           this.viewModel = null;
           this.sections = [];
-          return this.resolverService.resolve(this.entityType, params.get('id'));
+          const context = this.sessionHistory.captureContext();
+          return this.resolverService
+            .resolve(this.entityType, params.get('id'))
+            .pipe(map((viewModel) => ({ viewModel, context })));
         }),
+        takeUntilDestroyed(this.destroyRef),
       )
       .subscribe({
-        next: (viewModel) => {
+        next: ({ viewModel, context }) => {
           this.viewModel = viewModel;
           this.sections = buildSections(viewModel);
-          this.sessionHistory.record({ entityType: viewModel.kind, id: viewModel.id, label: viewModel.title });
+          this.sessionHistory.record({ entityType: viewModel.kind, id: viewModel.id, label: viewModel.title }, context);
           this.loading = false;
           this.onActiveLanguageChange(this.languageService.languageSubject.value);
         },
