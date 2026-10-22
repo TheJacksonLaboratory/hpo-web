@@ -3,7 +3,7 @@ import { NavigationStart, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { EntityType } from '../../models/models';
 import { SessionHistoryService } from './session-history.service';
-import { SessionStep } from './session-history.types';
+import { SessionStep, SessionTrail } from './session-history.types';
 
 const STORAGE_KEY = 'hpo.sessionHistory';
 
@@ -11,6 +11,11 @@ const hypertension: SessionStep = { entityType: EntityType.PHENOTYPE, id: 'HP:00
 const ptbp1: SessionStep = { entityType: EntityType.GENE, id: 'NCBIGene:5725', label: 'PTBP1' };
 const labile: SessionStep = { entityType: EntityType.PHENOTYPE, id: 'HP:0031992', label: 'Labile Hypertension' };
 const diabetes: SessionStep = { entityType: EntityType.DISEASE, id: 'MONDO:0005015', label: 'Diabetes' };
+
+/** A trail of the given steps with the last one current. */
+function trailOf(...steps: SessionStep[]): SessionTrail {
+  return { steps, current: steps.length - 1 };
+}
 
 describe('SessionHistoryService', () => {
   let routerStub: { events: Subject<unknown>; url: string; navigate: jest.Mock };
@@ -44,83 +49,104 @@ describe('SessionHistoryService', () => {
     navigateFrom('/');
     service.record(hypertension);
 
-    expect(service.steps()).toEqual([hypertension]);
+    expect(service.trail()).toEqual({ steps: [hypertension], current: 0 });
   });
 
   it('appends when the previous URL is an entity page', () => {
-    const service = create([hypertension]);
+    const service = create(trailOf(hypertension));
     navigateFrom('/term/HP:0000822');
     service.record(ptbp1);
 
-    expect(service.steps()).toEqual([hypertension, ptbp1]);
+    expect(service.trail()).toEqual(trailOf(hypertension, ptbp1));
   });
 
   it('starts a new trail when the previous URL is search', () => {
-    const service = create([hypertension, ptbp1]);
+    const service = create(trailOf(hypertension, ptbp1));
     navigateFrom('/search?q=pressure');
     service.record(diabetes);
 
-    expect(service.steps()).toEqual([diabetes]);
+    expect(service.trail()).toEqual(trailOf(diabetes));
   });
 
   it('starts a new trail when a different entity is loaded with no previous URL', () => {
-    const service = create([hypertension, ptbp1]);
+    const service = create(trailOf(hypertension, ptbp1));
     navigateFrom('/');
     service.record(diabetes);
 
-    expect(service.steps()).toEqual([diabetes]);
+    expect(service.trail()).toEqual(trailOf(diabetes));
   });
 
-  it('does nothing when the same entity is recorded again', () => {
-    const service = create([hypertension, ptbp1]);
+  it('does nothing when the current entity is recorded again', () => {
+    const service = create({ steps: [hypertension, ptbp1], current: 0 });
     navigateFrom('/');
-    service.record(ptbp1);
+    service.record(hypertension);
 
-    expect(service.steps()).toEqual([hypertension, ptbp1]);
+    expect(service.trail()).toEqual({ steps: [hypertension, ptbp1], current: 0 });
   });
 
-  it('rewindTo cuts the trail and navigates to the clicked step', () => {
-    const service = create([hypertension, ptbp1, labile]);
-    service.rewindTo(1);
+  it('goTo navigates to the step without changing the trail until the page resolves', () => {
+    const service = create(trailOf(hypertension, ptbp1, labile));
+    service.goTo(1);
 
-    expect(service.steps()).toEqual([hypertension, ptbp1]);
     expect(routerStub.navigate).toHaveBeenCalledWith(['/gene', 'NCBIGene:5725']);
+    expect(service.trail()).toEqual(trailOf(hypertension, ptbp1, labile));
   });
 
-  it('rewindTo then record of the same step does not append', () => {
-    const service = create([hypertension, ptbp1, labile]);
-    service.rewindTo(1);
+  it('goTo then record of that step makes it current and keeps every step', () => {
+    const service = create(trailOf(hypertension, ptbp1, labile));
+    service.goTo(1);
     navigateFrom('/term/HP:0031992');
     service.record(ptbp1);
 
-    expect(service.steps()).toEqual([hypertension, ptbp1]);
+    expect(service.trail()).toEqual({ steps: [hypertension, ptbp1, labile], current: 1 });
   });
 
-  it('a link followed after a rewind appends after the rewound step', () => {
-    const service = create([hypertension, ptbp1, labile]);
-    service.rewindTo(1);
+  it('a link followed after goTo appends at the end and records the skipped steps', () => {
+    const service = create(trailOf(hypertension, ptbp1, labile));
+    service.goTo(0);
     navigateFrom('/term/HP:0031992');
-    service.record(ptbp1);
-    navigateFrom('/gene/NCBIGene:5725');
+    service.record(hypertension);
+    navigateFrom('/term/HP:0000822');
     service.record(diabetes);
 
-    expect(service.steps()).toEqual([hypertension, ptbp1, diabetes]);
+    expect(service.trail()).toEqual({
+      steps: [hypertension, ptbp1, labile, { ...diabetes, skipped: 2 }],
+      current: 3,
+    });
   });
 
-  it('popstate to an entity in the trail cuts to its most recent occurrence', () => {
-    const service = create([hypertension, ptbp1, hypertension, labile]);
+  it('popstate to an entity in the trail makes its most recent step current', () => {
+    const service = create(trailOf(hypertension, ptbp1, hypertension, labile));
     navigateFrom('/term/HP:0031992', 'popstate');
     service.record(hypertension);
 
-    expect(service.steps()).toEqual([hypertension, ptbp1, hypertension]);
+    expect(service.trail()).toEqual({ steps: [hypertension, ptbp1, hypertension, labile], current: 2 });
   });
 
   it('popstate to an entity not in the trail appends it', () => {
-    const service = create([hypertension, ptbp1]);
+    const service = create(trailOf(hypertension, ptbp1));
     navigateFrom('/gene/NCBIGene:5725', 'popstate');
     service.record(labile);
 
-    expect(service.steps()).toEqual([hypertension, ptbp1, labile]);
+    expect(service.trail()).toEqual(trailOf(hypertension, ptbp1, labile));
+  });
+
+  it('record applies the captured context rather than a later navigation\'s', () => {
+    const service = create({ steps: [hypertension, ptbp1], current: 1 });
+    navigateFrom('/gene/NCBIGene:5725', 'popstate');
+    const context = service.captureContext();
+    navigateFrom('/gene/NCBIGene:5725');
+    service.record(hypertension, context);
+
+    expect(service.trail()).toEqual({ steps: [hypertension, ptbp1], current: 0 });
+  });
+
+  it('clear keeps only the page on screen', () => {
+    const service = create({ steps: [hypertension, ptbp1, labile], current: 1 });
+    service.clear();
+
+    expect(service.trail()).toEqual(trailOf(ptbp1));
+    expect(JSON.parse(sessionStorage.getItem(STORAGE_KEY) as string)).toEqual(trailOf(ptbp1));
   });
 
   it('persists the trail to sessionStorage', () => {
@@ -128,31 +154,29 @@ describe('SessionHistoryService', () => {
     navigateFrom('/');
     service.record(hypertension);
 
-    expect(JSON.parse(sessionStorage.getItem(STORAGE_KEY) as string)).toEqual([hypertension]);
+    expect(JSON.parse(sessionStorage.getItem(STORAGE_KEY) as string)).toEqual({ steps: [hypertension], current: 0 });
   });
 
   it('hydrates a stored trail', () => {
-    const service = create([hypertension, ptbp1]);
+    const service = create({ steps: [hypertension, ptbp1], current: 0 });
 
-    expect(service.steps()).toEqual([hypertension, ptbp1]);
+    expect(service.trail()).toEqual({ steps: [hypertension, ptbp1], current: 0 });
   });
 
   it('ignores malformed stored JSON', () => {
-    expect(create('{not json').steps()).toEqual([]);
+    expect(create('{not json').trail()).toEqual({ steps: [], current: -1 });
   });
 
-  it('ignores a stored value that is not a list of steps', () => {
-    expect(create([{ entityType: 'gene', id: 5, label: null }]).steps()).toEqual([]);
+  it('ignores a stored value that is not a trail', () => {
+    expect(create([hypertension]).trail()).toEqual({ steps: [], current: -1 });
+    expect(create({ steps: [{ entityType: 'gene', id: 5, label: null }], current: 0 }).trail()).toEqual({
+      steps: [],
+      current: -1,
+    });
   });
 
-  it('record applies the captured context rather than a later navigation\'s', () => {
-    const service = create([hypertension, ptbp1]);
-    navigateFrom('/gene/NCBIGene:5725', 'popstate');
-    const context = service.captureContext();
-    navigateFrom('/gene/NCBIGene:5725');
-    service.record(hypertension, context);
-
-    expect(service.steps()).toEqual([hypertension]);
+  it('ignores a stored trail whose current index is outside it', () => {
+    expect(create({ steps: [hypertension], current: 3 }).trail()).toEqual({ steps: [], current: -1 });
   });
 
   it('works when sessionStorage throws', () => {
@@ -168,6 +192,6 @@ describe('SessionHistoryService', () => {
     navigateFrom('/term/HP:0000822');
     service.record(ptbp1);
 
-    expect(service.steps()).toEqual([hypertension, ptbp1]);
+    expect(service.trail()).toEqual(trailOf(hypertension, ptbp1));
   });
 });

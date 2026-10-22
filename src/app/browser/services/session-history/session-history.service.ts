@@ -1,8 +1,16 @@
 import { Injectable, Signal, signal } from '@angular/core';
 import { Event, NavigationStart, Router } from '@angular/router';
 import { EntityType } from '../../models/models';
-import { SessionStep } from './session-history.types';
-import { appendStep, rewindToEntity, rewindToIndex, startTrail, stepRoute } from './session-history.trail';
+import { SessionStep, SessionTrail } from './session-history.types';
+import {
+  appendStep,
+  clearTrail,
+  emptyTrail,
+  moveTo,
+  moveToEntity,
+  startTrail,
+  stepRoute,
+} from './session-history.trail';
 
 /** sessionStorage key holding the serialized trail. */
 const STORAGE_KEY = 'hpo.sessionHistory';
@@ -16,8 +24,8 @@ export interface NavigationContext {
   fromEntity: boolean;
   /** True when the navigation is a browser Back or Forward. */
   isPopstate: boolean;
-  /** True when the navigation was started by {@link SessionHistoryService.rewindTo}. */
-  isRewind: boolean;
+  /** Index of the trail step the navigation was started towards by {@link SessionHistoryService.goTo}, if any. */
+  goToIndex: number | undefined;
 }
 
 /**
@@ -25,20 +33,21 @@ export interface NavigationContext {
  * trail in sessionStorage so it survives reloads.
  *
  * The entity page reports each resolved entity through {@link record}; the
- * breadcrumb reads {@link steps} and rewinds through {@link rewindTo}.
+ * breadcrumb reads {@link trail}, moves through it with {@link goTo} and empties
+ * it with {@link clear}.
  */
 @Injectable({ providedIn: 'root' })
 export class SessionHistoryService {
-  private readonly trail = signal<SessionStep[]>(this.load());
+  private readonly state = signal<SessionTrail>(this.load());
 
-  /** The trail of visited entity pages, oldest first. */
-  readonly steps: Signal<SessionStep[]> = this.trail.asReadonly();
+  /** The steps visited and which one is on screen. */
+  readonly trail: Signal<SessionTrail> = this.state.asReadonly();
 
   /** Context of the navigation in flight, set at `NavigationStart`. */
   private context: NavigationContext | undefined;
 
-  /** True between {@link rewindTo} and the `NavigationStart` it triggers. */
-  private rewindRequested = false;
+  /** Set by {@link goTo} until the `NavigationStart` it triggers consumes it. */
+  private pendingGoTo: number | undefined;
 
   constructor(private router: Router) {
     this.router.events.subscribe((event: Event) => {
@@ -46,9 +55,9 @@ export class SessionHistoryService {
         this.context = {
           fromEntity: ENTITY_URL.test(this.router.url),
           isPopstate: event.navigationTrigger === 'popstate',
-          isRewind: this.rewindRequested,
+          goToIndex: this.pendingGoTo,
         };
-        this.rewindRequested = false;
+        this.pendingGoTo = undefined;
       }
     });
   }
@@ -56,27 +65,27 @@ export class SessionHistoryService {
   /**
    * Records the entity page that has just resolved.
    *
-   * The first matching case applies: a rewind leaves the trail as is; the same
-   * entity as the last step (reload) adds nothing; Back or Forward cuts to the
-   * entity; arriving from an entity page appends; any other arrival starts a
-   * new trail.
+   * The first matching case applies: a navigation started by {@link goTo} makes
+   * that step current; the same entity as the current step (reload) adds
+   * nothing; Back or Forward moves to the entity's most recent step; arriving
+   * from an entity page appends; any other arrival starts a new trail.
    *
    * @param step The resolved entity.
    * @param context The context of the navigation that produced the page, from
    * {@link captureContext}. Defaults to the navigation currently in flight.
    */
   record(step: SessionStep, context: NavigationContext | undefined = this.context): void {
-    const current = this.trail();
-    const last = current[current.length - 1];
+    const current = this.state();
+    const shown = current.steps[current.current];
+    const sameEntity = (other: SessionStep | undefined) =>
+      !!other && other.entityType === step.entityType && other.id === step.id;
 
-    if (context?.isRewind) {
+    if (context?.goToIndex !== undefined && sameEntity(current.steps[context.goToIndex])) {
+      this.update(moveTo(current, context.goToIndex));
+    } else if (sameEntity(shown)) {
       return;
-    }
-    if (last && last.entityType === step.entityType && last.id === step.id) {
-      return;
-    }
-    if (context?.isPopstate) {
-      this.update(rewindToEntity(current, step));
+    } else if (context?.isPopstate || context?.goToIndex !== undefined) {
+      this.update(moveToEntity(current, step));
     } else if (context?.fromEntity) {
       this.update(appendStep(current, step));
     } else {
@@ -95,39 +104,59 @@ export class SessionHistoryService {
   }
 
   /**
-   * Cuts the trail back to a step and navigates to its page.
+   * Navigates to a step already in the trail. The trail is unchanged until that
+   * page has resolved, then the step becomes current.
    *
-   * @param index Index of the clicked step in the full trail.
+   * @param index Index of the step in the trail.
    */
-  rewindTo(index: number): void {
-    const target = this.trail()[index];
+  goTo(index: number): void {
+    const target = this.state().steps[index];
     if (!target) {
       return;
     }
-    this.update(rewindToIndex(this.trail(), index));
-    this.rewindRequested = true;
+    this.pendingGoTo = index;
     this.router.navigate(stepRoute(target));
   }
 
-  /** Replaces the trail and writes it to sessionStorage. */
-  private update(next: SessionStep[]): void {
-    this.trail.set(next);
+  /** Drops every step except the page on screen. */
+  clear(): void {
+    this.update(clearTrail(this.state()));
+  }
+
+  /** Replaces the trail and writes it to sessionStorage; storage failures leave it in memory only. */
+  private update(next: SessionTrail): void {
+    this.state.set(next);
     try {
       sessionStorage.setItem(STORAGE_KEY, JSON.stringify(next));
     } catch {
-      // Storage unavailable: the trail stays in memory only.
+      return;
     }
   }
 
   /** Reads the stored trail, or an empty one when it is missing, unreadable or malformed. */
-  private load(): SessionStep[] {
+  private load(): SessionTrail {
     try {
-      const parsed: unknown = JSON.parse(sessionStorage.getItem(STORAGE_KEY) ?? '[]');
-      return Array.isArray(parsed) && parsed.every(isSessionStep) ? parsed : [];
+      const raw = sessionStorage.getItem(STORAGE_KEY);
+      const parsed: unknown = raw === null ? null : JSON.parse(raw);
+      return isSessionTrail(parsed) ? parsed : emptyTrail();
     } catch {
-      return [];
+      return emptyTrail();
     }
   }
+}
+
+/** Type guard for a stored trail. */
+function isSessionTrail(value: unknown): value is SessionTrail {
+  const trail = value as SessionTrail;
+  return (
+    typeof trail === 'object' &&
+    trail !== null &&
+    Array.isArray(trail.steps) &&
+    trail.steps.every(isSessionStep) &&
+    Number.isInteger(trail.current) &&
+    trail.current < trail.steps.length &&
+    (trail.steps.length === 0 ? trail.current === -1 : trail.current >= 0)
+  );
 }
 
 /** Type guard for a stored step. */
@@ -139,6 +168,7 @@ function isSessionStep(value: unknown): value is SessionStep {
     typeof step.id === 'string' &&
     typeof step.label === 'string' &&
     typeof step.entityType === 'number' &&
-    Object.values(EntityType).includes(step.entityType)
+    Object.values(EntityType).includes(step.entityType) &&
+    (step.skipped === undefined || (Number.isInteger(step.skipped) && step.skipped > 0))
   );
 }
