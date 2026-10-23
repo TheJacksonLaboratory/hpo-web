@@ -41,7 +41,7 @@
         @if (item.kind === 'step') {
           <li class="flex items-center gap-2" [class.min-w-0]="item.isCurrent" [class.shrink-0]="!item.isCurrent">
             @if (item.isCurrent) {
-              <span class="flex min-w-0 items-center gap-2 text-[#0177b2]" aria-current="page">
+              <span class="flex min-w-0 items-center gap-2 text-[var(--p-text-color)]" aria-current="page">
                 <i [class]="iconClass(item.step)" aria-hidden="true"></i><span class="truncate">{{ item.step.label }}</span>
               </span>
             } @else {

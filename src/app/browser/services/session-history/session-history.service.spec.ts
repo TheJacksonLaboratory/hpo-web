@@ -92,16 +92,25 @@ describe('SessionHistoryService', () => {
     expect(service.trail()).toEqual(trailOf(hypertension, ptbp1, labile));
   });
 
-  it('goTo then record of that step makes it current and keeps every step', () => {
+  it('goTo then record of that step appends it at the end and makes it current', () => {
     const service = create(trailOf(hypertension, ptbp1, labile));
     service.goTo(1);
     navigateFrom('/term/HP:0031992');
     service.record(ptbp1);
 
-    expect(service.trail()).toEqual({ steps: [hypertension, ptbp1, labile], current: 1 });
+    expect(service.trail()).toEqual(trailOf(hypertension, ptbp1, labile, ptbp1));
   });
 
-  it('a link followed after goTo appends at the end and records the skipped steps', () => {
+  it('goTo to the same page as the last step makes the last step current without repeating it', () => {
+    const service = create(trailOf(hypertension, ptbp1, hypertension));
+    service.goTo(0);
+    navigateFrom('/term/HP:0000822');
+    service.record(hypertension);
+
+    expect(service.trail()).toEqual(trailOf(hypertension, ptbp1, hypertension));
+  });
+
+  it('a link followed after goTo appends after the revisited page with nothing skipped', () => {
     const service = create(trailOf(hypertension, ptbp1, labile));
     service.goTo(0);
     navigateFrom('/term/HP:0031992');
@@ -109,10 +118,7 @@ describe('SessionHistoryService', () => {
     navigateFrom('/term/HP:0000822');
     service.record(diabetes);
 
-    expect(service.trail()).toEqual({
-      steps: [hypertension, ptbp1, labile, { ...diabetes, skipped: 2 }],
-      current: 3,
-    });
+    expect(service.trail()).toEqual(trailOf(hypertension, ptbp1, labile, hypertension, diabetes));
   });
 
   it('popstate to an entity in the trail makes its most recent step current', () => {

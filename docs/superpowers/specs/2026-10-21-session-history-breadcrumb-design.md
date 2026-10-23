@@ -36,47 +36,65 @@ The trail describes the journey actually taken, not the site hierarchy.
 ## Anti-goals (failure even if it technically works)
 
 - A trail that disagrees with the page on screen (after Back, reload, or a
-  rewind click).
+  trail click).
 - Duplicate steps from a reload or a same-page navigation.
 - Inventing history the app did not track (the old placeholder avoided this;
   the new trail must only contain pages actually visited in this tab).
 
 ## Behaviour (decided with the product owner)
 
+The trail is a log of steps plus a pointer to the step that is the page on
+screen (`current`). Nothing in the trail is erased by moving around in it.
+
 1. **Steps.** Only term, gene and disease pages add a step. Each step has a
    type, an entity id, and a display name.
-2. **Arriving by a link between entity pages** appends a step.
+2. **Arriving by a link between entity pages** appends a step at the very end
+   of the log and makes it current. If the person was on an earlier step, the
+   steps after it are left behind: the new step records how many (`skipped`),
+   and the row shows them collapsed (see Presentation). Example: `A > B > C > D`,
+   click `B`, follow a link to `E` -> `A B C D E`, current `E`, with `C D`
+   skipped. A link to the same entity as the last step just makes the last
+   step current. (Skipped ranges form only after Back/Forward, since a click
+   on a step also appends.)
 3. **Reload, or navigating to the page already shown,** adds nothing.
-4. **Clicking an earlier step** navigates to it and cuts the trail back to that
-   step (everything after it is dropped). A later normal link then appends
-   after it. Example: `Hypertension > PTBP1 > Labile Hypertension`, click
-   `PTBP1` -> `Hypertension > PTBP1`, then follow a link to Diabetes ->
-   `Hypertension > PTBP1 > Diabetes`.
+4. **Clicking a step** (in the row or in a menu) navigates to it and, like a
+   link, appends the page at the end as a new step and makes it current. Earlier
+   steps are never removed or moved, so the trail shows the order things were
+   visited in, repeats included. Clicking leads to the same page as the last
+   step adds nothing.
 5. **Arriving from a non-entity page** (search, home, static pages, or a first
    visit in the tab) **starts a new trail**; the entity opened becomes step one.
    Following links between entity pages continues the trail.
-6. **Browser Back/Forward** keeps the trail matched to the page on screen: Back
-   to a previous entity page cuts the trail to that entity, as a trail click
-   does; Forward re-adds the entity. Back to a non-entity page leaves the trail
-   as is (the next entity opened from there starts a new trail, per rule 5).
-   If Back/Forward lands on an entity that is not in the trail (dropped by a
-   rewind, from an earlier trail, or evicted by the cap), it is appended as a
-   new step, so the trail always ends at the page on screen. If the entity is
-   in the trail more than once, the trail is cut to its most recent occurrence.
-7. **Lifetime.** Per browser tab: survives reloads and in-app navigation, is
+6. **Browser Back/Forward** keeps `current` matched to the page on screen: it
+   moves to the most recent step for that entity, or, when the entity is not in
+   the trail (for example after Clear), appends it as a new step. Back to a
+   non-entity page leaves the trail as is.
+7. **Clear.** A "Clear history" button, shown when the trail has more than one
+   step, resets the trail to just the page on screen.
+8. **Lifetime.** Per browser tab: survives reloads and in-app navigation, is
    cleared when the tab closes. A shared link or a new tab starts empty.
    (sessionStorage, wrapped so it degrades to in-memory when unavailable.)
 
 ## Presentation
 
 Follows the Figma frame (full width, light-blue band, small "Session History"
-label above a single row of steps).
+label above a single row of steps), with a "Clear history" text button at the
+right end of the label line.
 
 - Each step: a type icon (phenotype, disease, gene, as in the design) and the
-  entity name, as a link in the brand blue, separated by chevrons.
-- Long trails collapse the oldest steps into a "..." item; the design shows
-  "..." followed by six steps. The trail is not truncated in storage by this.
-- The final step is the page on screen.
+  entity name, as a link in the brand blue, separated by chevrons. The current
+  step is plain text with `aria-current="page"`; there is no trailing chevron.
+- The row never wraps and has no fixed step limit: it shows as many steps as
+  fit the width, always including the current step, extending to its earlier
+  side first and then its later side.
+- Steps that do not fit collapse into a "..." button at the start of the row
+  (earlier steps) and/or at the end (later steps). The button opens a dropdown
+  menu listing the hidden steps in trail order, each with its type icon and
+  name; choosing one behaves like clicking it in the row.
+- Steps left behind by a branch (rule 2) collapse into a "..." button between
+  the step branched from and the new step, with the same kind of menu. When the
+  current step is inside that range the range is shown in full.
+- The current step shortens with an ellipsis if it alone is too wide.
 
 ## Where it lives
 
@@ -99,14 +117,13 @@ label above a single row of steps).
 
 ## My calls (not yet confirmed - review these)
 
-- The trail stores up to 50 steps; display collapses to the six most recent
-  behind "...".
-- The final step is not a link and is styled as the current page; the design
+- The trail stores up to 50 steps; the oldest are dropped past that.
+- The current step is not a link and is styled as the current page; the design
   shows every item identically and a stray chevron after the last item, which
   I read as design oversights. No trailing chevron.
 - Consecutive identical steps (same type and id) are never stored twice.
 - A full page load (typed URL, bookmark, external link) of an entity other than
-  the stored last step starts a new trail; a full load of the same entity is a
+  the current step starts a new trail; a full load of the same entity is a
   reload and adds nothing. Header search and autocomplete count as search, so
   an entity opened from them starts a new trail (rule 5).
 - A step is recorded only once its entity has resolved, using the resolved
@@ -115,7 +132,7 @@ label above a single row of steps).
   records only the pages that finished loading.
 - A step links to the bare `term/:id`, `gene/:id` or `disease/:id` route, not
   to remembered query params, fragments or section state. Trail clicks go
-  through a handler that rewinds, not a plain link that appends.
+  through a handler that moves the current step, not a plain link that appends.
 
 ## Left to the builder
 

@@ -6,7 +6,6 @@ import {
   appendStep,
   clearTrail,
   emptyTrail,
-  moveTo,
   moveToEntity,
   startTrail,
   stepRoute,
@@ -65,10 +64,10 @@ export class SessionHistoryService {
   /**
    * Records the entity page that has just resolved.
    *
-   * The first matching case applies: a navigation started by {@link goTo} makes
-   * that step current; the same entity as the current step (reload) adds
-   * nothing; Back or Forward moves to the entity's most recent step; arriving
-   * from an entity page appends; any other arrival starts a new trail.
+   * The first matching case applies: the same entity as the current step
+   * (reload) adds nothing; Back or Forward moves to the entity's most recent
+   * step; a navigation started by {@link goTo}, or arriving from an entity page,
+   * appends; any other arrival starts a new trail.
    *
    * @param step The resolved entity.
    * @param context The context of the navigation that produced the page, from
@@ -80,13 +79,12 @@ export class SessionHistoryService {
     const sameEntity = (other: SessionStep | undefined) =>
       !!other && other.entityType === step.entityType && other.id === step.id;
 
-    if (context?.goToIndex !== undefined && sameEntity(current.steps[context.goToIndex])) {
-      this.update(moveTo(current, context.goToIndex));
-    } else if (sameEntity(shown)) {
+    if (sameEntity(shown)) {
       return;
-    } else if (context?.isPopstate || context?.goToIndex !== undefined) {
+    }
+    if (context?.isPopstate && context.goToIndex === undefined) {
       this.update(moveToEntity(current, step));
-    } else if (context?.fromEntity) {
+    } else if (context?.goToIndex !== undefined || context?.fromEntity) {
       this.update(appendStep(current, step));
     } else {
       this.update(startTrail(step));
@@ -105,7 +103,7 @@ export class SessionHistoryService {
 
   /**
    * Navigates to a step already in the trail. The trail is unchanged until that
-   * page has resolved, then the step becomes current.
+   * page has resolved, then the page is appended at the end as a new step.
    *
    * @param index Index of the step in the trail.
    */
