@@ -158,7 +158,6 @@ describe('layoutRow', () => {
 
   it('on the newest step, hides the oldest steps behind a start menu', () => {
     const trail: SessionTrail = { steps: longSteps(8), current: 7 };
-    // current 100 + start button 40 = 140; each earlier step adds 100: room for 1 more (240 <= 250).
     expect(describeRow(layoutRow(trail, widths(8), 250, OVERFLOW, GAP))).toEqual([
       'before:0,1,2,3,4,5',
       'Step 6',
@@ -168,7 +167,6 @@ describe('layoutRow', () => {
 
   it('in the middle, shows neighbours on both sides with a menu at each end', () => {
     const trail: SessionTrail = { steps: longSteps(9), current: 4 };
-    // 3 steps (300) + two buttons (80) = 380 fits in 450; a 4th step would not.
     expect(describeRow(layoutRow(trail, widths(9), 450, OVERFLOW, GAP))).toEqual([
       'before:0,1,2',
       'Step 3',
@@ -194,7 +192,6 @@ describe('layoutRow', () => {
 
   it('counts the gap between items when fitting', () => {
     const trail: SessionTrail = { steps: longSteps(3), current: 2 };
-    // 3 x 100 + 2 x 8 = 316 does not fit in 310, so the oldest collapses (200 + 8 + 40 + 8 = 256).
     expect(describeRow(layoutRow(trail, widths(3), 310, OVERFLOW, 8))).toEqual(['before:0', 'Step 1', '[Step 2]']);
   });
 
@@ -224,7 +221,6 @@ describe('layoutRow', () => {
   it('puts the steps of a collapsed range into the start menu when they are truncated away', () => {
     const steps = longSteps(6);
     steps[3] = { ...steps[3], skipped: 2 };
-    // Row: 0, gap(1,2), 3, 4, [5]; room for the current step and its one neighbour only.
     expect(describeRow(layoutRow({ steps, current: 5 }, widths(6), 250, OVERFLOW, GAP))).toEqual([
       'before:0,1,2,3',
       'Step 4',

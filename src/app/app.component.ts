@@ -43,7 +43,6 @@ export class AppComponent {
       }
     ]
   constructor(meta: Meta) {
-    // Created here so the trail sees the first navigation.
     inject(SessionHistoryService);
     if (!environment.production) {
       meta.addTag({ name: 'robots', content: 'noindex' });

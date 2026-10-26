@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { NavigationStart, Router } from '@angular/router';
+import { NavigationCancel, NavigationError, NavigationSkipped, NavigationStart, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { EntityType } from '../../models/models';
 import { SessionHistoryService } from './session-history.service';
@@ -119,6 +119,19 @@ describe('SessionHistoryService', () => {
     service.record(diabetes);
 
     expect(service.trail()).toEqual(trailOf(hypertension, ptbp1, labile, hypertension, diabetes));
+  });
+
+  it.each([
+    ['skipped', () => new NavigationSkipped(1, '/term/HP:0000822', 'same url')],
+    ['cancelled', () => new NavigationCancel(1, '/term/HP:0000822', 'guard')],
+    ['failed', () => new NavigationError(1, '/term/HP:0000822', new Error('failed'))],
+  ])('a goTo whose navigation is %s does not mark the next navigation', (_, ended) => {
+    const service = create(trailOf(hypertension, ptbp1, hypertension));
+    service.goTo(0);
+    routerStub.events.next(ended());
+    navigateFrom('/', 'popstate');
+
+    expect(service.captureContext()?.goToIndex).toBeUndefined();
   });
 
   it('popstate to an entity in the trail makes its most recent step current', () => {

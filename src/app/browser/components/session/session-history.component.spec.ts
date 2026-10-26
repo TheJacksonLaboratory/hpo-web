@@ -14,6 +14,12 @@ const diabetes: SessionStep = { entityType: EntityType.DISEASE, id: 'MONDO:00050
 
 const VISIBLE_ROW = 'ol:not([data-measure])';
 
+/** Width in pixels reported for every measured step. */
+const STEP_WIDTH = 100;
+
+/** Width in pixels reported for every overflow button. */
+const OVERFLOW_WIDTH = 40;
+
 /** Builds `count` distinct phenotype steps labelled `Step 0..count-1`. */
 function longSteps(count: number): SessionStep[] {
   return Array.from({ length: count }, (_, i) => ({ ...labile, id: `HP:${i}`, label: `Step ${i}` }));
@@ -56,9 +62,8 @@ describe('SessionHistoryComponent', () => {
     goTo = jest.fn();
     clear = jest.fn();
     navWidth = 10000;
-    // jsdom does no layout: every measured step is 100px wide, the overflow button 40px.
     jest.spyOn(HTMLElement.prototype, 'offsetWidth', 'get').mockImplementation(function (this: HTMLElement) {
-      return this.hasAttribute('data-overflow') ? 40 : 100;
+      return this.hasAttribute('data-overflow') ? OVERFLOW_WIDTH : STEP_WIDTH;
     });
     jest.spyOn(HTMLElement.prototype, 'clientWidth', 'get').mockImplementation(() => navWidth);
     await TestBed.configureTestingModule({

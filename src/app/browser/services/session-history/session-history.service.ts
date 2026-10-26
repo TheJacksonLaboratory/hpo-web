@@ -1,5 +1,5 @@
 import { Injectable, Signal, signal } from '@angular/core';
-import { Event, NavigationStart, Router } from '@angular/router';
+import { Event, NavigationCancel, NavigationError, NavigationSkipped, NavigationStart, Router } from '@angular/router';
 import { EntityType } from '../../models/models';
 import { SessionStep, SessionTrail } from './session-history.types';
 import {
@@ -45,7 +45,7 @@ export class SessionHistoryService {
   /** Context of the navigation in flight, set at `NavigationStart`. */
   private context: NavigationContext | undefined;
 
-  /** Set by {@link goTo} until the `NavigationStart` it triggers consumes it. */
+  /** Set by {@link goTo}; cleared when that navigation starts, is skipped, is cancelled or fails. */
   private pendingGoTo: number | undefined;
 
   constructor(private router: Router) {
@@ -56,6 +56,12 @@ export class SessionHistoryService {
           isPopstate: event.navigationTrigger === 'popstate',
           goToIndex: this.pendingGoTo,
         };
+        this.pendingGoTo = undefined;
+      } else if (
+        event instanceof NavigationSkipped ||
+        event instanceof NavigationCancel ||
+        event instanceof NavigationError
+      ) {
         this.pendingGoTo = undefined;
       }
     });
