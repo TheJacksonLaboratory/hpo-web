@@ -1,0 +1,79 @@
+<nav #nav aria-label="Session History" class="relative overflow-hidden bg-[#f0faff] px-3 py-2">
+  <div class="flex items-center justify-between gap-3">
+    <p class="text-xs text-[#636363] my-0">Session History</p>
+    @if (trail().steps.length > 1) {
+      <button
+        type="button"
+        class="cursor-pointer border-0 bg-transparent p-0 text-xs text-[#0177b2] hover:underline"
+        (click)="clear()"
+      >
+        Clear history
+      </button>
+    }
+  </div>
+
+  <ol
+    #measureRow
+    data-measure
+    inert
+    aria-hidden="true"
+    class="invisible pointer-events-none absolute left-3 top-0 flex flex-nowrap items-center gap-2 whitespace-nowrap list-none m-0 p-0 text-base font-semibold leading-none"
+  >
+    <li data-overflow class="flex shrink-0 items-center gap-2">
+      <span>...</span>
+      <i class="pi pi-angle-right"></i>
+    </li>
+    @for (step of trail().steps; track $index; let last = $last) {
+      <li data-step class="flex shrink-0 items-center gap-2">
+        <span class="flex items-center gap-2"><i [class]="iconClass(step)"></i>{{ step.label }}</span>
+        @if (!last) {
+          <i class="pi pi-angle-right"></i>
+        }
+      </li>
+    }
+  </ol>
+
+  @if (items().length > 0) {
+    <p-menu #menu [model]="menuItems()" [popup]="true" appendTo="body" styleClass="max-h-80 overflow-y-auto" />
+    <ol class="flex flex-nowrap items-center gap-2 list-none m-0 mt-2 p-0 text-base font-semibold leading-none">
+      @for (item of items(); track $index; let last = $last) {
+        @if (item.kind === 'step') {
+          <li class="flex items-center gap-2" [class.min-w-0]="item.isCurrent" [class.shrink-0]="!item.isCurrent">
+            @if (item.isCurrent) {
+              <span class="flex min-w-0 items-center gap-2 text-[var(--p-text-color)]" aria-current="page">
+                <i [class]="iconClass(item.step)" aria-hidden="true"></i><span class="truncate">{{ item.step.label }}</span>
+              </span>
+            } @else {
+              <a
+                class="flex items-center gap-2 text-[#0177b2] no-underline hover:underline"
+                [href]="href(item.step)"
+                (click)="onStepClick($event, item.index)"
+              >
+                <i [class]="iconClass(item.step)" aria-hidden="true"></i>{{ item.step.label }}
+              </a>
+            }
+            @if (!last) {
+              <i class="pi pi-angle-right text-[#636363]" aria-hidden="true"></i>
+            }
+          </li>
+        } @else {
+          <li class="flex shrink-0 items-center gap-2">
+            <button
+              type="button"
+              class="cursor-pointer border-0 bg-transparent p-0 font-semibold leading-none text-[#0177b2] hover:underline"
+              aria-haspopup="menu"
+              [attr.data-kind]="item.kind"
+              [attr.aria-label]="menuLabel(item.kind)"
+              (click)="openMenu($event, menu, item.hidden)"
+            >
+              ...
+            </button>
+            @if (!last) {
+              <i class="pi pi-angle-right text-[#636363]" aria-hidden="true"></i>
+            }
+          </li>
+        }
+      }
+    </ol>
+  }
+</nav>
