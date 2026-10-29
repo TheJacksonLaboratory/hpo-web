@@ -3,7 +3,7 @@
     <p class="text-[var(--p-text-muted-color)]">Loading&hellip;</p>
   </div>
 } @else if (viewModel) {
-  <app-session-placeholder [currentLabel]="viewModel.title" />
+  <app-session-history />
   <div class="flex flex-col lg:flex-row lg:flex-wrap gap-6 lg:gap-0">
     @switch (viewModel.kind) {
       @case (EntityType.PHENOTYPE) {

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, forkJoin, of, throwError } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
-import { EntityType, EntrezGene, Language, Term, TermTree } from '../../models/models';
+import { EntityType, EntrezGene, Language, SimpleTerm, Term, TermTree } from '../../models/models';
 import { DiseasePageViewModel, DiseasePhenotypeRow } from './entity-page.types';
 import { AnnotationService } from '../../services/annotation/annotation.service';
 import { OntologyService } from '../../services/ontology/ontology.service';
@@ -20,6 +20,11 @@ export const BODY_SYSTEM_ORDER = [
   'Skin, Hair, and Nails', 'Nervous System', 'Voice', 'Prenatal and Birth', 'Constitutional Symptom',
   'Neoplasm', 'Metabolism/Laboratory abnormality', 'Cellular phenotype',
 ];
+
+/** A phenotype as the disease annotation API returns it, with its optional curation metadata. */
+interface DiseasePhenotypeAnnotation extends SimpleTerm {
+  metadata?: { onset?: string; frequency?: string; sources?: string[] };
+}
 
 /** Shown in place of an onset or frequency the annotation does not carry. */
 const NO_VALUE = '-';
@@ -185,7 +190,7 @@ export class EntityDataResolverService {
    * @param diseaseId Used as the provenance when an annotation carries none.
    */
   private buildPhenotypeRows(categories: object, diseaseId: string): DiseasePhenotypeRow[] {
-    const byCategory = (categories ?? {}) as Record<string, any[]>;
+    const byCategory = (categories ?? {}) as Record<string, DiseasePhenotypeAnnotation[]>;
 
     return Object.keys(byCategory)
       .filter((category) => byCategory[category]?.length)
@@ -211,7 +216,7 @@ export class EntityDataResolverService {
 
   /** Total phenotypes across every body system, for the export dialog's count. */
   private countPhenotypes(categories: object): number {
-    return Object.values((categories ?? {}) as Record<string, any[]>).reduce(
+    return Object.values((categories ?? {}) as Record<string, DiseasePhenotypeAnnotation[]>).reduce(
       (total, phenotypes) => total + (phenotypes?.length ?? 0),
       0,
     );
