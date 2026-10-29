@@ -14,10 +14,6 @@
     "typeRoots": [
       "node_modules/@types"
     ],
-    "lib": [
-      "es7",
-      "dom"
-    ],
     "module": "esnext",
     "paths": {
       "rxjs/internal/Observable": [
