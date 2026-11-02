@@ -6,6 +6,7 @@
     "ng": "ng",
     "start": "ng serve",
     "start:prod": "ng serve --configuration=production",
+    "sqa": "ng serve --configuration=sqa",
     "build:sqa": "ng build --configuration=sqa",
     "build:prod": "ng build --configuration=production",
     "test": "jest",
