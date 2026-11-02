@@ -4,39 +4,69 @@
   </div>
 } @else if (viewModel) {
   <app-session-history />
-  <div class="flex flex-col lg:flex-row lg:flex-wrap gap-6 lg:gap-0">
-    @switch (viewModel.kind) {
-      @case (EntityType.PHENOTYPE) {
-        <div class="w-full lg:w-[284px] lg:shrink-0 bg-white border border-t-0 border-[#e2e8f0] px-6 py-4">
-          <app-hierarchy-tree
-            [term]="viewModel.term"
-            [treeData]="viewModel.treeData"
-            [selectedLanguage]="selectedLanguage"
+  <div class="flex flex-col sm:flex-row">
+    @if (viewModel.kind === EntityType.PHENOTYPE) {
+      @if (treeOpen) {
+        <div class="fixed inset-0 z-[65] bg-black/40 sm:hidden" role="presentation" (click)="closeTree()"></div>
+      }
+      <div
+        id="hierarchy-drawer"
+        class="fixed inset-y-0 left-0 z-[70] w-3/4 max-w-sm overflow-y-auto bg-white border-r border-[#e2e8f0] shadow-lg transition-transform duration-200 -translate-x-full data-[open=true]:translate-x-0 max-sm:data-[open=false]:invisible sm:static sm:z-auto sm:w-[17.75rem] sm:shrink-0 sm:translate-x-0 sm:overflow-visible sm:border sm:border-t-0 sm:shadow-none"
+        [attr.data-open]="treeOpen"
+      >
+        @if (termBrowser.error()) {
+          <p class="my-0 text-[var(--p-text-muted-color)]">Could not load the hierarchy.</p>
+        } @else {
+          <lib-jds-term-browser
+            title="Hierarchy"
+            ariaLabel="HPO term hierarchy"
+            [tree]="termBrowser.tree()"
+            [term]="termBrowser.term()"
+            [childrenResolver]="termBrowser.childrenResolver"
+            [loading]="termBrowser.loading()"
+            (termSelect)="onTermSelect($event)"
           />
-        </div>
-        <div class="flex-1 min-w-0 p-6">
-          <app-term-page-content [viewModel]="viewModel" [selectedLanguage]="selectedLanguage" />
-        </div>
-      }
-      @case (EntityType.GENE) {
-        <div class="flex-1 min-w-0 p-6">
-          <app-gene-page-content [viewModel]="viewModel" />
-        </div>
-      }
-      @case (EntityType.DISEASE) {
-        <div class="flex-1 min-w-0 p-6">
-          <app-disease-page-content [viewModel]="viewModel" />
-        </div>
-      }
+        }
+      </div>
     }
 
-    <!-- 282px is the narrowest the export button's label fits without wrapping. -->
-    <aside class="w-full xl:w-[282px] xl:shrink-0 px-6 py-8">
-      <div class="xl:sticky xl:top-4 flex flex-col gap-4">
-        <app-on-this-page-panel-menu [items]="sections" />
-        <app-export-associations-button [id]="viewModel.id" [counts]="viewModel.downloadCounts" />
-        <app-report-entry-issue-button [id]="viewModel.id" />
+    <div class="flex flex-1 min-w-0 flex-col xl:flex-row">
+      <div class="flex-1 min-w-0 p-4 sm:p-6">
+        @switch (viewModel.kind) {
+          @case (EntityType.PHENOTYPE) {
+            <app-term-page-content [viewModel]="viewModel" [selectedLanguage]="selectedLanguage" />
+          }
+          @case (EntityType.GENE) {
+            <app-gene-page-content [viewModel]="viewModel" />
+          }
+          @case (EntityType.DISEASE) {
+            <app-disease-page-content [viewModel]="viewModel" />
+          }
+        }
       </div>
-    </aside>
+
+      <aside class="order-first w-full border-b border-[#e2e8f0] px-4 py-5 sm:px-6 xl:order-none xl:w-[17.625rem] xl:shrink-0 xl:border-b-0 xl:py-8">
+        <div class="flex flex-col gap-4 lg:flex-row lg:flex-wrap lg:items-center xl:sticky xl:top-4 xl:flex-col xl:items-stretch">
+          @if (viewModel.kind === EntityType.PHENOTYPE) {
+            <button
+              pButton
+              type="button"
+              severity="secondary"
+              [outlined]="true"
+              class="w-full sm:!hidden"
+              aria-controls="hierarchy-drawer"
+              [attr.aria-expanded]="treeOpen"
+              (click)="openTree()"
+            >
+              <i class="pi pi-sitemap"></i>
+              <span class="font-bold whitespace-nowrap">Show hierarchy</span>
+            </button>
+          }
+          <app-on-this-page-panel-menu class="lg:flex-1" [items]="sections" />
+          <app-export-associations-button [id]="viewModel.id" [counts]="viewModel.downloadCounts" />
+          <app-report-entry-issue-button [id]="viewModel.id" />
+        </div>
+      </aside>
+    </div>
   </div>
 }

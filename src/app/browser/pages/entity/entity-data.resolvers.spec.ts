@@ -211,26 +211,6 @@ describe('EntityDataResolverService', () => {
     });
   });
 
-  it('sorts children by descendantCount descending and computes proportional bar width/margin', (done) => {
-    ontologyService.term.mockReturnValue(of({ ...baseTerm, descendantCount: 10 }));
-    ontologyService.children.mockReturnValue(
-      of([
-        { id: 'HP:1', name: 'small', descendantCount: 2 },
-        { id: 'HP:2', name: 'big', descendantCount: 8 },
-      ]),
-    );
-    annotationService.fromPhenotype.mockReturnValue(
-      of({ diseases: [], genes: [], assays: [], medicalActions: [] }),
-    );
-
-    service.resolve(EntityType.PHENOTYPE, 'HP:0001250').subscribe((vm: TermPageViewModel) => {
-      expect(vm.treeData.children.map((c) => c.id)).toEqual(['HP:2', 'HP:1']);
-      expect(vm.treeData.children[0].treeCountWidth).toBe(32); // 8/10 * 40 (MAX_TREE_WIDTH)
-      expect(vm.treeData.children[1].treeCountWidth).toBe(8); // 2/10 * 40
-      done();
-    });
-  });
-
   describe('gene', () => {
     const ENTREZ = {
       uid: '1497',

@@ -57,7 +57,7 @@ describe('Browse disease page (shared entity page)', () => {
   });
 
   it('renders no hierarchy rail and no language selector', () => {
-    cy.get('app-hierarchy-tree').should('not.exist');
+    cy.get('lib-jds-term-browser').should('not.exist');
     cy.get('#summary p-select').should('not.exist');
   });
 

@@ -7,7 +7,6 @@ import {
   OntologyAnnotationDisease,
   SimpleTerm,
   Term,
-  TermTree,
 } from '../../models/models';
 
 /**
@@ -63,8 +62,6 @@ export interface TermPageViewModel extends EntityPageViewModelBase {
   paramId: string;
   /** The resolved term, with null-ish fields already defaulted for display. */
   term: Term;
-  /** Immediate parents and children, with precomputed descendant-bar geometry. */
-  treeData: TermTree;
   /** Diseases annotated with this phenotype. */
   diseaseAssoc: SimpleTerm[];
   /** Genes inferred to be associated with this phenotype. */

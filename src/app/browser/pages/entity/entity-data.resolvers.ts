@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, forkJoin, of, throwError } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
-import { EntityType, EntrezGene, Language, SimpleTerm, Term, TermTree } from '../../models/models';
+import { EntityType, EntrezGene, Language, SimpleTerm, Term } from '../../models/models';
 import { DiseasePageViewModel, DiseasePhenotypeRow } from './entity-page.types';
 import { AnnotationService } from '../../services/annotation/annotation.service';
 import { OntologyService } from '../../services/ontology/ontology.service';
@@ -9,8 +9,6 @@ import { LanguageService } from '../../services/language/language.service';
 import { GeneService } from '../../services/gene/gene.service';
 import { EntityPageViewModel, GenePageViewModel, PublicationReference, TermPageViewModel } from './entity-page.types';
 
-
-const MAX_TREE_WIDTH = 40;
 
 /** Order the disease page lists body systems in. Labels outside it sort last. */
 export const BODY_SYSTEM_ORDER = [
@@ -75,7 +73,7 @@ export class EntityDataResolverService {
   }
 
   /**
-   * Resolves the term, its immediate hierarchy, and its annotations.
+   * Resolves the term and its annotations.
    *
    * A failing annotation call is caught and surfaced as `networkError` rather
    * than failing the route, because the term half of the page is still worth
@@ -91,36 +89,27 @@ export class EntityDataResolverService {
         const normalizedTerm = this.normalizeTerm(term);
         const languages = this.buildLanguages(normalizedTerm);
 
-        return forkJoin({
-          parents: this.ontologyService.parents(normalizedTerm.id).pipe(catchError(() => of([]))),
-          children: this.ontologyService.children(normalizedTerm.id).pipe(catchError(() => of([]))),
-        }).pipe(
-          switchMap(({ parents, children }) => {
-            const treeData = this.buildTreeData(normalizedTerm, parents, children);
-
-            return this.annotationService.fromPhenotype(normalizedTerm.id).pipe(
-              map((associations) =>
-                this.buildTermViewModel(id, normalizedTerm, treeData, languages, {
-                  diseaseAssoc: associations.diseases,
-                  geneAssoc: associations.genes,
-                  medicalActions: associations.medicalActions,
-                  loincAssoc: associations.assays,
-                  networkError: false,
-                }),
-              ),
-              catchError(() =>
-                of(
-                  this.buildTermViewModel(id, normalizedTerm, treeData, languages, {
-                    diseaseAssoc: [],
-                    geneAssoc: [],
-                    medicalActions: [],
-                    loincAssoc: [],
-                    networkError: true,
-                  }),
-                ),
-              ),
-            );
-          }),
+        return this.annotationService.fromPhenotype(normalizedTerm.id).pipe(
+          map((associations) =>
+            this.buildTermViewModel(id, normalizedTerm, languages, {
+              diseaseAssoc: associations.diseases,
+              geneAssoc: associations.genes,
+              medicalActions: associations.medicalActions,
+              loincAssoc: associations.assays,
+              networkError: false,
+            }),
+          ),
+          catchError(() =>
+            of(
+              this.buildTermViewModel(id, normalizedTerm, languages, {
+                diseaseAssoc: [],
+                geneAssoc: [],
+                medicalActions: [],
+                loincAssoc: [],
+                networkError: true,
+              }),
+            ),
+          ),
         );
       }),
     );
@@ -245,7 +234,6 @@ export class EntityDataResolverService {
   private buildTermViewModel(
     paramId: string,
     term: Term,
-    treeData: TermTree,
     languages: Language[],
     associations: Pick<
       TermPageViewModel,
@@ -262,7 +250,6 @@ export class EntityDataResolverService {
       },
       paramId,
       term,
-      treeData,
       languages,
       publications: this.buildPublications(term),
       ...associations,
@@ -308,27 +295,5 @@ export class EntityDataResolverService {
     const unique = [...new Set(term.translations.map((t) => JSON.stringify({ language: t.language, language_long: t.language_long })))]
       .map((entry) => JSON.parse(entry) as Language);
     return [this.languageService.default, ...unique];
-  }
-
-  /**
-   * Orders children by subtree size and precomputes each one's descendant-bar
-   * geometry, so the hierarchy template renders widths rather than deriving
-   * them. Bars are sized as a proportion of the parent's descendant count.
-   */
-  private buildTreeData(term: Term, parents: Term[], children: Term[]): TermTree {
-    const sortedChildren = [...children].sort((a, b) => (a.descendantCount > b.descendantCount ? -1 : 1));
-    sortedChildren.forEach((child) => {
-      const percent = child.descendantCount / term.descendantCount;
-      const newWidth = Math.ceil(MAX_TREE_WIDTH * percent);
-      child.treeCountWidth = newWidth;
-      child.treeMargin = -46 + ((MAX_TREE_WIDTH - newWidth) - 2);
-    });
-
-    return {
-      parents,
-      children: sortedChildren,
-      descendantCount: term.descendantCount,
-      maxTermWidth: MAX_TREE_WIDTH,
-    };
   }
 }

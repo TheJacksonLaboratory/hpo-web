@@ -68,7 +68,7 @@ describe('Browse gene page (shared entity page)', () => {
   });
 
   it('renders no hierarchy rail - a gene has none', () => {
-    cy.get('app-hierarchy-tree').should('not.exist');
+    cy.get('lib-jds-term-browser').should('not.exist');
   });
 
   it('renders no language selector - a gene has no translations', () => {

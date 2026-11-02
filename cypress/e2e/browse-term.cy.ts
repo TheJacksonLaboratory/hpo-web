@@ -16,7 +16,7 @@ describe('Browse term page (shared entity page)', () => {
     translations: [],
   };
 
-  const PARENTS = [{ id: 'HP:0012638', name: 'Abnormal nervous system physiology', descendantCount: 500 }];
+  const ANCESTORS = [{ id: 'HP:0012638', name: 'Abnormal nervous system physiology', descendantCount: 500, parents: [] }];
 
   const CHILDREN = [
     { id: 'HP:0002133', name: 'Status epilepticus', descendantCount: 0 },
@@ -41,9 +41,9 @@ describe('Browse term page (shared entity page)', () => {
   };
 
   beforeEach(() => {
-    cy.intercept('GET', '**/hp/terms/HP:0001250', TERM).as('term');
-    cy.intercept('GET', '**/hp/terms/HP:0001250/parents', PARENTS).as('parents');
-    cy.intercept('GET', '**/hp/terms/HP:0001250/children', CHILDREN).as('children');
+    cy.intercept('GET', /\/hp\/terms\/HP(:|%3A)0001250$/, TERM).as('term');
+    cy.intercept('GET', /\/hp\/terms\/HP(:|%3A)0001250\/ancestors$/, ANCESTORS).as('ancestors');
+    cy.intercept('GET', /\/hp\/terms\/HP(:|%3A)0001250\/children$/, CHILDREN).as('children');
     cy.intercept('GET', '**/network/annotation/HP:0001250', ASSOCIATIONS).as('associations');
 
     cy.visit('/term/HP:0001250', {
@@ -51,12 +51,12 @@ describe('Browse term page (shared entity page)', () => {
         cy.spy(win.console, 'error').as('consoleError');
       },
     });
-    cy.wait(['@term', '@parents', '@children', '@associations']);
+    cy.wait(['@term', '@ancestors', '@children', '@associations']);
   });
 
   it('serves the same page from the legacy /browse/term path', () => {
     cy.visit('/browse/term/HP:0001250');
-    cy.wait(['@term', '@parents', '@children', '@associations']);
+    cy.wait(['@term', '@ancestors', '@children', '@associations']);
     cy.location('pathname').should('match', /^\/term\/HP(%3A|:)0001250$/);
     cy.get('#summary').should('contain.text', 'Seizure');
   });
@@ -89,10 +89,10 @@ describe('Browse term page (shared entity page)', () => {
     });
   });
 
-  it('renders the hierarchy tree with parent and child links', () => {
-    cy.contains('app-hierarchy-tree a', 'Abnormal nervous system physiology').should('exist');
-    cy.contains('app-hierarchy-tree a', 'Status epilepticus').should('exist');
-    cy.contains('app-hierarchy-tree a', 'Enuresis nocturna').should('exist');
+  it('renders the term browser with the ancestors and children of the term', () => {
+    cy.contains('lib-jds-term-browser', 'Abnormal nervous system physiology').should('exist');
+    cy.contains('lib-jds-term-browser', 'Status epilepticus').should('exist');
+    cy.contains('lib-jds-term-browser', 'Enuresis nocturna').should('exist');
   });
 
   it('renders every association section with the right row content', () => {
