@@ -36,9 +36,9 @@
           <p-tablist>
             <!-- Hidden for now until "All Terms" has a real cross-category implementation -->
             <p-tab value="all" class="hidden">All Terms</p-tab>
-            <p-tab value="term">Phenotypes <span class="font-normal">({{ termItems.length }})</span></p-tab>
-            <p-tab value="disease">Diseases <span class="font-normal">({{ diseaseItems.length }})</span></p-tab>
-            <p-tab value="gene">Genes <span class="font-normal">({{ geneItems.length }})</span></p-tab>
+            <p-tab value="term">Phenotypes @if (!isLoading) {<span class="font-normal">({{ termItems.length }})</span>}</p-tab>
+            <p-tab value="disease">Diseases @if (!isLoading) {<span class="font-normal">({{ diseaseItems.length }})</span>}</p-tab>
+            <p-tab value="gene">Genes @if (!isLoading) {<span class="font-normal">({{ geneItems.length }})</span>}</p-tab>
           </p-tablist>
         </p-tabs>
 
@@ -55,7 +55,7 @@
             }
           </div>
 
-          <div class="flex items-center gap-2">
+          <div class="flex items-center gap-2" [class.invisible]="isLoading">
             <span class="hidden md:inline text-base text-[#454545]">Sorted by:</span>
             <!--
               PrimeNG defaults scrollHeight to 200px, which clips this 5-option list at
