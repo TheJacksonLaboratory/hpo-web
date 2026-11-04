@@ -18,6 +18,7 @@
           <p class="my-0 text-[var(--p-text-muted-color)]">Could not load the hierarchy.</p>
         } @else {
           <lib-jds-term-browser
+            style="--jds-term-browser-padding: 1rem 0.5rem"
             title="Hierarchy"
             ariaLabel="HPO term hierarchy"
             [tree]="termBrowser.tree()"
