@@ -77,23 +77,27 @@
       </div>
 
       <div class="flex flex-col gap-1 w-full">
-        @for (item of pagedItems; track item.id) {
-          <app-search-result-card [item]="item" [query]="query" />
-        } @empty {
-          @if (!isLoading) {
+        @if (isLoading) {
+          <div class="py-10 flex justify-center">
+            <p class="text-[var(--p-text-muted-color)]">Loading&hellip;</p>
+          </div>
+        } @else {
+          @for (item of pagedItems; track item.id) {
+            <app-search-result-card [item]="item" [query]="query" />
+          } @empty {
             <p class="text-base text-[#636363]">No results found for "{{ query }}"</p>
           }
-        }
 
-        <p-paginator
-          [totalRecords]="activeCategoryItems.length"
-          [rows]="rows"
-          [first]="first"
-          [rowsPerPageOptions]="rowsPerPageOptions"
-          [showCurrentPageReport]="true"
-          currentPageReportTemplate="Showing {rows} of {totalRecords} entries"
-          (onPageChange)="onPageChange($event)"
-        />
+          <p-paginator
+            [totalRecords]="activeCategoryItems.length"
+            [rows]="rows"
+            [first]="first"
+            [rowsPerPageOptions]="rowsPerPageOptions"
+            [showCurrentPageReport]="true"
+            currentPageReportTemplate="Showing {rows} of {totalRecords} entries"
+            (onPageChange)="onPageChange($event)"
+          />
+        }
       </div>
     </div>
   </div>
