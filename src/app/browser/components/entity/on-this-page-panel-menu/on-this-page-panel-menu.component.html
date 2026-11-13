@@ -1,20 +1,20 @@
 <nav
-  class="rounded-md border border-[var(--p-content-border-color)] bg-[var(--p-content-background)] p-1"
+  class="xl:rounded-md xl:border xl:border-[var(--p-content-border-color)] xl:bg-[var(--p-content-background)] xl:p-1"
   aria-label="On this page"
 >
-  <p class="p-3 text-base font-semibold text-[var(--p-text-color)] my-0">
+  <p class="pb-2 text-base font-semibold text-[var(--p-text-color)] my-0 xl:p-3">
     On this page
   </p>
-  <ul class="list-none m-0 p-0">
+  <ul class="list-none m-0 p-0 flex flex-wrap gap-x-5 gap-y-2 xl:flex-col xl:gap-0">
     @for (item of items; track item.id) {
-      <li class="pl-4">
+      <li class="xl:pl-4">
         <button
           type="button"
-          class="w-full text-left p-2 rounded-md text-base transition-colors"
+          class="p-0 text-base transition-colors xl:w-full xl:text-left xl:p-2 xl:rounded-md"
           [ngClass]="
             activeAnchor === item.anchor
-              ? 'font-bold text-[#222] bg-[var(--p-teal-300)]'
-              : 'text-[var(--p-text-color)]'
+              ? 'font-bold text-[#222] xl:bg-[var(--p-teal-300)]'
+              : 'text-[#0177b2] underline underline-offset-4 xl:text-[var(--p-text-color)] xl:no-underline'
           "
           (click)="scrollTo(item)"
         >

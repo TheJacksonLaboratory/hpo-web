@@ -5,6 +5,7 @@ import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { providePrimeNG } from 'primeng/config';
 import { EchoPreset } from '@jax-data-science/themes';
+import { JAX_ONTOLOGY_API_ROOT, JaxOntologyService, OntologyService } from '@jax-data-science/api-clients';
 import { MAT_TABS_CONFIG } from '@angular/material/tabs';
 
 import { AppComponent } from './app/app.component';
@@ -183,6 +184,8 @@ bootstrapApplication(AppComponent, {
         }
       }
     }),
-    { provide: MAT_TABS_CONFIG, useValue: { animationDuration: '0ms' } }
+    { provide: MAT_TABS_CONFIG, useValue: { animationDuration: '0ms' } },
+    { provide: JAX_ONTOLOGY_API_ROOT, useValue: environment.ONTOLOGY_API_ROOT },
+    { provide: OntologyService, useExisting: JaxOntologyService },
   ]
 }).catch(err => console.error(err));

@@ -1,6 +1,8 @@
-import { Component, DestroyRef, OnInit, inject } from '@angular/core';
+import { Component, DestroyRef, HostListener, OnInit, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ButtonDirective } from 'primeng/button';
+import { JdsTermBrowserComponent, JdsTermBrowserFacade, JdsTermSelectEvent } from '@jax-data-science/components';
 import { map, switchMap } from 'rxjs/operators';
 import { EntityType, Language, PanelMenuItem } from '../../models/models';
 import { EntityDataResolverService } from './entity-data.resolvers';
@@ -9,7 +11,6 @@ import { buildSections } from './entity-page.sections';
 import { TermPageContentComponent } from './content/term-page-content.component';
 import { GenePageContentComponent } from './content/gene-page-content.component';
 import { DiseasePageContentComponent } from './content/disease-page-content.component';
-import { HierarchyTreeComponent } from '../../components/entity/hierarchy-tree/hierarchy-tree.component';
 import { OnThisPagePanelMenuComponent } from '../../components/entity/on-this-page-panel-menu/on-this-page-panel-menu.component';
 import { ExportAssociationsButtonComponent } from '../../components/entity/export-associations-button/export-associations-button.component';
 import { ReportEntryIssueButtonComponent } from '../../components/entity/report-entry-issue-button/report-entry-issue-button.component';
@@ -33,10 +34,11 @@ import { SessionHistoryService } from '../../services/session-history/session-hi
   selector: 'app-entity-page',
   standalone: true,
   imports: [
+    ButtonDirective,
     TermPageContentComponent,
     GenePageContentComponent,
     DiseasePageContentComponent,
-    HierarchyTreeComponent,
+    JdsTermBrowserComponent,
     OnThisPagePanelMenuComponent,
     ExportAssociationsButtonComponent,
     ReportEntryIssueButtonComponent,
@@ -53,6 +55,9 @@ export class EntityPageComponent implements OnInit {
 
   private readonly destroyRef = inject(DestroyRef);
 
+  /** Loads the ancestor tree the phenotype page's term browser renders. */
+  readonly termBrowser = inject(JdsTermBrowserFacade);
+
   /** The resolved page data, or null while loading or after a failure. */
   viewModel: EntityPageViewModel | null = null;
 
@@ -68,6 +73,9 @@ export class EntityPageComponent implements OnInit {
    * against it.
    */
   selectedLanguage: Language = this.languageService.default;
+
+  /** True while the hierarchy drawer is open on viewports narrower than `lg`. */
+  treeOpen = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -96,6 +104,7 @@ export class EntityPageComponent implements OnInit {
       .pipe(
         switchMap((params) => {
           this.loading = true;
+          this.treeOpen = false;
           this.viewModel = null;
           this.sections = [];
           const context = this.sessionHistory.captureContext();
@@ -109,6 +118,9 @@ export class EntityPageComponent implements OnInit {
         next: ({ viewModel, context }) => {
           this.viewModel = viewModel;
           this.sections = buildSections(viewModel);
+          if (viewModel.kind === EntityType.PHENOTYPE) {
+            this.termBrowser.load(viewModel.id);
+          }
           this.sessionHistory.record({ entityType: viewModel.kind, id: viewModel.id, label: viewModel.title }, context);
           this.loading = false;
           this.onActiveLanguageChange(this.languageService.languageSubject.value);
@@ -120,6 +132,26 @@ export class EntityPageComponent implements OnInit {
           });
         },
       });
+  }
+
+  /** Opens the hierarchy drawer. */
+  openTree(): void {
+    this.treeOpen = true;
+  }
+
+  /**
+   * Navigates to the term chosen in the term browser.
+   *
+   * @param event The term browser's selection.
+   */
+  onTermSelect(event: JdsTermSelectEvent): void {
+    this.router.navigate(['/term', event.term.id]);
+  }
+
+  /** Closes the hierarchy drawer. Bound to the backdrop click and the Escape key. */
+  @HostListener('document:keydown.escape')
+  closeTree(): void {
+    this.treeOpen = false;
   }
 
   /**

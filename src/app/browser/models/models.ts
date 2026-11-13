@@ -55,17 +55,8 @@ export interface Term extends SimpleTerm {
   descendantCount?: number;
   synonym?: string;
   matchingString?: string;
-  treeCountWidth?: number;
-  treeMargin?: number;
   publicationReferences?: Array<string>;
   translations?: Translation[];
-}
-
-export interface TermTree {
-  parents: Term[];
-  descendantCount?: number;
-  children: Term[];
-  maxTermWidth?: number;
 }
 
 export interface News {

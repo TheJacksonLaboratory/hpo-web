@@ -13,7 +13,6 @@ describe('buildSections', () => {
     downloadCounts: { diseases: 0, genes: 0 },
     paramId: 'HP:0001250',
     term: { id: 'HP:0001250', name: 'Seizure', synonyms: [] },
-    treeData: { parents: [], children: [] },
     diseaseAssoc: [],
     geneAssoc: [],
     medicalActions: [],
