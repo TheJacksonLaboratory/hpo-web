@@ -4,8 +4,8 @@ import { RouterModule } from '@angular/router';
 import { Meta } from '@angular/platform-browser';
 
 import { JdsMenuItem, NavbarComponent } from '@jax-data-science/components';
-import { FooterComponent } from './shared/footer/footer.component';
-import { FloatingFeedbackComponent } from './shared/floating-feedback/floating-feedback.component';
+import { FooterComponent } from './layout/footer/footer.component';
+import { FloatingFeedbackComponent } from './layout/floating-feedback/floating-feedback.component';
 import { environment } from '../environments/environment';
 import { SessionHistoryService } from './browser/services/session-history/session-history.service';
 
