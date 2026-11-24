@@ -47,8 +47,7 @@ describe('NavbarComponent', () => {
     expect(link?.getAttribute('rel')).toBe('noopener');
   });
 
-  it('shows the Copied Terms button', () => {
-    const button = render().querySelector('.p-menubar-end button');
-    expect(button?.getAttribute('aria-label')).toBe('Copied terms');
+  it('shows the Clinical Clipboard button', () => {
+    expect(render().querySelector('.p-menubar-end app-clinical-clipboard button')).toBeTruthy();
   });
 });

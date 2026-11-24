@@ -1,10 +1,13 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Clipboard } from '@angular/cdk/clipboard';
 import { IdBadgeComponent } from './id-badge.component';
+import { ClinicalClipboardService } from '../../../services/clinical-clipboard/clinical-clipboard.service';
 
 describe('IdBadgeComponent', () => {
   let fixture: ComponentFixture<IdBadgeComponent>;
 
   beforeEach(async () => {
+    localStorage.clear();
     await TestBed.configureTestingModule({ imports: [IdBadgeComponent] }).compileComponents();
     fixture = TestBed.createComponent(IdBadgeComponent);
     fixture.componentInstance.id = 'HP:0001250';
@@ -117,6 +120,56 @@ describe('IdBadgeComponent', () => {
       fixture.componentInstance.onCopied(true);
       fixture.destroy();
       expect(() => jest.advanceTimersByTime(1500)).not.toThrow();
+    });
+  });
+
+  describe('collect mode', () => {
+    let copy: jest.SpyInstance;
+    let service: ClinicalClipboardService;
+
+    beforeEach(() => {
+      jest.useFakeTimers();
+      copy = jest.spyOn(TestBed.inject(Clipboard), 'copy').mockReturnValue(true);
+      service = TestBed.inject(ClinicalClipboardService);
+      Object.assign(fixture.componentInstance, { copyable: true, collect: true, name: 'Seizure' });
+      fixture.detectChanges();
+    });
+
+    afterEach(() => jest.useRealTimers());
+
+    const button = () => fixture.nativeElement.querySelector('button') as HTMLButtonElement;
+
+    it('copies the id and adds the term on first click', () => {
+      button().click();
+      fixture.detectChanges();
+
+      expect(copy).toHaveBeenCalledWith('HP:0001250');
+      expect(service.terms()).toEqual([{ id: 'HP:0001250', name: 'Seizure' }]);
+      expect(button().getAttribute('aria-pressed')).toBe('true');
+      expect(button().querySelector('i')!.classList).toContain('pi-check');
+      expect(button().textContent).toContain('Copied to Clipboard');
+
+      jest.advanceTimersByTime(1500);
+      fixture.detectChanges();
+      expect(button().textContent).toContain('HP:0001250');
+    });
+
+    it('removes the term on a second click without copying', () => {
+      button().click();
+      copy.mockClear();
+      button().click();
+      fixture.detectChanges();
+
+      expect(copy).not.toHaveBeenCalled();
+      expect(service.count()).toBe(0);
+      expect(button().getAttribute('aria-pressed')).toBe('false');
+      expect(button().textContent).toContain('Removed from Clipboard');
+    });
+
+    it('reflects a term added elsewhere', () => {
+      service.add({ id: 'HP:0001250', name: 'Seizure' });
+      fixture.detectChanges();
+      expect(button().getAttribute('aria-pressed')).toBe('true');
     });
   });
 
