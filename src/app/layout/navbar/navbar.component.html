@@ -1,0 +1,29 @@
+<p-menubar [model]="items" class="w-full">
+  <ng-template #start>
+    <a routerLink="/" aria-label="Human Phenotype Ontology home" class="p-menubar-logo mr-2">
+      <img src="assets/hpo-logo-black.png" alt="Human Phenotype Ontology" class="h-8" />
+    </a>
+  </ng-template>
+
+  <ng-template #item let-item>
+    @if (item.routerLink !== undefined) {
+      <a class="p-menubar-item-link flex items-center gap-2" [routerLink]="item.routerLink">
+        <span>{{ item.label }}</span>
+      </a>
+    } @else {
+      <a class="p-menubar-item-link flex items-center gap-2" [href]="item.url" [attr.target]="item.target"
+         [attr.rel]="item.target === '_blank' ? 'noopener' : null">
+        <span>{{ item.label }}</span>
+        @if (item.icon) {
+          <i [class]="item.icon + ' app-navbar__item-icon'" [class.order-first]="!item.iconEnd" aria-hidden="true"></i>
+        }
+      </a>
+    }
+  </ng-template>
+
+  <ng-template #end>
+    <button type="button" class="app-navbar__copied-terms" aria-label="Copied terms">
+      <i class="pi pi-clipboard" aria-hidden="true"></i>
+    </button>
+  </ng-template>
+</p-menubar>
