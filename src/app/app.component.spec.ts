@@ -8,6 +8,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { provideRouter } from '@angular/router';
 import { provideLocationMocks } from '@angular/common/testing';
+import { SessionHistoryService } from './browser/services/session-history/session-history.service';
 
 describe('AppComponent', () => {
   beforeEach(waitForAsync(() => {
@@ -25,6 +26,19 @@ describe('AppComponent', () => {
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
   }));
+
+  it('creates the session history service at startup so it sees the first navigation', () => {
+    let created = false;
+    TestBed.overrideProvider(SessionHistoryService, {
+      useFactory: () => {
+        created = true;
+        return {};
+      },
+    });
+    TestBed.createComponent(AppComponent);
+
+    expect(created).toBe(true);
+  });
 
   it('it should check that search url environment variable is set', () => {
 

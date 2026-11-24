@@ -4,7 +4,7 @@ import { ProfileSearchComponent } from "./pages/profile-search/profile-search.co
 export const browserRoutes: Routes = [
   // Backwards compatibility: term/disease/gene pages moved to top-level routes.
   { path: 'term/:id', redirectTo: '/term/:id' },
-  { path: 'disease/:id', redirectTo: '/diseases/:id' },
+  { path: 'disease/:id', redirectTo: '/disease/:id' },
   { path: 'gene/:id', redirectTo: '/gene/:id' },
   { path: 'profile-search', component: ProfileSearchComponent },
   // Backwards compatibility: search moved to the top-level /search route.

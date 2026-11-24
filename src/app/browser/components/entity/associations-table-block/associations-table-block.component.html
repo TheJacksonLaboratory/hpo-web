@@ -1,0 +1,88 @@
+<section [id]="anchorId" class="scroll-mt-8 flex flex-col gap-4">
+  <div class="flex flex-col gap-2 pb-2">
+    <h2 class="text-xl leading-7 sm:text-2xl sm:leading-8 font-bold capitalize text-[#222] my-0">
+      {{ title }} <span class="font-normal">({{ value.length }})</span>
+    </h2>
+    @if (description) {
+      <p class="text-base leading-7 text-[var(--p-text-muted-color)] my-0">{{ description }}</p>
+    }
+  </div>
+
+  @if (loading) {
+    <div class="flex flex-col gap-2">
+      <p-skeleton height="2.5rem" />
+      <p-skeleton height="2.5rem" />
+      <p-skeleton height="2.5rem" />
+    </div>
+  } @else if (networkError) {
+    <p class="text-red-600">
+      Ontology Annotation Network Error.
+      <a
+        href="https://github.com/TheJacksonLaboratory/ontology-annotation-network/issues/new"
+        target="_blank"
+        class="underline"
+      >Please report this issue.</a>
+    </p>
+  } @else if (!value.length) {
+    <app-empty-state [ctaHref]="emptyCtaLink" />
+  } @else {
+    <div class="flex flex-col items-stretch gap-2 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
+      @if (sortOptions?.length) {
+        <p-select
+          [options]="sortOptions"
+          optionLabel="label"
+          [(ngModel)]="selectedSort"
+          (onChange)="onSortChange()"
+          placeholder="Sort by"
+          styleClass="w-full sm:w-[240px]"
+        />
+      } @else {
+        <span class="hidden sm:block"></span>
+      }
+      @if (filterable) {
+        <p-iconfield class="w-full sm:w-auto">
+          <p-inputicon class="pi pi-search" />
+          <input pInputText type="text" class="w-full" placeholder="Filter terms" (input)="onFilterInput($any($event.target).value)" />
+        </p-iconfield>
+      }
+    </div>
+
+    <p-table
+      #dt
+      [value]="value"
+      [scrollable]="true"
+      scrollDirection="horizontal"
+      [tableStyle]="{ 'min-width': '28.75rem' }"
+      [paginator]="paginated"
+      [rows]="10"
+      [rowsPerPageOptions]="[10, 20, 50]"
+      [globalFilterFields]="globalFilterFields"
+      [sortField]="sortField"
+      [sortOrder]="sortOrder"
+      [rowGroupMode]="groupRowsBy ? 'subheader' : undefined"
+      [groupRowsBy]="groupRowsBy"
+      [customSort]="usesGroupOrder"
+      (sortFunction)="sortRows($any($event))"
+      [showCurrentPageReport]="true"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords}"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <ng-container *ngTemplateOutlet="headerCellsTpl"></ng-container>
+        </tr>
+      </ng-template>
+      @if (groupRowsBy && groupHeaderCellsTpl) {
+        <ng-template pTemplate="groupheader" let-row>
+          <tr class="bg-[var(--p-slate-800)] text-[var(--p-surface-0)]">
+            <ng-container *ngTemplateOutlet="groupHeaderCellsTpl; context: { $implicit: row, row: row }"></ng-container>
+          </tr>
+        </ng-template>
+      }
+      <ng-template pTemplate="body" let-row>
+        <tr>
+          <ng-container *ngTemplateOutlet="rowCellsTpl; context: { $implicit: row, row: row }"></ng-container>
+        </tr>
+      </ng-template>
+    </p-table>
+  }
+</section>

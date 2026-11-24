@@ -54,7 +54,7 @@ export class SearchFormComponent implements OnInit, OnChanges {
       this.routerLinkById.clear();
       this.suggestions = [
         this.toGroup<Term>('Phenotypes', terms.terms, (term) => `/term/${term.id}`),
-        this.toGroup<SimpleTerm>('Diseases', diseases.results, (disease) => `/diseases/${disease.id}`),
+        this.toGroup<SimpleTerm>('Diseases', diseases.results, (disease) => `/disease/${disease.id}`),
         this.toGroup<SimpleTerm>('Genes', genes.results, (gene) => `/gene/${gene.id}`),
       ].filter((group) => group.items.length > 0);
     });

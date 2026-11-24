@@ -5,6 +5,7 @@ import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { providePrimeNG } from 'primeng/config';
 import { EchoPreset } from '@jax-data-science/themes';
+import { JAX_ONTOLOGY_API_ROOT, JaxOntologyService, OntologyService } from '@jax-data-science/api-clients';
 import { MAT_TABS_CONFIG } from '@angular/material/tabs';
 
 import { AppComponent } from './app/app.component';
@@ -30,6 +31,11 @@ if (environment.production) {
       },
       colorScheme: {
         light: {
+          // Figma inputtext/disabled/color. The preset ships #636363, which is
+          // the card-subtitle/muted value and reads as active copy.
+          formField: {
+            disabledColor: '#808080'
+          },
           surface: {
             0: '#ffffff',
             50: '{grey.100}',
@@ -64,6 +70,24 @@ if (environment.production) {
       },
     },
     components: {
+      // Entity page association tables (AssociationsTableBlockComponent) -
+      // the only p-table consumer in the app today. Figma: _datatable-header-cell.
+      datatable: {
+        // Colour tokens must sit under colorScheme.light - at the component
+        // root they are silently ignored (as menubar/message below already do).
+        colorScheme: {
+          light: {
+            headerCell: {
+              background: '{teal.300}',
+              borderColor: '{grey.300}',
+              color: '{grey.900}'
+            }
+          }
+        },
+        headerCell: {
+          padding: '12px'
+        }
+      },
       menubar: {
         colorScheme: {
           light: {
@@ -93,6 +117,18 @@ if (environment.production) {
           light: {
             link: {
               color: '{primary.700}',
+            },
+            // Figma button/outlined/*: border and label share one colour. The
+            // preset tints the border, which reads as a disabled control.
+            outlined: {
+              primary: {
+                borderColor: '#0177b2',
+                color: '#0177b2'
+              },
+              warn: {
+                borderColor: '#bc4702',
+                color: '#bc4702'
+              }
             }
           }
         }
@@ -148,6 +184,8 @@ bootstrapApplication(AppComponent, {
         }
       }
     }),
-    { provide: MAT_TABS_CONFIG, useValue: { animationDuration: '0ms' } }
+    { provide: MAT_TABS_CONFIG, useValue: { animationDuration: '0ms' } },
+    { provide: JAX_ONTOLOGY_API_ROOT, useValue: environment.ONTOLOGY_API_ROOT },
+    { provide: OntologyService, useExisting: JaxOntologyService },
   ]
 }).catch(err => console.error(err));

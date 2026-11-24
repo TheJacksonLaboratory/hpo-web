@@ -22,7 +22,12 @@ export interface Disease extends SimpleTerm {
 
 export class EntrezGene {
   uid?: string;
+  /** Gene symbol, e.g. `CTNS`. */
   name?: string;
+  /** Full gene name, e.g. `cystinosin`. */
+  description?: string;
+  /** Chromosome number, e.g. `17`. */
+  chromosome?: string;
   maplocation?: string;
   summary?: string;
   otheraliases?: string;
@@ -35,7 +40,8 @@ export class EntrezGene {
 }
 
 export interface EntrezGeneResult {
-  result: EntrezGene
+  /** Gene records keyed by Entrez uid. */
+  result: Record<string, EntrezGene>
 }
 
 export interface Term extends SimpleTerm {
@@ -49,17 +55,8 @@ export interface Term extends SimpleTerm {
   descendantCount?: number;
   synonym?: string;
   matchingString?: string;
-  treeCountWidth?: number;
-  treeMargin?: number;
   publicationReferences?: Array<string>;
   translations?: Translation[];
-}
-
-export interface TermTree {
-  parents: Term[];
-  descendantCount?: number;
-  children: Term[];
-  maxTermWidth?: number;
 }
 
 export interface News {
@@ -167,4 +164,19 @@ export interface OntologyAnnotationDisease extends SimpleTerm {
 export interface OntologyAnnotationSearchResult<T extends SimpleTerm> {
   results: T[];
   totalCount: number;
+}
+
+/**
+ * One entry in an entity page's "On this page" panel menu, describing a
+ * section of the page it can scroll to.
+ */
+export interface PanelMenuItem {
+  /** Stable key for the section, unique within one page. */
+  id: string;
+  /** Text shown in the menu, e.g. `Disease Associations`. */
+  label: string;
+  /** DOM id of the section element this entry scrolls to. */
+  anchor: string;
+  /** Number of rows in the section. Omitted for sections that are not lists. */
+  count?: number;
 }
