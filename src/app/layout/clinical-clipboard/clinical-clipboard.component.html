@@ -1,0 +1,89 @@
+@let count = clinicalClipboard.count();
+<button
+  #toggleButton
+  type="button"
+  class="relative inline-flex h-11 w-11 items-center justify-center rounded-lg border text-2xl cursor-pointer transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+  [class]="
+    count > 0 || panelOpen()
+      ? 'bg-[var(--p-slate-800)] border-[var(--p-slate-800)] text-[var(--p-surface-0)] shadow-sm'
+      : 'border-transparent bg-transparent text-inherit hover:bg-white/35'
+  "
+  aria-haspopup="dialog"
+  [attr.aria-expanded]="panelOpen()"
+  [attr.aria-label]="'Clinical clipboard, ' + count + (count === 1 ? ' item' : ' items')"
+  title="Clinical clipboard"
+  (click)="popover.toggle($event, toggleButton)"
+>
+  <i class="pi pi-clipboard text-2xl" aria-hidden="true"></i>
+  @if (count > 0) {
+    <span
+      class="absolute -top-[7px] -right-[7px] box-border h-[22px] min-w-[22px] rounded-full border-2 border-[var(--p-menubar-background)] bg-[var(--p-slate-800)] px-[5px] text-center text-xs font-bold leading-[18px] text-[var(--p-surface-0)]"
+      aria-hidden="true"
+      >{{ count > 99 ? '99+' : count }}</span
+    >
+  }
+</button>
+
+<p-popover
+  #popover
+  appendTo="body"
+  ariaLabelledBy="clinical-clipboard-title"
+  styleClass="w-[340px] max-w-[calc(100vw-2rem)] overflow-hidden rounded-lg border border-[var(--p-grey-300)] bg-[var(--p-surface-0)] text-left text-[#222222] shadow-[0_8px_24px_rgb(18_32_36/0.18)] before:hidden after:hidden [--p-popover-gutter:8px] [--p-popover-content-padding:0]"
+  (onShow)="onPanelShow()"
+  (onHide)="onPanelHide()"
+>
+  <div data-clinical-clipboard-panel>
+    <div class="border-b border-[var(--p-slate-200)] px-4 py-3">
+      <h2
+        id="clinical-clipboard-title"
+        class="m-0 text-base font-bold text-[var(--p-slate-800)] focus:outline-none"
+        tabindex="-1"
+      >
+        Clinical Clipboard <span class="font-normal">({{ count }})</span>
+      </h2>
+    </div>
+
+    @if (count > 0) {
+      <ul class="m-0 flex max-h-[280px] list-none flex-col gap-2 overflow-y-auto overscroll-contain p-3">
+        @for (term of clinicalClipboard.terms(); track term.id; let i = $index) {
+          <li class="flex items-center gap-2 rounded-lg border border-[var(--p-grey-300)] py-3 pl-4 pr-2">
+            <div class="flex min-w-0 flex-1 flex-col">
+              <span class="break-words text-[15px] font-semibold text-[var(--p-slate-800)]">{{ term.name }}</span>
+              <span class="text-[13px] text-[#454545]">{{ term.id }}</span>
+            </div>
+            <button
+              type="button"
+              data-clinical-clipboard-remove
+              class="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full border-0 bg-transparent text-[#454545] cursor-pointer hover:bg-[#f7f7f7] hover:text-[var(--p-slate-800)]"
+              [attr.aria-label]="'Remove ' + term.name + ' (' + term.id + ')'"
+              (click)="removeTerm(term, i)"
+            >
+              <i class="pi pi-times" aria-hidden="true"></i>
+            </button>
+          </li>
+        }
+      </ul>
+      <div class="flex items-center justify-between gap-2 border-t border-[var(--p-slate-200)] px-4 py-3">
+        <p-button label="Export CSV" icon="pi pi-download" [outlined]="true" size="small" (onClick)="exportCsv()" />
+        <button
+          type="button"
+          data-clinical-clipboard-clear
+          class="border-0 bg-transparent p-2 text-sm font-bold text-[#bc4702] cursor-pointer hover:underline"
+          (click)="clearAll()"
+        >
+          Clear all
+        </button>
+      </div>
+    } @else {
+      <div class="flex flex-col items-center gap-2 px-6 py-8 text-center">
+        <i class="pi pi-clipboard text-[2.5rem] text-[#808080]" aria-hidden="true"></i>
+        <p class="m-0 text-base font-bold text-[var(--p-slate-800)]">Your clipboard is empty</p>
+        <p class="m-0 text-sm text-[#454545]">
+          Track phenotypes of interest as you browse. Copy a term ID to add it here, then export your list as a CSV.
+        </p>
+      </div>
+    }
+  </div>
+</p-popover>
+
+<span class="sr-only" aria-live="polite">{{ announcement() }}</span>

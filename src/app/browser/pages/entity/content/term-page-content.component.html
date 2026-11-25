@@ -10,7 +10,12 @@
             <span class="line-through text-[var(--p-text-muted-color)]">{{ viewModel.paramId }}</span>
             <i class="pi pi-arrow-right text-[var(--p-text-muted-color)]"></i>
           }
-          <app-id-badge [id]="viewModel.term.id" [copyable]="true" />
+          <app-id-badge
+            [id]="viewModel.term.id"
+            [copyable]="true"
+            [collect]="true"
+            [name]="viewModel.term.name | translate: viewModel.term.translations : selectedLanguage.language : 'name'"
+          />
         </div>
       </div>
 

@@ -1,5 +1,6 @@
 import { Component, DestroyRef, Input, inject } from '@angular/core';
-import { CdkCopyToClipboard } from '@angular/cdk/clipboard';
+import { CdkCopyToClipboard, Clipboard } from '@angular/cdk/clipboard';
+import { ClinicalClipboardService } from '../../../services/clinical-clipboard/clinical-clipboard.service';
 
 /**
  * How long the "copied" confirmation stays on screen. Long enough to notice,
@@ -39,6 +40,26 @@ export class IdBadgeComponent {
   @Input() externalUrl?: string;
 
   /**
+   * With {@link copyable}, makes the chip a toggle for the Clinical Clipboard: a click
+   * copies {@link id} and adds the term to the list, and a click on a term
+   * already in the list removes it.
+   */
+  @Input() collect = false;
+
+  /** The term name stored in the Clinical Clipboard. Falls back to {@link id}. */
+  @Input() name?: string;
+
+  /**
+   * Text shown in place of the id for a moment after a Clinical Clipboard toggle,
+   * or undefined when the id is shown.
+   */
+  collectFeedback?: string;
+
+  readonly clinicalClipboard = inject(ClinicalClipboardService);
+
+  private readonly clipboard = inject(Clipboard);
+
+  /**
    * True for a moment after a successful copy, which swaps the icon to a tick.
    * Without it the chip looks inert on click, since copying is silent.
    */
@@ -63,5 +84,20 @@ export class IdBadgeComponent {
     this.copied = true;
     clearTimeout(this.resetTimer);
     this.resetTimer = setTimeout(() => (this.copied = false), COPIED_FEEDBACK_MS);
+  }
+
+  /**
+   * Toggles the term in the Clinical Clipboard. Adding also copies {@link id} to the
+   * clipboard; removing does not. The chip then shows what happened for
+   * {@link COPIED_FEEDBACK_MS}.
+   */
+  onCollectClick(): void {
+    const added = this.clinicalClipboard.toggle({ id: this.id, name: this.name || this.id });
+    if (added) {
+      this.clipboard.copy(this.id);
+    }
+    this.collectFeedback = added ? 'Copied to Clipboard' : 'Removed from Clipboard';
+    clearTimeout(this.resetTimer);
+    this.resetTimer = setTimeout(() => (this.collectFeedback = undefined), COPIED_FEEDBACK_MS);
   }
 }

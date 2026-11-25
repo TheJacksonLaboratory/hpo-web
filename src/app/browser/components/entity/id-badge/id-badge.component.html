@@ -1,4 +1,25 @@
-@if (copyable) {
+@if (copyable && collect) {
+  @let inList = clinicalClipboard.has(id);
+  <button
+    type="button"
+    class="inline-flex items-center gap-2 px-2 py-1 rounded-md whitespace-nowrap text-sm leading-4 font-bold cursor-pointer transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-[var(--p-primary-color)]"
+    [class]="
+      inList
+        ? 'bg-[var(--p-surface-0)] text-[var(--p-slate-900)] shadow-[inset_0_0_0_1.5px_var(--p-slate-900)] hover:bg-[var(--p-surface-100)]'
+        : 'bg-[var(--p-slate-900)] text-[var(--p-surface-0)] hover:opacity-90'
+    "
+    [attr.aria-pressed]="inList"
+    [attr.aria-label]="(inList ? 'Remove ' : 'Copy and add ') + id + (inList ? ' from the Clinical Clipboard' : ' to the Clinical Clipboard')"
+    [title]="inList ? 'Click to remove from the Clinical Clipboard' : 'Copy ID and add to the Clinical Clipboard'"
+    (click)="onCollectClick()"
+  >
+    <span>{{ collectFeedback ?? id }}</span>
+    <i class="pi w-[1em] text-center" [class.pi-copy]="!inList" [class.pi-check]="inList" aria-hidden="true"></i>
+    <span class="sr-only" role="status">{{
+      collectFeedback ? (inList ? 'Copied ' + id + ' and added to the Clinical Clipboard' : 'Removed ' + id + ' from the Clinical Clipboard') : ''
+    }}</span>
+  </button>
+} @else if (copyable) {
   <button
     type="button"
     class="inline-flex items-center gap-2 px-2 py-1 rounded-md whitespace-nowrap bg-[var(--p-slate-900)] text-[var(--p-surface-0)] text-sm leading-4 font-bold cursor-pointer transition-opacity hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-[var(--p-primary-color)]"
